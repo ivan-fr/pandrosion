@@ -12,8 +12,8 @@ name = "LeanMath"
 
 [[lean_lib]]
 name = "research"
-globs = ["research.**"]
+globs = ["research.+"]
 
 [[lean_lib]]
 name = "lean"
-globs = ["lean.**"]
+globs = ["lean.+"]

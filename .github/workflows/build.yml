@@ -12,6 +12,8 @@ concurrency:
 jobs:
   lean-base:
     name: Lean dependency base (192 modules)
+    outputs:
+      cache-hit: ${{ steps.lean-cache.outputs.cache-hit }}
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     env:
@@ -26,6 +28,29 @@ jobs:
           lint: false
           use-mathlib-cache: true
           use-github-cache: false
+      - uses: actions/cache/restore@v6.1.0
+        id: lean-cache
+        with:
+          path: .lake/build
+          key: lean-linux-v1-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'LeanMath.lean', 'LeanMath/**/*.lean', 'research/**/*.lean', 'lean/**/*.lean', 'scripts/build_lean.py') }}
+      # Optional one-time cache seed from a trusted run of this repository.
+      # Lake still checks source/dependency hashes and rebuilds stale modules.
+      - uses: actions/download-artifact@v8.0.1
+        if: steps.lean-cache.outputs.cache-hit != 'true' && vars.LEAN_BOOTSTRAP_RUN != ''
+        continue-on-error: true
+        with:
+          pattern: lean-segments-*
+          merge-multiple: true
+          path: ${{ runner.temp }}/lean-bootstrap
+          run-id: ${{ vars.LEAN_BOOTSTRAP_RUN }}
+          github-token: ${{ github.token }}
+      - name: Restore available bootstrap artifacts
+        if: steps.lean-cache.outputs.cache-hit != 'true' && vars.LEAN_BOOTSTRAP_RUN != ''
+        run: |
+          for archive in "$RUNNER_TEMP"/lean-bootstrap/*.tar.gz; do
+            [ -f "$archive" ] || continue
+            tar xzf "$archive"
+          done
       - run: python3 scripts/build_lean.py --phase base --batch-size 4
       - run: tar czf "$RUNNER_TEMP/lean-base.tar.gz" .lake/build
       - uses: actions/upload-artifact@v7.0.1
@@ -68,7 +93,7 @@ jobs:
           retention-days: 2
   lean:
     name: Complete Lean build and 149+11 axiom audit
-    needs: lean-segments
+    needs: [lean-base, lean-segments]
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     env:
@@ -94,6 +119,11 @@ jobs:
           done
       - run: python3 scripts/build_lean.py --phase final
       - run: python3 scripts/audit_lean.py
+      - uses: actions/cache/save@v6.1.0
+        if: needs.lean-base.outputs.cache-hit != 'true'
+        with:
+          path: .lake/build
+          key: lean-linux-v1-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'LeanMath.lean', 'LeanMath/**/*.lean', 'research/**/*.lean', 'lean/**/*.lean', 'scripts/build_lean.py') }}
   mathematics:
     name: Symbolic and high precision geometry
     runs-on: ubuntu-24.04

@@ -90,6 +90,8 @@ The badge links to the actual GitHub Actions workflow. It passes only when all v
 4. Rerun the P4 SPICE study and its validation checks.
 5. Check 576 independent geometric cases and exercise all seven methods, nine archived previews and mobile layouts in a browser.
 
+Successful full builds cache the Lean artifacts under a key derived from the proof sources, toolchain and build configuration. Lake checks source and dependency hashes on subsequent builds.
+
 Fresh PDFs, browser screenshots and P4 validation records are downloadable as workflow artifacts. No claim of historical priority, optimal geometric cost or experimentally measured chip performance is implied by a successful build.
 
 ## Preview development
