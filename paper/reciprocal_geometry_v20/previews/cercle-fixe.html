@@ -1,0 +1,54 @@
+<div id="fixed-circle-viz">
+  <h2>Racine p-ième · un cercle fixe</h2>
+  <div class="viz-controls">
+    <label class="form-label">Degré p<select class="form-select" id="fc-p"><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>12</option></select></label>
+    <label class="form-label">Nombre X<input class="form-control" id="fc-x" type="number" min="0.01" step="0.1" value="2"></label>
+    <label class="form-label">Approximation réciproque s<input class="form-control" id="fc-s" type="number" min="0.001" step="0.01" value="0.75"></label>
+  </div>
+  <div id="fc-error" role="alert" class="text-destructive" hidden></div>
+  <svg class="fc-geometry" role="img" aria-label="Construction par intersections de droites et d’un cercle fixe"></svg>
+  <div class="viz-row"><button class="btn" id="fc-prev" type="button">← Trait</button><button class="btn" id="fc-next" type="button">Trait →</button><span id="fc-step-label" class="tabular-nums" aria-live="polite"></span></div>
+  <label class="form-label">Construction<input id="fc-step" class="form-range" type="range" min="0" max="8" value="8"></label>
+  <div class="viz-row text-small"><span>Γ : cercle préparé</span><span>G : branche continue passant par Φ = 1</span><span>G′ : autre intersection</span></div>
+  <div id="fc-result" class="tabular-nums" aria-live="polite"></div>
+  <div class="viz-row"><button class="btn btn-primary" id="fc-iterate" type="button">Itération suivante</button><button class="btn btn-ghost" id="fc-reset" type="button">Exemple p = 3</button></div>
+</div>
+<style>
+#fixed-circle-viz .fc-geometry {display:block;width:100%;height:auto;overflow:hidden;margin-block:12px}
+#fixed-circle-viz .fc-geometry text {fill:var(--foreground);font-size:12px;font-weight:400}
+#fixed-circle-viz #fc-result {margin-block:12px;overflow-wrap:anywhere}
+#fixed-circle-viz #fc-error {margin-block:8px}
+</style>
+<script>
+(()=>{
+const root=document.getElementById('fixed-circle-viz'),q=s=>root.querySelector(s),svg=q('svg');
+const ns='http://www.w3.org/2000/svg';let state=null;
+const minus=(a,b)=>[a[0]-b[0],a[1]-b[1]],cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
+function meet(a,b,c,d){let u=minus(b,a),v=minus(d,c),det=cross(u,v);if(Math.abs(det)<1e-12*Math.max(1,Math.hypot(...u)*Math.hypot(...v)))throw Error('Intersection à l’infini ou trop mal conditionnée pour cette preview.');let f=cross(minus(c,a),v)/det;return [a[0]+f*u[0],a[1]+f*u[1]]}
+function hub(f){if(Math.abs(f-1)<1e-10)throw Error('Centre fixe à l’infini : choisir une autre valeur de X.');return [2*f/(f-1),4]}
+function parameters(p){if(p===4)return {rho:1/3,h:13502/7167,j:3328/2389,zx:-214/2389,zy:2432/2389,k:145/2389};let L=p**3+12*p*p+39*p-26;return {rho:.5,h:2-72*p*(p+4)/((p-1)*L),j:24*p*(p-2)*(p+4)/((p-1)*L),zx:2-24*p*(p+4)*(p-2)/((p-4)*L),zy:24*p*(p*p+2*p-26)/((p-4)*L),k:(p-2)*(p*p-4*p+13)/L}}
+function construct(){let p=+q('#fc-p').value,X=+q('#fc-x').value,s=+q('#fc-s').value;if(!(X>0&&s>0&&Number.isFinite(X*s)))throw Error('X et s doivent être strictement positifs.');if(Math.abs(s-1)<1e-10)throw Error('Pour s = 1, CP est parallèle à OA : le centre mobile est à l’infini.');let par=parameters(p),{rho,h,j,zx,zy,k}=par;let O=[0,4],A=[2,4],B=[2,0],C=[0,0],P=[2,4*(1-s)],V=meet(C,P,O,A),Q=P,saved,lines=[{a:C,b:P,point:V,name:'V',label:'CP coupe OA en V = U[1/s]'}],fixed=[];
+for(let i=1;i<p;i++){let f=i===1?rho:i===p-1?k*X*2**(p-3)/rho:.5,F=hub(f),L=meet(F,Q,O,C);fixed.push(F);lines.push({a:F,b:Q,point:L,name:i===1?'L₁':'L'+i,label:i===1?'Projection vers L₁, conservé pour la lecture finale':'Projection sur OC, niveau '+i});if(i===1)saved=L;Q=meet(V,L,A,B);lines.push({a:V,b:L,point:Q,name:i===p-1?'T':'Q'+i,label:i===p-1?'Multiplication par s : le point T est prêt':'Multiplication par s, niveau '+(i+1)})}
+let Z=[zx,zy],M=[h,j],dir=minus(Q,Z),off=minus(Z,M),rad=Math.hypot(2-h,j),aa=dir[0]**2+dir[1]**2,bb=2*(dir[0]*off[0]+dir[1]*off[1]),cc=off[0]**2+off[1]**2-rad*rad,disc=bb*bb-4*aa*cc;
+if(disc<=0)throw Error('ZT ne traverse pas le cercle en deux points distincts : hors du domaine admissible (ou tangence).');
+let candidates=[-1,1].map(sign=>{let lam=(-bb+sign*Math.sqrt(disc))/(2*aa),G=[zx+lam*dir[0],zy+lam*dir[1]],u=minus(G,B),v=rho*4*u[0]/(4*u[0]+2*u[1]),der=(p*p-4)*(v*v+1)-2*(p*p+2)*v;return {G,v,der}}),sel=candidates.filter(a=>a.der<0);if(sel.length!==1)throw Error('La branche ne peut pas être distinguée à cette précision.');let {G,v}=sel[0],other=candidates.find(a=>a!==sel[0]).G,U=meet(B,G,O,A),F=meet(U,saved,A,B),value=1-F[1]/4;let t=X*s**p,Ap=(p+1)*(p+2),Bp=p*p-4,Cp=(p-1)*(p-2),delta=(42*p*p-24)*t-3*Bp*(1+t*t),r=Math.sqrt(delta),expected=s*(t<=1?(Ap-t*Cp)/(Bp*(1-t)+r):(r-Bp*(1-t))/(t*Ap-Cp));
+if(Math.abs(value-expected)>1e-7*Math.max(1,Math.abs(expected)))throw Error('Construction trop mal conditionnée pour la précision de la preview.');
+lines.push({a:Z,b:Q,point:G,name:'G',label:'ZT coupe Γ : retenir G sur la branche centrale'});lines.push({a:B,b:G,point:U,name:'U',label:'BG coupe OA en U'});lines.push({a:U,b:saved,point:F,name:'P⁺',label:'UL₁ coupe AB en P⁺ : lecture de s⁺'});
+return {...par,p,X,s,O,A,B,C,P,V,T:Q,Z,M,rad,saved,G,other,U,F,value,lines,fixed,t};}
+function el(tag,attrs={},text){let n=document.createElementNS(ns,tag);for(let [k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;svg.append(n);return n}
+function draw(){svg.replaceChildren();if(!state){svg.setAttribute('viewBox','0 0 736 100');return}let d=state,n=Math.min(+q('#fc-step').value,d.lines.length),w=Math.max(280,root.getBoundingClientRect().width),height=w<450?340:430;svg.setAttribute('viewBox',`0 0 ${w} ${height}`);el('title',{},'Construction géométrique réelle, trait '+n+' sur '+d.lines.length);el('desc',{},'Rectangle OABC, cercle de centre M passant par B, chaîne à pinceaux et lecture finale. Les points proviennent d’intersections.');let points=[d.O,d.A,d.B,d.C,d.P,d.Z,d.V,d.G,d.U,d.F,...d.fixed,[d.h-d.rad,d.j-d.rad],[d.h+d.rad,d.j+d.rad]],xs=points.map(a=>a[0]),ys=points.map(a=>a[1]),xmin=Math.min(...xs),xmax=Math.max(...xs),ymin=Math.min(...ys),ymax=Math.max(...ys),scale=Math.min((w-80)/(xmax-xmin),(height-65)/(ymax-ymin)),cx=(xmin+xmax)/2,cy=(ymin+ymax)/2,px=a=>w/2+(a[0]-cx)*scale,py=a=>height/2-(a[1]-cy)*scale;
+function seg(a,b,color='var(--border)',width=1,opacity=1){el('line',{x1:px(a),y1:py(a),x2:px(b),y2:py(b),stroke:color,'stroke-width':width,opacity})}
+function line(a,b,color,width=1,opacity=1){let dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy),extent=2*Math.max(xmax-xmin,ymax-ymin);seg([a[0]-extent*dx/len,a[1]-extent*dy/len],[a[0]+extent*dx/len,a[1]+extent*dy/len],color,width,opacity)}
+line(d.O,d.A,'var(--border)');line(d.O,d.C,'var(--border)');line(d.A,d.B,'var(--border)');seg(d.C,d.B);el('circle',{cx:px(d.M),cy:py(d.M),r:d.rad*scale,fill:'none',stroke:'var(--foreground)','stroke-width':1,opacity:.45});
+for(let i=0;i<n;i++){let a=d.lines[i];line(a.a,a.b,i===n-1?'var(--viz-series-1)':'var(--foreground)',i===n-1?2:1,i===n-1?1:.18)}
+let occupied=[];function mark(a,name,active=false,optional=false){let x=px(a),y=py(a);el('circle',{cx:x,cy:y,r:active?4.5:2.5,fill:active?'var(--viz-series-1)':'var(--foreground)'});let tw=name.length*7+6;for(let [dx,dy]of [[8,-9],[8,18],[-tw-5,-9],[-tw-5,18],[8,-25],[-tw-5,32]]){let box={x:x+dx,y:y+dy-12,w:tw,h:16};if(box.x<2||box.x+box.w>w-2||box.y<2||box.y+box.h>height-2||occupied.some(b=>box.x<b.x+b.w+4&&box.x+box.w+4>b.x&&box.y<b.y+b.h+4&&box.y+box.h+4>b.y))continue;el('text',{x:box.x,y:y+dy},name);occupied.push(box);return}if(!optional){let yy=20+occupied.length*18;if(yy<height-5)el('text',{x:4,y:yy},name)}}
+// Prioritize the current intersection and final readout over optional fixed-point labels.
+if(n)mark(d.lines[n-1].point,d.lines[n-1].name,true);if(n>=d.lines.length-2)mark(d.T,'T',false,true);for(let [a,name]of [[d.O,'O'],[d.A,'A'],[d.B,'B'],[d.C,'C'],[d.P,'P'],[d.Z,'Z']])mark(a,name,false,true);
+if(n>=2)mark(d.saved,'L₁',false,true);if(n>=d.lines.length-2){mark(d.other,'G′',false,true);if(n!==d.lines.length-2)mark(d.G,'G',false,true)}if(n>=d.lines.length-1&&n!==d.lines.length-1)mark(d.U,'U',false,true);mark([d.h-d.rad*.7,d.j+d.rad*.7],'Γ',false,true);
+q('#fc-step-label').textContent=n===0?'Préparation fixe':`${n} / ${d.lines.length} · ${d.lines[n-1].label}`;q('#fc-prev').disabled=n===0;q('#fc-next').disabled=n===d.lines.length;let a=d.X**(-1/d.p);q('#fc-result').textContent=n===d.lines.length?`s⁺ ≈ ${d.value.toPrecision(13)} · racine ≈ ${(1/d.value).toPrecision(13)} · erreur relative ≈ ${Math.abs(d.value/a-1)<1e-13?'plancher de la preview':Math.abs(d.value/a-1).toExponential(3)}`:`${d.lines.length} droites mobiles · 1 cercle fixe · t ≈ ${d.t.toPrecision(6)}`;
+q('#fc-iterate').disabled=n!==d.lines.length||Math.abs(d.value/a-1)<1e-13;
+}
+function refresh(reset=false){try{state=construct();q('#fc-error').hidden=true;q('#fc-step').max=state.lines.length;if(reset)q('#fc-step').value=state.lines.length;draw()}catch(e){state=null;q('#fc-error').hidden=false;q('#fc-error').textContent=e.message;q('#fc-result').textContent='';q('#fc-step-label').textContent='Construction non définie dans cette représentation';q('#fc-iterate').disabled=true;draw()}}
+for(let id of ['#fc-p','#fc-x','#fc-s'])q(id).addEventListener('change',()=>refresh(true));q('#fc-step').addEventListener('input',draw);q('#fc-prev').onclick=()=>{q('#fc-step').value=+q('#fc-step').value-1;draw()};q('#fc-next').onclick=()=>{q('#fc-step').value=+q('#fc-step').value+1;draw()};q('#fc-iterate').onclick=()=>{if(state){q('#fc-s').value=state.value;refresh(true)}};q('#fc-reset').onclick=()=>{q('#fc-p').value=3;q('#fc-x').value=2;q('#fc-s').value=.75;refresh(true)};new ResizeObserver(()=>draw()).observe(root);refresh(true);
+})();
+</script>

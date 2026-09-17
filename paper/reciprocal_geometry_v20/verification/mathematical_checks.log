@@ -1,0 +1,156 @@
+src/revision/verify.py
+{
+  "projective_difference_identity": "PASS",
+  "uniform_circle_identity": "PASS",
+  "uniform_denominator_positive": "all coefficients positive in p-3",
+  "renormalization": "Xnew=c^p X; snew=s/c; residual invariant",
+  "contraction_sampling": [
+    {
+      "p": 3,
+      "samples": 4008,
+      "max_abs_error_ratio": "0.353481051160016219"
+    },
+    {
+      "p": 5,
+      "samples": 4008,
+      "max_abs_error_ratio": "0.326034267854893883"
+    },
+    {
+      "p": 17,
+      "samples": 4008,
+      "max_abs_error_ratio": "0.316039275545863414"
+    }
+  ],
+  "precision": 90,
+  "scope": "Exact symbolic identities plus finite contraction evidence; contraction remains conjectural."
+}
+src/review/check_math.py
+{
+  "status": "PASS",
+  "rational_maps": {
+    "AK": {
+      "order": 2,
+      "relative_coefficient": "-(p - 1)/2",
+      "derivative": "-p*(p - 1)*(t - 1)/(p + t - 1)**2",
+      "pade_contact": "verified through degree 1"
+    },
+    "AD": {
+      "order": 3,
+      "relative_coefficient": "(p - 1)*(p + 1)/12",
+      "derivative": "(p - 1)*(p + 1)*(t - 1)**2/(p*t + p + t - 1)**2",
+      "pade_contact": "verified through degree 2"
+    },
+    "projective": {
+      "order": 4,
+      "relative_coefficient": "-(p - 1)*(p + 1)*(2*p - 1)/72",
+      "derivative": "-2*p*(p - 1)*(p + 1)*(2*p - 1)*(t - 1)**3/(4*p**2*t + 2*p**2 + p*t**2 + 2*p*t - 3*p + t**2 - 2*t + 1)**2",
+      "pade_contact": "verified through degree 3"
+    },
+    "rational5": {
+      "order": 5,
+      "relative_coefficient": "(p - 1)*(p + 1)*(2*p - 1)*(2*p + 1)/720",
+      "derivative": "(p - 1)*(p + 1)*(2*p - 1)*(2*p + 1)*(t - 1)**4/(2*p**2*t**2 + 8*p**2*t + 2*p**2 + 3*p*t**2 - 3*p + t**2 - 2*t + 1)**2",
+      "pade_contact": "verified through degree 4"
+    }
+  },
+  "fixed_circle": "positive quadratics, branch derivative and fourth-power certificate verified symbolically",
+  "bilateral_logarithmic_coefficient": "(p - 2)*(p - 1)**2/6",
+  "scope": "Algebraic cross-checks; full analytical arguments reviewed in manuscript, not an independent formal verification of every claim."
+}
+src/fixed_circle/verify.py
+{
+  "symbolic": "general discriminant, derivative and circle identities: exact",
+  "independent_geometries": 162,
+  "max_error": "4.170096e-243",
+  "benchmark_p3": [
+    {
+      "iteration": 0,
+      "s": "0.75",
+      "relative_error": "0.0550592125788"
+    },
+    {
+      "iteration": 1,
+      "s": "0.793700551706633487706391072484278618969277059900170218932446613095916693357624813731935361",
+      "relative_error": "3.24083617287e-8"
+    },
+    {
+      "iteration": 2,
+      "s": "0.793700525984099737375852819636154130194170252734856887471051058631244273263856296830832041",
+      "relative_error": "1.98615367316e-39"
+    },
+    {
+      "iteration": 3,
+      "s": "0.793700525984099737375852819636154130195746663949926504904142880912608252812109586636772107",
+      "relative_error": "1.71708476088e-195"
+    }
+  ],
+  "thresholds": {
+    "6": 1,
+    "12": 2,
+    "30": 2,
+    "60": 3
+  },
+  "two_positive_roots_at_t_005": [
+    "3.118283112791927988131219837685948332265424810351093617603212907242422936305805225510469853343511724437669130141800081516279312290423927910581112311129058357814122350932671815848911476865087841502003976407005293409196689393626655903679006128706503057",
+    "6.381716887208072011868780162314051667734575189648906382396787092757577063694194774489530146656488275562330869858199918483720687709576072089418887688870941642185877649067328184151088523134912158497996023592994706590803310606373344096320993871293496943"
+  ]
+}
+src/stereo/model.py
+{
+  "cases": 75,
+  "max_formula_error": 5.717648576819556e-14,
+  "max_sphere_residual": 4.440892098500626e-16,
+  "max_line_plane_residual": 9.43689570931383e-16,
+  "max_circle_plane_residual": 8.881784197001252e-16,
+  "infinity_cases": [
+    {
+      "case": "initial infinity",
+      "value": 0.7936708223899539,
+      "infinite_points": [
+        "V"
+      ]
+    },
+    {
+      "case": "final infinity",
+      "value": 0.7853451630978481,
+      "infinite_points": [
+        "U"
+      ]
+    },
+    {
+      "case": "fixed infinity",
+      "value": 0.4445528729789143,
+      "infinite_points": [
+        "F2"
+      ]
+    }
+  ]
+}
+src/decentered/verify.py
+{
+  "symbolic": "Derivative numerator, squared identity, reciprocity and sign decomposition exact",
+  "local_coefficients": {
+    "3": "1/18",
+    "4": "13/48",
+    "5": "4/5",
+    "7": "11/3"
+  },
+  "independent_arc_geometries": 108,
+  "working_digits": 160,
+  "max_error": "2.56061807941e-159",
+  "additional_geometries": {
+    "AK": {
+      "cases": 108,
+      "max_error": "2.31166909946e-160"
+    },
+    "AD": {
+      "cases": 108,
+      "max_error": "2.34723323946e-159"
+    },
+    "projective": {
+      "cases": 108,
+      "max_error": "4.80115889889e-160"
+    }
+  },
+  "proof_scope": "Global monotone convergence proved in paper; finite checks do not replace proof."
+}

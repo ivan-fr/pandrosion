@@ -1,0 +1,25 @@
+{
+  "projective_difference_identity": "PASS",
+  "uniform_circle_identity": "PASS",
+  "uniform_denominator_positive": "all coefficients positive in p-3",
+  "renormalization": "Xnew=c^p X; snew=s/c; residual invariant",
+  "contraction_sampling": [
+    {
+      "p": 3,
+      "samples": 4008,
+      "max_abs_error_ratio": "0.353481051160016219"
+    },
+    {
+      "p": 5,
+      "samples": 4008,
+      "max_abs_error_ratio": "0.326034267854893883"
+    },
+    {
+      "p": 17,
+      "samples": 4008,
+      "max_abs_error_ratio": "0.316039275545863414"
+    }
+  ],
+  "precision": 90,
+  "scope": "Exact symbolic identities plus finite contraction evidence; contraction remains conjectural."
+}

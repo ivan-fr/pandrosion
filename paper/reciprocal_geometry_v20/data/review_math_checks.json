@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "rational_maps": {
+    "AK": {
+      "order": 2,
+      "relative_coefficient": "-(p - 1)/2",
+      "derivative": "-p*(p - 1)*(t - 1)/(p + t - 1)**2",
+      "pade_contact": "verified through degree 1"
+    },
+    "AD": {
+      "order": 3,
+      "relative_coefficient": "(p - 1)*(p + 1)/12",
+      "derivative": "(p - 1)*(p + 1)*(t - 1)**2/(p*t + p + t - 1)**2",
+      "pade_contact": "verified through degree 2"
+    },
+    "projective": {
+      "order": 4,
+      "relative_coefficient": "-(p - 1)*(p + 1)*(2*p - 1)/72",
+      "derivative": "-2*p*(p - 1)*(p + 1)*(2*p - 1)*(t - 1)**3/(4*p**2*t + 2*p**2 + p*t**2 + 2*p*t - 3*p + t**2 - 2*t + 1)**2",
+      "pade_contact": "verified through degree 3"
+    },
+    "rational5": {
+      "order": 5,
+      "relative_coefficient": "(p - 1)*(p + 1)*(2*p - 1)*(2*p + 1)/720",
+      "derivative": "(p - 1)*(p + 1)*(2*p - 1)*(2*p + 1)*(t - 1)**4/(2*p**2*t**2 + 8*p**2*t + 2*p**2 + 3*p*t**2 - 3*p + t**2 - 2*t + 1)**2",
+      "pade_contact": "verified through degree 4"
+    }
+  },
+  "fixed_circle": "positive quadratics, branch derivative and fourth-power certificate verified symbolically",
+  "bilateral_logarithmic_coefficient": "(p - 2)*(p - 1)**2/6",
+  "scope": "Algebraic cross-checks; full analytical arguments reviewed in manuscript, not an independent formal verification of every claim."
+}

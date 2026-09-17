@@ -1,0 +1,39 @@
+\section{Reciprocal bounds and the Pad\'e context}\label{sec:context}
+The geometric constructions can also be assessed using two analytical tools: bilateral root bounds and identification of reciprocal rational corrections. These use a direct-root state $u$, rather than the reciprocal state $s$. For a direct-root approximation $u>0$, put $R=X/u^p$ and define, for real $p>1$,
+\begin{equation}\label{eq:bounds}
+ D_p(R)=R\left(\frac p{R+p-1}\right)^{p-1},\qquad
+ L_p(R)=R\left(\frac{p-1+R^{-1}}p\right)^{p-1}.
+\end{equation}
+Weighted arithmetic--geometric mean gives
+\begin{equation}\label{eq:enclosure}
+ uD_p(R)\le X^{1/p}\le uL_p(R),\qquad D_p(R)=1/L_p(1/R).
+\end{equation}
+These are exact-real bounds, not automatically outward-rounded floating-point intervals. The geometric center $G_p=\sqrt{D_pL_p}$ is reciprocal. At $p=3$ it reduces to $(2R+1)/(R+2)$, Halley's correction in this coordinate. For $u^+=uG_p(R)$ and $\eta=\log(u/X^{1/p})$, the leading coefficient is $\eta^+/\eta^3\to(p-2)(p-1)^2/6$ when $p>2$. For each $p>3$, $G_p(R)\to0$ as $R\to\infty$, so sufficiently large residuals increase under $R^+=R/G_p(R)^p$ instead of approaching $1$. On the sufficient cell
+\[
+ (1+p^{-1/2})^{-1}\le R\le1+p^{-1/2},\qquad p\ge3,
+\]
+it converges monotonically. Higher-order center-defect variants are retained in the earlier analytical companion; they are outside the seven geometric protocols studied here.
+
+\fig{bilateral_center}{.95}{The classical bilateral enclosure and its mean-proportional center. The semicircle altitude computes $\sqrt{ab}$ from two positive lengths; it uses a different circle construction from the fixed-circle quadratic module. The bounds can check an output regardless of which iteration produced it.}
+
+
+A negative result prevents a misleading acceleration claim. Write $h_p(R)=[p+1+(p-1)R]/[p-1+(p+1)R]$ and $A_p(R)=Rh_p(R)^{p-1}$ for a freshly initialized neutral AD readout. Since $h_p(1/R)=1/h_p(R)$, the two reciprocal lengths $uA_p(R)$ and $u/A_p(1/R)$ coincide: their geometric mean adds nothing. Resetting the rectangle at each step also defines a different map from persistent-state Halley, so its global convergence cannot be borrowed from Proposition~\ref{prop:rational}.
+
+The second tool identifies rational corrections written in reciprocal coordinates. For $0<z<1$, define
+\[
+ S_p(z)=\frac{\tanh(p^{-1}\artanh\sqrt z)}{\sqrt z},\qquad S_p(0)=1/p.
+\]
+The removable singularity at zero defines the analytic germ used for Pad\'e approximation. If $P_m/Q_n$ is a normalized $[m/n]$ approximant of $S_p$, let $y=(R-1)/(R+1)$ and
+\[
+ \mathcal P(R)=\frac{Q_n(y^2)+yP_m(y^2)}{Q_n(y^2)-yP_m(y^2)}.
+\]
+For $n=m$ or $n=m+1$, $\mathcal P$ is exactly the direct $[d/d]$ Pad\'e approximant of $R^{1/p}$, where $d=m+n+1$. To see this, the quotient approximation gives an error $O(y^{2d+1})$ after lifting. Homographic substitution yields degrees at most $d$ in $R$. Two such rational functions with matching order $2d$ agree, because their cross-multiplied difference has degree at most $2d$ and vanishes to order $2d+1$. This is a specialization of classical Pad\'e uniqueness and homographic invariance~\cite{baker1996}, not a new non-Pad\'e family.
+
+The ideal positive scalar diagonal family has global monotone convergence for every real $p>1$ and integer $d\ge1$. In contrast, the fixed-circle construction inverts a Pad\'e model of $v^{-p}$ and is governed by a quadratic branch domain. Neither the rational-family identification nor its global convergence theorem transfers to that algebraic inverse.
+
+A constructive initialization is available for the special degrees $p=2^k-1$, $k\ge2$. Starting from $(u_0,R_0)=(1,X)$, compute $v_j=R_j^{1/(p+1)}$ by $k$ nested square roots and set $(u_{j+1},R_{j+1})=(u_jv_j,v_j)$. Then $R_j=X^{(p+1)^{-j}}$ and $R_ju_j^p=X$. For fixed $L$ and $|\log X|\le L\log2$, the Cayley radius after one step satisfies
+\[
+ \left|\frac{R_1-1}{R_1+1}\right|\le\tanh\!\left(\frac{L\log2}{2(p+1)}\right)=O(1/p).
+\]
+This bound explains why a low diagonal degree may suffice after initialization on this restricted family. It is a statement about the residual interval, not a general computational speed advantage.
+

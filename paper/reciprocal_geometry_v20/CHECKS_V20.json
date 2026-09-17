@@ -1,0 +1,51 @@
+{
+  "release": "V20",
+  "date": "2026-09-17",
+  "pdf_pages": 18,
+  "figures_in_main_paper": 7,
+  "bibliography_entries": 18,
+  "page_one_table": "Seven methods visually and textually checked",
+  "visual_review": "All 18 final rendered pages inspected",
+  "tex_check": "No overfull boxes or unresolved references",
+  "revision": {
+    "projective_difference_identity": "PASS",
+    "uniform_circle_identity": "PASS",
+    "uniform_denominator_positive": "all coefficients positive in p-3",
+    "renormalization": "Xnew=c^p X; snew=s/c; residual invariant",
+    "contraction_sampling": [
+      {
+        "p": 3,
+        "samples": 4008,
+        "max_abs_error_ratio": "0.353481051160016219"
+      },
+      {
+        "p": 5,
+        "samples": 4008,
+        "max_abs_error_ratio": "0.326034267854893883"
+      },
+      {
+        "p": 17,
+        "samples": 4008,
+        "max_abs_error_ratio": "0.316039275545863414"
+      }
+    ],
+    "precision": 90,
+    "scope": "Exact symbolic identities plus finite contraction evidence; contraction remains conjectural."
+  },
+  "proof_scope": "See CLAIM_COVERAGE.md; uniform preparation is symbolic, full-branch decrease conjectural; inherited Lean audit 149+11 unchanged.",
+  "fresh_mathematical_scripts": "All five verification scripts passed on 2026-09-17",
+  "browser": {
+    "status": "PASS",
+    "methods": 7,
+    "archive_previews": 9,
+    "mobile_width": 360,
+    "infinity_and_domain_checked": true
+  },
+  "geometry": {
+    "status": "PASS",
+    "independent_cases": 576,
+    "max_relative_readout_discrepancy": 1.837271446092359e-10
+  },
+  "formal_snapshot_hashes": "verified against SOURCE_HASHES.json",
+  "cross_references": "unique and resolved"
+}

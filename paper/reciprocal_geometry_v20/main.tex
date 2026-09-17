@@ -1,0 +1,596 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{newtxtext,newtxmath,microtype}
+\usepackage[margin=23mm,headheight=14pt,headsep=7mm,footskip=11mm]{geometry}
+\usepackage{graphicx,booktabs,array,tabularx,enumitem,fancyhdr,caption,placeins,float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+\usepackage{bookmark}
+\definecolor{ink}{HTML}{253640}
+\definecolor{blue}{HTML}{176B9B}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Reciprocal root geometry}\fancyhead[R]{\small Pandrosion}\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{.3pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt plus 1pt minus 1pt}
+\setlength{\emergencystretch}{2em}
+\captionsetup{font=small,labelfont=bf,skip=6pt}
+\setlist{noitemsep,topsep=3pt,leftmargin=*}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}
+\newcommand{\artanh}{\operatorname{artanh}}
+\newcommand{\fig}[3]{\begin{figure}[H]\centering\includegraphics[width=#2\linewidth]{figures/#1.pdf}\caption{#3}\label{fig:#1}\end{figure}}
+\hypersetup{pdftitle={Reciprocal Root Geometry: Pandrosion, Pencils, and Circle Corrections},pdfauthor={Ivan Besevic},pdfsubject={Pandrosion AK, AD, projective AD, decentered-arc and fixed-circle fifth-order methods}}
+\begin{document}
+\raggedbottom
+\thispagestyle{empty}
+{\small\sffamily\color{blue} GEOMETRIC ROOT ITERATIONS / EXACT ANALYSIS / LEAN CERTIFICATES}\par
+\vspace{7pt}
+{\LARGE\bfseries\color{ink} Reciprocal Root Geometry:\\Pandrosion, Pencils, and Circle Corrections\par}
+\vspace{8pt}
+{\large Ivan Besevic}\par
+{\small Independent Mathematical Research\quad\textbullet\quad17 September 2026}\par
+{\small\url{https://github.com/ivan-fr/pandrosion}}\par
+\vspace{10pt}
+\textbf{Abstract.}
+We study straightedge-and-compass realizations of positive root iterations, separating numerical order from construction cost. Four supports in the Pandrosion rectangle give Newton, Halley, projective Pad\'e $[2/1]$, and a decentered-arc correction of order five. The last converges monotonically from every positive start, with the same mobile operations as centered AD. A two-pencil construction replaces the parallel-based triangle chain by $2p-1$ joins. Its rational readouts realize Halley in $2p+3$ joins and diagonal Pad\'e $[2/2]$ in $2p+7$. A second fifth-order method instead inverts a quadratic Pad\'e model using one prepared circle and $2p+2$ mobile joins for every integer $p\ge3$. We give its local error constant, inverse branch, real domain and rational circle parameters, with a uniform rational chart and a compact cubic alternative. A stereographic display preserves the circle while keeping projective incidence data separate. The geometric realizations, convergence arguments and formal algebraic certificates have separate, explicit scopes.
+
+\section{Problem and principal results}
+Let $X>0$ and let $p\ge2$ be an integer. Our iterations approximate the reciprocal root
+\begin{equation}\label{eq:state}
+ a=X^{-1/p},\qquad t=Xs^p,\qquad s^+=s\Phi(t),\qquad s>0.
+\end{equation}
+The desired direct root is $1/a$. At the solution, $t=1$ and $\Phi(1)=1$. We use relative error $\varepsilon=s/a-1$ and logarithmic error $e=\log(s/a)$, so that $t=\exp(pe)$. The leading coefficient of a superlinear update is unchanged when passing between these two errors, although higher expansion terms need not agree.
+
+The contribution is a set of explicit realizations and certificates, rather than new Newton, Halley or direct Pad\'e formulas. Those numerical families are classical~\cite{dlmf38,laszkiewicz2009,zietakSlides2009}; aligned-scale computation has a longstanding nomographic context~\cite{docagne1925}. Historical priority for the particular diagrams below has not been established. An iterative approximation to a cube root does not constitute its exact finite ruler-and-compass construction.
+
+\begin{table}[H]\centering\small
+\caption{All seven protocols. $J$: joins; $P$: parallel macros; $C$: mobile arcs. Generic step counts exclude fixed preparation and final readout. Rectangle protocols reuse one $P$ after the first step. A parallel expands here to $2J+3C$. Scope concerns the exact scalar map, not every drawing chart.}
+\begin{tabularx}{\linewidth}{@{}Xccccc@{}}\toprule
+Method & Order & $J$ & $P$ & $C$ & Scope\\\midrule
+Pandrosion AK & 2 & 2 & $2p+1$ & 0 & Global\\
+Pandrosion AD & 3 & 3 & $2p+1$ & 1 & Global\\
+AD projective $[2/1]$ & 4 & 4 & $2p+1$ & 0 & Global\\
+AD decentered arc & 5 & 3 & $2p+1$ & 1 & Global, $p\ge3$\\\midrule
+Pencil Halley & 3 & $2p+3$ & 0 & 0 & Global\\
+Pencil rational $[2/2]$ & 5 & $2p+7$ & 0 & 0 & Global\\
+Fixed-circle inverse $[2/2]$ & 5 & $2p+2$ & 0 & 0 & Local, $p\ge3$\\\bottomrule
+\end{tabularx}\label{tab:main}
+\end{table}
+
+The operation counts belong to the tradition of Lemoine's geom\'etrographie~\cite{lemoine1902}, although our $J,P,C$ convention groups operations differently from his elementary placement counts. The Poncelet--Steiner theorem explains why one given circle with its center suffices for straightedge constructions~\cite{steiner1833}; it does not supply the short protocol or its count. Halley's geometric interpretations~\cite{gander1985,scavo1995}, model-based root iterations~\cite{traub1961,traub1964}, and Shafer's quadratic approximants~\cite{shafer1974} provide the numerical context. Solving an algebraic local model is therefore a classical strategy. The specific contribution here is the combination of a proved decentered-arc correction, an explicit rational fixed-circle preparation for each degree, and a counted rail protocol; no priority claim is made for the numerical map.
+
+
+The fixed-circle protocol saves five joins over rational fifth order, and one over pencil Halley at $p=3$. Centered and decentered AD share the same mobile counts but require different preparations. Counts are upper bounds for the stated protocols; intersections are not counted as traces. We first develop the four rectangle constructions, then replace their parallel chain by pencils, and finally derive the fixed-circle method and its spherical display.
+
+\section{Pandrosion: four geometric correction supports}\label{sec:pandrosion}
+Pappus addresses the opening of Book III of the \emph{Collection} to Pandrosion; the text and its historical setting are treated in Hultsch's edition and Cuomo's study~\cite{pappus1876,cuomo2000}. Our starting diagram is the modern proportional-rectangle reconstruction popularized by Launay~\cite{launayPandrosion}. Neither its present coordinate formulation nor the accelerated supports below are attributed to the ancient text. The same triangle chain supplies all four corrections below. Fix $W,H>0$ and write $C_0=(0,0)$, $B_0=(W,0)$, $O=(0,H)$, $A_0=(W,H)$ and prepare
+\[
+ M=(0,H(1-1/X)),\qquad P=(W,H(1-s)),\qquad t=Xs^p.
+\]
+The horizontal through $P$ meets $OC_0$ at $L_1$ and $OB_0$ at $B_1$. Draw $L_1B_0$. For $j=2,\ldots,p$, its parallel through $B_{j-1}$ meets $OC_0$ at $L_j$; the horizontal through $L_j$ meets $OB_0$ at $B_j$. Similar triangles give
+\begin{equation}\label{eq:pandchain}
+ L_j=(0,H(1-s^j)),\quad B_j=(Ws^j,H(1-s^j)),\quad E=(W,H(1-s^p)).
+\end{equation}
+Here $E$ is the last horizontal's intersection with $A_0B_0$. When $W=X$, the visible length $L_{p-1}B_{p-1}=Xs^{p-1}$ tends to $X^{1/p}$. Each iteration retains $P$ as its state; the visible length is an output. Figures abbreviate $A_0,B_0,C_0$ to $A,B,C$.
+
+Draw $ME$. Its slope is $m=H(1-t)/(WX)$. For a support through $A_0$ of slope $k=H\kappa/(WX)$, intersect its line with the parallel to $ME$ through $P$, obtaining $T$. The horizontal through $T$ gives $P^+$. Subtracting the two line equations proves the common correction identity
+\begin{equation}\label{eq:commonreport}
+ s^+=s\frac{k}{k-m}=s\frac{\kappa}{\kappa-1+t}.
+\end{equation}
+The following choices modify the support, while keeping this triangle chain and correction.
+
+\subsection{Fixed AK and centered-arc AD}
+For \textbf{Pandrosion AK}, prepare $K=(W(1-X/p),0)$ and draw $A_0K$ once. Then $\kappa=p$ and
+\begin{equation}\label{eq:AK}
+ F_2(s)=\frac{ps}{p-1+t},\qquad
+ z^+=\frac{(p-1)z+X/z^{p-1}}p\quad(z=1/s).
+\end{equation}
+Thus AK is Newton under inversion. For $x=s/a>0$,
+\[
+ x^p-px+p-1=(x-1)^2\sum_{j=0}^{p-2}(p-1-j)x^j\ge0.
+\]
+It follows that $0<F_2(s)\le a$. Moreover, $F_2(s)-s=s(1-t)/(p-1+t)$. After at most one step, the iterates therefore increase to a positive limit; continuity and the unique positive fixed point identify that limit as $a$. The leading relative-error coefficient is $-(p-1)/2$, so the order is exactly two.
+
+For \textbf{Pandrosion AD}, prepare the point and its vertical
+\begin{equation}\label{eq:centeredF}
+ F_0=\left(W-\frac{2W}{p-1},\ H-\frac{H(p+1)}{X(p-1)}\right).
+\end{equation}
+Draw an arc centered at $F_0$ with the already available radius $A_0E$, and take its lower intersection $D$ with that vertical. Thus $D=F_0-(0,Hs^p)$. The join $A_0D$ gives
+\[
+ \kappa=\frac{p+1+(p-1)t}{2},\qquad
+ F_3(s)=s\frac{p+1+(p-1)t}{p-1+(p+1)t}.
+\]
+This is Halley, globally monotone without crossing the root, with exact order three; Proposition~\ref{prop:rational} proves the dynamics. For $p=3,X=W=2,H=4$, $F_0=C_0$: the arc simply transfers $A_0E$ below $C_0$. In general, all fixed parameters use rational operations on the supplied lengths.
+
+\fig{pandrosion_ak_ad}{.95}{The original triangle chain with two different supports, at $p=3,X=W=2,H=4,s=3/4$. Left: fixed AK. Right: centered-arc AD, with $F_0=C_0$ and radius $A_0E$. Blue marks the interception support and horizontal readout; green shows the parallel correction lines $ME$ and $PT$. These points are obtained from line and circle intersections.}
+
+\subsection{Projective AD: direct Pad\'e [2/1]}
+Prepare the fixed horizontal $\ell$ and center $Z$:
+\begin{align}
+ \ell:\ y&=H\left(1+\frac{5p-1}{(p+1)X}\right),\label{eq:projectiveprep}\\
+ Z&=\left(W\left(1+\frac{5p-1}{2p(2p-1)}\right),\ H\left(1+\frac{p+1}{(2p-1)X}\right)\right).\nonumber
+\end{align}
+Draw $ZE$, set $D=ZE\cap\ell$, and draw $A_0D$. This gives
+\[
+ \kappa=\frac{2p((2p-1)t+p+1)}{(p+1)t+5p-1},
+\]
+and therefore
+\begin{equation}\label{eq:F4}
+ F_4(s)=s\frac{2p((2p-1)t+p+1)}{(p+1)t^2+2(2p-1)(p+1)t+(2p-1)(p-1)}.
+\end{equation}
+The name \textbf{AD projective [2/1]} refers to the direct-root correction $z^+/z$, for $z=1/s$ and residual $t=X/z^p$: its numerator has degree two and its denominator degree one. In the reciprocal state used here, $s^+/s$ is the reciprocal Pad\'e $[1/2]$ correction. These are the same iteration in inverse coordinates, not two different methods.
+
+Writing $D_4$ for the denominator in~\eqref{eq:F4},
+\[
+ F_4'(s)=-\frac{2p(p^2-1)(2p-1)(t-1)^3}{D_4(t)^2},\qquad
+ \frac{F_4(s)}s-1=\frac{(1-t)((p+1)t+5p-1)}{D_4(t)}.
+\]
+Hence $F_4$ has positive maximum $F_4(a)=a$; after at most one step, iterates lie below $a$ and increase to it. Its exact local order is four, with relative-error coefficient $-(p^2-1)(2p-1)/72$. The factorization is exactly \texttt{RectangleProjective.numerator\_difference}: \texttt{pole p t} is $(p+1)t+5p-1$. Projection, correction incidences and the dynamics are covered by that Lean development.
+
+\subsection{Decentered-arc AD: a global fifth-order correction}\label{sec:arc}
+For $p>2$, define
+\begin{equation}\label{eq:arcmap}
+ q(t)=\sqrt{\frac{(p-2)(t^2+1)+(10p+4)t}{12p}},\quad
+ g(t)=(p-1)q(t),\quad F_{\rm arc}(s)=s\frac{1+g(t)}{t+g(t)}.
+\end{equation}
+This is not the fixed-circle inverse studied later. Here the center is fixed, but a new radius and arc are used at each iteration.
+
+For integer $p\ge3$, the following preparation constructs the support with \emph{one mobile arc and one join}, giving $\kappa=1+g$. Set
+\begin{align}
+ \beta_{\rm arc}&=(p-1)\sqrt{\frac{p-2}{12p}},&
+ \alpha_{\rm arc}&=\frac{5p+2}{p-2},&d&=\frac W\beta_{\rm arc},&
+ \delta_{\rm arc}&=\frac H X\sqrt{\alpha_{\rm arc}^2-1},\label{eq:arcprep}\\
+ G&=(W,H+H\alpha_{\rm arc}/X),&
+ F&=(W-d+\delta_{\rm arc},H-H/(X\beta_{\rm arc})).\nonumber
+\end{align}
+Prepare the vertical $x=W-d$. Draw the circle centered at $F$ with radius $EG=(H/X)(t+\alpha_{\rm arc})$ and select the intersection $D$ below $F$. Since
+\[
+ EG^2-\delta_{\rm arc}^2=(H/X)^2(t^2+2\alpha_{\rm arc} t+1)>0,
+\]
+the intersection always exists and is transverse for $t>0$. Its coordinates give
+\[
+ y_D=H-\frac H{X\beta_{\rm arc}}-\frac H X\sqrt{t^2+2\alpha_{\rm arc} t+1},\qquad
+ \frac{H-y_D}{d}=\frac H{WX}(1+g(t)).
+\]
+The join $A_0D$ and~\eqref{eq:commonreport} therefore yield~\eqref{eq:arcmap}. All fixed parameters require only rational operations and square roots of positive numbers, so they are constructible from constructible input lengths. Their distances and preparation costs are not uniformly bounded by the mobile count.
+
+\fig{pandrosion_projective_arc}{.98}{Two higher-order AD supports for the same cubic state. Left: $ZE$ meets the fixed horizontal $\ell$ at $D$, then $A_0D$ supplies projective [2/1]. Right: an arc centered at the displaced point $F$ with radius $EG$ crosses the prepared vertical at its lower intersection $D$. The dotted segment $FD$ is a radius; the inset enlarges the common correction near the rectangle. The compact mobile count does not imply a compact drawing.}
+
+\begin{theorem}[Decentered-arc dynamics]\label{thm:arc}
+For every real $p>2$, $X>0$ and $s_0>0$, the map~\eqref{eq:arcmap} converges monotonically to $a=X^{-1/p}$ without crossing it. It is reciprocal: $\Phi(1/t)=1/\Phi(t)$. Its exact local logarithmic order is five, with
+\begin{equation}\label{eq:arcorder}
+ e^+=\frac{(p-2)(p^2-1)(3p+1)}{1440}e^5+O(e^7).
+\end{equation}
+For $p=2$ the formula gives the exact square root in one step; the preparation~\eqref{eq:arcprep} is then replaced by the usual mean-proportional construction.
+\end{theorem}
+\begin{proof}
+The radicand is positive and $q(1/t)=q(t)/t$, proving reciprocity. Let
+\[
+ \mathcal E(t)=\frac{\log t}{p}+\log(1+g(t))-\log(t+g(t)).
+\]
+This is the new logarithmic error when $t=e^{pe}$. Put
+\begin{align*}
+ A_*(t)&=(p-1)(t^2+1)+(10p+2)t>0,\\
+ B_*(t)&=(t+1)(6pt-(t-1)^2),\\
+ K_*(t)&=(p^2-5p-2)(t-1)^2+12p(3p+1)t.
+\end{align*}
+Differentiation and a polynomial identity give
+\begin{align}
+ \frac{d\mathcal E}{d\log t}
+ &=\frac{(p-2)(p-1)^2(qA_*-B_*)}{12p^2g(1+g)(t+g)},\label{eq:arcderivative}\\
+ q^2A_*^2-B_*^2&=\frac{p+1}{12p}(t-1)^4K_* .\label{eq:arccert}
+\end{align}
+If $B_*\le0$, then $qA_*-B_*>0$. Otherwise $(t-1)^2<6pt$. When $p^2-5p-2\ge0$, $K_*>0$ directly; when it is negative, write
+\[
+ K_*=6p^2(p+1)t+(p^2-5p-2)((t-1)^2-6pt)>0.
+\]
+Thus~\eqref{eq:arccert} implies $qA_*>B_*$ for $t\ne1$. Consequently $\mathcal E$ is strictly increasing with $\mathcal E(1)=0$. The sign of the new error equals the sign of $t-1$, while $\Phi(t)-1=(1-t)/(t+g)$ moves the state strictly toward the root. The iterates remain between the positive numbers $s_0$ and $a$. They converge by monotonicity, and continuity identifies their positive limit through $\Phi(t)=1$, which is equivalent to $t=1$.
+
+For the local constant, rationalize $qA_*-B_*=(q^2A_*^2-B_*^2)/(qA_*+B_*)$ near $1$. There $q=1$, $g=p-1$, $A_*=B_*=12p$ and $K_*=12p(3p+1)$. Equation~\eqref{eq:arcderivative} then yields
+\[
+ \lim_{t\to1}\frac{d\mathcal E/d\log t}{(t-1)^4}
+ =\frac{(p-2)(p^2-1)(3p+1)}{288p^5}.
+\]
+Substitute $t=e^{pe}$ and integrate to obtain~\eqref{eq:arcorder}. Analyticity and reciprocity make the logarithmic map odd. At $p=3$ the coefficient is $+1/18$; its sign is opposite to the fixed-circle inverse. When $p=2$, $g=\sqrt t$ and $\Phi=1/\sqrt t$.
+\end{proof}
+
+\subsection{Cost of the four rectangle protocols}
+The common chain and correction use two joins ($L_1B_0,ME$) and $2p+1$ parallels. Prepared supports and intersection selection are excluded. The cost symbols $J,P,C$ denote a join, a parallel macro and a useful compass arc, respectively; here $P$ is a count, not the state point. The generic counts are collected in Table~\ref{tab:main}.
+
+A parallel may be constructed by copying an angle: one auxiliary transversal and one output join, with three arcs to transfer the angle. Using this same macro ($2$ joins and $3$ arcs) throughout, their first-step trace totals are $10p+7$, $10p+9$, $10p+9$ and $10p+9$. The final horizontal can be reused as the first horizontal of the next step, saving five traces: the running totals are $10p+2$ for AK and $10p+4$ for each AD variant. Thus centered and decentered AD have identical mobile operation types and counts; their fixed preparations differ. The projective variant trades the arc for a join. These are upper bounds for stated protocols, not optimality claims or equal manual times. The pencil counts in Table~\ref{tab:main} use actual joins, without parallel macros, and should not be compared to a count that treats a parallel as one elementary straightedge trace.
+
+For orientation, the older fixed correction on $MB_0$ gives $h(s)=1-(X-1)/(X\sum_{j=0}^{p-1}s^j)$, only linearly convergent for $X>1$. AK, AD and the two higher-order supports retain its triangular mechanism while replacing its correction. For the arc method, the written global proof above is supplemented by symbolic identities, 108 independent circle/line checks at 160 digits, and a separate ten-declaration Lean algebraic audit. That audit does not yet formalize the full radical iteration's global convergence theorem.
+
+
+\section{Parallel rails and the rational baseline}\label{sec:rails}
+The rectangle protocols repeatedly copy parallel directions. We now obtain the same power residual using lines through prepared centers. Keep the rectangle of Section~\ref{sec:pandrosion}. On its two extended vertical sides write
+\begin{equation}\label{eq:rails}
+ R(q)=(W,H(1-q)),\quad L(q)=(0,H(1-q)),\quad
+ U(f)=\left(\frac{Wf}{f-1},H\right).
+\end{equation}
+The elementary incidences are
+\begin{equation}\label{eq:incidences}
+ U(f)R(q)\cap OC_0=L(fq),\qquad U(f)L(b)\cap A_0B_0=R(b/f).
+\end{equation}
+They follow by substitution in a line equation. A finite realization requires the denominators and intersection determinants to be nonzero. The corresponding existence and uniqueness statements are formalized.
+
+\subsection{A power telescope in \texorpdfstring{$2p-1$}{2p-1} lines}
+Start at $P=R(s)$. The line $C_0P$ meets the top support at $V=U(1/s)$ when $s\ne1$. Repeatedly project from the right rail through the fixed center $U(1/2)$, and return through $V$. After $p-1$ pairs,
+\begin{equation}\label{eq:telescope}
+ q_1=s,\qquad q_{j+1}=sq_j/2,\qquad q_p=s^p/2^{p-1}.
+\end{equation}
+Thus the one initial join and $2(p-1)$ rail joins construct $Q=R(q_p)$. The factor $2^{p-1}$ must be retained in every subsequent projector; omitting it changes the numerical iteration.
+
+A fixed point
+\[
+ Z(\alpha,\beta)=\left(-\frac{W\alpha}{1-\alpha},\ H\left(1-\frac{\beta}{1-\alpha}\right)\right)
+\]
+projects $Q$ to $U(f(q_p))$, where $f(q)=\alpha+\beta/q$. For two prepared projectors with factors $f$ and $g$, first join $Q$ to each projector to obtain $U(f)$ and $U(g)$. Then join $R(v)$ to $U(f)$, giving $L(fv)$, and join that point to $U(g)$. The four joins implement
+\begin{equation}\label{eq:module}
+ R(v)\longmapsto R\!\left(v\frac{f(q_p)}{g(q_p)}\right).
+\end{equation}
+This is a four-line module, under the same explicit finite-chart conditions.
+
+\subsection{Halley and rational fifth order}
+With $t=Xs^p$, choose
+\[
+ f=\frac{p-1}{4p}+\frac{p+1}{4pt},\qquad
+ g=\frac{p+1}{4p}+\frac{p-1}{4pt}.
+\]
+Equation~\eqref{eq:module} reproduces the Halley update already obtained from centered AD, now using only joins
+\begin{equation}\label{eq:halley}
+ F_3(s)=s\frac{p+1+(p-1)t}{p-1+(p+1)t}.
+\end{equation}
+The cost is $2p+3$ lines. In terms of the actual variable $q_p$, the inverse terms have denominator $4pX2^{p-1}q_p$.
+
+For diagonal Pad\'e $[2/2]$, set
+\[
+ a_5=(p-1)(2p-1),\quad b_5=8p^2-2,\quad c_5=(p+1)(2p+1).
+\]
+The correction and its factorization are
+\begin{align}
+ F_5(s)&=s\frac{a_5 t^2+b_5 t+c_5}{c_5 t^2+b_5 t+a_5},\label{eq:rational5}\\
+ \frac{F_5(s)}s&=\prod_{r\in\{r_+,r_-\}}\frac{t+r}{rt+1},\qquad
+ r_\pm=\frac{b_5\pm\sqrt{12p^2(4p^2-1)}}{2a_5}.
+\end{align}
+Each factor uses a four-line module with
+\[
+ f_r=\frac{1}{2(1+r)}+\frac{r}{2(1+r)t},\qquad
+ g_r=\frac{r}{2(1+r)}+\frac{1}{2(1+r)t}.
+\]
+Both reuse the same $Q$. The constants $r_\pm$ need one constructible square root during preparation; the moving construction uses $2p+7$ lines.
+
+\begin{proposition}[Positive rational dynamics]\label{prop:rational}
+For $p\ge2$, $X>0$ and $s_0>0$, both $F_3$ and $F_5$ converge monotonically to $a$, without crossing it. Their leading local relative-error coefficients are respectively
+\[
+ \frac{p^2-1}{12},\qquad \frac{(p^2-1)(4p^2-1)}{720}.
+\]
+\end{proposition}
+\begin{proof}
+For $F_5$, let $D(t)=c_5 t^2+b_5 t+a_5$ and $N(t)=a_5 t^2+b_5 t+c_5$. Positive coefficients give $N,D>0$, and
+\[
+ F_5'(s)=\frac{a_5c_5(t-1)^4}{D(t)^2}\ge0,\qquad N(t)-D(t)=6p(1-t)(1+t).
+\]
+The sign of the second identity moves $s$ toward $a$, while monotonicity and $F_5(a)=a$ prevent crossing. Continuity identifies the monotone limit. At $s=a(1+\varepsilon)$, expand $t-1=p\varepsilon+O(\varepsilon^2)$ and integrate the derivative; $D(1)=12p^2$ gives the displayed coefficient. The same argument for $F_3$ uses
+\[
+ F_3'(s)=\frac{(p^2-1)(t-1)^2}{(p-1+(p+1)t)^2}.
+\]
+\end{proof}
+
+Global convergence does not remove affine-chart exceptions. For example, the initial center is infinite at $s=1$, and Halley's two projected centers are infinite at $t=(p+1)/(3p+1)$ and $t=(p-1)/(3p-1)$. The formulas themselves remain positive and finite there.
+
+\section{Invert a quadratic model instead of evaluating a rational correction}\label{sec:inverse}
+The preceding fifth-order rational readout needs eight joins after the power construction. To reduce this count, we solve a quadratic model for the correction factor instead of evaluating a rational correction directly. This uses a prepared circle, whereas the decentered-arc method changes its radius at each step. Define the coefficients
+\begin{equation}\label{eq:ABC}
+ A=(p+1)(p+2),\quad B=p^2-4,\quad C=(p-1)(p-2),
+\end{equation}
+separately from the rectangle vertices, and put
+\begin{equation}\label{eq:model}
+ N(v)=Cv^2-2Bv+A,\quad D(v)=Av^2-2Bv+C,\quad \mathcal R(v)=N(v)/D(v).
+\end{equation}
+This is the $[2/2]$ Pad\'e model of $v^{-p}$ at $v=1$. The iteration solves
+\begin{equation}\label{eq:implicit}
+ \mathcal R(v)=t=Xs^p,\qquad v(1)=1,\qquad F_\Gamma(s)=sv(t).
+\end{equation}
+It is generally algebraic rather than rational in $t$. It must not be identified with the rational $F_5$ of~\eqref{eq:rational5}.
+
+\begin{theorem}[Exact fifth-order local correction]\label{thm:order}
+For every real $p>2$, the inverse branch in~\eqref{eq:implicit} exists near $t=1$. If $e=\log(s/a)$ and $e^+=\log(F_\Gamma(s)/a)$, then
+\begin{equation}\label{eq:order}
+ \lim_{e\to0,\ e\ne0}\frac{e^+}{e^5}=-\frac{(p^2-1)(p^2-4)}{720}.
+\end{equation}
+Thus the iteration has exact local order five and alternates around the root for sufficiently small nonzero errors. For $p=2$, the positive branch gives the exact root in one step.
+\end{theorem}
+\begin{proof}
+First $N(1)=D(1)=12$. For $p>2$, both quadratics are positive on the whole real line because
+\[
+ CN(v)=(Cv-B)^2+3(p^2-4),\qquad AD(v)=(Av-B)^2+3(p^2-4).
+\]
+Direct polynomial calculation gives the certificate
+\begin{equation}\label{eq:derivativecert}
+ pND+v(N'D-ND')=pAC(v-1)^4.
+\end{equation}
+Parameterize the local branch by $v=1+u$, and set
+\[
+ E(u)=\frac{\log N(1+u)-\log D(1+u)}p,\qquad
+ \mathcal H(u)=E(u)+\log(1+u).
+\]
+Then $E(0)=0$, $E'(0)=-1$, and~\eqref{eq:derivativecert} implies
+\[
+ \mathcal H'(u)=\frac{ACu^4}{(1+u)N(1+u)D(1+u)}.
+\]
+Consequently $\mathcal H(u)/u^5\to AC/720$ and $E(u)/u\to-1$. The inverse function theorem makes $E$ a local coordinate for the input logarithmic error; division proves~\eqref{eq:order}. The constant is nonzero. When $p=2$, $N(v)-tD(v)=12(1-tv^2)$, so $v=1/\sqrt t$ and $sv=X^{-1/2}$.
+\end{proof}
+
+The identity also certifies the Pad\'e contact: integrating the derivative of $\log(v^p\mathcal R(v))$ gives $\mathcal R(v)-v^{-p}=O((v-1)^5)$. Reciprocity $\mathcal R(1/v)=1/\mathcal R(v)$ makes the local logarithmic map odd. At $p=3$ the coefficient in~\eqref{eq:order} is $-1/18$.
+
+\subsection{Discriminant, stable evaluation and branch selection}
+The discriminant after removing the common factor four is
+\begin{equation}\label{eq:disc}
+ \Delta_p(t)=(42p^2-24)t-3(p^2-4)(1+t^2).
+\end{equation}
+A numerically preferable pair of equivalent expressions is
+\begin{equation}\label{eq:stable}
+ v(t)=\begin{cases}
+ \displaystyle\frac{A-tC}{B(1-t)+\sqrt{\Delta_p(t)}},&t\le1,\\[6pt]
+ \displaystyle\frac{\sqrt{\Delta_p(t)}-B(1-t)}{tA-C},&t>1.
+ \end{cases}
+\end{equation}
+The first expression, if used beyond $t\le1$, has a removable $0/0$ at $t=A/C$; the second avoids it. For $p>2$, the real domain with two distinct roots is
+\begin{equation}\label{eq:taubounds}
+ \tau_-<t<\tau_+,\qquad
+ \tau_\pm=\frac{7p^2-4\pm4p\sqrt{3(p^2-1)}}{p^2-4},\qquad \tau_-\tau_+=1.
+\end{equation}
+The selected branch satisfies $\mathcal R'(v)<0$, equivalently
+\begin{equation}\label{eq:vbranch}
+ v_-<v<v_+,\qquad v_\pm=\frac{p^2+2\pm\sqrt{12(p^2-1)}}{p^2-4}.
+\end{equation}
+Indeed, $N'D-ND'=12p[(p^2-4)(v^2+1)-2(p^2+2)v]$. At the endpoints the two inverse roots coalesce and the inverse ceases to be regular. In the construction of Section~\ref{sec:circle}, this corresponds to a tangent line.
+
+The other root is not always negative: for $p=3,t=0.05$ the two roots are approximately $3.1182831$ and $6.3817169$, both positive. Only the former lies on the branch~\eqref{eq:vbranch}. A sign-only selection rule is therefore wrong. For $p=3$ the real interval is approximately $(0.0424492,23.5575508)$; as $p\to\infty$ its endpoints tend to $7\mp4\sqrt3$. We prove local convergence. A separate, reproducible experiment samples 4,008 nonzero logarithmic residuals for each $p=3,5,17$ at 90 decimal digits, including points within a relative $10^{-40}$ of both boundaries. It finds no violation of
+\begin{equation}\label{eq:conjecture}
+ \left|\frac{\log t}{p}+\log v(t)\right|<\frac{|\log t|}{p},
+ \qquad \tau_-<t<\tau_+,\quad t\ne1.
+\end{equation}
+We conjecture this strict error decrease for every integer $p\ge3$. This is a conjecture about distance to the fixed point, not a uniform Lipschitz bound for pairs of inputs. The finite sample is not a proof of either assertion.
+
+\fig{branch_domain}{.98}{The fold of the quadratic inverse determines the branch. Left: only the descending central segment is selected; the dashed level $t=0.05$ has two positive preimages. Right: the transverse real domain and its limiting boundaries. These are domain curves, not a convergence-basin certificate.}
+
+
+\section{One prepared circle and \texorpdfstring{$2p+2$}{2p+2} mobile lines}\label{sec:circle}
+We now realize the selected inverse branch by line-circle intersections. Use $W=2$, $H=4$. For a fixed integer $p\ge3$, prepare a circle $\Gamma$ with center $M_\Gamma=(h,j)$ passing through $B_0=(2,0)$, a point $Z=(z_x,z_y)$, and positive constants $k,\rho$. Their rational formulas are given below. In this section $M_\Gamma$ denotes the circle center, distinct from the rectangle reference point $M$. The circle depends on $p$, but not on $X$ or $s$.
+
+\begin{theorem}[Fixed-circle realization]\label{thm:construction}
+Fix an integer $p\ge3$ and $X,s>0$. Use either the compact parameters~\eqref{eq:prep1}--\eqref{eq:p4} or the uniform preparation~\eqref{eq:uniform}, and put $t=Xs^p$, $v=v(t)$ from~\eqref{eq:stable}, and $\sigma=kX2^{p-3}/\rho$. Assume
+\[
+ \tau_-<t<\tau_+,\qquad s\ne1,\quad \sigma\ne1,\quad v\ne\rho,
+ \quad b(v)=(2-h)2v-4j(\rho-v)\ne0.
+\]
+Then every join and intersection below is finite and uniquely defined after selecting the branch arc, and the protocol realizes~\eqref{eq:implicit} in at most $2p+2$ mobile straight lines, using one fixed circle with rational data for every integer $p\ge3$; the other fixed centers are rational functions of $X$.
+\end{theorem}
+\begin{proof}[Construction and proof]
+Prepare $U(\rho)$, $U(1/2)$ when needed, and $U(\sigma)$, where
+\begin{equation}\label{eq:beta}
+ \sigma=\frac{kX2^{p-3}}\rho.
+\end{equation}
+The initial join is $C_0P$, giving $V=U(1/s)$. Perform $p-1$ rail pairs as in~\eqref{eq:incidences}, using leftward factors
+\[
+ f_1=\rho,\qquad f_i=1/2\ (2\le i\le p-2),\qquad f_{p-1}=\sigma,
+\]
+and returning through $V$ each time. Save the first left-rail point $L_1=L(\rho s)$. The chain terminates at
+\begin{equation}\label{eq:T}
+ T=R(kXs^p),\qquad s^p\rho\,2^{-(p-3)}\sigma=kXs^p.
+\end{equation}
+This costs $2p-1$ lines. Now draw $ZT$, selecting its intersection $G$ with $\Gamma$ on the arc~\eqref{eq:vbranch}. Draw $B_0G$ to the top support, obtaining $U(\rho/v)$, and draw $U(\rho/v)L_1$ back to the right rail. Its rail coordinate is $(\rho s)/(\rho/v)=sv$.
+
+For an exact incidence certificate, put
+\[
+ d=(2v,4(\rho-v)),\quad n=d\cdot d,\quad b=(B_0-M_\Gamma)\cdot d,
+ \quad G=B_0-\frac{2b}{n}d.
+\]
+Substitution proves $|G-M_\Gamma|^2=|B_0-M_\Gamma|^2$ and the pencil incidence with $B_0$ and $U(\rho/v)$. The selected arc is parameterized by $v_-<v<v_+$; its endpoints and the reference point $G(1)$ are constructible during preparation. Selecting the arc containing $G(1)$ makes the branch rule a fixed part of the diagram. After multiplication by $n$, the remaining alignment $Z,T,G$ has numerator
+\begin{align}
+ I={}&(2-z_x)(-2bd_y-z_yn)\nonumber\\
+ &-[4(1-kt)-z_y][(2-z_x)n-2bd_x].\label{eq:incidenceI}
+\end{align}
+The parameters below satisfy $I=\lambda_p[N(v)-tD(v)]$ with nonzero $\lambda_p$. Equation~\eqref{eq:implicit} therefore gives the required alignment. The last three joins yield a total of $2p+2$.
+\end{proof}
+
+For $p\ne4$, set $\Lambda_p=p^3+12p^2+39p-26$ and
+\begin{align}
+ \rho&=\tfrac12,& k&=\frac{(p-2)(p^2-4p+13)}{\Lambda_p},\label{eq:prep1}\\
+ h&=2-\frac{72p(p+4)}{(p-1)\Lambda_p},&j&=\frac{24p(p-2)(p+4)}{(p-1)\Lambda_p},\nonumber\\
+ z_x&=2-\frac{24p(p+4)(p-2)}{(p-4)\Lambda_p},&z_y&=\frac{24p(p^2+2p-26)}{(p-4)\Lambda_p}.\nonumber
+\end{align}
+Here $\Lambda_p>0$, $k>0$, $j>0$, and
+\[
+ \lambda_p=-\frac{384p(p-2)(p+4)(p^2-4p+13)}{(p-4)(p-1)\Lambda_p^2}.
+\]
+The apparent singularity at $p=4$ belongs to this preparation chart. A finite replacement is
+\begin{equation}\label{eq:p4}
+ \rho=\frac13,\quad k=\frac{145}{2389},\quad
+ M_\Gamma=\left(\frac{13502}{7167},\frac{3328}{2389}\right),\quad
+ Z=\left(-\frac{214}{2389},\frac{2432}{2389}\right),
+\end{equation}
+for which $\lambda_4=-7720960/51365889$. The specified circle and projector centers are rational when $X$ is rational; for constructible $X$, they remain constructible. The branch markers may additionally involve square roots. The radius is realized by drawing the circle centered at $M_\Gamma$ through the already given $B_0$.
+
+\subsection{A uniform rational preparation}
+The pole at $p=4$ in~\eqref{eq:prep1} is an artifact of that compact choice, not an obstruction. One chart covers all integer $p\ge3$. Put $\nu=p-3$ and
+\begin{align*}
+ \mathcal D_p&=625\nu^5+10525\nu^4+56797\nu^3+88639\nu^2+14758\nu+664,\\
+ \mathcal K_p&=625\nu^5+1975\nu^4+4147\nu^3+2905\nu^2+448\nu+340,\\
+ \chi_p&=\frac{288p(p-2)(25p^2-244)}{\mathcal D_p},\quad
+ u_p=5-\frac{4A}{9C},\quad w_p=\frac{8(5-2p)}{9(p-1)}.
+\end{align*}
+Then take
+\begin{equation}\label{eq:uniform}
+\begin{gathered}
+ \rho=\tfrac13,\quad k=\mathcal K_p/\mathcal D_p,\quad j=-3\chi_pw_p/4,\quad h=2+2j-\chi_pu_p/2,\\
+ z_x=2-\chi_p,\qquad z_y=\frac{384p(25p^3-50p^2-415p+974)}{\mathcal D_p}.
+\end{gathered}
+\end{equation}
+Substitution in~\eqref{eq:incidenceI} gives the same certificate with $\lambda_p=-64k\chi_p/(9C)$. This is a polynomial identity after denominators are cleared; the companion checks it symbolically. The displayed positive coefficients give $\mathcal D_p,\mathcal K_p>0$ for $\nu\ge0$, while $25p^2\ne244$ for integer $p\ge3$. Hence $\chi_p,\lambda_p,j$ are nonzero, and the circle and projector are finite. At $p=4$ this specializes to~\eqref{eq:p4}. It is less compact at $p=3$, so the earlier figures retain the compact chart. This additional preparation identity is symbolically checked and proved by substitution, not included in the inherited Lean audit.
+
+\fig{fixed_circle_construction}{1}{The cubic example $X=2,s=3/4$. The first five joins construct $T$; the sixth crosses the prepared circle; the last two read out $s^+$. Gray lines are earlier joins, blue is the current join, and orange is the fixed circle. Panel (a) includes the distant center $V=(8,4)$; panel (b) uses a closer view.}
+
+
+In the cubic example, $k=5/113$, $\sigma=20/113$,
+\[
+ M_\Gamma=(-152/113,126/113),\quad Z=(478/113,396/113),\quad
+ \operatorname{radius}(\Gamma)=126\sqrt{10}/113.
+\]
+The chain gives $T=R((10/113)s^3)$, and the first update is
+\[
+ s^+=0.793700551706633487706391072484\ldots.
+\]
+There are no mobile compass arcs. The fixed circle is an active quadratic solver, not merely a length-transfer device.
+
+\begin{remark}[Meaning of the exclusions]
+The four exclusions in the theorem have distinct geometric meanings: the initial center $V$, the fixed last rail center, or the final readout center is at infinity when $s=1$, $\sigma=1$, or $v=\rho$, respectively; $b(v)=0$ makes $G=B_0$, so $B_0G$ is undefined. The strict residual bounds exclude tangency. Positivity of the rail coordinates and $\rho,\sigma$ prevents any remaining rail join from joining coincident points. The displayed rational parameters have $z_x\ne2$, so $ZT$ is also defined. These conditions are explicit sufficient hypotheses for the finite protocol, not restrictions on every possible realization. A small trace count gives no uniform bound on center distances or drawing error.
+\end{remark}
+
+\subsection{Keep the limiting center finite}
+The initial center has abscissa $W/(1-s)$. At convergence this tends to $W/(1-a)$, so it becomes arbitrarily distant as $X\to1$, and is infinite at the fixed point when $X=1$. For example, $X=1.1$, $p=3$, $W=2$ gives approximately $64$.
+
+Choose a positive rational scale $c$ and work with
+\begin{equation}\label{eq:renormalize}
+ \widetilde X=c^pX,\qquad \widetilde s=s/c,\qquad
+ \widetilde a=a/c,\qquad \widetilde X\widetilde s^p=t.
+\end{equation}
+Every scalar correction is conjugated exactly: $c\widetilde s^+=s^+$. Powers of two suffice to arrange $\widetilde a\in(1/4,1/2]$, by comparisons with $2^p$ and $4^p$, without knowing the root. If this makes the fixed rail factor $\sigma$ equal to one, double $c$ once. Then $\widetilde a\in(1/8,1/2]$ and the limiting center has abscissa at most $2W$. This controls the initial center near convergence and removes its $X=1$ obstruction. It does not remove the residual-dependent exceptions $v=\rho$ or $b(v)=0$: those require a different preparation or an intervening globally convergent step. Scaling and preparation are outside the per-step trace count.
+
+\fig{general_degrees}{.95}{The same construction for degrees four and seven, with $X=2$ and $s=0.95X^{-1/p}$. Degree four uses the rational replacement chart~\eqref{eq:p4}. The circles and centers change with the degree; no uniform compactness claim is inferred from these two examples.}
+
+
+\section{Stereographic geometry of the fixed-circle protocol}\label{sec:stereo}
+The planar construction can be displayed on a sphere without changing how its intersections are computed. Use the similarity coordinates
+\begin{equation}\label{eq:similarity}
+ \xi=(x-1)/2,\qquad \eta=(y-2)/2.
+\end{equation}
+Using a common scale is essential here: separate normalization by the rectangle width and height would send a Euclidean circle to an ellipse. In homogeneous coordinates,~\eqref{eq:similarity} sends $[x:y:w]$ to $[x-w:y-2w:2w]$.
+
+For a nonzero normalized homogeneous triple $[u:v:w]$, define the inverse stereographic map
+\begin{equation}\label{eq:sigma}
+ \Sigma_h([u:v:w])=
+ \frac{(2uw,2vw,u^2+v^2-w^2)}{u^2+v^2+w^2}.
+\end{equation}
+Its value lies on the unit sphere and is invariant under nonzero common scaling. Every point with $w=0$ maps to the north pole $N=(0,0,1)$. For $w\ne0$, division by $1-\mathsf Z$ recovers $(u/w,v/w)$. These are standard stereographic facts~\cite{hitchmanStereo}; the identities used here are checked directly in Lean.
+
+\begin{proposition}[Images of lines and the fixed circle]\label{prop:sphere}
+In normalized coordinates, the line $a\xi+b\eta+c=0$, with $(a,b)\ne(0,0)$ and its point at infinity included, maps onto the sphere-plane section
+\begin{equation}\label{eq:lineplane}
+ a\mathsf X+b\mathsf Y+c(1-\mathsf Z)=0.
+\end{equation}
+A circle $(\xi-h)^2+(\eta-j)^2=r^2$, with $r>0$ and $c_0=h^2+j^2-r^2$, maps onto
+\begin{equation}\label{eq:circleplane}
+ -2h\mathsf X-2j\mathsf Y+(1-c_0)\mathsf Z+(1+c_0)=0.
+\end{equation}
+The completed line image contains $N$; the affine line alone omits it. The Euclidean circle image does not contain $N$.
+\end{proposition}
+\begin{proof}
+Substitute~\eqref{eq:sigma}. With $d=u^2+v^2+w^2$, the left side of~\eqref{eq:lineplane} is $2w(au+bv+cw)/d$. The left side of~\eqref{eq:circleplane} is
+\[
+ \frac{2}{d}(u^2+v^2-2huw-2jvw+c_0w^2).
+\]
+Both vanish on the indicated locus. Away from $N$, the inverse coordinates recover the corresponding planar equation, proving the converse. Substitution of $N$ gives zero for the line plane and exactly two for the circle plane.
+\end{proof}
+
+The new display computes all joins and intersections in the original homogeneous plane by cross products. Circle crossings are computed there, with the branch test~\eqref{eq:vbranch}; only then are points and curves mapped onto the sphere. Thus the horizontal direction $V=[1:0:0]$ is retained when $s=1$. Its displayed position is $N$, while the subsequent rail join is the corresponding parallel operation. For $p=3,X=2,s=1$, the homogeneous construction gives $s^+\approx0.793670822390$. At $t=31/4$, the final center $U$ is infinite instead, and the last rail operation is horizontal.
+
+\fig{stereographic_circle}{.93}{The new fixed-circle construction in the plane and on the sphere. Top: the sixth join crosses $\Gamma$ in two points; the selected point is $G$. Bottom: at $s=1$, the first join is parallel to the top support and its projective intersection $V$ appears at $N$. Orange denotes the fixed circle, blue the current join, and dashed arcs the rear hemisphere. The same similarity scale is used in both coordinate directions.}
+
+
+This is a bounded representation, not an identification of the projective plane with the sphere. Distinct projective directions all map to $N$, and any two displayed line circles share $N$ even when the original lines are not parallel. The incidence data must therefore remain separate. The sphere does not improve convergence order, remove the inverse branch restriction, or justify the same physical cost at an infinite center. Inverse projection is also ill-conditioned near $N$.
+
+\section{Initialization and rational context}\label{sec:context}
+Initialization may use globally convergent AK, Halley or rational $[2/2]$ until the residual lies in an admissible local neighborhood of the circle method. Exact-real enclosures can independently check a proposed result: with $u=1/s$ and $t=Xs^p$, weighted arithmetic--geometric mean gives
+\[
+ u\,t\left(\frac p{t+p-1}\right)^{p-1}\le X^{1/p}\le
+ u\,t\left(\frac{p-1+t^{-1}}p\right)^{p-1}.
+\]
+These bounds are not automatically outward-rounded floating-point intervals. Their mean-proportional construction and the more specialized dyadic entry scheme are retained in the online supplement and previews, rather than interrupting the geometric development.
+
+Reciprocal compression of the analytic germ $\tanh(p^{-1}\artanh\sqrt z)/\sqrt z$ produces the usual diagonal Pad\'e corrections after a homographic change of variable. This follows from Pad\'e uniqueness and homographic invariance~\cite{baker1996}, not from a new approximation family. In contrast, the fixed-circle protocol inverts the quadratic model of $v^{-p}$ and requires its own branch analysis. The full reciprocal-bound and Pad\'e context, including the limits of neutral-AD symmetrization, is supplied with the archive.
+
+\section{Accuracy, construction work and reproducibility}\label{sec:evidence}
+The common test state is $p=3,X=2,s_0=3/4$, with stopping criterion $|s/a-1|\le10^{-d}$. All three pencil protocols use the same internal start. The fixed-circle benchmark uses 250-digit arithmetic; its absolute relative errors after one, two and three steps are approximately
+\[
+ 3.24083617\times10^{-8},\qquad1.98615367\times10^{-39},\qquad1.71708476\times10^{-195}.
+\]
+The common plotting script uses 280 digits for all three methods. The plotted digit scale is capped at 200, solely for readability.
+
+\begin{table}[htbp]\centering\small
+\caption{Updates / mobile lines, excluding fixed preparation and final inversion.}
+\begin{tabular}{@{}rrrr@{}}\toprule
+Required digits $d$ & Pencil Halley & Rational $[2/2]$ & Fixed circle\\\midrule
+6  & 2 / 18 & 1 / 13 & 1 / 8\\
+12 & 3 / 27 & 2 / 26 & 2 / 16\\
+30 & 3 / 27 & 2 / 26 & 2 / 16\\
+60 & 4 / 36 & 3 / 39 & 3 / 24\\\bottomrule
+\end{tabular}\label{tab:work}
+\end{table}
+
+\fig{accuracy_work}{.98}{Same-state comparison of the three protocols. Fifth order does not alone rank construction work: the rational fifth-order protocol uses more lines than Halley at 60 digits, while the fixed-circle protocol uses fewer in this example. The horizontal variable on the right is requested accuracy, not elapsed time.}
+
+
+The rectangle variants use the same scalar start and stopping rule. Their update counts are listed separately because their parallel macros and mobile arcs have different costs from the pencil joins. The decentered arc reaches the four thresholds in the same number of steps as the fixed-circle inverse in this example, but remains on the initial side of the root. Its first three absolute relative errors are $3.23563427\times10^{-8}$, $1.97026511\times10^{-39}$ and $1.64949432\times10^{-195}$.
+\begin{table}[H]\centering\small
+\caption{Rectangle updates only, at the same reciprocal-state accuracy. Convert these to traces with the protocol counts in Section~\ref{sec:pandrosion}; fixed preparation and final visible readout are separate.}
+\begin{tabular}{@{}rcccc@{}}\toprule
+Digits & AK & AD & Projective AD [2/1] & Decentered AD arc\\\midrule
+6 & 3 & 2 & 2 & 1\\
+12 & 4 & 3 & 2 & 2\\
+30 & 5 & 3 & 3 & 2\\
+60 & 6 & 4 & 3 & 3\\\bottomrule
+\end{tabular}
+\end{table}
+
+Independent high-precision checks construct the lines and circle intersections first and then compare the resulting readout with~\eqref{eq:stable}. The fixed-circle study checks 162 configurations across nine degrees, three targets and six residual levels at 250 digits; the maximum observed discrepancy is below $4.18\times10^{-243}$. The spherical implementation separately checks 75 regular configurations, sphere norms, line-plane and circle-plane residuals, plus explicit initial, fixed-center and final-center infinity cases. These finite checks exercise the software; they do not prove the quantified theorems.
+
+The public gallery covers all seven protocols, with degree, target, starting value, construction stage, iteration, and plane/sphere controls. It also retains the earlier proportional-rectangle, bilateral and stereographic explorations. It distinguishes both circle intersections and supplies explicit infinity examples. Its ordinary browser arithmetic is for geometric exploration, not a demonstration of 60-digit accuracy. The supplied scripts generate the construction figures from intersections and the remaining plots from their stated formulas.
+
+\subsection{What is formally certified}\label{sec:formal}
+The named geometry audit checks 149 declarations: the 101 projective, pencil and stereographic declarations inherited from the preceding geometric development, 28 fixed-circle declarations, 10 new sphere correspondence declarations, and 10 decentered-arc algebraic certificates. All transitive axioms are among \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}; no \texttt{sorryAx} occurs. Lean and mathlib provide the checking infrastructure~\cite{lean4,mathlib}.
+
+\begin{table}[htbp]\centering\small
+\caption{Proof boundary. Module names have prefix \texttt{LeanMath.Papers.}.}
+\begin{tabularx}{\linewidth}{@{}p{.36\linewidth}X@{}}\toprule
+Modules or evidence & Certified content / limitation\\\midrule
+\path{RectangleProjective}, \path{RectangleProjectiveVerification} & 35 declarations: finite incidence, order-four dynamics, complete correction and restricted jet matching.\\
+\path{RectanglePencils}, \path{RectanglePencilsPade} & 58 declarations: rails, telescope, projectors, rational dynamics, order five and factorization.\\
+\path{RectangleStereographic} & 8 declarations: earlier circle/sphere identities and horizontal readout.\\
+\path{RectangleFixedCircle} & 28 declarations: model identities, radical charts, preparation certificates, final rail readout and parametric logarithmic fifth-order limit.\\
+\path{RectangleFixedCircleStereo} & 10 declarations: sphere norm, line/circle image identities, scale invariance, north-pole behavior, similarity and finite inverse.\\
+\path{RectangleDecenteredArc} & 10 declarations: algebraic certificates for the decentered-arc derivative, circle and correction; the global analytic argument is not formalized.\\\bottomrule
+\end{tabularx}\label{tab:formal}
+\end{table}
+
+\noindent The decentered-arc certificates verify the derivative numerator, its squared factorization, sign decomposition, reciprocity, circle-height identity and scalar correction algebra. The analytic differentiation, integration and monotone-sequence argument in Theorem~\ref{thm:arc} remain written proofs, not a compiled global-convergence theorem.
+
+The theorem \path{logarithmic_order_five} is parameterized by $v=1+u$. The inverse-function argument in Theorem~\ref{thm:order} connects it to the radical iteration; a theorem about convergence of the complete radical iterate sequence is not exported. The geometric proof is modular: the rail lemmas, circle incidence and projector polynomial certificate are composed in the written construction. There is no single theorem certifying every branch decision, degenerate projective operation, physical trace count or rendered frame.
+
+The archive supplies a pinned Lean dependency closure, a named audit, source hashes, numerical checks, vector figures, the short manuscript source and a standalone preview. A separate audit retains 11 analytical background results for the supplementary context; they are listed separately from the 149 geometric declarations. The mathematical proofs do not certify floating-point rounding or the rendering software.
+
+\section{Conclusions and remaining questions}
+The four Pandrosion supports give an explicit geometric progression from orders two to five. Decentered-arc AD is globally monotone on positive states, with the mobile support budget of centered AD. The fixed-circle inverse gives a different fifth-order correction in $2p+2$ joins on its stated finite chart. Its rational preparation can be chosen uniformly in the integer degree; renormalization keeps the initial center finite near convergence.
+
+The remaining problems concern contraction on the entire transverse branch, physical protocols through excluded configurations, and conditioning versus preparation size and mobile work. The spherical view preserves the computation's incidence data separately from its display. Neither a universal order-five ceiling, geometric optimality nor historical priority is asserted.
+
+\section*{Code, paper and interactive constructions}
+The public repository is \url{https://github.com/ivan-fr/pandrosion}. It contains the Lean sources, pinned toolchain, named axiom audits, paper sources, vector figures, high-precision checks and analog SPICE companion. The geometry gallery is available at \url{https://ivan-fr.github.io/pandrosion/}; its files also run locally. Previews report their chart and excluded cases; browser arithmetic is exploratory. GitHub Actions rebuilds the formal library and papers and reruns the mathematical and analog checks. The repository provides public reproducibility; no archival DOI is claimed.
+
+\section*{Computational assistance}
+AI assistance was used in analysis, proof development, figure generation and manuscript preparation. The author remains responsible for the scientific claims and their attribution. Exact proofs, numerical checks and exploratory displays are distinguished throughout.
+
+\begingroup
+\small
+\setlength{\bibsep}{1.5pt}
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+\endgroup
+\end{document}

@@ -1,0 +1,12 @@
+{
+  "name": "pandrosion-previews",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:geometry": "node scripts/test_geometry.mjs",
+    "test:browser": "node scripts/test_browser.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

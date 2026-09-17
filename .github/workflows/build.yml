@@ -10,14 +10,14 @@ concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  lean:
-    name: All Lean sources and V19 axioms
+  lean-base:
+    name: Lean dependency base (192 modules)
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     env:
       LEAN_NUM_THREADS: 2
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
       - uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
         with:
           auto-config: false
@@ -25,55 +25,121 @@ jobs:
           test: false
           lint: false
           use-mathlib-cache: true
-      - name: Build every module in dependency order
-        run: python3 scripts/build_lean.py
-      - name: Audit 149 geometric and 11 background declarations
-        run: python3 scripts/audit_lean.py
+          use-github-cache: false
+      - run: python3 scripts/build_lean.py --phase base
+      - run: tar czf "$RUNNER_TEMP/lean-base.tar.gz" .lake/build
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: lean-base
+          path: ${{ runner.temp }}/lean-base.tar.gz
+          retention-days: 2
+  lean-segments:
+    name: Lean polynomial certificates (${{ matrix.shard }})
+    needs: lean-base
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    env:
+      LEAN_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: true
+          use-github-cache: false
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          name: lean-base
+          path: ${{ runner.temp }}
+      - run: tar xzf "$RUNNER_TEMP/lean-base.tar.gz"
+      - run: python3 scripts/build_lean.py --phase segments --shard ${{ matrix.shard }} --shards 4
+      - run: tar czf "$RUNNER_TEMP/lean-segments-${{ matrix.shard }}.tar.gz" .lake/build
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: lean-segments-${{ matrix.shard }}
+          path: ${{ runner.temp }}/lean-segments-${{ matrix.shard }}.tar.gz
+          retention-days: 2
+  lean:
+    name: Complete Lean build and 149+11 axiom audit
+    needs: lean-segments
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      LEAN_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: true
+          use-github-cache: false
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          pattern: lean-segments-*
+          merge-multiple: true
+          path: ${{ runner.temp }}/lean-parts
+      - run: |
+          for archive in "$RUNNER_TEMP"/lean-parts/*.tar.gz; do
+            tar xzf "$archive"
+          done
+      - run: python3 scripts/build_lean.py --phase final
+      - run: python3 scripts/audit_lean.py
   mathematics:
     name: Symbolic and high precision geometry
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.12'
           cache: pip
-          cache-dependency-path: paper/reciprocal_geometry_v19/requirements.txt
-      - run: pip install -r paper/reciprocal_geometry_v19/requirements.txt
-      - working-directory: paper/reciprocal_geometry_v19
+          cache-dependency-path: paper/reciprocal_geometry_v20/requirements.txt
+      - run: pip install -r paper/reciprocal_geometry_v20/requirements.txt
+      - working-directory: paper/reciprocal_geometry_v20
         run: |
+          python src/revision/verify.py
           python src/review/check_math.py
           python src/fixed_circle/verify.py
           python src/stereo/model.py
           python src/decentered/verify.py
   paper:
-    name: Build V19 and analog companion PDFs
+    name: Build V20 and analog companion PDFs
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
       - name: Install Tectonic 0.17.0
         run: |
           curl -fsSL https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-unknown-linux-musl.tar.gz -o /tmp/tectonic.tar.gz
           echo '8533d07f9ccbd7a65824b9e0459041bca34af1eb33daba48f59215593753a3b7  /tmp/tectonic.tar.gz' | sha256sum -c -
           tar xzf /tmp/tectonic.tar.gz -C /tmp
           sudo install /tmp/tectonic /usr/local/bin/tectonic
-      - run: bash paper/reciprocal_geometry_v19/build.sh
+      - run: bash paper/reciprocal_geometry_v20/build.sh
       - run: bash paper/pandrosion_analog_v17/build.sh
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: papers
           path: |
-            paper/reciprocal_geometry_v19/Reciprocal_Root_Geometry_v19.pdf
+            paper/reciprocal_geometry_v20/Reciprocal_Root_Geometry_v20.pdf
             paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf
   analog:
     name: P4 SPICE simulations and validation
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.12'
           cache: pip
@@ -82,9 +148,26 @@ jobs:
       - run: pip install -r research/pandrosion_analog_p4/requirements.txt
       - run: python research/pandrosion_analog_p4/simulate_p4.py
       - run: python research/pandrosion_analog_p4/verify_p4.py
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: analog-p4-results
           path: |
             research/pandrosion_analog_p4/results.json
             research/pandrosion_analog_p4/VALIDATION.json
+  previews:
+    name: Interactive geometry and browser checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/test_geometry.mjs
+      - run: |
+          python3 -m http.server 8765 --directory docs > /tmp/preview-server.log 2>&1 &
+          node scripts/test_browser.mjs
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: preview-screenshots
+          path: .ci/browser

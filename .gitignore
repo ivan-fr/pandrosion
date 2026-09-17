@@ -8,3 +8,6 @@ __pycache__/
 *.ilean
 waveform.txt
 .ci/
+
+node_modules/
+.ci/
