@@ -1,7 +1,7 @@
 // Homogeneous incidence engine. Scalar formulas are used only as independent readout checks.
 export const methods={AK:'Pandrosion AK',AD:'Pandrosion AD',projective:'AD projectif [2/1]',arc:'AD à arc décentré',halley:'Pinceaux · Halley',pade:'Pinceaux · Padé [2/2]',circle:'Cercle fixe · inverse [2/2]'};
 export const orders={AK:2,AD:3,projective:4,arc:5,halley:3,pade:5,circle:5};
-export function cross(a,b){const c=[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],m=Math.max(...c.map(Math.abs));if(m<1e-14)throw Error('Points confondus ou intersection non unique : changer de carte ou de départ.');return c.map(x=>x/m);}
+export function cross(a,b){const c=[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],m=Math.max(...c.map(Math.abs));if(!c.every(Number.isFinite))throw Error('Données trop grandes pour les intersections du navigateur. Renormaliser.');if(m<1e-14)throw Error('Points confondus ou intersection non unique : changer de carte ou de départ.');return c.map(x=>x/m);}
 export function affine(q){return Math.abs(q[2])<1e-11?null:[q[0]/q[2],q[1]/q[2]];}
 export const point=(x,y)=>[x,y,1];
 const hub=f=>[2*f,4*(f-1),f-1];
@@ -28,7 +28,7 @@ export function correction(mode,p,t){
 export function construct(mode,p,X,s,chart='compact'){
  if(!methods[mode]||!Number.isInteger(p)||p<3||p>32||!(X>0&&s>0)||!Number.isFinite(X+s))throw Error('Choisir un entier 3 ≤ p ≤ 32 et X, s strictement positifs.');
  const t=X*s**p,expected=s*correction(mode,p,t);
- if(!Number.isFinite(t+expected))throw Error('Les données dépassent la précision du navigateur.');
+ if(!(t>0&&expected>0)||!Number.isFinite(t+expected))throw Error('Les données dépassent la précision du navigateur.');
  const points={},birth={},ops=[],circles=[],fixed=[],counts={J:0,P:0,C:0},warnings=[];
  const add=(name,q,at=ops.length)=>{points[name]=q;birth[name]=at;return name;};
  for(const [name,xy]of Object.entries({O:[0,4],A:[2,4],B:[2,0],C:[0,0],P:[2,4*(1-s)]}))add(name,point(...xy),0);
@@ -95,10 +95,10 @@ export function construct(mode,p,X,s,chart='compact'){
   }
  }
  const end=affine(points.Pnext);if(!end)throw Error('Lecture finale à l’infini.');const value=1-end[1]/4,discrepancy=Math.abs(value-expected)/Math.max(1,Math.abs(expected));
- if(discrepancy>2e-7)throw Error('Configuration trop mal conditionnée pour la précision du navigateur. Renormaliser ou changer de carte.');
+ if(!(value>0)||!Number.isFinite(value+discrepancy)||discrepancy>2e-7)throw Error('Configuration trop mal conditionnée pour la précision du navigateur. Renormaliser ou changer de carte.');
  const infinite=Object.entries(points).filter(([,v])=>!affine(v)).map(([n])=>n);
  if(infinite.length)warnings.push('Continuation projective : '+infinite.join(', ')+' à l’infini. Le coût du protocole fini ne s’applique pas littéralement.');
  return {mode,p,X,s,t,chart,points,birth,ops,circles,fixed,counts,value,expected,discrepancy,warnings,root:X**(-1/p)};
 }
-export function renormalize(p,X,s){if(!Number.isFinite(X+s)||!(X>0&&s>0))throw Error('Paramètres invalides.');const n=Math.ceil(1-Math.log2(X)/p),c=2**n;let scaled=X*c**p;if(!Number.isFinite(scaled)||scaled===0)scaled=Math.exp(Math.log(X)+p*n*Math.LN2);return {X:scaled,s:s/c,c};}
+export function renormalize(p,X,s,chart='compact'){if(!Number.isInteger(p)||p<3||p>32||!Number.isFinite(X+s)||!(X>0&&s>0))throw Error('Paramètres invalides.');let n=Math.ceil(1-Math.log2(X)/p),c=2**n,scaled=X*c**p;if(!Number.isFinite(scaled)||scaled===0)scaled=Math.exp(Math.log(X)+p*n*Math.LN2);const par=parameters(p,chart),sigma=par.k*scaled*2**(p-3)/par.rho;if(Math.abs(sigma-1)<1e-12){c*=2;scaled*=2**p;}return {X:scaled,s:s/c,c};}
 export function stereo(q){const [x,y,w]=q,u=x-w,v=y-2*w,z=2*w,n=u*u+v*v+z*z;return [2*u*z/n,2*v*z/n,(u*u+v*v-z*z)/n];}

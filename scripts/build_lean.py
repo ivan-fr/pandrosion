@@ -15,7 +15,10 @@ parser.add_argument('--phase', choices=['all','base','segments','final'], defaul
 parser.add_argument('--shard', type=int, default=0)
 parser.add_argument('--shards', type=int, default=4)
 parser.add_argument('--list', action='store_true')
+parser.add_argument('--batch-size', type=int, default=1, help='Bound the number of requested module targets per Lake process')
 args = parser.parse_args()
+if args.batch_size < 1:
+    parser.error('batch-size must be positive')
 if not 0 <= args.shard < args.shards:
     parser.error('shard must lie in [0, shards)')
 sources = {'.'.join(p.with_suffix('').parts): p
@@ -48,7 +51,9 @@ chosen = [m for m in order if m in selected]
 print(f'Partition: {len(base)} base + {len(segments)} segments + {len(final)} downstream = {len(sources)} modules',flush=True)
 for i,module in enumerate(chosen,1):
     print(f'[{i}/{len(chosen)}] {module}',flush=True)
-    if not args.list:subprocess.run(['lake','build',module],check=True)
+    if not args.list and (i % args.batch_size == 0 or i == len(chosen)):
+        start = ((i-1)//args.batch_size)*args.batch_size
+        subprocess.run(['lake','build',*chosen[start:i]],check=True)
 if not args.list and args.phase in ['all','final']:
     subprocess.run(['lake','build'],check=True)
 print(f'{args.phase}: {len(chosen)} modules {"listed" if args.list else "built successfully"}.')

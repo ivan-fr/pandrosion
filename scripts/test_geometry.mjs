@@ -11,4 +11,9 @@ for(const mode of Object.keys(methods))for(const p of [3,4,5,7,12,17])for(const 
  }}
 for(const [p,X,s]of [[3,2,1],[3,2,(7.75/2)**(1/3)],[3,113/10,.75]])assert(construct('circle',p,X,s).warnings.length>0);
 assert.throws(()=>construct('circle',3,2,.1));
+assert.throws(()=>construct('circle',3,2,(83/85)**(1/3),'uniform'));
+assert.throws(()=>construct('arc',3,1e-300,1e100));
+const normalizedFixedInfinity=renormalize(3,113/10,.75);
+assert.equal(normalizedFixedInfinity.c,2);
+assert.equal(construct('circle',3,normalizedFixedInfinity.X,normalizedFixedInfinity.s).warnings.length,0);
 console.log(JSON.stringify({status:'PASS',independent_geometric_cases:count,max_relative_readout_discrepancy:max,infinity_cases:3}));

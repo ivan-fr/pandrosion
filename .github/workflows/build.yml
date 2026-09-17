@@ -26,7 +26,7 @@ jobs:
           lint: false
           use-mathlib-cache: true
           use-github-cache: false
-      - run: python3 scripts/build_lean.py --phase base
+      - run: python3 scripts/build_lean.py --phase base --batch-size 4
       - run: tar czf "$RUNNER_TEMP/lean-base.tar.gz" .lake/build
       - uses: actions/upload-artifact@v7.0.1
         with:
@@ -59,7 +59,7 @@ jobs:
           name: lean-base
           path: ${{ runner.temp }}
       - run: tar xzf "$RUNNER_TEMP/lean-base.tar.gz"
-      - run: python3 scripts/build_lean.py --phase segments --shard ${{ matrix.shard }} --shards 4
+      - run: python3 scripts/build_lean.py --phase segments --shard ${{ matrix.shard }} --shards 4 --batch-size 2
       - run: tar czf "$RUNNER_TEMP/lean-segments-${{ matrix.shard }}.tar.gz" .lake/build
       - uses: actions/upload-artifact@v7.0.1
         with:
