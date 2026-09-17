@@ -1,0 +1,8 @@
+{
+  "consulted": "2026-09-17",
+  "primary_datasheet": "https://www.analog.com/media/en/technical-documentation/data-sheets/ad734.pdf",
+  "revision_E_reference": "Figure 29, page 15; Figure 21, page 11",
+  "visually_inspected_manufacturer_document_mirror": "https://media.digikey.com/pdf/Data%20Sheets/Analog%20Devices%20PDFs/AD734.pdf",
+  "revision_C_reference": "Figure 10, page 8",
+  "internal_transistor_parameters": "Authored assumptions, not manufacturer model"
+}

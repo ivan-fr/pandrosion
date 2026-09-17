@@ -1,0 +1,462 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm}
+\usepackage{newtxtext,newtxmath}
+\usepackage[margin=23mm,headheight=14pt,headsep=7mm,footskip=11mm]{geometry}
+\usepackage{microtype,mathtools}
+\usepackage{graphicx,booktabs,array,tabularx,longtable}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem,fancyhdr,caption,placeins,listings}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue,breaklinks=true]{hyperref}
+\usepackage{bookmark}
+\definecolor{ink}{HTML}{193944}\definecolor{teal}{HTML}{137C82}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\sffamily Proportional geometry and analog root computation}
+\fancyhead[R]{\small\sffamily V17 / Research preprint}
+\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{.3pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt plus 1pt}
+\setlength{\emergencystretch}{2em}\renewcommand{\arraystretch}{1.15}
+\captionsetup{font=small,labelfont=bf,skip=6pt}
+\setlist{noitemsep,topsep=4pt,leftmargin=*}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=single,columns=fullflexible,rulecolor=\color{black!20}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\newcommand{\Rpos}{\mathbb R_{>0}}
+\newcommand{\AD}{J_{p,X}}
+\newcommand{\AK}{F_{p,X}}
+\newcommand{\fig}[4]{\begin{figure}[htbp]\centering\includegraphics[width=#3\linewidth]{figures/#1.pdf}\caption{#4}\label{fig:#2}\end{figure}}
+\hypersetup{pdftitle={From Proportional Rectangles to Sampled Analog Root Computation},pdfauthor={Ivan Besevic},pdfsubject={A formalized Halley construction and a reproducible analog feasibility study}}
+\begin{document}
+\thispagestyle{empty}
+{\small\sffamily\color{teal} GEOMETRIC ITERATION / FORMAL MATHEMATICS / ANALOG FEASIBILITY}\par
+\vspace{8pt}
+{\fontsize{25}{28}\selectfont\bfseries\color{ink} From Proportional Rectangles\\to Sampled Analog Root Computation\par}
+\vspace{7pt}
+{\large A formalized Halley construction and a reproducible feasibility study}\par
+\vspace{10pt}
+{\large Ivan Besevic}\par
+{\small Independent research\quad$\cdot$\quad17 September 2026\quad$\cdot$\quad Version 17}
+\vspace{9pt}\hrule\vspace{9pt}
+\textbf{Abstract.}
+We study a modern proportional-rectangle construction for positive integer-degree roots and its translation into a sampled analog computing architecture. A fixed support realizes reciprocal Newton iteration. Replacing it by a moving line through a constructible anchor gives
+\[
+ s^+=s\,\frac{p+1+(p-1)Xs^p}{p-1+(p+1)Xs^p},\qquad p\ge2,\quad X,s>0.
+\]
+This is classical Halley iteration in an inverse-root state, and it is exactly conjugate by inversion to Halley for the desired positive root. We give the incidence derivation, global positive convergence, cubic error constant, and a map to an existing Lean formalization. An explicit construction-cost model exhibits savings over the fixed-line protocol, while a compact arithmetic realization of Halley prevents a claim of geometric optimality. Fresh arbitrary-precision wall-clock measurements also favor direct Halley over the inverse-state implementation, and a specialized root routine over both. For a normalized cubic circuit, progressively refined SPICE models expose a decisive memory-loading failure: four modeled input ports discharge an unbuffered 10 nF state capacitor by about 16.9\% over a 23\,$\mu$s hold window. A read follower reduces this change below 3.6 ppm in the tested model. With electrical two-point calibration, the corrected AD output error is at most 11.14 ppm at four held-out inputs, and 43.86 ppm in the specified port-stress scenarios. These are functional-model results, not measured silicon specifications. Sources, formal certificates, vector figures, netlists, raw data and benchmark scripts accompany the article.
+
+\vspace{4pt}
+{\small\textbf{Keywords.} Straightedge and compass; proportional means; Halley iteration; positive roots; Lean; sample-and-hold; analog division; reproducibility.}
+
+\vspace{8pt}
+\textbf{Evidence boundary.} The exact iteration is proved for every integer $p\ge2$ and every positive starting state. The analog experiments implement only $p=3$ on a normalized input interval. No transistor-level multiplier model, fabricated chip, energy advantage or historical priority for the particular drawing is claimed.
+\vfill
+{\small This standalone article develops the geometric and analog thread of the author's V16 working manuscript. Earlier versions and experiment packages remain unchanged.}
+\clearpage
+
+\section{Introduction and positioning}
+Positive-root iterations are elementary enough to admit geometric interpretation, yet their implementation crosses several different notions of correctness. A straightedge-and-compass step can be exact over ideal real lengths. A theorem prover can certify its coordinate relations and limiting behavior. A sampled circuit instead stores charge, drives finite impedances and experiences offset, finite bandwidth and saturation. None of these layers automatically validates the next.
+
+This article connects these layers for a proportional chain inspired by the rectangle model studied in the author's earlier manuscript \citep{v16}. We call this a \emph{Pandrosion-type modern construction}; we do not claim to reconstruct an ancient text exactly. Our aim is a precise, auditable realization and an engineering feasibility study.
+
+Newton and Halley are classical methods \citep{dlmf}. Geometrical interpretations of Halley also predate this work \citep{scavo}. Rational arithmetic on constructible lengths already makes rational root updates constructible. Consequently, neither Halley's formula nor its mere straightedge-and-compass realizability is a novelty claim here. The potentially distinctive object is the particular moving-support realization that preserves the nested rectangle chain. Its historical priority remains unestablished.
+
+The contributions are: (i) an explicit common geometric mechanism for fixed-line and moving-line updates; (ii) proofs and a theorem-level formalization map; (iii) an operation-count comparison with an adverse compact-Halley control; and (iv) a reproducible analog-model study that identifies, explains and remedies input loading of the state memory. Negative controls are part of the result: neutral bilateral duplication adds no new value, the inverse-state digital implementation is not the fastest implementation, and an unbuffered ideal-to-circuit translation fails.
+
+\section{A proportional rectangle and its moving support}\label{sec:geometry}
+Fix $p\in\mathbb N$, $p\ge2$, and $X,W,H,s>0$. The target is $r=X^{1/p}$; the internal target is $a=X^{-1/p}$. Coordinates are taken relative to a chosen unit length. Define
+\begin{align}
+ C&=(0,0),& B&=(W,0),& O&=(0,H),& A&=(W,H),\\
+ M&=(0,H(1-X^{-1})),&& P=(W,H(1-s)).\label{eq:points}
+\end{align}
+Lines and sides may be extended. In particular, $P$ need not lie on the finite side when $s>1$, and $M$ may lie below $C$ when $X<1$.
+
+\subsection{The chain of similar triangles}
+The horizontal through $P$ intersects $OC$ at $L_1$ and $OB$ at $B_1$. Draw $L_1B$. For $j=2,\ldots,p$, the parallel to $L_1B$ through $B_{j-1}$ meets $OC$ at $L_j$; its horizontal meets $OB$ at $B_j$. The last horizontal meets $AB$ at $E$.
+
+\begin{lemma}[Chain coordinates]\label{lem:chain}
+Every level is given by
+\begin{equation}
+ L_j=(0,H(1-s^j)),\quad B_j=(Ws^j,H(1-s^j)),\quad E=(W,H(1-s^p)).
+\end{equation}
+\end{lemma}
+\begin{proof}
+The first horizontal has ordinate $H(1-s)$, giving $B_1=(Ws,H(1-s))$ on $OB$. The slope of $L_1B$ is $-H(1-s)/W$. At $B_{j-1}$, the parallel therefore meets the left axis at ordinate
+$H(1-s^{j-1})+H(1-s)s^{j-1}=H(1-s^j)$.
+Intersection of that horizontal with $OB$ gives the stated abscissa. Positivity of $W,H$ ensures that the required horizontal/vertical intersections are unique.
+\end{proof}
+
+The slope of $ME$ is
+\begin{equation}
+ m(s)=\frac{H}{WX}(1-Xs^p).
+\end{equation}
+Choose a support through $A$ of slope $k$. The parallel to $ME$ through $P$ meets it at $T$, and the horizontal through $T$ defines $P^+$ on $AB$. Solving the two line equations gives
+\begin{equation}
+ x_T=W-\frac{Hs}{k-m(s)},\quad y_T=H-\frac{kHs}{k-m(s)},\quad
+ s^+=1-\frac{y_T}{H}=\frac{ks}{k-m(s)}.\label{eq:report}
+\end{equation}
+This identity is the bridge from incidence geometry to iteration.
+
+\fig{geometry}{geometry}{.94}{The same nested chain supplies the power $s^p$. Example: $p=3$, $X=W=2$, $H=4$, $s=3/4$. Left: horizontal proportional means and parallel red segments. Right: the green support $AD$, the orange parallel through $P$, and the blue horizontal report define $P^+$. Here the fixed anchor is $F=C$, so $D$ is obtained by copying $AE$ below $C$. All plotted coordinates are computed from the displayed construction.}
+
+\subsection{Fixed line AK: reciprocal Newton}
+Let
+\begin{equation}
+ K=(W(1-X/p),0),\qquad k_{AK}=\frac{Hp}{WX}.
+\end{equation}
+The abscissa of $K$ is oriented; it may be negative. Substitution in \eqref{eq:report} gives
+\begin{equation}
+ \AK(s)=\frac{ps}{p-1+Xs^p}.\label{eq:ak}
+\end{equation}
+For $y=1/s$, its inverse is
+\begin{equation}
+ y^+=\frac{(p-1)y+X/y^{p-1}}{p},
+\end{equation}
+which is Newton's method for $y^p-X=0$. This is not Newton applied directly to the inverse-root equation in $s$.
+
+\subsection{Moving line AD: construction using one fixed anchor}
+Prepare the fixed point
+\begin{equation}
+ F=\left(W-\frac{2W}{p-1},\ H-\frac{H(p+1)}{X(p-1)}\right).
+\end{equation}
+At each update, copy the positive length $AE=Hs^p$ downward on the vertical through $F$. The endpoint is
+\begin{equation}
+ D=\left(W-\frac{2W}{p-1},\ H(1-s^p)-\frac{H(p+1)}{X(p-1)}\right).\label{eq:D}
+\end{equation}
+Then join $A$ to $D$ and perform the report \eqref{eq:report}. The anchor depends only on known data. No root oracle is used to construct it. Its preparation uses rational operations on lengths; the per-update motion is one compass transfer and one new join.
+
+\begin{proposition}[Geometric update]\label{prop:ad}
+The moving support has slope
+\begin{equation}
+ k_{AD}(s)=\frac{H}{2WX}\bigl[p+1+(p-1)Xs^p\bigr],
+\end{equation}
+and its intersection with the parallel through $P$ is unique. The reported state is
+\begin{equation}
+ \boxed{\AD(s)=s\frac{p+1+(p-1)Xs^p}{p-1+(p+1)Xs^p}.}\label{eq:ad}
+\end{equation}
+\end{proposition}
+\begin{proof}
+The horizontal displacement from $A$ to $D$ is $-2W/(p-1)\ne0$. Taking the ratio of vertical and horizontal displacements gives $k_{AD}$. Moreover,
+\[
+ k_{AD}-m=\frac{H}{2WX}\bigl[p-1+(p+1)Xs^p\bigr]>0.
+\]
+Thus the lines meet uniquely and \eqref{eq:report} yields \eqref{eq:ad}.
+\end{proof}
+
+\fig{anchor}{anchor}{.32}{General-degree anchor, shown for $p=4$, $X=W=2$, $H=4$, $s=0.8$. The point $F$ is prepared once. The vertical transfer $FD=AE$ places $D$, and the support $AD$ changes with the state. The anchor need not lie on a rectangle vertex.}
+
+\begin{remark}[Finite constructions and limits]
+For constructible positive input lengths, every individual step uses constructible operations. This does not make every limiting $p$-th root constructible in finitely many steps. In particular, iterative approximation of $\sqrt[3]{2}$ does not contradict its classical straightedge-and-compass obstruction. The construction can be interpreted over any ordered field of known coordinates, with the usual field operations for the line intersections.
+\end{remark}
+
+\section{Exact dynamics and the two output readings}\label{sec:dynamics}
+There are two useful root approximations:
+\begin{equation}
+ y=1/s,\qquad v=Xs^{p-1}\quad\text{when }W=X.\label{eq:readings}
+\end{equation}
+The second is a visible horizontal segment of the proportional chain. Both converge to $r$, but they represent different errors at a given internal state. The analog architecture below uses $y$, with $v$ retained only as a diagnostic. Comparisons must state which reading is used.
+
+\begin{theorem}[Classical identity and global convergence]\label{thm:global}
+For every $p\ge2$, $X>0$ and $s_0>0$, the iteration $s_{n+1}=\AD(s_n)$ stays positive and converges monotonically to $a=X^{-1/p}$. Under $y_n=1/s_n$, it satisfies exactly
+\begin{equation}
+ y_{n+1}=y_n\frac{(p-1)y_n^p+(p+1)X}{(p+1)y_n^p+(p-1)X},\label{eq:halley}
+\end{equation}
+Halley's method for $y^p=X$.
+\end{theorem}
+\begin{proof}
+Inverting \eqref{eq:ad} and multiplying numerator and denominator by $y^p$ gives \eqref{eq:halley}. It also follows by substituting $f(y)=y^p-X$ into
+$y-2ff'/(2(f')^2-ff'')$.
+All denominators are positive on the positive half-line. Write $t=Xs^p$. Direct differentiation and subtraction give
+\begin{align}
+ \AD(s)-s&=\frac{2s(1-t)}{p-1+(p+1)t},\label{eq:displacement}\\
+ \AD'(s)&=\frac{(p^2-1)(t-1)^2}{[p-1+(p+1)t]^2}\ge0.\label{eq:derivative}
+\end{align}
+The derivative vanishes only at $a$; hence $\AD$ is strictly increasing and fixes $a$. If $s<a$, then $s<\AD(s)<a$. If $s>a$, then $a<\AD(s)<s$. The resulting monotone bounded sequence has a positive limit, bounded away from zero by $\min(s_0,a)$. Continuity makes this limit a fixed point. Equation~\eqref{eq:displacement} identifies the unique positive fixed point as $a$.
+\end{proof}
+
+\begin{theorem}[Exact cubic order]\label{thm:cubic}
+With $e=s/a-1$,
+\begin{equation}
+ \frac{\AD(a(1+e))}{a}-1=\frac{p^2-1}{12}e^3+O(e^4).\label{eq:order}
+\end{equation}
+The coefficient is positive and nonzero. For the visible reading $v$,
+\begin{equation}
+ \lim_{v\to r}\frac{v^+-r}{(v-r)^3}=\frac{p+1}{12(p-1)r^2};
+\end{equation}
+for the inverse reading $y$, the corresponding coefficient is $(p^2-1)/(12r^2)$.
+\end{theorem}
+\begin{proof}
+Scaling gives $\AD(at)=aJ_{p,1}(t)$. In \eqref{eq:derivative} at $t=1+e$, the numerator has leading term $(p^2-1)p^2e^2$ and the denominator has constant term $4p^2$. Integration from the fixed point yields \eqref{eq:order}. Analyticity follows from the positive denominator near that point. For $v/r=(1+e)^{p-1}$, transfer the cubic term through a smooth change of coordinate of derivative $p-1$; its relative coefficient is divided by $(p-1)^2$. For $y/r=(1+e)^{-1}$, the derivative is $-1$, so the relative coefficient is unchanged. Conversion from relative to absolute error contributes $r^{-2}$.
+\end{proof}
+
+For comparison, AK has relative error coefficient $-(p-1)/2$ and order two. Indeed, with $t=s/a$,
+\begin{equation}
+ t^p-pt+p-1=(t-1)^2\sum_{j=0}^{p-2}(p-1-j)t^j.
+\end{equation}
+It follows that $0<\AK(s)\le a$ for every $s>0$, with equality only at $a$. Below $a$, the update increases $s$. This proves global positive convergence of AK after at most one crossing, as well as the stated quadratic coefficient by expansion.
+
+\subsection{Why neutral bilateral duplication adds nothing}
+This observation concerns a precisely defined closure, not all possible bilateral constructions. Set
+\begin{equation}
+ h_p(R)=\frac{p+1+(p-1)R}{p-1+(p+1)R},\qquad A_p(R)=R h_p(R)^{p-1}.
+\end{equation}
+A neutral AD rectangle with target $R$ and state $s=1$ yields visible reading $A_p(R)$. Because $h_p(1/R)=1/h_p(R)$, one has
+\begin{equation}
+ A_p(1/R)=A_p(R)^{-1}.
+\end{equation}
+Thus the two proposed lengths $uA_p(R)$ and $u/A_p(1/R)$ are equal; their positive geometric mean is unchanged. For $p=3,R=2$, both equal $32u/25$. They are not opposite bounds on the root.
+
+Reinitializing such rectangles at every outer step is also not the persistent AD iteration. For $p=3$, $R=X/u^3$ gives
+\begin{equation}
+ u^+=uR\left(\frac{R+2}{2R+1}\right)^2.
+\end{equation}
+At $X=2,u=8$, the next value is exactly $29241/236672$, a drastic crossing. Global convergence of Theorem~\ref{thm:global} must not be attributed to this different map. The simple reciprocal identity above is algebraic; the supplementary exploratory bilateral results are not part of the Lean audit described next.
+
+\section{Formal verification and its scope}\label{sec:formal}
+The companion uses Lean~4.33.1 and mathlib v4.33.1 \citep{lean4,mathlib}. Eight rectangle modules expose 88 audited theorem declarations. They connect incidence equations, unique intersections, state maps and limiting behavior. The audit is not merely a test of a few coordinates.
+
+\begin{table}[htbp]\centering\small
+\caption{Representative formal statements. Names are in the namespace \texttt{LeanMath.Papers}; the bundle contains the full audit and transitive local sources.}\label{tab:formal}
+\begin{tabularx}{\linewidth}{@{}p{.28\linewidth}X@{}}\toprule
+Module & Statements and interpretation\\\midrule
+\texttt{RectangleGeometry} & \texttt{chain\_step\_unique}, \texttt{intersection\_unique}, \texttt{report\_readout}: incidence and uniqueness.\\
+\texttt{RectangleReports} & \texttt{AD\_through\_D}, \texttt{ad\_geometric\_readout}, \texttt{reports\_exist\_unique}: geometry-to-formula bridge.\\
+\texttt{RectangleConstructible} & \texttt{movingD\_over}, \texttt{steps\_over}: coordinates remain in a field containing the input data.\\
+\texttt{RectangleDynamics} & \texttt{ad\_eq\_halley}, \texttt{ad\_global\_convergence}, \texttt{ad\_relative\_order\_three}: identity, convergence and local coefficient.\\
+\texttt{RectangleNewton} & \texttt{ak\_global\_convergence}, \texttt{ak\_relative\_order\_two}: fixed-line dynamics.\\
+\texttt{RectangleVerification} & \texttt{ad\_visible\_convergence}, \texttt{target\_identity}: the visible root reading.\\
+\texttt{RectangleRaw} & \texttt{raw\_neutral\_degenerate}: the original support degenerates at $s=1$.\\
+\texttt{RectangleBilateral} & \texttt{altitude\_unique}, \texttt{cubic\_center}: the earlier bilateral circle construction, not the new neutral AD closure.\\\bottomrule
+\end{tabularx}
+\end{table}
+
+The formal geometry is Cartesian over $\mathbb R$. Lines use normal-vector equations; parallelism and unique intersection are algebraic. Constructibility is expressed by closure of coordinates under field operations, and, for circle altitudes, positive square roots. This is not a complete synthetic axiomatization of physical Euclidean instruments.
+
+\input{data/formal_status.tex}
+
+The audit does not certify the Python generators, HTML previews, SPICE macromodels, timing measurements, construction-count optimality or historical priority. In particular, it does not establish circuit stability under finite rails, a power budget or a floating-point implementation guarantee. The nonlinear analog system is a different mathematical object from the exact scalar map.
+
+\section{Geometric work and numerical benchmarks}\label{sec:bench}
+\subsection{An explicit, nonminimal construction-cost model}
+A join costs one straight line; a parallel is implemented uniformly by two lines and three compass arcs; a known-length transfer costs one arc. Point selection and intersection reading are not charged. The compass retains its aperture. These are explicit protocol costs, not lower bounds.
+
+For the first step, both the raw support $MB$ and AK require two joins and $2p+1$ parallels. AD adds a join and a transfer. Reusing the last horizontal as the first horizontal of the next step gives recurrent costs $10p+2$ for raw/AK and $10p+4$ for AD. Fixed-anchor preparation and final visible reading are charged separately.
+
+For $p=3,X=2,W=2,H=4$, the anchor is $C$. Including the specified method preparation and final reading, the totals after $n\ge1$ updates are
+\begin{equation}
+ C_{\rm raw}=32n+17,\qquad C_{AK}=32n+24,\qquad C_{AD}=34n+16.
+\end{equation}
+The common rectangle is excluded. The raw map is
+$1-(X-1)/(X\sum_{j=0}^{p-1}s^j)$; its geometric intersection is undefined at $s=1$, although its algebraic continuation exists. The cost comparison starts at $s_0=3/4$, avoiding this degeneracy.
+
+\begin{table}[htbp]\centering
+\caption{Rechecked cubic example: $X=2$, visible start $v_0=9/8$. Each entry is updates / elementary traces. The compact-Halley protocol does not preserve the rectangle chain.}\label{tab:cost}
+\begin{tabular}{@{}rrrrr@{}}\toprule
+Digits $d$ & Raw & AK & AD & Compact Halley\\\midrule
+6 & 8 / 273 & 3 / 120 & 2 / 84 & 2 / 55\\
+12 & 17 / 561 & 4 / 152 & 3 / 118 & 3 / 82\\
+30 & 45 / 1457 & 5 / 184 & 3 / 118 & 4 / 109\\
+60 & 90 / 2897 & 6 / 216 & 4 / 152 & 4 / 109\\\bottomrule
+\end{tabular}
+\end{table}
+
+Here ``$d$ digits'' means relative error at most $10^{-d}$, not correctly rounded decimal output. Counts are certified by rational inequalities: for positive $v$ and $\epsilon=10^{-d}$, the stopping condition is exactly
+$2(1-\epsilon)^3\le v^3\le2(1+\epsilon)^3$.
+AK, AD and compact Halley use exact fractions. Raw uses directed rational interval propagation to avoid explosive denominators. The previous iterate is also checked to fail the threshold.
+
+The compact control computes $u^+=u(2X+u^3)/(X+2u^3)$ using 27 traces per step and one preparation arc. It can be cheaper than AD. Within the specified rectangle protocols, the asymptotic AD/AK work ratio is
+\begin{equation}
+ \frac{10p+4}{10p+2}\frac{\log2}{\log3},
+\end{equation}
+about $0.6704$ at $p=3$. This is not an optimum over all root constructions.
+
+\fig{convergence_cost}{cost}{1}{Convergence and counted work are different quantities. Left: visible-reading errors at equal initial visible estimate; curves stop before exhausting the working precision. Right: the explicit trace counts in Table~\ref{tab:cost}. Compact Halley is retained as a control against overstating the geometric advantage.}
+
+\subsection{Fresh digital wall-clock benchmark}
+We compare direct Newton, direct Halley, inverse-state AD and \texttt{mpmath.root} at root degrees 3, 4, 8, 16 and 32. Inputs are 1.125, 1.25, 1.5 and 2. Every iterative solver starts at the same inverse reading $y_0=1$; hence AD starts at $s_0=1$. Working precision is 140 decimal digits and the target relative error is $10^{-60}$. The reference root is computed outside the timed region, but the reference-based stopping test is included in the iterative timings. This is an experimental stopping oracle, not a proposed production stopping rule.
+
+After warm-up, nine shuffled rounds each time a batch of 100 solves per degree and method. Reported times are medians of per-solve batch averages; quartiles summarize variation between rounds. There are 80 distinct correctness checks, all passing the target. The specialized root routine computes a root at the full working precision and uses its own implementation strategy \citep{mpmath}; its timing is a practical library baseline, not an equal-instruction comparison. No CPU pinning or operating-system isolation is claimed.
+
+\input{data/digital_table.tex}
+
+\fig{timing}{timing}{.88}{Fresh same-host wall-clock timings. Error bars show the empirical interquartile spread of nine batch averages, not confidence intervals. They measure this Python/mpmath implementation only. AD's reciprocal reading and Python-level stopping overhead are included.}
+
+The matched AD and Halley update counts are required by their exact conjugacy; timing differences arise from representation and implementation. A cubic order does not imply minimum runtime. These normalized-input experiments do not establish behavior for floating-point extremes or replace a general-purpose root library.
+
+\subsection{SPICE wall time versus circuit time}
+Fourteen additional runs execute the saved buffered cubic netlists, seven per architecture, in shuffled order. The timed region includes process launch, transient solution and waveform writing; Python parsing follows outside it. Outputs at 645\,$\mu$s are checked against the retained results.
+\input{data/spice_table.tex}
+The circuit simulation covers 650\,$\mu$s and reads the sixth-cycle output at 645\,$\mu$s. Neither value is the measured latency of a physical device. Simulator runtime is also not a measure of transistor area, circuit energy or processor speedup.
+
+\section{Sampled analog architecture}\label{sec:analog}
+\subsection{Normalization and arithmetic cells}
+Only the cubic case is implemented in the analog experiments. Let $m\in[1,2]$ and $V_0=4.096$ V. The prescribed input is $V_m=V_0m$, independent of reference drift, and the desired output is $V_0m^{1/3}$. Store the inverse-root state as $V_s=V_0s$, initially $V_0$. The nominal supplies are $\pm15$ V.
+
+At $p=3$, \eqref{eq:ad} reduces to
+\begin{equation}
+ s^+=s\frac{1+t/2}{1/2+t},\qquad t=ms^3.
+\end{equation}
+Cells with functional transfer $XY/U$ form
+\begin{align}
+ V_{q2}&=V_s^2/V_0,& V_{q3}&=V_{q2}V_s/V_0,& V_t&=V_{q3}V_m/V_0,\\
+ N&=V_0/2+V_t/4,& D&=V_0/4+V_t/2,& V_s^+&=V_sN/D.\label{eq:analog}
+\end{align}
+The weighted voltages use 10/20/20 k$\Omega$ and 20/10/20 k$\Omega$ resistor networks, followed by buffers. The inverse output uses $X=V_0/2$, $Y=2V_0$, $U=V_s$ to obtain $V_0/s$. This port allocation matters because the candidate multiplier has an $X$-range restriction depending on $U$ \citep{ad734}. A diagnostic output $V_0ms^2$ adds a sixth arithmetic cell; the inverse-output-only AD core needs five. The compared direct Halley core uses three, plus its scaling and buffering networks.
+
+\fig{architecture}{architecture}{1}{Functional sampled AD architecture. Clock A acquires the candidate; clock B transfers it to the state. The read follower supplies the arithmetic loads. Each quotient uses its denominator servo, omitted from this overview for clarity. The inverse output and calibration are outside the update feedback path.}
+
+\subsection{Clocking, memory and output correction}
+The two 10 nF storage capacitors are reset for 50\,$\mu$s. Each 100\,$\mu$s cycle allocates 30\,$\mu$s to calculation, 20\,$\mu$s to candidate acquisition, a 5\,$\mu$s gap, 20\,$\mu$s to state transfer and a 25\,$\mu$s tail. Switches have modeled on-resistance 120\,$\Omega$. Isolation resistors of 100\,$\Omega$ are used in the charging paths.
+
+P2 introduced an electrical affine output stage. An inverting summer uses a 10 k$\Omega$ input resistor, feedback $R_f$, and a 1 M$\Omega$ trim-input resistor. A second unity-gain inverter yields ideally
+\begin{equation}
+ V_{\rm out}=gV_{\rm raw}+0.01gV_{\rm trim},\qquad g=R_f/(10\text{ k}\Omega).\label{eq:calibration}
+\end{equation}
+The simulated amplifiers have finite open-loop gain and dynamics. A script tunes the two electrical controls at $m=1$ and $m=2$; they are then held fixed. No offline correction is applied to the held-out outputs. The trim source and resistor settings remain ideal continuous controls: a DAC or potentiometer implementation with finite resolution and noise is not yet included.
+
+\subsection{Denominator control}
+The AD734 is a candidate arithmetic component, not the model used here. Its documented direct-denominator connection is Figure~29 of revision E \citep{ad734}. In the proposed positive-denominator connection, an amplifier senses $U_1$, drives $U_0$, and takes the requested denominator at its noninverting input, with $U_2=0$ and a 2 M$\Omega$ resistor between $U_0$ and $U_1$. DD is connected to the positive supply. A direct voltage on $U_0$ alone fails to compensate the base-emitter drop.
+
+P3 represents the internal denominator transistor by an assumed NPN and a nominal 28 k$\Omega$ emitter resistance. The rest of the multiplier remains a functional macromodel. The NPN process parameters are not extracted from an AD734 and its collector is simplified as connected to an ideal positive rail.
+
+\fig{servo}{servo}{.94}{Denominator-control topology represented by P3/P4. The internal transistor and parasitics are approximations. Feedback suppresses the modeled base-emitter error; the figure is not a complete fabrication schematic.}
+
+For an isolated cell, 27 combinations of resistance, parasitic capacitance and SPICE transistor temperature were tested. The command moves from 1.024 to 4.096 to 3.25 V. The worst observed denominator settling times to $\pm0.1\%$, measured after each 100 ns command transition, were 0.262\,$\mu$s upward and 2.715\,$\mu$s downward. A deliberately uncorrected control produced about $-20\%$ denominator error at the final plateau. These tests establish behavior of the assumed model, not a phase-margin or temperature qualification of the component.
+
+\section{Nonideal experiments and the memory-loading failure}\label{sec:results}
+\subsection{Model hierarchy and parameter provenance}
+The study was developed in stages. P1 introduced finite arithmetic and buffer response, memory leakage and switch charge injection. P2 added output calibration and reference-sensitivity tests. P3 added a denominator servo. P4 added the input loads and the corrective read buffers. The article's principal circuit results use P4; earlier results explain how a failure hidden by ideal interfaces was found.
+
+\begin{table}[htbp]\centering\small
+\caption{Selected P4 assumptions. ``Stress'' denotes a chosen test condition, not a combined manufacturer guarantee. Full equations and signs are in the source generators.}\label{tab:params}
+\begin{tabularx}{\linewidth}{@{}p{.34\linewidth}p{.29\linewidth}X@{}}\toprule
+Quantity & Value & Status\\\midrule
+Arithmetic gain / offset & $\pm0.1\%$ / $\pm5$ mV & Fixed alternating signs, P2 stress profile\\
+Legacy buffer offset & $\pm1$ mV & Fixed-sign stress assumption\\
+Weighted resistors & $\pm0.1\%$ & Alternating mismatch assumption\\
+Storage & 10 nF, leakage 5 nA & Exact capacitance, imposed leakage\\
+Switch charge & 5 pC & Imposed pulses at opening\\
+XY/Z input ports & 50 k$\Omega$, 2 pF, 50 nA & Candidate-informed nominal load model\\
+New follower / servo & $A_0=10^6$, GBW 10 MHz & Authored single-pole approximation\\
+Follower offset / bias & $+25\,\mu$V / 20 pA & Fixed assumed values\\
+Follower drive & 5 mA limit, 20 V/$\mu$s & Assumed current limit and slew rate\\
+Denominator NPN & $\beta=199$, $I_s=10^{-15}$ A & Assumed transistor, no process calibration\\\bottomrule
+\end{tabularx}
+\end{table}
+
+OPA192-family amplifiers, ADG1211 switches and an ADR4540 reference are component candidates \citep{opa192,adg1211,adr4540}. No vendor macromodel is substituted by silently identifying it with our behavioral source. In particular, loading a 10 nF hold capacitor requires an amplifier-stability assessment; the isolation resistor alone is not proof of stability. Parameters chosen for stress may be larger or smaller than a particular manufacturer's specification under different conditions.
+
+\subsection{Analytical diagnosis}
+For the single-ended connections, each differential input resistance is modeled to ground. The AD state drives four ports: X and Y of $q2$, Y of $q3$, and Y of the update quotient. Their parallel load is 12.5 k$\Omega$, giving
+\begin{equation}
+ \tau=R_{\rm eq}C=125\,\mu\text{s},\qquad
+ \frac{V_s(t+\Delta t)}{V_s(t)}=e^{-\Delta t/\tau}.\label{eq:RC}
+\end{equation}
+For $\Delta t=23\,\mu$s this predicts a 16.8\% loss before bias and leakage corrections. Three independent RC simulations verify \eqref{eq:RC} with 10, 12.5 and 15 k$\Omega$ loads.
+
+In the loaded AD chain, the measured state loss between 626 and 649\,$\mu$s reaches 16.89\%. The arithmetic then exceeds its modeled port limit: the largest ratio to the allowed input threshold is about 4.10, and output error reaches 149\% with the old P3 calibration. This is a failed operating condition. Refining an ideal convergence proof cannot repair that circuit-level failure.
+
+\subsection{Buffering and measured effect in the model}
+P4 adds one closed-loop read follower to AD. It also redirects the inverse-output denominator command to that buffered reading. Halley's existing scaled read path already shields its memory from the large direct port load; however, its three attenuation networks change ratio when loaded. P4 therefore adds a read follower and one follower to each of those three networks. The counts describe these particular implementations, not a general advantage of AD.
+
+The maximum absolute state change over the same 23\,$\mu$s window becomes 3.564 ppm for buffered AD and 2.923 ppm for buffered Halley on the six nominal input points. The remaining modeled leakage is not eliminated. Nominal output calibration is refitted after adding the followers.
+
+\begin{table}[htbp]\centering\small
+\caption{P4 output errors, in ppm. Baseline and buffered columns use different calibration protocols, explicitly stated below.}\label{tab:analog}
+\begin{tabular}{@{}lrrr@{}}\toprule
+Architecture & Loaded, old settings & Buffered, held-out & Port-stress cases\\\midrule
+AD inverse output & 1,492,046 & 11.133 & 43.851\\
+Direct Halley & 77,376 & 25.729 & 21.979\\\bottomrule
+\end{tabular}
+\end{table}
+
+The loaded column retains P3 settings and takes the maximum over $m=1,1.1,1.35,1.6,1.9,2$. The buffered column uses new two-point calibration at 1 and 2 and reports only the four held-out inputs. Therefore the full output-error improvement cannot be attributed to buffering alone. In contrast, the capacitor hold change directly measures the isolation effect.
+
+Port stress uses two global scenarios: $(40\text{ k}\Omega,+150\text{ nA},10\text{ pF})$ and $(60\text{ k}\Omega,-150\text{ nA},10\text{ pF})$, each at $m=1.1,1.9$ with calibration frozen. The negative bias polarity and 10 pF capacitance are deliberately chosen stresses. These correlated scenarios are neither independent component mismatch Monte Carlo nor an exhaustive worst-case sweep. Buffered runs stay below 0.95 of the modeled port limit.
+
+\fig{analog_results}{analog}{1}{P4 evidence. Left: retained waveforms at $m=2$ show memory discharge under the modeled load and its suppression by a read follower. Right: corrected outputs at four inputs not used for calibration. Lines connect finite samples and do not certify an error envelope between them.}
+
+\subsection{Reference sensitivity and accuracy interpretation}
+The ideal dimensional circuit, with externally fixed $V_{\rm in}$, obeys
+\begin{equation}
+ V_{\rm out}=V_{\rm ref}^{2/3}V_{\rm in}^{1/3},\qquad
+ \frac{\delta V_{\rm out}}{V_{\rm out}}\simeq\frac23\frac{\delta V_{\rm ref}}{V_{\rm ref}}.
+\end{equation}
+A 200 ppm reference change therefore contributes about 133 ppm even after the iteration has converged. P2's frozen-calibration reference tests are consistent with this scale. A ratiometric input specification would require a different interpretation. P4's port tests do not combine reference drift with all other errors, so their smaller errors are not a full accuracy budget.
+
+The 11.133 ppm nominal held-out result is a property of a particular functional model, sign pattern and calibration. No output-noise spectrum, effective number of bits, guaranteed temperature range or silicon accuracy follows from it. Full-scale multiplier specifications must not be read as uniform relative error bounds on every arithmetic operation.
+
+\section{Discussion and limitations}
+The mathematical construction is globally well-defined and convergent over positive real states. The practical analog prototype has rails, restricted input ranges, fixed timing and a normalization domain. The startup denominator floor $\max(U,0.4\text{ V})$ is still a numerical guard in the functional core, not an implemented protection circuit. A physical denominator clamp and power sequencing remain to be designed.
+
+At the geometric level, preserving the proportional chain explains where the power $s^p$ comes from and how moving one support realizes Halley. At the formal level, the incidence-to-map proof prevents a drawing from being treated as evidence merely because its formula appears plausible. At the circuit level, P4 shows why arithmetic correspondence is insufficient: charge storage and input resistance must also be modeled.
+
+The results do not establish historical priority for the drawing, a new root iteration, the smallest possible straightedge-and-compass construction, or an analog speedup over digital libraries. The raw, AK and AD trace comparison is protocol-specific. The digital timings are interpreter- and library-specific. The analog comparisons use different port scalings and auxiliary circuits and are not optimized area/energy comparisons.
+
+A next experimental stage should measure one buffered hold cell and one denominator-controlled XY/U cell before assembling the complete loop. It should address real amplifier poles, phase margin, reference/output impedances, thermal drift, stochastic mismatch, noise, acquisition error and startup sequencing. A foundry process, transistor multiplier, layout, parasitics and measured power are required before discussing a fabricated analog chip. Generalization of the exact map to all $p$ does not imply a single finite circuit implementing arbitrary degree or arbitrary dynamic range.
+
+\section{Conclusion}
+A moving support in a proportional rectangle gives a concrete realization of classical Halley iteration for every positive integer-degree root. Its exact map has global positive convergence and a nonzero cubic error constant, with a precise correspondence to Lean statements. The construction improves the specified fixed-line rectangle protocol at high accuracy, but compact Halley and specialized numerical libraries delimit the claim.
+
+The analog study contributes a reproducible failure-and-remedy result: finite input resistance destroys an unbuffered state memory, while a read follower restores the intended sampled behavior in the tested model. That finding, together with explicit calibration and denominator control, supports a laboratory feasibility program. It is not yet a validated silicon design.
+
+\section*{Data, code and drafting disclosure}
+The companion archive includes this LaTeX source, vector figures, figure generators, exact construction-count code, benchmark data, the P4 netlists and generators, and the formal source snapshot with its audit. No external dataset of measured hardware is used. Digital and SPICE timings are local measurements; analog errors are simulated. Bibliography links were checked on 17 September 2026 where accessible. AI assistance was used in drafting, code preparation and analysis; the scope of each computational check is recorded rather than treating generated prose as evidence.
+
+\appendix
+\section{Reproducibility protocol}\label{app:repro}
+The supplied \texttt{README.md} gives exact commands. Main entry points are:
+\begin{lstlisting}
+python scripts/benchmark.py
+python scripts/geometric_cost.py
+python scripts/bench_spice.py
+python scripts/figures.py
+cd analog_p4
+python simulate_p4.py
+python verify_p4.py
+\end{lstlisting}
+The numerical Python environment uses mpmath, numpy and matplotlib. ngspice 46 is the simulator used for the retained experiments \citep{ngspice}. Tectonic compiles the LaTeX source; a latexmk alternative is documented. Saved netlists all write \texttt{waveform.txt}, so standalone reruns should use separate working directories.
+
+The P4 main suite has 40 simulations: per architecture, six loaded diagnostics, four endpoint calibration solves, six buffered samples and four frozen-calibration stress samples. Verification adds three independent RC checks and two integrated runs with maximum timestep reduced from 100 to 20 ns. The new wall-clock suite adds 14 netlist executions. Thus the article draws on 45 P4 validation runs and 14 timing reruns, not 59 independent input conditions.
+
+The final-output timestep comparisons at $m=2$ are numerical resolution checks, not proofs of every transient peak. All finite checks, including rational geometric counts, are kept separate from universal Lean theorems. Source and output hashes are included for provenance; they do not substitute for independent reproduction.
+
+\section{Exact construction and circuit interfaces}
+The construction data flow is
+\[
+ P\longrightarrow (L_j,B_j)_{j=1}^p\longrightarrow E
+ \longrightarrow D\longrightarrow AD\cap(P\parallel ME)
+ \longrightarrow P^+.
+\]
+For the parallel macro, choose a generic point on the reference line and join it to the external point. Copy the angle by two equal-radius arcs and one chord-transfer arc, then draw the resulting direction. This uses two lines and three arcs, with consistently oriented intersections. The compact cubic Halley control uses two products (16 traces), three additions/transfers (3 traces), and one proportional construction of $uN/D$ (8 traces), plus one initial transfer for $2X$. These are explicit recipes, not minimality theorems.
+
+A visible-root readout after an update requires rebuilding the appropriate $p-1$ chain levels. An inverse-state analog readout instead requires a division. Neither readout is free in the relevant cost model.
+
+For $p=3,X=2,s=3/4$, the exact values provide a compact regression case:
+\begin{equation}
+ E=(2,37/16),\quad D=(0,-27/16),\quad
+ s^+_{AD}=273/344,\quad s^+_{AK}=72/91.
+\end{equation}
+The output readings are $v^+=2(s^+)^2$ and $y^+=1/s^+$. They differ at finite iteration. These values can be checked by direct substitution without evaluating a cube root.
+
+For electronic calibration, the final nominal P4 settings are approximately
+\begin{center}\small
+\begin{tabular}{@{}lrr@{}}\toprule
+Architecture & $R_f$ ($\Omega$) & $V_{\rm trim}$ (V)\\\midrule
+AD & 9961.249437 & $-0.223401869$\\
+Halley & 9998.099480 & $-1.435688082$\\\bottomrule
+\end{tabular}
+\end{center}
+Their many displayed digits document the simulation inputs; they are not a claim that a physical trimmer can be set to that resolution. Neither trimming hardware nor calibration metrology uncertainty is included.
+
+\begingroup
+\small
+\setlength{\bibsep}{3pt}
+\bibliographystyle{plainnat}
+\bibliography{references}
+\endgroup
+\end{document}

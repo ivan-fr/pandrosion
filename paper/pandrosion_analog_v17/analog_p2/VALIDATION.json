@@ -1,0 +1,11 @@
+{
+  "spice_runs": 42,
+  "chain_runs": 40,
+  "independent_stage_checks": 2,
+  "finite_outputs": true,
+  "port_ratio_below_0p95": true,
+  "heldout_error_below_30ppm": true,
+  "isolated_variations_error_below_200ppm": true,
+  "figures_visually_inspected": true,
+  "not_vendor_models": true
+}

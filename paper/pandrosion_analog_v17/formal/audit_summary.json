@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "checked_at": "2026-09-17T10:33:59.059794+00:00",
+  "theorems": 88,
+  "local_modules": 18,
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "lean": "4.33.1",
+  "mathlib": "v4.33.1",
+  "source_hashes": {
+    "LeanMath/Papers/Family.lean": "0d13fef99787d8154fc64a99755a6a8b53555f9dc334f9ad3bed2fc0fed438b9",
+    "LeanMath/Papers/LocalOrder.lean": "ff56e258d7ed81ac8815dcbf40647022739503917e2ff6e6d55336f4d89afa0b",
+    "LeanMath/Papers/IntervalIteration.lean": "ad49df471c8385fd48749043f4144a7ca761f84952c191f57c9e6f8aac92fbc3",
+    "LeanMath/Papers/RectangleVerification.lean": "b0ea3fe1f3a94d1924c6acd527998723d84f03b605168c996f8f86cf80fa7bfd",
+    "LeanMath/Papers/RectangleBilateral.lean": "cadd887c239466ef4ae0a9931ab19efdc3a3f76e17b0eada8603695d3805c6ac",
+    "LeanMath/Papers/RectangleConstructible.lean": "f7e09f617d31a782e087fbee03b82500f2860fed478569fcce887ab6938f559f",
+    "LeanMath/Papers/RectangleReports.lean": "28d5976e36f433197ebb11743f821eb8b861848a097e69e7e8eb2d356de49031",
+    "LeanMath/Papers/CertifiedConvergence.lean": "c1f6c122beeea5a40f782f2b93727706aef6bfe1219aa2c425c5fb019c307862",
+    "LeanMath/Papers/RawConvergence.lean": "fb3cf51264374440fd04414c1cd72a7f32fc836adf028c0314cb19794462210e",
+    "LeanMath/Papers/RectangleNewton.lean": "b1e20c909e3b14e138ad7b2a12a0600af778238b34dc3a3c073ae4961522bab1",
+    "LeanMath/Papers/MonotoneIteration.lean": "f201981962fa6a3119fa9c6581172a907bd716cb95203a2d803891cf5166fd5e",
+    "LeanMath/Papers/RectangleDynamics.lean": "da6b33f0bece3d9355ecfd69acc1e949a8e45642dce39dbbd8a3adeaf137ec1e",
+    "LeanMath/Papers/Cayley.lean": "03e3cef44feb1621cf9444c4b66db6e59a84288d779fc1761b7ec0cb529eba9b",
+    "LeanMath/Papers/Raw.lean": "711a7e6f23bee89bea5bbd677451ab95890cb6c8114d40b2396001d6da4ed237",
+    "LeanMath/Papers/Bracket.lean": "bff959f86d4daed8e26a5dcb46515cf0522510695e482d9c89b082c92b29d9fb",
+    "LeanMath/Papers/RectangleGeometry.lean": "3e1e11034563cfe85b1c1758fc67089f38d9d7e6e7fb8819a3449241a1b5a373",
+    "LeanMath/Papers/RectangleRaw.lean": "785a7043e9a34ee66305f531bd244a492e5f5cd792ffd13786d13f6f26e7b89c",
+    "LeanMath/Papers/Comparison.lean": "8b1f37a5bc74fd3386b5f85e97b0dffa5bac5bf7860815794fcf38bd62da6c23"
+  }
+}

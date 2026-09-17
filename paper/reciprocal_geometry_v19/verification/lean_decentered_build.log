@@ -1,0 +1,285 @@
+⚠ [3006/3096] Replayed LeanMath.Papers.RectangleReports
+warning: LeanMath/Papers/RectangleReports.lean:16:47: Variable name `hW` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hW
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanMath/Papers/RectangleReports.lean:16:60: Variable name `hX` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hX
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanMath/Papers/RectangleReports.lean:45:29: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleReports.lean:83:17: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectangleReports.lean:83:17: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/RectangleReports.lean:89:17: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectangleReports.lean:89:17: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+⚠ [3084/3192] Replayed LeanMath.Papers.Cayley
+warning: LeanMath/Papers/Cayley.lean:29:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:45:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:67:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:71:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:131:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:138:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:156:20: This simp argument is unused:
+  P₅
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Pi.add_apply, Nat.reduceSub, mul_one, id_eq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Cayley.lean:156:24: This simp argument is unused:
+  Pi.add_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [P₅, Nat.reduceSub, mul_one, id_eq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Cayley.lean:155:57: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:156:70: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3117/3192] Replayed LeanMath.Papers.Comparison
+warning: LeanMath/Papers/Comparison.lean:16:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Comparison.lean:49:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Comparison.lean:72:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/Comparison.lean:72:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3177/3192] Replayed LeanMath.Papers.Family
+warning: LeanMath/Papers/Family.lean:25:40: This simp argument is unused:
+  Matrix.cons_val_zero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [truncation, Matrix.cons_val_one, Matrix.cons_val_fin_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Family.lean:25:61: This simp argument is unused:
+  Matrix.cons_val_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [truncation, Matrix.cons_val_zero, Matrix.cons_val_fin_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Family.lean:25:81: This simp argument is unused:
+  Matrix.cons_val_fin_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [truncation, Matrix.cons_val_zero, Matrix.cons_val_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3179/3192] Replayed LeanMath.Papers.LocalOrder
+warning: LeanMath/Papers/LocalOrder.lean:24:49: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3180/3192] Replayed LeanMath.Papers.RectangleDynamics
+warning: LeanMath/Papers/RectangleDynamics.lean:25:6: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectangleDynamics.lean:25:6: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/RectangleDynamics.lean:95:48: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3182/3192] Replayed LeanMath.Papers.Bracket
+warning: LeanMath/Papers/Bracket.lean:20:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3183/3192] Replayed LeanMath.Papers.RectangleNewton
+warning: LeanMath/Papers/RectangleNewton.lean:78:40: This simp argument is unused:
+  Pi.mul_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [id_eq, mul_one, Pi.pow_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/RectangleNewton.lean:119:48: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3185/3192] Replayed LeanMath.Papers.RectangleBilateral
+warning: LeanMath/Papers/RectangleBilateral.lean:16:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleBilateral.lean:87:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3187/3192] Replayed LeanMath.Papers.RectangleProjective
+info: LeanMath/Papers/RectangleProjective.lean:55:147: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: LeanMath/Papers/RectangleProjective.lean:59:127: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleProjective.lean:59:143: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleProjective.lean:201:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleProjective.lean:219:10: Variable name `W` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _W
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanMath/Papers/RectangleProjective.lean:244:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleProjective.lean:290:62: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectangleProjective.lean:290:62: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+⚠ [3188/3192] Replayed LeanMath.Papers.RectangleProjectiveVerification
+warning: LeanMath/Papers/RectangleProjectiveVerification.lean:73:51: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [step, div_eq_mul_inv, mul_comm, mul_left_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/RectangleProjectiveVerification.lean:87:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3189/3192] Replayed LeanMath.Papers.RectanglePencils
+warning: LeanMath/Papers/RectanglePencils.lean:51:27: This simp argument is unused:
+  div_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [chain, div_div, one_div, div_inv_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/RectanglePencils.lean:66:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencils.lean:79:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencils.lean:91:2: Unused tactic linter: `change (projector W H a b).2 - (right W H q).2 ≠ 0` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectanglePencils.lean:128:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencils.lean:195:75: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencils.lean:195:87: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3190/3192] Replayed LeanMath.Papers.RectanglePencilsPade
+warning: LeanMath/Papers/RectanglePencilsPade.lean:44:91: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:44:107: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:48:91: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:48:107: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:164:48: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:207:41: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:223:44: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:227:44: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:223:44: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:227:44: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:236:6: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:236:6: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:250:6: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectanglePencilsPade.lean:250:6: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+⚠ [3191/3192] Replayed LeanMath.Papers.RectangleFixedCircle
+warning: LeanMath/Papers/RectangleFixedCircle.lean:154:83: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleFixedCircle.lean:154:97: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleFixedCircle.lean:157:83: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleFixedCircle.lean:157:97: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleFixedCircle.lean:234:69: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectangleFixedCircle.lean:234:69: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/RectangleFixedCircle.lean:234:39: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleFixedCircle.lean:247:48: Variable name `hp` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanMath/Papers/RectangleFixedCircle.lean:251:6: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectangleFixedCircle.lean:251:6: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+✔ [3192/3192] Built LeanMath.Papers.RectangleDecenteredArc (32s)
+Build completed successfully (3192 jobs).

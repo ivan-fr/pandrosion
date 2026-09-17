@@ -1,0 +1,186 @@
+Pandrosion P2 Halley m=2 profile=untrimmed_stress C=1e-08 acquisition=20.0us
+* Authored functional macromodels; not AD734/vendor models; no supply power accounting.
+.options reltol=2e-6 abstol=1e-11 vntol=1e-7 method=gear
+Vref ref 0 4.096
+Rhalf1 ref half_mid 10k
+Rhalf2 half_mid 0 10k
+Xhalf half_mid ref_half ref_half OA PARAMS: vo=0
+Rdouble1 ref_double double_fb 10k
+Rdouble2 double_fb 0 10k
+Xdouble ref double_fb ref_double OA PARAMS: vo=0
+Vm m 0 8.192
+Va ca 0 PULSE(0 3 8e-05 1e-08 1e-08 2e-05 0.0001)
+Vb cb 0 PULSE(0 3 0.000105 1e-08 1e-08 2e-05 0.0001)
+Vr reset 0 PULSE(3 0 5e-05 1e-08 1e-08 1 2)
+.model sw SW(Ron=120 Roff=1e12 Vt=1.5 Vh=0.1)
+Cc candidate 0 1e-08
+Cs state 0 1e-08
+Rc candidate 0 1e12
+Rs state 0 1e12
+Ileakc candidate 0 5e-09
+Ileaks state 0 5e-09
+Risoa sample_drive track_a 100
+Sa track_a candidate ca 0 sw
+Risob memory_drive track_b 100
+Sb track_b state cb 0 sw
+Risor reset_drive reset_iso 100
+Sr1 reset_iso candidate reset 0 sw
+Sr2 reset_iso state reset 0 sw
+Iinj_candidate 0 candidate PULSE(0 9.61538461538e-05 0.000100015 2n 2n 5e-08 0.0001)
+Iinj_state 0 state PULSE(0 9.61538461538e-05 0.000125015 2n 2n 5e-08 0.0001)
+Bint_reset_drive 0 z_reset_drive I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(ref)+(0.001))))-v(z_reset_drive))/8e-08))
+Cint_reset_drive z_reset_drive 0 1n
+Rint_reset_drive z_reset_drive 0 1e12
+Bout_reset_drive 0 reset_drive I=min(0.005,max(-0.005,(v(z_reset_drive)-v(reset_drive))/0.5))
+Rout_reset_drive reset_drive 0 1e12
+Ib_reset_drive ref 0 100p
+Bint_sample_drive 0 z_sample_drive I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(next)+(-0.001))))-v(z_sample_drive))/8e-08))
+Cint_sample_drive z_sample_drive 0 1n
+Rint_sample_drive z_sample_drive 0 1e12
+Bout_sample_drive 0 sample_drive I=min(0.005,max(-0.005,(v(z_sample_drive)-v(sample_drive))/0.5))
+Rout_sample_drive sample_drive 0 1e12
+Ib_sample_drive next 0 100p
+Bint_memory_drive 0 z_memory_drive I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(candidate)+(0.001))))-v(z_memory_drive))/8e-08))
+Cint_memory_drive z_memory_drive 0 1n
+Rint_memory_drive z_memory_drive 0 1e12
+Bout_memory_drive 0 memory_drive I=min(0.005,max(-0.005,(v(z_memory_drive)-v(memory_drive))/0.5))
+Rout_memory_drive memory_drive 0 1e12
+Ib_memory_drive candidate 0 100p
+Egainstate gs_target 0 state 0 1.6666666666666667
+Bint_gainstate 0 z_gainstate I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(gs_target)+(-0.001))))-v(z_gainstate))/8e-08))
+Cint_gainstate z_gainstate 0 1n
+Rint_gainstate z_gainstate 0 1e12
+Bout_gainstate 0 gainstate I=min(0.005,max(-0.005,(v(z_gainstate)-v(gainstate))/0.5))
+Rout_gainstate gainstate 0 1e12
+Ib_gainstate gs_target 0 100p
+Rtop_att_state gainstate att_state 32k
+Rbot_att_state att_state 0 18k
+Ib_gaininput state 0 100p
+Rtop_att_q2 q2 att_q2 20k
+Rbot_att_q2 att_q2 0 30k
+Rtop_att_num num att_num 20k
+Rbot_att_num att_num 0 30k
+Bint_q2 0 z_q2 I=1n*min(10000000.0,max(-10000000.0,(min(10.5,max(-10.5,((1+(0.001))*(min(1.25*max(v(u_q2),0.4),max(-1.25*max(v(u_q2),0.4),v(att_state))))*min(10,max(-10,v(gainstate)))/max(v(u_q2),0.4)+(0.005))))-v(z_q2))/1e-07))
+Cint_q2 z_q2 0 1n
+Rint_q2 z_q2 0 1e12
+Bout_q2 0 q2 I=min(0.005,max(-0.005,(v(z_q2)-v(q2))/5.0))
+Rout_q2 q2 0 1e12
+Bint_q3 0 z_q3 I=1n*min(10000000.0,max(-10000000.0,(min(10.5,max(-10.5,((1+(-0.001))*(min(1.25*max(v(u_q3),0.4),max(-1.25*max(v(u_q3),0.4),v(att_q2))))*min(10,max(-10,v(gainstate)))/max(v(u_q3),0.4)+(-0.005))))-v(z_q3))/1e-07))
+Cint_q3 z_q3 0 1n
+Rint_q3 z_q3 0 1e12
+Bout_q3 0 q3 I=min(0.005,max(-0.005,(v(z_q3)-v(q3))/5.0))
+Rout_q3 q3 0 1e12
+Rweight1 num_sum q3 20020
+Rweight2 num_sum m 9990
+Rweight3 num_sum 0 20020
+Bint_num 0 z_num I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(num_sum)+(0.001))))-v(z_num))/8e-08))
+Cint_num z_num 0 1n
+Rint_num z_num 0 1e12
+Bout_num 0 num I=min(0.005,max(-0.005,(v(z_num)-v(num))/0.5))
+Rout_num num 0 1e12
+Ib_num num_sum 0 100p
+Rweight4 den_sum q3 9990
+Rweight5 den_sum m 20020
+Rweight6 den_sum 0 19980
+Bint_den 0 z_den I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(den_sum)+(-0.001))))-v(z_den))/8e-08))
+Cint_den z_den 0 1n
+Rint_den z_den 0 1e12
+Bout_den 0 den I=min(0.005,max(-0.005,(v(z_den)-v(den))/0.5))
+Rout_den den 0 1e12
+Ib_den den_sum 0 100p
+Bint_next 0 z_next I=1n*min(10000000.0,max(-10000000.0,(min(10.5,max(-10.5,((1+(0.001))*(min(1.25*max(v(u_next),0.4),max(-1.25*max(v(u_next),0.4),v(att_num))))*min(10,max(-10,v(gainstate)))/max(v(u_next),0.4)+(0.005))))-v(z_next))/1e-07))
+Cint_next z_next 0 1n
+Rint_next z_next 0 1e12
+Bout_next 0 next I=min(0.005,max(-0.005,(v(z_next)-v(next))/5.0))
+Rout_next next 0 1e12
+Bint_out 0 z_out I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(state)+(0.001))))-v(z_out))/8e-08))
+Cint_out z_out 0 1n
+Rint_out z_out 0 1e12
+Bout_out 0 out I=min(0.005,max(-0.005,(v(z_out)-v(out))/0.5))
+Rout_out out 0 1e12
+Ib_out state 0 100p
+Egeo outgeo 0 out 0 1
+Rload_out out 0 5k
+Cload_out out 0 20p
+Rload_outgeo outgeo 0 5k
+Cload_outgeo outgeo 0 20p
+Bclipratio clipratio 0 V=max(max(max(max(max(abs(v(att_state))/(1.25*max(v(u_q2),0.4)),abs(v(gainstate))/10),abs(v(att_q2))/(1.25*max(v(u_q3),0.4))),abs(v(gainstate))/10),abs(v(att_num))/(1.25*max(v(u_next),0.4))),abs(v(gainstate))/10)
+
+* Two inverters implement a positive affine correction using real resistor KCL.
+* Vtrim represents a bench trim source, not an implemented DAC/potentiometer.
+Vtrim trim 0 -1.42364565860303
+Rcalin out sum1 10k
+Rcalfb neg sum1 9997.58927851648
+Rcaloffset trim sum1 1meg
+Xcal1 0 sum1 neg OA PARAMS: vo=2.5e-05
+Rcalin2 neg sum2 10k
+Rcalfb2 corrected sum2 10k
+Xcal2 0 sum2 corrected OA PARAMS: vo=-2.5e-05
+Rcal_load corrected 0 10k
+Ccal_load corrected 0 20p
+* Authored single-pole op amp: A0=1e6, GBW=10 MHz, SR=20 V/us,
+* internal clamp +/-13 V, output limit 5 mA, Rout=10 ohms, bias=20 pA.
+* This is not the OPA192 vendor model and does not prove load stability.
+.subckt OA plus minus output PARAMS: vo=0
+Bpole 0 internal I=1n*min(20meg,max(-20meg,(1meg*(v(plus)-v(minus)+vo)-v(internal))/0.0159154943092))
+Brail internal 0 I=10*(max(0,v(internal)-13)+min(0,v(internal)+13))
+Cpole internal 0 1n
+Rbleed internal 0 1e12
+Bdrive 0 output I=min(5m,max(-5m,(v(internal)-v(output))/10))
+Rout output 0 1e12
+Ibplus plus 0 20p
+Ibminus minus 0 20p
+.ends OA
+
+Vservo_supply servo_supply 0 15
+Xden_q2 ref u_q2 servo_supply DEN
+Xden_q3 ref u_q3 servo_supply DEN
+Xden_next den u_next servo_supply DEN
+Bservoerr servoerr 0 V=max(max(abs(v(u_q2)-v(ref)),abs(v(u_q3)-v(ref))),abs(v(u_next)-v(den)))
+* Simplified internal transistor; parameters are assumptions, not AD734 process data.
+.model QUAPP NPN(Is=1e-15 Bf=199 Vaf=100 Cje=2p Cjc=1p Tf=0.3n)
+.subckt DEN cmd measured supply PARAMS: vos=25u
+Xamp cmd measured base OA PARAMS: vo={vos}
+Qden supply base measured QUAPP
+Rden measured 0 28000
+Rcomp base measured 2meg
+Cpar measured 0 2e-11
+.ends DEN
+
+Rport_q2_x att_state 0 50000
+Cport_q2_x att_state 0 2e-12
+Iport_q2_x att_state 0 5e-08
+Rport_q2_y gainstate 0 50000
+Cport_q2_y gainstate 0 2e-12
+Iport_q2_y gainstate 0 5e-08
+Rport_q2_z q2 0 50000
+Cport_q2_z q2 0 2e-12
+Iport_q2_z q2 0 5e-08
+Rport_q3_x att_q2 0 50000
+Cport_q3_x att_q2 0 2e-12
+Iport_q3_x att_q2 0 5e-08
+Rport_q3_y gainstate 0 50000
+Cport_q3_y gainstate 0 2e-12
+Iport_q3_y gainstate 0 5e-08
+Rport_q3_z q3 0 50000
+Cport_q3_z q3 0 2e-12
+Iport_q3_z q3 0 5e-08
+Rport_next_x att_num 0 50000
+Cport_next_x att_num 0 2e-12
+Iport_next_x att_num 0 5e-08
+Rport_next_y gainstate 0 50000
+Cport_next_y gainstate 0 2e-12
+Iport_next_y gainstate 0 5e-08
+Rport_next_z next 0 50000
+Cport_next_z next 0 2e-12
+Iport_next_z next 0 5e-08
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=14
+tran 100n 0.00065 0 100n uic
+wrdata waveform.txt v(state) v(candidate) v(out) v(outgeo) v(next) v(num) v(den) v(ca) v(cb) v(clipratio) v(corrected) v(neg) v(servoerr)
+quit
+.endc
+.end

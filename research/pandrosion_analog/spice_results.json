@@ -1,0 +1,2833 @@
+{
+  "controls": [
+    {
+      "mode": "Halley",
+      "p": 3,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 1.249999860330853,
+          "ideal_state": 1.25,
+          "state_error": -1.3966914691465604e-07,
+          "inverse_error": -0.007874453375350754,
+          "geometry_error": -0.007874453375350754,
+          "residual": 1.0240003381309648
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 1.259920503039473,
+          "ideal_state": 1.2599206349206349,
+          "state_error": -1.3188116199103206e-07,
+          "inverse_error": -4.3403941885067354e-07,
+          "geometry_error": -4.3403941885067354e-07,
+          "residual": 1.0000012971193781
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 1.2599209179938269,
+          "ideal_state": 1.2599210498948732,
+          "state_error": -1.319010463074477e-07,
+          "inverse_error": -1.0468992983625469e-07,
+          "geometry_error": -1.0468992983625469e-07,
+          "residual": 1.0000003090698495
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 1.2599209179938269,
+          "ideal_state": 1.2599210498948732,
+          "state_error": -1.319010463074477e-07,
+          "inverse_error": -1.0468992983625469e-07,
+          "geometry_error": -1.0468992983625469e-07,
+          "residual": 1.0000003090698495
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 1.2599209179938269,
+          "ideal_state": 1.2599210498948732,
+          "state_error": -1.319010463074477e-07,
+          "inverse_error": -1.0468992983625469e-07,
+          "geometry_error": -1.0468992983625469e-07,
+          "residual": 1.0000003090698495
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 1.2599209179938269,
+          "ideal_state": 1.2599210498948732,
+          "state_error": -1.319010463074477e-07,
+          "inverse_error": -1.0468992983625469e-07,
+          "geometry_error": -1.0468992983625469e-07,
+          "residual": 1.0000003090698495
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 1.2599209179938269,
+          "ideal_state": 1.2599210498948732,
+          "state_error": -1.319010463074477e-07,
+          "inverse_error": -1.0468992983625469e-07,
+          "geometry_error": -1.0468992983625469e-07,
+          "residual": 1.0000003090698495
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 1.2599209179938269,
+          "ideal_state": 1.2599210498948732,
+          "state_error": -1.319010463074477e-07,
+          "inverse_error": -1.0468992983625469e-07,
+          "geometry_error": -1.0468992983625469e-07,
+          "residual": 1.0000003090698495
+        }
+      ],
+      "max_abs_state_deviation": 1.3966914691465604e-07,
+      "final_inverse_error": -1.0468992983625469e-07,
+      "final_geometry_error": -1.0468992983625469e-07
+    },
+    {
+      "mode": "Halley",
+      "p": 16,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 1.0425530668486667,
+          "ideal_state": 1.0425531914893618,
+          "state_error": -1.2464069509832143e-07,
+          "inverse_error": -0.0016477628833573288,
+          "geometry_error": -0.0016477628833573288,
+          "residual": 1.0267370036341528
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 1.0442735665177496,
+          "ideal_state": 1.0442736829310784,
+          "state_error": -1.1641332875456101e-07,
+          "inverse_error": -2.0675580270079763e-07,
+          "geometry_error": -2.0675580270079763e-07,
+          "residual": 1.0000031730981387
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 1.0442736660318659,
+          "ideal_state": 1.0442737824274138,
+          "state_error": -1.1639554786668782e-07,
+          "inverse_error": -1.1146075851176107e-07,
+          "geometry_error": -1.1146075851176107e-07,
+          "residual": 1.0000016483735408
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 1.0442736660318699,
+          "ideal_state": 1.0442737824274138,
+          "state_error": -1.1639554386988493e-07,
+          "inverse_error": -1.1146075462598048e-07,
+          "geometry_error": -1.1146075462598048e-07,
+          "residual": 1.0000016483734722
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 1.0442736660318699,
+          "ideal_state": 1.0442737824274138,
+          "state_error": -1.1639554386988493e-07,
+          "inverse_error": -1.1146075462598048e-07,
+          "geometry_error": -1.1146075462598048e-07,
+          "residual": 1.0000016483734722
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 1.0442736660318699,
+          "ideal_state": 1.0442737824274138,
+          "state_error": -1.1639554386988493e-07,
+          "inverse_error": -1.1146075462598048e-07,
+          "geometry_error": -1.1146075462598048e-07,
+          "residual": 1.0000016483734722
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 1.0442736660318805,
+          "ideal_state": 1.0442737824274138,
+          "state_error": -1.163955332117439e-07,
+          "inverse_error": -1.1146074441192866e-07,
+          "geometry_error": -1.1146074441192866e-07,
+          "residual": 1.0000016483732872
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 1.0442736660318785,
+          "ideal_state": 1.0442737824274138,
+          "state_error": -1.1639553521014534e-07,
+          "inverse_error": -1.114607464103301e-07,
+          "geometry_error": -1.114607464103301e-07,
+          "residual": 1.0000016483733274
+        }
+      ],
+      "max_abs_state_deviation": 1.2464069509832143e-07,
+      "final_inverse_error": -1.114607464103301e-07,
+      "final_geometry_error": -1.114607464103301e-07
+    }
+  ],
+  "status": "passed",
+  "simulator": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n******\n",
+  "scope": "Behavioral cells + RC bandwidth + two switched capacitors and two ideal isolation buffers; no transistor, process, power or silicon timing claim.",
+  "nominal": [
+    {
+      "mode": "AD",
+      "p": 2,
+      "m": 1.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9999998949767366,
+          "ideal_state": 1.0,
+          "state_error": -1.0502326341921275e-07,
+          "inverse_error": 1.05023274521443e-07,
+          "geometry_error": -1.0502326341921275e-07,
+          "residual": 0.999999793953488
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9999998949767366,
+          "ideal_state": 1.0,
+          "state_error": -1.0502326341921275e-07,
+          "inverse_error": 1.05023274521443e-07,
+          "geometry_error": -1.0502326341921275e-07,
+          "residual": 0.999999793953488
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9999998949767355,
+          "ideal_state": 1.0,
+          "state_error": -1.0502326452943578e-07,
+          "inverse_error": 1.0502327540962142e-07,
+          "geometry_error": -1.0502326452943578e-07,
+          "residual": 0.9999997939534858
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9999998949767355,
+          "ideal_state": 1.0,
+          "state_error": -1.0502326452943578e-07,
+          "inverse_error": 1.0502327540962142e-07,
+          "geometry_error": -1.0502326452943578e-07,
+          "residual": 0.9999997939534858
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9999998949767366,
+          "ideal_state": 1.0,
+          "state_error": -1.0502326341921275e-07,
+          "inverse_error": 1.05023274521443e-07,
+          "geometry_error": -1.0502326341921275e-07,
+          "residual": 0.999999793953488
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9999998949767366,
+          "ideal_state": 1.0,
+          "state_error": -1.0502326341921275e-07,
+          "inverse_error": 1.05023274521443e-07,
+          "geometry_error": -1.0502326341921275e-07,
+          "residual": 0.999999793953488
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9999998949767319,
+          "ideal_state": 1.0,
+          "state_error": -1.0502326808214946e-07,
+          "inverse_error": 1.050232791843797e-07,
+          "geometry_error": -1.0502326808214946e-07,
+          "residual": 0.9999997939534789
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9999998949767319,
+          "ideal_state": 1.0,
+          "state_error": -1.0502326808214946e-07,
+          "inverse_error": 1.050232791843797e-07,
+          "geometry_error": -1.0502326808214946e-07,
+          "residual": 0.9999997939534789
+        }
+      ],
+      "max_abs_state_deviation": 1.0502326808214946e-07,
+      "final_inverse_error": 1.050232791843797e-07,
+      "final_geometry_error": -1.0502326808214946e-07
+    },
+    {
+      "mode": "AD",
+      "p": 2,
+      "m": 1.25,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.8947367468668265,
+          "ideal_state": 0.8947368421052632,
+          "state_error": -9.523843669256848e-08,
+          "inverse_error": -0.0003459742410204525,
+          "geometry_error": 0.00034609398062279695,
+          "residual": 1.0006923117450626
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.8944270970716929,
+          "ideal_state": 0.8944271910091895,
+          "state_error": -9.393749667019335e-08,
+          "inverse_error": 1.050149565084979e-07,
+          "geometry_error": -1.0501494573933456e-07,
+          "residual": 0.999999793970124
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.8944270970642508,
+          "ideal_state": 0.8944271909999157,
+          "state_error": -9.393566491322503e-08,
+          "inverse_error": 1.0502327740802286e-07,
+          "geometry_error": -1.0502326652783722e-07,
+          "residual": 0.9999997939534823
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.8944270970642515,
+          "ideal_state": 0.8944271909999159,
+          "state_error": -9.393566435811351e-08,
+          "inverse_error": 1.0502327651984444e-07,
+          "geometry_error": -1.050232655286365e-07,
+          "residual": 0.999999793953484
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.8944270970642515,
+          "ideal_state": 0.894427190999916,
+          "state_error": -9.393566446913582e-08,
+          "inverse_error": 1.0502327651984444e-07,
+          "geometry_error": -1.050232655286365e-07,
+          "residual": 0.999999793953484
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.8944270970642515,
+          "ideal_state": 0.894427190999916,
+          "state_error": -9.393566446913582e-08,
+          "inverse_error": 1.0502327651984444e-07,
+          "geometry_error": -1.050232655286365e-07,
+          "residual": 0.999999793953484
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.8944270970642494,
+          "ideal_state": 0.894427190999916,
+          "state_error": -9.393566657855956e-08,
+          "inverse_error": 1.050232791843797e-07,
+          "geometry_error": -1.0502326730499334e-07,
+          "residual": 0.9999997939534787
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.8944270970642515,
+          "ideal_state": 0.894427190999916,
+          "state_error": -9.393566446913582e-08,
+          "inverse_error": 1.0502327651984444e-07,
+          "geometry_error": -1.050232655286365e-07,
+          "residual": 0.999999793953484
+        }
+      ],
+      "max_abs_state_deviation": 9.523843669256848e-08,
+      "final_inverse_error": 1.0502327651984444e-07,
+      "final_geometry_error": -1.050232655286365e-07
+    },
+    {
+      "mode": "AD",
+      "p": 2,
+      "m": 1.5,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.8181817292318505,
+          "ideal_state": 0.8181818181818182,
+          "state_error": -8.894996772479402e-08,
+          "inverse_error": -0.0020596259289564767,
+          "geometry_error": 0.002063876743010562,
+          "residual": 1.0041320170897647
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.8164964969554039,
+          "ideal_state": 0.816496582716974,
+          "state_error": -8.576157006778828e-08,
+          "inverse_error": 1.028446814377304e-07,
+          "geometry_error": -1.0284467055754476e-07,
+          "residual": 0.999999798310673
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.8164964951765784,
+          "ideal_state": 0.8164965809277261,
+          "state_error": -8.575114773812231e-08,
+          "inverse_error": 1.0502328962047613e-07,
+          "geometry_error": -1.0502327796313438e-07,
+          "residual": 0.9999997939534594
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.8164964951765784,
+          "ideal_state": 0.8164965809277259,
+          "state_error": -8.575114751607771e-08,
+          "inverse_error": 1.0502328962047613e-07,
+          "geometry_error": -1.0502327796313438e-07,
+          "residual": 0.9999997939534594
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.8164964951765765,
+          "ideal_state": 0.8164965809277261,
+          "state_error": -8.575114962550145e-08,
+          "inverse_error": 1.0502329161887758e-07,
+          "geometry_error": -1.0502328051664733e-07,
+          "residual": 0.9999997939534542
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.8164964951765765,
+          "ideal_state": 0.8164965809277259,
+          "state_error": -8.575114940345685e-08,
+          "inverse_error": 1.0502329161887758e-07,
+          "geometry_error": -1.0502328051664733e-07,
+          "residual": 0.9999997939534542
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.8164964951765769,
+          "ideal_state": 0.8164965809277261,
+          "state_error": -8.575114929243455e-08,
+          "inverse_error": 1.0502329117478837e-07,
+          "geometry_error": -1.0502328018358043e-07,
+          "residual": 0.9999997939534548
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.8164964951765769,
+          "ideal_state": 0.8164965809277259,
+          "state_error": -8.575114907038994e-08,
+          "inverse_error": 1.0502329117478837e-07,
+          "geometry_error": -1.0502328018358043e-07,
+          "residual": 0.9999997939534548
+        }
+      ],
+      "max_abs_state_deviation": 8.894996772479402e-08,
+      "final_inverse_error": 1.0502329117478837e-07,
+      "final_geometry_error": -1.0502328018358043e-07
+    },
+    {
+      "mode": "AD",
+      "p": 2,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.7142856327350896,
+          "ideal_state": 0.7142857142857143,
+          "state_error": -8.155062469761276e-08,
+          "inverse_error": -0.01005039331542168,
+          "geometry_error": 0.01015242922221149,
+          "residual": 1.0204079343451704
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.7071068890725721,
+          "ideal_state": 0.7071069633883704,
+          "state_error": -7.431579829297874e-08,
+          "inverse_error": -1.5257385577172045e-07,
+          "geometry_error": 1.5257387886435936e-07,
+          "residual": 1.0000003091477854
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.7071067069239341,
+          "ideal_state": 0.7071067811865475,
+          "state_error": -7.426261339205098e-08,
+          "inverse_error": 1.0502320613170468e-07,
+          "geometry_error": -1.0502319536254134e-07,
+          "residual": 0.9999997939536214
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.7071067069239313,
+          "ideal_state": 0.7071067811865476,
+          "state_error": -7.426261627863084e-08,
+          "inverse_error": 1.0502320990646297e-07,
+          "geometry_error": -1.0502319880423272e-07,
+          "residual": 0.9999997939536128
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.7071067069239313,
+          "ideal_state": 0.7071067811865475,
+          "state_error": -7.426261616760854e-08,
+          "inverse_error": 1.0502320990646297e-07,
+          "geometry_error": -1.0502319880423272e-07,
+          "residual": 0.9999997939536128
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.7071067069239313,
+          "ideal_state": 0.7071067811865476,
+          "state_error": -7.426261627863084e-08,
+          "inverse_error": 1.0502320990646297e-07,
+          "geometry_error": -1.0502319880423272e-07,
+          "residual": 0.9999997939536128
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.7071067069239313,
+          "ideal_state": 0.7071067811865475,
+          "state_error": -7.426261616760854e-08,
+          "inverse_error": 1.0502320990646297e-07,
+          "geometry_error": -1.0502319880423272e-07,
+          "residual": 0.9999997939536128
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.7071067069239313,
+          "ideal_state": 0.7071067811865476,
+          "state_error": -7.426261627863084e-08,
+          "inverse_error": 1.0502320990646297e-07,
+          "geometry_error": -1.0502319880423272e-07,
+          "residual": 0.9999997939536128
+        }
+      ],
+      "max_abs_state_deviation": 8.155062469761276e-08,
+      "final_inverse_error": 1.0502320990646297e-07,
+      "final_geometry_error": -1.0502319880423272e-07
+    },
+    {
+      "mode": "AD",
+      "p": 3,
+      "m": 1.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9999998943100723,
+          "ideal_state": 1.0,
+          "state_error": -1.0568992769854901e-07,
+          "inverse_error": 1.0568993924486847e-07,
+          "geometry_error": -2.093798422420079e-07,
+          "residual": 0.9999996909302573
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9999998943100723,
+          "ideal_state": 1.0,
+          "state_error": -1.0568992769854901e-07,
+          "inverse_error": 1.0568993924486847e-07,
+          "geometry_error": -2.093798422420079e-07,
+          "residual": 0.9999996909302573
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.999999894310067,
+          "ideal_state": 1.0,
+          "state_error": -1.0568993302761953e-07,
+          "inverse_error": 1.0568994412984978e-07,
+          "geometry_error": -2.0937985267810433e-07,
+          "residual": 0.9999996909302409
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9999998943100707,
+          "ideal_state": 1.0,
+          "state_error": -1.0568992925286125e-07,
+          "inverse_error": 1.0568994013304689e-07,
+          "geometry_error": -2.0937984523961006e-07,
+          "residual": 0.9999996909302528
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.999999894310067,
+          "ideal_state": 1.0,
+          "state_error": -1.0568993302761953e-07,
+          "inverse_error": 1.0568994412984978e-07,
+          "geometry_error": -2.0937985267810433e-07,
+          "residual": 0.9999996909302409
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.999999894310067,
+          "ideal_state": 1.0,
+          "state_error": -1.0568993302761953e-07,
+          "inverse_error": 1.0568994412984978e-07,
+          "geometry_error": -2.0937985267810433e-07,
+          "residual": 0.9999996909302409
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9999998943100723,
+          "ideal_state": 1.0,
+          "state_error": -1.0568992769854901e-07,
+          "inverse_error": 1.0568993924486847e-07,
+          "geometry_error": -2.093798422420079e-07,
+          "residual": 0.9999996909302573
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9999998943100723,
+          "ideal_state": 1.0,
+          "state_error": -1.0568992769854901e-07,
+          "inverse_error": 1.0568993924486847e-07,
+          "geometry_error": -2.093798422420079e-07,
+          "residual": 0.9999996909302573
+        }
+      ],
+      "max_abs_state_deviation": 1.0568993302761953e-07,
+      "final_inverse_error": 1.0568993924486847e-07,
+      "final_geometry_error": -2.093798422420079e-07
+    },
+    {
+      "mode": "AD",
+      "p": 3,
+      "m": 1.25,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.928571329100982,
+          "ideal_state": 0.9285714285714286,
+          "state_error": -9.947044665725713e-08,
+          "inverse_error": -0.00027306720601849577,
+          "geometry_error": 0.0005463601917015115,
+          "residual": 1.0008196572225085
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9283176686194963,
+          "ideal_state": 0.9283177667351772,
+          "state_error": -9.811568091322442e-08,
+          "inverse_error": 1.0567832831043233e-07,
+          "geometry_error": -2.0935662103926944e-07,
+          "residual": 0.9999996909650898
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9283176686086962,
+          "ideal_state": 0.9283177667225557,
+          "state_error": -9.811385948133022e-08,
+          "inverse_error": 1.0568996211546278e-07,
+          "geometry_error": -2.0937988876035263e-07,
+          "residual": 0.999999690930189
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9283176686086929,
+          "ideal_state": 0.928317766722556,
+          "state_error": -9.81138630340439e-08,
+          "inverse_error": 1.0568996611226567e-07,
+          "geometry_error": -2.093798961988469e-07,
+          "residual": 0.9999996909301774
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9283176686086895,
+          "ideal_state": 0.9283177667225558,
+          "state_error": -9.811386636471298e-08,
+          "inverse_error": 1.0568996966497934e-07,
+          "geometry_error": -2.0937990363734116e-07,
+          "residual": 0.999999690930166
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9283176686086866,
+          "ideal_state": 0.9283177667225556,
+          "state_error": -9.811386902924824e-08,
+          "inverse_error": 1.0568997255155921e-07,
+          "geometry_error": -2.093799098545901e-07,
+          "residual": 0.9999996909301566
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9283176686086906,
+          "ideal_state": 0.9283177667225557,
+          "state_error": -9.811386514346765e-08,
+          "inverse_error": 1.0568996833271171e-07,
+          "geometry_error": -2.093799009728059e-07,
+          "residual": 0.9999996909301698
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9283176686086906,
+          "ideal_state": 0.928317766722556,
+          "state_error": -9.811386536551225e-08,
+          "inverse_error": 1.0568996833271171e-07,
+          "geometry_error": -2.093799009728059e-07,
+          "residual": 0.9999996909301698
+        }
+      ],
+      "max_abs_state_deviation": 9.947044665725713e-08,
+      "final_inverse_error": 1.0568996833271171e-07,
+      "final_geometry_error": -2.093799009728059e-07
+    },
+    {
+      "mode": "AD",
+      "p": 3,
+      "m": 1.5,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.8749999041029884,
+          "ideal_state": 0.875,
+          "state_error": -9.589701155388042e-08,
+          "inverse_error": -0.0016222165968634572,
+          "geometry_error": 0.003252347071003303,
+          "residual": 1.004882490143934
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.8735803748895138,
+          "ideal_state": 0.873580467229072,
+          "state_error": -9.233955822196549e-08,
+          "inverse_error": 1.0284890494816068e-07,
+          "geometry_error": -2.0369777875561823e-07,
+          "residual": 0.9999996994533492
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.8735803724076858,
+          "ideal_state": 0.8735804647362989,
+          "state_error": -9.232861308827722e-08,
+          "inverse_error": 1.0568988972892157e-07,
+          "geometry_error": -2.0937974531953785e-07,
+          "residual": 0.9999996909303996
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.873580372407683,
+          "ideal_state": 0.8735804647362989,
+          "state_error": -9.232861586383478e-08,
+          "inverse_error": 1.0568989328163525e-07,
+          "geometry_error": -2.0937975153678678e-07,
+          "residual": 0.9999996909303908
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.8735803724076824,
+          "ideal_state": 0.8735804647362989,
+          "state_error": -9.23286165299686e-08,
+          "inverse_error": 1.0568989328163525e-07,
+          "geometry_error": -2.0937975320212132e-07,
+          "residual": 0.9999996909303879
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.8735803724076824,
+          "ideal_state": 0.8735804647362989,
+          "state_error": -9.23286165299686e-08,
+          "inverse_error": 1.0568989328163525e-07,
+          "geometry_error": -2.0937975320212132e-07,
+          "residual": 0.9999996909303879
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.8735803724076856,
+          "ideal_state": 0.8735804647362989,
+          "state_error": -9.232861331032183e-08,
+          "inverse_error": 1.0568988972892157e-07,
+          "geometry_error": -2.0937974531953785e-07,
+          "residual": 0.9999996909303986
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.8735803724076797,
+          "ideal_state": 0.8735804647362989,
+          "state_error": -9.232861919450386e-08,
+          "inverse_error": 1.0568989661230432e-07,
+          "geometry_error": -2.0937975930834796e-07,
+          "residual": 0.9999996909303784
+        }
+      ],
+      "max_abs_state_deviation": 9.589701155388042e-08,
+      "final_inverse_error": 1.0568989661230432e-07,
+      "final_geometry_error": -2.0937975930834796e-07
+    },
+    {
+      "mode": "AD",
+      "p": 3,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.7999999075168515,
+          "ideal_state": 0.8,
+          "state_error": -9.248314858378848e-08,
+          "inverse_error": -0.007874227826231484,
+          "geometry_error": 0.015936440398980345,
+          "residual": 1.023999653056755
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.793700703450493,
+          "ideal_state": 0.7937007874015747,
+          "state_error": -8.395108164194198e-08,
+          "inverse_error": -2.2359359463930417e-07,
+          "geometry_error": 4.4918734154464346e-07,
+          "residual": 1.000000678781095
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.7937004420979187,
+          "ideal_state": 0.7937005259840997,
+          "state_error": -8.388618100152456e-08,
+          "inverse_error": 1.0568997632631749e-07,
+          "geometry_error": -2.0937991640490594e-07,
+          "residual": 0.9999996909301463
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.7937004420979249,
+          "ideal_state": 0.7937005259840998,
+          "state_error": -8.388617489529793e-08,
+          "inverse_error": 1.0568996833271171e-07,
+          "geometry_error": -2.093799014168951e-07,
+          "residual": 0.9999996909301697
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.7937004420979249,
+          "ideal_state": 0.7937005259840997,
+          "state_error": -8.388617478427562e-08,
+          "inverse_error": 1.0568996833271171e-07,
+          "geometry_error": -2.093799014168951e-07,
+          "residual": 0.9999996909301697
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.7937004420979249,
+          "ideal_state": 0.7937005259840998,
+          "state_error": -8.388617489529793e-08,
+          "inverse_error": 1.0568996833271171e-07,
+          "geometry_error": -2.093799014168951e-07,
+          "residual": 0.9999996909301697
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.7937004420979257,
+          "ideal_state": 0.7937005259840997,
+          "state_error": -8.388617400711951e-08,
+          "inverse_error": 1.056899676665779e-07,
+          "geometry_error": -2.0937989897440445e-07,
+          "residual": 0.9999996909301737
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.7937004420979257,
+          "ideal_state": 0.7937005259840998,
+          "state_error": -8.388617411814181e-08,
+          "inverse_error": 1.056899676665779e-07,
+          "geometry_error": -2.0937989897440445e-07,
+          "residual": 0.9999996909301737
+        }
+      ],
+      "max_abs_state_deviation": 9.248314858378848e-08,
+      "final_inverse_error": 1.056899676665779e-07,
+      "final_geometry_error": -2.0937989897440445e-07
+    },
+    {
+      "mode": "AD",
+      "p": 4,
+      "m": 1.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9999998937267401,
+          "ideal_state": 1.0,
+          "state_error": -1.0627325985890224e-07,
+          "inverse_error": 1.0627327129419939e-07,
+          "geometry_error": -3.138197416374666e-07,
+          "residual": 0.9999995879070371
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9999998937267401,
+          "ideal_state": 1.0,
+          "state_error": -1.0627325985890224e-07,
+          "inverse_error": 1.0627327129419939e-07,
+          "geometry_error": -3.138197416374666e-07,
+          "residual": 0.9999995879070371
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9999998937267401,
+          "ideal_state": 1.0,
+          "state_error": -1.0627325985890224e-07,
+          "inverse_error": 1.0627327129419939e-07,
+          "geometry_error": -3.138197416374666e-07,
+          "residual": 0.9999995879070371
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9999998937267364,
+          "ideal_state": 1.0,
+          "state_error": -1.0627326363366052e-07,
+          "inverse_error": 1.0627327529100228e-07,
+          "geometry_error": -3.1381975251765226e-07,
+          "residual": 0.9999995879070223
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9999998937267364,
+          "ideal_state": 1.0,
+          "state_error": -1.0627326363366052e-07,
+          "inverse_error": 1.0627327529100228e-07,
+          "geometry_error": -3.1381975251765226e-07,
+          "residual": 0.9999995879070223
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9999998937267364,
+          "ideal_state": 1.0,
+          "state_error": -1.0627326363366052e-07,
+          "inverse_error": 1.0627327529100228e-07,
+          "geometry_error": -3.1381975251765226e-07,
+          "residual": 0.9999995879070223
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9999998937267364,
+          "ideal_state": 1.0,
+          "state_error": -1.0627326363366052e-07,
+          "inverse_error": 1.0627327529100228e-07,
+          "geometry_error": -3.1381975251765226e-07,
+          "residual": 0.9999995879070223
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9999998937267364,
+          "ideal_state": 1.0,
+          "state_error": -1.0627326363366052e-07,
+          "inverse_error": 1.0627327529100228e-07,
+          "geometry_error": -3.1381975251765226e-07,
+          "residual": 0.9999995879070223
+        }
+      ],
+      "max_abs_state_deviation": 1.0627326363366052e-07,
+      "final_inverse_error": 1.0627327529100228e-07,
+      "final_geometry_error": -3.1381975251765226e-07
+    },
+    {
+      "mode": "AD",
+      "p": 4,
+      "m": 1.25,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9459458440939204,
+          "ideal_state": 0.9459459459459459,
+          "state_error": -1.0185202559132023e-07,
+          "inverse_error": -0.00021590569060558895,
+          "geometry_error": 0.0006480018673442611,
+          "residual": 1.0008641021277098
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9457415085064175,
+          "ideal_state": 0.9457416090150954,
+          "state_error": -1.0050867793598428e-07,
+          "inverse_error": 1.0626239577149477e-07,
+          "geometry_error": -3.137871176228657e-07,
+          "residual": 0.9999995879505338
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9457415084961591,
+          "ideal_state": 0.9457416090031758,
+          "state_error": -1.0050701670927253e-07,
+          "inverse_error": 1.0627324242840075e-07,
+          "geometry_error": -3.1381965792665056e-07,
+          "residual": 0.9999995879071483
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9457415084961618,
+          "ideal_state": 0.9457416090031758,
+          "state_error": -1.0050701404473728e-07,
+          "inverse_error": 1.0627323976386549e-07,
+          "geometry_error": -3.1381964926691097e-07,
+          "residual": 0.9999995879071591
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9457415084961608,
+          "ideal_state": 0.9457416090031758,
+          "state_error": -1.00507015043938e-07,
+          "inverse_error": 1.0627324065204391e-07,
+          "geometry_error": -3.1381965304166926e-07,
+          "residual": 0.9999995879071527
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9457415084961608,
+          "ideal_state": 0.9457416090031758,
+          "state_error": -1.00507015043938e-07,
+          "inverse_error": 1.0627324065204391e-07,
+          "geometry_error": -3.1381965304166926e-07,
+          "residual": 0.9999995879071527
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9457415084961591,
+          "ideal_state": 0.9457416090031758,
+          "state_error": -1.0050701670927253e-07,
+          "inverse_error": 1.0627324242840075e-07,
+          "geometry_error": -3.1381965792665056e-07,
+          "residual": 0.9999995879071483
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9457415084961591,
+          "ideal_state": 0.9457416090031758,
+          "state_error": -1.0050701670927253e-07,
+          "inverse_error": 1.0627324242840075e-07,
+          "geometry_error": -3.1381965792665056e-07,
+          "residual": 0.9999995879071483
+        }
+      ],
+      "max_abs_state_deviation": 1.0185202559132023e-07,
+      "final_inverse_error": 1.0627324242840075e-07,
+      "final_geometry_error": -3.1381965792665056e-07
+    },
+    {
+      "mode": "AD",
+      "p": 4,
+      "m": 1.5,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.904761805077252,
+          "ideal_state": 0.9047619047619048,
+          "state_error": -9.96846527545614e-08,
+          "inverse_error": -0.0012818859736329902,
+          "geometry_error": 0.0038555434350089346,
+          "residual": 1.0051440315013227
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9036019099551378,
+          "ideal_state": 0.9036020059942595,
+          "state_error": -9.603912176636697e-08,
+          "inverse_error": 1.0364598179712914e-07,
+          "geometry_error": -3.059378780312372e-07,
+          "residual": 0.9999995984161862
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9036019075811296,
+          "ideal_state": 0.903602003609845,
+          "state_error": -9.602871542391256e-08,
+          "inverse_error": 1.0627325419676481e-07,
+          "geometry_error": -3.13819692232542e-07,
+          "residual": 0.9999995879071029
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9036019075811258,
+          "ideal_state": 0.9036020036098448,
+          "state_error": -9.602871897662624e-08,
+          "inverse_error": 1.0627325885970151e-07,
+          "geometry_error": -3.13819705444196e-07,
+          "residual": 0.9999995879070842
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9036019075811258,
+          "ideal_state": 0.9036020036098448,
+          "state_error": -9.602871897662624e-08,
+          "inverse_error": 1.0627325885970151e-07,
+          "geometry_error": -3.13819705444196e-07,
+          "residual": 0.9999995879070842
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9036019075811258,
+          "ideal_state": 0.9036020036098448,
+          "state_error": -9.602871897662624e-08,
+          "inverse_error": 1.0627325885970151e-07,
+          "geometry_error": -3.13819705444196e-07,
+          "residual": 0.9999995879070842
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9036019075811258,
+          "ideal_state": 0.9036020036098448,
+          "state_error": -9.602871897662624e-08,
+          "inverse_error": 1.0627325885970151e-07,
+          "geometry_error": -3.13819705444196e-07,
+          "residual": 0.9999995879070842
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9036019075811296,
+          "ideal_state": 0.9036020036098448,
+          "state_error": -9.602871520186795e-08,
+          "inverse_error": 1.0627325419676481e-07,
+          "geometry_error": -3.13819692232542e-07,
+          "residual": 0.9999995879071029
+        }
+      ],
+      "max_abs_state_deviation": 9.96846527545614e-08,
+      "final_inverse_error": 1.0627325419676481e-07,
+      "final_geometry_error": -3.13819692232542e-07
+    },
+    {
+      "mode": "AD",
+      "p": 4,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.8461537477483898,
+          "ideal_state": 0.8461538461538461,
+          "state_error": -9.840545633910125e-08,
+          "inverse_error": -0.006213211852650891,
+          "geometry_error": 0.018873685759984715,
+          "residual": 1.0252437505336525
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.8408965803045632,
+          "ideal_state": 0.840896669736833,
+          "state_error": -8.943226981195096e-08,
+          "inverse_error": -1.962796053467386e-07,
+          "geometry_error": 5.938390501558644e-07,
+          "residual": 1.000000798118818
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.8408963258889286,
+          "ideal_state": 0.8408964152537147,
+          "state_error": -8.936478612664445e-08,
+          "inverse_error": 1.0627325064405113e-07,
+          "geometry_error": -3.138196783547542e-07,
+          "residual": 0.9999995879071232
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.8408963258889313,
+          "ideal_state": 0.8408964152537147,
+          "state_error": -8.936478346210919e-08,
+          "inverse_error": 1.0627324731338206e-07,
+          "geometry_error": -3.1381967069421535e-07,
+          "residual": 0.9999995879071324
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.8408963258889313,
+          "ideal_state": 0.8408964152537147,
+          "state_error": -8.936478346210919e-08,
+          "inverse_error": 1.0627324731338206e-07,
+          "geometry_error": -3.1381967069421535e-07,
+          "residual": 0.9999995879071324
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.8408963258889313,
+          "ideal_state": 0.8408964152537147,
+          "state_error": -8.936478346210919e-08,
+          "inverse_error": 1.0627324731338206e-07,
+          "geometry_error": -3.1381967069421535e-07,
+          "residual": 0.9999995879071324
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.8408963258889286,
+          "ideal_state": 0.8408964152537147,
+          "state_error": -8.936478612664445e-08,
+          "inverse_error": 1.0627325064405113e-07,
+          "geometry_error": -3.138196783547542e-07,
+          "residual": 0.9999995879071232
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.8408963258889286,
+          "ideal_state": 0.8408964152537147,
+          "state_error": -8.936478612664445e-08,
+          "inverse_error": 1.0627325064405113e-07,
+          "geometry_error": -3.138196783547542e-07,
+          "residual": 0.9999995879071232
+        }
+      ],
+      "max_abs_state_deviation": 9.840545633910125e-08,
+      "final_inverse_error": 1.0627325064405113e-07,
+      "final_geometry_error": -3.138196783547542e-07
+    },
+    {
+      "mode": "AD",
+      "p": 8,
+      "m": 1.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9999998916017397,
+          "ideal_state": 1.0,
+          "state_error": -1.0839826025677013e-07,
+          "inverse_error": 1.0839827213615649e-07,
+          "geometry_error": -7.317875644341498e-07,
+          "residual": 0.99999917581426
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9999998916017381,
+          "ideal_state": 1.0,
+          "state_error": -1.0839826192210467e-07,
+          "inverse_error": 1.0839827346842412e-07,
+          "geometry_error": -7.317875765355808e-07,
+          "residual": 0.9999991758142449
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9999998916017381,
+          "ideal_state": 1.0,
+          "state_error": -1.0839826192210467e-07,
+          "inverse_error": 1.0839827346842412e-07,
+          "geometry_error": -7.317875765355808e-07,
+          "residual": 0.9999991758142449
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9999998916017325,
+          "ideal_state": 1.0,
+          "state_error": -1.0839826747321979e-07,
+          "inverse_error": 1.0839827924158385e-07,
+          "geometry_error": -7.317876152823644e-07,
+          "residual": 0.999999175814201
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9999998916017325,
+          "ideal_state": 1.0,
+          "state_error": -1.0839826747321979e-07,
+          "inverse_error": 1.0839827924158385e-07,
+          "geometry_error": -7.317876152823644e-07,
+          "residual": 0.999999175814201
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9999998916017325,
+          "ideal_state": 1.0,
+          "state_error": -1.0839826747321979e-07,
+          "inverse_error": 1.0839827924158385e-07,
+          "geometry_error": -7.317876152823644e-07,
+          "residual": 0.999999175814201
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9999998916017325,
+          "ideal_state": 1.0,
+          "state_error": -1.0839826747321979e-07,
+          "inverse_error": 1.0839827924158385e-07,
+          "geometry_error": -7.317876152823644e-07,
+          "residual": 0.999999175814201
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9999998916017325,
+          "ideal_state": 1.0,
+          "state_error": -1.0839826747321979e-07,
+          "inverse_error": 1.0839827924158385e-07,
+          "geometry_error": -7.317876152823644e-07,
+          "residual": 0.999999175814201
+        }
+      ],
+      "max_abs_state_deviation": 1.0839826747321979e-07,
+      "final_inverse_error": 1.0839827924158385e-07,
+      "final_geometry_error": -7.317876152823644e-07
+    },
+    {
+      "mode": "AD",
+      "p": 8,
+      "m": 1.25,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9726026330656875,
+          "ideal_state": 0.9726027397260274,
+          "state_error": -1.0666033989359391e-07,
+          "inverse_error": -0.00011326372751752078,
+          "geometry_error": 0.0007932324389774426,
+          "residual": 1.0009066148657852
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9724923670558245,
+          "ideal_state": 0.9724924724735143,
+          "state_error": -1.0541768979965838e-07,
+          "inverse_error": 1.0839185149436048e-07,
+          "geometry_error": -7.317426171660202e-07,
+          "residual": 0.9999991758656314
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9724923670495704,
+          "ideal_state": 0.9724924724660732,
+          "state_error": -1.0541650274920045e-07,
+          "inverse_error": 1.0839828257225292e-07,
+          "geometry_error": -7.317876367096687e-07,
+          "residual": 0.9999991758141792
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9724923670495704,
+          "ideal_state": 0.972492472466073,
+          "state_error": -1.0541650252715584e-07,
+          "inverse_error": 1.0839828257225292e-07,
+          "geometry_error": -7.317876367096687e-07,
+          "residual": 0.9999991758141792
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.972492367049567,
+          "ideal_state": 0.9724924724660731,
+          "state_error": -1.0541650607986952e-07,
+          "inverse_error": 1.0839828634701121e-07,
+          "geometry_error": -7.317876615786645e-07,
+          "residual": 0.9999991758141501
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.972492367049567,
+          "ideal_state": 0.9724924724660731,
+          "state_error": -1.0541650607986952e-07,
+          "inverse_error": 1.0839828634701121e-07,
+          "geometry_error": -7.317876615786645e-07,
+          "residual": 0.9999991758141501
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9724923670495704,
+          "ideal_state": 0.9724924724660731,
+          "state_error": -1.0541650263817814e-07,
+          "inverse_error": 1.0839828257225292e-07,
+          "geometry_error": -7.317876367096687e-07,
+          "residual": 0.9999991758141792
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9724923670495704,
+          "ideal_state": 0.9724924724660731,
+          "state_error": -1.0541650263817814e-07,
+          "inverse_error": 1.0839828257225292e-07,
+          "geometry_error": -7.317876367096687e-07,
+          "residual": 0.9999991758141792
+        }
+      ],
+      "max_abs_state_deviation": 1.0666033989359391e-07,
+      "final_inverse_error": 1.0839828257225292e-07,
+      "final_geometry_error": -7.317876367096687e-07
+    },
+    {
+      "mode": "AD",
+      "p": 8,
+      "m": 1.5,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9512194055727917,
+          "ideal_state": 0.9512195121951219,
+          "state_error": -1.0662233018710054e-07,
+          "inverse_error": -0.0006723797001029208,
+          "geometry_error": 0.004719369250318239,
+          "residual": 1.0053953927785282
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9505797234242565,
+          "ideal_state": 0.9505798264734482,
+          "state_error": -1.0304919173531601e-07,
+          "inverse_error": 1.068083843591694e-07,
+          "geometry_error": -7.206583685359647e-07,
+          "residual": 0.999999188533335
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9505797219129628,
+          "ideal_state": 0.9505798249541407,
+          "state_error": -1.0304117792347967e-07,
+          "inverse_error": 1.083982501537406e-07,
+          "geometry_error": -7.317874136658631e-07,
+          "residual": 0.9999991758144268
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9505797219129628,
+          "ideal_state": 0.9505798249541407,
+          "state_error": -1.0304117792347967e-07,
+          "inverse_error": 1.083982501537406e-07,
+          "geometry_error": -7.317874136658631e-07,
+          "residual": 0.9999991758144268
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9505797219129628,
+          "ideal_state": 0.9505798249541407,
+          "state_error": -1.0304117792347967e-07,
+          "inverse_error": 1.083982501537406e-07,
+          "geometry_error": -7.317874136658631e-07,
+          "residual": 0.9999991758144268
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9505797219129628,
+          "ideal_state": 0.9505798249541407,
+          "state_error": -1.0304117792347967e-07,
+          "inverse_error": 1.083982501537406e-07,
+          "geometry_error": -7.317874136658631e-07,
+          "residual": 0.9999991758144268
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9505797219129628,
+          "ideal_state": 0.9505798249541407,
+          "state_error": -1.0304117792347967e-07,
+          "inverse_error": 1.083982501537406e-07,
+          "geometry_error": -7.317874136658631e-07,
+          "residual": 0.9999991758144268
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9505797219129628,
+          "ideal_state": 0.9505798249541407,
+          "state_error": -1.0304117792347967e-07,
+          "inverse_error": 1.083982501537406e-07,
+          "geometry_error": -7.317874136658631e-07,
+          "residual": 0.9999991758144268
+        }
+      ],
+      "max_abs_state_deviation": 1.0662233018710054e-07,
+      "final_inverse_error": 1.083982501537406e-07,
+      "final_geometry_error": -7.317874136658631e-07
+    },
+    {
+      "mode": "AD",
+      "p": 8,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9199998913522385,
+          "ideal_state": 0.92,
+          "state_error": -1.0864776156527256e-07,
+          "inverse_error": -0.0032563570666991337,
+          "geometry_error": 0.023094359507745743,
+          "residual": 1.0264368206717804
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9170041107986362,
+          "ideal_state": 0.9170042102633951,
+          "state_error": -9.946475887367967e-08,
+          "inverse_error": -7.371173593728741e-08,
+          "geometry_error": 5.429823375369125e-07,
+          "residual": 1.0000006326941417
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9170039438030636,
+          "ideal_state": 0.9170040432046713,
+          "state_error": -9.940160772270445e-08,
+          "inverse_error": 1.0839823305630603e-07,
+          "geometry_error": -7.317873139678355e-07,
+          "residual": 0.9999991758145383
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9170039438030636,
+          "ideal_state": 0.9170040432046713,
+          "state_error": -9.940160772270445e-08,
+          "inverse_error": 1.0839823305630603e-07,
+          "geometry_error": -7.317873139678355e-07,
+          "residual": 0.9999991758145383
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9170039438030603,
+          "ideal_state": 0.9170040432046713,
+          "state_error": -9.940161105337353e-08,
+          "inverse_error": 1.0839823683106431e-07,
+          "geometry_error": -7.317873373935413e-07,
+          "residual": 0.9999991758145117
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9170039438030603,
+          "ideal_state": 0.9170040432046713,
+          "state_error": -9.940161105337353e-08,
+          "inverse_error": 1.0839823683106431e-07,
+          "geometry_error": -7.317873373935413e-07,
+          "residual": 0.9999991758145117
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9170039438030636,
+          "ideal_state": 0.9170040432046713,
+          "state_error": -9.940160772270445e-08,
+          "inverse_error": 1.0839823305630603e-07,
+          "geometry_error": -7.317873139678355e-07,
+          "residual": 0.9999991758145383
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9170039438030636,
+          "ideal_state": 0.9170040432046713,
+          "state_error": -9.940160772270445e-08,
+          "inverse_error": 1.0839823305630603e-07,
+          "geometry_error": -7.317873139678355e-07,
+          "residual": 0.9999991758145383
+        }
+      ],
+      "max_abs_state_deviation": 1.0864776156527256e-07,
+      "final_inverse_error": 1.0839823305630603e-07,
+      "final_geometry_error": -7.317873139678355e-07
+    },
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 1.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9999998875392339,
+          "ideal_state": 1.0,
+          "state_error": -1.1246076614401801e-07,
+          "inverse_error": 1.1246077846749358e-07,
+          "geometry_error": -1.5679102145504942e-06,
+          "residual": 0.9999983516291818
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9999998875392403,
+          "ideal_state": 1.0,
+          "state_error": -1.1246075970472447e-07,
+          "inverse_error": 1.1246077225024464e-07,
+          "geometry_error": -1.567910124955496e-06,
+          "residual": 0.9999983516292751
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9999998875392356,
+          "ideal_state": 1.0,
+          "state_error": -1.1246076436766117e-07,
+          "inverse_error": 1.1246077713522595e-07,
+          "geometry_error": -1.5679101966759035e-06,
+          "residual": 0.999998351629198
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9999998875392356,
+          "ideal_state": 1.0,
+          "state_error": -1.1246076436766117e-07,
+          "inverse_error": 1.1246077713522595e-07,
+          "geometry_error": -1.5679101966759035e-06,
+          "residual": 0.999998351629198
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9999998875392244,
+          "ideal_state": 1.0,
+          "state_error": -1.1246077558091372e-07,
+          "inverse_error": 1.124607882374562e-07,
+          "geometry_error": -1.5679103525512161e-06,
+          "residual": 0.9999983516290333
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9999998875392312,
+          "ideal_state": 1.0,
+          "state_error": -1.1246076880855327e-07,
+          "inverse_error": 1.1246078113202884e-07,
+          "geometry_error": -1.567910257405103e-06,
+          "residual": 0.9999983516291348
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9999998875392312,
+          "ideal_state": 1.0,
+          "state_error": -1.1246076880855327e-07,
+          "inverse_error": 1.1246078113202884e-07,
+          "geometry_error": -1.567910257405103e-06,
+          "residual": 0.9999983516291348
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9999998875392312,
+          "ideal_state": 1.0,
+          "state_error": -1.1246076880855327e-07,
+          "inverse_error": 1.1246078113202884e-07,
+          "geometry_error": -1.567910257405103e-06,
+          "residual": 0.9999983516291348
+        }
+      ],
+      "max_abs_state_deviation": 1.1246077558091372e-07,
+      "final_inverse_error": 1.1246078113202884e-07,
+      "final_geometry_error": -1.567910257405103e-06
+    },
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 1.25,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9862067845499876,
+          "ideal_state": 0.9862068965517241,
+          "state_error": -1.1200173655190326e-07,
+          "inverse_error": -5.724458973577207e-05,
+          "geometry_error": 0.0008591813091567424,
+          "residual": 1.0009165103916808
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9861502186472566,
+          "ideal_state": 0.9861503295511659,
+          "state_error": -1.1090390927837035e-07,
+          "inverse_error": 1.1245746600607731e-07,
+          "geometry_error": -1.5678605471691753e-06,
+          "residual": 0.9999983516821543
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9861502186440175,
+          "ideal_state": 0.986150329547211,
+          "state_error": -1.1090319351758637e-07,
+          "inverse_error": 1.1246075026782876e-07,
+          "geometry_error": -1.5679098168686068e-06,
+          "residual": 0.9999983516296
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9861502186440166,
+          "ideal_state": 0.9861503295472112,
+          "state_error": -1.109031945167871e-07,
+          "inverse_error": 1.1246075071191797e-07,
+          "geometry_error": -1.5679098281928816e-06,
+          "residual": 0.9999983516295873
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9861502186440112,
+          "ideal_state": 0.9861503295472109,
+          "state_error": -1.1090319973483531e-07,
+          "inverse_error": 1.124607567071223e-07,
+          "geometry_error": -1.5679099130139207e-06,
+          "residual": 0.9999983516294981
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9861502186440112,
+          "ideal_state": 0.9861503295472112,
+          "state_error": -1.1090319995687992e-07,
+          "inverse_error": 1.124607567071223e-07,
+          "geometry_error": -1.5679099130139207e-06,
+          "residual": 0.9999983516294981
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9861502186440175,
+          "ideal_state": 0.9861503295472109,
+          "state_error": -1.1090319340656407e-07,
+          "inverse_error": 1.1246075026782876e-07,
+          "geometry_error": -1.5679098168686068e-06,
+          "residual": 0.9999983516296
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9861502186440112,
+          "ideal_state": 0.9861503295472112,
+          "state_error": -1.1090319995687992e-07,
+          "inverse_error": 1.124607567071223e-07,
+          "geometry_error": -1.5679099130139207e-06,
+          "residual": 0.9999983516294981
+        }
+      ],
+      "max_abs_state_deviation": 1.1200173655190326e-07,
+      "final_inverse_error": 1.124607567071223e-07,
+      "final_geometry_error": -1.5679099130139207e-06
+    },
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 1.5,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9753085290252603,
+          "ideal_state": 0.9753086419753086,
+          "state_error": -1.1295004831435307e-07,
+          "inverse_error": -0.0003400933969182063,
+          "geometry_error": 0.005115426974591442,
+          "residual": 1.0054574085638508
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9749767241987838,
+          "ideal_state": 0.9749768338508091,
+          "state_error": -1.096520253485167e-07,
+          "inverse_error": 1.1162912350037857e-07,
+          "geometry_error": -1.5554354696467598e-06,
+          "residual": 0.999998364935561
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9749767233879918,
+          "ideal_state": 0.9749768330345805,
+          "state_error": -1.0964658869738741e-07,
+          "inverse_error": 1.124607251767884e-07,
+          "geometry_error": -1.5679094726994691e-06,
+          "residual": 0.9999983516299583
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9749767233879906,
+          "ideal_state": 0.9749768330345807,
+          "state_error": -1.0964659014067735e-07,
+          "inverse_error": 1.1246072606496682e-07,
+          "geometry_error": -1.5679095095588735e-06,
+          "residual": 0.9999983516299183
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9749767233879838,
+          "ideal_state": 0.9749768330345807,
+          "state_error": -1.096465969130378e-07,
+          "inverse_error": 1.1246073294834957e-07,
+          "geometry_error": -1.5679095991538716e-06,
+          "residual": 0.9999983516298218
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9749767233879838,
+          "ideal_state": 0.9749768330345807,
+          "state_error": -1.096465969130378e-07,
+          "inverse_error": 1.1246073294834957e-07,
+          "geometry_error": -1.5679095991538716e-06,
+          "residual": 0.9999983516298218
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9749767233879866,
+          "ideal_state": 0.9749768330345807,
+          "state_error": -1.0964659413748024e-07,
+          "inverse_error": 1.1246073028381431e-07,
+          "geometry_error": -1.5679095610732219e-06,
+          "residual": 0.9999983516298638
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9749767233879866,
+          "ideal_state": 0.9749768330345807,
+          "state_error": -1.0964659413748024e-07,
+          "inverse_error": 1.1246073028381431e-07,
+          "geometry_error": -1.567909574728965e-06,
+          "residual": 0.9999983516298467
+        }
+      ],
+      "max_abs_state_deviation": 1.1295004831435307e-07,
+      "final_inverse_error": 1.1246073028381431e-07,
+      "final_geometry_error": -1.567909574728965e-06
+    },
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9591835569915818,
+          "ideal_state": 0.9591836734693877,
+          "state_error": -1.1647780595591684e-07,
+          "inverse_error": -0.0016475222927759825,
+          "geometry_error": 0.025041739527805973,
+          "residual": 1.0267333383929176
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9576032641908256,
+          "ideal_state": 0.9576033719371243,
+          "state_error": -1.0774629866094898e-07,
+          "inverse_error": 1.723860898472651e-08,
+          "geometry_error": -1.395789752667298e-07,
+          "residual": 0.9999998751824538
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.957603173005767,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280667233261e-07,
+          "inverse_error": 1.1246078712723317e-07,
+          "geometry_error": -1.5679103382293391e-06,
+          "residual": 0.9999983516290505
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.957603173005767,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280667233261e-07,
+          "inverse_error": 1.1246078712723317e-07,
+          "geometry_error": -1.5679103382293391e-06,
+          "residual": 0.9999983516290505
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.957603173005767,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280667233261e-07,
+          "inverse_error": 1.1246078712723317e-07,
+          "geometry_error": -1.5679103382293391e-06,
+          "residual": 0.9999983516290505
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.957603173005767,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280667233261e-07,
+          "inverse_error": 1.1246078712723317e-07,
+          "geometry_error": -1.5679103382293391e-06,
+          "residual": 0.9999983516290505
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.957603173005766,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280767153333e-07,
+          "inverse_error": 1.124607882374562e-07,
+          "geometry_error": -1.5679103614330003e-06,
+          "residual": 0.9999983516290234
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.957603173005766,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280767153333e-07,
+          "inverse_error": 1.124607882374562e-07,
+          "geometry_error": -1.5679103614330003e-06,
+          "residual": 0.9999983516290234
+        }
+      ],
+      "max_abs_state_deviation": 1.1647780595591684e-07,
+      "final_inverse_error": 1.124607882374562e-07,
+      "final_geometry_error": -1.5679103614330003e-06
+    }
+  ],
+  "mismatch_corners": [
+    {
+      "mode": "AD",
+      "p": 3,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.001,
+      "update_offset_volts": 0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.7995204350721564,
+          "ideal_state": 0.8,
+          "state_error": -0.00047956492784362315,
+          "inverse_error": -0.007279249951293032,
+          "geometry_error": 0.015733740391439044,
+          "residual": 1.0242049238745639
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.7931720168802892,
+          "ideal_state": 0.7937007874015747,
+          "state_error": -0.0005287705212855265,
+          "inverse_error": 0.0006663234362318526,
+          "geometry_error": -0.0003326454108263377,
+          "residual": 1.0000007040424188
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.7931717490230175,
+          "ideal_state": 0.7937005259840997,
+          "state_error": -0.0005287769610822224,
+          "inverse_error": 0.0006666613652512865,
+          "geometry_error": -0.00033332059381185886,
+          "residual": 0.9999996909303882
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.7931717490230195,
+          "ideal_state": 0.7937005259840998,
+          "state_error": -0.000528776961080335,
+          "inverse_error": 0.0006666613652481779,
+          "geometry_error": -0.0003333205938070849,
+          "residual": 0.9999996909303981
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.7931717490230175,
+          "ideal_state": 0.7937005259840997,
+          "state_error": -0.0005287769610822224,
+          "inverse_error": 0.0006666613652512865,
+          "geometry_error": -0.00033332059381185886,
+          "residual": 0.9999996909303882
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.7931717490230195,
+          "ideal_state": 0.7937005259840998,
+          "state_error": -0.000528776961080335,
+          "inverse_error": 0.0006666613652481779,
+          "geometry_error": -0.0003333205938070849,
+          "residual": 0.9999996909303981
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.7931717490230195,
+          "ideal_state": 0.7937005259840997,
+          "state_error": -0.000528776961080224,
+          "inverse_error": 0.0006666613652481779,
+          "geometry_error": -0.0003333205938070849,
+          "residual": 0.9999996909303981
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.7931717490230195,
+          "ideal_state": 0.7937005259840998,
+          "state_error": -0.000528776961080335,
+          "inverse_error": 0.0006666613652481779,
+          "geometry_error": -0.0003333205938070849,
+          "residual": 0.9999996909303981
+        }
+      ],
+      "max_abs_state_deviation": 0.0005287769610822224,
+      "final_inverse_error": 0.0006666613652481779,
+      "final_geometry_error": -0.0003333205938070849
+    },
+    {
+      "mode": "AD",
+      "p": 3,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0,
+      "update_offset_volts": 0.0005,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.8004999074691261,
+          "ideal_state": 0.8,
+          "state_error": 0.000499907469126093,
+          "inverse_error": -0.008493919139258344,
+          "geometry_error": 0.01720675782525949,
+          "residual": 1.0259208526945702
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.794200770404032,
+          "ideal_state": 0.7937007874015747,
+          "state_error": 0.0004999830024573493,
+          "inverse_error": -0.0006298714866237454,
+          "geometry_error": 0.0012609361904056815,
+          "residual": 1.001892005404859
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.7942004421792491,
+          "ideal_state": 0.7937005259840997,
+          "state_error": 0.0004999161951494413,
+          "inverse_error": -0.0006294584699266803,
+          "geometry_error": 0.0012601085946681856,
+          "residual": 1.0018907632290883
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.7942004421789888,
+          "ideal_state": 0.7937005259840998,
+          "state_error": 0.000499916194888983,
+          "inverse_error": -0.0006294584695994976,
+          "geometry_error": 0.0012601085940109336,
+          "residual": 1.0018907632281027
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.7942004421789888,
+          "ideal_state": 0.7937005259840997,
+          "state_error": 0.000499916194889094,
+          "inverse_error": -0.0006294584695994976,
+          "geometry_error": 0.0012601085940109336,
+          "residual": 1.0018907632281027
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.7942004421789888,
+          "ideal_state": 0.7937005259840998,
+          "state_error": 0.000499916194888983,
+          "inverse_error": -0.0006294584695994976,
+          "geometry_error": 0.0012601085940109336,
+          "residual": 1.0018907632281027
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.7942004421789888,
+          "ideal_state": 0.7937005259840997,
+          "state_error": 0.000499916194889094,
+          "inverse_error": -0.0006294584695994976,
+          "geometry_error": 0.0012601085940109336,
+          "residual": 1.0018907632281027
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.7942004421789888,
+          "ideal_state": 0.7937005259840998,
+          "state_error": 0.000499916194888983,
+          "inverse_error": -0.0006294584695994976,
+          "geometry_error": 0.0012601085940109336,
+          "residual": 1.0018907632281027
+        }
+      ],
+      "max_abs_state_deviation": 0.0004999830024573493,
+      "final_inverse_error": -0.0006294584695994976,
+      "final_geometry_error": 0.0012601085940109336
+    },
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.001,
+      "update_offset_volts": 0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9583866209021371,
+          "ideal_state": 0.9591836734693877,
+          "state_error": -0.0007970525672506001,
+          "inverse_error": -0.0008173530248432037,
+          "geometry_error": 0.026606222363086296,
+          "residual": 1.0284734873856072
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9567063986734015,
+          "ideal_state": 0.9576033719371243,
+          "state_error": -0.0008969732637228445,
+          "inverse_error": 0.0009374684087148921,
+          "geometry_error": -6.231328975792039e-05,
+          "residual": 1.0000001878421927
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9567062888785164,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -0.0008969918200573135,
+          "inverse_error": 0.0009375832797218209,
+          "geometry_error": -6.403463223314532e-05,
+          "residual": 0.999998351628888
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.956706288878518,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -0.0008969918200556481,
+          "inverse_error": 0.0009375832797198225,
+          "geometry_error": -6.403463221338335e-05,
+          "residual": 0.9999983516289072
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.956706288878518,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -0.0008969918200556481,
+          "inverse_error": 0.0009375832797198225,
+          "geometry_error": -6.403463221338335e-05,
+          "residual": 0.9999983516289072
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.956706288878518,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -0.0008969918200556481,
+          "inverse_error": 0.0009375832797198225,
+          "geometry_error": -6.403463221338335e-05,
+          "residual": 0.9999983516289072
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9567062888785164,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -0.0008969918200573135,
+          "inverse_error": 0.0009375832797218209,
+          "geometry_error": -6.403463223314532e-05,
+          "residual": 0.999998351628888
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9567062888785164,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -0.0008969918200573135,
+          "inverse_error": 0.0009375832797218209,
+          "geometry_error": -6.403463223314532e-05,
+          "residual": 0.999998351628888
+        }
+      ],
+      "max_abs_state_deviation": 0.0008969918200573135,
+      "final_inverse_error": 0.0009375832797218209,
+      "final_geometry_error": -6.403463223314532e-05
+    },
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0,
+      "update_offset_volts": 0.0005,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9596835569465003,
+          "ideal_state": 0.9591836734693877,
+          "state_error": 0.0004998834771126059,
+          "inverse_error": -0.002167668949696,
+          "geometry_error": 0.03308600602937406,
+          "residual": 1.0353302924157
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.958103380825481,
+          "ideal_state": 0.9576033719371243,
+          "state_error": 0.0005000088883566622,
+          "inverse_error": -0.000521968857344457,
+          "geometry_error": 0.00786244390568469,
+          "residual": 1.0083888237193916
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.9581031758494823,
+          "ideal_state": 0.9576032806985737,
+          "state_error": 0.0004998951509086469,
+          "inverse_error": -0.0005217550296349183,
+          "geometry_error": 0.007859209589215821,
+          "residual": 1.008385371980379
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.9581031758459254,
+          "ideal_state": 0.9576032806985737,
+          "state_error": 0.0004998951473517144,
+          "inverse_error": -0.0005217550259241088,
+          "geometry_error": 0.007859209533084055,
+          "residual": 1.0083853719204736
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.9581031758459254,
+          "ideal_state": 0.9576032806985737,
+          "state_error": 0.0004998951473517144,
+          "inverse_error": -0.0005217550259241088,
+          "geometry_error": 0.007859209533084055,
+          "residual": 1.0083853719204736
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.9581031758459254,
+          "ideal_state": 0.9576032806985737,
+          "state_error": 0.0004998951473517144,
+          "inverse_error": -0.0005217550259241088,
+          "geometry_error": 0.007859209533084055,
+          "residual": 1.0083853719204736
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.9581031758459245,
+          "ideal_state": 0.9576032806985737,
+          "state_error": 0.0004998951473508262,
+          "inverse_error": -0.0005217550259232206,
+          "geometry_error": 0.007859209533057632,
+          "residual": 1.008385371920444
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.9581031758459245,
+          "ideal_state": 0.9576032806985737,
+          "state_error": 0.0004998951473508262,
+          "inverse_error": -0.0005217550259232206,
+          "geometry_error": 0.007859209533057632,
+          "residual": 1.008385371920444
+        }
+      ],
+      "max_abs_state_deviation": 0.0005000088883566622,
+      "final_inverse_error": -0.0005217550259232206,
+      "final_geometry_error": 0.007859209533057632
+    }
+  ],
+  "timing_sweep": [
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 2.0,
+      "calc_us": 0.25,
+      "period_us": 4.5,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 3.5000000000000004,
+          "state": 0.9591846680000684,
+          "ideal_state": 0.9591836734693877,
+          "state_error": 9.945306806979914e-07,
+          "inverse_error": -0.0016486786687193167,
+          "geometry_error": 0.17110788676492472,
+          "residual": 1.2631358907206827
+        },
+        {
+          "iteration": 2,
+          "time_us": 8.0,
+          "state": 0.9575900916748772,
+          "ideal_state": 0.9576033719371243,
+          "state_error": -1.3280262247117314e-05,
+          "inverse_error": 1.3773141358974783e-05,
+          "geometry_error": 0.0048519611271151675,
+          "residual": 1.0077349674633358
+        },
+        {
+          "iteration": 3,
+          "time_us": 12.499999999999998,
+          "state": 0.9576027555006582,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -5.251979154907715e-07,
+          "inverse_error": 5.484507146213957e-07,
+          "geometry_error": -4.828197331896433e-05,
+          "residual": 0.99992826721409
+        },
+        {
+          "iteration": 4,
+          "time_us": 17.0,
+          "state": 0.9576032511298969,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -2.9568676840341368e-08,
+          "inverse_error": 3.08777954316497e-08,
+          "geometry_error": -2.0475413128329123e-06,
+          "residual": 0.9999969811816894
+        },
+        {
+          "iteration": 5,
+          "time_us": 21.5,
+          "state": 0.9576032473858758,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -3.331269793349634e-08,
+          "inverse_error": 3.478757837349633e-08,
+          "geometry_error": -5.272279559598303e-07,
+          "residual": 0.9999993989603841
+        },
+        {
+          "iteration": 6,
+          "time_us": 26.0,
+          "state": 0.9576032472322069,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -3.346636678891457e-08,
+          "inverse_error": 3.494805089765407e-08,
+          "geometry_error": -5.409873251593922e-07,
+          "residual": 0.9999993785598967
+        },
+        {
+          "iteration": 7,
+          "time_us": 30.5,
+          "state": 0.9576032472333136,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -3.3465260118603624e-08,
+          "inverse_error": 3.494689493344083e-08,
+          "geometry_error": -5.414593724495376e-07,
+          "residual": 0.9999993778096348
+        },
+        {
+          "iteration": 8,
+          "time_us": 35.00000000000001,
+          "state": 0.9576032472333652,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -3.346520849323298e-08,
+          "inverse_error": 3.4946841420691044e-08,
+          "geometry_error": -5.414552232130276e-07,
+          "residual": 0.9999993778157473
+        }
+      ],
+      "max_abs_state_deviation": 1.3280262247117314e-05,
+      "final_inverse_error": 3.4946841420691044e-08,
+      "final_geometry_error": -5.414552232130276e-07
+    },
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 2.0,
+      "calc_us": 1.0,
+      "period_us": 6.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 5.0,
+          "state": 0.9591836324346024,
+          "ideal_state": 0.9591836734693877,
+          "state_error": -4.103478534744909e-08,
+          "inverse_error": -0.0016476008165579037,
+          "geometry_error": 0.03529040937766381,
+          "residual": 1.0543464217108973
+        },
+        {
+          "iteration": 2,
+          "time_us": 11.0,
+          "state": 0.9576033298233735,
+          "ideal_state": 0.9576033719371243,
+          "state_error": -4.211375081997204e-08,
+          "inverse_error": -5.129973801309973e-08,
+          "geometry_error": 0.00036626830575769986,
+          "residual": 1.0009727039432867
+        },
+        {
+          "iteration": 3,
+          "time_us": 17.0,
+          "state": 0.9576032399854242,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -4.0713149518367686e-08,
+          "inverse_error": 4.2515676756949006e-08,
+          "geometry_error": -5.112640845128524e-07,
+          "residual": 0.9999994906113887
+        },
+        {
+          "iteration": 4,
+          "time_us": 23.0,
+          "state": 0.9576032400380687,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -4.066050496298601e-08,
+          "inverse_error": 4.246070095526022e-08,
+          "geometry_error": -5.311780847394587e-07,
+          "residual": 0.9999994363550352
+        },
+        {
+          "iteration": 5,
+          "time_us": 29.0,
+          "state": 0.9576032400380687,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -4.066050496298601e-08,
+          "inverse_error": 4.246070095526022e-08,
+          "geometry_error": -5.311659371232125e-07,
+          "residual": 0.9999994363873304
+        },
+        {
+          "iteration": 6,
+          "time_us": 35.00000000000001,
+          "state": 0.9576032400380753,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -4.0660498412670165e-08,
+          "inverse_error": 4.246069407187747e-08,
+          "geometry_error": -5.31165839312564e-07,
+          "residual": 0.9999994363874307
+        },
+        {
+          "iteration": 7,
+          "time_us": 41.00000000000001,
+          "state": 0.9576032400380726,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -4.0660501077205424e-08,
+          "inverse_error": 4.246069718050194e-08,
+          "geometry_error": -5.311658786144591e-07,
+          "residual": 0.9999994363873916
+        },
+        {
+          "iteration": 8,
+          "time_us": 47.00000000000001,
+          "state": 0.9576032400380734,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -4.066050030004931e-08,
+          "inverse_error": 4.2460696070278914e-08,
+          "geometry_error": -5.311646653627378e-07,
+          "residual": 0.9999994363900848
+        }
+      ],
+      "max_abs_state_deviation": 4.211375081997204e-08,
+      "final_inverse_error": 4.2460696070278914e-08,
+      "final_geometry_error": -5.311646653627378e-07
+    },
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 2.0,
+      "calc_us": 2.0,
+      "period_us": 8.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 7.0,
+          "state": 0.959183620921102,
+          "ideal_state": 0.9591836734693877,
+          "state_error": -5.2548285722764376e-08,
+          "inverse_error": -0.0016475888328977284,
+          "geometry_error": 0.02509200579488957,
+          "residual": 1.0269906208898818
+        },
+        {
+          "iteration": 2,
+          "time_us": 14.999999999999998,
+          "state": 0.9576033216681195,
+          "ideal_state": 0.9576033719371243,
+          "state_error": -5.0269004847613985e-08,
+          "inverse_error": -4.278342102814747e-08,
+          "geometry_error": 2.5377899361966882e-06,
+          "residual": 1.0000100345383205
+        },
+        {
+          "iteration": 3,
+          "time_us": 23.0,
+          "state": 0.9576032304620204,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -5.0236553250648797e-08,
+          "inverse_error": 5.2460718213964697e-08,
+          "geometry_error": -6.6789401131917e-07,
+          "residual": 0.9999993117137346
+        },
+        {
+          "iteration": 4,
+          "time_us": 31.0,
+          "state": 0.9576032304620214,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -5.0236552251448074e-08,
+          "inverse_error": 5.246071732578628e-08,
+          "geometry_error": -6.679963107103504e-07,
+          "residual": 0.9999993111840115
+        },
+        {
+          "iteration": 5,
+          "time_us": 39.0,
+          "state": 0.957603230462029,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -5.023654470193151e-08,
+          "inverse_error": 5.246070888809129e-08,
+          "geometry_error": -6.67996196801468e-07,
+          "residual": 0.999999311184132
+        },
+        {
+          "iteration": 6,
+          "time_us": 47.00000000000001,
+          "state": 0.957603230462029,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -5.023654470193151e-08,
+          "inverse_error": 5.246070888809129e-08,
+          "geometry_error": -6.67996196801468e-07,
+          "residual": 0.9999993111841321
+        },
+        {
+          "iteration": 7,
+          "time_us": 55.0,
+          "state": 0.957603230462029,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -5.023654470193151e-08,
+          "inverse_error": 5.246070888809129e-08,
+          "geometry_error": -6.67996196801468e-07,
+          "residual": 0.9999993111841322
+        },
+        {
+          "iteration": 8,
+          "time_us": 63.0,
+          "state": 0.957603230462029,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -5.023654470193151e-08,
+          "inverse_error": 5.246070888809129e-08,
+          "geometry_error": -6.67996196801468e-07,
+          "residual": 0.9999993111841321
+        }
+      ],
+      "max_abs_state_deviation": 5.2548285722764376e-08,
+      "final_inverse_error": 5.246070888809129e-08,
+      "final_geometry_error": -6.67996196801468e-07
+    },
+    {
+      "mode": "AD",
+      "p": 16,
+      "m": 2.0,
+      "calc_us": 8.0,
+      "period_us": 20.0,
+      "multiplier_gain_error": 0.0,
+      "update_offset_volts": 0.0,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 18.999999999999996,
+          "state": 0.9591835569915818,
+          "ideal_state": 0.9591836734693877,
+          "state_error": -1.1647780595591684e-07,
+          "inverse_error": -0.0016475222927759825,
+          "geometry_error": 0.025041739527805973,
+          "residual": 1.0267333383929176
+        },
+        {
+          "iteration": 2,
+          "time_us": 39.0,
+          "state": 0.9576032641908256,
+          "ideal_state": 0.9576033719371243,
+          "state_error": -1.0774629866094898e-07,
+          "inverse_error": 1.723860898472651e-08,
+          "geometry_error": -1.395789752667298e-07,
+          "residual": 0.9999998751824538
+        },
+        {
+          "iteration": 3,
+          "time_us": 59.0,
+          "state": 0.957603173005767,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280667233261e-07,
+          "inverse_error": 1.1246078712723317e-07,
+          "geometry_error": -1.5679103382293391e-06,
+          "residual": 0.9999983516290505
+        },
+        {
+          "iteration": 4,
+          "time_us": 79.0,
+          "state": 0.957603173005767,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280667233261e-07,
+          "inverse_error": 1.1246078712723317e-07,
+          "geometry_error": -1.5679103382293391e-06,
+          "residual": 0.9999983516290505
+        },
+        {
+          "iteration": 5,
+          "time_us": 99.0,
+          "state": 0.957603173005767,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280667233261e-07,
+          "inverse_error": 1.1246078712723317e-07,
+          "geometry_error": -1.5679103382293391e-06,
+          "residual": 0.9999983516290505
+        },
+        {
+          "iteration": 6,
+          "time_us": 118.99999999999999,
+          "state": 0.957603173005767,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280667233261e-07,
+          "inverse_error": 1.1246078712723317e-07,
+          "geometry_error": -1.5679103382293391e-06,
+          "residual": 0.9999983516290505
+        },
+        {
+          "iteration": 7,
+          "time_us": 139.0,
+          "state": 0.957603173005766,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280767153333e-07,
+          "inverse_error": 1.124607882374562e-07,
+          "geometry_error": -1.5679103614330003e-06,
+          "residual": 0.9999983516290234
+        },
+        {
+          "iteration": 8,
+          "time_us": 159.0,
+          "state": 0.957603173005766,
+          "ideal_state": 0.9576032806985737,
+          "state_error": -1.0769280767153333e-07,
+          "inverse_error": 1.124607882374562e-07,
+          "geometry_error": -1.5679103614330003e-06,
+          "residual": 0.9999983516290234
+        }
+      ],
+      "max_abs_state_deviation": 1.1647780595591684e-07,
+      "final_inverse_error": 1.124607882374562e-07,
+      "final_geometry_error": -1.5679103614330003e-06
+    }
+  ]
+}

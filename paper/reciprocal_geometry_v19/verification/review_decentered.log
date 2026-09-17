@@ -1,0 +1,27 @@
+{
+  "symbolic": "Derivative numerator, squared identity, reciprocity and sign decomposition exact",
+  "local_coefficients": {
+    "3": "1/18",
+    "4": "13/48",
+    "5": "4/5",
+    "7": "11/3"
+  },
+  "independent_arc_geometries": 108,
+  "working_digits": 160,
+  "max_error": "2.56061807941e-159",
+  "additional_geometries": {
+    "AK": {
+      "cases": 108,
+      "max_error": "2.31166909946e-160"
+    },
+    "AD": {
+      "cases": 108,
+      "max_error": "2.34723323946e-159"
+    },
+    "projective": {
+      "cases": 108,
+      "max_error": "4.80115889889e-160"
+    }
+  },
+  "proof_scope": "Global monotone convergence proved in paper; finite checks do not replace proof."
+}

@@ -1,0 +1,574 @@
+{
+  "scope": "Simplified transistor denominator servo + custom functional arithmetic; not vendor or PDK simulation",
+  "spice_runs": 56,
+  "cells": [
+    {
+      "ru": 22400,
+      "cap_pf": 2.0,
+      "temp_C": 0,
+      "naive": false,
+      "final_den_error": 6.474178849247281e-06,
+      "final_output_error": -6.474136939327302e-06,
+      "rise_settle_0p1pct_us": 0.11582727779779785,
+      "fall_settle_0p1pct_us": 0.06168987643979972,
+      "peak_den": 4.09602024048926
+    },
+    {
+      "ru": 22400,
+      "cap_pf": 2.0,
+      "temp_C": 27,
+      "naive": false,
+      "final_den_error": 6.488633218504347e-06,
+      "final_output_error": -6.488591119402365e-06,
+      "rise_settle_0p1pct_us": 0.11453703511359994,
+      "fall_settle_0p1pct_us": 0.05927320179970508,
+      "peak_den": 4.09602028912262
+    },
+    {
+      "ru": 22400,
+      "cap_pf": 2.0,
+      "temp_C": 70,
+      "naive": false,
+      "final_den_error": 6.512046732298771e-06,
+      "final_output_error": -6.5120043226674085e-06,
+      "rise_settle_0p1pct_us": 0.11876154082429886,
+      "fall_settle_0p1pct_us": 0.05714819180180293,
+      "peak_den": 4.09602036613022
+    },
+    {
+      "ru": 22400,
+      "cap_pf": 20.0,
+      "temp_C": 0,
+      "naive": false,
+      "final_den_error": 6.474178849247281e-06,
+      "final_output_error": -6.474136939327302e-06,
+      "rise_settle_0p1pct_us": 0.1058931443367005,
+      "fall_settle_0p1pct_us": 0.08134528952050157,
+      "peak_den": 4.09602199711305
+    },
+    {
+      "ru": 22400,
+      "cap_pf": 20.0,
+      "temp_C": 27,
+      "naive": false,
+      "final_den_error": 6.488633218504347e-06,
+      "final_output_error": -6.488591119402365e-06,
+      "rise_settle_0p1pct_us": 0.10851321573530007,
+      "fall_settle_0p1pct_us": 0.08335365523169913,
+      "peak_den": 4.09602270086611
+    },
+    {
+      "ru": 22400,
+      "cap_pf": 20.0,
+      "temp_C": 70,
+      "naive": false,
+      "final_den_error": 6.512046732298771e-06,
+      "final_output_error": -6.5120043226674085e-06,
+      "rise_settle_0p1pct_us": 0.10579474474879777,
+      "fall_settle_0p1pct_us": 0.08153979740680052,
+      "peak_den": 4.09602418660209
+    },
+    {
+      "ru": 22400,
+      "cap_pf": 200.0,
+      "temp_C": 0,
+      "naive": false,
+      "final_den_error": 6.474178849247281e-06,
+      "final_output_error": -6.474136931222674e-06,
+      "rise_settle_0p1pct_us": 0.1498235049649996,
+      "fall_settle_0p1pct_us": 1.8923357693637033,
+      "peak_den": 4.10478451621386
+    },
+    {
+      "ru": 22400,
+      "cap_pf": 200.0,
+      "temp_C": 27,
+      "naive": false,
+      "final_den_error": 6.488633218504347e-06,
+      "final_output_error": -6.488591119402365e-06,
+      "rise_settle_0p1pct_us": 0.15084948008840082,
+      "fall_settle_0p1pct_us": 1.9091510496291015,
+      "peak_den": 4.10633994285263
+    },
+    {
+      "ru": 22400,
+      "cap_pf": 200.0,
+      "temp_C": 70,
+      "naive": false,
+      "final_den_error": 6.512046732298771e-06,
+      "final_output_error": -6.5120043226674085e-06,
+      "rise_settle_0p1pct_us": 0.2143862483341978,
+      "fall_settle_0p1pct_us": 1.920727904730105,
+      "peak_den": 4.10890132202904
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 2.0,
+      "temp_C": 0,
+      "naive": false,
+      "final_den_error": 6.475800018446165e-06,
+      "final_output_error": -6.475758088209105e-06,
+      "rise_settle_0p1pct_us": 0.11397107334599907,
+      "fall_settle_0p1pct_us": 0.0586566265552038,
+      "peak_den": 4.09602025123245
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 2.0,
+      "temp_C": 27,
+      "naive": false,
+      "final_den_error": 6.49041429223729e-06,
+      "final_output_error": -6.490372168044267e-06,
+      "rise_settle_0p1pct_us": 0.1137044575998999,
+      "fall_settle_0p1pct_us": 0.05797931759970055,
+      "peak_den": 4.09602030035314
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 2.0,
+      "temp_C": 70,
+      "naive": false,
+      "final_den_error": 6.514082341535499e-06,
+      "final_output_error": -6.5140399113650105e-06,
+      "rise_settle_0p1pct_us": 0.11766146005659801,
+      "fall_settle_0p1pct_us": 0.056752347727398934,
+      "peak_den": 4.09602038059891
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 20.0,
+      "temp_C": 0,
+      "naive": false,
+      "final_den_error": 6.475800018446165e-06,
+      "final_output_error": -6.475758088209105e-06,
+      "rise_settle_0p1pct_us": 0.10591498559939921,
+      "fall_settle_0p1pct_us": 0.12814772844260014,
+      "peak_den": 4.09602503723416
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 20.0,
+      "temp_C": 27,
+      "naive": false,
+      "final_den_error": 6.49041429223729e-06,
+      "final_output_error": -6.490372168044267e-06,
+      "rise_settle_0p1pct_us": 0.10350989647759894,
+      "fall_settle_0p1pct_us": 0.13058391071699935,
+      "peak_den": 4.09602803258771
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 20.0,
+      "temp_C": 70,
+      "naive": false,
+      "final_den_error": 6.514082341535499e-06,
+      "final_output_error": -6.5140399113650105e-06,
+      "rise_settle_0p1pct_us": 0.10335912760479952,
+      "fall_settle_0p1pct_us": 0.1317853228035006,
+      "peak_den": 4.09604343220133
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 200.0,
+      "temp_C": 0,
+      "naive": false,
+      "final_den_error": 6.475800018446165e-06,
+      "final_output_error": -6.475758088209105e-06,
+      "rise_settle_0p1pct_us": 0.15605003890769947,
+      "fall_settle_0p1pct_us": 2.331218585927301,
+      "peak_den": 4.10629867796607
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 200.0,
+      "temp_C": 27,
+      "naive": false,
+      "final_den_error": 6.49041429223729e-06,
+      "final_output_error": -6.490372168044267e-06,
+      "rise_settle_0p1pct_us": 0.22076864118369913,
+      "fall_settle_0p1pct_us": 2.3398331379532045,
+      "peak_den": 4.10796489480373
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 200.0,
+      "temp_C": 70,
+      "naive": false,
+      "final_den_error": 6.514082341535499e-06,
+      "final_output_error": -6.5140399113650105e-06,
+      "rise_settle_0p1pct_us": 0.23694396943070095,
+      "fall_settle_0p1pct_us": 2.351270301258703,
+      "peak_den": 4.11066349204762
+    },
+    {
+      "ru": 33600,
+      "cap_pf": 2.0,
+      "temp_C": 0,
+      "naive": false,
+      "final_den_error": 6.477125307657872e-06,
+      "final_output_error": -6.477083356992708e-06,
+      "rise_settle_0p1pct_us": 0.11478336301100046,
+      "fall_settle_0p1pct_us": 0.0584430069090007,
+      "peak_den": 4.09602025805435
+    },
+    {
+      "ru": 33600,
+      "cap_pf": 2.0,
+      "temp_C": 27,
+      "naive": false,
+      "final_den_error": 6.491870240044051e-06,
+      "final_output_error": -6.491828095089858e-06,
+      "rise_settle_0p1pct_us": 0.11846791761459884,
+      "fall_settle_0p1pct_us": 0.057152646959704866,
+      "peak_den": 4.09602031254784
+    },
+    {
+      "ru": 33600,
+      "cap_pf": 2.0,
+      "temp_C": 70,
+      "naive": false,
+      "final_den_error": 6.515746246105181e-06,
+      "final_output_error": -6.51570379750499e-06,
+      "rise_settle_0p1pct_us": 0.11643897028139956,
+      "fall_settle_0p1pct_us": 0.05993157411729927,
+      "peak_den": 4.09602039499697
+    },
+    {
+      "ru": 33600,
+      "cap_pf": 20.0,
+      "temp_C": 0,
+      "naive": false,
+      "final_den_error": 6.477125307657872e-06,
+      "final_output_error": -6.477083356992708e-06,
+      "rise_settle_0p1pct_us": 0.10524305450510096,
+      "fall_settle_0p1pct_us": 0.17427575027940365,
+      "peak_den": 4.09603930406283
+    },
+    {
+      "ru": 33600,
+      "cap_pf": 20.0,
+      "temp_C": 27,
+      "naive": false,
+      "final_den_error": 6.491870240044051e-06,
+      "final_output_error": -6.491828095089858e-06,
+      "rise_settle_0p1pct_us": 0.10463725957329771,
+      "fall_settle_0p1pct_us": 0.17356003129730335,
+      "peak_den": 4.0960651006309
+    },
+    {
+      "ru": 33600,
+      "cap_pf": 20.0,
+      "temp_C": 70,
+      "naive": false,
+      "final_den_error": 6.515746246105181e-06,
+      "final_output_error": -6.51570379750499e-06,
+      "rise_settle_0p1pct_us": 0.09919436998370092,
+      "fall_settle_0p1pct_us": 0.17279260878360345,
+      "peak_den": 4.09618993722618
+    },
+    {
+      "ru": 33600,
+      "cap_pf": 200.0,
+      "temp_C": 0,
+      "naive": false,
+      "final_den_error": 6.477125304549247e-06,
+      "final_output_error": -6.477083356992708e-06,
+      "rise_settle_0p1pct_us": 0.22901585350759768,
+      "fall_settle_0p1pct_us": 2.6286385656091045,
+      "peak_den": 4.10745794311045
+    },
+    {
+      "ru": 33600,
+      "cap_pf": 200.0,
+      "temp_C": 27,
+      "naive": false,
+      "final_den_error": 6.491870240044051e-06,
+      "final_output_error": -6.491828095089858e-06,
+      "rise_settle_0p1pct_us": 0.2438728529984982,
+      "fall_settle_0p1pct_us": 2.635438323663001,
+      "peak_den": 4.10920431082995
+    },
+    {
+      "ru": 33600,
+      "cap_pf": 200.0,
+      "temp_C": 70,
+      "naive": false,
+      "final_den_error": 6.515746246105181e-06,
+      "final_output_error": -6.51570379750499e-06,
+      "rise_settle_0p1pct_us": 0.26189565160229844,
+      "fall_settle_0p1pct_us": 2.7149922136025,
+      "peak_den": 4.11206342995724
+    },
+    {
+      "ru": 28000,
+      "cap_pf": 20.0,
+      "temp_C": 27,
+      "naive": true,
+      "final_den_error": -0.20006447034016306,
+      "final_output_error": 0.25010074302517626,
+      "rise_settle_0p1pct_us": null,
+      "fall_settle_0p1pct_us": null,
+      "peak_den": 3.43836734776541
+    }
+  ],
+  "chains": [
+    {
+      "mode": "AD",
+      "gain": 0.9959222556004295,
+      "trim_volts": -0.2199233431253481,
+      "nominal": [
+        {
+          "mode": "AD",
+          "m": 1,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.004659950890429254,
+          "corrected_error": -3.608224830031759e-13,
+          "output_volts": 4.095999999998522,
+          "port_peak": 0.819198380757952,
+          "servo_error_at_sample_volts": 2.129883536184121e-05,
+          "servo_error_peak_after_reset_volts": 0.000138222470228655
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.0046470162099543355,
+          "corrected_error": 4.60381879330285e-06,
+          "output_volts": 4.228238818865,
+          "port_peak": 0.819198380757952,
+          "servo_error_at_sample_volts": 2.129941919408613e-05,
+          "servo_error_peak_after_reset_volts": 0.00139326234205628
+        },
+        {
+          "mode": "AD",
+          "m": 1.35,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.004617576648533905,
+          "corrected_error": 1.1028576699878556e-05,
+          "output_volts": 4.526987831211215,
+          "port_peak": 0.819198380757953,
+          "servo_error_at_sample_volts": 2.1300738311797796e-05,
+          "servo_error_peak_after_reset_volts": 0.004656732046318
+        },
+        {
+          "mode": "AD",
+          "m": 1.6,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.004589612656348496,
+          "corrected_error": 1.1035410193649398e-05,
+          "output_volts": 4.790763529745238,
+          "port_peak": 0.819198380757952,
+          "servo_error_at_sample_volts": 2.130190325411603e-05,
+          "servo_error_peak_after_reset_volts": 0.00808640607491906
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.0045557173909782644,
+          "corrected_error": 3.8950879854837694e-06,
+          "output_volts": 5.073171062535866,
+          "port_peak": 0.819198380757952,
+          "servo_error_at_sample_volts": 2.1303150849241223e-05,
+          "servo_error_peak_after_reset_volts": 0.0123598831804808
+        },
+        {
+          "mode": "AD",
+          "m": 2,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.004544121536212309,
+          "corrected_error": -2.849942504212777e-13,
+          "output_volts": 5.16063662036793,
+          "port_peak": 0.8192,
+          "servo_error_at_sample_volts": 2.1303537341456252e-05,
+          "servo_error_peak_after_reset_volts": 0.0137975571443523
+        }
+      ],
+      "frozen_calibration_corners": [
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "ru": 22400,
+          "cap_pf": 200.0,
+          "raw_error": 0.0046470171863302046,
+          "corrected_error": 4.60479118369328e-06,
+          "output_volts": 4.22823882297648,
+          "port_peak": 0.819198380757952,
+          "servo_error_at_sample_volts": 2.1293629896914645e-05,
+          "servo_error_peak_after_reset_volts": 0.00165193918055717
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "ru": 22400,
+          "cap_pf": 200.0,
+          "raw_error": 0.004555718661510166,
+          "corrected_error": 3.896353331089841e-06,
+          "output_volts": 5.073171068955156,
+          "port_peak": 0.819198380757952,
+          "servo_error_at_sample_volts": 2.1297361540249774e-05,
+          "servo_error_peak_after_reset_volts": 0.0127787940283621
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "ru": 33600,
+          "cap_pf": 200.0,
+          "raw_error": 0.004647015412104327,
+          "corrected_error": 4.603024200688921e-06,
+          "output_volts": 4.228238815505288,
+          "port_peak": 0.819198380757953,
+          "servo_error_at_sample_volts": 2.130415190988596e-05,
+          "servo_error_peak_after_reset_volts": 0.00193040158019908
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "ru": 33600,
+          "cap_pf": 200.0,
+          "raw_error": 0.0045557163525071775,
+          "corrected_error": 3.894053751896109e-06,
+          "output_volts": 5.073171057289042,
+          "port_peak": 0.819198380757952,
+          "servo_error_at_sample_volts": 2.130788358877902e-05,
+          "servo_error_peak_after_reset_volts": 0.0593188298422276
+        }
+      ]
+    },
+    {
+      "mode": "Halley",
+      "gain": 0.9997589278516478,
+      "trim_volts": -1.4236456586030253,
+      "nominal": [
+        {
+          "mode": "Halley",
+          "m": 1,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.003745317902681622,
+          "corrected_error": 3.3084646133829665e-14,
+          "output_volts": 4.096000000000136,
+          "port_peak": 0.685064236409756,
+          "servo_error_at_sample_volts": 2.1266406233898946e-05,
+          "servo_error_peak_after_reset_volts": 0.000104004126127322
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.0036223707508502567,
+          "corrected_error": -1.3491136745868992e-05,
+          "output_volts": 4.228162309423799,
+          "port_peak": 0.707161307043457,
+          "servo_error_at_sample_volts": 2.09561102488395e-05,
+          "servo_error_peak_after_reset_volts": 0.00132215104447386
+        },
+        {
+          "mode": "Halley",
+          "m": 1.35,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.003386738123220878,
+          "corrected_error": -2.5378039669510244e-05,
+          "output_volts": 4.52682302071956,
+          "port_peak": 0.756888185463058,
+          "servo_error_at_sample_volts": 2.0241635480861575e-05,
+          "servo_error_peak_after_reset_volts": 0.00409113601592059
+        },
+        {
+          "mode": "Halley",
+          "m": 1.6,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.0032168753110590753,
+          "corrected_error": -2.0870900284908345e-05,
+          "output_volts": 4.790610675843434,
+          "port_peak": 0.80087374556791,
+          "servo_error_at_sample_volts": 2.0241635482203824e-05,
+          "servo_error_peak_after_reset_volts": 0.00655204610777416
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.0030650786945238817,
+          "corrected_error": -6.062180902044467e-06,
+          "output_volts": 5.073120547804243,
+          "port_peak": 0.847985567416185,
+          "servo_error_at_sample_volts": 2.0241635482203824e-05,
+          "servo_error_peak_after_reset_volts": 0.00917125631447657
+        },
+        {
+          "mode": "Halley",
+          "m": 2,
+          "ru": 28000,
+          "cap_pf": 20.0,
+          "raw_error": 0.0030232349153249682,
+          "corrected_error": 2.864375403532904e-14,
+          "output_volts": 5.160636620369548,
+          "port_peak": 0.862580909261995,
+          "servo_error_at_sample_volts": 2.0241635482203824e-05,
+          "servo_error_peak_after_reset_volts": 0.00999392066907667
+        }
+      ],
+      "frozen_calibration_corners": [
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "ru": 22400,
+          "cap_pf": 200.0,
+          "raw_error": 0.0036223715066838746,
+          "corrected_error": -1.3490381099101612e-05,
+          "output_volts": 4.2281623126188395,
+          "port_peak": 0.707161307577791,
+          "servo_error_at_sample_volts": 2.0950322259640415e-05,
+          "servo_error_peak_after_reset_volts": 0.00132026033785948
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "ru": 22400,
+          "cap_pf": 200.0,
+          "raw_error": 0.003065078735389859,
+          "corrected_error": -6.062140047391473e-06,
+          "output_volts": 5.073120548011505,
+          "port_peak": 0.847985567459992,
+          "servo_error_at_sample_volts": 2.02358494441057e-05,
+          "servo_error_peak_after_reset_volts": 0.00915413687816979
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "ru": 33600,
+          "cap_pf": 200.0,
+          "raw_error": 0.0036223701329212155,
+          "corrected_error": -1.3491754523697885e-05,
+          "output_volts": 4.228162306811699,
+          "port_peak": 0.707161306417596,
+          "servo_error_at_sample_volts": 2.096084161475084e-05,
+          "servo_error_peak_after_reset_volts": 0.00131672448856168
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "ru": 33600,
+          "cap_pf": 200.0,
+          "raw_error": 0.003065078661201648,
+          "corrected_error": -6.062214214841433e-06,
+          "output_volts": 5.073120547635242,
+          "port_peak": 0.847985567382651,
+          "servo_error_at_sample_volts": 2.02463647545059e-05,
+          "servo_error_peak_after_reset_volts": 0.00914621825601625
+        }
+      ]
+    }
+  ]
+}

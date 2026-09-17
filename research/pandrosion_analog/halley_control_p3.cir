@@ -1,0 +1,45 @@
+Halley sampled analog behavioral prototype p=3, m=2.0
+* 1 V represents one dimensionless unit. Arithmetic is behavioral.
+* Two nonoverlapping track/hold phases; no continuous-loop Halley claim.
+.options reltol=1e-7 abstol=1e-12 vntol=1e-9 method=gear
+Vm m 0 2
+Va clk_a 0 PULSE(0 3 8e-06 5n 5n 8e-07 2e-05)
+Vb clk_b 0 PULSE(0 3 1e-05 5n 5n 8e-07 2e-05)
+.model holdsw SW(Ron=100 Roff=1e12 Vt=1.5 Vh=0.1)
+Bsample_buffer sample_drive 0 V=v(next)
+Sa sample_drive candidate clk_a 0 holdsw
+Ca candidate 0 100p IC=1
+Ra candidate 0 1e12
+* Buffer avoids charge sharing between the two 100 pF memories.
+Bbuffer candidate_buffer 0 V=v(candidate)
+Sb candidate_buffer state clk_b 0 holdsw
+Cs state 0 100p IC=1
+Rs state 0 1e12
+Bmul2 drive2 0 V=min(3,max(0,(1+0)*v(state)*v(state)))
+Rmul2 drive2 q2 1k
+Cmul2 q2 0 100p IC=1
+Bmul3 drive3 0 V=min(3,max(0,(1+0)*v(q2)*v(state)))
+Rmul3 drive3 q3 1k
+Cmul3 q3 0 100p IC=1
+Bresidual residual 0 V=v(m)/max(v(q3),0.1)
+Bnum d_num 0 V=0.5*v(q3)+v(m)
+Rnum d_num num 1k
+Cnum num 0 100p IC=2.5
+Bden d_den 0 V=v(q3)+0.5*v(m)
+Rden d_den den 1k
+Cden den 0 100p IC=2
+Bnext d_next 0 V=min(2.0,max(0.5,v(state)*v(num)/max(v(den),0.1)+0))
+Rnext d_next next 1k
+Cnext next 0 100p IC=1
+Binverse y_inverse 0 V=v(state)
+Bgeometry y_geometry 0 V=v(state)
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=15
+tran 20n 0.00016 0 20n uic
+wrdata waveform.txt v(state) v(candidate) v(next) v(y_inverse) v(y_geometry) v(residual) v(clk_a) v(clk_b)
+quit
+.endc
+.end

@@ -1,0 +1,20 @@
+{
+  "main_runs": 56,
+  "refined_step_runs": 2,
+  "total_spice_runs": 58,
+  "cell_settling_below_3us": true,
+  "chain_error_below_30ppm_at_tested_samples": true,
+  "step_checks": [
+    {
+      "mode": "AD",
+      "max_step_ns": 20,
+      "output_difference_ppm": -0.00019779272585792817
+    },
+    {
+      "mode": "Halley",
+      "max_step_ns": 20,
+      "output_difference_ppm": 0.00012291939988887286
+    }
+  ],
+  "figures_visually_inspected": true
+}

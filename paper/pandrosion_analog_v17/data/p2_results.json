@@ -1,0 +1,500 @@
+{
+  "scope": "Authored functional core plus explicit op-amp feedback and resistor calibration; not vendor models or fabricated circuit",
+  "vref_nominal": 4.096,
+  "input_convention": "Vin=4.096*m fixed independently of reference drift; target Vout=4.096*cuberoot(m)",
+  "spice_runs": 40,
+  "results": [
+    {
+      "mode": "AD",
+      "gain": 0.9959119052833175,
+      "feedback_ohms": 9959.119052833175,
+      "trim_volts": -0.21683820504398926,
+      "tuning": [
+        {
+          "gain": 1.0,
+          "trim_volts": 0.0,
+          "endpoint_errors": [
+            0.004634334667431572,
+            0.004525106730347339
+          ]
+        },
+        {
+          "gain": 0.9959119094133879,
+          "trim_volts": -0.21686804216642722,
+          "endpoint_errors": [
+            -6.83997182227003e-08,
+            -5.3433363400579026e-08
+          ]
+        }
+      ],
+      "nominal": [
+        {
+          "mode": "AD",
+          "m": 1.0,
+          "raw_volts": 4.115099051467666,
+          "corrected_volts": 4.095999999998514,
+          "raw_error": 0.004662854362223134,
+          "corrected_error": -3.6282088444750116e-13,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819198380757953,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "raw_volts": 4.247881048711098,
+          "corrected_volts": 4.228238638958387,
+          "raw_error": 0.004650112532191386,
+          "corrected_error": 4.5612697678887315e-06,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819198380757953,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "AD",
+          "m": 1.35,
+          "raw_volts": 4.54785737816148,
+          "corrected_volts": 4.526987432602006,
+          "raw_error": 0.00462110880880906,
+          "corrected_error": 1.0940523976987748e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819198380757953,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "AD",
+          "m": 1.6,
+          "raw_volts": 4.812716934539568,
+          "corrected_volts": 4.7907631545496905,
+          "raw_error": 0.004593529812777053,
+          "corrected_error": 1.095709288878588e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819198380757952,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "raw_volts": 5.09628511014653,
+          "corrected_volts": 5.073170937704662,
+          "raw_error": 0.004560046922211125,
+          "corrected_error": 3.870481740442244e-06,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819198380757952,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "AD",
+          "m": 2.0,
+          "raw_volts": 5.184110182817912,
+          "corrected_volts": 5.160636620367926,
+          "raw_error": 0.004548578823756033,
+          "corrected_error": -2.856603842360528e-13,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.8192,
+          "sample_us": 645.0
+        }
+      ],
+      "frozen_calibration_corners": [
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "raw_volts": 4.247317091147488,
+          "corrected_volts": 4.227676989156572,
+          "raw_error": 0.0045167330841211495,
+          "corrected_error": -0.00012827237837953476,
+          "ref_ppm": -200,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819034541085801,
+          "sample_us": 645.0,
+          "case": "ref_minus"
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "raw_volts": 5.095608342828115,
+          "corrected_volts": 5.072496939773943,
+          "raw_error": 0.004426645161036413,
+          "corrected_error": -0.0001289853884227643,
+          "ref_ppm": -200,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819034541085801,
+          "sample_us": 645.0,
+          "case": "ref_minus"
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "raw_volts": 4.248444968814827,
+          "corrected_volts": 4.228800251453602,
+          "raw_error": 0.0047834831207680395,
+          "corrected_error": 0.00013738609467384144,
+          "ref_ppm": 200,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819362220430103,
+          "sample_us": 645.0,
+          "case": "ref_plus"
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "raw_volts": 5.096961832434075,
+          "corrected_volts": 5.073844890788752,
+          "raw_error": 0.004693439807074595,
+          "corrected_error": 0.00013671751190935666,
+          "ref_ppm": 200,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819362220430103,
+          "sample_us": 645.0,
+          "case": "ref_plus"
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "raw_volts": 4.247881048711077,
+          "corrected_volts": 4.227815808040619,
+          "raw_error": 0.004650112532186501,
+          "corrected_error": -9.544085464341379e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": -100,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819198380757953,
+          "sample_us": 645.0,
+          "case": "ratio_minus"
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "raw_volts": 5.0962851101465105,
+          "corrected_volts": 5.072663613642364,
+          "raw_error": 0.00456004692220735,
+          "corrected_error": -9.61312789169444e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": -100,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819198380757952,
+          "sample_us": 645.0,
+          "case": "ratio_minus"
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "raw_volts": 4.247881048711118,
+          "corrected_volts": 4.228661469876072,
+          "raw_error": 0.004650112532196049,
+          "corrected_error": 0.00010456339415965132,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 100,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819198380757953,
+          "sample_us": 645.0,
+          "case": "ratio_plus"
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "raw_volts": 5.09628511014656,
+          "corrected_volts": 5.073678261766842,
+          "raw_error": 0.00456004692221712,
+          "corrected_error": 0.00010387224237473625,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 100,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.819198380757952,
+          "sample_us": 645.0,
+          "case": "ratio_plus"
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "raw_volts": 4.247881049960908,
+          "corrected_volts": 4.228238493528507,
+          "raw_error": 0.004650112827779163,
+          "corrected_error": 4.526874702870387e-06,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 2.5e-05,
+          "port_peak": 0.819198380757953,
+          "sample_us": 645.0,
+          "case": "amp_shift"
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "raw_volts": 5.09628511139634,
+          "corrected_volts": 5.073170792274781,
+          "raw_error": 0.004560047168568948,
+          "corrected_error": 3.841815163774243e-06,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 2.5e-05,
+          "port_peak": 0.819198380757952,
+          "sample_us": 645.0,
+          "case": "amp_shift"
+        }
+      ]
+    },
+    {
+      "mode": "Halley",
+      "gain": 0.9997743955256267,
+      "feedback_ohms": 9997.743955256268,
+      "trim_volts": -1.4314447543629845,
+      "tuning": [
+        {
+          "gain": 1.0,
+          "trim_volts": 0.0,
+          "endpoint_errors": [
+            0.0037203834045673734,
+            0.002999422804919938
+          ]
+        },
+        {
+          "gain": 0.9997743957534377,
+          "trim_volts": -1.4314406908902664,
+          "endpoint_errors": [
+            1.014621209272093e-08,
+            8.10006173246336e-09
+          ]
+        }
+      ],
+      "nominal": [
+        {
+          "mode": "Halley",
+          "m": 1.0,
+          "raw_volts": 4.111355426569134,
+          "corrected_volts": 4.096000000000145,
+          "raw_error": 0.003748883439730122,
+          "corrected_error": 3.530509218307998e-14,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.685066716557674,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "raw_volts": 4.243547589524629,
+          "corrected_volts": 4.228161808806237,
+          "raw_error": 0.003625222661355343,
+          "corrected_error": -1.3609535892245006e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.707163691439036,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "Halley",
+          "m": 1.35,
+          "raw_volts": 4.542276383638248,
+          "corrected_volts": 4.526822008396198,
+          "raw_error": 0.0033882678377816777,
+          "corrected_error": -2.560166176979184e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.756889339567971,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "Halley",
+          "m": 1.6,
+          "raw_volts": 4.8061247523809625,
+          "corrected_volts": 4.790609791907321,
+          "raw_error": 0.0032174955198902566,
+          "corrected_error": -2.1055410720838275e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.800874252566177,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "raw_volts": 5.088700120860621,
+          "corrected_volts": 5.073120275035511,
+          "raw_error": 0.0030649231156982815,
+          "corrected_error": -6.115948021467865e-06,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.847985470834777,
+          "sample_us": 645.0
+        },
+        {
+          "mode": "Halley",
+          "m": 2.0,
+          "raw_volts": 5.176236566435765,
+          "corrected_volts": 5.160636620369546,
+          "raw_error": 0.0030228724116692085,
+          "corrected_error": 2.8199664825478976e-14,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.862580641577433,
+          "sample_us": 645.0
+        }
+      ],
+      "frozen_calibration_corners": [
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "raw_volts": 4.242982584687806,
+          "corrected_volts": 4.227596933706617,
+          "raw_error": 0.0034915955267003085,
+          "corrected_error": -0.00014720598689732523,
+          "ref_ppm": -200,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.707069568582131,
+          "sample_us": 645.0,
+          "case": "ref_minus"
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "raw_volts": 5.088022443430032,
+          "corrected_volts": 5.072442753214172,
+          "raw_error": 0.0029313419567251753,
+          "corrected_error": -0.00013966643389995426,
+          "ref_ppm": -200,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.847872520044937,
+          "sample_us": 645.0,
+          "case": "ref_minus"
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "raw_volts": 4.2441125567041365,
+          "corrected_volts": 4.2287266462571775,
+          "raw_error": 0.003758840889822812,
+          "corrected_error": 0.00011997801096752525,
+          "ref_ppm": 200,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.707257807614813,
+          "sample_us": 645.0,
+          "case": "ref_plus"
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "raw_volts": 5.089377753120723,
+          "corrected_volts": 5.073797751696743,
+          "raw_error": 0.0031984953708392716,
+          "corrected_error": 0.0001274256360710435,
+          "ref_ppm": 200,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.848098414101579,
+          "sample_us": 645.0,
+          "case": "ref_plus"
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "raw_volts": 4.243547589524608,
+          "corrected_volts": 4.227738985571441,
+          "raw_error": 0.003625222661350458,
+          "corrected_error": -0.0001136098432332755,
+          "ref_ppm": 0.0,
+          "ratio_ppm": -100,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.707163691439035,
+          "sample_us": 645.0,
+          "case": "ratio_minus"
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "raw_volts": 5.088700120860593,
+          "corrected_volts": 5.072612956039396,
+          "raw_error": 0.0030649231156927303,
+          "corrected_error": -0.00010611671005233969,
+          "ref_ppm": 0.0,
+          "ratio_ppm": -100,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.847985470834777,
+          "sample_us": 645.0,
+          "case": "ratio_minus"
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "raw_volts": 4.243547589524656,
+          "corrected_volts": 4.228584632040952,
+          "raw_error": 0.003625222661361782,
+          "corrected_error": 8.63907714294676e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 100,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.707163691439036,
+          "sample_us": 645.0,
+          "case": "ratio_plus"
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "raw_volts": 5.0887001208606435,
+          "corrected_volts": 5.073627594031518,
+          "raw_error": 0.0030649231157027224,
+          "corrected_error": 9.38848139881987e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 100,
+          "amp_shift_volts": 0.0,
+          "port_peak": 0.847985470834777,
+          "sample_us": 645.0,
+          "case": "ratio_plus"
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "raw_volts": 4.243547590774438,
+          "corrected_volts": 4.228161565853897,
+          "raw_error": 0.0036252229569428973,
+          "corrected_error": -1.3666995621663958e-05,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 2.5e-05,
+          "port_peak": 0.707163691438491,
+          "sample_us": 645.0,
+          "case": "amp_shift"
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "raw_volts": 5.088700122110431,
+          "corrected_volts": 5.073120032083163,
+          "raw_error": 0.0030649233620561045,
+          "corrected_error": -6.163837850348131e-06,
+          "ref_ppm": 0.0,
+          "ratio_ppm": 0.0,
+          "amp_shift_volts": 2.5e-05,
+          "port_peak": 0.847985470834777,
+          "sample_us": 645.0,
+          "case": "amp_shift"
+        }
+      ]
+    }
+  ]
+}

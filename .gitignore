@@ -1,0 +1,10 @@
+.lake/
+.venv*/
+__pycache__/
+*.pyc
+.DS_Store
+**/build/
+*.olean
+*.ilean
+waveform.txt
+.ci/

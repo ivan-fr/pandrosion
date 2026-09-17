@@ -1,0 +1,75 @@
+# Pandrosion analogique P2 — étalonnage électrique et référence réelle
+
+17 septembre 2026. Suite de P1, conservé séparément. **40 simulations SPICE de la chaîne et 2 vérifications indépendantes de l'étage de correction.** Le résultat est une étude de faisabilité pour un prototype de laboratoire ; ce n'est pas une puce conçue au niveau transistor.
+
+## Ce qui change
+
+La correction affine auparavant appliquée en Python est maintenant effectuée par deux amplificateurs en contre-réaction avec résistances dans le circuit SPICE. Python ajuste les deux commandes aux entrées m=1 et m=2, puis les gèle ; aucune correction logicielle des sorties de validation n'est appliquée. La référence passe de 4 V à 4,096 V, les commutateurs à 120 Ω, et des résistances d'isolation de 100 Ω sont ajoutées aux cellules mémoire de 10 nF. Les références moitié et double utilisent désormais un pont et des amplificateurs en contre-réaction.
+
+![Schéma de l'étage de correction](p2_calibration.png)
+
+## Domaine et formule
+
+Pour p=3, m∈[1,2], l'état géométrique suit idéalement
+
+    s⁺ = s (1 + m s³/2) / (1/2 + m s³),  s₀ = 1.
+    y = 1/s ; y → ∛m.
+
+L'inversion de l'état transforme exactement cette itération en Halley. P2 conserve donc Halley direct comme témoin. Une construction à la règle et au compas ne démontre pas une meilleure consommation électronique.
+
+Convention électrique : Vin=4,096m V est imposée indépendamment de Vref. La cible est Vout=4,096∛m V. Les valeurs d'entrée vont de 4,096 à 8,192 V ; les rails proposés sont ±15 V. Reset 50 µs, calcul 30 µs, acquisitions 20 µs, cycle 100 µs, six cycles ; mesure à 645 µs. Cette mesure finale n'est pas une mesure de temps minimal d'établissement.
+
+## Résultats calculés
+
+| Chaîne | Erreur brute max., six entrées | Après correction, quatre entrées inédites | Variations isolées, réglages gelés |
+|---|---:|---:|---:|
+| AD | 0.466285 % | 0.001096 % | 0.013739 % |
+| Halley | 0.374888 % | 0.002560 % | 0.014721 % |
+
+Entrées inédites : 1,1 ; 1,35 ; 1,6 ; 1,9. Les deux points d'étalonnage sont exclus du maximum corrigé. Chaque scénario de variation est testé à 1,1 et 1,9 uniquement. Il n'y a ni balayage continu ni garantie de maximum sur tout l'intervalle. Les erreurs internes du cœur sont celles du scénario déterministe `untrimmed_stress` de P1 : gain ±0,1 %, offset ±5 mV, offset buffer ±1 mV, résistances ±0,1 %, fuite 5 nA et injection 5 pC, suivant un vecteur de signes fixe. Ce sont des hypothèses de stress, pas des spécifications constructeur assemblées.
+
+![Courbes et sensibilité](p2_results.png)
+
+## Étalonnage effectivement simulé
+
+Le premier inverseur reçoit Vbrut via 10 kΩ et Vtrim via 1 MΩ ; sa résistance de retour est Rf. Le second a un gain −1. Au régime idéal,
+
+    Vcorrigé = a Vbrut + 0,01 a Vtrim,  a = Rf/(10 kΩ).
+
+Les deux paramètres calculés sont :
+
+- AD : Rf = 9959.119053 Ω ; Vtrim = -0.216838205 V.
+- Halley : Rf = 9997.743955 Ω ; Vtrim = -1.431444754 V.
+
+Ce sont des valeurs continues de simulation, pas des valeurs E96 ni des réglages réalisables avec cette résolution sans instrumentation. Vtrim est encore une source de laboratoire idéale. Son générateur, le potentiomètre ou le DAC, sa résolution et son bruit restent à réaliser. Le modèle d'amplificateur est écrit ici : gain ouvert 10⁶, GBW 10 MHz, slew rate 20 V/µs, courant limité à 5 mA, résistance de sortie 10 Ω, limitation interne voisine de ±13 V, biais 20 pA. Offsets de correction +25 et −25 µV. Il ne reproduit pas tous les pôles, l'impédance ni la stabilité d'un composant réel. Deux essais indépendants vérifient le transfert affine à moins de 50 µV pour des entrées de 2 et 5 V.
+
+## Sensibilité et choix de composants candidats
+
+- **AD734** pour les produits/divisions : la fiche indique W=XY/U et une limitation d'entrée X liée à U. Attention : la commande précise du dénominateur demande de contrôler la différence U1−U2 ; brancher directement une tension sur U0 ne suffit pas. Les figures 22–23 et 28 distinguent les montages. P2 utilise encore le dénominateur fonctionnel idéal du cœur P1 et ne simule pas cette interface physique. Le routage des broches, les impédances d'entrée et cette commande sont une étape indispensable avant une carte. [Fiche AD734](https://www.analog.com/media/en/technical-documentation/data-sheets/ad734.pdf).
+- **OPA192 / OPA4192** comme candidats pour les amplificateurs : plage d'alimentation compatible avec ±15 V, GBW 10 MHz, slew rate typique 20 V/µs. La page TI annonce une charge capacitive jusqu'à 1 nF : les mémoires de 10 nF nécessitent une étude de stabilité avec isolation. Les 100 Ω ajoutés sont une hypothèse de conception, non une validation constructeur. [TI OPA192](https://www.ti.com/product/OPA192).
+- **ADG1211**, quadruple commutateur : résistance typique 120 Ω et fonctionnement sous ±15 V. Le modèle conserve volontairement les 5 nA et 5 pC du stress P1 ; il ne prétend pas modéliser ce composant. [ADG1211](https://www.analog.com/en/products/adg1211.html).
+- **ADR4540**, référence nominale 4,096 V. Une variation ±200 ppm est testée comme sensibilité après étalonnage, sans l'attribuer à une température particulière. [ADR4540](https://www.analog.com/en/products/adr4540.html).
+
+Les autres variations isolées sont ±100 ppm sur Rf et +25 µV sur les offsets des deux amplificateurs de correction. Les réglages ne sont pas recalculés. Ces variations ne sont pas des coins thermiques complets : le drift du multiplicateur, la référence du générateur d'entrée et les corrélations ne sont pas modélisés.
+
+Un calcul utile explique l'effet de la référence. À Vin constant, le circuit idéal fournit Vout=Vref^(2/3) Vin^(1/3). Une petite variation relative ε de Vref produit donc environ (2/3)ε en sortie. Une variation de 200 ppm donne environ 133 ppm, soit 0,0133 %. Avec une entrée ratiométrique Vin=m Vref, l'interprétation serait différente ; les conventions ne doivent pas être mélangées.
+
+## Portée et prochaine décision matérielle
+
+P2 montre qu'un étage électrique peut remplacer la correction hors ligne dans le modèle. Les erreurs faibles après réglage sont propres au modèle et au vecteur d'erreurs retenu. Elles ne garantissent pas une précision de silicium, une supériorité AD/Halley ni une nouveauté historique.
+
+Les sources comportementales n'absorbent pas un courant d'alimentation réaliste : aucun chiffre d'énergie, puissance ou surface ne peut être déduit de ces essais. Le bruit, les tolérances des condensateurs, les composants parasites, le vieillissement, l'impédance réelle des ports AD734, la commande de dénominateur, l'électronique des horloges et les protections ne sont pas validés. Les buffers et le gain 5/3 de Halley restent des macros P1. Aucune nouvelle preuve Lean n'est ajoutée : les garanties du modèle mathématique exact ne couvrent pas ces circuits.
+
+La prochaine étape est de réaliser et vérifier **une seule cellule XY/U avec sa vraie commande de dénominateur**, puis la mémoire isolée, avant d'assembler les cinq cellules arithmétiques de la chaîne AD à sortie inverse seule. La sortie géométrique de diagnostic porte le modèle actuel à six cellules, contre trois pour le cœur Halley direct. Ces nombres ne comptent pas les amplificateurs auxiliaires et ne constituent pas une comparaison de consommation.
+
+## Reproduction
+
+Python avec numpy et matplotlib ; ngspice accessible dans PATH (ou /opt/homebrew/bin/ngspice).
+
+```sh
+python simulate_p2.py
+python verify_stage.py
+python make_report.py
+```
+
+`core_p1.py` est une copie autonome du générateur P1 ; `simulate_p2.py` en transforme explicitement le circuit. `ad_p2.cir` et `halley_p2.cir` sont les netlists finales à m=2 ; les `.log` et `.csv` contiennent les résultats. Les `.cir` peuvent être exécutés seuls avec `ngspice -b` dans un répertoire temporaire ; ils écrivent `waveform.txt`. `results.json` conserve les réglages, toutes les entrées et les scénarios. `stage_validation.json` contient les deux contrôles indépendants.

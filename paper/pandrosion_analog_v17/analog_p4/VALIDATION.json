@@ -1,0 +1,32 @@
+{
+  "main_runs": 40,
+  "RC_checks": [
+    {
+      "resistance": 10000,
+      "expected_volts": 3.2544096358536563,
+      "simulated_volts": 3.25440963364365
+    },
+    {
+      "resistance": 12500,
+      "expected_volts": 3.4076090524740477,
+      "simulated_volts": 3.40760905132628
+    },
+    {
+      "resistance": 15000,
+      "expected_volts": 3.5137279026764463,
+      "simulated_volts": 3.51372790201432
+    }
+  ],
+  "refined_step_checks": [
+    {
+      "mode": "AD",
+      "difference_ppm": -0.00019749257235402847
+    },
+    {
+      "mode": "Halley",
+      "difference_ppm": 0.00012278739430544907
+    }
+  ],
+  "retained_validation_runs": 45,
+  "figures_visually_inspected": true
+}

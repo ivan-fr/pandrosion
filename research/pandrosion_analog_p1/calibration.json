@@ -1,0 +1,151 @@
+{
+  "status": "completed",
+  "scope": "Offline affine correction fitted at m=1,2; fixed gains applied to held-out points. Physical correction stage, gain/offset drift and temperature not modeled.",
+  "results": [
+    {
+      "mode": "AD",
+      "profile": "trimmed_stress",
+      "gain": 0.9999626310411955,
+      "offset_normalized": -9.483679800337264e-05,
+      "calibration_inputs": [
+        1,
+        2
+      ],
+      "held_out": [
+        {
+          "m": 1.1,
+          "raw_error": 0.0001300616204578109,
+          "corrected_error": 8.166158584899108e-07,
+          "clip_ratio": 0.800182766103738
+        },
+        {
+          "m": 1.35,
+          "raw_error": 0.0001249328545462891,
+          "corrected_error": 1.7503353970660385e-06,
+          "clip_ratio": 0.800182766103701
+        },
+        {
+          "m": 1.6,
+          "raw_error": 0.00012006394287444877,
+          "corrected_error": 1.6061756826779572e-06,
+          "clip_ratio": 0.800182766103654
+        },
+        {
+          "m": 1.9,
+          "raw_error": 0.0001144651793796303,
+          "corrected_error": 5.218781975457887e-07,
+          "clip_ratio": 0.800182766103625
+        }
+      ]
+    },
+    {
+      "mode": "AD",
+      "profile": "untrimmed_stress",
+      "gain": 0.9957962741777597,
+      "offset_normalized": -0.0005650932981735579,
+      "calibration_inputs": [
+        1,
+        2
+      ],
+      "held_out": [
+        {
+          "m": 1.1,
+          "raw_error": 0.0047758984959256345,
+          "corrected_error": 4.673667203247689e-06,
+          "clip_ratio": 0.802178236161471
+        },
+        {
+          "m": 1.35,
+          "raw_error": 0.004746186733560087,
+          "corrected_error": 1.1209509063192513e-05,
+          "clip_ratio": 0.802178236161419
+        },
+        {
+          "m": 1.6,
+          "raw_error": 0.004717932744968678,
+          "corrected_error": 1.1226053268087455e-05,
+          "clip_ratio": 0.80217823616138
+        },
+        {
+          "m": 1.9,
+          "raw_error": 0.004683629251514665,
+          "corrected_error": 3.965353473800448e-06,
+          "clip_ratio": 0.802178236161342
+        }
+      ]
+    },
+    {
+      "mode": "Halley",
+      "profile": "trimmed_stress",
+      "gain": 1.000094386068783,
+      "offset_normalized": -0.0005321514747094191,
+      "calibration_inputs": [
+        1,
+        2
+      ],
+      "held_out": [
+        {
+          "m": 1.1,
+          "raw_error": 0.0004189103829708163,
+          "corrected_error": -2.1747378047276555e-06,
+          "clip_ratio": 0.68848464372495
+        },
+        {
+          "m": 1.35,
+          "raw_error": 0.00038297021226396666,
+          "corrected_error": -4.101351116170271e-06,
+          "clip_ratio": 0.737102542922918
+        },
+        {
+          "m": 1.6,
+          "raw_error": 0.00035718323195021995,
+          "corrected_error": -3.380097016503214e-06,
+          "clip_ratio": 0.780034704873705
+        },
+        {
+          "m": 1.9,
+          "raw_error": 0.0003342510635604423,
+          "corrected_error": -9.838782570881222e-07,
+          "clip_ratio": 0.826006727049287
+        }
+      ]
+    },
+    {
+      "mode": "Halley",
+      "profile": "untrimmed_stress",
+      "gain": 0.9997484015901151,
+      "offset_normalized": -0.003602870165465566,
+      "calibration_inputs": [
+        1,
+        2
+      ],
+      "held_out": [
+        {
+          "m": 1.1,
+          "raw_error": 0.003728808629469116,
+          "corrected_error": -1.3933858282855205e-05,
+          "clip_ratio": 0.690626374106783
+        },
+        {
+          "m": 1.35,
+          "raw_error": 0.003486161608142746,
+          "corrected_error": -2.621199694063936e-05,
+          "clip_ratio": 0.739178738902407
+        },
+        {
+          "m": 1.6,
+          "raw_error": 0.003311284679882176,
+          "corrected_error": -2.155750493537667e-05,
+          "clip_ratio": 0.782131910377954
+        },
+        {
+          "m": 1.9,
+          "raw_error": 0.003155043469936114,
+          "corrected_error": -6.261827428910571e-06,
+          "clip_ratio": 0.828138665206262
+        }
+      ]
+    }
+  ],
+  "additional_spice_runs": 16
+}

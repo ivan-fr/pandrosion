@@ -1,0 +1,15 @@
+{
+  "pdf_pages": 15,
+  "vector_figures": 7,
+  "bibliography_entries": 11,
+  "unresolved_references": false,
+  "overfull_boxes": false,
+  "visual_review": "All 15 pages reviewed at final layout",
+  "lean_audit": {
+    "status": "passed",
+    "theorems": 88,
+    "local_modules": 18,
+    "archived_source_hashes_verified": true
+  },
+  "scope": "Lean audit concerns the archived geometric and dynamical statements; circuit results are simulations, not a fabricated chip."
+}

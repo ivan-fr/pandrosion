@@ -1,0 +1,36 @@
+'LeanMath.Papers.RectangleFixedCircle.at_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.discriminant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.reciprocity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.derivative_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.positive_quadratics' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.branch_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.branch_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.sqrt_branch_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.sqrt_branch_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.second_degree_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.circle_incidence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.pencil_incidence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.projection_incidence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.cubic_geometry_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.general_geometry_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.fourth_geometry_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.input_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.input_derivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.input_derivative_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.output_derivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.output_contact_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.logarithmic_order_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.top_readout_incidence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.top_is_hub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.final_readout' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.weighted_chain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.positive_preparation_scale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircle.rational_preparation' depends on axioms: [propext, Classical.choice, Quot.sound]

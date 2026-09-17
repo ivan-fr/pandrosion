@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-17",
+  "scope": "Nonideal functional P1 cubic prototype; no manufacturer models, transistor PDK or silicon data",
+  "simulator": "ngspice 46",
+  "python": "3.14.3 (main, Feb  3 2026, 15:32:20) [Clang 17.0.0 (clang-1700.6.3.2)]",
+  "numpy": "2.5.3",
+  "matplotlib": "3.11.2",
+  "released_configuration_spice_runs": 66,
+  "input_profile_cases": 30,
+  "memory_cases": 20,
+  "calibration_validation_cases": 16,
+  "checks": [
+    "finite SPICE waveforms",
+    "port operating ratios < 0.95 for 30 input/profile cases",
+    "sampled final error < 0.1% for both lower-error profiles",
+    "calibration points disjoint from held-out inputs"
+  ],
+  "figures_visually_inspected": true
+}

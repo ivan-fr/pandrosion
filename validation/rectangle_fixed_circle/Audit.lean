@@ -1,0 +1,30 @@
+import LeanMath.Papers.RectangleFixedCircle
+
+#print axioms LeanMath.Papers.RectangleFixedCircle.at_one
+#print axioms LeanMath.Papers.RectangleFixedCircle.discriminant
+#print axioms LeanMath.Papers.RectangleFixedCircle.reciprocity
+#print axioms LeanMath.Papers.RectangleFixedCircle.derivative_certificate
+#print axioms LeanMath.Papers.RectangleFixedCircle.positive_quadratics
+#print axioms LeanMath.Papers.RectangleFixedCircle.branch_left
+#print axioms LeanMath.Papers.RectangleFixedCircle.branch_right
+#print axioms LeanMath.Papers.RectangleFixedCircle.sqrt_branch_left
+#print axioms LeanMath.Papers.RectangleFixedCircle.sqrt_branch_right
+#print axioms LeanMath.Papers.RectangleFixedCircle.second_degree_exact
+#print axioms LeanMath.Papers.RectangleFixedCircle.circle_incidence
+#print axioms LeanMath.Papers.RectangleFixedCircle.pencil_incidence
+#print axioms LeanMath.Papers.RectangleFixedCircle.projection_incidence
+#print axioms LeanMath.Papers.RectangleFixedCircle.cubic_geometry_certificate
+#print axioms LeanMath.Papers.RectangleFixedCircle.general_geometry_certificate
+#print axioms LeanMath.Papers.RectangleFixedCircle.fourth_geometry_certificate
+#print axioms LeanMath.Papers.RectangleFixedCircle.input_zero
+#print axioms LeanMath.Papers.RectangleFixedCircle.input_derivative
+#print axioms LeanMath.Papers.RectangleFixedCircle.input_derivative_zero
+#print axioms LeanMath.Papers.RectangleFixedCircle.output_derivative
+#print axioms LeanMath.Papers.RectangleFixedCircle.output_contact_five
+#print axioms LeanMath.Papers.RectangleFixedCircle.logarithmic_order_five
+#print axioms LeanMath.Papers.RectangleFixedCircle.top_readout_incidence
+#print axioms LeanMath.Papers.RectangleFixedCircle.top_is_hub
+#print axioms LeanMath.Papers.RectangleFixedCircle.final_readout
+#print axioms LeanMath.Papers.RectangleFixedCircle.weighted_chain
+#print axioms LeanMath.Papers.RectangleFixedCircle.positive_preparation_scale
+#print axioms LeanMath.Papers.RectangleFixedCircle.rational_preparation

@@ -1,0 +1,10 @@
+\begin{table}[htbp]\centering\small
+\caption{Median microseconds per solve on Apple M5, Python 3.14.3, mpmath 1.3.0. Nine batches of 100 solves; full round timings are archived.}\label{tab:digital}
+\begin{tabular}{@{}rrrrr@{}}\toprule
+$p$ & Newton & Halley & AD inverse & \texttt{mpmath.root}\\\midrule
+3 & 41.24 & 36.54 & 46.29 & 3.84\\
+4 & 40.45 & 38.09 & 46.42 & 5.84\\
+8 & 43.87 & 38.27 & 47.48 & 7.57\\
+16 & 48.76 & 38.73 & 47.77 & 9.59\\
+32 & 51.95 & 39.30 & 49.71 & 12.86\\
+\bottomrule\end{tabular}\end{table}

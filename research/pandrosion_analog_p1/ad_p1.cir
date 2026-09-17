@@ -1,0 +1,116 @@
+Pandrosion P1 AD m=2.0 profile=trimmed_stress C=1e-08 acquisition=20.0us
+* Authored functional macromodels; not AD734/vendor models; no supply power accounting.
+.options reltol=2e-6 abstol=1e-11 vntol=1e-7 method=gear
+Vref ref 0 4
+Ehalf ref_half 0 ref 0 0.5
+Edouble ref_double 0 ref 0 2
+Vm m 0 8
+Va ca 0 PULSE(0 3 8e-05 1e-08 1e-08 2e-05 0.0001)
+Vb cb 0 PULSE(0 3 0.000105 1e-08 1e-08 2e-05 0.0001)
+Vr reset 0 PULSE(3 0 5e-05 1e-08 1e-08 1 2)
+.model sw SW(Ron=100 Roff=1e12 Vt=1.5 Vh=0.1)
+Cc candidate 0 1e-08
+Cs state 0 1e-08
+Rc candidate 0 1e12
+Rs state 0 1e12
+Ileakc candidate 0 1e-09
+Ileaks state 0 1e-09
+Sa sample_drive candidate ca 0 sw
+Sb memory_drive state cb 0 sw
+Sr1 reset_drive candidate reset 0 sw
+Sr2 reset_drive state reset 0 sw
+Iinj_candidate 0 candidate PULSE(0 3.84615384615e-05 0.000100015 2n 2n 5e-08 0.0001)
+Iinj_state 0 state PULSE(0 3.84615384615e-05 0.000125015 2n 2n 5e-08 0.0001)
+Bint_reset_drive 0 z_reset_drive I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(ref)+(0.0002))))-v(z_reset_drive))/8e-08))
+Cint_reset_drive z_reset_drive 0 1n
+Rint_reset_drive z_reset_drive 0 1e12
+Bout_reset_drive 0 reset_drive I=min(0.005,max(-0.005,(v(z_reset_drive)-v(reset_drive))/0.5))
+Rout_reset_drive reset_drive 0 1e12
+Ib_reset_drive ref 0 100p
+Bint_sample_drive 0 z_sample_drive I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(next)+(-0.0002))))-v(z_sample_drive))/8e-08))
+Cint_sample_drive z_sample_drive 0 1n
+Rint_sample_drive z_sample_drive 0 1e12
+Bout_sample_drive 0 sample_drive I=min(0.005,max(-0.005,(v(z_sample_drive)-v(sample_drive))/0.5))
+Rout_sample_drive sample_drive 0 1e12
+Ib_sample_drive next 0 100p
+Bint_memory_drive 0 z_memory_drive I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(candidate)+(0.0002))))-v(z_memory_drive))/8e-08))
+Cint_memory_drive z_memory_drive 0 1n
+Rint_memory_drive z_memory_drive 0 1e12
+Bout_memory_drive 0 memory_drive I=min(0.005,max(-0.005,(v(z_memory_drive)-v(memory_drive))/0.5))
+Rout_memory_drive memory_drive 0 1e12
+Ib_memory_drive candidate 0 100p
+Bint_q2 0 z_q2 I=1n*min(10000000.0,max(-10000000.0,(min(10.5,max(-10.5,((1+(0.0001))*(min(1.25*max(v(ref),0.4),max(-1.25*max(v(ref),0.4),v(state))))*min(10,max(-10,v(state)))/max(v(ref),0.4)+(0.0002))))-v(z_q2))/1e-07))
+Cint_q2 z_q2 0 1n
+Rint_q2 z_q2 0 1e12
+Bout_q2 0 q2 I=min(0.005,max(-0.005,(v(z_q2)-v(q2))/5.0))
+Rout_q2 q2 0 1e12
+Bint_q3 0 z_q3 I=1n*min(10000000.0,max(-10000000.0,(min(10.5,max(-10.5,((1+(-0.0001))*(min(1.25*max(v(ref),0.4),max(-1.25*max(v(ref),0.4),v(q2))))*min(10,max(-10,v(state)))/max(v(ref),0.4)+(-0.0002))))-v(z_q3))/1e-07))
+Cint_q3 z_q3 0 1n
+Rint_q3 z_q3 0 1e12
+Bout_q3 0 q3 I=min(0.005,max(-0.005,(v(z_q3)-v(q3))/5.0))
+Rout_q3 q3 0 1e12
+Bint_t 0 z_t I=1n*min(10000000.0,max(-10000000.0,(min(10.5,max(-10.5,((1+(0.0001))*(min(1.25*max(v(ref),0.4),max(-1.25*max(v(ref),0.4),v(q3))))*min(10,max(-10,v(m)))/max(v(ref),0.4)+(0.0002))))-v(z_t))/1e-07))
+Cint_t z_t 0 1n
+Rint_t z_t 0 1e12
+Bout_t 0 t I=min(0.005,max(-0.005,(v(z_t)-v(t))/5.0))
+Rout_t t 0 1e12
+Rweight1 num_sum ref 10001
+Rweight2 num_sum t 19998
+Rweight3 num_sum 0 20002
+Bint_num 0 z_num I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(num_sum)+(-0.0002))))-v(z_num))/8e-08))
+Cint_num z_num 0 1n
+Rint_num z_num 0 1e12
+Bout_num 0 num I=min(0.005,max(-0.005,(v(z_num)-v(num))/0.5))
+Rout_num num 0 1e12
+Ib_num num_sum 0 100p
+Rweight4 den_sum ref 19998
+Rweight5 den_sum t 10001
+Rweight6 den_sum 0 19998
+Bint_den 0 z_den I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(den_sum)+(0.0002))))-v(z_den))/8e-08))
+Cint_den z_den 0 1n
+Rint_den z_den 0 1e12
+Bout_den 0 den I=min(0.005,max(-0.005,(v(z_den)-v(den))/0.5))
+Rout_den den 0 1e12
+Ib_den den_sum 0 100p
+Bint_next 0 z_next I=1n*min(10000000.0,max(-10000000.0,(min(10.5,max(-10.5,((1+(-0.0001))*(min(1.25*max(v(den),0.4),max(-1.25*max(v(den),0.4),v(num))))*min(10,max(-10,v(state)))/max(v(den),0.4)+(-0.0002))))-v(z_next))/1e-07))
+Cint_next z_next 0 1n
+Rint_next z_next 0 1e12
+Bout_next 0 next I=min(0.005,max(-0.005,(v(z_next)-v(next))/5.0))
+Rout_next next 0 1e12
+Bint_inverse 0 z_inverse I=1n*min(10000000.0,max(-10000000.0,(min(10.5,max(-10.5,((1+(0.0001))*(min(1.25*max(v(state),0.4),max(-1.25*max(v(state),0.4),v(ref_half))))*min(10,max(-10,v(ref_double)))/max(v(state),0.4)+(0.0002))))-v(z_inverse))/1e-07))
+Cint_inverse z_inverse 0 1n
+Rint_inverse z_inverse 0 1e12
+Bout_inverse 0 inverse I=min(0.005,max(-0.005,(v(z_inverse)-v(inverse))/5.0))
+Rout_inverse inverse 0 1e12
+Bint_geometry 0 z_geometry I=1n*min(10000000.0,max(-10000000.0,(min(10.5,max(-10.5,((1+(-0.0001))*(min(1.25*max(v(ref),0.4),max(-1.25*max(v(ref),0.4),v(q2))))*min(10,max(-10,v(m)))/max(v(ref),0.4)+(-0.0002))))-v(z_geometry))/1e-07))
+Cint_geometry z_geometry 0 1n
+Rint_geometry z_geometry 0 1e12
+Bout_geometry 0 geometry I=min(0.005,max(-0.005,(v(z_geometry)-v(geometry))/5.0))
+Rout_geometry geometry 0 1e12
+Bint_out 0 z_out I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(inverse)+(-0.0002))))-v(z_out))/8e-08))
+Cint_out z_out 0 1n
+Rint_out z_out 0 1e12
+Bout_out 0 out I=min(0.005,max(-0.005,(v(z_out)-v(out))/0.5))
+Rout_out out 0 1e12
+Ib_out inverse 0 100p
+Bint_outgeo 0 z_outgeo I=1n*min(5000000.0,max(-5000000.0,(min(10.5,max(-10.5,((1-1e-5)*v(geometry)+(0.0002))))-v(z_outgeo))/8e-08))
+Cint_outgeo z_outgeo 0 1n
+Rint_outgeo z_outgeo 0 1e12
+Bout_outgeo 0 outgeo I=min(0.005,max(-0.005,(v(z_outgeo)-v(outgeo))/0.5))
+Rout_outgeo outgeo 0 1e12
+Ib_outgeo geometry 0 100p
+Rload_out out 0 5k
+Cload_out out 0 20p
+Rload_outgeo outgeo 0 5k
+Cload_outgeo outgeo 0 20p
+Bclipratio clipratio 0 V=max(max(max(max(max(max(max(max(max(max(max(abs(v(state))/(1.25*max(v(ref),0.4)),abs(v(state))/10),abs(v(q2))/(1.25*max(v(ref),0.4))),abs(v(state))/10),abs(v(q3))/(1.25*max(v(ref),0.4))),abs(v(m))/10),abs(v(num))/(1.25*max(v(den),0.4))),abs(v(state))/10),abs(v(ref_half))/(1.25*max(v(state),0.4))),abs(v(ref_double))/10),abs(v(q2))/(1.25*max(v(ref),0.4))),abs(v(m))/10)
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=14
+tran 100n 0.00065 0 100n uic
+wrdata waveform.txt v(state) v(candidate) v(out) v(outgeo) v(next) v(num) v(den) v(ca) v(cb) v(clipratio)
+quit
+.endc
+.end

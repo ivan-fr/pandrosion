@@ -1,0 +1,3645 @@
+{
+  "status": "simulations completed",
+  "scope": "Custom nonideal functional macromodels, not vendor SPICE, PDK, post-layout, silicon or guaranteed component bounds.",
+  "profiles": {
+    "ideal_dynamic": {
+      "g": 0.0,
+      "off": 0.0,
+      "vos": 0.0,
+      "leak": 0.0,
+      "charge": 0.0,
+      "rm": 0.0
+    },
+    "trimmed_stress": {
+      "g": 0.0001,
+      "off": 0.0002,
+      "vos": 0.0002,
+      "leak": 1e-09,
+      "charge": 2e-12,
+      "rm": 0.0001
+    },
+    "untrimmed_stress": {
+      "g": 0.001,
+      "off": 0.005,
+      "vos": 0.001,
+      "leak": 5e-09,
+      "charge": 5e-12,
+      "rm": 0.001
+    }
+  },
+  "sign_vector": [
+    1,
+    -1,
+    1,
+    -1,
+    1,
+    -1,
+    1,
+    -1
+  ],
+  "nominal_grid": [
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800101922526794,
+      "mode": "AD",
+      "m": 1.0,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.0000424096558849,
+          "output": 0.9998476074774579,
+          "relative_error": -0.00015239252254206637,
+          "geometry_error": -2.5177579613511192e-05,
+          "denominator_volts": 2.9998490217953497
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.0000424227463944,
+          "output": 0.9998475943895004,
+          "relative_error": -0.00015240561049956192,
+          "geometry_error": -2.515140036596364e-05,
+          "denominator_volts": 2.9998491003099206
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.000042422749655,
+          "output": 0.9998475943862383,
+          "relative_error": -0.00015240561376173023,
+          "geometry_error": -2.515139384340337e-05,
+          "denominator_volts": 2.999849100329481
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.0000424227496594,
+          "output": 0.9998475943862355,
+          "relative_error": -0.0001524056137645058,
+          "geometry_error": -2.515139383818532e-05,
+          "denominator_volts": 2.999849100329501
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.0000424227496574,
+          "output": 0.9998475943862358,
+          "relative_error": -0.00015240561376417272,
+          "geometry_error": -2.5151393838407365e-05,
+          "denominator_volts": 2.9998491003294996
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.000042422749665,
+          "output": 0.9998475943862283,
+          "relative_error": -0.00015240561377172224,
+          "geometry_error": -2.5151393823419355e-05,
+          "denominator_volts": 2.999849100329541
+        }
+      ],
+      "final_error": -0.00015240561377172224,
+      "final_geometry_error": -2.5151393823419355e-05,
+      "time_to_0p1pct_us": 144.99999999999997,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800016062068464,
+      "mode": "AD",
+      "m": 1.25,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.9286253602672077,
+          "output": 1.076742089396553,
+          "relative_error": -0.0004411882352135521,
+          "geometry_error": 0.000552737735835862,
+          "denominator_volts": 3.0015825067289224
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.928357211329092,
+          "output": 1.0770530981811155,
+          "relative_error": -0.00015247325489731178,
+          "geometry_error": -2.501606900351394e-05,
+          "denominator_volts": 2.999849506154324
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.9283571443873945,
+          "output": 1.0770531758449353,
+          "relative_error": -0.00015240115819348254,
+          "geometry_error": -2.5160280773595112e-05,
+          "denominator_volts": 2.999849073646604
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.9283571443706844,
+          "output": 1.077053175864323,
+          "relative_error": -0.0001524011401956571,
+          "geometry_error": -2.5160316776018377e-05,
+          "denominator_volts": 2.9998490735386247
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.928357144370677,
+          "output": 1.0770531758643305,
+          "relative_error": -0.0001524011401886627,
+          "geometry_error": -2.5160316792338655e-05,
+          "denominator_volts": 2.999849073538575
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.928357144370682,
+          "output": 1.0770531758643254,
+          "relative_error": -0.00015240114019343665,
+          "geometry_error": -2.5160316780792336e-05,
+          "denominator_volts": 2.999849073538614
+        }
+      ],
+      "final_error": -0.00015240114019343665,
+      "final_geometry_error": -2.5160316780792336e-05,
+      "time_to_0p1pct_us": 144.99999999999997,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800016064867179,
+      "mode": "AD",
+      "m": 1.5,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8750582577999269,
+          "output": 1.1426553624012956,
+          "relative_error": -0.0017985974800521776,
+          "geometry_error": 0.003275801422999658,
+          "denominator_volts": 3.0097572034607554
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8736178782547481,
+          "output": 1.1445393181356862,
+          "relative_error": -0.00015281055406057842,
+          "geometry_error": -2.4341365163937922e-05,
+          "denominator_volts": 2.9998515296461
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8736175172032606,
+          "output": 1.144539791154616,
+          "relative_error": -0.00015239733396410493,
+          "geometry_error": -2.5167911034462698e-05,
+          "denominator_volts": 2.9998490507393503
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8736175171130982,
+          "output": 1.144539791272741,
+          "relative_error": -0.00015239723077231648,
+          "geometry_error": -2.516811744157632e-05,
+          "denominator_volts": 2.9998490501203188
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.8736175171130707,
+          "output": 1.1445397912727762,
+          "relative_error": -0.00015239723074167433,
+          "geometry_error": -2.5168117500751208e-05,
+          "denominator_volts": 2.999849050120139
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.873617517113076,
+          "output": 1.1445397912727684,
+          "relative_error": -0.0001523972307484467,
+          "geometry_error": -2.5168117487650576e-05,
+          "denominator_volts": 2.999849050120179
+        }
+      ],
+      "final_error": -0.0001523972307484467,
+      "final_geometry_error": -2.5168117487650576e-05,
+      "time_to_0p1pct_us": 245.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800016067369524,
+      "mode": "AD",
+      "m": 1.75,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8333923983453848,
+          "output": 1.1997829745988045,
+          "relative_error": -0.004388253396834463,
+          "geometry_error": 0.008501770487351568,
+          "denominator_volts": 3.02547676036024
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8298626430697662,
+          "output": 1.2048861568182794,
+          "relative_error": -0.0001534973865113809,
+          "geometry_error": -2.296750714458895e-05,
+          "denominator_volts": 2.9998556499887963
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8298617272802388,
+          "output": 1.2048874864640347,
+          "relative_error": -0.00015239401118360973,
+          "geometry_error": -2.5174542239381204e-05,
+          "denominator_volts": 2.9998490308327876
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8298617270515287,
+          "output": 1.2048874867961021,
+          "relative_error": -0.00015239373562525582,
+          "geometry_error": -2.5175093426699213e-05,
+          "denominator_volts": 2.9998490291797166
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.8298617270514712,
+          "output": 1.2048874867961845,
+          "relative_error": -0.00015239373555686608,
+          "geometry_error": -2.51750935640338e-05,
+          "denominator_volts": 2.9998490291793063
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.8298617270514712,
+          "output": 1.2048874867961845,
+          "relative_error": -0.00015239373555686608,
+          "geometry_error": -2.51750935640338e-05,
+          "denominator_volts": 2.9998490291793063
+        }
+      ],
+      "final_error": -0.00015239373555686608,
+      "final_geometry_error": -2.51750935640338e-05,
+      "time_to_0p1pct_us": 245.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800016069643752,
+      "mode": "AD",
+      "m": 2.0,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8000580994366082,
+          "output": 1.2497717495817293,
+          "relative_error": -0.008055504996912877,
+          "geometry_error": 0.0159724835463817,
+          "denominator_volts": 3.0480192326953213
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.7937360017810954,
+          "output": 1.259726166454843,
+          "relative_error": -0.00015467908885757886,
+          "geometry_error": -2.0603777271310797e-05,
+          "denominator_volts": 2.9998627390831056
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.7937341854700054,
+          "output": 1.259729049100758,
+          "relative_error": -0.00015239113127862858,
+          "geometry_error": -2.5180290331938693e-05,
+          "denominator_volts": 2.9998490135778657
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.7937341850163929,
+          "output": 1.2597290498206808,
+          "relative_error": -0.00015239055987548156,
+          "geometry_error": -2.5181433284449106e-05,
+          "denominator_volts": 2.9998490101500157
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.7937341850162829,
+          "output": 1.2597290498208558,
+          "relative_error": -0.00015239055973659266,
+          "geometry_error": -2.518143356233793e-05,
+          "denominator_volts": 2.9998490101491844
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.7937341850162855,
+          "output": 1.2597290498208504,
+          "relative_error": -0.0001523905597408115,
+          "geometry_error": -2.51814335522349e-05,
+          "denominator_volts": 2.9998490101492146
+        }
+      ],
+      "final_error": -0.0001523905597408115,
+      "final_geometry_error": -2.51814335522349e-05,
+      "time_to_0p1pct_us": 245.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800182766103769,
+      "mode": "AD",
+      "m": 1.0,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.9998579394180717,
+          "output": 1.0001320740152468,
+          "relative_error": 0.00013207401524684137,
+          "geometry_error": -0.00034406509320894507,
+          "denominator_volts": 2.999142681557265
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.9998578028758717,
+          "output": 1.0001322105949015,
+          "relative_error": 0.00013221059490153841,
+          "geometry_error": -0.0003443381087639974,
+          "denominator_volts": 2.9991418628896347
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.9998578027734841,
+          "output": 1.0001322106973165,
+          "relative_error": 0.0001322106973165038,
+          "geometry_error": -0.00034433831348623656,
+          "denominator_volts": 2.9991418622757546
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.9998578027734066,
+          "output": 1.000132210697394,
+          "relative_error": 0.00013221069739399738,
+          "geometry_error": -0.0003443383136412237,
+          "denominator_volts": 2.9991418622752946
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.9998578027734116,
+          "output": 1.0001322106973891,
+          "relative_error": 0.0001322106973891124,
+          "geometry_error": -0.0003443383136337852,
+          "denominator_volts": 2.9991418622753234
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.9998578027734166,
+          "output": 1.000132210697384,
+          "relative_error": 0.00013221069738400537,
+          "geometry_error": -0.0003443383136214617,
+          "denominator_volts": 2.999141862275353
+        }
+      ],
+      "final_error": 0.00013221069738400537,
+      "final_geometry_error": -0.0003443383136214617,
+      "time_to_0p1pct_us": 144.99999999999997,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800182766103722,
+      "mode": "AD",
+      "m": 1.25,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.9284935709676747,
+          "output": 1.0770026046908066,
+          "relative_error": -0.00019934725905490502,
+          "geometry_error": 0.0003267768313621744,
+          "denominator_volts": 3.0011216081541905
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.9281908713749667,
+          "output": 1.0773538344415532,
+          "relative_error": 0.00012670555876481693,
+          "geometry_error": -0.00032531511858990836,
+          "denominator_volts": 2.9991659029245534
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.9281906466799363,
+          "output": 1.077354095245788,
+          "relative_error": 0.0001269476679695014,
+          "geometry_error": -0.0003257990898889451,
+          "denominator_volts": 2.9991644516709726
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.9281906465130864,
+          "output": 1.0773540954394527,
+          "relative_error": 0.0001269478477519126,
+          "geometry_error": -0.00032579944926847126,
+          "denominator_volts": 2.9991644505933235
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.9281906465129613,
+          "output": 1.0773540954395981,
+          "relative_error": 0.0001269478478869157,
+          "geometry_error": -0.00032579944953980977,
+          "denominator_volts": 2.9991644505925135
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.9281906465129663,
+          "output": 1.0773540954395926,
+          "relative_error": 0.00012694784788180868,
+          "geometry_error": -0.0003257994495283745,
+          "denominator_volts": 2.9991644505925437
+        }
+      ],
+      "final_error": 0.00012694784788180868,
+      "final_geometry_error": -0.0003257994495283745,
+      "time_to_0p1pct_us": 144.99999999999997,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800182766103676,
+      "mode": "AD",
+      "m": 1.5,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.874964851636749,
+          "output": 1.1428916170042094,
+          "relative_error": -0.0015922100742427059,
+          "geometry_error": 0.0031271391640463886,
+          "denominator_volts": 3.0094949949986516
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8734662760923375,
+          "output": 1.1448524361751198,
+          "relative_error": 0.0001207232483451115,
+          "geometry_error": -0.0003058590082319901,
+          "denominator_volts": 2.9991917628491853
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8734651743449828,
+          "output": 1.1448538802374288,
+          "relative_error": 0.00012198475296809619,
+          "geometry_error": -0.0003083807713093467,
+          "denominator_volts": 2.9991842009403302
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8734651735351078,
+          "output": 1.1448538812989337,
+          "relative_error": 0.00012198568027810275,
+          "geometry_error": -0.0003083826250078747,
+          "denominator_volts": 2.999184195381729
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.8734651735345128,
+          "output": 1.1448538812997135,
+          "relative_error": 0.0001219856809593356,
+          "geometry_error": -0.00030838262637056246,
+          "denominator_volts": 2.999184195377639
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.8734651735345178,
+          "output": 1.1448538812997087,
+          "relative_error": 0.00012198568095511675,
+          "geometry_error": -0.0003083826263596823,
+          "denominator_volts": 2.9991841953776706
+        }
+      ],
+      "final_error": 0.00012198568095511675,
+      "final_geometry_error": -0.0003083826263596823,
+      "time_to_0p1pct_us": 245.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800182766103632,
+      "mode": "AD",
+      "m": 1.75,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8333281773823222,
+          "output": 1.1999954171959484,
+          "relative_error": -0.004211962892907151,
+          "geometry_error": 0.00841894864820425,
+          "denominator_volts": 3.025379403076872
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8297236088761084,
+          "output": 1.205208557597208,
+          "relative_error": 0.00011403933422160506,
+          "geometry_error": -0.0002854074868756662,
+          "denominator_volts": 2.999221015154635
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8297209585939184,
+          "output": 1.205212407256215,
+          "relative_error": 0.00011723388340989516,
+          "geometry_error": -0.0002917935390559512,
+          "denominator_volts": 2.999201865403723
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8297209566663484,
+          "output": 1.20521241005611,
+          "relative_error": 0.00011723620683712355,
+          "geometry_error": -0.00029179818366964483,
+          "denominator_volts": 2.9992018514760215
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.8297209566649508,
+          "output": 1.20521241005814,
+          "relative_error": 0.00011723620852177596,
+          "geometry_error": -0.0002917981870347308,
+          "denominator_volts": 2.9992018514659216
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.8297209566649534,
+          "output": 1.205212410058135,
+          "relative_error": 0.00011723620851755712,
+          "geometry_error": -0.00029179818702851357,
+          "denominator_volts": 2.999201851465943
+        }
+      ],
+      "final_error": 0.00011723620851755712,
+      "final_geometry_error": -0.00029179818702851357,
+      "time_to_0p1pct_us": 245.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800182766103616,
+      "mode": "AD",
+      "m": 2.0,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8000168054938407,
+          "output": 1.2499612343250905,
+          "relative_error": -0.007905110856441078,
+          "geometry_error": 0.015946971498172147,
+          "denominator_volts": 3.048062125839389
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.7936080243624951,
+          "output": 1.2600552954816064,
+          "relative_error": 0.00010655079280130764,
+          "geometry_error": -0.0002636781888464279,
+          "denominator_volts": 2.999254430406517
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.7936031918274951,
+          "output": 1.2600629684110405,
+          "relative_error": 0.00011264080092887596,
+          "geometry_error": -0.0002758526185118182,
+          "denominator_volts": 2.999217922839308
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.7936031883514126,
+          "output": 1.2600629739302756,
+          "relative_error": 0.00011264518154874281,
+          "geometry_error": -0.00027586137565349667,
+          "denominator_volts": 2.999217896579278
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.7936031883489076,
+          "output": 1.2600629739342506,
+          "relative_error": 0.00011264518470355256,
+          "geometry_error": -0.00027586138196156185,
+          "denominator_volts": 2.999217896560358
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.7936031883489151,
+          "output": 1.2600629739342406,
+          "relative_error": 0.000112645184695781,
+          "geometry_error": -0.00027586138194568566,
+          "denominator_volts": 2.999217896560408
+        }
+      ],
+      "final_error": 0.000112645184695781,
+      "final_geometry_error": -0.00027586138194568566,
+      "time_to_0p1pct_us": 245.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.80217823616149,
+      "mode": "AD",
+      "m": 1.0,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.9971266086476749,
+          "output": 1.0047740014652313,
+          "relative_error": 0.004774001465231326,
+          "geometry_error": -0.005600083730056382,
+          "denominator_volts": 2.986893933693862
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.9971118295403575,
+          "output": 1.004788879320033,
+          "relative_error": 0.004788879320033024,
+          "geometry_error": -0.005629553523796571,
+          "denominator_volts": 2.9868057719374517
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.9971117591159122,
+          "output": 1.0047889502160803,
+          "relative_error": 0.004788950216080279,
+          "geometry_error": -0.005629693950304326,
+          "denominator_volts": 2.9868053518410016
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.9971117587803298,
+          "output": 1.0047889505539103,
+          "relative_error": 0.004788950553910265,
+          "geometry_error": -0.005629694619459058,
+          "denominator_volts": 2.9868053498391816
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.9971117587787275,
+          "output": 1.0047889505555205,
+          "relative_error": 0.0047889505555205325,
+          "geometry_error": -0.005629694622649395,
+          "denominator_volts": 2.9868053498296314
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.9971117587787247,
+          "output": 1.0047889505555254,
+          "relative_error": 0.0047889505555254175,
+          "geometry_error": -0.005629694622659054,
+          "denominator_volts": 2.9868053498296105
+        }
+      ],
+      "final_error": 0.0047889505555254175,
+      "final_geometry_error": -0.005629694622659054,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.802178236161434,
+      "mode": "AD",
+      "m": 1.25,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.9261832524150639,
+          "output": 1.0816606247526293,
+          "relative_error": 0.004124775522085233,
+          "geometry_error": -0.004183115636052559,
+          "denominator_volts": 2.9900951587667497
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.9256019163387199,
+          "output": 1.0823393474805874,
+          "relative_error": 0.004754845889127113,
+          "geometry_error": -0.005432155684799489,
+          "denominator_volts": 2.9863572782870347
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.9255992528724499,
+          "output": 1.0823424590983843,
+          "relative_error": 0.004757734459211349,
+          "geometry_error": -0.005437876518246898,
+          "denominator_volts": 2.986340163500598
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.92559924065691,
+          "output": 1.082342473369337,
+          "relative_error": 0.004757747707190063,
+          "geometry_error": -0.0054379027558513204,
+          "denominator_volts": 2.9863400850067285
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.9255992406008875,
+          "output": 1.0823424734347844,
+          "relative_error": 0.00475774776794613,
+          "geometry_error": -0.005437902876179956,
+          "denominator_volts": 2.9863400846467485
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.9255992406006349,
+          "output": 1.0823424734350795,
+          "relative_error": 0.004757747768220133,
+          "geometry_error": -0.005437902876720746,
+          "denominator_volts": 2.9863400846451285
+        }
+      ],
+      "final_error": 0.004757747768220133,
+      "final_geometry_error": -0.005437902876720746,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.802178236161392,
+      "mode": "AD",
+      "m": 1.5,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8729547733722288,
+          "output": 1.1475539879421406,
+          "relative_error": 0.0024807460964881844,
+          "geometry_error": -0.0007800496460711459,
+          "denominator_volts": 2.9993148782378567
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8710080889945118,
+          "output": 1.1501165116733758,
+          "relative_error": 0.0047193167685184445,
+          "geometry_error": -0.005228192860724068,
+          "denominator_volts": 2.9859920870090955
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8709995531604064,
+          "output": 1.1501277730667765,
+          "relative_error": 0.0047291545017991155,
+          "geometry_error": -0.00524767524061398,
+          "denominator_volts": 2.9859338000168316
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8709995156160667,
+          "output": 1.1501278225998086,
+          "relative_error": 0.004729197772888272,
+          "geometry_error": -0.005247760932236223,
+          "denominator_volts": 2.9859335436476204
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.8709995154509317,
+          "output": 1.1501278228176737,
+          "relative_error": 0.004729197963210918,
+          "geometry_error": -0.005247761309140508,
+          "denominator_volts": 2.9859335425200104
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.8709995154502043,
+          "output": 1.1501278228186338,
+          "relative_error": 0.004729197964049803,
+          "geometry_error": -0.005247761310802068,
+          "denominator_volts": 2.98593354251504
+        }
+      ],
+      "final_error": 0.004729197964049803,
+      "final_geometry_error": -0.005247761310802068,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.802178236161364,
+      "mode": "AD",
+      "m": 1.75,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8315424168862027,
+          "output": 1.2046545096891093,
+          "relative_error": -0.00034572432067481174,
+          "geometry_error": 0.005011932491205018,
+          "denominator_volts": 3.0157731403715715
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8273795870621073,
+          "output": 1.2107105078087494,
+          "relative_error": 0.004679703605018792,
+          "geometry_error": -0.00501554751022304,
+          "denominator_volts": 2.98569587723873
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8273621700715601,
+          "output": 1.210735973703408,
+          "relative_error": 0.004700835880102394,
+          "geometry_error": -0.005057396070553333,
+          "denominator_volts": 2.9855706693452366
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8273620968588223,
+          "output": 1.21073608075217,
+          "relative_error": 0.004700924712005339,
+          "geometry_error": -0.005057571980121689,
+          "denominator_volts": 2.9855701430419654
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.8273620965510549,
+          "output": 1.2107360812021752,
+          "relative_error": 0.00470092508543174,
+          "geometry_error": -0.005057572719601056,
+          "denominator_volts": 2.9855701408295254
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.8273620965497573,
+          "output": 1.2107360812040726,
+          "relative_error": 0.004700925087006036,
+          "geometry_error": -0.005057572722719117,
+          "denominator_volts": 2.9855701408201956
+        }
+      ],
+      "final_error": 0.004700925087006036,
+      "final_geometry_error": -0.005057572722719117,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.802178236161337,
+      "mode": "AD",
+      "m": 2.0,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.7984046987038289,
+          "output": 1.254612089603579,
+          "relative_error": -0.004213724575628852,
+          "geometry_error": 0.012965118169072865,
+          "denominator_volts": 3.038831721223045
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.7913660240746643,
+          "output": 1.265762136337247,
+          "relative_error": 0.004636073381630856,
+          "geometry_error": -0.00479573659492305,
+          "denominator_volts": 2.98545218250982
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.7913379104135693,
+          "output": 1.2658070692233812,
+          "relative_error": 0.0046717366369892765,
+          "geometry_error": -0.0048663611240885585,
+          "denominator_volts": 2.985240866972944
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.7913377978770721,
+          "output": 1.2658072490921626,
+          "relative_error": 0.004671879398935763,
+          "geometry_error": -0.004866643822786787,
+          "denominator_volts": 2.9852400211257013
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.7913377974265746,
+          "output": 1.2658072498121982,
+          "relative_error": 0.004671879970428394,
+          "geometry_error": -0.004866644954463095,
+          "denominator_volts": 2.98524001773968
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.7913377974247768,
+          "output": 1.2658072498150732,
+          "relative_error": 0.004671879972710347,
+          "geometry_error": -0.004866644958981259,
+          "denominator_volts": 2.98524001772616
+        }
+      ],
+      "final_error": 0.004671879972710347,
+      "final_geometry_error": -0.004866644958981259,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.28080122312757,
+      "mode": "Halley",
+      "m": 1.0,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.9374035419824468,
+          "output": 0.9373004380347878,
+          "relative_error": -0.0626995619652122,
+          "geometry_error": -0.0626995619652122,
+          "denominator_volts": 2.647192977453042
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.882351256513687,
+          "output": 0.8822542077154637,
+          "relative_error": -0.1177457922845363,
+          "geometry_error": -0.1177457922845363,
+          "denominator_volts": 2.3737728223746166
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8396302256231775,
+          "output": 0.8395378756712217,
+          "relative_error": -0.16046212432877827,
+          "geometry_error": -0.16046212432877827,
+          "denominator_volts": 2.1838029524866447
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8099480372358552,
+          "output": 0.8098589520000643,
+          "relative_error": -0.1901410479999357,
+          "geometry_error": -0.1901410479999357,
+          "denominator_volts": 2.062691394567224
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.7910247414823263,
+          "output": 0.7909377376021529,
+          "relative_error": -0.2090622623978471,
+          "geometry_error": -0.2090622623978471,
+          "denominator_volts": 1.9899667091448032
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.779661740775946,
+          "output": 0.7795759867016026,
+          "relative_error": -0.22042401329839745,
+          "geometry_error": -0.22042401329839745,
+          "denominator_volts": 1.9479350458206046
+        }
+      ],
+      "final_error": -0.22042401329839745,
+      "final_geometry_error": -0.22042401329839745,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.993408724616078,
+      "mode": "Halley",
+      "m": 1.25,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.0769456674519553,
+          "output": 1.0768272153963039,
+          "relative_error": -0.00036216425723467616,
+          "geometry_error": -0.00036216425723467616,
+          "denominator_volts": 3.7476032627129063
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.0772629155005486,
+          "output": 1.077144428551082,
+          "relative_error": -6.76896498159607e-05,
+          "geometry_error": -6.76896498159607e-05,
+          "denominator_volts": 3.7498106138296428
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.0772629948109709,
+          "output": 1.07714450785278,
+          "relative_error": -6.761603264093807e-05,
+          "geometry_error": -6.761603264093807e-05,
+          "denominator_volts": 3.749811165818943
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.077262994830781,
+          "output": 1.0771445078725874,
+          "relative_error": -6.761601425331332e-05,
+          "geometry_error": -6.761601425331332e-05,
+          "denominator_volts": 3.7498111659568227
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.0772629948307861,
+          "output": 1.0771445078725923,
+          "relative_error": -6.76160142487614e-05,
+          "geometry_error": -6.76160142487614e-05,
+          "denominator_volts": 3.749811165956853
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.077262994830791,
+          "output": 1.0771445078725974,
+          "relative_error": -6.761601424398744e-05,
+          "geometry_error": -6.761601424398744e-05,
+          "denominator_volts": 3.749811165956893
+        }
+      ],
+      "final_error": -6.761601424398744e-05,
+      "final_geometry_error": -6.761601424398744e-05,
+      "time_to_0p1pct_us": 144.99999999999997,
+      "time_to_0p01pct_us": 245.0
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.13753053632771,
+      "mode": "Halley",
+      "m": 1.5,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.1428567156905638,
+          "output": 1.1427310141403029,
+          "relative_error": -0.0017325095987320571,
+          "geometry_error": -0.0017325095987320571,
+          "denominator_volts": 4.356597942277017
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.161636469902072,
+          "output": 1.1615087027841937,
+          "relative_error": 0.014671312373471634,
+          "geometry_error": 0.014671312373471634,
+          "denominator_volts": 4.403526327136532
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.1743314910973708,
+          "output": 1.1742023276659745,
+          "relative_error": 0.025760215096885863,
+          "geometry_error": 0.025760215096885863,
+          "denominator_volts": 4.43524968377598
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.182873639650149,
+          "output": 1.1827435366758154,
+          "relative_error": 0.033221648433112705,
+          "geometry_error": 0.033221648433112705,
+          "denominator_volts": 4.456595502805191
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.1886038428000927,
+          "output": 1.188473109566067,
+          "relative_error": 0.03822689138131907,
+          "geometry_error": 0.03822689138131907,
+          "denominator_volts": 4.470914602816577
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.1924399417253848,
+          "output": 1.1923087865624238,
+          "relative_error": 0.04157766387437478,
+          "geometry_error": 0.04157766387437478,
+          "denominator_volts": 4.48050056036947
+        }
+      ],
+      "final_error": 0.04157766387437478,
+      "final_geometry_error": 0.04157766387437478,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.37195284450769,
+      "mode": "Halley",
+      "m": 1.75,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.1999750883624358,
+          "output": 1.1998431044157372,
+          "relative_error": -0.004338356079297223,
+          "geometry_error": -0.004338356079297223,
+          "denominator_volts": 4.7494524447672966
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.2631759428876879,
+          "output": 1.2630370075380566,
+          "relative_error": 0.048101621478579215,
+          "geometry_error": 0.048101621478579215,
+          "denominator_volts": 4.907383906021152
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.3072379813952955,
+          "output": 1.3070941997032195,
+          "relative_error": 0.08466144852284696,
+          "geometry_error": 0.08466144852284696,
+          "denominator_volts": 5.017489729425
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.337492783606092,
+          "output": 1.3373456742165908,
+          "relative_error": 0.109764924747495,
+          "geometry_error": 0.109764924747495,
+          "denominator_volts": 5.093092902182545
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.3580610619376348,
+          "output": 1.357911690262421,
+          "relative_error": 0.1268311505479609,
+          "geometry_error": 0.1268311505479609,
+          "denominator_volts": 5.144490597305142
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.371952781767601,
+          "output": 1.3718018821551023,
+          "relative_error": 0.13835760033405653,
+          "geometry_error": 0.13835760033405653,
+          "denominator_volts": 5.179204362309676
+        }
+      ],
+      "final_error": 0.13835760033405653,
+      "final_geometry_error": 0.13835760033405653,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.54875054822367,
+      "mode": "Halley",
+      "m": 2.0,
+      "profile": "ideal_dynamic",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.249950209721758,
+          "output": 1.2498127290581593,
+          "relative_error": -0.008022979564915822,
+          "geometry_error": -0.008022979564915822,
+          "denominator_volts": 5.1244568069965215
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.356696094215034,
+          "output": 1.3565468726713454,
+          "relative_error": 0.07669196636133235,
+          "geometry_error": 0.07669196636133235,
+          "denominator_volts": 5.391202148455822
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.4332615843247234,
+          "output": 1.4331039414143196,
+          "relative_error": 0.13745535209043203,
+          "geometry_error": 0.13745535209043203,
+          "denominator_volts": 5.58253025351821
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.4868145513240694,
+          "output": 1.4866510181728658,
+          "relative_error": 0.17995569507860099,
+          "geometry_error": 0.17995569507860099,
+          "denominator_volts": 5.716352784814948
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.5236640873065268,
+          "output": 1.523496501109293,
+          "relative_error": 0.2091999742653814,
+          "geometry_error": 0.2091999742653814,
+          "denominator_volts": 5.808435417367172
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.5487504862187407,
+          "output": 1.548580140791932,
+          "relative_error": 0.22910887227508758,
+          "geometry_error": 0.22910887227508758,
+          "denominator_volts": 5.871123361502805
+        }
+      ],
+      "final_error": 0.22910887227508758,
+      "final_geometry_error": 0.22910887227508758,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.28047064975535,
+      "mode": "Halley",
+      "m": 1.0,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.9376605336960249,
+          "output": 0.9375074084816201,
+          "relative_error": -0.062492591518379936,
+          "geometry_error": -0.062492591518379936,
+          "denominator_volts": 2.648673889096805
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.882772148928483,
+          "output": 0.8826250608362309,
+          "relative_error": -0.11737493916376907,
+          "geometry_error": -0.11737493916376907,
+          "denominator_volts": 2.375846048122158
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8401459228741913,
+          "output": 0.8400035232007118,
+          "relative_error": -0.1599964767992882,
+          "geometry_error": -0.1599964767992882,
+          "denominator_volts": 2.1860779704590727
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8104968391710163,
+          "output": 0.8103577005725494,
+          "relative_error": -0.1896422994274506,
+          "geometry_error": -0.1896422994274506,
+          "denominator_volts": 2.064936327939735
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.7915698510011999,
+          "output": 0.7914327941644754,
+          "relative_error": -0.20856720583552457,
+          "geometry_error": -0.20856720583552457,
+          "denominator_volts": 1.9920924856199287
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.7801888397822596,
+          "output": 0.7800530347323251,
+          "relative_error": -0.21994696526767488,
+          "geometry_error": -0.21994696526767488,
+          "denominator_volts": 1.9499334594446778
+        }
+      ],
+      "final_error": -0.21994696526767488,
+      "final_geometry_error": -0.21994696526767488,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.993343841676038,
+      "mode": "Halley",
+      "m": 1.25,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.0771500975091282,
+          "output": 1.0769816299679407,
+          "relative_error": -0.00021881846694338236,
+          "geometry_error": -0.00021881846694338236,
+          "denominator_volts": 3.749170659313907
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.0774573599384913,
+          "output": 1.0772888586017946,
+          "relative_error": 6.638733230901472e-05,
+          "geometry_error": 6.638733230901472e-05,
+          "denominator_volts": 3.751309461819832
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.0774574004539914,
+          "output": 1.077288899112839,
+          "relative_error": 6.642493943154193e-05,
+          "geometry_error": 6.642493943154193e-05,
+          "denominator_volts": 3.7513097439219214
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.0774574004593436,
+          "output": 1.077288899118189,
+          "relative_error": 6.642494439779156e-05,
+          "geometry_error": 6.642494439779156e-05,
+          "denominator_volts": 3.7513097439591823
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.0774574004593362,
+          "output": 1.0772888991181815,
+          "relative_error": 6.642494439090818e-05,
+          "geometry_error": 6.642494439090818e-05,
+          "denominator_volts": 3.7513097439591223
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.077457400459339,
+          "output": 1.0772888991181866,
+          "relative_error": 6.642494439557112e-05,
+          "geometry_error": 6.642494439557112e-05,
+          "denominator_volts": 3.751309743959152
+        }
+      ],
+      "final_error": 6.642494439557112e-05,
+      "final_geometry_error": 6.642494439557112e-05,
+      "time_to_0p1pct_us": 144.99999999999997,
+      "time_to_0p01pct_us": 245.0
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.13912114596532,
+      "mode": "Halley",
+      "m": 1.5,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.1430973264053716,
+          "output": 1.1429216053900997,
+          "relative_error": -0.0015660128061599776,
+          "geometry_error": -0.0015660128061599776,
+          "denominator_volts": 4.356931438556704
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.1620732269092684,
+          "output": 1.161895418752431,
+          "relative_error": 0.01500913988872532,
+          "geometry_error": 0.01500913988872532,
+          "denominator_volts": 4.404347598522081
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.174899884166687,
+          "output": 1.1747206652178022,
+          "relative_error": 0.02621302465630171,
+          "geometry_error": 0.02621302465630171,
+          "denominator_volts": 4.436398295257869
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.183529561127283,
+          "output": 1.183349393008291,
+          "relative_error": 0.033750912689600066,
+          "geometry_error": 0.033750912689600066,
+          "denominator_volts": 4.4579617590381115
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.1893176047924447,
+          "output": 1.1891368000519402,
+          "relative_error": 0.03880667842440921,
+          "geometry_error": 0.03880667842440921,
+          "denominator_volts": 4.4724246723663965
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.1931917647162116,
+          "output": 1.193010533860477,
+          "relative_error": 0.042190696605135525,
+          "geometry_error": 0.042190696605135525,
+          "denominator_volts": 4.48210525572733
+        }
+      ],
+      "final_error": 0.042190696605135525,
+      "final_geometry_error": 0.042190696605135525,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.37299502950717,
+      "mode": "Halley",
+      "m": 1.75,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.2002491457584994,
+          "output": 1.2000671386680195,
+          "relative_error": -0.004152446512370456,
+          "geometry_error": -0.004152446512370456,
+          "denominator_volts": 4.749824883867783
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.2636755717531392,
+          "output": 1.2634865884493294,
+          "relative_error": 0.0484746956476485,
+          "geometry_error": 0.0484746956476485,
+          "denominator_volts": 4.90831209560126
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.307891537841372,
+          "output": 1.3076976912647673,
+          "relative_error": 0.0851622418332818,
+          "geometry_error": 0.0851622418332818,
+          "denominator_volts": 5.018797040472942
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.3382482703313288,
+          "output": 1.3380510848460838,
+          "relative_error": 0.11035029320476686,
+          "geometry_error": 0.11035029320476686,
+          "denominator_volts": 5.094651131480356
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.3588826902094167,
+          "output": 1.3586832351636093,
+          "relative_error": 0.12747139897865045,
+          "geometry_error": 0.12747139897865045,
+          "denominator_volts": 5.146211527970181
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.3728167103173332,
+          "output": 1.372615722681676,
+          "relative_error": 0.139032946796936,
+          "geometry_error": 0.139032946796936,
+          "denominator_volts": 5.181029255132178
+        }
+      ],
+      "final_error": 0.139032946796936,
+      "final_geometry_error": 0.139032946796936,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.54992320194297,
+      "mode": "Halley",
+      "m": 2.0,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.2502551247670861,
+          "output": 1.2500676175657015,
+          "relative_error": -0.0078206744224123,
+          "geometry_error": -0.0078206744224123,
+          "denominator_volts": 5.12486261219751
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.3572564338941,
+          "output": 1.3570571577187078,
+          "relative_error": 0.07709697987182573,
+          "geometry_error": 0.07709697987182573,
+          "denominator_volts": 5.392232858422732
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.4339993028459452,
+          "output": 1.4337915857941055,
+          "relative_error": 0.13800113579635798,
+          "geometry_error": 0.13800113579635798,
+          "denominator_volts": 5.583994622228142
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.4876695378280012,
+          "output": 1.4874559176371644,
+          "relative_error": 0.18059454420677912,
+          "geometry_error": 0.18059454420677912,
+          "denominator_volts": 5.718103485560679
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.524594043904144,
+          "output": 1.524376362421387,
+          "relative_error": 0.20989832065158365,
+          "geometry_error": 0.20989832065158365,
+          "denominator_volts": 5.810368845320005
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.5497271910304231,
+          "output": 1.5495067451762983,
+          "relative_error": 0.22984431866233823,
+          "geometry_error": 0.22984431866233823,
+          "denominator_volts": 5.8731704670047575
+        }
+      ],
+      "final_error": 0.22984431866233823,
+      "final_geometry_error": 0.22984431866233823,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.27686182634313,
+      "mode": "Halley",
+      "m": 1.0,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.9400630231452554,
+          "output": 0.939709661681414,
+          "relative_error": -0.06029033831858599,
+          "geometry_error": -0.06029033831858599,
+          "denominator_volts": 2.6614253829118852
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.886949405133978,
+          "output": 0.8866018855873542,
+          "relative_error": -0.1133981144126458,
+          "geometry_error": -0.1133981144126458,
+          "denominator_volts": 2.3952663156616083
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8453843220104441,
+          "output": 0.8450413741684727,
+          "relative_error": -0.1549586258315273,
+          "geometry_error": -0.1549586258315273,
+          "denominator_volts": 2.208013013551738
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8161416861516976,
+          "output": 0.8158019546799209,
+          "relative_error": -0.1841980453200791,
+          "geometry_error": -0.1841980453200791,
+          "denominator_volts": 2.0868274174384442
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.7972166053764439,
+          "output": 0.7968789554566174,
+          "relative_error": -0.20312104454338265,
+          "geometry_error": -0.20312104454338265,
+          "denominator_volts": 2.012882121580741
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.7856688632966881,
+          "output": 0.7853324835022217,
+          "relative_error": -0.21466751649777827,
+          "geometry_error": -0.21466751649777827,
+          "denominator_volts": 1.9694505240603817
+        }
+      ],
+      "final_error": -0.21466751649777827,
+      "final_geometry_error": -0.21466751649777827,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.993400095536841,
+      "mode": "Halley",
+      "m": 1.25,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.079632410901439,
+          "output": 1.0792636983310548,
+          "relative_error": 0.0018996661394108383,
+          "geometry_error": 0.0018996661394108383,
+          "denominator_volts": 3.7669157018269366
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.079766850523797,
+          "output": 1.079398123166523,
+          "relative_error": 0.0020244551024648505,
+          "geometry_error": 0.0020244551024648505,
+          "denominator_volts": 3.767856424810426
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.079766597149317,
+          "output": 1.0793978698199127,
+          "relative_error": 0.002024219916305414,
+          "geometry_error": 0.002024219916305414,
+          "denominator_volts": 3.7678546516366795
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.0797665976266695,
+          "output": 1.0793978702972127,
+          "relative_error": 0.0020242203593914265,
+          "geometry_error": 0.0020242203593914265,
+          "denominator_volts": 3.7678546549772998
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.0797665976257766,
+          "output": 1.07939787029632,
+          "relative_error": 0.002024220358562756,
+          "geometry_error": 0.002024220358562756,
+          "denominator_volts": 3.7678546549710408
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.079766597625772,
+          "output": 1.0793978702963152,
+          "relative_error": 0.002024220358558093,
+          "geometry_error": 0.002024220358558093,
+          "denominator_volts": 3.7678546549710195
+        }
+      ],
+      "final_error": 0.002024220358558093,
+      "final_geometry_error": 0.002024220358558093,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.15798165433863,
+      "mode": "Halley",
+      "m": 1.5,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.1458715435924982,
+          "output": 1.1454955454418043,
+          "relative_error": 0.0006825309404114854,
+          "geometry_error": 0.0006825309404114854,
+          "denominator_volts": 4.358949054607586
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.1671620881611628,
+          "output": 1.166783748283364,
+          "relative_error": 0.019279489072141942,
+          "geometry_error": 0.019279489072141942,
+          "denominator_volts": 4.412124966465625
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.181540380202033,
+          "output": 1.1811604588693292,
+          "relative_error": 0.03183870258720867,
+          "geometry_error": 0.03183870258720867,
+          "denominator_volts": 4.448036626111933
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.1912000045490465,
+          "output": 1.1908190207632874,
+          "relative_error": 0.040276233575216924,
+          "geometry_error": 0.040276233575216924,
+          "denominator_volts": 4.472162797765362
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.1976672183259476,
+          "output": 1.1972855232173885,
+          "relative_error": 0.04592524379428897,
+          "geometry_error": 0.04592524379428897,
+          "denominator_volts": 4.488315507653001
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.2019872286097355,
+          "output": 1.201605058347279,
+          "relative_error": 0.049698705300503576,
+          "geometry_error": 0.049698705300503576,
+          "denominator_volts": 4.499105296769739
+        }
+      ],
+      "final_error": 0.049698705300503576,
+      "final_geometry_error": 0.049698705300503576,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.38503414161298,
+      "mode": "Halley",
+      "m": 1.75,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.2032894378032213,
+          "output": 1.2029071243119949,
+          "relative_error": -0.001795751070620466,
+          "geometry_error": -0.001795751070620466,
+          "denominator_volts": 4.7521054004958465
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.26931807537506,
+          "output": 1.2689284994556838,
+          "relative_error": 0.05299053779293916,
+          "geometry_error": 0.05299053779293916,
+          "denominator_volts": 4.91702053454995
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.3153075758389376,
+          "output": 1.3149129415773786,
+          "relative_error": 0.09114964798756575,
+          "geometry_error": 0.09114964798756575,
+          "denominator_volts": 5.031885310092689
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.3468364939662918,
+          "output": 1.3464383918684881,
+          "relative_error": 0.11731030311544699,
+          "geometry_error": 0.11731030311544699,
+          "denominator_volts": 5.110632895243092
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.3682297405352344,
+          "output": 1.3678292854142329,
+          "relative_error": 0.1350610341521188,
+          "geometry_error": 0.1350610341521188,
+          "denominator_volts": 5.164065318741633
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.3826477506786796,
+          "output": 1.3822457097342153,
+          "relative_error": 0.1470241655691067,
+          "geometry_error": 0.1470241655691067,
+          "denominator_volts": 5.200076179529312
+        }
+      ],
+      "final_error": 0.1470241655691067,
+      "final_geometry_error": 0.1470241655691067,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.5631608615985,
+      "mode": "Halley",
+      "m": 2.0,
+      "profile": "untrimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.2535382064126341,
+          "output": 1.2531503661063024,
+          "relative_error": -0.005373895284260688,
+          "geometry_error": -0.005373895284260688,
+          "denominator_volts": 5.127355920168862
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.363429693944025,
+          "output": 1.3630297667756635,
+          "relative_error": 0.08183744282182892,
+          "geometry_error": 0.08183744282182892,
+          "denominator_volts": 5.401824242764904
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.4421774591958074,
+          "output": 1.4417688706343283,
+          "relative_error": 0.14433271096996791,
+          "geometry_error": 0.14433271096996791,
+          "denominator_volts": 5.598507057079064
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.4971706282194646,
+          "output": 1.4967559910107078,
+          "relative_error": 0.1879760173350511,
+          "geometry_error": 0.1879760173350511,
+          "denominator_volts": 5.73585966914423
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.5349388177248242,
+          "output": 1.5345200264281953,
+          "relative_error": 0.2179493521091933,
+          "geometry_error": 0.2179493521091933,
+          "denominator_volts": 5.8301906483118895
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.5605965212145094,
+          "output": 1.5601749078510503,
+          "relative_error": 0.23831164498857293,
+          "geometry_error": 0.23831164498857293,
+          "denominator_volts": 5.894274109157468
+        }
+      ],
+      "final_error": 0.23831164498857293,
+      "final_geometry_error": 0.23831164498857293,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    }
+  ],
+  "memory_corners": [
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800063893760418,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 100.0,
+      "acquisition_us": 1.0,
+      "sign": 1,
+      "period_us": 62.0,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 107.00000000000001,
+          "state": 0.8669476733465903,
+          "output": 1.153460017710939,
+          "relative_error": -0.013805557130508683,
+          "geometry_error": 0.028128920262482593,
+          "denominator_volts": 3.085049803292554
+        },
+        {
+          "iteration": 2,
+          "time_us": 169.0,
+          "state": 0.8647166751802615,
+          "output": 1.1564359818917838,
+          "relative_error": -0.011261143546800745,
+          "geometry_error": 0.02284452253107272,
+          "denominator_volts": 3.0690005682293258
+        },
+        {
+          "iteration": 3,
+          "time_us": 231.0,
+          "state": 0.8647143947179948,
+          "output": 1.1564390316932813,
+          "relative_error": -0.01125853600319926,
+          "geometry_error": 0.022839127937675396,
+          "denominator_volts": 3.0689842054571503
+        },
+        {
+          "iteration": 4,
+          "time_us": 293.0,
+          "state": 0.8647143925216606,
+          "output": 1.1564390346305804,
+          "relative_error": -0.011258533491843914,
+          "geometry_error": 0.022839122742101425,
+          "denominator_volts": 3.06898418969806
+        },
+        {
+          "iteration": 5,
+          "time_us": 355.0,
+          "state": 0.8647143925195455,
+          "output": 1.1564390346334081,
+          "relative_error": -0.011258533489426292,
+          "geometry_error": 0.022839122737097428,
+          "denominator_volts": 3.0689841896828844
+        },
+        {
+          "iteration": 6,
+          "time_us": 417.00000000000006,
+          "state": 0.8647143925195455,
+          "output": 1.1564390346334081,
+          "relative_error": -0.011258533489426292,
+          "geometry_error": 0.022839122737097428,
+          "denominator_volts": 3.0689841896828844
+        }
+      ],
+      "final_error": -0.011258533489426292,
+      "final_geometry_error": 0.022839122737097428,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800063893760418,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 100.0,
+      "acquisition_us": 5.0,
+      "sign": 1,
+      "period_us": 70.0,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 114.99999999999999,
+          "state": 0.8669362294527961,
+          "output": 1.1534752438217812,
+          "relative_error": -0.013792538988857905,
+          "geometry_error": 0.028101779227727608,
+          "denominator_volts": 3.0849672676997533
+        },
+        {
+          "iteration": 2,
+          "time_us": 184.99999999999997,
+          "state": 0.8647056230254111,
+          "output": 1.1564507627635476,
+          "relative_error": -0.011248506079207243,
+          "geometry_error": 0.022818378016413066,
+          "denominator_volts": 3.06892126761559
+        },
+        {
+          "iteration": 3,
+          "time_us": 254.99999999999997,
+          "state": 0.864703345563015,
+          "output": 1.1564538086309837,
+          "relative_error": -0.011245901899181066,
+          "geometry_error": 0.0228129905882668,
+          "denominator_volts": 3.068904926785737
+        },
+        {
+          "iteration": 4,
+          "time_us": 325.0,
+          "state": 0.8647033433719346,
+          "output": 1.1564538115613323,
+          "relative_error": -0.011245899393768188,
+          "geometry_error": 0.02281298540518839,
+          "denominator_volts": 3.068904911064752
+        },
+        {
+          "iteration": 5,
+          "time_us": 394.99999999999994,
+          "state": 0.8647033433698259,
+          "output": 1.1564538115641523,
+          "relative_error": -0.011245899391357117,
+          "geometry_error": 0.022812985400199715,
+          "denominator_volts": 3.068904911049612
+        },
+        {
+          "iteration": 6,
+          "time_us": 465.0,
+          "state": 0.8647033433698259,
+          "output": 1.1564538115641523,
+          "relative_error": -0.011245899391357117,
+          "geometry_error": 0.022812985400199715,
+          "denominator_volts": 3.068904911049612
+        }
+      ],
+      "final_error": -0.011245899391357117,
+      "final_geometry_error": 0.022812985400199715,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800063893760418,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 100.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8668933153759133,
+          "output": 1.1535323446193653,
+          "relative_error": -0.013743718493655521,
+          "geometry_error": 0.028000004782910315,
+          "denominator_volts": 3.084657782417393
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8646641777074455,
+          "output": 1.1565061940465713,
+          "relative_error": -0.011201112998875273,
+          "geometry_error": 0.022720339684008772,
+          "denominator_volts": 3.068623910252355
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8646619114384321,
+          "output": 1.1565092252345521,
+          "relative_error": -0.011198521369606751,
+          "geometry_error": 0.022714978991176027,
+          "denominator_volts": 3.068607651293665
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8646619092668681,
+          "output": 1.1565092281390792,
+          "relative_error": -0.011198518886270992,
+          "geometry_error": 0.022714973854506493,
+          "denominator_volts": 3.06860763571419
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.864661909264762,
+          "output": 1.1565092281418954,
+          "relative_error": -0.011198518883863251,
+          "geometry_error": 0.022714973849524922,
+          "denominator_volts": 3.0686076356990855
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.8646619092647656,
+          "output": 1.1565092281418905,
+          "relative_error": -0.011198518883867359,
+          "geometry_error": 0.022714973849534692,
+          "denominator_volts": 3.06860763569911
+        }
+      ],
+      "final_error": -0.011198518883867359,
+      "final_geometry_error": 0.022714973849534692,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800171959159362,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 1000.0000000000001,
+      "acquisition_us": 1.0,
+      "sign": 1,
+      "period_us": 62.0,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 107.00000000000001,
+          "state": 0.8580170605554255,
+          "output": 1.1654662740991977,
+          "relative_error": -0.0035403523137308435,
+          "geometry_error": 0.007056005220046346,
+          "denominator_volts": 3.021295315914172
+        },
+        {
+          "iteration": 2,
+          "time_us": 169.0,
+          "state": 0.8557726363100231,
+          "output": 1.168522927836646,
+          "relative_error": -0.0009269501295527949,
+          "geometry_error": 0.001794685078164937,
+          "denominator_volts": 3.0054811196802884
+        },
+        {
+          "iteration": 3,
+          "time_us": 231.0,
+          "state": 0.8557714617740007,
+          "output": 1.1685245316202046,
+          "relative_error": -0.0009255789138983284,
+          "geometry_error": 0.0017919353694895168,
+          "denominator_volts": 3.0054728655860683
+        },
+        {
+          "iteration": 4,
+          "time_us": 293.0,
+          "state": 0.8557714611136932,
+          "output": 1.1685245325218343,
+          "relative_error": -0.0009255781430158594,
+          "geometry_error": 0.0017919338236394022,
+          "denominator_volts": 3.0054728609457273
+        },
+        {
+          "iteration": 5,
+          "time_us": 355.0,
+          "state": 0.8557714611133206,
+          "output": 1.1685245325223397,
+          "relative_error": -0.0009255781425837606,
+          "geometry_error": 0.0017919338227734283,
+          "denominator_volts": 3.005472860943127
+        },
+        {
+          "iteration": 6,
+          "time_us": 417.00000000000006,
+          "state": 0.8557714611133206,
+          "output": 1.1685245325223397,
+          "relative_error": -0.0009255781425837606,
+          "geometry_error": 0.0017919338227734283,
+          "denominator_volts": 3.005472860943127
+        }
+      ],
+      "final_error": -0.0009255781425837606,
+      "final_geometry_error": 0.0017919338227734283,
+      "time_to_0p1pct_us": 169.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800171959159362,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 1000.0000000000001,
+      "acquisition_us": 5.0,
+      "sign": 1,
+      "period_us": 70.0,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 114.99999999999999,
+          "state": 0.8580136062783529,
+          "output": 1.165470966149758,
+          "relative_error": -0.0035363406669315367,
+          "geometry_error": 0.007047897206518439,
+          "denominator_volts": 3.02127091342646
+        },
+        {
+          "iteration": 2,
+          "time_us": 184.99999999999997,
+          "state": 0.8557720782028131,
+          "output": 1.1685236899099305,
+          "relative_error": -0.0009262985660598577,
+          "geometry_error": 0.0017933784917680828,
+          "denominator_volts": 3.005477197558939
+        },
+        {
+          "iteration": 3,
+          "time_us": 254.99999999999997,
+          "state": 0.8557704213001232,
+          "output": 1.1685259523507643,
+          "relative_error": -0.0009243642063565538,
+          "geometry_error": 0.0017894995171277017,
+          "denominator_volts": 3.005465553637326
+        },
+        {
+          "iteration": 4,
+          "time_us": 325.0,
+          "state": 0.8557704200872456,
+          "output": 1.1685259540069068,
+          "relative_error": -0.0009243627903745555,
+          "geometry_error": 0.0017894966776634824,
+          "denominator_volts": 3.0054655451138155
+        },
+        {
+          "iteration": 5,
+          "time_us": 394.99999999999994,
+          "state": 0.8557704200863556,
+          "output": 1.1685259540081216,
+          "relative_error": -0.0009243627893359418,
+          "geometry_error": 0.0017894966755818142,
+          "denominator_volts": 3.0054655451075747
+        },
+        {
+          "iteration": 6,
+          "time_us": 465.0,
+          "state": 0.8557704200863506,
+          "output": 1.1685259540081294,
+          "relative_error": -0.0009243627893292805,
+          "geometry_error": 0.0017894966755667152,
+          "denominator_volts": 3.005465545107526
+        }
+      ],
+      "final_error": -0.0009243627893292805,
+      "final_geometry_error": 0.0017894966755667152,
+      "time_to_0p1pct_us": 184.99999999999997,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800171959159362,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 1000.0000000000001,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8580093149052653,
+          "output": 1.1654767953061484,
+          "relative_error": -0.0035313568083229496,
+          "geometry_error": 0.007037824374133361,
+          "denominator_volts": 3.0212405976088825
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8557679365348131,
+          "output": 1.1685293452245524,
+          "relative_error": -0.0009214633400725925,
+          "geometry_error": 0.00178368244750704,
+          "denominator_volts": 3.0054480919766986
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8557662798932153,
+          "output": 1.1685316073307688,
+          "relative_error": -0.0009195292664632149,
+          "geometry_error": 0.0017798041028800338,
+          "denominator_volts": 3.0054364500026054
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8557662786805481,
+          "output": 1.1685316089866389,
+          "relative_error": -0.0009195278507141413,
+          "geometry_error": 0.0017798012639245187,
+          "denominator_volts": 3.005436441480667
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.8557662786796582,
+          "output": 1.168531608987854,
+          "relative_error": -0.0009195278496753057,
+          "geometry_error": 0.00177980126184063,
+          "denominator_volts": 3.0054364414744157
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.8557662786796532,
+          "output": 1.1685316089878615,
+          "relative_error": -0.0009195278496688664,
+          "geometry_error": 0.0017798012618277514,
+          "denominator_volts": 3.0054364414743757
+        }
+      ],
+      "final_error": -0.0009195278496688664,
+      "final_geometry_error": 0.0017798012618277514,
+      "time_to_0p1pct_us": 245.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800182766103654,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 1.0,
+      "sign": 1,
+      "period_us": 62.0,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 107.00000000000001,
+          "state": 0.942839589941288,
+          "output": 1.0606151938284427,
+          "relative_error": -0.09318676493676015,
+          "geometry_error": 0.21599633304993238,
+          "denominator_volts": 3.681708965945139
+        },
+        {
+          "iteration": 2,
+          "time_us": 169.0,
+          "state": 0.9000317105623009,
+          "output": 1.1110608465236615,
+          "relative_error": -0.0500563385751448,
+          "geometry_error": 0.10808900521273945,
+          "denominator_volts": 3.3328761871160943
+        },
+        {
+          "iteration": 3,
+          "time_us": 231.0,
+          "state": 0.8761903936966595,
+          "output": 1.1412930355195048,
+          "relative_error": -0.024208180576006932,
+          "geometry_error": 0.05016484749828298,
+          "denominator_volts": 3.152417842787457
+        },
+        {
+          "iteration": 4,
+          "time_us": 293.0,
+          "state": 0.8644508369054138,
+          "output": 1.1567922099918275,
+          "relative_error": -0.010956572805498221,
+          "geometry_error": 0.022214115579779703,
+          "denominator_volts": 3.0670875362373744
+        },
+        {
+          "iteration": 5,
+          "time_us": 355.0,
+          "state": 0.8590513446711039,
+          "output": 1.1640631264092984,
+          "relative_error": -0.0047400267134122265,
+          "geometry_error": 0.009485036760988219,
+          "denominator_volts": 3.0286102268994592
+        },
+        {
+          "iteration": 6,
+          "time_us": 417.00000000000006,
+          "state": 0.8566725186532433,
+          "output": 1.1672955210271654,
+          "relative_error": -0.0019763681900524244,
+          "geometry_error": 0.0039023624921308286,
+          "denominator_volts": 3.0118111851882827
+        }
+      ],
+      "final_error": -0.0019763681900524244,
+      "final_geometry_error": 0.0039023624921308286,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800182766103654,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 5.0,
+      "sign": 1,
+      "period_us": 70.0,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 114.99999999999999,
+          "state": 0.8590565141653411,
+          "output": 1.164056121494662,
+          "relative_error": -0.004746015831180506,
+          "geometry_error": 0.009497185485726867,
+          "denominator_volts": 3.028646834868675
+        },
+        {
+          "iteration": 2,
+          "time_us": 184.99999999999997,
+          "state": 0.8549304714352975,
+          "output": 1.169674058198695,
+          "relative_error": 5.725248574361963e-05,
+          "geometry_error": -0.0001760878246360731,
+          "denominator_volts": 2.999568041132357
+        },
+        {
+          "iteration": 3,
+          "time_us": 254.99999999999997,
+          "state": 0.8548783987546676,
+          "output": 1.169745305832832,
+          "relative_error": 0.0001181683560596003,
+          "geometry_error": -0.00029787167990347196,
+          "denominator_volts": 2.999202840179613
+        },
+        {
+          "iteration": 4,
+          "time_us": 325.0,
+          "state": 0.8548778510622198,
+          "output": 1.169746055250619,
+          "relative_error": 0.00011880909925432448,
+          "geometry_error": -0.0002991525443482024,
+          "denominator_volts": 2.9991989992885606
+        },
+        {
+          "iteration": 5,
+          "time_us": 394.99999999999994,
+          "state": 0.8548778456318598,
+          "output": 1.169746062681089,
+          "relative_error": 0.00011881545221692491,
+          "geometry_error": -0.0002991652440935688,
+          "denominator_volts": 2.9991989612062206
+        },
+        {
+          "iteration": 6,
+          "time_us": 465.0,
+          "state": 0.8548778455796723,
+          "output": 1.1697460627524943,
+          "relative_error": 0.00011881551326764495,
+          "geometry_error": -0.00029916536613705524,
+          "denominator_volts": 2.9991989608402494
+        }
+      ],
+      "final_error": 0.00011881551326764495,
+      "final_geometry_error": -0.00029916536613705524,
+      "time_to_0p1pct_us": 184.99999999999997,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.800182766103654,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8571209083165103,
+          "output": 1.1666848682732303,
+          "relative_error": -0.0024984689505528346,
+          "geometry_error": 0.0049534679286027394,
+          "denominator_volts": 3.0149705467988483
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8548784251456423,
+          "output": 1.169745269721597,
+          "relative_error": 0.0001181374813881142,
+          "geometry_error": -0.0002978099604675766,
+          "denominator_volts": 2.9992030252559627
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8548767796583601,
+          "output": 1.1697475212752682,
+          "relative_error": 0.00012006253269825073,
+          "geometry_error": -0.00030165818745719886,
+          "denominator_volts": 2.9991914856963744
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8548767784538576,
+          "output": 1.169747522923418,
+          "relative_error": 0.00012006394184638225,
+          "geometry_error": -0.0003016610043692358,
+          "denominator_volts": 2.9991914772493944
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.8548767784529873,
+          "output": 1.1697475229246104,
+          "relative_error": 0.00012006394286601108,
+          "geometry_error": -0.00030166100641026983,
+          "denominator_volts": 2.9991914772432757
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.8548767784529797,
+          "output": 1.1697475229246204,
+          "relative_error": 0.00012006394287444877,
+          "geometry_error": -0.0003016610064254799,
+          "denominator_volts": 2.999191477243226
+        }
+      ],
+      "final_error": 0.00012006394287444877,
+      "final_geometry_error": -0.0003016610064254799,
+      "time_to_0p1pct_us": 245.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 0.799982963863556,
+      "mode": "AD",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": -1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 6,
+      "buffers": 7,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 0.8572826636848931,
+          "output": 1.1662314773399112,
+          "relative_error": -0.002886112745761338,
+          "geometry_error": 0.005195969673824408,
+          "denominator_volts": 3.015356820750947
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 0.8551711567637054,
+          "output": 1.1691110247016898,
+          "relative_error": -0.0004241343827824373,
+          "geometry_error": 0.00025008952303684495,
+          "denominator_volts": 3.0005030226806517
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 0.8551716392065107,
+          "output": 1.1691103651508095,
+          "relative_error": -0.00042469829085289845,
+          "geometry_error": 0.0002512181780331968,
+          "denominator_volts": 3.0005064081523383
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 0.8551716390943432,
+          "output": 1.1691103653041566,
+          "relative_error": -0.00042469815974299774,
+          "geometry_error": 0.0002512179156204386,
+          "denominator_volts": 3.000506407365218
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 0.8551716390943679,
+          "output": 1.169110365304124,
+          "relative_error": -0.00042469815977086434,
+          "geometry_error": 0.00025121791567594975,
+          "denominator_volts": 3.0005064073653798
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 0.8551716390943729,
+          "output": 1.1691103653041164,
+          "relative_error": -0.00042469815977730363,
+          "geometry_error": 0.00025121791569082674,
+          "denominator_volts": 3.0005064073654197
+        }
+      ],
+      "final_error": -0.00042469815977730363,
+      "final_geometry_error": 0.00025121791569082674,
+      "time_to_0p1pct_us": 245.0,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.29262129782014,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 100.0,
+      "acquisition_us": 1.0,
+      "sign": 1,
+      "period_us": 62.0,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 107.00000000000001,
+          "state": 1.176730948353617,
+          "output": 1.176551746886881,
+          "relative_error": 0.005937593598507762,
+          "geometry_error": 0.005937593598507762,
+          "denominator_volts": 4.541008889643051
+        },
+        {
+          "iteration": 2,
+          "time_us": 169.0,
+          "state": 1.2202635656703424,
+          "output": 1.2200795761606613,
+          "relative_error": 0.04315336413311499,
+          "geometry_error": 0.04315336413311499,
+          "denominator_volts": 4.649786312529222
+        },
+        {
+          "iteration": 3,
+          "time_us": 231.0,
+          "state": 1.249950767621732,
+          "output": 1.2497635128914741,
+          "relative_error": 0.06853277303929639,
+          "geometry_error": 0.06853277303929639,
+          "denominator_volts": 4.723967409831015
+        },
+        {
+          "iteration": 4,
+          "time_us": 293.0,
+          "state": 1.269986788183315,
+          "output": 1.2697973297416147,
+          "relative_error": 0.08566144550622967,
+          "geometry_error": 0.08566144550622967,
+          "denominator_volts": 4.774032552152374
+        },
+        {
+          "iteration": 5,
+          "time_us": 355.0,
+          "state": 1.2834179584292325,
+          "output": 1.2832270227269418,
+          "relative_error": 0.0971436714943108,
+          "geometry_error": 0.0971436714943108,
+          "denominator_volts": 4.807593779933989
+        },
+        {
+          "iteration": 6,
+          "time_us": 417.00000000000006,
+          "state": 1.2923817498416035,
+          "output": 1.2921898282344704,
+          "relative_error": 0.10480676241061837,
+          "geometry_error": 0.10480676241061837,
+          "denominator_volts": 4.829992114544407
+        }
+      ],
+      "final_error": 0.10480676241061837,
+      "final_geometry_error": 0.10480676241061837,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.29257136365854,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 100.0,
+      "acquisition_us": 5.0,
+      "sign": 1,
+      "period_us": 70.0,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 114.99999999999999,
+          "state": 1.176719279604981,
+          "output": 1.1765400794216625,
+          "relative_error": 0.005927618056066786,
+          "geometry_error": 0.005927618056066786,
+          "denominator_volts": 4.5409797322782275
+        },
+        {
+          "iteration": 2,
+          "time_us": 184.99999999999997,
+          "state": 1.2202369152908108,
+          "output": 1.2200529287123385,
+          "relative_error": 0.04313058088527888,
+          "geometry_error": 0.04313058088527888,
+          "denominator_volts": 4.649719719712549
+        },
+        {
+          "iteration": 3,
+          "time_us": 254.99999999999997,
+          "state": 1.2499141544831294,
+          "output": 1.2497269037798577,
+          "relative_error": 0.06850147268914974,
+          "geometry_error": 0.06850147268914974,
+          "denominator_volts": 4.723875922502513
+        },
+        {
+          "iteration": 4,
+          "time_us": 325.0,
+          "state": 1.2699436835483986,
+          "output": 1.2697542298476692,
+          "relative_error": 0.08562459561525415,
+          "geometry_error": 0.08562459561525415,
+          "denominator_volts": 4.7739248441534174
+        },
+        {
+          "iteration": 5,
+          "time_us": 394.99999999999994,
+          "state": 1.2833706825384121,
+          "output": 1.28317975203588,
+          "relative_error": 0.09710325562196154,
+          "geometry_error": 0.09710325562196154,
+          "denominator_volts": 4.807475648981045
+        },
+        {
+          "iteration": 6,
+          "time_us": 465.0,
+          "state": 1.2923318203411658,
+          "output": 1.292139904225655,
+          "relative_error": 0.1047640779835004,
+          "geometry_error": 0.1047640779835004,
+          "denominator_volts": 4.829867352866415
+        }
+      ],
+      "final_error": 0.1047640779835004,
+      "final_geometry_error": 0.1047640779835004,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.29238409706521,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 100.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.1766755209802924,
+          "output": 1.1764963256098735,
+          "relative_error": 0.005890209073199371,
+          "geometry_error": 0.005890209073199371,
+          "denominator_volts": 4.540870390117884
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.2201369749175157,
+          "output": 1.2199529993312346,
+          "relative_error": 0.04304514246625191,
+          "geometry_error": 0.04304514246625191,
+          "denominator_volts": 4.649469993026686
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.249776851898618,
+          "output": 1.249589616296913,
+          "relative_error": 0.0683840935423421,
+          "geometry_error": 0.0683840935423421,
+          "denominator_volts": 4.723532836737874
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.269782035360491,
+          "output": 1.2695925994390382,
+          "relative_error": 0.0854864035597489,
+          "geometry_error": 0.0854864035597489,
+          "denominator_volts": 4.773520924647108
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.2831933895762357,
+          "output": 1.2830024785737082,
+          "relative_error": 0.09695168894381267,
+          "geometry_error": 0.09695168894381267,
+          "denominator_volts": 4.807032636988875
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.2921445740355777,
+          "output": 1.291952678514814,
+          "relative_error": 0.10460400225243172,
+          "geometry_error": 0.10460400225243172,
+          "denominator_volts": 4.829399469889873
+        }
+      ],
+      "final_error": 0.10460400225243172,
+      "final_geometry_error": 0.10460400225243172,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.26803342752667,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 1000.0000000000001,
+      "acquisition_us": 1.0,
+      "sign": 1,
+      "period_us": 62.0,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 107.00000000000001,
+          "state": 1.1678037810728692,
+          "output": 1.1676253625142303,
+          "relative_error": -0.0016943576855038556,
+          "geometry_error": -0.0016943576855038556,
+          "denominator_volts": 4.5187009512052585
+        },
+        {
+          "iteration": 2,
+          "time_us": 169.0,
+          "state": 1.205261663413792,
+          "output": 1.2050791249030706,
+          "relative_error": 0.030328158713226694,
+          "geometry_error": 0.030328158713226694,
+          "denominator_volts": 4.6122990885507065
+        },
+        {
+          "iteration": 3,
+          "time_us": 231.0,
+          "state": 1.2308946111772137,
+          "output": 1.2307092533262096,
+          "relative_error": 0.05224161027012797,
+          "geometry_error": 0.05224161027012797,
+          "denominator_volts": 4.676349590484931
+        },
+        {
+          "iteration": 4,
+          "time_us": 293.0,
+          "state": 1.2482758089830708,
+          "output": 1.2480885393928642,
+          "relative_error": 0.0671006908423244,
+          "geometry_error": 0.0671006908423244,
+          "denominator_volts": 4.719780976291913
+        },
+        {
+          "iteration": 5,
+          "time_us": 355.0,
+          "state": 1.2599913288200124,
+          "output": 1.2598027706524133,
+          "relative_error": 0.07711621768614307,
+          "geometry_error": 0.07711621768614307,
+          "denominator_volts": 4.7490552108786686
+        },
+        {
+          "iteration": 6,
+          "time_us": 417.00000000000006,
+          "state": 1.2678563200552844,
+          "output": 1.2676668968257803,
+          "relative_error": 0.08383995098518704,
+          "geometry_error": 0.08383995098518704,
+          "denominator_volts": 4.7687079110275885
+        }
+      ],
+      "final_error": 0.08383995098518704,
+      "final_geometry_error": 0.08383995098518704,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.26802249230892,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 1000.0000000000001,
+      "acquisition_us": 5.0,
+      "sign": 1,
+      "period_us": 70.0,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 114.99999999999999,
+          "state": 1.1678029402285919,
+          "output": 1.167624521762438,
+          "relative_error": -0.0016950765181749095,
+          "geometry_error": -0.0016950765181749095,
+          "denominator_volts": 4.518698850139928
+        },
+        {
+          "iteration": 2,
+          "time_us": 184.99999999999997,
+          "state": 1.2052557836407245,
+          "output": 1.2050732457767128,
+          "relative_error": 0.030323132130897212,
+          "geometry_error": 0.030323132130897212,
+          "denominator_volts": 4.612284396427906
+        },
+        {
+          "iteration": 3,
+          "time_us": 254.99999999999997,
+          "state": 1.230885573820326,
+          "output": 1.230700216963332,
+          "relative_error": 0.05223388428854503,
+          "geometry_error": 0.05223388428854503,
+          "denominator_volts": 4.67632700832817
+        },
+        {
+          "iteration": 4,
+          "time_us": 325.0,
+          "state": 1.2482653226368805,
+          "output": 1.2480780542000565,
+          "relative_error": 0.06709172612857572,
+          "geometry_error": 0.06709172612857572,
+          "denominator_volts": 4.719754773463302
+        },
+        {
+          "iteration": 5,
+          "time_us": 394.99999999999994,
+          "state": 1.2599801589073396,
+          "output": 1.2597916019683078,
+          "relative_error": 0.07710666859555482,
+          "geometry_error": 0.07710666859555482,
+          "denominator_volts": 4.749027299983679
+        },
+        {
+          "iteration": 6,
+          "time_us": 465.0,
+          "state": 1.2678453353851318,
+          "output": 1.2676559133638226,
+          "relative_error": 0.08383056025730773,
+          "geometry_error": 0.08383056025730773,
+          "denominator_volts": 4.768680463008609
+        }
+      ],
+      "final_error": 0.08383056025730773,
+      "final_geometry_error": 0.08383056025730773,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.26800358316721,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 1000.0000000000001,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.1677985648421243,
+          "output": 1.1676201468572152,
+          "relative_error": -0.001698817009524789,
+          "geometry_error": -0.001698817009524789,
+          "denominator_volts": 4.518687917113338
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.2052457750425694,
+          "output": 1.2050632382793929,
+          "relative_error": 0.030314575841045466,
+          "geometry_error": 0.030314575841045466,
+          "denominator_volts": 4.6122593873754445
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.2308717939769656,
+          "output": 1.2306864386356016,
+          "relative_error": 0.0522221039840427,
+          "geometry_error": 0.0522221039840427,
+          "denominator_volts": 4.67629257585119
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.2482490630092877,
+          "output": 1.2480617963608438,
+          "relative_error": 0.06707782587157629,
+          "geometry_error": 0.06707782587157629,
+          "denominator_volts": 4.719714144608671
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.2599622886232364,
+          "output": 1.2597737336497374,
+          "relative_error": 0.0770913913980733,
+          "geometry_error": 0.0770913913980733,
+          "denominator_volts": 4.748982646490177
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.2678264281348814,
+          "output": 1.2676370081931594,
+          "relative_error": 0.08381439656375678,
+          "geometry_error": 0.08381439656375678,
+          "denominator_volts": 4.768633218388907
+        }
+      ],
+      "final_error": 0.08381439656375678,
+      "final_geometry_error": 0.08381439656375678,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.15009769492953,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 1.0,
+      "sign": 1,
+      "period_us": 62.0,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 107.00000000000001,
+          "state": 1.0655077265465271,
+          "output": 1.0653405395385416,
+          "relative_error": -0.08914665118475973,
+          "geometry_error": -0.08914665118475973,
+          "denominator_volts": 4.019144608856865
+        },
+        {
+          "iteration": 2,
+          "time_us": 169.0,
+          "state": 1.116052355870664,
+          "output": 1.1158796095061965,
+          "relative_error": -0.04593635417870945,
+          "geometry_error": -0.04593635417870945,
+          "denominator_volts": 4.379899165927264
+        },
+        {
+          "iteration": 3,
+          "time_us": 231.0,
+          "state": 1.1444814255574747,
+          "output": 1.1443055523062988,
+          "relative_error": -0.021632514953818127,
+          "geometry_error": -0.021632514953818127,
+          "denominator_volts": 4.4604239454669825
+        },
+        {
+          "iteration": 4,
+          "time_us": 293.0,
+          "state": 1.1659424165715322,
+          "output": 1.1657641828460408,
+          "relative_error": -0.0032856439180277697,
+          "geometry_error": -0.0032856439180277697,
+          "denominator_volts": 4.514049742183867
+        },
+        {
+          "iteration": 5,
+          "time_us": 355.0,
+          "state": 1.183798812983275,
+          "output": 1.1836186152494403,
+          "relative_error": 0.01197968105766134,
+          "geometry_error": 0.01197968105766134,
+          "denominator_volts": 4.558668533713273
+        },
+        {
+          "iteration": 6,
+          "time_us": 417.00000000000006,
+          "state": 1.1989198012062723,
+          "output": 1.1987379403290856,
+          "relative_error": 0.024906522165750955,
+          "geometry_error": 0.024906522165750955,
+          "denominator_volts": 4.596452205495829
+        }
+      ],
+      "final_error": 0.024906522165750955,
+      "final_geometry_error": 0.024906522165750955,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.26468941469486,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 5.0,
+      "sign": 1,
+      "period_us": 70.0,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 114.99999999999999,
+          "state": 1.1645718690509053,
+          "output": 1.164393786070743,
+          "relative_error": -0.004457316679609025,
+          "geometry_error": -0.004457316679609025,
+          "denominator_volts": 4.510625077280324
+        },
+        {
+          "iteration": 2,
+          "time_us": 184.99999999999997,
+          "state": 1.2016506396056046,
+          "output": 1.2014684783661225,
+          "relative_error": 0.027241099348160436,
+          "geometry_error": 0.027241099348160436,
+          "denominator_volts": 4.603275906450781
+        },
+        {
+          "iteration": 3,
+          "time_us": 254.99999999999997,
+          "state": 1.2272014253150472,
+          "output": 1.2270164537685222,
+          "relative_error": 0.049084311060356045,
+          "geometry_error": 0.049084311060356045,
+          "denominator_volts": 4.667121105375148
+        },
+        {
+          "iteration": 4,
+          "time_us": 325.0,
+          "state": 1.2446540420640049,
+          "output": 1.24446715092047,
+          "relative_error": 0.06400444725164145,
+          "geometry_error": 0.06400444725164145,
+          "denominator_volts": 4.710730949736065
+        },
+        {
+          "iteration": 5,
+          "time_us": 394.99999999999994,
+          "state": 1.2565055175483713,
+          "output": 1.256317322872124,
+          "relative_error": 0.07413620175229685,
+          "geometry_error": 0.07413620175229685,
+          "denominator_volts": 4.7403449044085875
+        },
+        {
+          "iteration": 6,
+          "time_us": 465.0,
+          "state": 1.2645218807599283,
+          "output": 1.264332804371381,
+          "relative_error": 0.08098934203467767,
+          "geometry_error": 0.08098934203467767,
+          "denominator_volts": 4.760375846302576
+        }
+      ],
+      "final_error": 0.08098934203467767,
+      "final_geometry_error": 0.08098934203467767,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.26555138663657,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": 1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.1669108604612024,
+          "output": 1.1667325202175678,
+          "relative_error": -0.0024577271112380394,
+          "geometry_error": -0.0024577271112380394,
+          "denominator_volts": 4.5164696479159305
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.203755769421835,
+          "output": 1.2035733766410952,
+          "relative_error": 0.029040762058362812,
+          "geometry_error": 0.029040762058362812,
+          "denominator_volts": 4.608536113843525
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.2289783489008792,
+          "output": 1.2287931819121896,
+          "relative_error": 0.05060339225508348,
+          "geometry_error": 0.05060339225508348,
+          "denominator_volts": 4.671561205225738
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.246090163027356,
+          "output": 1.245903113926219,
+          "relative_error": 0.06523217835171558,
+          "geometry_error": 0.06523217835171558,
+          "denominator_volts": 4.714319466724445
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.2576308457638792,
+          "output": 1.257442527313832,
+          "relative_error": 0.07509823801750426,
+          "geometry_error": 0.07509823801750426,
+          "denominator_volts": 4.743156825912345
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.2653838111462257,
+          "output": 1.2651946399547607,
+          "relative_error": 0.08172620109346229,
+          "geometry_error": 0.08172620109346229,
+          "denominator_volts": 4.762529600695811
+        }
+      ],
+      "final_error": 0.08172620109346229,
+      "final_geometry_error": 0.08172620109346229,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    },
+    {
+      "peak_X_over_clip_limit_after_reset": 1.26367370609501,
+      "mode": "Halley",
+      "m": 1.6,
+      "profile": "trimmed_stress",
+      "hold_pf": 10000.0,
+      "acquisition_us": 20.0,
+      "sign": -1,
+      "period_us": 99.99999999999999,
+      "arithmetic_macros": 3,
+      "buffers": 6,
+      "samples": [
+        {
+          "iteration": 1,
+          "time_us": 144.99999999999997,
+          "state": 1.1664022248223864,
+          "output": 1.1663239265240462,
+          "relative_error": -0.002807069805180973,
+          "geometry_error": -0.002807069805180973,
+          "denominator_volts": 4.51577000450458
+        },
+        {
+          "iteration": 2,
+          "time_us": 245.0,
+          "state": 1.2028314492269125,
+          "output": 1.2027491441122178,
+          "relative_error": 0.02833605315893828,
+          "geometry_error": 0.02833605315893828,
+          "denominator_volts": 4.6068068790632015
+        },
+        {
+          "iteration": 3,
+          "time_us": 345.0,
+          "state": 1.2277732084171065,
+          "output": 1.227688159981626,
+          "relative_error": 0.04965861179417663,
+          "geometry_error": 0.04965861179417663,
+          "denominator_volts": 4.669136501496423
+        },
+        {
+          "iteration": 4,
+          "time_us": 445.0,
+          "state": 1.2446986450539876,
+          "output": 1.2446117350055477,
+          "relative_error": 0.0641280649055187,
+          "geometry_error": 0.0641280649055187,
+          "denominator_volts": 4.711433280446517
+        },
+        {
+          "iteration": 5,
+          "time_us": 545.0,
+          "state": 1.256117095821733,
+          "output": 1.2560289298685607,
+          "relative_error": 0.0738896292026554,
+          "geometry_error": 0.0738896292026554,
+          "denominator_volts": 4.739968065009976
+        },
+        {
+          "iteration": 6,
+          "time_us": 645.0,
+          "state": 1.2637905593771868,
+          "output": 1.2637015494269268,
+          "relative_error": 0.08044962664905886,
+          "geometry_error": 0.08044962664905886,
+          "denominator_volts": 4.759144101572563
+        }
+      ],
+      "final_error": 0.08044962664905886,
+      "final_geometry_error": 0.08044962664905886,
+      "time_to_0p1pct_us": null,
+      "time_to_0p01pct_us": null
+    }
+  ],
+  "spice_runs": 50
+}

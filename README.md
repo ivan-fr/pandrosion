@@ -1,0 +1,89 @@
+# Pandrosion
+
+[![Build](https://github.com/ivan-fr/pandrosion/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ivan-fr/pandrosion/actions/workflows/build.yml)
+
+Geometric constructions for reciprocal nth roots, Lean proofs, and behavioral analog implementations of root iterations.
+
+**Read the [V19 paper](paper/reciprocal_geometry_v19/Reciprocal_Root_Geometry_v19.pdf)** — 18 pages, eight vector figures. The paper brings together Pandrosion AK and AD, projective AD [2/1], decentered-arc AD, pencil constructions, and the new fixed-circle inverse-quadratic correction.
+
+![Fixed-circle geometry](paper/reciprocal_geometry_v19/figures/fixed_circle_construction.png)
+
+## Geometry and paper
+
+| Method | Local order | Scope in V19 |
+|---|---:|---|
+| Pandrosion AK | 2 | Classical geometric support |
+| Pandrosion AD | 3 | Centered-arc support / Halley correction |
+| Projective AD [2/1] | 4 | Projective support |
+| Decentered-arc AD | 5 | Written global monotone convergence proof |
+| Pencil Halley | 3 | Global positive scalar convergence |
+| Rational Padé [2/2] | 5 | Global positive scalar convergence |
+| Fixed-circle inverse [2/2] | 5 | Local convergence; 2p+2 mobile joins in the finite nondegenerate protocol |
+
+Orders shown are for the non-exact general case; special degrees can give exact corrections. Construction costs and preparation assumptions are detailed in the paper's first-page table.
+
+- [Paper sources, figures and reproduction guide](paper/reciprocal_geometry_v19/README.md)
+- [Stereographic preview](paper/reciprocal_geometry_v19/previews/fixed_circle_stereo.html): download and open the HTML locally, or serve the repository with `python -m http.server 8000` and visit this path. GitHub displays the HTML source.
+- [Formal claim coverage](paper/reciprocal_geometry_v19/CLAIM_COVERAGE.md) and [V19 review](paper/reciprocal_geometry_v19/REVIEW_V19.md)
+
+The fixed-circle method has a local convergence result. A numerical real-branch domain is not a global convergence proof. The stereographic sphere is a visualization; homogeneous incidence data retain the distinct points at infinity.
+
+## Lean
+
+The repository includes all 235 source modules in `LeanMath/`, 31 supplementary research modules and two standalone algebra files in `lean/`. `LeanMath.lean` imports the complete main library. Historical coefficient certificates are retained, accounting for most of the source size.
+
+Lean and mathlib are pinned to **4.33.1**. After installing [elan](https://github.com/leanprover/elan):
+
+```sh
+lake exe cache get
+python3 scripts/build_lean.py
+python3 scripts/audit_lean.py
+```
+
+The build script checks every one of the 268 modules in dependency order and then all default library targets. The V19 axiom audit checks **149 geometric declarations plus 11 analytical background declarations** and permits only `propext`, `Classical.choice` and `Quot.sound`. This audit has a narrower scope than the full library build. See the claim-coverage document for the boundary between formal algebraic certificates and written analytic proofs; in particular, the complete analytic convergence theorem for decentered AD is not yet formalized.
+
+The paper also retains its self-contained 57-module source snapshot in `paper/reciprocal_geometry_v19/formal/`.
+
+## Analog prototype
+
+The analog work consists of authored behavioral SPICE models, circuit netlists and numerical validation. It is a simulation-stage design, without a fabricated chip, foundry PDK or physical layout. The models are not manufacturer macromodels.
+
+- [Analog companion paper (V17)](paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf)
+- [P0](research/pandrosion_analog/README.md), [P1](research/pandrosion_analog_p1/README.md), [P2](research/pandrosion_analog_p2/README.md), [P3](research/pandrosion_analog_p3/README.md), **[P4: explicit input loading and buffered storage](research/pandrosion_analog_p4/README.md)**
+
+P4 includes 40 main SPICE runs and five independent RC/time-step checks. It evaluates AD and Halley chains with input loading, storage isolation, endpoint calibration and selected parameter perturbations. Its measured simulation errors do not establish hardware performance.
+
+With Python and ngspice installed:
+
+```sh
+python3 -m pip install -r research/pandrosion_analog_p4/requirements.txt
+python3 research/pandrosion_analog_p4/simulate_p4.py
+python3 research/pandrosion_analog_p4/verify_p4.py
+```
+
+These commands regenerate the P4 result files. Archived companion snapshots remain unchanged.
+
+## Reproduce the paper and numerical checks
+
+```sh
+python3 -m pip install -r paper/reciprocal_geometry_v19/requirements.txt
+cd paper/reciprocal_geometry_v19
+python3 src/review/check_math.py
+python3 src/fixed_circle/verify.py
+python3 src/stereo/model.py
+python3 src/decentered/verify.py
+bash build.sh
+```
+
+The paper build requires Tectonic or a TeX installation with `latexmk`. Supplied vector figures make the PDF build independent of figure regeneration.
+
+## Continuous integration
+
+The badge links to the actual GitHub Actions workflow. It passes only when all four jobs succeed:
+
+1. Build all Lean sources and check the V19 axiom audit.
+2. Repeat symbolic and high precision geometry checks.
+3. Rebuild the V19 PDF and the analog companion PDF.
+4. Rerun the P4 SPICE study and its validation checks.
+
+Fresh PDFs and P4 validation records are downloadable as workflow artifacts. No claim of historical priority, optimal geometric cost or experimentally measured chip performance is implied by a successful build.

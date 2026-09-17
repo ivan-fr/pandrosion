@@ -1,0 +1,30 @@
+{
+  "cases": 75,
+  "max_formula_error": 5.717648576819556e-14,
+  "max_sphere_residual": 4.440892098500626e-16,
+  "max_line_plane_residual": 9.43689570931383e-16,
+  "max_circle_plane_residual": 8.881784197001252e-16,
+  "infinity_cases": [
+    {
+      "case": "initial infinity",
+      "value": 0.7936708223899539,
+      "infinite_points": [
+        "V"
+      ]
+    },
+    {
+      "case": "final infinity",
+      "value": 0.7853451630978481,
+      "infinite_points": [
+        "U"
+      ]
+    },
+    {
+      "case": "fixed infinity",
+      "value": 0.4445528729789143,
+      "infinite_points": [
+        "F2"
+      ]
+    }
+  ]
+}

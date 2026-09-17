@@ -1,0 +1,9 @@
+function,candidate,quantity_scope,status,source
+Arithmetic XY/U,AD734,AD inverse only 5; current diagnostic deck 6; Halley core 3,External denominator interface and real input loading not implemented,https://www.analog.com/media/en/technical-documentation/data-sheets/ad734.pdf
+Correction amplifiers,OPA192 or OPA4192,2 amplifier channels per output stage,Authored single pole approximation only,https://www.ti.com/product/OPA192
+Memory switches,ADG1211,4 switches in either core,Authored switch model with stress injection and leakage,https://www.analog.com/en/products/adg1211.html
+Reference,ADR4540,1 reference per prototype,4.096 V voltage source with sensitivity sweep only,https://www.analog.com/en/products/adr4540.html
+Hold capacitors,C0G 10 nF candidate,2 per core,Exact capacitors in model; part number and tolerance pending,
+Calibration resistors,Precision network plus adjustable Rf,5 per output stage,Continuous Rf in simulation; selected network pending,
+Trim voltage,External bench adjustable source,1 per output stage,Ideal source; hardware generator pending,
+Memory isolation resistors,100 ohm,3 per core,Stability with vendor models pending,

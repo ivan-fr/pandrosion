@@ -1,0 +1,88 @@
+{
+  "runs": [
+    {
+      "mode": "halley",
+      "wall_seconds": 0.5449047910515219,
+      "output_error": 3.019806626980426e-14
+    },
+    {
+      "mode": "ad",
+      "wall_seconds": 0.7535676250699908,
+      "output_error": -2.7122748491592574e-13
+    },
+    {
+      "mode": "ad",
+      "wall_seconds": 0.7496855829376727,
+      "output_error": -2.7122748491592574e-13
+    },
+    {
+      "mode": "ad",
+      "wall_seconds": 0.7459459999809042,
+      "output_error": -2.7122748491592574e-13
+    },
+    {
+      "mode": "halley",
+      "wall_seconds": 0.5006461249431595,
+      "output_error": 3.019806626980426e-14
+    },
+    {
+      "mode": "ad",
+      "wall_seconds": 0.7766857499955222,
+      "output_error": -2.7122748491592574e-13
+    },
+    {
+      "mode": "halley",
+      "wall_seconds": 0.5158487500157207,
+      "output_error": 3.019806626980426e-14
+    },
+    {
+      "mode": "ad",
+      "wall_seconds": 0.7664240830345079,
+      "output_error": -2.7122748491592574e-13
+    },
+    {
+      "mode": "halley",
+      "wall_seconds": 0.536833707941696,
+      "output_error": 3.019806626980426e-14
+    },
+    {
+      "mode": "halley",
+      "wall_seconds": 0.5349371660267934,
+      "output_error": 3.019806626980426e-14
+    },
+    {
+      "mode": "ad",
+      "wall_seconds": 0.7556760830339044,
+      "output_error": -2.7122748491592574e-13
+    },
+    {
+      "mode": "ad",
+      "wall_seconds": 0.7929973340360448,
+      "output_error": -2.7122748491592574e-13
+    },
+    {
+      "mode": "halley",
+      "wall_seconds": 0.5376903329743072,
+      "output_error": 3.019806626980426e-14
+    },
+    {
+      "mode": "halley",
+      "wall_seconds": 0.5290443750564009,
+      "output_error": 3.019806626980426e-14
+    }
+  ],
+  "summary": {
+    "ad": {
+      "median_seconds": 0.7556760830339044,
+      "min_seconds": 0.7459459999809042,
+      "max_seconds": 0.7929973340360448
+    },
+    "halley": {
+      "median_seconds": 0.5349371660267934,
+      "min_seconds": 0.5006461249431595,
+      "max_seconds": 0.5449047910515219
+    }
+  },
+  "scope": "Process launch + transient solve + wrdata output; not device latency",
+  "simulated_seconds": 0.00065
+}

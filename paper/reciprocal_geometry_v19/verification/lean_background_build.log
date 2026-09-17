@@ -1,0 +1,237 @@
+⚠ [3318/3486] Replayed LeanMath.Papers.LocalOrder
+warning: LeanMath/Papers/LocalOrder.lean:24:49: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3388/3486] Replayed LeanMath.Papers.Cayley
+warning: LeanMath/Papers/Cayley.lean:29:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:45:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:67:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:71:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:131:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:138:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:156:20: This simp argument is unused:
+  P₅
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Pi.add_apply, Nat.reduceSub, mul_one, id_eq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Cayley.lean:156:24: This simp argument is unused:
+  Pi.add_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [P₅, Nat.reduceSub, mul_one, id_eq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Cayley.lean:155:57: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:156:70: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3389/3486] Replayed LeanMath.Papers.Comparison
+warning: LeanMath/Papers/Comparison.lean:16:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Comparison.lean:49:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Comparison.lean:72:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/Comparison.lean:72:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3489/3520] Built LeanMath.Papers.Corrections (20s)
+warning: LeanMath/Papers/Corrections.lean:38:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3490/3520] Built LeanMath.Papers.Dyadic (20s)
+warning: LeanMath/Papers/Dyadic.lean:21:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/Dyadic.lean:21:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/Dyadic.lean:24:21: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3491/3520] Built LeanMath.Papers.V14Pade (20s)
+warning: LeanMath/Papers/V14Pade.lean:83:23: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14Pade.lean:83:77: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [3492/3520] Built LeanMath.Papers.RealBracket (12s)
+✔ [3493/3520] Built LeanMath.Papers.Hybrid (12s)
+✔ [3494/3520] Built LeanMath.Papers.V14RootSeries (12s)
+⚠ [3495/3520] Built LeanMath.Papers.Bilateral (8.7s)
+warning: LeanMath/Papers/Bilateral.lean:29:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Bilateral.lean:105:16: Unused tactic linter: `congr 1` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/Bilateral.lean:105:12: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Bilateral.lean:105:24: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Bilateral.lean:119:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3496/3520] Built LeanMath.Papers.BilateralLocal (9.5s)
+warning: LeanMath/Papers/BilateralLocal.lean:53:76: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/BilateralLocal.lean:65:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/BilateralLocal.lean:89:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/BilateralLocal.lean:89:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+✔ [3497/3520] Built LeanMath.Papers.BilateralRange (9.5s)
+⚠ [3498/3520] Built LeanMath.Papers.V14Defect (9.5s)
+warning: LeanMath/Papers/V14Defect.lean:50:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14Defect.lean:75:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14Defect.lean:127:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [3499/3520] Built LeanMath.Papers.BilateralHybrid (15s)
+⚠ [3500/3520] Built LeanMath.Papers.V14RootAnalytic (15s)
+warning: LeanMath/Papers/V14RootAnalytic.lean:68:66: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3501/3520] Built LeanMath.Papers.V14Fused (15s)
+warning: LeanMath/Papers/V14Fused.lean:35:37: This simp argument is unused:
+  neg_pow
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [even_two, Even.neg_pow, neg_mul, Odd.neg_pow (by decide : Odd 3)]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/V14Fused.lean:38:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14Fused.lean:95:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3502/3520] Built LeanMath.Papers.V14Entry (15s)
+warning: LeanMath/Papers/V14Entry.lean:34:6: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+info: LeanMath/Papers/V14Entry.lean:45:6: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: LeanMath/Papers/V14Entry.lean:45:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14Entry.lean:55:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14Entry.lean:96:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [3503/3520] Built LeanMath.Papers.V14ScalarSeries (12s)
+⚠ [3504/3520] Built LeanMath.Papers.V14Homography (12s)
+warning: LeanMath/Papers/V14Homography.lean:40:6: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/V14Homography.lean:40:6: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+✔ [3505/3520] Built LeanMath.Papers.V14PadeNormalization (7.5s)
+⚠ [3506/3520] Built LeanMath.Papers.V14CompressedAnalytic (7.5s)
+warning: LeanMath/Papers/V14CompressedAnalytic.lean:24:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14CompressedAnalytic.lean:44:6: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/V14CompressedAnalytic.lean:44:6: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3507/3520] Built LeanMath.Papers.V14Contact (6.1s)
+warning: LeanMath/Papers/V14Contact.lean:35:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14Contact.lean:40:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3508/3520] Built LeanMath.Papers.V14PadeContact (2.1s)
+warning: LeanMath/Papers/V14PadeContact.lean:34:24: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14PadeContact.lean:34:78: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/V14PadeContact.lean:69:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3509/3520] Built LeanMath.Papers.V14AnalyticUniqueness (2.3s)
+warning: LeanMath/Papers/V14AnalyticUniqueness.lean:66:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3510/3520] Built LeanMath.Papers.V14SeriesContact (2.0s)
+warning: LeanMath/Papers/V14SeriesContact.lean:20:14: This simp argument is unused:
+  Polynomial.coeff_coe
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Polynomial.coeff_monomial, PowerSeries.coeff_monomial, hj, Ne.symm hj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/V14SeriesContact.lean:20:35: This simp argument is unused:
+  Polynomial.coeff_monomial
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Polynomial.coeff_coe, PowerSeries.coeff_monomial, hj, Ne.symm hj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/V14SeriesContact.lean:20:91: This simp argument is unused:
+  Ne.symm hj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Polynomial.coeff_coe, Polynomial.coeff_monomial, PowerSeries.coeff_monomial, hj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/V14SeriesContact.lean:61:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/V14SeriesContact.lean:61:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+✔ [3511/3520] Built LeanMath.Papers.V14PadeTheorem (5.5s)
+✔ [3512/3520] Built LeanMath.Papers.V14DiagonalPolynomials (10s)
+✔ [3513/3520] Built LeanMath.Papers.V14DiagonalWronskian (8.8s)
+✔ [3514/3520] Built LeanMath.Papers.V14DiagonalError (8.1s)
+✔ [3515/3520] Built LeanMath.Papers.V14DiagonalBounds (8.1s)
+✔ [3516/3520] Built LeanMath.Papers.V14DiagonalContact (24s)
+✔ [3517/3520] Built LeanMath.Papers.V14DiagonalOrdering (24s)
+✔ [3518/3520] Built LeanMath.Papers.V14DiagonalConvergence (53s)
+✔ [3519/3520] Built LeanMath.Papers.V14DiagonalRegularity (41s)
+✔ [3520/3520] Built LeanMath.Papers.V14PadeGlobal (31s)
+Build completed successfully (3520 jobs).

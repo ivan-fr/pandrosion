@@ -1,0 +1,412 @@
+{
+  "spice_runs": 40,
+  "scope": "Ground-referenced 50 kohm XY/Z load model plus custom followers, not vendor models",
+  "results": [
+    {
+      "mode": "AD",
+      "gain": 0.9961249436686569,
+      "trim_volts": -0.22340186868913156,
+      "loaded_without_new_buffers": [
+        {
+          "mode": "AD",
+          "m": 1,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 10.2074191899128,
+          "error": 1.4920457006623047,
+          "hold_change_ppm": -168808.53630188596,
+          "port_peak": 4.0959957031189
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 10.2074191899128,
+          "error": 1.4141177025003335,
+          "hold_change_ppm": -168808.53684256048,
+          "port_peak": 4.0959957031189
+        },
+        {
+          "mode": "AD",
+          "m": 1.35,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 10.2074191899128,
+          "error": 1.2548175837457856,
+          "hold_change_ppm": -168808.69185691272,
+          "port_peak": 4.0959957031189
+        },
+        {
+          "mode": "AD",
+          "m": 1.6,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 10.2074191899128,
+          "error": 1.1306691030758085,
+          "hold_change_ppm": -168812.40919034768,
+          "port_peak": 4.0959957031189
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 10.2074191899128,
+          "error": 1.0120470654120557,
+          "hold_change_ppm": -168851.68864576562,
+          "port_peak": 4.0959957031189
+        },
+        {
+          "mode": "AD",
+          "m": 2,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 10.2074191899128,
+          "error": 0.9779379833920856,
+          "hold_change_ppm": -168866.84361307026,
+          "port_peak": 4.0959957031189
+        }
+      ],
+      "buffered": [
+        {
+          "mode": "AD",
+          "m": 1,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.0959999999985905,
+          "error": -3.4416913763379853e-13,
+          "hold_change_ppm": -2.8289123643610026,
+          "port_peak": 0.819198380430169
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.228239031979065,
+          "error": 4.654221586353202e-06,
+          "hold_change_ppm": -2.9201329023731404,
+          "port_peak": 0.819198380430169
+        },
+        {
+          "mode": "AD",
+          "m": 1.35,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.526988304721226,
+          "error": 1.1133175000566098e-05,
+          "hold_change_ppm": -3.126214950355255,
+          "port_peak": 0.819198380430169
+        },
+        {
+          "mode": "AD",
+          "m": 1.6,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.790763976547518,
+          "error": 1.1128674494376156e-05,
+          "hold_change_ppm": -3.3081719249539177,
+          "port_peak": 0.819198380430169
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 5.073171211586377,
+          "error": 3.924468246818691e-06,
+          "hold_change_ppm": -3.5029816173315353,
+          "port_peak": 0.819198380430169
+        },
+        {
+          "mode": "AD",
+          "m": 2,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 5.160636620368001,
+          "error": -2.7122748491592574e-13,
+          "hold_change_ppm": -3.5633168967708073,
+          "port_peak": 0.8192
+        }
+      ],
+      "frozen_calibration_corners": [
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "buffered": true,
+          "rin": 40000,
+          "bias_amp": 1.5e-07,
+          "cinput_pf": 10.0,
+          "output_volts": 4.228037442834674,
+          "error": -4.302285653201565e-05,
+          "hold_change_ppm": -2.9200670996765155,
+          "port_peak": 0.819198380348048
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "buffered": true,
+          "rin": 40000,
+          "bias_amp": 1.5e-07,
+          "cinput_pf": 10.0,
+          "output_volts": 5.072928839446461,
+          "error": -4.3850992306193604e-05,
+          "hold_change_ppm": -3.5029023032207007,
+          "port_peak": 0.819198380348048
+        },
+        {
+          "mode": "AD",
+          "m": 1.1,
+          "buffered": true,
+          "rin": 60000,
+          "bias_amp": -1.5e-07,
+          "cinput_pf": 10.0,
+          "output_volts": 4.228374770369143,
+          "error": 3.675718946682949e-05,
+          "hold_change_ppm": -2.9201771821751876,
+          "port_peak": 0.819198380485182
+        },
+        {
+          "mode": "AD",
+          "m": 1.9,
+          "buffered": true,
+          "rin": 60000,
+          "bias_amp": -1.5e-07,
+          "cinput_pf": 10.0,
+          "output_volts": 5.073334937489993,
+          "error": 3.619748631078501e-05,
+          "hold_change_ppm": -3.503035476137839,
+          "port_peak": 0.819198380485182
+        }
+      ]
+    },
+    {
+      "mode": "Halley",
+      "gain": 0.999809948044736,
+      "trim_volts": -1.4356880823661133,
+      "loaded_without_new_buffers": [
+        {
+          "mode": "Halley",
+          "m": 1,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 3.7795177732337724,
+          "error": -0.07726616864409852,
+          "hold_change_ppm": -3.154131994809184,
+          "port_peak": 0.682687349020358
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 3.9013849859815997,
+          "error": -0.07729834704597305,
+          "hold_change_ppm": -3.056085690067434,
+          "port_peak": 0.682687349155949
+        },
+        {
+          "mode": "Halley",
+          "m": 1.35,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.176797423882342,
+          "error": -0.07734598727746977,
+          "hold_change_ppm": -2.8555155949794297,
+          "port_peak": 0.698505627897553
+        },
+        {
+          "mode": "Halley",
+          "m": 1.6,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.420066848878967,
+          "error": -0.077367188197498,
+          "hold_change_ppm": -2.6990805793714046,
+          "port_peak": 0.739064889900801
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.680614724130404,
+          "error": -0.0773752948916081,
+          "hold_change_ppm": -2.549517844285809,
+          "port_peak": 0.7825049133927
+        },
+        {
+          "mode": "Halley",
+          "m": 2,
+          "buffered": false,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.761329581066962,
+          "error": -0.07737553884851056,
+          "hold_change_ppm": -2.506496567300509,
+          "port_peak": 0.795962153364786
+        }
+      ],
+      "buffered": [
+        {
+          "mode": "Halley",
+          "m": 1,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.096000000000165,
+          "error": 4.04121180963557e-14,
+          "hold_change_ppm": -2.922837126551059,
+          "port_peak": 0.685029222784115
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.228161521606838,
+          "error": -1.3677460324545976e-05,
+          "hold_change_ppm": -2.8319095226603253,
+          "port_peak": 0.707124300008605
+        },
+        {
+          "mode": "Halley",
+          "m": 1.35,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.5268214312362876,
+          "error": -2.5729156319487245e-05,
+          "hold_change_ppm": -2.645928148692356,
+          "port_peak": 0.756847146593615
+        },
+        {
+          "mode": "Halley",
+          "m": 1.6,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 4.790609290504053,
+          "error": -2.1160072284365228e-05,
+          "hold_change_ppm": -2.5008942340365437,
+          "port_peak": 0.800829184870857
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 5.073120121094353,
+          "error": -6.14629230832886e-06,
+          "hold_change_ppm": -2.362248410991974,
+          "port_peak": 0.847937355383791
+        },
+        {
+          "mode": "Halley",
+          "m": 2,
+          "buffered": true,
+          "rin": 50000,
+          "bias_amp": 5e-08,
+          "cinput_pf": 2.0,
+          "output_volts": 5.160636620369557,
+          "error": 3.019806626980426e-14,
+          "hold_change_ppm": -2.322370146412567,
+          "port_peak": 0.862531585113801
+        }
+      ],
+      "frozen_calibration_corners": [
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "buffered": true,
+          "rin": 40000,
+          "bias_amp": 1.5e-07,
+          "cinput_pf": 10.0,
+          "output_volts": 4.22812642272044,
+          "error": -2.19785638077008e-05,
+          "hold_change_ppm": -2.8319329827830586,
+          "port_peak": 0.707113081319744
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "buffered": true,
+          "rin": 40000,
+          "bias_amp": 1.5e-07,
+          "cinput_pf": 10.0,
+          "output_volts": 5.073077909403282,
+          "error": -1.446689789574851e-05,
+          "hold_change_ppm": -2.362267959576947,
+          "port_peak": 0.8479239494439
+        },
+        {
+          "mode": "Halley",
+          "m": 1.1,
+          "buffered": true,
+          "rin": 60000,
+          "bias_amp": -1.5e-07,
+          "cinput_pf": 10.0,
+          "output_volts": 4.228185164334968,
+          "error": -8.08580905087286e-06,
+          "hold_change_ppm": -2.831893791799267,
+          "port_peak": 0.707131834133089
+        },
+        {
+          "mode": "Halley",
+          "m": 1.9,
+          "buffered": true,
+          "rin": 60000,
+          "bias_amp": -1.5e-07,
+          "cinput_pf": 10.0,
+          "output_volts": 5.073148604720642,
+          "error": -5.317098539237008e-07,
+          "hold_change_ppm": -2.362235155040082,
+          "port_peak": 0.847946369662223
+        }
+      ]
+    }
+  ]
+}

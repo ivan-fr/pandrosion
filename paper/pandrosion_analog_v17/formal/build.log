@@ -1,0 +1,148 @@
+✔ [3172/3189] Built LeanMath.Papers.RectangleGeometry (26s)
+✔ [3173/3189] Built LeanMath.Papers.MonotoneIteration (26s)
+⚠ [3174/3189] Built LeanMath.Papers.LocalOrder (26s)
+warning: LeanMath/Papers/LocalOrder.lean:24:49: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3175/3189] Built LeanMath.Papers.Bracket (26s)
+warning: LeanMath/Papers/Bracket.lean:20:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [3176/3189] Built LeanMath.Papers.Raw (26s)
+⚠ [3177/3189] Built LeanMath.Papers.Cayley (27s)
+warning: LeanMath/Papers/Cayley.lean:29:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:45:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:67:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:71:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:131:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:138:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:156:20: This simp argument is unused:
+  P₅
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Pi.add_apply, Nat.reduceSub, mul_one, id_eq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Cayley.lean:156:24: This simp argument is unused:
+  Pi.add_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [P₅, Nat.reduceSub, mul_one, id_eq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Cayley.lean:155:57: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Cayley.lean:156:70: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3178/3189] Built LeanMath.Papers.RectangleReports (15s)
+warning: LeanMath/Papers/RectangleReports.lean:16:47: Variable name `hW` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hW
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanMath/Papers/RectangleReports.lean:16:60: Variable name `hX` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hX
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanMath/Papers/RectangleReports.lean:45:29: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleReports.lean:83:17: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectangleReports.lean:83:17: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/RectangleReports.lean:89:17: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectangleReports.lean:89:17: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+✔ [3179/3189] Built LeanMath.Papers.CertifiedConvergence (15s)
+✔ [3180/3189] Built LeanMath.Papers.IntervalIteration (15s)
+✔ [3181/3189] Built LeanMath.Papers.RawConvergence (15s)
+⚠ [3182/3189] Built LeanMath.Papers.Comparison (15s)
+warning: LeanMath/Papers/Comparison.lean:16:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Comparison.lean:49:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/Comparison.lean:72:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/Comparison.lean:72:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+✔ [3183/3189] Built LeanMath.Papers.RectangleRaw (7.8s)
+⚠ [3184/3189] Built LeanMath.Papers.Family (7.7s)
+warning: LeanMath/Papers/Family.lean:25:40: This simp argument is unused:
+  Matrix.cons_val_zero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [truncation, Matrix.cons_val_one, Matrix.cons_val_fin_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Family.lean:25:61: This simp argument is unused:
+  Matrix.cons_val_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [truncation, Matrix.cons_val_zero, Matrix.cons_val_fin_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/Family.lean:25:81: This simp argument is unused:
+  Matrix.cons_val_fin_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [truncation, Matrix.cons_val_zero, Matrix.cons_val_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3185/3189] Built LeanMath.Papers.RectangleBilateral (7.9s)
+warning: LeanMath/Papers/RectangleBilateral.lean:16:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanMath/Papers/RectangleBilateral.lean:87:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [3186/3189] Built LeanMath.Papers.RectangleConstructible (3.8s)
+⚠ [3187/3189] Built LeanMath.Papers.RectangleDynamics (4.3s)
+warning: LeanMath/Papers/RectangleDynamics.lean:25:6: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: LeanMath/Papers/RectangleDynamics.lean:25:6: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: LeanMath/Papers/RectangleDynamics.lean:95:48: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3188/3189] Built LeanMath.Papers.RectangleNewton (2.2s)
+warning: LeanMath/Papers/RectangleNewton.lean:78:40: This simp argument is unused:
+  Pi.mul_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [id_eq, mul_one, Pi.pow_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanMath/Papers/RectangleNewton.lean:119:48: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [3189/3189] Built LeanMath.Papers.RectangleVerification (1.8s)
+Build completed successfully (3189 jobs).

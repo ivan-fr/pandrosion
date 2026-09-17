@@ -1,0 +1,40 @@
+P3 isolated XY/U cell; simplified internal transistor
+.options reltol=1e-6 abstol=1e-12 vntol=1e-8 method=gear
+.temp 27
+Vrail supply 0 15
+Vcmd cmd 0 PWL(0 1.024 20u 1.024 20.1u 4.096 50u 4.096 50.1u 3.25)
+Xden cmd actual supply DEN
+* X=1 V, Y=4 V. Numerator sources ideal; 0.4 V floor startup guard only.
+Bquot target 0 V=4/max(v(actual),0.4)
+Rdyn target output 100
+Cdyn output 0 1n
+.subckt OA plus minus output PARAMS: vo=0
+Bpole 0 internal I=1n*min(20meg,max(-20meg,(1meg*(v(plus)-v(minus)+vo)-v(internal))/0.0159154943092))
+Brail internal 0 I=10*(max(0,v(internal)-13)+min(0,v(internal)+13))
+Cpole internal 0 1n
+Rbleed internal 0 1e12
+Bdrive 0 output I=min(5m,max(-5m,(v(internal)-v(output))/10))
+Rout output 0 1e12
+Ibplus plus 0 20p
+Ibminus minus 0 20p
+.ends OA
+
+* Simplified internal transistor; parameters are assumptions, not AD734 process data.
+.model QUAPP NPN(Is=1e-15 Bf=199 Vaf=100 Cje=2p Cjc=1p Tf=0.3n)
+.subckt DEN cmd measured supply PARAMS: vos=25u
+Xamp cmd measured base OA PARAMS: vo={vos}
+Qden supply base measured QUAPP
+Rden measured 0 28000
+Rcomp base measured 2meg
+Cpar measured 0 2e-11
+.ends DEN
+
+.control
+set wr_singlescale
+set wr_vecnames
+set numdgt=14
+tran 10n 80u 0 10n uic
+wrdata waveform.txt v(cmd) v(actual) v(output)
+quit
+.endc
+.end
