@@ -1,0 +1,29 @@
+import LeanMath.Papers.RectangleInitialization
+
+-- Independent post-V20 initialization audit.
+#print axioms LeanMath.Papers.RectangleInitialization.residual_mono
+#print axioms LeanMath.Papers.RectangleInitialization.step_invariant
+#print axioms LeanMath.Papers.RectangleInitialization.bisection_invariant
+#print axioms LeanMath.Papers.RectangleInitialization.residual_width_bound
+#print axioms LeanMath.Papers.RectangleInitialization.bisection_terminates
+#print axioms LeanMath.Papers.RectangleInitialization.dyadic_bracket_exists
+#print axioms LeanMath.Papers.RectangleInitialization.GeometricInitializationTheorem
+#print axioms LeanMath.Papers.RectangleInitialization.calibration_conjugacy
+#print axioms LeanMath.Papers.RectangleInitialization.calibration_initial_band
+#print axioms LeanMath.Papers.RectangleInitialization.initialized_power_points
+#print axioms LeanMath.Papers.RectangleInitialization.initialized_M_bound
+#print axioms LeanMath.Papers.RectangleInitialization.initialized_K_bound
+#print axioms LeanMath.Papers.RectangleInitialization.update_positive
+#print axioms LeanMath.Papers.RectangleInitialization.orbit_positive
+#print axioms LeanMath.Papers.RectangleInitialization.update_calibration
+#print axioms LeanMath.Papers.RectangleInitialization.orbit_calibration
+#print axioms LeanMath.Papers.RectangleInitialization.support_exists
+#print axioms LeanMath.Papers.RectangleInitialization.calibrated_orbit_geometry
+#print axioms LeanMath.Papers.RectangleInitialization.calibration_residual_error
+#print axioms LeanMath.Papers.RectangleInitialization.interval_acceptance
+#print axioms LeanMath.Papers.RectangleInitialization.positive_interval_product
+#print axioms LeanMath.Papers.RectangleInitialization.dyadic_endpoints
+#print axioms LeanMath.Papers.RectangleInitialization.dyadic_midpoint
+#print axioms LeanMath.Papers.RectangleInitialization.positive_dyadic_initialization
+#print axioms LeanMath.Papers.RectangleInitialization.round_down_bound
+#print axioms LeanMath.Papers.RectangleInitialization.round_up_bound

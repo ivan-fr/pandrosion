@@ -50,9 +50,15 @@ this is separate from scalar convergence and floating-point conditioning. Its
 51-declaration audit is independent of the 22-declaration fast-power audit and
 the frozen V20 149+11 audit.
 
+The **Initialiser et calibrer** button now replaces an unusable starting state
+with a certified dyadic preparation: choose c with 1≤Xc^p≤2, then start at 1
+for the calibrated target. It uses bounded-mantissa integer intervals, not a
+root oracle. Subsequent steps stop when residual improvement cannot be certified.
+See [initialization theorem, rounding certificate and limits](docs/INITIALIZATION.md).
+
 ## Lean
 
-The repository includes all 237 source modules in `LeanMath/`, 31 supplementary research modules and two standalone algebra files in `lean/`. `LeanMath.lean` imports the complete main library. Historical coefficient certificates are retained, accounting for most of the source size.
+The repository includes all 238 source modules in `LeanMath/`, 31 supplementary research modules and two standalone algebra files in `lean/`. `LeanMath.lean` imports the complete main library. Historical coefficient certificates are retained, accounting for most of the source size.
 
 Lean and mathlib are pinned to **4.33.1**. After installing [elan](https://github.com/leanprover/elan):
 
@@ -62,9 +68,10 @@ python3 scripts/build_lean.py
 python3 scripts/audit_lean.py
 python3 scripts/audit_fast_power.py
 python3 scripts/audit_native_nondegeneracy.py
+python3 scripts/audit_initialization.py
 ```
 
-The build script checks every one of the 270 modules in dependency order and then all default library targets. The V20 axiom audit checks **149 geometric declarations plus 11 analytical background declarations** and permits only `propext`, `Classical.choice` and `Quot.sound`. This audit has a narrower scope than the full library build. See the claim-coverage document for the boundary between formal algebraic certificates and written analytic proofs; in particular, the complete analytic convergence theorem for decentered AD is not yet formalized.
+The build script checks every one of the 271 modules in dependency order and then all default library targets. The V20 axiom audit checks **149 geometric declarations plus 11 analytical background declarations** and permits only `propext`, `Classical.choice` and `Quot.sound`. This audit has a narrower scope than the full library build. See the claim-coverage document for the boundary between formal algebraic certificates and written analytic proofs; in particular, the complete analytic convergence theorem for decentered AD is not yet formalized.
 
 The paper also retains its self-contained 57-module source snapshot in `paper/reciprocal_geometry_v20/formal/`.
 
