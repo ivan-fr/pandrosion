@@ -1,3 +1,5 @@
+import {bindSphereDrag} from './sphere-drag.js';
+import {stereoLineSamples,stereoCircleSamples} from './stereography.js';
 import {construct,methods,orders,affine,point,stereo,renormalize,renormalizeOptimal,needsStereographicView,adaptRectangle,baseMode} from './geometry.js';
 import {initializeCalibrated,iterationDecision,initializationBands} from './initialization.js';
 const $=id=>document.getElementById(id);let g=null,timer=null,scale=1,adaptive=null,manualView=false,automaticSphere=false,initialization=null,layout=null;
@@ -31,17 +33,34 @@ function sphere(canvas){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<
  const rotate=([x,y,z])=>{const u=x*Math.cos(ya)+z*Math.sin(ya),v=-x*Math.sin(ya)+z*Math.cos(ya);return [u,y*Math.cos(pi)-v*Math.sin(pi),y*Math.sin(pi)+v*Math.cos(pi)];};
  const screen=z=>[cx+R*z[0],cy-R*z[1]];
  c.strokeStyle=co.line;c.beginPath();c.arc(cx,cy,R,0,2*Math.PI);c.stroke();
- function curve(samples,color,width=1){const pts=samples.map(rotate);for(let i=1;i<pts.length;i++){const back=(pts[i][2]+pts[i-1][2])<0;c.globalAlpha=back?.3:1;c.strokeStyle=color;c.lineWidth=width;c.setLineDash(back?[3,4]:[]);c.beginPath();c.moveTo(...screen(pts[i-1]));c.lineTo(...screen(pts[i]));c.stroke();}c.globalAlpha=1;c.setLineDash([]);}
+ function curve(samples,color,width=1){
+ const pts=samples.map(rotate);let back=null;c.strokeStyle=color;c.lineWidth=width;
+ for(let i=1;i<pts.length;i++){const nextBack=(pts[i][2]+pts[i-1][2])<0;
+  if(nextBack!==back){if(back!==null)c.stroke();back=nextBack;c.globalAlpha=back?.3:1;c.setLineDash(back?[3,4]:[]);c.beginPath();c.moveTo(...screen(pts[i-1]));}
+  c.lineTo(...screen(pts[i]));
+ }
+ if(back!==null)c.stroke();c.globalAlpha=1;c.setLineDash([]);
+ }
  for(const lat of [-Math.PI/4,0,Math.PI/4])curve(Array.from({length:121},(_,i)=>{const a=2*Math.PI*i/120;return [Math.cos(lat)*Math.cos(a),Math.sin(lat),Math.cos(lat)*Math.sin(a)];}),co.line);
- function line(l,color,width=1){if(!l)return;const [a,b,d]=l,n=Math.hypot(a,b);if(n<1e-14)return;const base=[-d*a/(n*n),-d*b/(n*n)],dir=[-b/n,a/n];curve(Array.from({length:241},(_,i)=>{const theta=-Math.PI/2+Math.PI*i/240,cs=Math.cos(theta),sn=Math.sin(theta);return stereo([base[0]*cs+dir[0]*sn,base[1]*cs+dir[1]*sn,cs],g.W,g.H);}),color,width);}
+ function line(l,color,width=1){if(l)curve(stereoLineSamples(l,g.W,g.H),color,width);}
  for(const l of [[1,0,0],[1,0,-g.W],[0,1,0],[0,1,-g.H]])line(l,co.line);for(const f of g.fixed)line(f.line,co.line);
- for(const a of g.circles)if(a.stage<=stage)curve(Array.from({length:241},(_,i)=>{const t=2*Math.PI*i/240;return stereo(point(a.center[0]+a.radius*Math.cos(t),a.center[1]+a.radius*Math.sin(t)),g.W,g.H);}),co.orange,1.7);
+ for(const a of g.circles)if(a.stage<=stage)curve(stereoCircleSamples(a.center,a.radius,g.W,g.H),co.orange,1.7);
  for(let i=0;i<stage;i++)line(g.ops[i].line,i===stage-1?co.blue:co.muted,i===stage-1?2:1);
- const occupied=[];for(const [n,q]of Object.entries(g.points)){if(g.birth[n]>stage||!key.has(n))continue;const z=rotate(stereo(q,g.W,g.H)),[x,y]=screen(z);c.globalAlpha=z[2]<0?.45:1;c.fillStyle=n==='Pnext'?co.green:n.startsWith('G')?co.orange:co.fg;c.beginPath();c.arc(x,y,3,0,2*Math.PI);c.fill();if(affine(q)&&!occupied.some(a=>Math.hypot(x-a[0],y-a[1])<24)){c.fillText(label(n),Math.min(w-35,x+7),Math.max(14,y-7));occupied.push([x,y]);}}
- c.globalAlpha=1;const N=screen(rotate([0,0,1]));c.fillStyle=co.blue;c.beginPath();c.arc(...N,4,0,Math.PI*2);c.fill();c.fillText('N',N[0]+8,N[1]+17);
+ // Reserve the readout points before placing secondary labels. Labels move; points never do.
+ const readouts=['P','Pnext'].filter(n=>g.points[n]&&g.birth[n]<=stage).map(n=>{const z=rotate(stereo(g.points[n],g.W,g.H));return {n,z,xy:screen(z)};});
+ const occupied=[];for(const [n,q]of Object.entries(g.points)){if(g.birth[n]>stage||!key.has(n)||['P','Pnext'].includes(n))continue;const z=rotate(stereo(q,g.W,g.H)),[x,y]=screen(z);c.globalAlpha=z[2]<0?.45:1;c.fillStyle=n.startsWith('G')?co.orange:co.fg;c.beginPath();c.arc(x,y,3,0,2*Math.PI);c.fill();if(affine(q)&&!occupied.some(a=>Math.hypot(x-a[0],y-a[1])<24)&&!readouts.some(a=>Math.hypot(x-a.xy[0],y-a.xy[1])<40)){c.fillText(label(n),Math.min(w-35,x+7),Math.max(14,y-7));occupied.push([x,y]);}}
+ c.globalAlpha=1;const N=screen(rotate([0,0,1]));c.fillStyle=co.blue;c.beginPath();c.arc(...N,4,0,2*Math.PI);c.fill();c.fillText('N',N[0]+8,N[1]+17);
+ for(const {n,z,xy:[x,y]} of readouts){
+  const color=n==='P'?co.blue:co.green,text=label(n),tw=c.measureText(text).width;
+  const tx=Math.max(8,Math.min(w-tw-8,x+(x>cx?-45:24))),ty=Math.max(18,Math.min(h-26,y+(n==='P'?-25:33)));
+  c.globalAlpha=z[2]<0?.6:1;c.strokeStyle=color;c.fillStyle=color;c.lineWidth=2;
+  c.beginPath();c.arc(x,y,n==='P'?6:3.5,0,2*Math.PI);if(n==='P')c.stroke();else c.fill();
+  c.globalAlpha=1;c.lineWidth=1;c.setLineDash(z[2]<0?[3,3]:[]);c.beginPath();c.moveTo(x,y);c.lineTo(tx+tw/2,ty-5);c.stroke();c.setLineDash([]);
+  c.fillStyle=co.bg;c.fillRect(tx-3,ty-13,tw+6,17);c.fillStyle=color;c.fillText(text,tx,ty);
+ }
  c.fillStyle=co.muted;c.fillText('Pointillés : hémisphère arrière',14,h-6);
 }
-function draw(){if($('view').value==='sphere')sphere($('overview'));else plane($('overview'));plane($('detail'),true);}
+function draw(){$('overview').classList.toggle('sphere-interactive',$('view').value==='sphere'&&!!g);if($('view').value==='sphere')sphere($('overview'));else plane($('overview'));plane($('detail'),true);}
 function stage(){if(!g)return;const n=+$('stage').value;$('stage-number').textContent=`${n} / ${g.ops.length}`;$('step-text').textContent=n?`${g.ops[n-1].kind} · ${g.ops[n-1].label}`:'Préparation fixe : rectangle, centres et supports.';$('back').disabled=n===0;$('forward').disabled=n===g.ops.length;draw();}
 function stop(){clearInterval(timer);timer=null;$('play').textContent='Parcourir';}
 function dimensions(){return ['AK','AD','projective','arc'].includes(baseMode($('method').value))?[+$('rect-width').value,+$('rect-height').value]:[2,4];}
@@ -80,6 +99,8 @@ $('normalize').onclick=()=>{try{const p=+$('degree').value,X=+$('working-target'
 $('normalize-optimal').onclick=()=>{try{initialization=null;const r=renormalizeOptimal($('method').value,+$('degree').value,+$('working-target').value,+$('state').value,$('chart').value,...dimensions());adaptive=r;scale*=r.c;$('working-target').value=r.X;$('state').value=r.s;rebuild();}catch(e){$('error').hidden=false;$('error').textContent=e.message;}};
 function example(){layout=null;$('rect-width').value=2;$('rect-height').value=4;scale=1;adaptive=null;initialization=null;manualView=false;automaticSphere=false;$('degree').value=3;$('working-target').value=2;$('state').value=.75;$('chart').value='compact';const ex=$('example').value;if(ex==='near'){$('working-target').value=1.1;$('state').value=.97;}if(['initial','final','outside'].includes(ex)){$('method').value='circle';$('state').value=ex==='initial'?1:ex==='final'?(7.75/2)**(1/3):.1;}rebuild();}
 $('example').onchange=example;$('reset').onclick=()=>{$('example').value='base';scale=1;example();};$('view').onchange=()=>{manualView=true;automaticSphere=false;$('rotation').hidden=$('view').value!=='sphere';$('drawing-title').textContent=$('view').value==='sphere'?'Image stéréographique':'Vue d’ensemble';draw();};for(const id of ['yaw','pitch'])$(id).oninput=draw;
+const cancelSphereDrag=bindSphereDrag($('overview'),$('yaw'),$('pitch'),()=>!!g&&$('view').value==='sphere',draw);
+$('view').addEventListener('change',()=>cancelSphereDrag());
 new ResizeObserver(draw).observe($('overview'));matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
 // Keep preparation controls and internal values inside a closed advanced panel.
 for(const el of document.querySelectorAll('.internal-input'))$('internal-controls').append(el);

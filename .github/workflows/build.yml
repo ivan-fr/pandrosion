@@ -204,9 +204,11 @@ jobs:
       - run: node scripts/test_geometry.mjs
       - run: node scripts/test_initialization.mjs
       - run: node scripts/test_layout.mjs
+      - run: node scripts/test_stereography.mjs
       - run: |
           python3 -m http.server 8765 --directory docs > /tmp/preview-server.log 2>&1 &
           node scripts/test_browser.mjs
+          node scripts/test_sphere_drag.mjs
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:
