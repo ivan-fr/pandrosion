@@ -1,12 +1,12 @@
-import {construct,methods,orders,affine,point,stereo,renormalize} from './geometry.js';
-const $=id=>document.getElementById(id);let g=null,timer=null,scale=1;
+import {construct,methods,orders,affine,point,stereo,renormalize,renormalizeOptimal,needsStereographicView} from './geometry.js';
+const $=id=>document.getElementById(id);let g=null,timer=null,scale=1,adaptive=null,manualView=false,automaticSphere=false;
 const fmt=x=>Number.isFinite(x)?(Math.abs(x)>1e6||Math.abs(x)<1e-5&&x!==0?x.toExponential(8):x.toPrecision(12)):'—';
 const colors=()=>Object.fromEntries(['bg','fg','muted','line','blue','orange','green'].map(k=>[k,getComputedStyle(document.documentElement).getPropertyValue('--'+k).trim()]));
 // Resolve light-dark() via a real element so canvas gets a concrete color.
 const colorProbe=document.createElement('span');colorProbe.hidden=true;document.body.append(colorProbe);
 function palette(){const c={};for(const k of ['bg','fg','muted','line','blue','orange','green']){colorProbe.style.color=`var(--${k})`;c[k]=getComputedStyle(colorProbe).color;}return c;}
 function setup(canvas){const r=canvas.getBoundingClientRect(),d=devicePixelRatio||1;canvas.width=Math.round(r.width*d);canvas.height=Math.round(r.height*d);const c=canvas.getContext('2d');c.scale(d,d);c.clearRect(0,0,r.width,r.height);c.font='12px system-ui';return [c,r.width,r.height];}
-const key=new Set(['O','A','B','C','P','Pnext','Q','V','U','G','Gother','MΓ','F','D','Z','K','M','L1','T']);
+const key=new Set(['O','A','B','C','P','Pnext','Q','V','U','G','Gother','MΓ','F','D','Z','K','M','L1','T','E','Ux','Xs']);
 const label=n=>({Pnext:'P⁺',Gother:'G′',L1:'L₁'}[n]||n);
 function plane(canvas,detail=false){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<80)return;const stage=+$('stage').value;
  let xs=[-.5,2.5],ys=[-.6,4.6];if(!detail){for(const q of Object.values(g.points)){const a=affine(q);if(a&&a.every(x=>Math.abs(x)<1e7)){xs.push(a[0]);ys.push(a[1]);}}for(const a of g.circles){xs.push(a.center[0]-a.radius,a.center[0]+a.radius);ys.push(a.center[1]-a.radius,a.center[1]+a.radius);}}
@@ -39,22 +39,28 @@ function sphere(canvas){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<
 function draw(){if($('view').value==='sphere')sphere($('overview'));else plane($('overview'));plane($('detail'),true);}
 function stage(){if(!g)return;const n=+$('stage').value;$('stage-number').textContent=`${n} / ${g.ops.length}`;$('step-text').textContent=n?`${g.ops[n-1].kind} · ${g.ops[n-1].label}`:'Préparation fixe : rectangle, centres et supports.';$('back').disabled=n===0;$('forward').disabled=n===g.ops.length;draw();}
 function stop(){clearInterval(timer);timer=null;$('play').textContent='Parcourir';}
-function rebuild(){stop();$('error').hidden=true;$('warning').hidden=true;$('chart-label').hidden=$('method').value!=='circle';try{g=construct($('method').value,+$('degree').value,+$('target').value,+$('state').value,$('chart').value);$('stage').max=g.ops.length;$('stage').value=g.ops.length;
+function rebuild(){stop();$('error').hidden=true;$('warning').hidden=true;$('chart-label').hidden=$('method').value!=='circle';try{try{g=construct($('method').value,+$('degree').value,+$('target').value,+$('state').value,$('chart').value);}catch(original){
+ let r;try{r=renormalizeOptimal($('method').value,+$('degree').value,+$('target').value,+$('state').value,$('chart').value);}catch(conditioning){throw Error(original.message+' '+conditioning.message);}adaptive=r;scale*=r.c;$('target').value=r.X;$('state').value=r.s;g=construct($('method').value,+$('degree').value,r.X,r.s,$('chart').value);
+ }const fallback=needsStereographicView(g);if(fallback&&!manualView){$('view').value='sphere';automaticSphere=true;$('rotation').hidden=false;$('drawing-title').textContent='Image stéréographique';g.warnings.push(fallback);}
+ $('fast-status').textContent=g.fast?`Post-V20 · p = ${g.p}, binaire ${g.binary} · ${g.multiplications} multiplications contre ${g.p-1} dans la chaîne native. Sphère automatique : ${automaticSphere?'oui':'non'}.`:'';
+ $('stage').max=g.ops.length;$('stage').value=g.ops.length;
  $('root-value').textContent=fmt(g.root);$('next-value').textContent=fmt(g.value);$('error-value').textContent=(g.value/g.root-1).toExponential(5);
  $('protocol').textContent=`${methods[g.mode]} · ordre ${orders[g.mode]} · ${g.counts.J} joins, ${g.counts.P} parallèles, ${g.counts.C} arc mobile. Préparation exclue ; une parallèle vaut ici 2 joins + 3 arcs.`;
  $('scope').textContent=g.mode==='circle'?'Branche réelle transverse, choisie par R′(v)<0. La convergence prouvée est locale ; la diminution de l’erreur sur tout le domaine reste conjecturale. Les exclusions et la renormalisation sont données dans le papier.':'La carte scalaire converge globalement sur les états positifs. La représentation géométrique peut néanmoins rencontrer des centres à l’infini ou des configurations mal conditionnées.';
  $('check').textContent=`Écart normalisé entre lecture géométrique et formule indépendante : ${g.discrepancy.toExponential(3)}. Résidu t = ${fmt(g.t)}.`;
  if(g.warnings.length){$('warning').hidden=false;$('warning').textContent=g.warnings.join(' ');}
  $('iterate').disabled=false;$('play').disabled=false;stage();
- }catch(e){g=null;$('error').hidden=false;$('error').textContent=e.message;$('iterate').disabled=true;$('play').disabled=true;for(const id of ['root-value','next-value','error-value'])$(id).textContent='—';$('step-text').textContent='Construction indisponible pour ces paramètres.';$('protocol').textContent='';draw();}
- $('scaling').textContent=scale===1?'':`Retour aux données initiales : multiplier s par ${fmt(scale)}.`;
+ }catch(e){g=null;$('fast-status').textContent='';$('error').hidden=false;$('error').textContent=e.message;$('iterate').disabled=true;$('play').disabled=true;for(const id of ['root-value','next-value','error-value'])$(id).textContent='—';$('step-text').textContent='Construction indisponible pour ces paramètres.';$('protocol').textContent='';draw();}
+ $('scaling').textContent=scale===1?'':`s original = ${fmt(scale)} × s normalisé (racine réciproque). Racine directe originale = racine directe normalisée / ${fmt(scale)}.`;
+ $('adaptive-status').textContent=adaptive?`Adaptative active : c = 2^${adaptive.k} = ${fmt(adaptive.c)} ; ${adaptive.candidateCount}/${adaptive.testedCount} candidats valides ; score à la sélection ${fmt(adaptive.score)} ; écart ${adaptive.discrepancy.toExponential(3)}. ${adaptive.reason}`:'';
 }
-for(const id of ['method','degree','target','state','chart'])$(id).addEventListener('change',()=>{if(['degree','target','state'].includes(id))scale=1;rebuild();});
+for(const id of ['method','degree','target','state','chart'])$(id).addEventListener('change',()=>{adaptive=null;if(['degree','target','state'].includes(id))scale=1;rebuild();});
 $('stage').addEventListener('input',()=>{stop();stage();});$('back').onclick=()=>{stop();$('stage').value=+$('stage').value-1;stage();};$('forward').onclick=()=>{stop();$('stage').value=+$('stage').value+1;stage();};
 $('play').onclick=()=>{if(timer){stop();return;}if(+$('stage').value===g.ops.length)$('stage').value=0;$('play').textContent='Pause';stage();timer=setInterval(()=>{if(+$('stage').value>=g.ops.length){stop();return;}$('stage').value=+$('stage').value+1;stage();},650);};
-$('iterate').onclick=()=>{if(!g)return;$('state').value=g.value;rebuild();};$('normalize').onclick=()=>{try{const p=+$('degree').value,X=+$('target').value,s=+$('state').value;if(!Number.isInteger(p)||p<3||p>32||!(X>0&&s>0))throw Error('Paramètres invalides.');const r=renormalize(p,X,s,$('chart').value);scale*=r.c;$('target').value=r.X;$('state').value=r.s;rebuild();}catch(e){$('error').hidden=false;$('error').textContent=e.message;}};
-function example(){scale=1;$('degree').value=3;$('target').value=2;$('state').value=.75;$('chart').value='compact';const ex=$('example').value;if(ex==='near'){$('target').value=1.1;$('state').value=.97;}if(['initial','final','outside'].includes(ex)){$('method').value='circle';$('state').value=ex==='initial'?1:ex==='final'?(7.75/2)**(1/3):.1;}rebuild();}
-$('example').onchange=example;$('reset').onclick=()=>{$('example').value='base';scale=1;example();};$('view').onchange=()=>{$('rotation').hidden=$('view').value!=='sphere';$('drawing-title').textContent=$('view').value==='sphere'?'Image stéréographique':'Vue d’ensemble';draw();};for(const id of ['yaw','pitch'])$(id).oninput=draw;
+$('iterate').onclick=()=>{if(!g)return;$('state').value=g.value;rebuild();};$('normalize').onclick=()=>{try{const p=+$('degree').value,X=+$('target').value,s=+$('state').value;if(!Number.isInteger(p)||p<3||p>1000000||!(X>0&&s>0))throw Error('Paramètres invalides.');adaptive=null;const r=renormalize(p,X,s,$('chart').value);scale*=r.c;$('target').value=r.X;$('state').value=r.s;rebuild();}catch(e){$('error').hidden=false;$('error').textContent=e.message;}};
+$('normalize-optimal').onclick=()=>{try{const r=renormalizeOptimal($('method').value,+$('degree').value,+$('target').value,+$('state').value,$('chart').value);adaptive=r;scale*=r.c;$('target').value=r.X;$('state').value=r.s;rebuild();}catch(e){$('error').hidden=false;$('error').textContent=e.message;}};
+function example(){scale=1;adaptive=null;manualView=false;automaticSphere=false;$('degree').value=3;$('target').value=2;$('state').value=.75;$('chart').value='compact';const ex=$('example').value;if(ex==='near'){$('target').value=1.1;$('state').value=.97;}if(['initial','final','outside'].includes(ex)){$('method').value='circle';$('state').value=ex==='initial'?1:ex==='final'?(7.75/2)**(1/3):.1;}rebuild();}
+$('example').onchange=example;$('reset').onclick=()=>{$('example').value='base';scale=1;example();};$('view').onchange=()=>{manualView=true;automaticSphere=false;$('rotation').hidden=$('view').value!=='sphere';$('drawing-title').textContent=$('view').value==='sphere'?'Image stéréographique':'Vue d’ensemble';draw();};for(const id of ['yaw','pitch'])$(id).oninput=draw;
 new ResizeObserver(draw).observe($('overview'));matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
 const methodFromURL=new URLSearchParams(location.search).get('method');if(methods[methodFromURL])$('method').value=methodFromURL;
 rebuild();

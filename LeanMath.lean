@@ -233,3 +233,5 @@ import LeanMath.Papers.V14WeightedMeans
 import LeanMath.Papers.V14WidthRemainders
 import LeanMath.Papers.WidthComparison
 import LeanMath.Papers.WidthLocal
+
+import LeanMath.Papers.RectangleFastPower
