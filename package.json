@@ -5,7 +5,8 @@
   "scripts": {
     "test:geometry": "node scripts/test_geometry.mjs",
     "test:browser": "node scripts/test_browser.mjs",
-    "test:initialization": "node scripts/test_initialization.mjs"
+    "test:initialization": "node scripts/test_initialization.mjs",
+    "test:layout": "node scripts/test_layout.mjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

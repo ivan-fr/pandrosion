@@ -50,11 +50,14 @@ this is separate from scalar convergence and floating-point conditioning. Its
 51-declaration audit is independent of the 22-declaration fast-power audit and
 the frozen V20 149+11 audit.
 
-The **Initialiser et calibrer** button now replaces an unusable starting state
-with a certified dyadic preparation: choose c with 1≤Xc^p≤2, then start at 1
-for the calibrated target. It uses bounded-mantissa integer intervals, not a
-root oracle. Subsequent steps stop when residual improvement cannot be certified.
-See [initialization theorem, rounding certificate and limits](docs/INITIALIZATION.md).
+The simple gallery automatically prepares the original p and X in a certified
+wide band, 1/4≤Xc^p≤4, and chooses rectangle proportions. **Iterations remain
+manual: one click, one geometric step.** Original X stays visible; internal
+calibration lives in the advanced panel. Circles are rebuilt for the selected
+width and height, and a local view magnifies the final readout without stretching
+geometry. Advanced mode retains the narrower [1,2] option and all protocols.
+The initialization/dimension module has **34 audited declarations**. See
+[theorems, layout, rounding certificates and limits](docs/INITIALIZATION.md).
 
 ## Lean
 
@@ -113,11 +116,11 @@ The paper build requires Tectonic or a TeX installation with `latexmk`. Supplied
 
 The badge links to the actual GitHub Actions workflow. It passes only when all validation areas succeed:
 
-1. Build all 268 Lean sources (192 base modules, four disjoint shards of 72 polynomial certificates, then four downstream modules and the complete library) and check the inherited 149+11 axiom audit.
+1. Build all 271 Lean sources and the complete library; check the frozen 149+11 audit and the separate 22, 51 and 34 declaration post-V20 audits.
 2. Repeat symbolic and high precision geometry checks.
 3. Rebuild the V20 PDF and the analog companion PDF.
 4. Rerun the P4 SPICE study and its validation checks.
-5. Check 576 independent geometric cases and exercise all seven methods, nine archived previews and mobile layouts in a browser.
+5. Check 864 geometry cases, 800 rectangle cases, 600 narrow and 600 wide initialized trajectories; exercise all eleven methods, nine archived previews and mobile layouts in a browser.
 
 Successful full builds cache the Lean artifacts under a key derived from the proof sources, toolchain and build configuration. Lake checks source and dependency hashes on subsequent builds.
 

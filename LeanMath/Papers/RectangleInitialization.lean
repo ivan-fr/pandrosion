@@ -267,4 +267,79 @@ theorem round_up_bound (n d : ℕ) (hd : 0<d) : n≤((n+d-1)/d)*d := by
   rw [Nat.mul_comm] at he
   omega
 
+
+/-- The wide band is an initialization domain, not an invariant domain. -/
+def Wide (X c : ℝ) (p : ℕ) : Prop := 0<c ∧ 1/4≤X*c^p ∧ X*c^p≤4
+
+/-- The first accepted midpoint in the wider band exists for every valid bracket. -/
+theorem wide_first_acceptance (X : ℝ) (p : ℕ) (b : ℝ×ℝ) (hX : 0<X)
+    (hp : 0<p) (hb : Bracket X p b) :
+    ∃ n : ℕ, Wide X (mid (bisect X p b n)) p ∧
+      ∀ j<n, ¬Wide X (mid (bisect X p b j)) p := by
+  classical
+  have hex : ∃ n : ℕ, Wide X (mid (bisect X p b n)) p := by
+    obtain ⟨n,hc,hl,hu⟩ := bisection_terminates X p b hX hp hb
+    refine ⟨n,hc,?_,?_⟩ <;> dsimp [residual] at * <;> linarith
+  exact ⟨Nat.find hex,Nat.find_spec hex,fun j hj => Nat.find_min hex hj⟩
+
+/-- Positive dyadic initialization, stopping at the first wide-band midpoint. -/
+theorem wide_dyadic_initialization (X : ℝ) (p : ℕ) (hX : 0<X) (hp : 3≤p) :
+    ∃ m n : ℕ, ∃ z : ℤ,
+      mid (bisect X p (0,(2:ℝ)^m) n)=(z:ℝ)/(2:ℝ)^(n+1) ∧
+      Wide X ((z:ℝ)/(2:ℝ)^(n+1)) p ∧
+      ∀ j<n, ¬Wide X (mid (bisect X p (0,(2:ℝ)^m) j)) p := by
+  obtain ⟨m,hm⟩ := dyadic_bracket_exists X p hX (by omega)
+  obtain ⟨n,hn,hfirst⟩ := wide_first_acceptance X p _ hX (by omega) hm
+  obtain ⟨z,hz⟩ := dyadic_midpoint X p m n
+  exact ⟨m,n,z,hz,by simpa only [hz] using hn,hfirst⟩
+
+theorem wide_interval_acceptance (X c lo hi : ℝ) (p : ℕ) (hc : 0<c)
+    (hl : lo≤X*c^p) (hh : X*c^p≤hi) (hlo : 1/4≤lo) (hhi : hi≤4) :
+    Wide X c p := ⟨hc,hlo.trans hl,hh.trans hhi⟩
+
+theorem wide_M_bound (H Y : ℝ) (hH : 0≤H) (hY : 1/4≤Y ∧ Y≤4) :
+    -3*H≤(M H Y).2 ∧ (M H Y).2≤3*H/4 := by
+  have hy : 0<Y := by linarith
+  have hlo : (1:ℝ)/4≤1/Y := (div_le_div_iff₀ (by norm_num) hy).2 (by linarith)
+  have hhi : 1/Y≤4 := (div_le_iff₀ hy).2 (by linarith)
+  dsimp [M]; constructor <;> nlinarith
+
+theorem wide_K_bound (W Y : ℝ) (p : ℕ) (hW : 0≤W) (hp : 3≤p)
+    (hY : 1/4≤Y ∧ Y≤4) : -W/3≤(K W Y p).1 ∧ (K W Y p).1≤W := by
+  have hp' : (3:ℝ)≤p := by exact_mod_cast hp
+  have hpos : (0:ℝ)<p := by linarith
+  have hy : 0≤Y/(p:ℝ) := div_nonneg (by linarith [hY.1]) hpos.le
+  have hy' : Y/(p:ℝ)≤4/3 := (div_le_div_iff₀ hpos (by norm_num)).2 (by nlinarith [hY.2])
+  dsimp [K]; constructor <;> nlinarith
+
+/-- Width and height may be chosen anew at every step; Euclidean supports are rebuilt. -/
+theorem wide_adaptive_orbit_geometry (method : Method) (W H : ℕ→ℝ) (X c : ℝ)
+    (p : ℕ) (hp : 3≤p) (hW : ∀ n,0<W n) (hH : ∀ n,0<H n)
+    (hband : Wide X c p) (n : ℕ) :
+    let s := orbit method p (X*c^p) 1 n
+    NativeCertificate (W n) (H n) s ∧ FastCertificate (W n) (H n) s p ∧
+      SupportCertificate method (W n) (H n) (X*c^p) s p := by
+  have hY : 0<X*c^p := by linarith [hband.2.1]
+  have hs := orbit_positive method p (X*c^p) 1 hp hY (by norm_num) n
+  exact ⟨native_telescope _ _ _ (hW n).ne' (hH n).ne',fast_telescope _ _ _ p (hH n).ne',
+    support_exists method _ _ _ _ p hp (hW n) (hH n) hY hs⟩
+
+/-- Binary power readout is independent of the positive rectangle dimensions. -/
+theorem rectangle_power_readout_invariant (W H W' H' s : ℝ) (n : ℕ)
+    (hH : H≠0) (hH' : H'≠0) :
+    RectangleFastPower.readout H (RectangleFastPower.geometricPower W H s n)=
+    RectangleFastPower.readout H' (RectangleFastPower.geometricPower W' H' s n) := by
+  rw [RectangleFastPower.geometric_readout W H s n hH,
+    RectangleFastPower.geometric_readout W' H' s n hH']
+
+/-- The wider band's lower endpoint costs a factor four in relative perturbation. -/
+theorem wide_calibration_residual_error (X c Y u ε : ℝ) (p : ℕ) (hY : 1/4≤Y)
+    (hu : 0≤u) (hε : 0≤ε) (herr : |X*c^p-Y|≤ε) :
+    |X*(c*u)^p-Y*u^p|≤4*ε*(Y*u^p) := by
+  have he : X*(c*u)^p-Y*u^p=(X*c^p-Y)*u^p := by rw [mul_pow]; ring
+  rw [he,abs_mul,abs_of_nonneg (pow_nonneg hu p)]
+  calc
+    |X*c^p-Y| * u^p ≤ ε*u^p := mul_le_mul_of_nonneg_right herr (pow_nonneg hu p)
+    _ ≤ 4*ε*(Y*u^p) := by nlinarith [mul_le_mul_of_nonneg_right hY (pow_nonneg hu p)]
+
 end LeanMath.Papers.RectangleInitialization

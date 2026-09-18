@@ -27,3 +27,11 @@ import LeanMath.Papers.RectangleInitialization
 #print axioms LeanMath.Papers.RectangleInitialization.positive_dyadic_initialization
 #print axioms LeanMath.Papers.RectangleInitialization.round_down_bound
 #print axioms LeanMath.Papers.RectangleInitialization.round_up_bound
+#print axioms LeanMath.Papers.RectangleInitialization.wide_first_acceptance
+#print axioms LeanMath.Papers.RectangleInitialization.wide_dyadic_initialization
+#print axioms LeanMath.Papers.RectangleInitialization.wide_interval_acceptance
+#print axioms LeanMath.Papers.RectangleInitialization.wide_M_bound
+#print axioms LeanMath.Papers.RectangleInitialization.wide_K_bound
+#print axioms LeanMath.Papers.RectangleInitialization.wide_adaptive_orbit_geometry
+#print axioms LeanMath.Papers.RectangleInitialization.rectangle_power_readout_invariant
+#print axioms LeanMath.Papers.RectangleInitialization.wide_calibration_residual_error

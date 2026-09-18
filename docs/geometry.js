@@ -30,23 +30,25 @@ export function correction(mode,p,t){
  if(disc<=0)throw Error('Le résidu est hors du domaine réel transverse du cercle. Choisir un départ plus proche.');
  return t<=1?(A-t*C)/(B*(1-t)+Math.sqrt(disc)):(Math.sqrt(disc)-B*(1-t))/(t*A-C);
 }
-export function construct(mode,p,X,s,chart='compact'){
+export function construct(mode,p,X,s,chart='compact',W=2,H=4){
  const requestedMode=mode,fast=!!fastModes[mode];mode=baseMode(mode);
  if(!methods[requestedMode]||!Number.isSafeInteger(p)||p<3||p>(fast?1_000_000:32)||!(X>0&&s>0)||!Number.isFinite(X+s))throw Error('Choisir un entier p entre 3 et 32 (1 000 000 en mode binaire), et X, s positifs.');
+ if(!(W>0&&H>0&&Number.isFinite(W+H)))throw Error('Dimensions positives et finies requises.');
+ if(!['AK','AD','projective','arc'].includes(mode)&&(W!==2||H!==4))throw Error('Ces dimensions sont réservées aux quatre méthodes du rectangle.');
  const logt=Math.log(X)+p*Math.log(s),t=Math.exp(logt),expected=s*correction(mode,p,t);
  if(!(t>0&&expected>0)||!Number.isFinite(t+expected))throw Error('Les données dépassent la précision du navigateur.');
  const points={},birth={},ops=[],circles=[],fixed=[],counts={J:0,P:0,C:0},warnings=[],transversality=[];
  const add=(name,q,at=ops.length)=>{points[name]=q;birth[name]=at;return name;};
- for(const [name,xy]of Object.entries({O:[0,4],A:[2,4],B:[2,0],C:[0,0],P:[2,4*(1-s)]}))add(name,point(...xy),0);
- const top=[0,1,-4],left=[1,0,0],right=[1,0,-2],diagonal=cross(points.O,points.B);
+ for(const [name,xy]of Object.entries({O:[0,H],A:[W,H],B:[W,0],C:[0,0],P:[W,H*(1-s)]}))add(name,point(...xy),0);
+ const top=[0,1,-H],left=[1,0,0],right=[1,0,-W],diagonal=cross(points.O,points.B);
  fixed.push({line:diagonal,label:'OB'});
  const op=(label,kind,line,names=[])=>{counts[kind]++;ops.push({label,kind,line,names});for(const n of names)birth[n]=ops.length;};
  const meet=(a,b,rail,name,label)=>{const l=cross(points[a],points[b]);add(name,cross(l,rail),ops.length+1);op(label||`${a}${b} → ${name}`,'J',l,[name]);return name;};
  const parallel=(l,q)=>[l[0]*q[2],l[1]*q[2],-l[0]*q[0]-l[1]*q[1]];
  if(['AK','AD','projective','arc'].includes(mode)){
-  add('M',point(0,4*(1-1/X)),0);
+  add('M',point(0,H*(1-1/X)),0);
   if(fast){
-   add('Ux',point(6,4),0);const transfer=cross(points.Ux,points.B);fixed.push({line:transfer,label:'U×B'});
+   add('Ux',point(3*W,H),0);const transfer=cross(points.Ux,points.B);fixed.push({line:transfer,label:'U×B'});
    const copy=(r,name)=>{const l=parallel(transfer,points[r]);add(name,cross(l,top),ops.length+1);op(`Copier ${r} sur le rail supérieur → ${name}`,'P',l,[name]);return name;};
    let topAccumulator=copy('P','Xs'),accumulator='P',serial=0;
    const multiply=(a,b)=>{serial++;const l=cross(points.Ux,points[b]);op(`Multiplication ${serial} : joindre U× à ${b}`,'J',l);const m=parallel(l,points[a]),name='Rmul'+serial;add(name,cross(m,right),ops.length+1);op(`Parallèle par ${a} → ${name}`,'P',m,[name]);return name;};
@@ -57,10 +59,10 @@ export function construct(mode,p,X,s,chart='compact'){
     if(i<bits.length-1)topAccumulator=copy(accumulator,'Xmul'+serial);
    }
    add('E',points[accumulator]);
-   const power=Math.exp(p*Math.log(s)),read=1-affine(points.E)[1]/4;
+   const power=Math.exp(p*Math.log(s)),read=1-affine(points.E)[1]/H;
    if(!(power>0)||!Number.isFinite(power)||Math.abs(read/power-1)>2e-7)throw Error('Puissance géométrique mal conditionnée : renormaliser.');
   }else{
-  let horizontal=[0,1,-4*(1-s)];add('L1',cross(horizontal,left),1);add('B1',cross(horizontal,diagonal),1);op('Horizontale par P : L₁ et B₁','P',horizontal,['L1','B1']);
+  let horizontal=[0,1,-H*(1-s)];add('L1',cross(horizontal,left),1);add('B1',cross(horizontal,diagonal),1);op('Horizontale par P : L₁ et B₁','P',horizontal,['L1','B1']);
   const red=cross(points.L1,points.B);op('Joindre L₁ à B','J',red);let prev='B1';
   for(let i=2;i<=p;i++){
    const l=parallel(red,points[prev]),li='L'+i,bi='B'+i;
@@ -71,18 +73,18 @@ export function construct(mode,p,X,s,chart='compact'){
   }
   }
   let support;
-  if(mode==='AK'){add('K',point(2*(1-X/p),0),0);support=cross(points.A,points.K);fixed.push({line:support,label:'AK'});}
+  if(mode==='AK'){add('K',point(W*(1-X/p),0),0);support=cross(points.A,points.K);fixed.push({line:support,label:'AK'});}
   if(mode==='AD'||mode==='arc'){
    let F,radius,dx;
-   if(mode==='AD'){F=point(2-4/(p-1),4-4*(p+1)/(X*(p-1)));radius=Math.abs(4-affine(points.E)[1]);dx=F[0];}
-   else{const beta=(p-1)*Math.sqrt((p-2)/(12*p)),alpha=(5*p+2)/(p-2),d=2/beta,delta=4/X*Math.sqrt(alpha*alpha-1);F=point(2-d+delta,4-4/(X*beta));const G=point(2,4+4*alpha/X);add('G',G,0);radius=Math.hypot(...affine(points.E).map((x,i)=>x-G[i]));dx=2-d;}
+   if(mode==='AD'){F=point(W-2*W/(p-1),H-H*(p+1)/(X*(p-1)));radius=Math.abs(H-affine(points.E)[1]);dx=F[0];}
+   else{const beta=(p-1)*Math.sqrt((p-2)/(12*p)),alpha=(5*p+2)/(p-2),d=W/beta,delta=H/X*Math.sqrt(alpha*alpha-1);F=point(W-d+delta,H-H/(X*beta));const G=point(W,H+H*alpha/X);add('G',G,0);radius=Math.hypot(...affine(points.E).map((x,i)=>x-G[i]));dx=W-d;}
    add('F',F,0);fixed.push({line:[1,0,-dx],label:'Verticale de D'});
    const offset=Math.abs(dx-F[0]),gap=radius-offset;if(!(gap>0)||!Number.isFinite(radius))throw Error('Intersection circulaire non transverse ou précision insuffisante : renormaliser.');transversality.push(gap/radius);const height=Math.sqrt(gap)*Math.sqrt(radius+offset);add('D',point(dx,F[1]-height),ops.length+1);
    circles.push({center:affine(F),radius,stage:ops.length+1,label:mode==='AD'?'Arc centré':'Arc décentré'});op('Tracer l’arc et choisir D en bas','C',null,['D']);
    support=cross(points.A,points.D);op('Joindre A à D','J',support);
   }
   if(mode==='projective'){
-   const Z=point(2*(1+(5*p-1)/(2*p*(2*p-1))),4*(1+(p+1)/((2*p-1)*X))),ell=[0,1,-4*(1+(5*p-1)/((p+1)*X))];add('Z',Z,0);fixed.push({line:ell,label:'ℓ'});
+   const Z=point(W*(1+(5*p-1)/(2*p*(2*p-1))),H*(1+(p+1)/((2*p-1)*X))),ell=[0,1,-H*(1+(5*p-1)/((p+1)*X))];add('Z',Z,0);fixed.push({line:ell,label:'ℓ'});
    meet('Z','E',ell,'D','ZE coupe ℓ en D');support=cross(points.A,points.D);op('Joindre A à D','J',support);
   }
   const green=cross(points.M,points.E);op('Joindre M à E','J',green);
@@ -116,11 +118,11 @@ export function construct(mode,p,X,s,chart='compact'){
    });
   }
  }
- const end=affine(points.Pnext);if(!end)throw Error('Lecture finale à l’infini.');const value=1-end[1]/4,discrepancy=Math.abs(value-expected)/Math.max(1,Math.abs(expected));
+ const end=affine(points.Pnext);if(!end)throw Error('Lecture finale à l’infini.');const value=1-end[1]/H,discrepancy=Math.abs(value-expected)/Math.max(1,Math.abs(expected));
  if(!(value>0)||!Number.isFinite(value+discrepancy)||discrepancy>2e-7)throw Error('Configuration trop mal conditionnée pour la précision du navigateur. Renormaliser ou changer de carte.');
  const infinite=Object.entries(points).filter(([,v])=>!affine(v)).map(([n])=>n);
  if(infinite.length)warnings.push('Continuation projective : '+infinite.join(', ')+' à l’infini. Le coût du protocole fini ne s’applique pas littéralement.');
- return {mode:requestedMode,baseMode:mode,fast,multiplications:fast?binaryCount(p):null,binary:p.toString(2),p,X,s,t,logt,chart,points,birth,ops,circles,fixed,counts,value,expected,discrepancy,warnings,transversality,root:Math.exp(-Math.log(X)/p)};
+ return {W,H,mode:requestedMode,baseMode:mode,fast,multiplications:fast?binaryCount(p):null,binary:p.toString(2),p,X,s,t,logt,chart,points,birth,ops,circles,fixed,counts,value,expected,discrepancy,warnings,transversality,root:Math.exp(-Math.log(X)/p)};
 }
 function validInput(p,X,s){return Number.isSafeInteger(p)&&p>=3&&p<=1_000_000&&X>0&&s>0&&Number.isFinite(X)&&Number.isFinite(s);}
 function scaledCandidate(p,X,s,k){const c=2**k,lx=Math.log(X)+p*k*Math.LN2,ls=Math.log(s)-k*Math.LN2;const nextX=k===0?X:Math.exp(lx),nextS=k===0?s:Math.exp(ls);if(!(c>0&&Number.isFinite(c)&&validInput(p,nextX,nextS)))return null;return {X:nextX,s:nextS,c,k};}
@@ -150,11 +152,28 @@ export function geometryScore(g){
  for(const t of g.transversality)score+=Math.max(0,-Math.log10(t)-3);
  return score;
 }
-export function renormalizeOptimal(mode,p,X,s,chart='compact'){
+export function renormalizeOptimal(mode,p,X,s,chart='compact',W=2,H=4){
  if(!validInput(p,X,s))throw Error('Paramètres invalides.');const ks=new Set([0]);
  for(const center of [Math.ceil(1-Math.log2(X)/p),Math.round(Math.log2(s))])for(let d=-10;d<=10;d++)ks.add(center+d);
- const candidates=[];for(const k of ks){const r=scaledCandidate(p,X,s,k);if(!r)continue;try{const g=construct(mode,p,r.X,r.s,chart);candidates.push({...r,score:geometryScore(g),discrepancy:g.discrepancy});}catch{/* Invalid real branch or unrepresentable geometry: exclude candidate. */}}
+ const candidates=[];for(const k of ks){const r=scaledCandidate(p,X,s,k);if(!r)continue;try{const g=construct(mode,p,r.X,r.s,chart,W,H);candidates.push({...r,score:geometryScore(g),discrepancy:g.discrepancy});}catch{/* Invalid real branch or unrepresentable geometry: exclude candidate. */}}
  if(!candidates.length)throw Error('Aucune échelle dyadique testée ne permet une construction fiable en double précision.');
  candidates.sort((a,b)=>a.score-b.score||Math.abs(a.k)-Math.abs(b.k));return {...candidates[0],candidateCount:candidates.length,testedCount:ks.size,rawScore:candidates.find(r=>r.k===0)?.score,reason:'Score minimal parmi les échelles dyadiques testées.'};
 }
-export function stereo(q){const [x,y,w]=q,u=x-w,v=y-2*w,z=2*w,n=u*u+v*v+z*z;return [2*u*z/n,2*v*z/n,(u*u+v*v-z*z)/n];}
+export function stereo(q,W=2,H=4){const [x,y,w]=q,u=x-W/2*w,v=y-H/2*w,z=Math.sqrt(W*H/2)*w,n=u*u+v*v+z*z;return [2*u*z/n,2*v*z/n,(u*u+v*v-z*z)/n];}
+
+// Rebuild actual Euclidean geometry for each aspect ratio: circles are not stretched.
+export function rectangleLayoutScore(g){
+ const xy=Object.values(g.points).map(affine).filter(Boolean),xs=xy.map(a=>a[0]),ys=xy.map(a=>a[1]);
+ for(const c of g.circles){xs.push(c.center[0]-c.radius,c.center[0]+c.radius);ys.push(c.center[1]-c.radius,c.center[1]+c.radius);}
+ const dx=Math.max(...xs)-Math.min(...xs),dy=Math.max(...ys)-Math.min(...ys);
+ return Math.abs(Math.log(dx/dy/1.25));
+}
+export function adaptRectangle(mode,p,X,s,chart='compact',W=2,H=4){
+ const candidates=[];
+ for(const w of new Set([W,...[.25,.5,1,2,4,8,16].map(r=>r*H)])){
+  try{const g=construct(mode,p,X,s,chart,w,H);candidates.push({W:w,H,score:rectangleLayoutScore(g)});}catch{}
+ }
+ if(!candidates.length)throw Error('Aucun rectangle testé ne permet une construction fiable.');
+ candidates.sort((a,b)=>a.score-b.score||Math.abs(Math.log(a.W/W))-Math.abs(Math.log(b.W/W)));
+ return {...candidates[0],tested:candidates.length};
+}

@@ -20,34 +20,37 @@ export function residualInterval(p,X,s){
  while(n){if(n%2)result=multiplyIntervals(result,base);n=Math.floor(n/2);if(n)base=multiplyIntervals(base,base);}
  return multiplyIntervals(exactDouble(X),result);
 }
-export const inResidualBand=r=>compareDyadic(r.lo,r.e,1n,0)>=0&&compareDyadic(r.hi,r.e,2n,0)<=0;
+export const initializationBands={compact:{lower:1,upper:2,guardLower:.25},wide:{lower:.25,upper:4,guardLower:.125}};
+function bandSpec(name){const b=initializationBands[name];if(!b)throw Error('Bande inconnue.');return b;}
+export const inResidualBand=(r,band='compact')=>{const b=bandSpec(band),l=exactDouble(b.lower),h=exactDouble(b.upper);return compareDyadic(r.lo,r.e,l.lo,l.e)>=0&&compareDyadic(r.hi,r.e,h.hi,h.e)<=0;};
 function toNumber(n,e){const shift=Math.max(0,bitLength(n)-53);return Number(n>>BigInt(shift))*2**(e+shift);}
-export function findInitialState(p,X){
+export function findInitialState(p,X,band='compact'){
+ bandSpec(band);
  if(!Number.isSafeInteger(p)||p<3||p>1_000_000||!(X>0&&Number.isFinite(X)))throw Error('Choisir p entier entre 3 et 1 000 000 et X fini positif.');
  let lower=0,upper=1,comparisons=0,halvings=0;
  const check=s=>{comparisons++;const enclosure=residualInterval(p,X,s);return {s,enclosure};};
- const accept=r=>({c:r.s,enclosure:r.enclosure,comparisons,halvings,precision:PRECISION});
+ const accept=r=>({c:r.s,enclosure:r.enclosure,comparisons,halvings,precision:PRECISION,band});
  let r=check(upper);
  // Bracket the interior target 3/2 by powers of two. Accept whenever [1,2] is certified.
- if(inResidualBand(r.enclosure))return accept(r);
+ if(inResidualBand(r.enclosure,band))return accept(r);
  if(compareDyadic(r.enclosure.hi,r.enclosure.e,3n,-1)<0){
-  do{lower=upper;upper*=2;r=check(upper);if(inResidualBand(r.enclosure))return accept(r);}while(compareDyadic(r.enclosure.hi,r.enclosure.e,3n,-1)<0);
+  do{lower=upper;upper*=2;r=check(upper);if(inResidualBand(r.enclosure,band))return accept(r);}while(compareDyadic(r.enclosure.hi,r.enclosure.e,3n,-1)<0);
  }else{
   lower=upper/2;r=check(lower);
-  while(compareDyadic(r.enclosure.lo,r.enclosure.e,3n,-1)>0){upper=lower;lower/=2;r=check(lower);if(inResidualBand(r.enclosure))return accept(r);}
-  if(inResidualBand(r.enclosure))return accept(r);
+  while(compareDyadic(r.enclosure.lo,r.enclosure.e,3n,-1)>0){upper=lower;lower/=2;r=check(lower);if(inResidualBand(r.enclosure,band))return accept(r);}
+  if(inResidualBand(r.enclosure,band))return accept(r);
  }
  for(let i=0;i<80;i++){
   const middle=lower+(upper-lower)/2;if(middle===lower||middle===upper)break;
-  r=check(middle);halvings++;if(inResidualBand(r.enclosure))return accept(r);
+  r=check(middle);halvings++;if(inResidualBand(r.enclosure,band))return accept(r);
   if(compareDyadic(r.enclosure.hi,r.enclosure.e,3n,-1)<0)lower=middle;
   else if(compareDyadic(r.enclosure.lo,r.enclosure.e,3n,-1)>0)upper=middle;
   else throw Error('Comparaison indécidable à la précision de certification disponible.');
  }
  throw Error('Aucun départ certifié trouvé à la précision disponible.');
 }
-export function initializeCalibrated(p,X){
- const r=findInitialState(p,X),bound=r.enclosure;
+export function initializeCalibrated(p,X,band='compact'){
+ const r=findInitialState(p,X,band),bound=r.enclosure;
  const calibratedX=toNumber((bound.lo+bound.hi)/2n,bound.e);
  // This is a rounded input parameter, never falsely advertised as exact X*c^p.
  const represented=exactDouble(calibratedX);
@@ -55,14 +58,15 @@ export function initializeCalibrated(p,X){
  const add=(a,b)=>{const e=Math.min(a.e,b.e);return {lo:(a.lo<<BigInt(a.e-e))+(b.lo<<BigInt(b.e-e)),hi:(a.hi<<BigInt(a.e-e))+(b.hi<<BigInt(b.e-e)),e};};
  const high=add(represented,tolerance),low=add(bound,tolerance);
  if(compareDyadic(bound.hi,bound.e,high.lo,high.e)>0||compareDyadic(represented.hi,represented.e,low.lo,low.e)>0)throw Error('Erreur de calibration supérieure à la borne certifiée.');
- return {...r,X:calibratedX,s:1,originalX:X,residualLower:toNumber(bound.lo,bound.e),residualUpper:Math.min(2,toNumber(bound.hi,bound.e)+Number.EPSILON*2),calibrationErrorBound:2**-48};
+ return {...r,X:calibratedX,s:1,originalX:X,residualLower:toNumber(bound.lo,bound.e),residualUpper:Math.min(bandSpec(band).upper,toNumber(bound.hi,bound.e)+Number.EPSILON*4),calibrationErrorBound:2**-48};
 }
 
 // A numerical guard for the iterative UI, not a global conditioning theorem.
-export function iterationDecision(p,X,current,next){
+export function iterationDecision(p,X,current,next,band='compact'){
+ const bspec=bandSpec(band),lo=exactDouble(bspec.guardLower),hi=exactDouble(bspec.upper);
  const before=residualInterval(p,X,current),after=residualInterval(p,X,next);
- if(compareDyadic(before.lo,before.e,1n,-2)<0||compareDyadic(before.hi,before.e,2n,0)>0)throw Error('Le départ courant est hors de la bande numérique contrôlée. Initialiser à nouveau.');
- if(compareDyadic(after.lo,after.e,1n,-2)<0||compareDyadic(after.hi,after.e,2n,0)>0)throw Error('Le pas sort de la bande numérique contrôlée [1/4, 2]. Départ conservé.');
+ if(compareDyadic(before.lo,before.e,lo.lo,lo.e)<0||compareDyadic(before.hi,before.e,hi.hi,hi.e)>0)throw Error('Le départ courant est hors de la bande numérique contrôlée. Initialiser à nouveau.');
+ if(compareDyadic(after.lo,after.e,lo.lo,lo.e)<0||compareDyadic(after.hi,after.e,hi.hi,hi.e)>0)throw Error(`Le pas sort de la bande numérique contrôlée [${bspec.guardLower}, ${bspec.upper}]. Départ conservé.`);
  const error=r=>{const e=Math.min(r.e,0),lo=r.lo<<BigInt(r.e-e),hi=r.hi<<BigInt(r.e-e),one=1n<<BigInt(-e),abs=x=>x<0n?-x:x;return {lo:lo>one?lo-one:hi<one?one-hi:0n,hi:abs(lo-one)>abs(hi-one)?abs(lo-one):abs(hi-one),e};};
  const a=error(before),b=error(after);
  return {stop:next===current||compareDyadic(b.hi,b.e,a.lo,a.e)>=0,before:toNumber(a.hi,a.e),after:toNumber(b.hi,b.e)};
