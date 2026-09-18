@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   lean-base:
-    name: Lean dependency base (192 modules)
+    name: Lean dependency base
     outputs:
       cache-hit: ${{ steps.lean-cache.outputs.cache-hit }}
     runs-on: ubuntu-24.04
@@ -33,7 +33,10 @@ jobs:
         id: lean-cache
         with:
           path: .lake/build
-          key: lean-linux-v1-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'LeanMath.lean', 'LeanMath/**/*.lean', 'research/**/*.lean', 'lean/**/*.lean', 'scripts/build_lean.py') }}
+          key: lean-linux-v2-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'LeanMath.lean', 'LeanMath/**/*.lean', 'research/**/*.lean', 'lean/**/*.lean', 'scripts/build_lean.py') }}
+          restore-keys: |
+            lean-linux-v2-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+            lean-linux-v1-204f6bdc3812881bcfc18b74c411324d36528b2b563ddd40eaaca93ec6a20424
       # Optional one-time cache seed from a trusted run of this repository.
       # Lake still checks source/dependency hashes and rebuilds stale modules.
       - uses: actions/download-artifact@v8.0.1
@@ -93,7 +96,7 @@ jobs:
           path: ${{ runner.temp }}/lean-segments-${{ matrix.shard }}.tar.gz
           retention-days: 2
   lean:
-    name: Complete Lean build and 149+11 axiom audit
+    name: Complete Lean build and separate axiom audits
     needs: [lean-base, lean-segments]
     runs-on: ubuntu-24.04
     timeout-minutes: 180
@@ -120,11 +123,14 @@ jobs:
           done
       - run: python3 scripts/build_lean.py --phase final
       - run: python3 scripts/audit_lean.py
+      - run: python3 scripts/audit_fast_power.py
+      - run: python3 scripts/audit_native_nondegeneracy.py
+      - run: python3 scripts/audit_initialization.py
       - uses: actions/cache/save@v6.1.0
         if: needs.lean-base.outputs.cache-hit != 'true'
         with:
           path: .lake/build
-          key: lean-linux-v1-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'LeanMath.lean', 'LeanMath/**/*.lean', 'research/**/*.lean', 'lean/**/*.lean', 'scripts/build_lean.py') }}
+          key: lean-linux-v2-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'LeanMath.lean', 'LeanMath/**/*.lean', 'research/**/*.lean', 'lean/**/*.lean', 'scripts/build_lean.py') }}
   mathematics:
     name: Symbolic and high precision geometry
     runs-on: ubuntu-24.04
@@ -144,6 +150,8 @@ jobs:
           python src/fixed_circle/verify.py
           python src/stereo/model.py
           python src/decentered/verify.py
+      - run: python scripts/test_native_nondegeneracy.py
+      - run: python scripts/check_initialization.py
   paper:
     name: Build V20 and analog companion PDFs
     runs-on: ubuntu-24.04
@@ -194,6 +202,8 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: node scripts/test_geometry.mjs
+      - run: node scripts/test_initialization.mjs
+      - run: node scripts/test_layout.mjs
       - run: |
           python3 -m http.server 8765 --directory docs > /tmp/preview-server.log 2>&1 &
           node scripts/test_browser.mjs
