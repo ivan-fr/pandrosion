@@ -1,3 +1,4 @@
+import {stereoLineSamples,stereoCircleSamples} from './stereography.js';
 import {construct,methods,orders,affine,point,stereo,renormalize,renormalizeOptimal,needsStereographicView,adaptRectangle,baseMode} from './geometry.js';
 import {initializeCalibrated,iterationDecision,initializationBands} from './initialization.js';
 const $=id=>document.getElementById(id);let g=null,timer=null,scale=1,adaptive=null,manualView=false,automaticSphere=false,initialization=null,layout=null;
@@ -31,11 +32,18 @@ function sphere(canvas){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<
  const rotate=([x,y,z])=>{const u=x*Math.cos(ya)+z*Math.sin(ya),v=-x*Math.sin(ya)+z*Math.cos(ya);return [u,y*Math.cos(pi)-v*Math.sin(pi),y*Math.sin(pi)+v*Math.cos(pi)];};
  const screen=z=>[cx+R*z[0],cy-R*z[1]];
  c.strokeStyle=co.line;c.beginPath();c.arc(cx,cy,R,0,2*Math.PI);c.stroke();
- function curve(samples,color,width=1){const pts=samples.map(rotate);for(let i=1;i<pts.length;i++){const back=(pts[i][2]+pts[i-1][2])<0;c.globalAlpha=back?.3:1;c.strokeStyle=color;c.lineWidth=width;c.setLineDash(back?[3,4]:[]);c.beginPath();c.moveTo(...screen(pts[i-1]));c.lineTo(...screen(pts[i]));c.stroke();}c.globalAlpha=1;c.setLineDash([]);}
+ function curve(samples,color,width=1){
+ const pts=samples.map(rotate);let back=null;c.strokeStyle=color;c.lineWidth=width;
+ for(let i=1;i<pts.length;i++){const nextBack=(pts[i][2]+pts[i-1][2])<0;
+  if(nextBack!==back){if(back!==null)c.stroke();back=nextBack;c.globalAlpha=back?.3:1;c.setLineDash(back?[3,4]:[]);c.beginPath();c.moveTo(...screen(pts[i-1]));}
+  c.lineTo(...screen(pts[i]));
+ }
+ if(back!==null)c.stroke();c.globalAlpha=1;c.setLineDash([]);
+ }
  for(const lat of [-Math.PI/4,0,Math.PI/4])curve(Array.from({length:121},(_,i)=>{const a=2*Math.PI*i/120;return [Math.cos(lat)*Math.cos(a),Math.sin(lat),Math.cos(lat)*Math.sin(a)];}),co.line);
- function line(l,color,width=1){if(!l)return;const [a,b,d]=l,n=Math.hypot(a,b);if(n<1e-14)return;const base=[-d*a/(n*n),-d*b/(n*n)],dir=[-b/n,a/n];curve(Array.from({length:241},(_,i)=>{const theta=-Math.PI/2+Math.PI*i/240,cs=Math.cos(theta),sn=Math.sin(theta);return stereo([base[0]*cs+dir[0]*sn,base[1]*cs+dir[1]*sn,cs],g.W,g.H);}),color,width);}
+ function line(l,color,width=1){if(l)curve(stereoLineSamples(l,g.W,g.H),color,width);}
  for(const l of [[1,0,0],[1,0,-g.W],[0,1,0],[0,1,-g.H]])line(l,co.line);for(const f of g.fixed)line(f.line,co.line);
- for(const a of g.circles)if(a.stage<=stage)curve(Array.from({length:241},(_,i)=>{const t=2*Math.PI*i/240;return stereo(point(a.center[0]+a.radius*Math.cos(t),a.center[1]+a.radius*Math.sin(t)),g.W,g.H);}),co.orange,1.7);
+ for(const a of g.circles)if(a.stage<=stage)curve(stereoCircleSamples(a.center,a.radius,g.W,g.H),co.orange,1.7);
  for(let i=0;i<stage;i++)line(g.ops[i].line,i===stage-1?co.blue:co.muted,i===stage-1?2:1);
  const occupied=[];for(const [n,q]of Object.entries(g.points)){if(g.birth[n]>stage||!key.has(n))continue;const z=rotate(stereo(q,g.W,g.H)),[x,y]=screen(z);c.globalAlpha=z[2]<0?.45:1;c.fillStyle=n==='Pnext'?co.green:n.startsWith('G')?co.orange:co.fg;c.beginPath();c.arc(x,y,3,0,2*Math.PI);c.fill();if(affine(q)&&!occupied.some(a=>Math.hypot(x-a[0],y-a[1])<24)){c.fillText(label(n),Math.min(w-35,x+7),Math.max(14,y-7));occupied.push([x,y]);}}
  c.globalAlpha=1;const N=screen(rotate([0,0,1]));c.fillStyle=co.blue;c.beginPath();c.arc(...N,4,0,Math.PI*2);c.fill();c.fillText('N',N[0]+8,N[1]+17);

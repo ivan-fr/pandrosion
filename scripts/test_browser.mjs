@@ -3,6 +3,12 @@ import fs from 'node:fs';
 const output=process.env.PREVIEW_OUTPUT || '.ci/browser';
 fs.mkdirSync(output,{recursive:true});
 (async()=>{const b=await chromium.launch({...(process.env.PLAYWRIGHT_CHANNEL ? {channel:process.env.PLAYWRIGHT_CHANNEL}:{}),headless:true});const page=await b.newPage({viewport:{width:1280,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(page.url()+': '+e.message));await page.goto(process.env.PREVIEW_URL || 'http://127.0.0.1:8765/');await page.waitForFunction(()=>document.getElementById('next-value').textContent!=='—');
+// Regression: the decentered arc must render smoothly with automatically selected proportions.
+await page.selectOption('#method','arc');await page.selectOption('#view','sphere');
+await page.screenshot({path:`${output}/decentered-sphere.png`,fullPage:true});
+await page.locator('#yaw').fill('65');await page.locator('#yaw').dispatchEvent('input');await page.locator('#pitch').fill('-35');await page.locator('#pitch').dispatchEvent('input');
+await page.screenshot({path:`${output}/decentered-sphere-rotated.png`,fullPage:true});
+await page.selectOption('#method','AKfast');await page.selectOption('#view','plane');
 // Automatic preparation only: no hidden iteration, unchanged original input, one click = one step.
 await page.locator('#degree').fill('1000000');await page.locator('#target').fill('500000');await page.locator('#target').dispatchEvent('change');
 if(await page.locator('#error').isVisible())throw Error('Automatic preparation failed');
