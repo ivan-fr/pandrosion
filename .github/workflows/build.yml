@@ -124,6 +124,7 @@ jobs:
       - run: python3 scripts/build_lean.py --phase final
       - run: python3 scripts/audit_lean.py
       - run: python3 scripts/audit_fast_power.py
+      - run: python3 scripts/audit_native_nondegeneracy.py
       - uses: actions/cache/save@v6.1.0
         if: needs.lean-base.outputs.cache-hit != 'true'
         with:
@@ -148,6 +149,7 @@ jobs:
           python src/fixed_circle/verify.py
           python src/stereo/model.py
           python src/decentered/verify.py
+      - run: python scripts/test_native_nondegeneracy.py
   paper:
     name: Build V20 and analog companion PDFs
     runs-on: ubuntu-24.04

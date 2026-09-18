@@ -235,3 +235,4 @@ import LeanMath.Papers.WidthComparison
 import LeanMath.Papers.WidthLocal
 
 import LeanMath.Papers.RectangleFastPower
+import LeanMath.Papers.RectangleNativeNondegeneracy

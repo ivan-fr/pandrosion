@@ -67,8 +67,10 @@ has height above H while E is below H; AD and the decentered D have abscissa
 strictly less than W. The report denominator is positive for each scalar map.
 For the decentered arc, α=(5p+2)/(p−2)>0 and
 (t+α)^2−(α²−1)=t²+2αt+1>0, which proves a transverse intersection.
-This support argument is a written algebraic argument; the new Lean module
-certifies the telescope and scalar substitutions, not every support assertion.
+The separate [native incidence audit](NATIVE_NONDEGENERACY.md) now formalizes
+these support and branch-existence assertions in
+`RectangleNativeNondegeneracy.lean`, and composes them with the binary stage.
+Its machine-readable table records every step and exceptional equation.
 
 Finite exact coordinates need not be small or distinguishable in floating point.
 The browser computes the circle height as sqrt(r−d)*sqrt(r+d), avoiding the
@@ -152,3 +154,6 @@ The geometry matrix covers 864 configurations, plus high degrees through
 normalization, invariance, raw-score dominance, infinity and true-degeneracy
 regressions. Browser tests cover all eleven methods, sphere/manual return,
 large degree, adaptive metadata, dark/light views, 360px layout and nine archives.
+
+The additional native audit has 56 classification rows, exact symbolic cross-checks,
+and 72 browser-engine regressions at s=1 (including X=1 and X=p).

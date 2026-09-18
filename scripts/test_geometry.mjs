@@ -42,3 +42,10 @@ assert.throws(()=>construct('AKfast',Number.MAX_SAFE_INTEGER+1,2,1));
 console.log('PASS: binary powers, extreme-scale normalization, projective continuation and true degeneracy');
 
 assert(needsStereographicView({points:{V:[1e6,0,1]},circles:[]}));
+
+for(const mode of ['AK','AD','projective','arc','AKfast','ADfast','projectiveFast','arcFast'])for(const p of [3,4,17])for(const X of [1,2,p]){
+ const g=construct(mode,p,X,1);assert(g.discrepancy<2e-7);
+ for(const v of Object.values(g.points))assert(affine(v),'Native rectangle infinity at s=1');
+ assert(Math.abs(affine(g.points.E)[1])<1e-10);
+}
+console.log('PASS: 72 native/fast s=1 and harmless fixed-vertex coincidence cases');
