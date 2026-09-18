@@ -2,9 +2,16 @@ import { chromium } from 'playwright';
 import fs from 'node:fs';
 const output=process.env.PREVIEW_OUTPUT || '.ci/browser';
 fs.mkdirSync(output,{recursive:true});
-(async()=>{const b=await chromium.launch({...(process.env.PLAYWRIGHT_CHANNEL ? {channel:process.env.PLAYWRIGHT_CHANNEL}:{}),headless:true});const page=await b.newPage({viewport:{width:1280,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(page.url()+': '+e.message));await page.goto(process.env.PREVIEW_URL || 'http://127.0.0.1:8765/');await page.waitForFunction(()=>document.getElementById('next-value').textContent!=='—');
+(async()=>{const b=await chromium.launch({...(process.env.PLAYWRIGHT_CHANNEL ? {channel:process.env.PLAYWRIGHT_CHANNEL}:{}),headless:true});const page=await b.newPage({viewport:{width:1280,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(page.url()+': '+e.message));await page.addInitScript(()=>{
+ const proto=CanvasRenderingContext2D.prototype,fill=proto.fillText,clear=proto.clearRect;
+ proto.clearRect=function(...args){if(this.canvas.id==='overview')this.canvas.dataset.drawnLabels='[]';return clear.apply(this,args);};
+ proto.fillText=function(text,...args){if(this.canvas.id==='overview'){const labels=JSON.parse(this.canvas.dataset.drawnLabels||'[]');labels.push(text);this.canvas.dataset.drawnLabels=JSON.stringify(labels);}return fill.call(this,text,...args);};
+});await page.goto(process.env.PREVIEW_URL || 'http://127.0.0.1:8765/');await page.waitForFunction(()=>document.getElementById('next-value').textContent!=='—');
 // Regression: the decentered arc must render smoothly with automatically selected proportions.
 await page.selectOption('#method','arc');await page.selectOption('#view','sphere');
+let drawn=JSON.parse(await page.locator('#overview').getAttribute('data-drawn-labels'));if(!drawn.includes('P')||!drawn.includes('P⁺'))throw Error('Missing priority readout labels');
+await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');drawn=JSON.parse(await page.locator('#overview').getAttribute('data-drawn-labels'));if(!drawn.includes('P')||drawn.includes('P⁺'))throw Error('Readout labels ignore construction stage');
+await page.locator('#stage').fill(await page.locator('#stage').getAttribute('max'));await page.locator('#stage').dispatchEvent('input');
 await page.screenshot({path:`${output}/decentered-sphere.png`,fullPage:true});
 await page.locator('#yaw').fill('65');await page.locator('#yaw').dispatchEvent('input');await page.locator('#pitch').fill('-35');await page.locator('#pitch').dispatchEvent('input');
 await page.screenshot({path:`${output}/decentered-sphere-rotated.png`,fullPage:true});

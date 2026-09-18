@@ -45,8 +45,18 @@ function sphere(canvas){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<
  for(const l of [[1,0,0],[1,0,-g.W],[0,1,0],[0,1,-g.H]])line(l,co.line);for(const f of g.fixed)line(f.line,co.line);
  for(const a of g.circles)if(a.stage<=stage)curve(stereoCircleSamples(a.center,a.radius,g.W,g.H),co.orange,1.7);
  for(let i=0;i<stage;i++)line(g.ops[i].line,i===stage-1?co.blue:co.muted,i===stage-1?2:1);
- const occupied=[];for(const [n,q]of Object.entries(g.points)){if(g.birth[n]>stage||!key.has(n))continue;const z=rotate(stereo(q,g.W,g.H)),[x,y]=screen(z);c.globalAlpha=z[2]<0?.45:1;c.fillStyle=n==='Pnext'?co.green:n.startsWith('G')?co.orange:co.fg;c.beginPath();c.arc(x,y,3,0,2*Math.PI);c.fill();if(affine(q)&&!occupied.some(a=>Math.hypot(x-a[0],y-a[1])<24)){c.fillText(label(n),Math.min(w-35,x+7),Math.max(14,y-7));occupied.push([x,y]);}}
- c.globalAlpha=1;const N=screen(rotate([0,0,1]));c.fillStyle=co.blue;c.beginPath();c.arc(...N,4,0,Math.PI*2);c.fill();c.fillText('N',N[0]+8,N[1]+17);
+ // Reserve the readout points before placing secondary labels. Labels move; points never do.
+ const readouts=['P','Pnext'].filter(n=>g.points[n]&&g.birth[n]<=stage).map(n=>{const z=rotate(stereo(g.points[n],g.W,g.H));return {n,z,xy:screen(z)};});
+ const occupied=[];for(const [n,q]of Object.entries(g.points)){if(g.birth[n]>stage||!key.has(n)||['P','Pnext'].includes(n))continue;const z=rotate(stereo(q,g.W,g.H)),[x,y]=screen(z);c.globalAlpha=z[2]<0?.45:1;c.fillStyle=n.startsWith('G')?co.orange:co.fg;c.beginPath();c.arc(x,y,3,0,2*Math.PI);c.fill();if(affine(q)&&!occupied.some(a=>Math.hypot(x-a[0],y-a[1])<24)&&!readouts.some(a=>Math.hypot(x-a.xy[0],y-a.xy[1])<40)){c.fillText(label(n),Math.min(w-35,x+7),Math.max(14,y-7));occupied.push([x,y]);}}
+ c.globalAlpha=1;const N=screen(rotate([0,0,1]));c.fillStyle=co.blue;c.beginPath();c.arc(...N,4,0,2*Math.PI);c.fill();c.fillText('N',N[0]+8,N[1]+17);
+ for(const {n,z,xy:[x,y]} of readouts){
+  const color=n==='P'?co.blue:co.green,text=label(n),tw=c.measureText(text).width;
+  const tx=Math.max(8,Math.min(w-tw-8,x+(x>cx?-45:24))),ty=Math.max(18,Math.min(h-26,y+(n==='P'?-25:33)));
+  c.globalAlpha=z[2]<0?.6:1;c.strokeStyle=color;c.fillStyle=color;c.lineWidth=2;
+  c.beginPath();c.arc(x,y,n==='P'?6:3.5,0,2*Math.PI);if(n==='P')c.stroke();else c.fill();
+  c.globalAlpha=1;c.lineWidth=1;c.setLineDash(z[2]<0?[3,3]:[]);c.beginPath();c.moveTo(x,y);c.lineTo(tx+tw/2,ty-5);c.stroke();c.setLineDash([]);
+  c.fillStyle=co.bg;c.fillRect(tx-3,ty-13,tw+6,17);c.fillStyle=color;c.fillText(text,tx,ty);
+ }
  c.fillStyle=co.muted;c.fillText('Pointillés : hémisphère arrière',14,h-6);
 }
 function draw(){if($('view').value==='sphere')sphere($('overview'));else plane($('overview'));plane($('detail'),true);}
