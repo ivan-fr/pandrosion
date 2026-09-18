@@ -443,4 +443,29 @@ theorem green_horizontal_iff (W H X s : ℝ) (p : ℕ) (hH : H≠0) (hX : X≠0)
   · field_simp [hX]
     linear_combination H*h
 
+/-- Every nonzero homogeneous common point is finite and has the same affine
+readout. Thus the affine certificate rules out a second, ideal intersection. -/
+theorem homogeneous_intersection_unique (l m : Line) (h : FinitePair l m)
+    (q : Homogeneous) (hq : q.x≠0 ∨ q.y≠0 ∨ q.w≠0)
+    (hl : l.a*q.x+l.b*q.y=l.c*q.w) (hm : m.a*q.x+m.b*q.y=m.c*q.w) :
+    q.w≠0 ∧ (q.x/q.w,q.y/q.w)=meet l m := by
+  have hw : q.w≠0 := by
+    intro hw
+    rw [hw,mul_zero] at hl hm
+    have hx : det l m*q.x=0 := by
+      dsimp [det]; linear_combination m.b*hl-l.b*hm
+    have hy : det l m*q.y=0 := by
+      dsimp [det]; linear_combination l.a*hm-m.a*hl
+    have hx0 := (mul_eq_zero.mp hx).resolve_left h.1
+    have hy0 := (mul_eq_zero.mp hy).resolve_left h.1
+    rcases hq with hqx | hqy | hqw
+    · exact hqx hx0
+    · exact hqy hy0
+    · exact hqw hw
+  refine ⟨hw,?_⟩
+  apply intersection_unique l m h.1 _ _ _ (meet_on l m h.1)
+  constructor
+  · dsimp [On]; field_simp [hw]; simpa only [mul_comm q.w l.c] using hl
+  · dsimp [On]; field_simp [hw]; simpa only [mul_comm q.w m.c] using hm
+
 end LeanMath.Papers.RectangleNativeNondegeneracy

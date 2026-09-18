@@ -18,7 +18,10 @@ A line is a*x+b*y=c, embedded as [a:b:−c]. Its meet with another line is
 the homogeneous cross product. The meet's weight is the determinant a*b′−a′*b.
 A nonzero weight proves a unique finite meet, and also proves both lines proper.
 `homogeneous_meet_finite` and `homogeneous_meet_readout` connect these cross
-products to the affine certificates. No scalar convergence theorem enters these proofs.
+products to the affine certificates. `homogeneous_intersection_unique` also proves
+that every nonzero homogeneous common point has nonzero weight and the same
+affine readout, excluding a second ideal intersection. No scalar convergence
+theorem enters these proofs.
 
 In the native chain Lj=(0,H(1−s^j)) and Bj=(W*s^j,H(1−s^j)).
 The red line L1B has b=W. A parallel through Bj therefore meets the left
@@ -169,7 +172,7 @@ theorems reuse the original correction certificates without re-proving supports.
 | Finite affine realization | Every required intermediate is finite in exact real arithmetic; optional ideal-direction macros can use Euclidean parallels. |
 | Numerically well-conditioned display | No global guarantee. Large finite extents, near-parallel lines and cancellation can exceed browser precision. |
 
-The formal file is `LeanMath/Papers/RectangleNativeNondegeneracy.lean`, with 50 checked declarations and
+The formal file is `LeanMath/Papers/RectangleNativeNondegeneracy.lean`, with 51 checked declarations and
 its own audit `validation/rectangle_native_nondegeneracy/Audit.lean`. Historical
 V20 audit counts remain 149+11. Run:
 

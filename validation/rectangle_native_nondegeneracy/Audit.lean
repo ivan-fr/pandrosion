@@ -51,3 +51,4 @@ import LeanMath.Papers.RectangleNativeNondegeneracy
 #print axioms LeanMath.Papers.RectangleNativeNondegeneracy.M_vertex_marker
 #print axioms LeanMath.Papers.RectangleNativeNondegeneracy.K_vertex_marker
 #print axioms LeanMath.Papers.RectangleNativeNondegeneracy.green_horizontal_iff
+#print axioms LeanMath.Papers.RectangleNativeNondegeneracy.homogeneous_intersection_unique

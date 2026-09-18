@@ -47,7 +47,7 @@ The separate [native non-degeneracy audit](docs/NATIVE_NONDEGENERACY.md)
 for all four original rectangle protocols on p≥3, W,H,X,s>0, and transfers it
 to the fast modes. It checks actual joins, parallels and circle branches;
 this is separate from scalar convergence and floating-point conditioning. Its
-50-declaration audit is independent of the 22-declaration fast-power audit and
+51-declaration audit is independent of the 22-declaration fast-power audit and
 the frozen V20 149+11 audit.
 
 ## Lean
