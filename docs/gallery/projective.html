@@ -1036,16 +1036,16 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;pandrosion-projection&quot;&gt;
-  &lt;h3&gt;Projection fixe ZE → D, puis support AD&lt;/h3&gt;
+  &lt;h3&gt;Fixed projection ZE → D, then support AD&lt;/h3&gt;
   &lt;div class=&quot;viz-controls&quot;&gt;
-    &lt;label class=&quot;form-label&quot;&gt;Degré p &lt;input class=&quot;form-control&quot; data-p type=&quot;number&quot; min=&quot;2&quot; max=&quot;32&quot; step=&quot;1&quot; value=&quot;3&quot;&gt;&lt;/label&gt;
-    &lt;label class=&quot;form-label&quot;&gt;Nombre X &lt;input class=&quot;form-control&quot; data-x type=&quot;number&quot; min=&quot;0.1&quot; max=&quot;10&quot; step=&quot;0.1&quot; value=&quot;2&quot;&gt;&lt;/label&gt;
-    &lt;label class=&quot;form-label&quot;&gt;État s : &lt;output data-svalue&gt;0,750000&lt;/output&gt;&lt;input class=&quot;form-range&quot; data-s type=&quot;range&quot; min=&quot;0.15&quot; max=&quot;1.1&quot; step=&quot;0.0001&quot; value=&quot;0.75&quot;&gt;&lt;/label&gt;
-    &lt;label class=&quot;form-label&quot;&gt;Vue &lt;select class=&quot;form-select&quot; data-view&gt;&lt;option value=&quot;all&quot;&gt;Construction complète&lt;/option&gt;&lt;option value=&quot;rectangle&quot;&gt;Détail du rectangle&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
+    &lt;label class=&quot;form-label&quot;&gt;Degree p &lt;input class=&quot;form-control&quot; data-p type=&quot;number&quot; min=&quot;2&quot; max=&quot;32&quot; step=&quot;1&quot; value=&quot;3&quot;&gt;&lt;/label&gt;
+    &lt;label class=&quot;form-label&quot;&gt;Number X &lt;input class=&quot;form-control&quot; data-x type=&quot;number&quot; min=&quot;0.1&quot; max=&quot;10&quot; step=&quot;0.1&quot; value=&quot;2&quot;&gt;&lt;/label&gt;
+    &lt;label class=&quot;form-label&quot;&gt;State s : &lt;output data-svalue&gt;0.750000&lt;/output&gt;&lt;input class=&quot;form-range&quot; data-s type=&quot;range&quot; min=&quot;0.15&quot; max=&quot;1.1&quot; step=&quot;0.0001&quot; value=&quot;0.75&quot;&gt;&lt;/label&gt;
+    &lt;label class=&quot;form-label&quot;&gt;View &lt;select class=&quot;form-select&quot; data-view&gt;&lt;option value=&quot;all&quot;&gt;Full construction&lt;/option&gt;&lt;option value=&quot;rectangle&quot;&gt;Rectangle detail&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;viz-row&quot;&gt;&lt;button class=&quot;btn btn-primary&quot; data-step&gt;Appliquer le pas&lt;/button&gt;&lt;button class=&quot;btn&quot; data-reset&gt;Exemple p = 3&lt;/button&gt;&lt;span class=&quot;text-muted&quot; data-count&gt;Pas 0&lt;/span&gt;&lt;/div&gt;
-  &lt;svg class=&quot;projection-diagram&quot; role=&quot;img&quot; aria-label=&quot;Rectangle proportionnel, chaîne de triangles, centre fixe Z, droite fixe ell et intersection D ; la parallèle à ME passant par P coupe AD en T et donne P suivant.&quot;&gt;&lt;/svg&gt;
-  &lt;div class=&quot;viz-row text-small&quot;&gt;&lt;span&gt;Gris : rectangle et chaîne&lt;/span&gt;&lt;span style=&quot;color:var(--viz-series-2)&quot;&gt;ZE et ℓ : projection&lt;/span&gt;&lt;span style=&quot;color:var(--viz-series-1)&quot;&gt;AD : support&lt;/span&gt;&lt;span style=&quot;color:var(--viz-series-3)&quot;&gt;ME et PT : parallèles&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;viz-row&quot;&gt;&lt;button class=&quot;btn btn-primary&quot; data-step&gt;Apply step&lt;/button&gt;&lt;button class=&quot;btn&quot; data-reset&gt;Example p = 3&lt;/button&gt;&lt;span class=&quot;text-muted&quot; data-count&gt;Step 0&lt;/span&gt;&lt;/div&gt;
+  &lt;svg class=&quot;projection-diagram&quot; role=&quot;img&quot; aria-label=&quot;Proportional rectangle, triangle chain, fixed center Z, fixed line ell and intersection D; the parallel to ME through P meets AD at T and gives the next P.&quot;&gt;&lt;/svg&gt;
+  &lt;div class=&quot;viz-row text-small&quot;&gt;&lt;span&gt;Gray: rectangle and chain&lt;/span&gt;&lt;span style=&quot;color:var(--viz-series-2)&quot;&gt;ZE and ℓ: projection&lt;/span&gt;&lt;span style=&quot;color:var(--viz-series-1)&quot;&gt;AD : support&lt;/span&gt;&lt;span style=&quot;color:var(--viz-series-3)&quot;&gt;ME and PT: parallels&lt;/span&gt;&lt;/div&gt;
   &lt;div aria-live=&quot;polite&quot; data-values&gt;&lt;/div&gt;
   &lt;div class=&quot;text-small text-muted&quot; data-check&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -1059,11 +1059,11 @@ html&gt;body{padding:0}&lt;/style&gt;
 const root=document.getElementById(&#x27;pandrosion-projection&#x27;),svg=root.querySelector(&#x27;svg&#x27;);
 const pc=root.querySelector(&#x27;[data-p]&#x27;),xc=root.querySelector(&#x27;[data-x]&#x27;),sc=root.querySelector(&#x27;[data-s]&#x27;),vc=root.querySelector(&#x27;[data-view]&#x27;);
 let state=.75,count=0,last=null;
-const fmt=x=&gt;Number(x).toLocaleString(&#x27;fr-FR&#x27;,{maximumSignificantDigits:10});
+const fmt=x=&gt;Number(x).toLocaleString(&#x27;en-US&#x27;,{maximumSignificantDigits:10});
 function meet(a,b,c,d){let u=[b[0]-a[0],b[1]-a[1]],v=[d[0]-c[0],d[1]-c[1]],det=u[0]*v[1]-u[1]*v[0];let q=((c[0]-a[0])*v[1]-(c[1]-a[1])*v[0])/det;return [a[0]+q*u[0],a[1]+q*u[1]];}
 function draw(){
 const p=Math.round(Number(pc.value)),X=Number(xc.value),s=state,W=2,H=4;
-if(!(p&gt;=2&amp;&amp;p&lt;=32&amp;&amp;X&gt;=.1&amp;&amp;X&lt;=10&amp;&amp;s&gt;0)){root.querySelector(&#x27;[data-check]&#x27;).textContent=&#x27;Choisir 2 ≤ p ≤ 32 et 0,1 ≤ X ≤ 10.&#x27;;return;}
+if(!(p&gt;=2&amp;&amp;p&lt;=32&amp;&amp;X&gt;=.1&amp;&amp;X&lt;=10&amp;&amp;s&gt;0)){root.querySelector(&#x27;[data-check]&#x27;).textContent=&#x27;Choose 2 ≤ p ≤ 32 and 0.1 ≤ X ≤ 10.&#x27;;return;}
 let A=[W,H],B=[W,0],C=[0,0],O=[0,H],P=[W,H*(1-s)],E=[W,H*(1-s**p)],M=[0,H*(1-1/X)];
 let Z=[W*(1+(5*p-1)/(2*p*(2*p-1))),H*(1+(p+1)/((2*p-1)*X))],y0=H*(1+(5*p-1)/((p+1)*X));
 let D=meet(Z,E,[0,y0],[1,y0]);
@@ -1090,9 +1090,9 @@ dot(E,&#x27;E&#x27;,9,0,&#x27;var(--viz-series-2)&#x27;);dot(M,&#x27;M&#x27;,-25
 dot(P,&#x27;P&#x27;,10,-9);dot(Pn,&#x27;P⁺&#x27;,10,17,&#x27;var(--viz-series-1)&#x27;);dot(T,&#x27;T&#x27;,-19,17,&#x27;var(--viz-series-1)&#x27;);
 if(!detail){let q=xy([xmin+.1,y0]);content+=`&lt;text x=&quot;${q[0]}&quot; y=&quot;${q[1]-10}&quot;&gt;ℓ fixe&lt;/text&gt;`;}
 content+=&#x27;&lt;/g&gt;&#x27;;svg.innerHTML=content;
-root.querySelector(&#x27;[data-svalue]&#x27;).textContent=fmt(s);root.querySelector(&#x27;[data-count]&#x27;).textContent=&#x27;Pas &#x27;+count;
-root.querySelector(&#x27;[data-values]&#x27;).textContent=`s⁺ = ${fmt(sn)} · cible a = ${fmt(a)} · racine affichée 1/s⁺ = ${fmt(1/sn)}`;
-root.querySelector(&#x27;[data-check]&#x27;).textContent=`Écart construction / formule : ${Math.abs(sn-formula).toExponential(1)} · erreur relative après ce pas : ${Math.abs(sn/a-1).toExponential(3)}`;
+root.querySelector(&#x27;[data-svalue]&#x27;).textContent=fmt(s);root.querySelector(&#x27;[data-count]&#x27;).textContent=&#x27;Step &#x27;+count;
+root.querySelector(&#x27;[data-values]&#x27;).textContent=`s⁺ = ${fmt(sn)} · target a = ${fmt(a)} · displayed root 1/s⁺ = ${fmt(1/sn)}`;
+root.querySelector(&#x27;[data-check]&#x27;).textContent=`Construction/formula discrepancy: ${Math.abs(sn-formula).toExponential(1)} · relative error after this step: ${Math.abs(sn/a-1).toExponential(3)}`;
 root.dataset.sNext=String(sn);root.dataset.residual=String(Math.abs(sn-formula));
 }
 for(const c of [pc,xc])c.addEventListener(&#x27;input&#x27;,()=&gt;{count=0;draw();});
