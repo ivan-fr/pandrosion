@@ -34,6 +34,17 @@ for(const mode of ['AK','AD','projective','arc']){
 }
 await page.locator('#degree').fill('1000000');await page.selectOption('#method','AKfast');
 if(await page.locator('#degree').getAttribute('max')!=='1000000'||await page.locator('#error').isVisible())throw Error('Fast degree limit not restored');
+// Restored pencil methods use automatic calibration and keep the original pencil geometry.
+for(const mode of ['halley','pade'])for(const p of [3,7,16]){
+ await page.locator('#degree').fill(String(p));await page.selectOption('#method',mode);await page.locator('#degree').dispatchEvent('change');
+ if(await page.locator('#method').inputValue()!==mode||await page.locator('#error').isVisible())throw Error('Pencil preparation failed: '+mode+' '+p);
+ if(await page.locator('#state').inputValue()!=='1'||await page.locator('#advanced').getAttribute('open')!==null)throw Error('Pencil workflow is not simple preparation');
+ if(await page.locator('#degree').getAttribute('max')!=='32')throw Error('Pencil degree limit missing');
+ await page.click('#iterate');if(!(await page.locator('#answer-label').innerText()).includes('étape 1'))throw Error('Pencil manual step failed');
+ if(await page.locator('#target').inputValue()!=='500000')throw Error('Pencil changed original X');
+ await page.locator('#degree').fill('33');await page.locator('#degree').dispatchEvent('change');if(!await page.locator('#error').isVisible())throw Error('Pencil degree limit ignored');
+}
+await page.locator('#degree').fill('3');await page.selectOption('#method','AKfast');
 await page.locator('#advanced > summary').click();await page.locator('#exploration').check();await page.click('#reset');
 for(const mode of ['AK','AD','projective','arc','halley','pade','circle','AKfast','ADfast','projectiveFast','arcFast']){await page.selectOption('#method',mode);if(await page.locator('#error').isVisible())throw Error(mode+': '+await page.locator('#error').innerText());await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');await page.click('#forward');await page.click('#iterate');await page.click('#reset');}
 await page.selectOption('#method','circle');await page.selectOption('#chart','uniform');await page.screenshot({path:`${output}/gallery-uniform.png`,fullPage:true});await page.selectOption('#chart','compact');await page.selectOption('#view','sphere');await page.locator('#yaw').fill('50');await page.locator('#yaw').dispatchEvent('input');await page.screenshot({path:`${output}/gallery-sphere.png`,fullPage:true});

@@ -8,7 +8,10 @@ The working target, reciprocal state, calibration certificates, manual controls,
 and independent reference calculation are inside the closed advanced panel.
 
 The four original rectangle methods (p≤32) and their four binary variants
-(p≤1,000,000) are available in this simple view, with automatic preparation.
+(p≤1,000,000), plus Pinceaux + Halley and Pinceaux + Padé (p≤32),
+are available in this simple view, with automatic preparation. The pencil methods
+retain their original 2×4 geometry; near the degree limit, numerical conditioning
+can still prevent a reliable construction and is reported explicitly.
 An out-of-range degree is reported without silently changing p or the method. Advanced exploration
 retains all eleven methods and nine historical demos. Width and height controls
 apply to the four rectangle methods and their binary variants. The three other

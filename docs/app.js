@@ -87,7 +87,7 @@ for(const selector of ['#layout-controls','#layout-status','.toolbar','#research
  const el=document.querySelector(selector);if(el)$('advanced').append(el);
 }
 $('iteration-controls').append($('iterate'));
-const preparedModes=['AK','AD','projective','arc','AKfast','ADfast','projectiveFast','arcFast'];
+const preparedModes=['AK','AD','projective','arc','halley','pade','AKfast','ADfast','projectiveFast','arcFast'];
 function automaticUI(){
  const manual=$('exploration').checked;document.body.dataset.manual=String(manual);
  for(const option of $('method').options)option.hidden=!manual&&!preparedModes.includes(option.value);
@@ -102,7 +102,8 @@ function autoSolve(){
   if(p>limit)throw Error(`Cette construction accepte p ≤ ${limit}. Choisir un degré plus petit ou une variante « Expo rapide ».`);
   const r=initializeCalibrated(p,X,'wide');
   // A new original problem always starts with the reference height, avoiding scale drift.
-  $('rect-width').value=2;$('rect-height').value=4;chooseLayout(r.X,1);
+  $('rect-width').value=2;$('rect-height').value=4;layout=null;
+  if(['AK','AD','projective','arc'].includes(baseMode($('method').value)))chooseLayout(r.X,1);
   const u=1;
   scale=r.c;initialization={...r,stopped:false,iterations:0};adaptive=null;
   $('working-target').value=r.X;$('state').value=u;rebuild();
