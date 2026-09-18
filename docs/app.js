@@ -1,3 +1,4 @@
+import {bindSphereDrag} from './sphere-drag.js';
 import {stereoLineSamples,stereoCircleSamples} from './stereography.js';
 import {construct,methods,orders,affine,point,stereo,renormalize,renormalizeOptimal,needsStereographicView,adaptRectangle,baseMode} from './geometry.js';
 import {initializeCalibrated,iterationDecision,initializationBands} from './initialization.js';
@@ -59,7 +60,7 @@ function sphere(canvas){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<
  }
  c.fillStyle=co.muted;c.fillText('Pointillés : hémisphère arrière',14,h-6);
 }
-function draw(){if($('view').value==='sphere')sphere($('overview'));else plane($('overview'));plane($('detail'),true);}
+function draw(){$('overview').classList.toggle('sphere-interactive',$('view').value==='sphere'&&!!g);if($('view').value==='sphere')sphere($('overview'));else plane($('overview'));plane($('detail'),true);}
 function stage(){if(!g)return;const n=+$('stage').value;$('stage-number').textContent=`${n} / ${g.ops.length}`;$('step-text').textContent=n?`${g.ops[n-1].kind} · ${g.ops[n-1].label}`:'Préparation fixe : rectangle, centres et supports.';$('back').disabled=n===0;$('forward').disabled=n===g.ops.length;draw();}
 function stop(){clearInterval(timer);timer=null;$('play').textContent='Parcourir';}
 function dimensions(){return ['AK','AD','projective','arc'].includes(baseMode($('method').value))?[+$('rect-width').value,+$('rect-height').value]:[2,4];}
@@ -98,6 +99,8 @@ $('normalize').onclick=()=>{try{const p=+$('degree').value,X=+$('working-target'
 $('normalize-optimal').onclick=()=>{try{initialization=null;const r=renormalizeOptimal($('method').value,+$('degree').value,+$('working-target').value,+$('state').value,$('chart').value,...dimensions());adaptive=r;scale*=r.c;$('working-target').value=r.X;$('state').value=r.s;rebuild();}catch(e){$('error').hidden=false;$('error').textContent=e.message;}};
 function example(){layout=null;$('rect-width').value=2;$('rect-height').value=4;scale=1;adaptive=null;initialization=null;manualView=false;automaticSphere=false;$('degree').value=3;$('working-target').value=2;$('state').value=.75;$('chart').value='compact';const ex=$('example').value;if(ex==='near'){$('working-target').value=1.1;$('state').value=.97;}if(['initial','final','outside'].includes(ex)){$('method').value='circle';$('state').value=ex==='initial'?1:ex==='final'?(7.75/2)**(1/3):.1;}rebuild();}
 $('example').onchange=example;$('reset').onclick=()=>{$('example').value='base';scale=1;example();};$('view').onchange=()=>{manualView=true;automaticSphere=false;$('rotation').hidden=$('view').value!=='sphere';$('drawing-title').textContent=$('view').value==='sphere'?'Image stéréographique':'Vue d’ensemble';draw();};for(const id of ['yaw','pitch'])$(id).oninput=draw;
+const cancelSphereDrag=bindSphereDrag($('overview'),$('yaw'),$('pitch'),()=>!!g&&$('view').value==='sphere',draw);
+$('view').addEventListener('change',()=>cancelSphereDrag());
 new ResizeObserver(draw).observe($('overview'));matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
 // Keep preparation controls and internal values inside a closed advanced panel.
 for(const el of document.querySelectorAll('.internal-input'))$('internal-controls').append(el);
