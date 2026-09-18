@@ -46,7 +46,7 @@ function stage(){if(!g)return;const n=+$('stage').value;$('stage-number').textCo
 function stop(){clearInterval(timer);timer=null;$('play').textContent='Parcourir';}
 function dimensions(){return ['AK','AD','projective','arc'].includes(baseMode($('method').value))?[+$('rect-width').value,+$('rect-height').value]:[2,4];}
 function chooseLayout(X=+$('working-target').value,s=+$('state').value){const [W,H]=dimensions();layout=adaptRectangle($('method').value,+$('degree').value,X,s,$('chart').value,W,H);$('rect-width').value=layout.W;$('rect-height').value=layout.H;}
-function rebuild(){stop();
+function rebuild(){stop();$('degree').max=['AKfast','ADfast','projectiveFast','arcFast'].includes($('method').value)?1000000:32;
  const adjustable=['AK','AD','projective','arc'].includes(baseMode($('method').value));for(const id of ['rect-width','rect-height','adapt-rectangle','init-band'])$(id).disabled=!adjustable;
  const [W,H]=dimensions();$('layout-status').textContent=`Rectangle : ${fmt(W)} × ${fmt(H)}. `+(layout?`Proportions choisies parmi ${layout.tested} rectangles testés pour équilibrer la vue d’ensemble. `:'')+'Les cercles sont reconstruits, jamais étirés. Les points confondus restent confondus.';
 $('initialize').disabled=!['AK','AD','projective','arc','AKfast','ADfast','projectiveFast','arcFast'].includes($('method').value);$('error').hidden=true;$('warning').hidden=true;$('chart-label').hidden=$('method').value!=='circle';try{try{g=construct($('method').value,+$('degree').value,+$('working-target').value,+$('state').value,$('chart').value,W,H);}catch(original){
@@ -87,16 +87,19 @@ for(const selector of ['#layout-controls','#layout-status','.toolbar','#research
  const el=document.querySelector(selector);if(el)$('advanced').append(el);
 }
 $('iteration-controls').append($('iterate'));
+const preparedModes=['AK','AD','projective','arc','AKfast','ADfast','projectiveFast','arcFast'];
 function automaticUI(){
  const manual=$('exploration').checked;document.body.dataset.manual=String(manual);
- for(const option of $('method').options)option.hidden=!manual&&!option.value.endsWith('fast')&&!option.value.endsWith('Fast');
- if(!manual&&!['AKfast','ADfast','projectiveFast','arcFast'].includes($('method').value))$('method').value='AKfast';
+ for(const option of $('method').options)option.hidden=!manual&&!preparedModes.includes(option.value);
+ if(!manual&&!preparedModes.includes($('method').value))$('method').value='AKfast';
 }
 function autoSolve(){
  if($('exploration').checked){rebuild();return;}
  stop();automaticUI();
  try{
   const p=+$('degree').value,X=+document.getElementById('target').value;
+  const limit=['AKfast','ADfast','projectiveFast','arcFast'].includes($('method').value)?1000000:32;$('degree').max=limit;
+  if(p>limit)throw Error(`Cette construction accepte p ≤ ${limit}. Choisir un degré plus petit ou une variante « Expo rapide ».`);
   const r=initializeCalibrated(p,X,'wide');
   // A new original problem always starts with the reference height, avoiding scale drift.
   $('rect-width').value=2;$('rect-height').value=4;chooseLayout(r.X,1);
@@ -109,5 +112,5 @@ $('calculate').onclick=autoSolve;
 document.getElementById('target').onchange=autoSolve;
 $('exploration').onchange=()=>{automaticUI();if($('exploration').checked)rebuild();else autoSolve();};
 const methodFromURL=new URLSearchParams(location.search).get('method');
-if(methods[methodFromURL]){$('method').value=methodFromURL;if(!['AKfast','ADfast','projectiveFast','arcFast'].includes(methodFromURL)){$('exploration').checked=true;$('advanced').open=true;}}
+if(methods[methodFromURL]){$('method').value=methodFromURL;if(!preparedModes.includes(methodFromURL)){$('exploration').checked=true;$('advanced').open=true;}}
 automaticUI();if($('exploration').checked)rebuild();else autoSolve();

@@ -7,7 +7,9 @@ The displayed approximation is the direct root in the original units, 1/(c*u).
 The working target, reciprocal state, calibration certificates, manual controls,
 and independent reference calculation are inside the closed advanced panel.
 
-The four binary variants are available in this simple view. Advanced exploration
+The four original rectangle methods (p≤32) and their four binary variants
+(p≤1,000,000) are available in this simple view, with automatic preparation.
+An out-of-range degree is reported without silently changing p or the method. Advanced exploration
 retains all eleven methods and nine historical demos. Width and height controls
 apply to the four rectangle methods and their binary variants. The three other
 V20 protocols retain their original 2×4 preparation.

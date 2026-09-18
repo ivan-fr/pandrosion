@@ -19,6 +19,21 @@ for(const mode of ['AKfast','ADfast','projectiveFast','arcFast']){
 }
 await page.selectOption('#method','AKfast');await page.click('#iterate');await page.screenshot({path:`${output}/simple-wide.png`,fullPage:true});
 await page.setViewportSize({width:360,height:900});await page.screenshot({path:`${output}/simple-mobile.png`,fullPage:true});if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1))throw Error('Simple mobile overflow');await page.setViewportSize({width:1280,height:1000});
+// Original constructions are available with automatic preparation and their native degree limit.
+for(const mode of ['AK','AD','projective','arc']){
+ await page.locator('#degree').fill('32');await page.selectOption('#method',mode);
+ if(await page.locator('#method').inputValue()!==mode)throw Error('Original method replaced');
+ if(await page.locator('#error').isVisible())throw Error('Original preparation failed: '+mode);
+ if(await page.locator('#degree').getAttribute('max')!=='32')throw Error('Missing native degree limit');
+ if(await page.locator('#advanced').getAttribute('open')!==null)throw Error('Original requires advanced mode');
+ if(await page.locator('#state').inputValue()!=='1')throw Error('Original auto-iterated');
+ await page.click('#iterate');if(!(await page.locator('#answer-label').innerText()).includes('étape 1'))throw Error('Original iteration failed');
+ if(await page.locator('#target').inputValue()!=='500000')throw Error('Original target changed');
+ await page.locator('#degree').fill('33');await page.locator('#degree').dispatchEvent('change');
+ if(!await page.locator('#error').isVisible()||!await page.locator('#iterate').isDisabled())throw Error('Native degree limit not enforced');
+}
+await page.locator('#degree').fill('1000000');await page.selectOption('#method','AKfast');
+if(await page.locator('#degree').getAttribute('max')!=='1000000'||await page.locator('#error').isVisible())throw Error('Fast degree limit not restored');
 await page.locator('#advanced > summary').click();await page.locator('#exploration').check();await page.click('#reset');
 for(const mode of ['AK','AD','projective','arc','halley','pade','circle','AKfast','ADfast','projectiveFast','arcFast']){await page.selectOption('#method',mode);if(await page.locator('#error').isVisible())throw Error(mode+': '+await page.locator('#error').innerText());await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');await page.click('#forward');await page.click('#iterate');await page.click('#reset');}
 await page.selectOption('#method','circle');await page.selectOption('#chart','uniform');await page.screenshot({path:`${output}/gallery-uniform.png`,fullPage:true});await page.selectOption('#chart','compact');await page.selectOption('#view','sphere');await page.locator('#yaw').fill('50');await page.locator('#yaw').dispatchEvent('input');await page.screenshot({path:`${output}/gallery-sphere.png`,fullPage:true});
