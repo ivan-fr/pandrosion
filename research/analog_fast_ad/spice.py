@@ -1,0 +1,75 @@
+"""Behavioral, clocked sample/hold SPICE prototype. No root/power oracle in deck.
+Unrolled programmable stages, NOT a validated time-multiplexed transistor core.
+"""
+from pathlib import Path
+import json,subprocess,tempfile
+import numpy as np
+import mpmath as mp
+from model import prepare,schedule,decode
+OUT=Path(__file__).parent
+
+def deck(p,Y,stress=False,step='0.2u'):
+ offset=25e-6 if stress else 0.;gain=.001 if stress else 0.;rin=50000 if stress else 1e12;leak=5e-9 if stress else 0.
+ lines=['Fast AD centered state behavioral P5', '.options reltol=1e-7 abstol=1e-12 vntol=1e-9',
+ '.model SW SW(Ron=1 Roff=1e12 Vt=0.5 Vh=0.1)',
+ 'Vreset reset 0 PULSE(1 0 10u 10n 10n 10m 20m)',
+ 'Vsample sample 0 PULSE(0 1 350u 10n 10n 10u 500u)',
+ 'Vupdate update 0 PULSE(0 1 380u 10n 10n 10u 500u)',
+ 'Sreset state 0 reset 0 SW','Cstate state 0 10n IC=0','Rleak state 0 1e12',f'Ileak state 0 {leak}',
+ 'Cnext stored 0 10n IC=0','Rnext stored 0 1e12',
+ 'Ssample candidate stored sample 0 SW','Supdate stored_read state update 0 SW',
+ 'Bstored stored_read 0 V=v(stored)']
+ def stage(name,expr):
+  lines.extend([f'B{name} {name}_drive 0 V=min(2,max(-2,({expr})))',f'R{name} {name}_drive {name} 10',f'C{name} {name} 0 100n',f'Rport_{name} {name} 0 {rin}',f'Cport_{name} {name} 0 2p'])
+ stage('q',f'v(state)+{offset}')
+ prev='q'
+ for i,op in enumerate(schedule(p)):
+  name=f'd{i}';w=op['product_weight']
+  if op['kind']=='square':expr=f'v({prev})+{w:.17g}*((1+{gain})*v({prev})*v({prev})+{offset})+{offset}'
+  else:expr=f'v({prev})+{op["copy_weight"]:.17g}*(v(q)-v({prev}))+{w:.17g}*((1+{gain})*v({prev})*v(q)+{offset})+{offset}'
+  stage(name,expr);prev=name
+ peak='abs(v(q_drive))'
+ for i in range(len(schedule(p))):peak=f'max({peak},abs(v(d{i}_drive)))'
+ lines.append(f'Bpeak stagepeak 0 V={peak}')
+ lines.extend([f'Bres residual 0 V={Y:.17g}*(1+v({prev}))',f'Bden denominator 0 V=1+v(residual)+(v(residual)-1)/{p}',
+ f'Btarget target 0 V=v(q)+2*(1+v(q)/{p})*(1-v(residual))/max(0.25,v(denominator))',
+ 'Bcandidate candidate_drive 0 V=min(2,max(-2,v(target)))','Rcandidate candidate_drive candidate 10','Ccandidate candidate 0 100n',
+ '.control','set numdgt=16','set wr_singlescale','set wr_vecnames',f'tran {step} 3m uic','wrdata wave.txt v(state) v(q) v(residual) v(candidate) v(denominator) v(target) v(stagepeak)', 'quit','.endc','.end'])
+ return '\n'.join(lines)+'\n'
+
+def run(r,stress=False,step='0.2u',keep=None):
+ text=deck(r['p'],r['Y'],stress,step)
+ with tempfile.TemporaryDirectory(prefix='pandrosion-fast-ad-') as tmp:
+  path=Path(tmp);(path/'test.cir').write_text(text)
+  proc=subprocess.run(['ngspice','-b','test.cir'],cwd=path,text=True,capture_output=True,timeout=90)
+  if proc.returncode:raise RuntimeError(proc.stdout+proc.stderr)
+  a=np.loadtxt(path/'wave.txt',skiprows=1)
+  if keep:
+   (OUT/(keep+'.cir')).write_text(text)
+   (OUT/(keep+'.log')).write_text(proc.stdout+proc.stderr)
+   # Thin exported plot samples only; measurements below use full simulator output.
+   np.savetxt(OUT/(keep+'.csv'),a[::20],delimiter=',',header='time,state,q,residual,candidate,denominator,target,stagepeak',comments='')
+ mp.mp.dps=80
+ samples=[float(np.interp((405+500*i)*1e-6,a[:,0],a[:,1]))for i in range(6)]
+ q=samples[-1];lsb=4/(2**18);adc=round(q/lsb)*lsb
+ ref=mp.exp(mp.log(mp.mpf(r['originalX']))/r['p'])
+ result=dict(p=r['p'],X=r['originalX'],stress=stress,max_step=step,q_samples=samples,q_final=q,adc18_q=adc,
+  decoded_relative_error=float(abs(mp.mpf(decode(r['c'],q,r['p']))/ref-1)),
+  adc18_decoded_relative_error=float(abs(mp.mpf(decode(r['c'],adc,r['p']))/ref-1)),
+  stage_peak=float(a[:,7].max()),denominator_min=float(a[:,5].min()),target_peak=float(abs(a[:,6]).max()),
+  final_hold_drift=float(np.interp(2980e-6,a[:,0],a[:,1])-np.interp(2905e-6,a[:,0],a[:,1])))
+ assert result['denominator_min']>.25 and result['target_peak']<2 and result['stage_peak']<1.99,'Guard/clamp activated: cannot claim normal operation'
+ return result
+
+def main():
+ cases=prepare([[3,2],[32,500000],[1000000,500000]])
+ results=[]
+ for r in cases:
+  for stress in [False,True]:
+   row=run(r,stress,keep=f'p{r["p"]}_{"stress" if stress else "ideal"}');results.append(row);print(row,flush=True)
+ # Independent time-step check of the required million-degree example.
+ check=run(cases[-1],True,'0.05u');results.append(check)
+ coarse=results[-2]
+ assert abs(check['q_final']-coarse['q_final'])<2e-5
+ (OUT/'spice_results.json').write_text(json.dumps(dict(scope='Behavioral macros, ideal clock/control and programmed coefficients; not measured silicon or PDK',runs=results),indent=2)+'\n')
+if __name__=='__main__':main()

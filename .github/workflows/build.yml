@@ -126,6 +126,7 @@ jobs:
       - run: python3 scripts/audit_fast_power.py
       - run: python3 scripts/audit_native_nondegeneracy.py
       - run: python3 scripts/audit_initialization.py
+      - run: python3 scripts/audit_analog_fast_ad.py
       - uses: actions/cache/save@v6.1.0
         if: needs.lean-base.outputs.cache-hit != 'true'
         with:
@@ -184,15 +185,22 @@ jobs:
           cache: pip
           cache-dependency-path: research/pandrosion_analog_p4/requirements.txt
       - run: sudo apt-get update && sudo apt-get install -y ngspice
-      - run: pip install -r research/pandrosion_analog_p4/requirements.txt
+      - run: pip install -r research/pandrosion_analog_p4/requirements.txt -r research/analog_fast_ad/requirements.txt
       - run: python research/pandrosion_analog_p4/simulate_p4.py
       - run: python research/pandrosion_analog_p4/verify_p4.py
+      - run: python research/analog_fast_ad/verify.py
+      - run: python research/analog_fast_ad/model.py
+      - run: python research/analog_fast_ad/precision.py
+      - run: python research/analog_fast_ad/spice.py
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: analog-p4-results
           path: |
             research/pandrosion_analog_p4/results.json
             research/pandrosion_analog_p4/VALIDATION.json
+            research/analog_fast_ad/model_results.json
+            research/analog_fast_ad/precision_results.json
+            research/analog_fast_ad/spice_results.json
   previews:
     name: Interactive geometry and browser checks
     runs-on: ubuntu-24.04

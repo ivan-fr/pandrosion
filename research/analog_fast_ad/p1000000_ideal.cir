@@ -1,0 +1,161 @@
+Fast AD centered state behavioral P5
+.options reltol=1e-7 abstol=1e-12 vntol=1e-9
+.model SW SW(Ron=1 Roff=1e12 Vt=0.5 Vh=0.1)
+Vreset reset 0 PULSE(1 0 10u 10n 10n 10m 20m)
+Vsample sample 0 PULSE(0 1 350u 10n 10n 10u 500u)
+Vupdate update 0 PULSE(0 1 380u 10n 10n 10u 500u)
+Sreset state 0 reset 0 SW
+Cstate state 0 10n IC=0
+Rleak state 0 1e12
+Ileak state 0 0.0
+Cnext stored 0 10n IC=0
+Rnext stored 0 1e12
+Ssample candidate stored sample 0 SW
+Supdate stored_read state update 0 SW
+Bstored stored_read 0 V=v(stored)
+Bq q_drive 0 V=min(2,max(-2,(v(state)+0.0)))
+Rq q_drive q 10
+Cq q 0 100n
+Rport_q q 0 1000000000000.0
+Cport_q q 0 2p
+Bd0 d0_drive 0 V=min(2,max(-2,(v(q)+4.9999999999999998e-07*((1+0.0)*v(q)*v(q)+0.0)+0.0)))
+Rd0 d0_drive d0 10
+Cd0 d0 0 100n
+Rport_d0 d0 0 1000000000000.0
+Cport_d0 d0 0 2p
+Bd1 d1_drive 0 V=min(2,max(-2,(v(d0)+0.33333333333333331*(v(q)-v(d0))+6.6666666666666671e-07*((1+0.0)*v(d0)*v(q)+0.0)+0.0)))
+Rd1 d1_drive d1 10
+Cd1 d1 0 100n
+Rport_d1 d1 0 1000000000000.0
+Cport_d1 d1 0 2p
+Bd2 d2_drive 0 V=min(2,max(-2,(v(d1)+1.5e-06*((1+0.0)*v(d1)*v(d1)+0.0)+0.0)))
+Rd2 d2_drive d2 10
+Cd2 d2 0 100n
+Rport_d2 d2 0 1000000000000.0
+Cport_d2 d2 0 2p
+Bd3 d3_drive 0 V=min(2,max(-2,(v(d2)+0.14285714285714285*(v(q)-v(d2))+8.5714285714285713e-07*((1+0.0)*v(d2)*v(q)+0.0)+0.0)))
+Rd3 d3_drive d3 10
+Cd3 d3 0 100n
+Rport_d3 d3 0 1000000000000.0
+Cport_d3 d3 0 2p
+Bd4 d4_drive 0 V=min(2,max(-2,(v(d3)+3.4999999999999999e-06*((1+0.0)*v(d3)*v(d3)+0.0)+0.0)))
+Rd4 d4_drive d4 10
+Cd4 d4 0 100n
+Rport_d4 d4 0 1000000000000.0
+Cport_d4 d4 0 2p
+Bd5 d5_drive 0 V=min(2,max(-2,(v(d4)+0.066666666666666666*(v(q)-v(d4))+9.3333333333333333e-07*((1+0.0)*v(d4)*v(q)+0.0)+0.0)))
+Rd5 d5_drive d5 10
+Cd5 d5 0 100n
+Rport_d5 d5 0 1000000000000.0
+Cport_d5 d5 0 2p
+Bd6 d6_drive 0 V=min(2,max(-2,(v(d5)+7.5000000000000002e-06*((1+0.0)*v(d5)*v(d5)+0.0)+0.0)))
+Rd6 d6_drive d6 10
+Cd6 d6 0 100n
+Rport_d6 d6 0 1000000000000.0
+Cport_d6 d6 0 2p
+Bd7 d7_drive 0 V=min(2,max(-2,(v(d6)+1.5e-05*((1+0.0)*v(d6)*v(d6)+0.0)+0.0)))
+Rd7 d7_drive d7 10
+Cd7 d7 0 100n
+Rport_d7 d7 0 1000000000000.0
+Cport_d7 d7 0 2p
+Bd8 d8_drive 0 V=min(2,max(-2,(v(d7)+0.016393442622950821*(v(q)-v(d7))+9.8360655737704926e-07*((1+0.0)*v(d7)*v(q)+0.0)+0.0)))
+Rd8 d8_drive d8 10
+Cd8 d8 0 100n
+Rport_d8 d8 0 1000000000000.0
+Cport_d8 d8 0 2p
+Bd9 d9_drive 0 V=min(2,max(-2,(v(d8)+3.0499999999999999e-05*((1+0.0)*v(d8)*v(d8)+0.0)+0.0)))
+Rd9 d9_drive d9 10
+Cd9 d9 0 100n
+Rport_d9 d9 0 1000000000000.0
+Cport_d9 d9 0 2p
+Bd10 d10_drive 0 V=min(2,max(-2,(v(d9)+6.0999999999999999e-05*((1+0.0)*v(d9)*v(d9)+0.0)+0.0)))
+Rd10 d10_drive d10 10
+Cd10 d10 0 100n
+Rport_d10 d10 0 1000000000000.0
+Cport_d10 d10 0 2p
+Bd11 d11_drive 0 V=min(2,max(-2,(v(d10)+0.000122*((1+0.0)*v(d10)*v(d10)+0.0)+0.0)))
+Rd11 d11_drive d11 10
+Cd11 d11 0 100n
+Rport_d11 d11 0 1000000000000.0
+Cport_d11 d11 0 2p
+Bd12 d12_drive 0 V=min(2,max(-2,(v(d11)+0.00024399999999999999*((1+0.0)*v(d11)*v(d11)+0.0)+0.0)))
+Rd12 d12_drive d12 10
+Cd12 d12 0 100n
+Rport_d12 d12 0 1000000000000.0
+Cport_d12 d12 0 2p
+Bd13 d13_drive 0 V=min(2,max(-2,(v(d12)+0.00048799999999999999*((1+0.0)*v(d12)*v(d12)+0.0)+0.0)))
+Rd13 d13_drive d13 10
+Cd13 d13 0 100n
+Rport_d13 d13 0 1000000000000.0
+Cport_d13 d13 0 2p
+Bd14 d14_drive 0 V=min(2,max(-2,(v(d13)+0.00051203277009728623*(v(q)-v(d13))+9.9948796722990274e-07*((1+0.0)*v(d13)*v(q)+0.0)+0.0)))
+Rd14 d14_drive d14 10
+Cd14 d14 0 100n
+Rport_d14 d14 0 1000000000000.0
+Cport_d14 d14 0 2p
+Bd15 d15_drive 0 V=min(2,max(-2,(v(d14)+0.00097650000000000005*((1+0.0)*v(d14)*v(d14)+0.0)+0.0)))
+Rd15 d15_drive d15 10
+Cd15 d15 0 100n
+Rport_d15 d15 0 1000000000000.0
+Cport_d15 d15 0 2p
+Bd16 d16_drive 0 V=min(2,max(-2,(v(d15)+0.0019530000000000001*((1+0.0)*v(d15)*v(d15)+0.0)+0.0)))
+Rd16 d16_drive d16 10
+Cd16 d16 0 100n
+Rport_d16 d16 0 1000000000000.0
+Cport_d16 d16 0 2p
+Bd17 d17_drive 0 V=min(2,max(-2,(v(d16)+0.0039060000000000002*((1+0.0)*v(d16)*v(d16)+0.0)+0.0)))
+Rd17 d17_drive d17 10
+Cd17 d17 0 100n
+Rport_d17 d17 0 1000000000000.0
+Cport_d17 d17 0 2p
+Bd18 d18_drive 0 V=min(2,max(-2,(v(d17)+6.3999999999999997e-05*(v(q)-v(d17))+9.9993600000000009e-07*((1+0.0)*v(d17)*v(q)+0.0)+0.0)))
+Rd18 d18_drive d18 10
+Cd18 d18 0 100n
+Rport_d18 d18 0 1000000000000.0
+Cport_d18 d18 0 2p
+Bd19 d19_drive 0 V=min(2,max(-2,(v(d18)+0.0078125*((1+0.0)*v(d18)*v(d18)+0.0)+0.0)))
+Rd19 d19_drive d19 10
+Cd19 d19 0 100n
+Rport_d19 d19 0 1000000000000.0
+Cport_d19 d19 0 2p
+Bd20 d20_drive 0 V=min(2,max(-2,(v(d19)+0.015625*((1+0.0)*v(d19)*v(d19)+0.0)+0.0)))
+Rd20 d20_drive d20 10
+Cd20 d20 0 100n
+Rport_d20 d20 0 1000000000000.0
+Cport_d20 d20 0 2p
+Bd21 d21_drive 0 V=min(2,max(-2,(v(d20)+0.03125*((1+0.0)*v(d20)*v(d20)+0.0)+0.0)))
+Rd21 d21_drive d21 10
+Cd21 d21 0 100n
+Rport_d21 d21 0 1000000000000.0
+Cport_d21 d21 0 2p
+Bd22 d22_drive 0 V=min(2,max(-2,(v(d21)+0.0625*((1+0.0)*v(d21)*v(d21)+0.0)+0.0)))
+Rd22 d22_drive d22 10
+Cd22 d22 0 100n
+Rport_d22 d22 0 1000000000000.0
+Cport_d22 d22 0 2p
+Bd23 d23_drive 0 V=min(2,max(-2,(v(d22)+0.125*((1+0.0)*v(d22)*v(d22)+0.0)+0.0)))
+Rd23 d23_drive d23 10
+Cd23 d23 0 100n
+Rport_d23 d23 0 1000000000000.0
+Cport_d23 d23 0 2p
+Bd24 d24_drive 0 V=min(2,max(-2,(v(d23)+0.25*((1+0.0)*v(d23)*v(d23)+0.0)+0.0)))
+Rd24 d24_drive d24 10
+Cd24 d24 0 100n
+Rport_d24 d24 0 1000000000000.0
+Cport_d24 d24 0 2p
+Bpeak stagepeak 0 V=max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(max(abs(v(q_drive)),abs(v(d0_drive))),abs(v(d1_drive))),abs(v(d2_drive))),abs(v(d3_drive))),abs(v(d4_drive))),abs(v(d5_drive))),abs(v(d6_drive))),abs(v(d7_drive))),abs(v(d8_drive))),abs(v(d9_drive))),abs(v(d10_drive))),abs(v(d11_drive))),abs(v(d12_drive))),abs(v(d13_drive))),abs(v(d14_drive))),abs(v(d15_drive))),abs(v(d16_drive))),abs(v(d17_drive))),abs(v(d18_drive))),abs(v(d19_drive))),abs(v(d20_drive))),abs(v(d21_drive))),abs(v(d22_drive))),abs(v(d23_drive))),abs(v(d24_drive)))
+Bres residual 0 V=1.2810463789184601*(1+v(d24))
+Bden denominator 0 V=1+v(residual)+(v(residual)-1)/1000000
+Btarget target 0 V=v(q)+2*(1+v(q)/1000000)*(1-v(residual))/max(0.25,v(denominator))
+Bcandidate candidate_drive 0 V=min(2,max(-2,v(target)))
+Rcandidate candidate_drive candidate 10
+Ccandidate candidate 0 100n
+.control
+set numdgt=16
+set wr_singlescale
+set wr_vecnames
+tran 0.2u 3m uic
+wrdata wave.txt v(state) v(q) v(residual) v(candidate) v(denominator) v(target) v(stagepeak)
+quit
+.endc
+.end

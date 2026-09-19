@@ -61,7 +61,7 @@ The initialization/dimension module has **34 audited declarations**. See
 
 ## Lean
 
-The repository includes all 238 source modules in `LeanMath/`, 31 supplementary research modules and two standalone algebra files in `lean/`. `LeanMath.lean` imports the complete main library. Historical coefficient certificates are retained, accounting for most of the source size.
+The repository includes all 239 source modules in `LeanMath/`, 31 supplementary research modules and two standalone algebra files in `lean/`. `LeanMath.lean` imports the complete main library. Historical coefficient certificates are retained, accounting for most of the source size.
 
 Lean and mathlib are pinned to **4.33.1**. After installing [elan](https://github.com/leanprover/elan):
 
@@ -72,13 +72,21 @@ python3 scripts/audit_lean.py
 python3 scripts/audit_fast_power.py
 python3 scripts/audit_native_nondegeneracy.py
 python3 scripts/audit_initialization.py
+python3 scripts/audit_analog_fast_ad.py
 ```
 
-The build script checks every one of the 271 modules in dependency order and then all default library targets. The V20 axiom audit checks **149 geometric declarations plus 11 analytical background declarations** and permits only `propext`, `Classical.choice` and `Quot.sound`. This audit has a narrower scope than the full library build. See the claim-coverage document for the boundary between formal algebraic certificates and written analytic proofs; in particular, the complete analytic convergence theorem for decentered AD is not yet formalized.
+The build script checks every one of the 272 modules in dependency order and then all default library targets. The V20 axiom audit checks **149 geometric declarations plus 11 analytical background declarations** and permits only `propext`, `Classical.choice` and `Quot.sound`. This audit has a narrower scope than the full library build. See the claim-coverage document for the boundary between formal algebraic certificates and written analytic proofs; in particular, the complete analytic convergence theorem for decentered AD is not yet formalized.
 
 The paper also retains its self-contained 57-module source snapshot in `paper/reciprocal_geometry_v20/formal/`.
 
 ## Analog prototype
+
+The new [binary-power AD prototype](research/analog_fast_ad/README.md) uses the
+gallery's certified digital preparation and an amplified analog state
+`q=p(u−1)`. It includes a behavioral SPICE example at p=1,000,000, X=500,000,
+six Lean arithmetic certificates and explicit finite-precision limitations.
+It is a mixed-signal feasibility model, not fabricated hardware.
+
 
 The analog work consists of authored behavioral SPICE models, circuit netlists and numerical validation. It is a simulation-stage design, without a fabricated chip, foundry PDK or physical layout. The models are not manufacturer macromodels.
 
@@ -116,7 +124,7 @@ The paper build requires Tectonic or a TeX installation with `latexmk`. Supplied
 
 The badge links to the actual GitHub Actions workflow. It passes only when all validation areas succeed:
 
-1. Build all 271 Lean sources and the complete library; check the frozen 149+11 audit and the separate 22, 51 and 34 declaration post-V20 audits.
+1. Build all 272 Lean sources and the complete library; check the frozen 149+11 audit and the separate 22, 51, 34 and 6 declaration post-V20 audits.
 2. Repeat symbolic and high precision geometry checks.
 3. Rebuild the V20 PDF and the analog companion PDF.
 4. Rerun the P4 SPICE study and its validation checks.
