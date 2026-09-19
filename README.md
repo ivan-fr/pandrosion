@@ -164,3 +164,7 @@ with added calibration and about 24 ms readout latency. A separate noisy
 completion controller passes 18 normal and four fail-closed fault tests.
 [Detailed results and assumptions](research/analog_fast_ad/PRECISION_REVISION_RESULTS.md)
 are reproduced by a dedicated CI job; physical circuit performance remains unvalidated.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Copyright © 2026 Ivan Besevic.
