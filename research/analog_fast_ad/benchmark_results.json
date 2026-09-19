@@ -1,0 +1,514 @@
+{
+  "scope": "Host JS timings, non-portable; no speed or energy advantage claimed",
+  "input_variation": "256 inputs X*(1+i/1024); varying calls to prevent constant folding",
+  "node": "v24.20.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "cpu": "Apple M5",
+  "rows": [
+    {
+      "p": 3,
+      "X": 1e-300,
+      "comparisons": 336,
+      "stages": 2,
+      "prepared_root": 9.1438991302582e-101,
+      "centered_root": 1e-100,
+      "standard_root": 1.0000000000000174e-100,
+      "preparation": {
+        "median_us": 421.52499999999975,
+        "p10_us": 411.8875000000003,
+        "p90_us": 426.62079999999776,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.11957999999992808,
+        "p10_us": 0.11791499999986854,
+        "p90_us": 0.4454150000000823,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 407.60830000000396,
+        "p10_us": 394.9292000000014,
+        "p90_us": 427.4166999999978,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.01429200000001174,
+        "p10_us": 0.014000000000010004,
+        "p90_us": 0.023458000000005086,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 1.163886919086663e-17,
+      "standard_root_relative_error": 1.7396540454803065e-14
+    },
+    {
+      "p": 3,
+      "X": 500000,
+      "comparisons": 7,
+      "stages": 2,
+      "prepared_root": 64,
+      "centered_root": 79.37005259840998,
+      "standard_root": 79.37005259840996,
+      "preparation": {
+        "median_us": 12.266700000003539,
+        "p10_us": 9.858299999996234,
+        "p90_us": 17.329100000000608,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.061044999999921856,
+        "p10_us": 0.06021000000004051,
+        "p90_us": 0.07291500000008,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 12.412499999999227,
+        "p10_us": 8.71249999999577,
+        "p90_us": 15.504199999998036,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.014833500000008826,
+        "p10_us": 0.014687500000007958,
+        "p90_us": 0.044999999999987494,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 1.300173688640888e-16,
+      "standard_root_relative_error": 2.2807373098952754e-16
+    },
+    {
+      "p": 3,
+      "X": 1e+300,
+      "comparisons": 333,
+      "stages": 2,
+      "prepared_root": 8.749002899132048e+99,
+      "centered_root": 1e+100,
+      "standard_root": 9.999999999999827e+99,
+      "preparation": {
+        "median_us": 422.5500000000011,
+        "p10_us": 419.4249999999897,
+        "p90_us": 427.59170000000495,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.07312500000011823,
+        "p10_us": 0.07229499999994005,
+        "p90_us": 0.08812500000033197,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 424.0624999999909,
+        "p10_us": 420.1624999999922,
+        "p90_us": 438.73330000000124,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.014896000000021559,
+        "p10_us": 0.01466699999997445,
+        "p90_us": 0.016958499999986998,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 1.5986956419748883e-18,
+      "standard_root_relative_error": 1.7291351836450963e-14
+    },
+    {
+      "p": 32,
+      "X": 1e-300,
+      "comparisons": 36,
+      "stages": 5,
+      "prepared_root": 4.13921144273546e-10,
+      "centered_root": 4.2169650342858224e-10,
+      "standard_root": 4.2169650342858255e-10,
+      "preparation": {
+        "median_us": 87.24580000000515,
+        "p10_us": 82.43340000000217,
+        "p90_us": 92.50419999999622,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.16874999999970441,
+        "p10_us": 0.15687500000012733,
+        "p90_us": 0.17249999999989996,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 89.41250000000309,
+        "p10_us": 83.16660000000411,
+        "p90_us": 91.82919999999513,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.015229000000033466,
+        "p10_us": 0.015000000000043201,
+        "p90_us": 0.01772899999997435,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 2.871356251934484e-17,
+      "standard_root_relative_error": 7.068693203961618e-16
+    },
+    {
+      "p": 32,
+      "X": 500000,
+      "comparisons": 7,
+      "stages": 5,
+      "prepared_root": 1.4883720930232558,
+      "centered_root": 1.5069290760695855,
+      "standard_root": 1.5069290760695855,
+      "preparation": {
+        "median_us": 17.349999999999,
+        "p10_us": 16.85420000000022,
+        "p90_us": 22.10420000000113,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.15104500000006738,
+        "p10_us": 0.1506249999999909,
+        "p90_us": 0.1583349999998518,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 16.999999999995907,
+        "p10_us": 16.67089999999689,
+        "p90_us": 21.162500000002638,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.014145500000040556,
+        "p10_us": 0.014062500000022737,
+        "p90_us": 0.014208499999995183,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 6.096897028394021e-17,
+      "standard_root_relative_error": 6.096897028394021e-17
+    },
+    {
+      "p": 32,
+      "X": 1e+300,
+      "comparisons": 37,
+      "stages": 5,
+      "prepared_root": 2369637128.827586,
+      "centered_root": 2371373705.661655,
+      "standard_root": 2371373705.6616535,
+      "preparation": {
+        "median_us": 88.31250000000637,
+        "p10_us": 86.88750000000027,
+        "p90_us": 90.08750000000418,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.1527099999998427,
+        "p10_us": 0.15228999999976622,
+        "p90_us": 0.15396000000009735,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 87.19160000000556,
+        "p10_us": 86.64170000000695,
+        "p90_us": 89.27919999999858,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.016083499999979267,
+        "p10_us": 0.01587499999999409,
+        "p90_us": 0.016416499999991174,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 1.33405547732485e-16,
+      "standard_root_relative_error": 7.366472346897235e-16
+    },
+    {
+      "p": 983039,
+      "X": 1e-300,
+      "comparisons": 23,
+      "stages": 37,
+      "prepared_root": 0.999297159523822,
+      "centered_root": 0.9992975529120869,
+      "standard_root": 0.9992975529120869,
+      "preparation": {
+        "median_us": 255.80830000000105,
+        "p10_us": 252.1333000000027,
+        "p90_us": 267.14580000000296,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.9647950000004357,
+        "p10_us": 0.8518749999996089,
+        "p90_us": 1.0420850000002702,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 258.6749999999938,
+        "p10_us": 254.9874999999929,
+        "p90_us": 266.94579999998496,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.013082999999937783,
+        "p10_us": 0.013020999999980631,
+        "p90_us": 0.013187499999958163,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 2.7867001403906948e-19,
+      "standard_root_relative_error": 2.7867001403906948e-19
+    },
+    {
+      "p": 983039,
+      "X": 500000,
+      "comparisons": 22,
+      "stages": 37,
+      "prepared_root": 1.0000128747690291,
+      "centered_root": 1.0000133488609928,
+      "standard_root": 1.0000133488609928,
+      "preparation": {
+        "median_us": 234.58749999999782,
+        "p10_us": 230.54999999999382,
+        "p90_us": 237.65829999999823,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.962294999999358,
+        "p10_us": 0.95083499999987,
+        "p90_us": 0.9947899999997389,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 234.82080000001133,
+        "p10_us": 229.8584000000119,
+        "p90_us": 239.01250000001255,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.012999999999919964,
+        "p10_us": 0.012895999999955166,
+        "p90_us": 0.013229000000023916,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 9.654828107360318e-18,
+      "standard_root_relative_error": 9.654828107360318e-18
+    },
+    {
+      "p": 983039,
+      "X": 1e+300,
+      "comparisons": 16,
+      "stages": 37,
+      "prepared_root": 1.0007023973125668,
+      "centered_root": 1.0007029408666779,
+      "standard_root": 1.0007029408666779,
+      "preparation": {
+        "median_us": 182.07499999998618,
+        "p10_us": 180.79999999999927,
+        "p90_us": 250.324999999998,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.9654199999999946,
+        "p10_us": 0.9643749999997908,
+        "p90_us": 0.9787499999993088,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 184.6499999999878,
+        "p10_us": 182.30419999999867,
+        "p90_us": 248.18330000000515,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.013062500000046384,
+        "p10_us": 0.013000000000033651,
+        "p90_us": 0.013291500000036649,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 8.082657149653276e-18,
+      "standard_root_relative_error": 8.082657149653276e-18
+    },
+    {
+      "p": 1000000,
+      "X": 1e-300,
+      "comparisons": 22,
+      "stages": 25,
+      "prepared_root": 0.9993090638434539,
+      "centered_root": 0.9993094630025899,
+      "standard_root": 0.9993094630025899,
+      "preparation": {
+        "median_us": 178.59999999998308,
+        "p10_us": 177.98330000000533,
+        "p90_us": 180.11669999998503,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.6841699999995399,
+        "p10_us": 0.6758350000006885,
+        "p90_us": 0.6893749999994725,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 179.51249999998709,
+        "p10_us": 178.67080000000897,
+        "p90_us": 181.15410000000338,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.013166500000011183,
+        "p10_us": 0.013062500000046384,
+        "p90_us": 0.013312499999983629,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 1.5520983659085056e-17,
+      "standard_root_relative_error": 1.5520983659085056e-17
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "comparisons": 22,
+      "stages": 25,
+      "prepared_root": 1.0000128747690291,
+      "centered_root": 1.000013122449476,
+      "standard_root": 1.000013122449476,
+      "preparation": {
+        "median_us": 179.20830000000478,
+        "p10_us": 177.17079999999896,
+        "p90_us": 182.97079999999823,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.687914999999748,
+        "p10_us": 0.6870850000007067,
+        "p90_us": 0.6889599999999518,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 179.3042000000014,
+        "p10_us": 178.1791000000112,
+        "p90_us": 183.91659999999774,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.012875000000008185,
+        "p10_us": 0.012791499999934786,
+        "p90_us": 0.014708000000041466,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 5.824187712227614e-17,
+      "standard_root_relative_error": 5.824187712227614e-17
+    },
+    {
+      "p": 1000000,
+      "X": 1e+300,
+      "comparisons": 19,
+      "stages": 25,
+      "prepared_root": 1.0006909372697672,
+      "centered_root": 1.000691014168259,
+      "standard_root": 1.000691014168259,
+      "preparation": {
+        "median_us": 154.6875,
+        "p10_us": 152.63330000000224,
+        "p90_us": 156.55839999999444,
+        "batch": 10,
+        "repeats": 21
+      },
+      "centered_six_steps_only": {
+        "median_us": 0.6910399999992478,
+        "p10_us": 0.6872899999996207,
+        "p90_us": 0.7195849999993698,
+        "batch": 200,
+        "repeats": 21
+      },
+      "full_centered_digital": {
+        "median_us": 156.82500000000346,
+        "p10_us": 154.93750000000546,
+        "p90_us": 158.42089999998734,
+        "batch": 10,
+        "repeats": 21
+      },
+      "standard_library": {
+        "median_us": 0.013229000000023916,
+        "p10_us": 0.013083499999993364,
+        "p90_us": 0.013395500000001448,
+        "batch": 2000,
+        "repeats": 21
+      },
+      "analog_core_nominal_us": 2905,
+      "analog_core_slow_us": 87150,
+      "note": "Analog schedule excludes programming, ADC and final digital decoding; energy unmeasured.",
+      "centered_root_relative_error": 1.192196703176828e-17,
+      "standard_root_relative_error": 1.192196703176828e-17
+    }
+  ]
+}

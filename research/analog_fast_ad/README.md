@@ -11,6 +11,11 @@ has relative error about **1.88×10⁻⁹**, including an idealized 18-bit state
 That precision belongs to a **digital coarse scale plus analog correction**;
 it is not the resolution of an ordinary single analog output voltage.
 
+The [engineering follow-up](ENGINEERING_REVIEW.md) now combines timed errors,
+implements simulated electrical-reference calibration, and compares full digital
+execution. It finds no demonstrated speed advantage and no uniform accuracy
+guarantee; see the [measured simulation tables](ENGINEERING_RESULTS.md).
+
 ## Supported inputs and the meaning of “all p and X”
 
 The algebra applies for positive X and integer p≥3. A finite device cannot

@@ -1,5 +1,9 @@
 # Hardware accuracy: what is quantified and what remains open
 
+Follow-up: [combined timed tests, simulated calibration and digital comparison](ENGINEERING_REVIEW.md)
+now address several gaps identified below. The original `trim_target` assumptions
+remain distinct from the fitted-calibration experiment.
+
 The large-degree centered representation survives a useful first error-budget
 study. It does **not** yet provide a uniform hardware accuracy across degrees.
 The limiting case for root precision is small p, whereas long binary chains
