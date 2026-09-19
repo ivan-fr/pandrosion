@@ -2,8 +2,10 @@
 export const methods={AK:'Pandrosion AK',AD:'Pandrosion AD',projective:'Projective AD [2/1]',arc:'Decentered-arc AD',halley:'Pencils · Halley',pade:'Pencils · Padé [2/2]',circle:'Fixed circle · inverse [2/2]'};
 export const orders={AK:2,AD:3,projective:4,arc:5,halley:3,pade:5,circle:5};
 export const fastModes={AKfast:'AK',ADfast:'AD',projectiveFast:'projective',arcFast:'arc'};
-export const baseMode=mode=>fastModes[mode]||mode;
+export const dualModes={AKdual:'AK',ADdual:'AD',projectiveDual:'projective',arcDual:'arc'};
+export const baseMode=mode=>fastModes[mode]||dualModes[mode]||mode;
 for(const [fast,base] of Object.entries(fastModes)){methods[fast]=`Fast exponentiation + ${methods[base]}`;orders[fast]=orders[base];}
+for(const [dual,base] of Object.entries(dualModes)){methods[dual]=`Fixed AK + ${base==='AK'?'Newton':base==='AD'?'Halley':base==='projective'?'[2/1]':'decentered-arc'} transport`;orders[dual]=orders[base];}
 export function binaryCount(p){if(!Number.isSafeInteger(p)||p<1)throw Error('A positive integer exponent is required.');const bits=p.toString(2);return bits.length-1+[...bits].filter(x=>x==='1').length-1;}
 export function cross(a,b){const c=[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],m=Math.max(...c.map(Math.abs));if(!c.every(Number.isFinite))throw Error('Values are too large for browser intersection calculations. Renormalize.');if(m===0)throw Error('Coincident points or nonunique intersection: change the chart or starting point.');return c.map(x=>x/m);}
 export function affine(q){return Math.abs(q[2])<1e-11?null:[q[0]/q[2],q[1]/q[2]];}
@@ -30,8 +32,8 @@ export function correction(mode,p,t){
  if(disc<=0)throw Error('The residual is outside the transverse real domain of the circle. Choose a closer starting point.');
  return t<=1?(A-t*C)/(B*(1-t)+Math.sqrt(disc)):(Math.sqrt(disc)-B*(1-t))/(t*A-C);
 }
-export function construct(mode,p,X,s,chart='compact',W=2,H=4){
- const requestedMode=mode,fast=!!fastModes[mode];mode=baseMode(mode);
+export function construct(mode,p,X,s,chart='compact',W=2,H=4,supportLevel=p,binaryPower=false){
+ const requestedMode=mode,fast=!!fastModes[mode]||binaryPower,dual=!!dualModes[mode];mode=baseMode(mode);
  if(!methods[requestedMode]||!Number.isSafeInteger(p)||p<3||p>(fast?1_000_000:32)||!(X>0&&s>0)||!Number.isFinite(X+s))throw Error('Choose an integer p from 3 to 32 (1,000,000 in binary mode), with positive X and s.');
  if(!(W>0&&H>0&&Number.isFinite(W+H)))throw Error('Positive finite dimensions are required.');
  if(!['AK','AD','projective','arc'].includes(mode)&&(W!==2||H!==4))throw Error('These dimensions are available only for the four rectangle methods.');
@@ -72,7 +74,53 @@ export function construct(mode,p,X,s,chart='compact',W=2,H=4){
    op(`Horizontal through ${li}`,'P',horizontal,names);prev=bi;
   }
   }
-  let support;
+  let support,transportName='E';
+  if(dual){
+   if(!(supportLevel>0&&Number.isFinite(supportLevel)))throw Error('A positive finite support level is required.');
+   // Reuse the last horizontal of the power chain: it already passes through E.
+   const ey=affine(points.E)[1],my=affine(points.M)[1],eh=[0,1,-ey],mh=[0,1,-my];
+   if(fast&&(mode!=='AK'||supportLevel!==p))op('Horizontal through E for the transport readout','P',eh);
+   add('K',point(W*(1-X/supportLevel),0),0);support=cross(points.A,points.K);fixed.push({line:support,label:'Fixed AK'});
+   if(mode==='AK'&&supportLevel!==p){
+    const rail=[1,0,-W*p/supportLevel];fixed.push({line:rail,label:'Constant transport rail'});
+    add('R',cross(eh,rail));ops.at(-1).names.push('R');transportName='R';
+   }else if(mode==='AD'){
+    // On this fixed oblique rail, x/W = (p+1+(p-1)t)/(2p).
+    const rail=[2*supportLevel/W,(p-1)*X/H,-(p+1+(p-1)*X)];
+    fixed.push({line:rail,label:'Halley transport rail'});
+    add('R',cross(eh,rail));ops.at(-1).names.push('R');transportName='R';
+   }else if(mode==='projective'){
+    const pv=p+1,u=2*p-1,t0=(supportLevel*(5*p-1)-2*p*pv)/(2*p*u-supportLevel*pv);
+    if(!Number.isFinite(t0))throw Error('This support level needs a different projective chart.');
+    const rail=[0,1,-H*(1-t0/X)];
+    add('Zr',point(2*p*W*u/(supportLevel*pv),H+H*(5*p-1)/(X*pv)),0);
+    fixed.push({line:rail,label:'Projection rail'});
+    meet('Zr','E',rail,'Qr','ZrE meets the fixed projection rail at Qr');
+    const v=parallel([1,0,0],points.Qr);add('R',cross(v,eh),ops.length+1);
+    op('Vertical through Qr meets the last chain horizontal at R','P',v,['R']);transportName='R';
+   }else if(mode==='arc'){
+    const beta=(p-1)*Math.sqrt((p-2)/(12*p)),alpha=(5*p+2)/(p-2),lambda=W*X*beta/(supportLevel*H);
+    const gy=H+H*alpha/X,delta=W*beta/supportLevel*Math.sqrt(alpha*alpha-1);
+    add('Gr',point(W,gy),0);add('Gscale',point(0,gy),0);
+    add('Fr',point(W/supportLevel,my+delta),0);fixed.push({line:mh,label:'Horizontal through M'});
+    let radius;
+    if(lambda===1){radius=Math.hypot(...affine(points.E).map((v,i)=>v-affine(points.Gr)[i]));}
+    else{
+     // A fixed projective center scales EG by lambda onto the left vertical.
+     add('Zscale',[W*lambda,(lambda-1)*gy,lambda-1],0);
+     meet('Zscale','E',left,'Escaled','ZscaleE transfers the scaled radius to Escaled');
+     radius=Math.hypot(...affine(points.Escaled).map((v,i)=>v-affine(points.Gscale)[i]));
+    }
+    const gap=radius-delta;if(!(gap>0)||!Number.isFinite(radius))throw Error('Dual arc is tangent or numerically unresolved. Change the starting point or rectangle.');
+    transversality.push(gap/radius);
+    const dx=Math.sqrt(gap)*Math.sqrt(radius+delta);
+    add('Qr',point(W/supportLevel+dx,my),ops.length+1);add('Qother',point(W/supportLevel-dx,my),ops.length+1);
+    circles.push({center:affine(points.Fr),radius,stage:ops.length+1,label:'Transport arc: right branch'});
+    op('Arc centered at Fr: select the right intersection Qr','C',null,['Qr','Qother']);
+    const v=parallel([1,0,0],points.Qr);add('R',cross(v,eh),ops.length+1);
+    op('Vertical through Qr meets the last chain horizontal at R','P',v,['R']);transportName='R';
+   }
+  }else{
   if(mode==='AK'){add('K',point(W*(1-X/p),0),0);support=cross(points.A,points.K);fixed.push({line:support,label:'AK'});}
   if(mode==='AD'||mode==='arc'){
    let F,radius,dx;
@@ -87,8 +135,9 @@ export function construct(mode,p,X,s,chart='compact',W=2,H=4){
    const Z=point(W*(1+(5*p-1)/(2*p*(2*p-1))),H*(1+(p+1)/((2*p-1)*X))),ell=[0,1,-H*(1+(5*p-1)/((p+1)*X))];add('Z',Z,0);fixed.push({line:ell,label:'ℓ'});
    meet('Z','E',ell,'D','ZE meets ℓ at D');support=cross(points.A,points.D);op('Join A to D','J',support);
   }
-  const green=cross(points.M,points.E);op('Join M to E','J',green);
-  const report=parallel(green,points.P);add('T',cross(report,support),ops.length+1);op('Parallel to ME through P → T','P',report,['T']);
+  }
+  const green=cross(points.M,points[transportName]);op(`Join M to ${transportName}`,'J',green);
+  const report=parallel(green,points.P);add('T',cross(report,support),ops.length+1);op(`Parallel to M${transportName} through P → T`,'P',report,['T']);
   const finish=parallel([0,1,0],points.T);add('Pnext',cross(finish,right),ops.length+1);op('Horizontal through T → P⁺','P',finish,['Pnext']);
  }else{
   meet('C','P',top,'V','CP gives center V');let curr='P',par;
@@ -122,7 +171,7 @@ export function construct(mode,p,X,s,chart='compact',W=2,H=4){
  if(!(value>0)||!Number.isFinite(value+discrepancy)||discrepancy>2e-7)throw Error('The configuration is too ill-conditioned for browser precision. Renormalize or change the chart.');
  const infinite=Object.entries(points).filter(([,v])=>!affine(v)).map(([n])=>n);
  if(infinite.length)warnings.push('Projective continuation: '+infinite.join(', ')+' at infinity. The cost of the finite protocol does not apply literally.');
- return {W,H,mode:requestedMode,baseMode:mode,fast,multiplications:fast?binaryCount(p):null,binary:p.toString(2),p,X,s,t,logt,chart,points,birth,ops,circles,fixed,counts,value,expected,discrepancy,warnings,transversality,root:Math.exp(-Math.log(X)/p)};
+ return {W,H,mode:requestedMode,baseMode:mode,fast,dual,multiplications:fast?binaryCount(p):null,binary:p.toString(2),p,X,s,t,logt,chart,points,birth,ops,circles,fixed,counts,value,expected,discrepancy,warnings,transversality,root:Math.exp(-Math.log(X)/p)};
 }
 function validInput(p,X,s){return Number.isSafeInteger(p)&&p>=3&&p<=1_000_000&&X>0&&s>0&&Number.isFinite(X)&&Number.isFinite(s);}
 function scaledCandidate(p,X,s,k){const c=2**k,lx=Math.log(X)+p*k*Math.LN2,ls=Math.log(s)-k*Math.LN2;const nextX=k===0?X:Math.exp(lx),nextS=k===0?s:Math.exp(ls);if(!(c>0&&Number.isFinite(c)&&validInput(p,nextX,nextS)))return null;return {X:nextX,s:nextS,c,k};}

@@ -8,6 +8,7 @@
     "test:initialization": "node scripts/test_initialization.mjs",
     "test:layout": "node scripts/test_layout.mjs",
     "test:stereography": "node scripts/test_stereography.mjs",
+    "test:dual-transport": "node scripts/test_dual_transport.mjs",
     "test:sphere-drag": "node scripts/test_sphere_drag.mjs"
   },
   "devDependencies": {

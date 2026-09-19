@@ -1,0 +1,47 @@
+import LeanMath.Papers.RectangleDualTransport
+import LeanMath.Papers.RectangleFactorizationJets
+
+#print axioms LeanMath.Papers.RectangleDualTransport.arbitrary_correction
+#print axioms LeanMath.Papers.RectangleDualTransport.gauge_invariance
+#print axioms LeanMath.Papers.RectangleDualTransport.redistribution
+#print axioms LeanMath.Papers.RectangleDualTransport.generalized_report
+#print axioms LeanMath.Papers.RectangleDualTransport.endpoint_incidence
+#print axioms LeanMath.Papers.RectangleDualTransport.endpoint_horizontal
+#print axioms LeanMath.Papers.RectangleDualTransport.transport_join_proper
+#print axioms LeanMath.Papers.RectangleDualTransport.fixed_ak_actual_incidence
+#print axioms LeanMath.Papers.RectangleDualTransport.fixed_ak_determinant
+#print axioms LeanMath.Papers.RectangleDualTransport.fixed_ak_actual_unique
+#print axioms LeanMath.Papers.RectangleDualTransport.fixed_ak_actual_readout
+#print axioms LeanMath.Papers.RectangleDualTransport.transport_at_root
+#print axioms LeanMath.Papers.RectangleDualTransport.newton_transport
+#print axioms LeanMath.Papers.RectangleDualTransport.halley_transport
+#print axioms LeanMath.Papers.RectangleDualTransport.halley_required_slope
+#print axioms LeanMath.Papers.RectangleDualTransport.projective_factorization
+#print axioms LeanMath.Papers.RectangleDualTransport.projective_transport
+#print axioms LeanMath.Papers.RectangleDualTransport.arc_transport
+#print axioms LeanMath.Papers.RectangleDualTransport.halley_rail
+#print axioms LeanMath.Papers.RectangleDualTransport.halley_rail_transverse
+#print axioms LeanMath.Papers.RectangleDualTransport.projective_projection
+#print axioms LeanMath.Papers.RectangleDualTransport.radius_projection
+#print axioms LeanMath.Papers.RectangleDualTransport.radical_decomposition
+#print axioms LeanMath.Papers.RectangleDualTransport.rad_positive
+#print axioms LeanMath.Papers.RectangleDualTransport.g_positive
+#print axioms LeanMath.Papers.RectangleDualTransport.alpha_gt_one
+#print axioms LeanMath.Papers.RectangleDualTransport.beta_positive
+#print axioms LeanMath.Papers.RectangleDualTransport.radical_identity
+#print axioms LeanMath.Papers.RectangleDualTransport.arc_circle_incidence
+#print axioms LeanMath.Papers.RectangleDualTransport.arc_right_branch_unique
+#print axioms LeanMath.Papers.RectangleDualTransport.arc_endpoint_right
+#print axioms LeanMath.Papers.RectangleDualTransport.positive_coefficients
+#print axioms LeanMath.Papers.RectangleDualTransport.fixed_ak_gap
+#print axioms LeanMath.Papers.RectangleFactorizationJets.correction_factorization_identity
+#print axioms LeanMath.Papers.RectangleFactorizationJets.fixed_point_identity
+#print axioms LeanMath.Papers.RectangleFactorizationJets.reciprocal_identity
+#print axioms LeanMath.Papers.RectangleFactorizationJets.seven_jet
+#print axioms LeanMath.Papers.RectangleFactorizationJets.seven_first_defect
+#print axioms LeanMath.Papers.RectangleFactorizationJets.nine_jet
+#print axioms LeanMath.Papers.RectangleFactorizationJets.nine_first_defect
+#print axioms LeanMath.Papers.RectangleFactorizationJets.seven_domain_obstruction
+#print axioms LeanMath.Papers.RectangleFactorizationJets.nine_domain_obstruction
+#print axioms LeanMath.Papers.RectangleFactorizationJets.explicit_seven_nonreal
+#print axioms LeanMath.Papers.RectangleFactorizationJets.explicit_nine_nonreal

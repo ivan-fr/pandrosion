@@ -237,3 +237,6 @@ import LeanMath.Papers.WidthLocal
 import LeanMath.Papers.RectangleFastPower
 import LeanMath.Papers.RectangleNativeNondegeneracy
 import LeanMath.Papers.RectangleInitialization
+
+import LeanMath.Papers.RectangleDualTransport
+import LeanMath.Papers.RectangleFactorizationJets
