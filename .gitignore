@@ -11,3 +11,6 @@ waveform.txt
 
 node_modules/
 .ci/
+
+# Incremental campaign journal; complete results are committed separately.
+research/analog_fast_ad/generalist_spice*.jsonl

@@ -3,7 +3,7 @@ from pathlib import Path
 import json,subprocess,math
 ROOT=Path(__file__).resolve().parents[2]
 def prepare(inputs):
- return json.loads(subprocess.check_output(['node',str(Path(__file__).with_name('prepare.mjs')),json.dumps(inputs)],cwd=ROOT,text=True))
+ return json.loads(subprocess.check_output(['node',str(Path(__file__).with_name('prepare.mjs')),'--stdin'],input=json.dumps(inputs),cwd=ROOT,text=True))
 def schedule(p):
  if not isinstance(p,int) or not 3<=p<=1000000:raise ValueError('Supported integer p: 3..1,000,000')
  n=1;ops=[]

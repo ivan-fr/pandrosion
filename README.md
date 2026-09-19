@@ -86,6 +86,9 @@ explicit tolerance budgets, temperature/noise experiments and settling checks.
 The [engineering follow-up](research/analog_fast_ad/ENGINEERING_REVIEW.md) adds
 combined transient errors, simulated electrical calibration and an end-to-end
 digital comparison. It establishes no speed/energy advantage or uniform accuracy.
+The [generalist campaign](research/analog_fast_ad/GENERALIST.md) now covers
+thousands of input pairs, hundreds of timed runs and alternatives to a periodic
+clock, with a dedicated continuous-integration job.
 These characterize behavioral models, not measured silicon.
 
 The new [binary-power AD prototype](research/analog_fast_ad/README.md) uses the

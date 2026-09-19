@@ -233,3 +233,32 @@ jobs:
         with:
           name: preview-screenshots
           path: .ci/browser
+  analog-generalist:
+    name: Generalist root campaign and clock alternatives
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y ngspice
+      - run: pip install -r research/analog_fast_ad/requirements.txt
+      - run: python research/analog_fast_ad/generalist_campaign.py
+      - run: python research/analog_fast_ad/generalist_spice.py --workers 2
+      - run: python research/analog_fast_ad/clock_modes.py
+      - run: python research/analog_fast_ad/streaming_campaign.py
+      - run: python research/analog_fast_ad/generalist_report.py
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: generalist-campaign-results
+          path: |
+            research/analog_fast_ad/generalist_algorithm.*
+            research/analog_fast_ad/generalist_spice.json
+            research/analog_fast_ad/generalist_spice.jsonl
+            research/analog_fast_ad/clock_modes_results.json
+            research/analog_fast_ad/clock_modes_waveforms.csv
+            research/analog_fast_ad/streaming_results.json
+            research/analog_fast_ad/GENERALIST_RESULTS.md
+            research/analog_fast_ad/generalist_results.png

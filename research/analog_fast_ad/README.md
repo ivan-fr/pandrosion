@@ -16,6 +16,11 @@ implements simulated electrical-reference calibration, and compares full digital
 execution. It finds no demonstrated speed advantage and no uniform accuracy
 guarantee; see the [measured simulation tables](ENGINEERING_RESULTS.md).
 
+The [generalist and clock study](GENERALIST.md) adds 8,243 input pairs, 296
+combined timed runs, 196 successive jobs and continuous/asynchronous-control
+experiments. All failures and assumptions are visible in the
+[coverage report](GENERALIST_RESULTS.md). A dedicated CI job reruns the campaigns.
+
 ## Supported inputs and the meaning of “all p and X”
 
 The algebra applies for positive X and integer p≥3. A finite device cannot
