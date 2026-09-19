@@ -81,6 +81,10 @@ The paper also retains its self-contained 57-module source snapshot in `paper/re
 
 ## Analog prototype
 
+The [hardware accuracy study](research/analog_fast_ad/HARDWARE_ACCURACY.md) adds
+explicit tolerance budgets, temperature/noise experiments and settling checks.
+These characterize behavioral models, not measured silicon.
+
 The new [binary-power AD prototype](research/analog_fast_ad/README.md) uses the
 gallery's certified digital preparation and an amplified analog state
 `q=p(u−1)`. It includes a behavioral SPICE example at p=1,000,000, X=500,000,

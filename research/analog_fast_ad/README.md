@@ -218,3 +218,32 @@ thermal noise, temperature drift and settling before choosing a fabrication PDK.
 There is no layout, foundry sign-off, measured power/energy/area, or fabricated
 chip in this deliverable. The prototype establishes a testable architecture
 and the requested large-p functional example, not an unrestricted physical machine.
+
+## Accuracy characterization (follow-up)
+
+The [full tolerance report](CHARACTERIZATION.md), [assumptions and engineering
+limits](HARDWARE_ACCURACY.md), and machine-readable results now separate error
+sources. They cover 49,152 joint behavioral samples, 24,576 isolated-source
+samples and additional timed ngspice sensitivity runs. The `trim_target` profile
+is a proposed set of residual specifications, **not an implemented calibration**.
+
+![Behavioral error budgets and SPICE sensitivity](accuracy.svg)
+
+At X=500,000 and 25 °C, the joint-model 99th-percentile errors are:
+
+| p | Untrimmed assumptions | Proposed tighter tolerances |
+|---:|---:|---:|
+| 3 | 3.83×10⁻⁴ | 6.35×10⁻⁶ |
+| 32 | 2.74×10⁻⁵ | 3.91×10⁻⁷ |
+| 1,000,000 | 1.60×10⁻⁹ | 1.59×10⁻¹¹ |
+
+These are finite sampled percentiles under the stated synthetic distributions,
+not yield predictions or guaranteed accuracy. Even the tighter profile misses
+one ppm at low p. Buffered interstage loading, arithmetic offset/gain trimming,
+converter linearity and sample timing need explicit hardware specifications.
+
+```sh
+python research/analog_fast_ad/characterize.py
+python research/analog_fast_ad/characterize_spice.py
+python research/analog_fast_ad/plot_accuracy.py
+```

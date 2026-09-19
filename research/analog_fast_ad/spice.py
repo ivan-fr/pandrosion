@@ -2,14 +2,17 @@
 Unrolled programmable stages, NOT a validated time-multiplexed transistor core.
 """
 from pathlib import Path
-import json,subprocess,tempfile
+import json,subprocess,tempfile,re
 import numpy as np
 import mpmath as mp
 from model import prepare,schedule,decode
 OUT=Path(__file__).parent
 
-def deck(p,Y,stress=False,step='0.2u'):
+def deck(p,Y,stress=False,step='0.2u',config=None):
  offset=25e-6 if stress else 0.;gain=.001 if stress else 0.;rin=50000 if stress else 1e12;leak=5e-9 if stress else 0.
+ cfg = dict(offset=offset,gain=gain,rin=rin,leak=leak,charge=0.,target_offset=0.,target_gain=0.,stage_cap=100e-9,timing_scale=1.)
+ if config: cfg.update(config)
+ offset,gain,rin,leak = (cfg[k] for k in ['offset','gain','rin','leak'])
  lines=['Fast AD centered state behavioral P5', '.options reltol=1e-7 abstol=1e-12 vntol=1e-9',
  '.model SW SW(Ron=1 Roff=1e12 Vt=0.5 Vh=0.1)',
  'Vreset reset 0 PULSE(1 0 10u 10n 10n 10m 20m)',
@@ -19,8 +22,11 @@ def deck(p,Y,stress=False,step='0.2u'):
  'Cnext stored 0 10n IC=0','Rnext stored 0 1e12',
  'Ssample candidate stored sample 0 SW','Supdate stored_read state update 0 SW',
  'Bstored stored_read 0 V=v(stored)']
+ if cfg['charge']:
+  # Positive charge enters the state at the end of transfer. Area = charge.
+  lines.append(f"Icharge 0 state PULSE(0 {cfg['charge']/(10e-9*cfg['timing_scale']):.17g} 390.02u 1n 1n 9n 500u)")
  def stage(name,expr):
-  lines.extend([f'B{name} {name}_drive 0 V=min(2,max(-2,({expr})))',f'R{name} {name}_drive {name} 10',f'C{name} {name} 0 100n',f'Rport_{name} {name} 0 {rin}',f'Cport_{name} {name} 0 2p'])
+  lines.extend([f'B{name} {name}_drive 0 V=min(2,max(-2,({expr})))',f'R{name} {name}_drive {name} 10',f'C{name} {name} 0 {cfg["stage_cap"]:.17g}',f'Rport_{name} {name} 0 {rin}',f'Cport_{name} {name} 0 2p'])
  stage('q',f'v(state)+{offset}')
  prev='q'
  for i,op in enumerate(schedule(p)):
@@ -32,13 +38,19 @@ def deck(p,Y,stress=False,step='0.2u'):
  for i in range(len(schedule(p))):peak=f'max({peak},abs(v(d{i}_drive)))'
  lines.append(f'Bpeak stagepeak 0 V={peak}')
  lines.extend([f'Bres residual 0 V={Y:.17g}*(1+v({prev}))',f'Bden denominator 0 V=1+v(residual)+(v(residual)-1)/{p}',
- f'Btarget target 0 V=v(q)+2*(1+v(q)/{p})*(1-v(residual))/max(0.25,v(denominator))',
+ f'Btarget target 0 V=(v(q)+2*(1+v(q)/{p})*(1-v(residual))/max(0.25,v(denominator)))*(1+{cfg["target_gain"]})+{cfg["target_offset"]}',
  'Bcandidate candidate_drive 0 V=min(2,max(-2,v(target)))','Rcandidate candidate_drive candidate 10','Ccandidate candidate 0 100n',
  '.control','set numdgt=16','set wr_singlescale','set wr_vecnames',f'tran {step} 3m uic','wrdata wave.txt v(state) v(q) v(residual) v(candidate) v(denominator) v(target) v(stagepeak)', 'quit','.endc','.end'])
+ if cfg['timing_scale'] != 1:
+  # Scale only timing statements, never component values or current amplitudes.
+  def scale_time(match):
+   return f"{float(match[1])*cfg['timing_scale']:.17g}{match[2]}"
+  lines = [re.sub(r'(?<![\w.])(\d+(?:\.\d+)?)([num])(?!\w)',scale_time,line)
+           if 'PULSE(' in line or line.startswith('tran ') else line for line in lines]
  return '\n'.join(lines)+'\n'
 
-def run(r,stress=False,step='0.2u',keep=None):
- text=deck(r['p'],r['Y'],stress,step)
+def run(r,stress=False,step='0.2u',keep=None,config=None):
+ text=deck(r['p'],r['Y'],stress,step,config)
  with tempfile.TemporaryDirectory(prefix='pandrosion-fast-ad-') as tmp:
   path=Path(tmp);(path/'test.cir').write_text(text)
   proc=subprocess.run(['ngspice','-b','test.cir'],cwd=path,text=True,capture_output=True,timeout=90)
@@ -50,14 +62,15 @@ def run(r,stress=False,step='0.2u',keep=None):
    # Thin exported plot samples only; measurements below use full simulator output.
    np.savetxt(OUT/(keep+'.csv'),a[::20],delimiter=',',header='time,state,q,residual,candidate,denominator,target,stagepeak',comments='')
  mp.mp.dps=80
- samples=[float(np.interp((405+500*i)*1e-6,a[:,0],a[:,1]))for i in range(6)]
+ timing_scale=(config or {}).get('timing_scale',1.)
+ samples=[float(np.interp((405+500*i)*1e-6*timing_scale,a[:,0],a[:,1]))for i in range(6)]
  q=samples[-1];lsb=4/(2**18);adc=round(q/lsb)*lsb
  ref=mp.exp(mp.log(mp.mpf(r['originalX']))/r['p'])
- result=dict(p=r['p'],X=r['originalX'],stress=stress,max_step=step,q_samples=samples,q_final=q,adc18_q=adc,
+ result=dict(config=config or {},p=r['p'],X=r['originalX'],stress=stress,max_step=step,q_samples=samples,q_final=q,adc18_q=adc,
   decoded_relative_error=float(abs(mp.mpf(decode(r['c'],q,r['p']))/ref-1)),
   adc18_decoded_relative_error=float(abs(mp.mpf(decode(r['c'],adc,r['p']))/ref-1)),
   stage_peak=float(a[:,7].max()),denominator_min=float(a[:,5].min()),target_peak=float(abs(a[:,6]).max()),
-  final_hold_drift=float(np.interp(2980e-6,a[:,0],a[:,1])-np.interp(2905e-6,a[:,0],a[:,1])))
+  final_hold_drift=float(np.interp(2980e-6*timing_scale,a[:,0],a[:,1])-np.interp(2905e-6*timing_scale,a[:,0],a[:,1])))
  assert result['denominator_min']>.25 and result['target_peak']<2 and result['stage_peak']<1.99,'Guard/clamp activated: cannot claim normal operation'
  return result
 

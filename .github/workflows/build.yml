@@ -174,7 +174,7 @@ jobs:
             paper/reciprocal_geometry_v20/Reciprocal_Root_Geometry_v20.pdf
             paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf
   analog:
-    name: P4 SPICE simulations and validation
+    name: Analog SPICE simulations and accuracy budgets
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -192,6 +192,8 @@ jobs:
       - run: python research/analog_fast_ad/model.py
       - run: python research/analog_fast_ad/precision.py
       - run: python research/analog_fast_ad/spice.py
+      - run: python research/analog_fast_ad/characterize.py
+      - run: python research/analog_fast_ad/characterize_spice.py
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: analog-p4-results
@@ -201,6 +203,8 @@ jobs:
             research/analog_fast_ad/model_results.json
             research/analog_fast_ad/precision_results.json
             research/analog_fast_ad/spice_results.json
+            research/analog_fast_ad/characterization_results.json
+            research/analog_fast_ad/characterization_spice.json
   previews:
     name: Interactive geometry and browser checks
     runs-on: ubuntu-24.04
