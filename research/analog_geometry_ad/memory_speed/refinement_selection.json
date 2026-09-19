@@ -1,0 +1,98 @@
+[
+  {
+    "arm": "optimized",
+    "policy": {
+      "iterations": 12,
+      "average": 4,
+      "time_ms": 5.034999999999999,
+      "worst_error": 5.350507084615452e-07
+    },
+    "profile": {
+      "name": "small33",
+      "memory_cap": 3.3e-08,
+      "switch_ron": 230.0,
+      "edge_charge": 5e-13,
+      "parasitic": 2e-12
+    },
+    "timing": {
+      "name": "acquire120",
+      "start": 150.0,
+      "width": 120.0,
+      "gap": 10.0,
+      "period": 420.0
+    },
+    "training_cases": 48
+  },
+  {
+    "arm": "feedback",
+    "policy": {
+      "iterations": 12,
+      "average": 8,
+      "time_ms": 5.034999999999999,
+      "worst_error": 5.85940702837286e-07
+    },
+    "profile": {
+      "name": "small33",
+      "memory_cap": 3.3e-08,
+      "switch_ron": 230.0,
+      "edge_charge": 5e-13,
+      "parasitic": 2e-12
+    },
+    "timing": {
+      "name": "acquire120",
+      "start": 150.0,
+      "width": 120.0,
+      "gap": 10.0,
+      "period": 420.0
+    },
+    "training_cases": 48
+  },
+  {
+    "arm": "loaded_control",
+    "policy": {
+      "iterations": 8,
+      "average": 4,
+      "time_ms": 9.584999999999999,
+      "worst_error": 5.043722931697077e-07
+    },
+    "profile": {
+      "name": "control100",
+      "memory_cap": 1e-07,
+      "switch_ron": 230.0,
+      "edge_charge": 5e-13,
+      "parasitic": 2e-12
+    },
+    "timing": {
+      "name": "precision",
+      "start": 350.0,
+      "width": 400.0,
+      "gap": 20.0,
+      "period": 1200.0
+    },
+    "training_cases": 48
+  },
+  {
+    "arm": "archive",
+    "policy": {
+      "iterations": 8,
+      "average": 4,
+      "time_ms": 9.584999999999999,
+      "worst_error": 5.350507084615452e-07
+    },
+    "profile": {
+      "name": "archive100",
+      "memory_cap": 1e-07,
+      "switch_ron": 230.0,
+      "edge_charge": 5e-13,
+      "parasitic": 0.0
+    },
+    "timing": {
+      "name": "precision",
+      "start": 350,
+      "width": 400,
+      "gap": 20,
+      "period": 1200
+    },
+    "training_cases": 48
+  }
+]

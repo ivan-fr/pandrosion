@@ -1,0 +1,26 @@
+[
+  {
+    "arm": "loaded_control",
+    "target_ppm": 1.0,
+    "policy": {
+      "profile": "control100",
+      "timing": "precision",
+      "iterations": 3,
+      "average": 1,
+      "time_ms": 3.5849999999999995,
+      "worst_error": 2.731395350692899e-07
+    }
+  },
+  {
+    "arm": "optimized_10ppm",
+    "target_ppm": 10.0,
+    "policy": {
+      "profile": "lowR10",
+      "timing": "acquire20",
+      "iterations": 2,
+      "average": 1,
+      "time_ms": 0.435,
+      "worst_error": 4.6538433932062224e-06
+    }
+  }
+]

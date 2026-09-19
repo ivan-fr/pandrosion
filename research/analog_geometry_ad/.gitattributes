@@ -1,0 +1,4 @@
+*.json linguist-generated=true
+*.csv linguist-generated=true
+*.svg linguist-generated=true
+examples/** linguist-generated=true

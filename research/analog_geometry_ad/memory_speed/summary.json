@@ -1,0 +1,85 @@
+{
+  "trial_counts": {
+    "development": 114,
+    "first_validation": 144,
+    "control_and_10ppm": 96,
+    "final_validation": 256,
+    "sensitivity": 36,
+    "refinements": 9
+  },
+  "completed_transients": 649,
+  "gains": [
+    {
+      "arm": "optimized",
+      "all_final_cases_pass": false,
+      "all_extra_nominal_cases_pass": true,
+      "final_set_speedup_vs_loaded_control": null,
+      "supported_all_nominal_speedup": null
+    },
+    {
+      "arm": "feedback",
+      "all_final_cases_pass": true,
+      "all_extra_nominal_cases_pass": false,
+      "final_set_speedup_vs_loaded_control": 1.903674280039722,
+      "supported_all_nominal_speedup": null
+    }
+  ],
+  "final": [
+    {
+      "arm": "optimized",
+      "policy": {
+        "iterations": 12,
+        "average": 4,
+        "time_ms": 5.034999999999999,
+        "worst_error": 5.350507084615452e-07
+      },
+      "cases": 64,
+      "completed": 64,
+      "passes": 62,
+      "worst_error": 1.224137603797125e-06,
+      "median_error": 8.013869786418716e-08
+    },
+    {
+      "arm": "feedback",
+      "policy": {
+        "iterations": 12,
+        "average": 8,
+        "time_ms": 5.034999999999999,
+        "worst_error": 5.85940702837286e-07
+      },
+      "cases": 64,
+      "completed": 64,
+      "passes": 64,
+      "worst_error": 9.935679880072707e-07,
+      "median_error": 3.7354470092073106e-08
+    },
+    {
+      "arm": "loaded_control",
+      "policy": {
+        "iterations": 8,
+        "average": 4,
+        "time_ms": 9.584999999999999,
+        "worst_error": 5.043722931697077e-07
+      },
+      "cases": 64,
+      "completed": 64,
+      "passes": 64,
+      "worst_error": 7.880601539378965e-07,
+      "median_error": 3.1080237057589383e-08
+    },
+    {
+      "arm": "archive",
+      "policy": {
+        "iterations": 8,
+        "average": 4,
+        "time_ms": 9.584999999999999,
+        "worst_error": 5.350507084615452e-07
+      },
+      "cases": 64,
+      "completed": 64,
+      "passes": 64,
+      "worst_error": 8.789008329520711e-07,
+      "median_error": 2.992451896180707e-08
+    }
+  ]
+}
