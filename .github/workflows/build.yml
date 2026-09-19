@@ -154,7 +154,7 @@ jobs:
       - run: python scripts/test_native_nondegeneracy.py
       - run: python scripts/check_initialization.py
   paper:
-    name: Build V20 and analog companion PDFs
+    name: Build V20, V17 and V30 papers
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -167,12 +167,15 @@ jobs:
           sudo install /tmp/tectonic /usr/local/bin/tectonic
       - run: bash paper/reciprocal_geometry_v20/build.sh
       - run: bash paper/pandrosion_analog_v17/build.sh
+      - run: python3 paper/pandrosion_analog_v30/check_results.py
+      - run: bash paper/pandrosion_analog_v30/build.sh
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: papers
           path: |
             paper/reciprocal_geometry_v20/Reciprocal_Root_Geometry_v20.pdf
             paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf
+            paper/pandrosion_analog_v30/Pandrosion_Geometry_Analog_V30.pdf
   analog:
     name: Analog SPICE simulations and accuracy budgets
     runs-on: ubuntu-24.04

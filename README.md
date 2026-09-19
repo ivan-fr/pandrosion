@@ -100,6 +100,7 @@ It is a mixed-signal feasibility model, not fabricated hardware.
 
 The analog work consists of authored behavioral SPICE models, circuit netlists and numerical validation. It is a simulation-stage design, without a fabricated chip, foundry PDK or physical layout. The models are not manufacturer macromodels.
 
+- **[Analog paper (V30): centered powers, calibration and precision–time results](paper/pandrosion_analog_v30/Pandrosion_Geometry_Analog_V30.pdf)**
 - [Analog companion paper (V17)](paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf)
 - [P0](research/pandrosion_analog/README.md), [P1](research/pandrosion_analog_p1/README.md), [P2](research/pandrosion_analog_p2/README.md), [P3](research/pandrosion_analog_p3/README.md), **[P4: explicit input loading and buffered storage](research/pandrosion_analog_p4/README.md)**
 

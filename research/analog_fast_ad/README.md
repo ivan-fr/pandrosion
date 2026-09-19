@@ -283,3 +283,5 @@ Retrospective scoring on the earlier 64 trajectories also passes both targets,
 but the faster 1 ppm mode has little margin (worst 0.982 ppm). These schedule
 times exclude preparation, calibration and physical converter latency. They
 are not a measured chip latency or an advantage over digital computation.
+
+The [V30 article](../../paper/pandrosion_analog_v30/Pandrosion_Geometry_Analog_V30.pdf) presents the geometry, centered arithmetic, Lean scope, calibration, validation and precision–time results in nine pages.
