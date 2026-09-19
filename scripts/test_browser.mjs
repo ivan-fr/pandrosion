@@ -24,7 +24,7 @@ if(await page.locator('#state').inputValue()!=='1')throw Error('Unexpected autom
 await page.waitForTimeout(300);if(await page.locator('#state').inputValue()!=='1')throw Error('Background solver must not run');
 for(const mode of ['AKfast','ADfast','projectiveFast','arcFast']){
  await page.selectOption('#method',mode);if(await page.locator('#state').inputValue()!=='1')throw Error('New method did not prepare step zero');
- await page.click('#iterate');if(!(await page.locator('#answer-label').innerText()).includes('étape 1'))throw Error('One click must be one iteration');
+ await page.click('#iterate');if(!(await page.locator('#answer-label').innerText()).includes('step 1'))throw Error('One click must be one iteration');
  if(await page.locator('#target').inputValue()!=='500000')throw Error('Original target mutated');
  for(let i=0;i<15&&!await page.locator('#iterate').isDisabled();i++)await page.click('#iterate');
  if(await page.locator('#error').isVisible())throw Error('Automatic orbit failed');
@@ -40,7 +40,7 @@ for(const mode of ['AK','AD','projective','arc']){
  if(await page.locator('#degree').getAttribute('max')!=='32')throw Error('Missing native degree limit');
  if(await page.locator('#advanced').getAttribute('open')!==null)throw Error('Original requires advanced mode');
  if(await page.locator('#state').inputValue()!=='1')throw Error('Original auto-iterated');
- await page.click('#iterate');if(!(await page.locator('#answer-label').innerText()).includes('étape 1'))throw Error('Original iteration failed');
+ await page.click('#iterate');if(!(await page.locator('#answer-label').innerText()).includes('step 1'))throw Error('Original iteration failed');
  if(await page.locator('#target').inputValue()!=='500000')throw Error('Original target changed');
  await page.locator('#degree').fill('33');await page.locator('#degree').dispatchEvent('change');
  if(!await page.locator('#error').isVisible()||!await page.locator('#iterate').isDisabled())throw Error('Native degree limit not enforced');
@@ -53,7 +53,7 @@ for(const mode of ['halley','pade'])for(const p of [3,7,16]){
  if(await page.locator('#method').inputValue()!==mode||await page.locator('#error').isVisible())throw Error('Pencil preparation failed: '+mode+' '+p);
  if(await page.locator('#state').inputValue()!=='1'||await page.locator('#advanced').getAttribute('open')!==null)throw Error('Pencil workflow is not simple preparation');
  if(await page.locator('#degree').getAttribute('max')!=='32')throw Error('Pencil degree limit missing');
- await page.click('#iterate');if(!(await page.locator('#answer-label').innerText()).includes('étape 1'))throw Error('Pencil manual step failed');
+ await page.click('#iterate');if(!(await page.locator('#answer-label').innerText()).includes('step 1'))throw Error('Pencil manual step failed');
  if(await page.locator('#target').inputValue()!=='500000')throw Error('Pencil changed original X');
  await page.locator('#degree').fill('33');await page.locator('#degree').dispatchEvent('change');if(!await page.locator('#error').isVisible())throw Error('Pencil degree limit ignored');
 }
@@ -62,7 +62,7 @@ await page.locator('#advanced > summary').click();await page.locator('#explorati
 for(const mode of ['AK','AD','projective','arc','halley','pade','circle','AKfast','ADfast','projectiveFast','arcFast']){await page.selectOption('#method',mode);if(await page.locator('#error').isVisible())throw Error(mode+': '+await page.locator('#error').innerText());await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');await page.click('#forward');await page.click('#iterate');await page.click('#reset');}
 await page.selectOption('#method','circle');await page.selectOption('#chart','uniform');await page.screenshot({path:`${output}/gallery-uniform.png`,fullPage:true});await page.selectOption('#chart','compact');await page.selectOption('#view','sphere');await page.locator('#yaw').fill('50');await page.locator('#yaw').dispatchEvent('input');await page.screenshot({path:`${output}/gallery-sphere.png`,fullPage:true});
 await page.selectOption('#example','initial');if(!await page.locator('#warning').isVisible())throw Error('Missing infinity warning');if(await page.locator('#view').inputValue()!=='sphere')throw Error('No automatic sphere');await page.selectOption('#view','plane');await page.click('#iterate');if(await page.locator('#view').inputValue()!=='plane')throw Error('Manual view overridden');await page.selectOption('#example','outside');if(!await page.locator('#error').isVisible())throw Error('Missing domain error');await page.click('#reset');await page.click('#normalize');if(await page.locator('#error').isVisible())throw Error('Normalization failed');
-await page.selectOption('#method','AKfast');await page.locator('#degree').fill('1024');await page.locator('#state').fill(String(Math.exp(Math.log(.4)/1024)));await page.locator('#state').dispatchEvent('change');if(await page.locator('#error').isVisible())throw Error('Large degree failed');if(!(await page.locator('#fast-status').innerText()).includes('10 multiplications contre 1023'))throw Error('Wrong binary count');await page.click('#normalize-optimal');if(await page.locator('#error').isVisible())throw Error('Adaptive failed');if(!(await page.locator('#adaptive-status').innerText()).includes('score'))throw Error('Missing metadata');
+await page.selectOption('#method','AKfast');await page.locator('#degree').fill('1024');await page.locator('#state').fill(String(Math.exp(Math.log(.4)/1024)));await page.locator('#state').dispatchEvent('change');if(await page.locator('#error').isVisible())throw Error('Large degree failed');if(!(await page.locator('#fast-status').innerText()).includes('10 multiplications versus 1023'))throw Error('Wrong binary count');await page.click('#normalize-optimal');if(await page.locator('#error').isVisible())throw Error('Adaptive failed');if(!(await page.locator('#adaptive-status').innerText()).includes('score'))throw Error('Missing metadata');
 await page.emulateMedia({colorScheme:'dark'});await page.screenshot({path:`${output}/binary-dark.png`,fullPage:true});await page.emulateMedia({colorScheme:'light'});await page.screenshot({path:`${output}/binary-light.png`,fullPage:true});
 // Recover an arbitrary unusable state through explicit initialization (not a silent restart).
 await page.selectOption('#method','AKfast');await page.locator('#degree').fill('1000000');await page.locator('#working-target').fill('500000');await page.locator('#state').fill('.75');await page.locator('#state').dispatchEvent('change');if(!await page.locator('#error').isVisible())throw Error('Expected unusable starting state');
