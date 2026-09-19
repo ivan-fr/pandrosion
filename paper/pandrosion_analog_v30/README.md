@@ -1,6 +1,6 @@
 # Pandrosion Geometry and Analog Root Computation — V30
 
-A nine-page English research preprint on the centered binary-power AD prototype.
+A ten-page English research preprint on the centered binary-power AD prototype.
 The paper distinguishes exact arithmetic, finite-case behavioral simulation and
 unimplemented physical circuitry. V17 and V20 remain unchanged.
 
@@ -24,7 +24,7 @@ upward to the displayed precision (e.g. 0.652306... ppm as 0.653 ppm).
 
 ## Provenance
 
-- `figures/geometry.pdf`: retained coordinate-based V17 geometry figure.
+- `figures/fast_geometry.pdf`: binary multiplication by parallels, the p=13 schedule and its AD report. Reproduce with `python3 paper/pandrosion_analog_v30/draw_fast_geometry.py` (NumPy and Matplotlib). The script verifies the intersections and outputs `fast_geometry_checks.json`.
 - Architecture: editable TikZ in `main.tex`.
 - Precision comparison and timing frontier: exact copies of the research plots;
   the result checker verifies their byte identity.

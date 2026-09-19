@@ -68,13 +68,31 @@ The compass transfer $FD=AE$ and join $AD$ give $\kappa=[p+1+(p-1)t]/2$, hence
  s^+=sC_p(t),\qquad C_p(t)=\frac{p+1+(p-1)t}{p-1+(p+1)t}.\label{eq:ad}
 \end{equation}
 For $p\ge2$, $t>0$, the denominator is positive. Under $y=1/s$, this is classical Halley iteration for $y^p-X=0$; it has cubic local convergence. The method itself is not new. The geometry is a modern Pandrosion-type interpretation, not a claimed reconstruction of an ancient protocol.
-\begin{figure}[H]\centering
-\includegraphics[width=.94\linewidth]{figures/geometry.pdf}
-\caption{Geometric source of the update, retained from V17. For $p=3$, $X=W=2$, $H=4$, $s=3/4$, the proportional chain supplies $E$ and the moving support reports $P^+$. Extended lines are allowed. The fast circuit replaces the linear-length power chain by binary arithmetic; it does not physically reproduce this drawing.}
-\end{figure}
+\subsection{Replacing the nested chain by geometric binary powering}
+The fast construction stores a value $v$ at $R(v)=(W,H(1-v))$ on the right rail. Prepare $U_\times=(W+H,H)$ and the fixed transfer line $U_\times B$. Copy $R(a)$ to the top rail by a parallel to this line. The intersection is $Z(a)=(W+Ha,H)$. Join $U_\times$ to $R(b)$; its parallel through $Z(a)$ meets the right rail at $R(ab)$. Thus the same gadget performs a square when $a=b$ and a multiplication otherwise.
+
+To see the product, the join has slope $b$ and the horizontal displacement from $Z(a)$ to the right rail is $-Ha$. The output ordinate is therefore $H-Hab$. No evaluation of $a b$ is needed to construct the intersection. For $p=13=(1101)_2$, reuse the gadget along
+\[
+ s\longmapsto s^2\longmapsto s^3\longmapsto s^6\longmapsto s^{12}\longmapsto s^{13}.
+\]
+The last point is the same $E=R(s^p)$ used in \eqref{eq:geometry}. Only the power-producing construction changes; $M$, the transfer $FD=AE$, the support $AD$ and the final report remain as above. Five multiplications replace twelve in this example. These are multiplication counts, not total line counts: copies, joins and parallels must also be counted.
+
+The existing \texttt{RectangleFastPower} Lean module certifies the copy and product intersections and the full geometric recursion through \texttt{geometricMul\_R}, \texttt{geometricPower\_eq} and \texttt{geometric\_readout}. These geometric certificates are separate from the six centered circuit identities listed later.
+
 The compass-based AD5 variants and projective constructions belong to the geometry companion. They are not implemented or electrically validated by the order-three circuit studied here.
 \clearpage
 
+\section*{Geometric fast exponentiation feeding AD}
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{figures/fast_geometry.pdf}
+\caption{The replacement for the nested proportional triangles. (a) Two parallel constructions give $R(ab)$; setting $a=b$ gives a square. The illustrative factors are $a=0.64$, $b=0.42$. (b) The binary output $E$ enters the unchanged AD construction, shown for $p=13$, $X=W=2$, $H=4$, $s=0.82$. The support is extended through $T$ and the horizontal gives $P^+$. (c) Five invocations of the product gadget give $E=R(s^{13})$; numbers below the boxes are the encoded values, not ordinates. Every intersection is computed and checked by the figure-generation script.}
+\end{figure}
+In this example $s^{13}\approx0.07578445$ and the geometric report gives $s^+\approx0.91852928$, agreeing with \eqref{eq:ad}. The example illustrates the geometric mechanism, not the circuit's digitally prepared initial condition.
+
+The top unit point used here matches the Lean certificate. The gallery uses $U_\times=(3W,H)$, with the corresponding horizontal scale $2W$ instead of $H$; both choices realize the same product. They coincide for the illustrated $W=2$, $H=4$. The theorem concerns ideal intersections. Near-coincident points in a finite-precision drawing do not acquire a conditioning guarantee from the binary stage count.
+
+The circuit uses the same exponent schedule but replaces these line intersections with the centered polynomial stages derived next. A geometric diagram and an electrical circuit are distinct realizations of the exact arithmetic.
+\clearpage
 \section{Preparation and bounded centered arithmetic}
 \subsection{Digital preparation is part of the computation}
 The controller accepts $p$ and a positive finite binary64 $X$. Certified interval comparisons and binary powering prepare a positive scale $c$ with $1\le Xc^p\le2$ and a rounded value $Y\approx Xc^p$. This uses the gallery's compact initializer and 128-bit interval arithmetic, not a root, logarithm or exponential oracle. Exact identities below use $Y=Xc^p$; rounding is an implementation error tested separately.

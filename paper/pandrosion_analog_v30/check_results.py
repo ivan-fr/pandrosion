@@ -29,3 +29,9 @@ text=(HERE/'main.tex').read_text()
 for value in ['8,243','4,278','24,729','0.279','23.985','4.785','0.653','0.982','2.385','1.239']:
  assert value in text,('Missing article value',value)
 print('PASS: V30 counts, errors, timings, controller outcomes and figure provenance')
+
+g=json.loads((HERE/'fast_geometry_checks.json').read_text())
+assert g['exponents']==[1,2,3,6,12,13]
+assert abs(g['s_next']-g['expected'])<1e-12
+assert (HERE/'figures/fast_geometry.pdf').exists()
+print('PASS: geometric fast-power figure records')
