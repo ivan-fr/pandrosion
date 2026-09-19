@@ -1,0 +1,1520 @@
+{
+  "scope": "Controller research, not physical asynchronous logic or a global delayed-loop stability theorem",
+  "adaptive": [
+    {
+      "p": 3,
+      "X": 0.125,
+      "stages": 2,
+      "events": [
+        {
+          "time_s": 5.000000000000001e-06,
+          "q": 0.0,
+          "detector_error_V": 0.0
+        },
+        {
+          "time_s": 9.999999999999996e-06,
+          "q": 0.0,
+          "detector_error_V": 0.0
+        },
+        {
+          "time_s": 1.4999999999999982e-05,
+          "q": 0.0,
+          "detector_error_V": 0.0
+        },
+        {
+          "time_s": 1.9999999999999968e-05,
+          "q": 0.0,
+          "detector_error_V": 0.0
+        },
+        {
+          "time_s": 2.4999999999999954e-05,
+          "q": 0.0,
+          "detector_error_V": 0.0
+        },
+        {
+          "time_s": 2.999999999999994e-05,
+          "q": 0.0,
+          "detector_error_V": 0.0
+        }
+      ],
+      "total_time_s": 2.999999999999994e-05,
+      "q": 0.0,
+      "state_error_V": 0.0,
+      "relative_error": 0.0,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 3,
+      "X": 2,
+      "stages": 2,
+      "events": [
+        {
+          "time_s": 2.0499999999999966e-05,
+          "q": -0.5999999992492911,
+          "detector_error_V": 7.50708828434199e-10
+        },
+        {
+          "time_s": 4.824999999999989e-05,
+          "q": -0.6188976392925624,
+          "detector_error_V": 1.3442230661908638e-09
+        },
+        {
+          "time_s": 7.200000000000012e-05,
+          "q": -0.6188984236718429,
+          "detector_error_V": 1.4299075257184768e-09
+        },
+        {
+          "time_s": 7.975000000000031e-05,
+          "q": -0.6188984496700701,
+          "detector_error_V": 1.8239100563199884e-08
+        },
+        {
+          "time_s": 8.475000000000043e-05,
+          "q": -0.618898427379652,
+          "detector_error_V": 2.8439395283186286e-09
+        },
+        {
+          "time_s": 8.975000000000056e-05,
+          "q": -0.6188984182865263,
+          "detector_error_V": 1.8117113365079263e-09
+        }
+      ],
+      "total_time_s": 8.975000000000056e-05,
+      "q": -0.6188984182865263,
+      "state_error_V": 3.7611744829746385e-09,
+      "relative_error": 1.5795942986472862e-09,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 3,
+      "X": 500000,
+      "stages": 2,
+      "events": [
+        {
+          "time_s": 2.0499999999999966e-05,
+          "q": -0.5653617963617439,
+          "detector_error_V": 7.073702734672338e-10
+        },
+        {
+          "time_s": 4.824999999999989e-05,
+          "q": -0.5809511581087272,
+          "detector_error_V": 1.2661415249581864e-09
+        },
+        {
+          "time_s": 7.175000000000012e-05,
+          "q": -0.5809515858709675,
+          "detector_error_V": 1.4674770287825822e-09
+        },
+        {
+          "time_s": 7.850000000000028e-05,
+          "q": -0.5809516127306751,
+          "detector_error_V": 1.754078515769919e-08
+        },
+        {
+          "time_s": 8.35000000000004e-05,
+          "q": -0.5809515898189281,
+          "detector_error_V": 3.0090986369302186e-09
+        },
+        {
+          "time_s": 8.850000000000052e-05,
+          "q": -0.5809515803396127,
+          "detector_error_V": 1.8592688499907695e-09
+        }
+      ],
+      "total_time_s": 8.850000000000052e-05,
+      "q": -0.5809515803396127,
+      "state_error_V": 3.8622308684566065e-09,
+      "relative_error": 1.5965909723290403e-09,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 3,
+      "X": 1e+300,
+      "stages": 2,
+      "events": [
+        {
+          "time_s": 1.9999999999999968e-05,
+          "q": -0.37117429015671694,
+          "detector_error_V": 7.656613121298506e-10
+        },
+        {
+          "time_s": 4.7249999999999895e-05,
+          "q": -0.3752991249280146,
+          "detector_error_V": 1.2924946113379576e-09
+        },
+        {
+          "time_s": 6.900000000000005e-05,
+          "q": -0.37529913230006146,
+          "detector_error_V": 1.7743975733175432e-09
+        },
+        {
+          "time_s": 7.400000000000017e-05,
+          "q": -0.375299131595906,
+          "detector_error_V": 6.705964672448772e-10
+        },
+        {
+          "time_s": 7.90000000000003e-05,
+          "q": -0.3752991301893816,
+          "detector_error_V": 2.6903868022287725e-11
+        },
+        {
+          "time_s": 8.400000000000042e-05,
+          "q": -0.37529913000625376,
+          "detector_error_V": 1.2659207015985885e-10
+        }
+      ],
+      "total_time_s": 8.400000000000042e-05,
+      "q": -0.37529913000625376,
+      "state_error_V": 2.5413199322699143e-10,
+      "relative_error": 9.682322131725317e-11,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 32,
+      "X": 0.125,
+      "stages": 5,
+      "events": [
+        {
+          "time_s": 1.974999999999997e-05,
+          "q": -0.3231662129060928,
+          "detector_error_V": 8.559610797931327e-10
+        },
+        {
+          "time_s": 5.324999999999988e-05,
+          "q": -0.32603564384956424,
+          "detector_error_V": 1.8011787616956099e-09
+        },
+        {
+          "time_s": 8.050000000000033e-05,
+          "q": -0.32603564670691887,
+          "detector_error_V": 2.389199504904127e-09
+        },
+        {
+          "time_s": 8.550000000000045e-05,
+          "q": -0.3260356457954484,
+          "detector_error_V": 4.310807821816809e-10
+        },
+        {
+          "time_s": 9.050000000000057e-05,
+          "q": -0.32603564339261404,
+          "detector_error_V": 9.89676673945894e-11
+        },
+        {
+          "time_s": 9.55000000000007e-05,
+          "q": -0.32603564184858225,
+          "detector_error_V": 3.7479319647815146e-10
+        }
+      ],
+      "total_time_s": 9.55000000000007e-05,
+      "q": -0.32603564184858225,
+      "state_error_V": 1.8306239857324158e-09,
+      "relative_error": 5.779585924365977e-11,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 32,
+      "X": 2,
+      "stages": 5,
+      "events": [
+        {
+          "time_s": 2.0499999999999966e-05,
+          "q": -0.6597938136074679,
+          "detector_error_V": 8.255217620600774e-10
+        },
+        {
+          "time_s": 5.4749999999999874e-05,
+          "q": -0.6856925070760812,
+          "detector_error_V": 1.9909125459349752e-09
+        },
+        {
+          "time_s": 8.500000000000044e-05,
+          "q": -0.6856940156778872,
+          "detector_error_V": 2.010073218983166e-09
+        },
+        {
+          "time_s": 9.97500000000008e-05,
+          "q": -0.6856940266666465,
+          "detector_error_V": 8.466500056591997e-09
+        },
+        {
+          "time_s": 0.00010475000000000092,
+          "q": -0.6856940215851635,
+          "detector_error_V": 1.5656557161847218e-09
+        },
+        {
+          "time_s": 0.00010975000000000104,
+          "q": -0.685694010961756,
+          "detector_error_V": 5.41436118162153e-10
+        }
+      ],
+      "total_time_s": 0.00010975000000000104,
+      "q": -0.685694010961756,
+      "state_error_V": 2.2318397130405287e-09,
+      "relative_error": 7.127220746395585e-11,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 32,
+      "X": 500000,
+      "stages": 5,
+      "events": [
+        {
+          "time_s": 1.9999999999999968e-05,
+          "q": -0.3890148881183992,
+          "detector_error_V": 8.024629849501252e-10
+        },
+        {
+          "time_s": 5.374999999999988e-05,
+          "q": -0.3940619725222463,
+          "detector_error_V": 1.7670034879735397e-09
+        },
+        {
+          "time_s": 8.175000000000036e-05,
+          "q": -0.39406198429920386,
+          "detector_error_V": 2.3364368773037825e-09
+        },
+        {
+          "time_s": 8.675000000000048e-05,
+          "q": -0.3940619899096942,
+          "detector_error_V": 1.7169655697202302e-09
+        },
+        {
+          "time_s": 9.17500000000006e-05,
+          "q": -0.39406198693536776,
+          "detector_error_V": 1.3692808553678049e-09
+        },
+        {
+          "time_s": 9.675000000000073e-05,
+          "q": -0.3940619800288326,
+          "detector_error_V": 3.4204128418480195e-10
+        }
+      ],
+      "total_time_s": 9.675000000000073e-05,
+      "q": -0.3940619800288326,
+      "state_error_V": 1.3295596845708246e-09,
+      "relative_error": 4.20667687106993e-11,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 32,
+      "X": 1e+300,
+      "stages": 5,
+      "events": [
+        {
+          "time_s": 1.7249999999999975e-05,
+          "q": -0.0234327956962445,
+          "detector_error_V": 7.56040119398449e-10
+        },
+        {
+          "time_s": 4.7249999999999895e-05,
+          "q": -0.02343387087460174,
+          "detector_error_V": 2.2216961256815715e-09
+        },
+        {
+          "time_s": 6.0999999999999856e-05,
+          "q": -0.023433885916132213,
+          "detector_error_V": 1.0759121048947717e-08
+        },
+        {
+          "time_s": 6.599999999999998e-05,
+          "q": -0.023433879645854756,
+          "detector_error_V": 2.7261276153156544e-09
+        },
+        {
+          "time_s": 7.10000000000001e-05,
+          "q": -0.023433865565055365,
+          "detector_error_V": 8.061176552665028e-10
+        },
+        {
+          "time_s": 7.600000000000022e-05,
+          "q": -0.023433857262836602,
+          "detector_error_V": 2.618668868553664e-09
+        }
+      ],
+      "total_time_s": 7.600000000000022e-05,
+      "q": -0.023433857262836602,
+      "state_error_V": 1.086074737435827e-08,
+      "relative_error": 3.3964708173723245e-10,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 983039,
+      "X": 0.125,
+      "stages": 37,
+      "events": [
+        {
+          "time_s": 1.974999999999997e-05,
+          "q": -0.26277531458360853,
+          "detector_error_V": 6.960054199645072e-10
+        },
+        {
+          "time_s": 0.00010050000000000082,
+          "q": -0.26430326005702676,
+          "detector_error_V": 8.522291372603519e-09
+        },
+        {
+          "time_s": 0.0001702500000000025,
+          "q": -0.2643032695713672,
+          "detector_error_V": 1.1825166013057498e-08
+        },
+        {
+          "time_s": 0.00017525000000000263,
+          "q": -0.26430325590992754,
+          "detector_error_V": 1.5454577617646237e-09
+        },
+        {
+          "time_s": 0.00018025000000000276,
+          "q": -0.26430324120006166,
+          "detector_error_V": 1.95889571230623e-09
+        },
+        {
+          "time_s": 0.00018525000000000288,
+          "q": -0.26430322639536974,
+          "detector_error_V": 2.8844047150755614e-09
+        }
+      ],
+      "total_time_s": 0.00018525000000000288,
+      "q": -0.26430322639536974,
+      "state_error_V": 1.824781670212161e-08,
+      "relative_error": 1.8562662934322356e-14,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 983039,
+      "X": 2,
+      "stages": 37,
+      "events": [
+        {
+          "time_s": 2.0499999999999966e-05,
+          "q": -0.6666664397762584,
+          "detector_error_V": 8.341206614304042e-10
+        },
+        {
+          "time_s": 0.00010325000000000088,
+          "q": -0.6931454022398991,
+          "detector_error_V": 7.369196586282101e-09
+        },
+        {
+          "time_s": 0.00017950000000000274,
+          "q": -0.6931469533661188,
+          "detector_error_V": 8.876501866872388e-09
+        },
+        {
+          "time_s": 0.00021425000000000358,
+          "q": -0.6931479787738617,
+          "detector_error_V": 9.047400628681146e-08
+        },
+        {
+          "time_s": 0.00023325000000000404,
+          "q": -0.6931479775466578,
+          "detector_error_V": 8.685877683767274e-08
+        },
+        {
+          "time_s": 0.00023825000000000416,
+          "q": -0.693147950024291,
+          "detector_error_V": 7.735723728252708e-08
+        }
+      ],
+      "total_time_s": 0.00023825000000000416,
+      "q": -0.693147950024291,
+      "state_error_V": 1.0138355766020624e-06,
+      "relative_error": 1.0313286568136227e-12,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 983039,
+      "X": 500000,
+      "stages": 37,
+      "events": [
+        {
+          "time_s": 2.0249999999999967e-05,
+          "q": -0.45778862264134945,
+          "detector_error_V": 7.354523101632537e-10
+        },
+        {
+          "time_s": 0.00010225000000000086,
+          "q": -0.46604463575959065,
+          "detector_error_V": 7.597174056517275e-09
+        },
+        {
+          "time_s": 0.00017600000000000265,
+          "q": -0.4660446879426417,
+          "detector_error_V": 9.585352900298716e-09
+        },
+        {
+          "time_s": 0.00018100000000000277,
+          "q": -0.46604472033759586,
+          "detector_error_V": 8.476308321903048e-09
+        },
+        {
+          "time_s": 0.0001860000000000029,
+          "q": -0.46604475215464464,
+          "detector_error_V": 7.792889056279506e-09
+        },
+        {
+          "time_s": 0.00019100000000000302,
+          "q": -0.4660447839002705,
+          "detector_error_V": 7.31500088280157e-09
+        }
+      ],
+      "total_time_s": 0.00019100000000000302,
+      "q": -0.4660447839002705,
+      "state_error_V": 1.150804829208596e-07,
+      "relative_error": 1.170660955251041e-13,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 983039,
+      "X": 1e+300,
+      "stages": 37,
+      "events": [
+        {
+          "time_s": 2.0249999999999967e-05,
+          "q": -0.52162455270619,
+          "detector_error_V": 8.380067750834996e-10
+        },
+        {
+          "time_s": 0.00010250000000000087,
+          "q": -0.5339594051625728,
+          "detector_error_V": 7.562817927464494e-09
+        },
+        {
+          "time_s": 0.00017700000000000268,
+          "q": -0.5339595674026374,
+          "detector_error_V": 9.908882492304372e-09
+        },
+        {
+          "time_s": 0.0001822500000000028,
+          "q": -0.5339597060032517,
+          "detector_error_V": 2.55451519937111e-08
+        },
+        {
+          "time_s": 0.00018750000000000293,
+          "q": -0.5339598441253601,
+          "detector_error_V": 2.7730995388886015e-08
+        },
+        {
+          "time_s": 0.00019275000000000306,
+          "q": -0.5339599821369517,
+          "detector_error_V": 2.7089009257963426e-08
+        }
+      ],
+      "total_time_s": 0.00019275000000000306,
+      "q": -0.5339599821369517,
+      "state_error_V": 4.3431703011798106e-07,
+      "relative_error": 4.418108193340023e-13,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 1000000,
+      "X": 0.125,
+      "stages": 25,
+      "events": [
+        {
+          "time_s": 1.974999999999997e-05,
+          "q": -0.3024046817448454,
+          "detector_error_V": 8.009706231604241e-10
+        },
+        {
+          "time_s": 8.400000000000042e-05,
+          "q": -0.30474136961609544,
+          "detector_error_V": 6.046684986049655e-09
+        },
+        {
+          "time_s": 0.00013925000000000176,
+          "q": -0.3047413748681608,
+          "detector_error_V": 7.743562679962679e-09
+        },
+        {
+          "time_s": 0.00014425000000000188,
+          "q": -0.3047413666088794,
+          "detector_error_V": 8.531165773817406e-10
+        },
+        {
+          "time_s": 0.000149250000000002,
+          "q": -0.3047413580997621,
+          "detector_error_V": 1.1979608416368137e-09
+        },
+        {
+          "time_s": 0.00015425000000000212,
+          "q": -0.30474134950498316,
+          "detector_error_V": 1.6012414172372758e-09
+        }
+      ],
+      "total_time_s": 0.00015425000000000212,
+      "q": -0.30474134950498316,
+      "state_error_V": 1.123072246311807e-08,
+      "relative_error": 1.1230725885584634e-14,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 1000000,
+      "X": 2,
+      "stages": 25,
+      "events": [
+        {
+          "time_s": 2.0499999999999966e-05,
+          "q": -0.6666664436103978,
+          "detector_error_V": 8.341206614304042e-10
+        },
+        {
+          "time_s": 8.625000000000047e-05,
+          "q": -0.6931454018061736,
+          "detector_error_V": 5.393651858476289e-09
+        },
+        {
+          "time_s": 0.00014625000000000193,
+          "q": -0.6931469512590456,
+          "detector_error_V": 6.355941772895335e-09
+        },
+        {
+          "time_s": 0.00017925000000000273,
+          "q": -0.6931470912223486,
+          "detector_error_V": 4.3471266697459043e-08
+        },
+        {
+          "time_s": 0.00018450000000000286,
+          "q": -0.6931471023665603,
+          "detector_error_V": 2.2037570657218453e-08
+        },
+        {
+          "time_s": 0.00018950000000000298,
+          "q": -0.6931470944350049,
+          "detector_error_V": 1.5972975275779788e-08
+        }
+      ],
+      "total_time_s": 0.00018950000000000298,
+      "q": -0.6931470944350049,
+      "state_error_V": 1.541015109962629e-07,
+      "relative_error": 1.5410161781135154e-13,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "stages": 25,
+      "events": [
+        {
+          "time_s": 1.949999999999997e-05,
+          "q": -0.24641878914215107,
+          "detector_error_V": 8.380523497386605e-10
+        },
+        {
+          "time_s": 8.35000000000004e-05,
+          "q": -0.24767720609715044,
+          "detector_error_V": 5.721400381242248e-09
+        },
+        {
+          "time_s": 0.0001372500000000017,
+          "q": -0.24767721399404696,
+          "detector_error_V": 9.201098660760465e-09
+        },
+        {
+          "time_s": 0.00014225000000000183,
+          "q": -0.24767720547832364,
+          "detector_error_V": 1.2827292561468084e-09
+        },
+        {
+          "time_s": 0.00014725000000000195,
+          "q": -0.2476771966068372,
+          "detector_error_V": 1.1672870448009576e-09
+        },
+        {
+          "time_s": 0.00015225000000000207,
+          "q": -0.2476771876089634,
+          "detector_error_V": 1.6636905741940211e-09
+        }
+      ],
+      "total_time_s": 0.00015225000000000207,
+      "q": -0.2476771876089634,
+      "state_error_V": 9.222937441544232e-09,
+      "relative_error": 9.222939725856005e-15,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    },
+    {
+      "p": 1000000,
+      "X": 1e+300,
+      "stages": 25,
+      "events": [
+        {
+          "time_s": 1.8499999999999972e-05,
+          "q": -0.07680759653687191,
+          "detector_error_V": 7.100330601250704e-10
+        },
+        {
+          "time_s": 8.025000000000032e-05,
+          "q": -0.07684540197441347,
+          "detector_error_V": 6.722862530561535e-09
+        },
+        {
+          "time_s": 0.00012575000000000143,
+          "q": -0.07684542240674803,
+          "detector_error_V": 1.4588247623792405e-08
+        },
+        {
+          "time_s": 0.00013075000000000155,
+          "q": -0.07684541306097156,
+          "detector_error_V": 3.318925551054619e-09
+        },
+        {
+          "time_s": 0.00013575000000000167,
+          "q": -0.07684540228418392,
+          "detector_error_V": 2.0023219055032015e-09
+        },
+        {
+          "time_s": 0.0001407500000000018,
+          "q": -0.076845391141178,
+          "detector_error_V": 1.9796423528228857e-09
+        }
+      ],
+      "total_time_s": 0.0001407500000000018,
+      "q": -0.076845391141178,
+      "state_error_V": 5.036860095675166e-10,
+      "relative_error": 5.03686048273468e-16,
+      "step_s": 2.5e-07,
+      "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+    }
+  ],
+  "adaptive_fine": {
+    "p": 1000000,
+    "X": 500000,
+    "stages": 25,
+    "events": [
+      {
+        "time_s": 1.962499999999996e-05,
+        "q": -0.2464187892411704,
+        "detector_error_V": 7.390330292178504e-10
+      },
+      {
+        "time_s": 8.362500000000122e-05,
+        "q": -0.2476772060957254,
+        "detector_error_V": 5.720620699367629e-09
+      },
+      {
+        "time_s": 0.00013750000000000085,
+        "q": -0.24767721287966538,
+        "detector_error_V": 8.619884361849017e-09
+      },
+      {
+        "time_s": 0.00014262500000000042,
+        "q": -0.24767720429453807,
+        "detector_error_V": 1.0861369581505187e-09
+      },
+      {
+        "time_s": 0.00014774999999999999,
+        "q": -0.24767719538259625,
+        "detector_error_V": 1.2119655001807672e-09
+      },
+      {
+        "time_s": 0.00015287499999999956,
+        "q": -0.24767718634387695,
+        "detector_error_V": 1.6320173545913974e-09
+      }
+    ],
+    "total_time_s": 0.00015287499999999956,
+    "q": -0.24767718634387695,
+    "state_error_V": 1.0488023893806542e-08,
+    "relative_error": 1.0488026491451435e-14,
+    "step_s": 1.25e-07,
+    "scope": "Ideal memory/switches and noise-free first-order stages; all-node detector overhead omitted"
+  },
+  "continuous": [
+    {
+      "p": 3,
+      "X": 0.125,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": 0.0,
+      "relative_error": 0.0,
+      "tail_state_error_max_V": 0.0,
+      "settling_time_s": 0.0,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 0
+    },
+    {
+      "p": 3,
+      "X": 0.125,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": 0.0,
+      "relative_error": 0.0,
+      "tail_state_error_max_V": 0.0,
+      "settling_time_s": 0.0,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 1
+    },
+    {
+      "p": 3,
+      "X": 0.125,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": 0.0,
+      "relative_error": 0.0,
+      "tail_state_error_max_V": 0.0,
+      "settling_time_s": 0.0,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 2
+    },
+    {
+      "p": 3,
+      "X": 2,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.6188984219367194,
+      "relative_error": 4.660924013295392e-11,
+      "tail_state_error_max_V": 1.1098133523290699e-10,
+      "settling_time_s": 7.195106160425957e-05,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 3
+    },
+    {
+      "p": 3,
+      "X": 2,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.6188984208221141,
+      "relative_error": 5.147141318532146e-10,
+      "tail_state_error_max_V": 1.2344291144827935e-09,
+      "settling_time_s": 0.00024260033742778953,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 4
+    },
+    {
+      "p": 3,
+      "X": 2,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.6188984085793222,
+      "relative_error": 5.6563645046016015e-09,
+      "tail_state_error_max_V": 2.0652394017162123e-08,
+      "settling_time_s": 0.0026521229483716167,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 5
+    },
+    {
+      "p": 3,
+      "X": 500000,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.5809515840922004,
+      "relative_error": 4.5324923097986164e-11,
+      "tail_state_error_max_V": 1.0964318342132628e-10,
+      "settling_time_s": 7.180296267801861e-05,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 6
+    },
+    {
+      "p": 3,
+      "X": 500000,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.5809515830459392,
+      "relative_error": 4.778343269681803e-10,
+      "tail_state_error_max_V": 1.164131568920368e-09,
+      "settling_time_s": 0.00024115423256230363,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 7
+    },
+    {
+      "p": 3,
+      "X": 500000,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.5809515715564648,
+      "relative_error": 5.227418597924169e-09,
+      "tail_state_error_max_V": 1.9369433501559286e-08,
+      "settling_time_s": 0.0026391764679398457,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 8
+    },
+    {
+      "p": 3,
+      "X": 1e+300,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.37529913018938144,
+      "relative_error": 2.705234503352189e-11,
+      "tail_state_error_max_V": 7.100431353990189e-11,
+      "settling_time_s": 7.104335343871526e-05,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 9
+    },
+    {
+      "p": 3,
+      "X": 1e+300,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.37529912951349687,
+      "relative_error": 2.845615256472754e-10,
+      "tail_state_error_max_V": 7.520596922994116e-10,
+      "settling_time_s": 0.0002327008986743586,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 10
+    },
+    {
+      "p": 3,
+      "X": 1e+300,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.3752991220982456,
+      "relative_error": 3.1097410753205643e-09,
+      "tail_state_error_max_V": 1.2462069598484504e-08,
+      "settling_time_s": 0.00254959631894005,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 11
+    },
+    {
+      "p": 32,
+      "X": 0.125,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.3260030076183516,
+      "relative_error": 1.030373932992391e-06,
+      "tail_state_error_max_V": 7.500964906737018e-05,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 12
+    },
+    {
+      "p": 32,
+      "X": 0.125,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.3260356430191291,
+      "relative_error": 2.0839739293708762e-11,
+      "tail_state_error_max_V": 6.600771595977051e-10,
+      "settling_time_s": 0.00016190309121853197,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 13
+    },
+    {
+      "p": 32,
+      "X": 0.125,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.3260356367491777,
+      "relative_error": 2.1879258534026257e-10,
+      "tail_state_error_max_V": 9.65059276936131e-09,
+      "settling_time_s": 0.0024777372506522718,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 14
+    },
+    {
+      "p": 32,
+      "X": 2,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.6856274450795342,
+      "relative_error": 2.125800666921287e-06,
+      "tail_state_error_max_V": 0.0001474180862266472,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 15
+    },
+    {
+      "p": 32,
+      "X": 2,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.6856940118615245,
+      "relative_error": 4.2538743525138514e-11,
+      "tail_state_error_max_V": 1.3320712310971317e-09,
+      "settling_time_s": 0.0001719595515886928,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 16
+    },
+    {
+      "p": 32,
+      "X": 2,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.6856939986601926,
+      "relative_error": 4.6411384738865114e-10,
+      "tail_state_error_max_V": 2.0362936004048038e-08,
+      "settling_time_s": 0.0026270250999608376,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 17
+    },
+    {
+      "p": 32,
+      "X": 500000,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.39402267208573116,
+      "relative_error": 1.2437290659696038e-06,
+      "tail_state_error_max_V": 8.985298887498328e-05,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 18
+    },
+    {
+      "p": 32,
+      "X": 500000,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.3940619805627551,
+      "relative_error": 2.5173660935864944e-11,
+      "tail_state_error_max_V": 7.956372782835786e-10,
+      "settling_time_s": 0.0001646321990787587,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 19
+    },
+    {
+      "p": 32,
+      "X": 500000,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.39406197298345663,
+      "relative_error": 2.649798157144561e-10,
+      "tail_state_error_max_V": 1.16689017892746e-08,
+      "settling_time_s": 0.0025153393032720695,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 20
+    },
+    {
+      "p": 32,
+      "X": 1e+300,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.02343151313388337,
+      "relative_error": 7.364735529933481e-08,
+      "tail_state_error_max_V": 5.502473705943506e-06,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 21
+    },
+    {
+      "p": 32,
+      "X": 1e+300,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.02343386808838281,
+      "relative_error": 1.1008425593423724e-12,
+      "tail_state_error_max_V": 3.520116489963421e-11,
+      "settling_time_s": 0.00012914357899421772,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 22
+    },
+    {
+      "p": 32,
+      "X": 1e+300,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.02343386763787817,
+      "relative_error": 1.518942976634458e-11,
+      "tail_state_error_max_V": 6.804709261343245e-10,
+      "settling_time_s": 0.001962032449465987,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 23
+    },
+    {
+      "p": 983039,
+      "X": 0.125,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.9998166735429157,
+      "relative_error": 1.765460942544455e-06,
+      "tail_state_error_max_V": 2.2643030743314,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": true,
+      "max_step": "0.5u",
+      "waveform_run": 24
+    },
+    {
+      "p": 983039,
+      "X": 0.125,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.6743510917246968,
+      "relative_error": 4.171229507362653e-07,
+      "tail_state_error_max_V": 0.4100478470815103,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 25
+    },
+    {
+      "p": 983039,
+      "X": 0.125,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.26430323948321044,
+      "relative_error": 5.249005776335429e-15,
+      "tail_state_error_max_V": 5.198207531087462e-09,
+      "settling_time_s": 0.001995980208652813,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 26
+    },
+    {
+      "p": 983039,
+      "X": 2,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.9999785973353046,
+      "relative_error": 1.3293819674316815e-06,
+      "tail_state_error_max_V": 2.6931461620006885,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": true,
+      "max_step": "0.5u",
+      "waveform_run": 27
+    },
+    {
+      "p": 983039,
+      "X": 2,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.4444274394620935,
+      "relative_error": 7.642439487836283e-07,
+      "tail_state_error_max_V": 0.7512805032733791,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 28
+    },
+    {
+      "p": 983039,
+      "X": 2,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.6931469225786937,
+      "relative_error": 1.3844852811067316e-14,
+      "tail_state_error_max_V": 1.371358326895944e-08,
+      "settling_time_s": 0.0021559437580265786,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 29
+    },
+    {
+      "p": 983039,
+      "X": 500000,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.9999807126002933,
+      "relative_error": 1.560405197108969e-06,
+      "tail_state_error_max_V": 2.466044343966471,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": true,
+      "max_step": "0.5u",
+      "waveform_run": 30
+    },
+    {
+      "p": 983039,
+      "X": 500000,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.0914131246814742,
+      "relative_error": 6.361590437144573e-07,
+      "tail_state_error_max_V": 0.6253684558616867,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 31
+    },
+    {
+      "p": 983039,
+      "X": 500000,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.4660446596405104,
+      "relative_error": 9.337657532880926e-15,
+      "tail_state_error_max_V": 9.247561216785272e-09,
+      "settling_time_s": 0.0020888063773357563,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 32
+    },
+    {
+      "p": 983039,
+      "X": 1e+300,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.9999840599924612,
+      "relative_error": 1.4913218039084672e-06,
+      "tail_state_error_max_V": 2.5339591351470148,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": true,
+      "max_step": "0.5u",
+      "waveform_run": 33
+    },
+    {
+      "p": 983039,
+      "X": 1e+300,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.208865883148038,
+      "relative_error": 6.86551769845477e-07,
+      "tail_state_error_max_V": 0.6749063353281163,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 34
+    },
+    {
+      "p": 983039,
+      "X": 1e+300,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.5339595373159198,
+      "relative_error": 1.068523983786346e-14,
+      "tail_state_error_max_V": 1.0582625775690246e-08,
+      "settling_time_s": 0.0021113617245563992,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 35
+    },
+    {
+      "p": 1000000,
+      "X": 0.125,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.7823820621395536,
+      "relative_error": 1.4776433351288227e-06,
+      "tail_state_error_max_V": 2.3046812752084636,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": true,
+      "max_step": "0.5u",
+      "waveform_run": 36
+    },
+    {
+      "p": 1000000,
+      "X": 0.125,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.3069700816301476,
+      "relative_error": 2.2287215785928274e-09,
+      "tail_state_error_max_V": 0.005108466060818773,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 37
+    },
+    {
+      "p": 1000000,
+      "X": 0.125,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.30474135471046226,
+      "relative_error": 6.0252451959387554e-15,
+      "tail_state_error_max_V": 6.3161175734016695e-09,
+      "settling_time_s": 0.002203179086417748,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 38
+    },
+    {
+      "p": 1000000,
+      "X": 2,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.9143318326007936,
+      "relative_error": 1.2211872300248876e-06,
+      "tail_state_error_max_V": 2.692928110087682,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": true,
+      "max_step": "0.5u",
+      "waveform_run": 39
+    },
+    {
+      "p": 1000000,
+      "X": 2,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.6976378700418472,
+      "relative_error": 4.490932841398119e-09,
+      "tail_state_error_max_V": 0.01095981531698298,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 40
+    },
+    {
+      "p": 1000000,
+      "X": 2,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.6931469265660505,
+      "relative_error": 1.3767452950398476e-14,
+      "tail_state_error_max_V": 1.4444648810396643e-08,
+      "settling_time_s": 0.0023513211364898914,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 41
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.694935693244999,
+      "relative_error": 1.4472609494273387e-06,
+      "tail_state_error_max_V": 2.2476259351862202,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": true,
+      "max_step": "0.5u",
+      "waveform_run": 42
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.2495065803891667,
+      "relative_error": 1.8293840137092119e-09,
+      "tail_state_error_max_V": 0.004172728086115157,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 43
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.2476771918973837,
+      "relative_error": 4.934518378164343e-15,
+      "tail_state_error_max_V": 5.17005846467633e-09,
+      "settling_time_s": 0.002166442254172094,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 44
+    },
+    {
+      "p": 1000000,
+      "X": 1e+300,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.4323314163380419,
+      "relative_error": 3.5548617938839327e-07,
+      "tail_state_error_max_V": 2.0768119152590327,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": true,
+      "max_step": "0.5u",
+      "waveform_run": 45
+    },
+    {
+      "p": 1000000,
+      "X": 1e+300,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -0.07742295135151164,
+      "relative_error": 5.775607587361123e-10,
+      "tail_state_error_max_V": 0.001305827784369884,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 46
+    },
+    {
+      "p": 1000000,
+      "X": 1e+300,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.07684538913662352,
+      "relative_error": 1.5008685865063097e-15,
+      "tail_state_error_max_V": 1.573685917688472e-09,
+      "settling_time_s": 0.0019614595418176507,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 47
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "memory_tau_s": 2e-06,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.0005,
+      "q_final": -1.6951966319921001,
+      "relative_error": 1.4475218889944303e-06,
+      "tail_state_error_max_V": 2.2476259753197225,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": true,
+      "max_step": "0.125u",
+      "waveform_run": 48
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "memory_tau_s": 0.0002,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.004,
+      "q_final": -0.247677191897418,
+      "relative_error": 4.934484072264385e-15,
+      "tail_state_error_max_V": 5.170558481371046e-09,
+      "settling_time_s": 0.002166091385198965,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.125u",
+      "waveform_run": 49
+    },
+    {
+      "p": 983039,
+      "X": 500000,
+      "extended": true,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.01,
+      "q_final": -1.3454600913085937,
+      "relative_error": 8.94589763095493e-07,
+      "tail_state_error_max_V": 0.9403703908965039,
+      "settling_time_s": null,
+      "stable_tail": false,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 50
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "extended": true,
+      "memory_tau_s": 2e-05,
+      "stage_tau_s": 1e-06,
+      "duration_s": 0.01,
+      "q_final": -0.24767719638193186,
+      "relative_error": 4.499690901911358e-16,
+      "tail_state_error_max_V": 4.4996897874405306e-10,
+      "settling_time_s": 0.0013880331448128725,
+      "stable_tail": true,
+      "guard_activated": false,
+      "max_step": "0.5u",
+      "waveform_run": 51
+    }
+  ]
+}

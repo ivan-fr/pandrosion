@@ -1,0 +1,45 @@
+{
+  "seed": 20260923,
+  "input_pairs": 8243,
+  "distinct_degrees": 4278,
+  "evaluations": 24729,
+  "groups": {
+    "grid": 1836,
+    "X_sweep": 1407,
+    "random": 5000
+  },
+  "worst": {
+    "ideal": {
+      "p": 6,
+      "X": 1e-100,
+      "group": "grid",
+      "profile": "ideal",
+      "Y": 1.4781372380246418,
+      "stages": 3,
+      "relative_error": 1.1443647134796423e-16,
+      "valid": true
+    },
+    "untrimmed": {
+      "p": 3,
+      "X": 2.2250738585072014e-308,
+      "group": "grid",
+      "profile": "untrimmed",
+      "Y": 2,
+      "stages": 2,
+      "relative_error": 0.00010413758030078264,
+      "valid": true
+    },
+    "trim_target": {
+      "p": 3,
+      "X": 2.2250738585072014e-308,
+      "group": "grid",
+      "profile": "trim_target",
+      "Y": 2,
+      "stages": 2,
+      "relative_error": 2.6946458526492113e-06,
+      "valid": true
+    }
+  },
+  "invalid": 0,
+  "scope": "Six-step arithmetic sweep: no stage loading, dynamic timing, ADC or thermal model; see separate timed campaign"
+}

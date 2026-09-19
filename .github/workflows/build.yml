@@ -126,6 +126,7 @@ jobs:
       - run: python3 scripts/audit_fast_power.py
       - run: python3 scripts/audit_native_nondegeneracy.py
       - run: python3 scripts/audit_initialization.py
+      - run: python3 scripts/audit_analog_fast_ad.py
       - uses: actions/cache/save@v6.1.0
         if: needs.lean-base.outputs.cache-hit != 'true'
         with:
@@ -152,8 +153,9 @@ jobs:
           python src/decentered/verify.py
       - run: python scripts/test_native_nondegeneracy.py
       - run: python scripts/check_initialization.py
+      - run: python paper/pandrosion_analog_v30/draw_fast_geometry.py
   paper:
-    name: Build V20 and analog companion PDFs
+    name: Build V20, V17 and V30 papers
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -166,14 +168,17 @@ jobs:
           sudo install /tmp/tectonic /usr/local/bin/tectonic
       - run: bash paper/reciprocal_geometry_v20/build.sh
       - run: bash paper/pandrosion_analog_v17/build.sh
+      - run: python3 paper/pandrosion_analog_v30/check_results.py
+      - run: bash paper/pandrosion_analog_v30/build.sh
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: papers
           path: |
             paper/reciprocal_geometry_v20/Reciprocal_Root_Geometry_v20.pdf
             paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf
+            paper/pandrosion_analog_v30/Pandrosion_Geometry_Analog_V30.pdf
   analog:
-    name: P4 SPICE simulations and validation
+    name: Analog SPICE simulations and accuracy budgets
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -184,15 +189,33 @@ jobs:
           cache: pip
           cache-dependency-path: research/pandrosion_analog_p4/requirements.txt
       - run: sudo apt-get update && sudo apt-get install -y ngspice
-      - run: pip install -r research/pandrosion_analog_p4/requirements.txt
+      - run: pip install -r research/pandrosion_analog_p4/requirements.txt -r research/analog_fast_ad/requirements.txt
       - run: python research/pandrosion_analog_p4/simulate_p4.py
       - run: python research/pandrosion_analog_p4/verify_p4.py
+      - run: python research/analog_fast_ad/verify.py
+      - run: python research/analog_fast_ad/model.py
+      - run: python research/analog_fast_ad/precision.py
+      - run: python research/analog_fast_ad/spice.py
+      - run: python research/analog_fast_ad/characterize.py
+      - run: python research/analog_fast_ad/characterize_spice.py
+      - run: python research/analog_fast_ad/joint_spice.py
+      - run: python research/analog_fast_ad/calibrate_cells.py
+      - run: node research/analog_fast_ad/benchmark.mjs
+      - run: python research/analog_fast_ad/validate_comparison.py
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: analog-p4-results
           path: |
             research/pandrosion_analog_p4/results.json
             research/pandrosion_analog_p4/VALIDATION.json
+            research/analog_fast_ad/model_results.json
+            research/analog_fast_ad/precision_results.json
+            research/analog_fast_ad/spice_results.json
+            research/analog_fast_ad/characterization_results.json
+            research/analog_fast_ad/characterization_spice.json
+            research/analog_fast_ad/joint_spice_results.json
+            research/analog_fast_ad/calibration_results.json
+            research/analog_fast_ad/benchmark_results.json
   previews:
     name: Interactive geometry and browser checks
     runs-on: ubuntu-24.04
@@ -214,3 +237,64 @@ jobs:
         with:
           name: preview-screenshots
           path: .ci/browser
+  analog-generalist:
+    name: Generalist root campaign and clock alternatives
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y ngspice
+      - run: pip install -r research/analog_fast_ad/requirements.txt
+      - run: python research/analog_fast_ad/generalist_campaign.py
+      - run: python research/analog_fast_ad/generalist_spice.py --workers 2
+      - run: python research/analog_fast_ad/clock_modes.py
+      - run: python research/analog_fast_ad/streaming_campaign.py
+      - run: python research/analog_fast_ad/generalist_report.py
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: generalist-campaign-results
+          path: |
+            research/analog_fast_ad/generalist_algorithm.*
+            research/analog_fast_ad/generalist_spice.json
+            research/analog_fast_ad/generalist_spice.jsonl
+            research/analog_fast_ad/clock_modes_results.json
+            research/analog_fast_ad/clock_modes_waveforms.csv
+            research/analog_fast_ad/streaming_results.json
+            research/analog_fast_ad/GENERALIST_RESULTS.md
+            research/analog_fast_ad/generalist_results.png
+  analog-precision:
+    name: Precision circuit and noisy completion controller
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y ngspice
+      - run: pip install -r research/analog_fast_ad/requirements.txt
+      - run: python research/analog_fast_ad/validate_revised.py
+      - run: python research/analog_fast_ad/revised_ablation.py
+      - run: python research/analog_fast_ad/noisy_controller.py
+      - run: python research/analog_fast_ad/precision_revision_report.py
+      - run: python research/analog_fast_ad/speed_accuracy.py
+      - run: python research/analog_fast_ad/speed_accuracy_report.py
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: precision-revision-results
+          path: |
+            research/analog_fast_ad/revised_validation.json
+            research/analog_fast_ad/revised_ablation.json
+            research/analog_fast_ad/noisy_controller_results.json
+            research/analog_fast_ad/PRECISION_REVISION_RESULTS.md
+            research/analog_fast_ad/precision_revision.png
+            research/analog_fast_ad/precision_revision.svg
+            research/analog_fast_ad/speed_accuracy*.json
+            research/analog_fast_ad/speed_accuracy.png
+            research/analog_fast_ad/speed_accuracy.svg
+            research/analog_fast_ad/SPEED_ACCURACY.md
