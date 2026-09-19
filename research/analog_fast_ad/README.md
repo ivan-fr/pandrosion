@@ -272,3 +272,14 @@ performance or a universal accuracy guarantee.
 A separate noisy completion-controller model completes 18 normal jobs and
 blocks transfers in four injected-fault tests. It is not yet integrated with the
 revised SPICE circuit. The dedicated precision CI job repeats both studies.
+
+## Precision versus time
+
+The [timing sweep](SPEED_ACCURACY.md) tests five fixed-hardware schedules and
+selects early-readout policies on eight development cases before eighteen new
+validation cases. A 4.785 ms policy stays below 1 ppm on those eighteen cases
+(worst 0.653 ppm); a 2.385 ms policy stays below 10 ppm (worst 1.239 ppm).
+Retrospective scoring on the earlier 64 trajectories also passes both targets,
+but the faster 1 ppm mode has little margin (worst 0.982 ppm). These schedule
+times exclude preparation, calibration and physical converter latency. They
+are not a measured chip latency or an advantage over digital computation.
