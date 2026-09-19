@@ -39,7 +39,7 @@ def main():
    if worst[profile] is None or err>worst[profile]['relative_error']:worst[profile]=row
    if profile=='ideal':assert valid and err<1e-12,row
  with (OUT/'generalist_algorithm.csv').open('w') as f:
-  w=csv.DictWriter(f,fieldnames=rows[0]);w.writeheader();w.writerows(rows)
+  w=csv.DictWriter(f,fieldnames=rows[0],lineterminator="\n");w.writeheader();w.writerows(rows)
  result=dict(seed=SEED,input_pairs=len(cases),distinct_degrees=len(set(r['p'] for r in cases)),
   evaluations=len(rows),groups={g:sum(x[2]==g for x in pairs) for g in ['grid','X_sweep','random']},
   worst=worst,invalid=sum(not r['valid'] for r in rows),

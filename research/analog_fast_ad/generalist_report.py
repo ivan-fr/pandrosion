@@ -59,4 +59,6 @@ axs[1,1].set(xlabel='Successive input job',ylabel='Relative root error',title='R
 for ax in axs.flat:ax.grid(alpha=.15)
 fig.suptitle('Broad root campaign — behavioral models, no silicon claim')
 fig.savefig(ROOT/'generalist_results.png',dpi=160);fig.savefig(ROOT/'generalist_results.svg')
+svg=ROOT/'generalist_results.svg'
+svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
 print('Generalist report generated from retained results')

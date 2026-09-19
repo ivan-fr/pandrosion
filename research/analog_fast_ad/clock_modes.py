@@ -73,7 +73,7 @@ def continuous(r,memory_tau,step='0.5u',duration_s=None):
 
 def save(report):
  with (OUT/'clock_modes_waveforms.csv').open('w') as f:
-  writer=csv.writer(f);writer.writerow(['run','time_s','q'])
+  writer=csv.writer(f,lineterminator="\n");writer.writerow(['run','time_s','q'])
   for i,row in enumerate(report['continuous']):
    row['waveform_run']=i
    for point in row.pop('waveform'):writer.writerow([i,point['time_s'],point['q']])
