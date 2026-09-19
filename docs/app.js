@@ -1,6 +1,6 @@
 import {bindSphereDrag} from './sphere-drag.js';
 import {stereoLineSamples,stereoCircleSamples} from './stereography.js';
-import {construct,methods,orders,affine,point,stereo,renormalize,renormalizeOptimal,needsStereographicView,adaptRectangle,baseMode} from './geometry.js';
+import {construct,methods,orders,affine,point,stereo,renormalize,renormalizeOptimal,needsStereographicView,adaptRectangle,baseMode,dualModes} from './geometry.js';
 import {initializeCalibrated,iterationDecision,initializationBands} from './initialization.js';
 const $=id=>document.getElementById(id);let g=null,timer=null,scale=1,adaptive=null,manualView=false,automaticSphere=false,initialization=null,layout=null;
 const fmt=x=>Number.isFinite(x)?(Math.abs(x)>1e6||Math.abs(x)<1e-5&&x!==0?x.toExponential(8):x.toPrecision(12)):'—';
@@ -9,7 +9,7 @@ const colors=()=>Object.fromEntries(['bg','fg','muted','line','blue','orange','g
 const colorProbe=document.createElement('span');colorProbe.hidden=true;document.body.append(colorProbe);
 function palette(){const c={};for(const k of ['bg','fg','muted','line','blue','orange','green']){colorProbe.style.color=`var(--${k})`;c[k]=getComputedStyle(colorProbe).color;}return c;}
 function setup(canvas){const r=canvas.getBoundingClientRect(),d=devicePixelRatio||1;canvas.width=Math.round(r.width*d);canvas.height=Math.round(r.height*d);const c=canvas.getContext('2d');c.scale(d,d);c.clearRect(0,0,r.width,r.height);c.font='12px system-ui';return [c,r.width,r.height];}
-const key=new Set(['O','A','B','C','P','Pnext','Q','V','U','G','Gother','MΓ','F','D','Z','K','M','L1','T','E','Ux','Xs']);
+const key=new Set(['O','A','B','C','P','Pnext','Q','V','U','G','Gother','MΓ','F','D','Z','K','M','L1','T','E','Ux','Xs','R','Qr','Qother','Zr','Gr','Fr','Zscale','Gscale','Escaled']);
 const label=n=>({Pnext:'P⁺',Gother:'G′',L1:'L₁'}[n]||n);
 function plane(canvas,detail=false){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<80)return;const stage=+$('stage').value;
  const W=g.W,H=g.H;let xs=[-.25*W,1.25*W],ys=[-.15*H,1.15*H];if(!detail){for(const q of Object.values(g.points)){const a=affine(q);if(a&&a.every(x=>Math.abs(x)<1e7)){xs.push(a[0]);ys.push(a[1]);}}for(const a of g.circles){xs.push(a.center[0]-a.radius,a.center[0]+a.radius);ys.push(a.center[1]-a.radius,a.center[1]+a.radius);}}
@@ -68,11 +68,13 @@ function chooseLayout(X=+$('working-target').value,s=+$('state').value){const [W
 function rebuild(){stop();$('degree').max=['AKfast','ADfast','projectiveFast','arcFast'].includes($('method').value)?1000000:32;
  const adjustable=['AK','AD','projective','arc'].includes(baseMode($('method').value));for(const id of ['rect-width','rect-height','adapt-rectangle','init-band'])$(id).disabled=!adjustable;
  const [W,H]=dimensions();$('layout-status').textContent=`Rectangle: ${fmt(W)} × ${fmt(H)}. `+(layout?`Proportions chosen from ${layout.tested} tested rectangles to balance the overview. `:'')+'Circles are reconstructed, never stretched. Coincident points remain coincident.';
-$('initialize').disabled=!['AK','AD','projective','arc','AKfast','ADfast','projectiveFast','arcFast'].includes($('method').value);$('error').hidden=true;$('warning').hidden=true;$('chart-label').hidden=$('method').value!=='circle';try{try{g=construct($('method').value,+$('degree').value,+$('working-target').value,+$('state').value,$('chart').value,W,H);}catch(original){
+$('initialize').disabled=!['AK','AD','projective','arc'].includes(baseMode($('method').value));$('error').hidden=true;$('warning').hidden=true;$('dual-status').hidden=true;$('chart-label').hidden=$('method').value!=='circle';try{try{g=construct($('method').value,+$('degree').value,+$('working-target').value,+$('state').value,$('chart').value,W,H);}catch(original){
  if(initialization)throw Error(original.message+' Calibration is preserved; this numerical limit is not an exact geometric degeneracy.');
  let r;try{r=renormalizeOptimal($('method').value,+$('degree').value,+$('working-target').value,+$('state').value,$('chart').value,W,H);}catch(conditioning){throw Error(original.message+' '+conditioning.message);}adaptive=r;scale*=r.c;$('working-target').value=r.X;$('state').value=r.s;g=construct($('method').value,+$('degree').value,r.X,r.s,$('chart').value,W,H);
  }const fallback=needsStereographicView(g);if(fallback&&!manualView){$('view').value='sphere';automaticSphere=true;$('rotation').hidden=false;$('drawing-title').textContent='Stereographic image';g.warnings.push(fallback);}
  $('fast-status').textContent=g.fast?`Post-V20 · p = ${g.p}, binary ${g.binary} · ${g.multiplications} multiplications versus ${g.p-1} in the native chain. Automatic sphere: ${automaticSphere?'yes':'no'}.`:'';
+ $('dual-status').hidden=!g.dual;
+ if(g.dual)$('dual-status').textContent='Post-V20 transport experiment: fixed support AK; '+(g.baseMode==='AK'?'the original ME transport is recovered.':g.baseMode==='AD'?'MR is read from a fixed oblique rail on the last chain horizontal. No mobile arc or extra support join.':g.baseMode==='projective'?'a fixed-center projection and a vertical transfer construct MR.':'a scaled radius and the right circle intersection construct MR.')+' The scalar iteration is unchanged. Counts include auxiliary traces; fixed preparation is excluded. No optimality or uniform conditioning is claimed. See the transport note in the repository.';
  $('stage').max=g.ops.length;$('stage').value=g.ops.length;
  $('root-value').textContent=fmt(g.root);$('next-value').textContent=fmt(g.value);$('error-value').textContent=(g.value/g.root-1).toExponential(5);
  $('answer').textContent=fmt(1/(scale*($('exploration').checked?g.value:g.s)));$('answer-label').textContent=$('exploration').checked?'Root · next readout in the original units':`Approximation to the degree-${g.p} root of ${document.getElementById('target').value} · step ${initialization?.iterations||0}`;$('answer-note').textContent='Numerical approximation. '+($('exploration').checked?'Manual exploration.':(initialization?.stopped?'The available precision can no longer certify an improvement.':'Automatic setup; each click performs one geometric iteration.'));
@@ -104,11 +106,11 @@ $('view').addEventListener('change',()=>cancelSphereDrag());
 new ResizeObserver(draw).observe($('overview'));matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
 // Keep preparation controls and internal values inside a closed advanced panel.
 for(const el of document.querySelectorAll('.internal-input'))$('internal-controls').append(el);
-for(const selector of ['#layout-controls','#layout-status','.toolbar','#research-notice','#initialization-status','#adaptive-status','#fast-status','.readouts','#protocol','details:not(#advanced)']){
+for(const selector of ['#layout-controls','#layout-status','.toolbar','#research-notice','#initialization-status','#adaptive-status','#fast-status','#dual-status','.readouts','#protocol','details:not(#advanced)']){
  const el=document.querySelector(selector);if(el)$('advanced').append(el);
 }
 $('iteration-controls').append($('iterate'));
-const preparedModes=['AK','AD','projective','arc','halley','pade','AKfast','ADfast','projectiveFast','arcFast'];
+const preparedModes=['AK','AD','projective','arc','halley','pade','AKfast','ADfast','projectiveFast','arcFast',...Object.keys(dualModes)];
 function automaticUI(){
  const manual=$('exploration').checked;document.body.dataset.manual=String(manual);
  for(const option of $('method').options)option.hidden=!manual&&!preparedModes.includes(option.value);

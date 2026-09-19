@@ -57,9 +57,22 @@ for(const mode of ['halley','pade'])for(const p of [3,7,16]){
  if(await page.locator('#target').inputValue()!=='500000')throw Error('Pencil changed original X');
  await page.locator('#degree').fill('33');await page.locator('#degree').dispatchEvent('change');if(!await page.locator('#error').isVisible())throw Error('Pencil degree limit ignored');
 }
+// Four fixed-AK transports retain automatic preparation and one click per iteration.
+for(const mode of ['AKdual','ADdual','projectiveDual','arcDual'])for(const p of [3,32]){
+ await page.locator('#degree').fill(String(p));await page.selectOption('#method',mode);await page.click('#calculate');
+ if(await page.locator('#error').isVisible())throw Error('Dual preparation failed: '+mode);
+ if(await page.locator('#state').inputValue()!=='1')throw Error('Dual auto-iterated');
+ if(await page.locator('#advanced').getAttribute('open')!==null)throw Error('Dual requires advanced mode');
+ await page.click('#iterate');if(!(await page.locator('#answer-label').innerText()).includes('step 1'))throw Error('Dual iteration failed');
+ await page.selectOption('#view','sphere');
+ if(p===3)await page.screenshot({path:`${output}/${mode}-sphere.png`,fullPage:true});
+ await page.selectOption('#view','plane');
+ await page.locator('#degree').fill('33');await page.locator('#degree').dispatchEvent('change');
+ if(!await page.locator('#error').isVisible())throw Error('Dual degree limit ignored');
+}
 await page.locator('#degree').fill('3');await page.selectOption('#method','AKfast');
 await page.locator('#advanced > summary').click();await page.locator('#exploration').check();await page.click('#reset');
-for(const mode of ['AK','AD','projective','arc','halley','pade','circle','AKfast','ADfast','projectiveFast','arcFast']){await page.selectOption('#method',mode);if(await page.locator('#error').isVisible())throw Error(mode+': '+await page.locator('#error').innerText());await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');await page.click('#forward');await page.click('#iterate');await page.click('#reset');}
+for(const mode of ['AK','AD','projective','arc','halley','pade','circle','AKfast','ADfast','projectiveFast','arcFast','AKdual','ADdual','projectiveDual','arcDual']){await page.selectOption('#method',mode);if(await page.locator('#error').isVisible())throw Error(mode+': '+await page.locator('#error').innerText());await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');await page.click('#forward');await page.click('#iterate');await page.click('#reset');}
 await page.selectOption('#method','circle');await page.selectOption('#chart','uniform');await page.screenshot({path:`${output}/gallery-uniform.png`,fullPage:true});await page.selectOption('#chart','compact');await page.selectOption('#view','sphere');await page.locator('#yaw').fill('50');await page.locator('#yaw').dispatchEvent('input');await page.screenshot({path:`${output}/gallery-sphere.png`,fullPage:true});
 await page.selectOption('#example','initial');if(!await page.locator('#warning').isVisible())throw Error('Missing infinity warning');if(await page.locator('#view').inputValue()!=='sphere')throw Error('No automatic sphere');await page.selectOption('#view','plane');await page.click('#iterate');if(await page.locator('#view').inputValue()!=='plane')throw Error('Manual view overridden');await page.selectOption('#example','outside');if(!await page.locator('#error').isVisible())throw Error('Missing domain error');await page.click('#reset');await page.click('#normalize');if(await page.locator('#error').isVisible())throw Error('Normalization failed');
 await page.selectOption('#method','AKfast');await page.locator('#degree').fill('1024');await page.locator('#state').fill(String(Math.exp(Math.log(.4)/1024)));await page.locator('#state').dispatchEvent('change');if(await page.locator('#error').isVisible())throw Error('Large degree failed');if(!(await page.locator('#fast-status').innerText()).includes('10 multiplications versus 1023'))throw Error('Wrong binary count');await page.click('#normalize-optimal');if(await page.locator('#error').isVisible())throw Error('Adaptive failed');if(!(await page.locator('#adaptive-status').innerText()).includes('score'))throw Error('Missing metadata');
@@ -74,4 +87,4 @@ await page.screenshot({path:`${output}/initialized-million.png`,fullPage:true});
 await page.locator('#rect-width').fill('8');await page.locator('#rect-width').dispatchEvent('change');if(await page.locator('#error').isVisible())throw Error('Manual rectangle failed');await page.click('#adapt-rectangle');if(await page.locator('#error').isVisible())throw Error('Rectangle adaptation failed');
 await page.setViewportSize({width:360,height:900});await page.screenshot({path:`${output}/gallery-mobile.png`,fullPage:true});const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);if(overflow)throw Error('Mobile overflow');
 const links=await page.locator('.gallery-links a').evaluateAll(a=>a.map(x=>x.href));for(const url of links){await page.goto(url);await page.waitForTimeout(150);if((await page.locator('body').innerText()).includes('Error response'))throw Error('Missing '+url);}
-if(errors.length)throw Error(errors.join('\n'));console.log(JSON.stringify({status:'PASS',methods:11,archive_previews:links.length,mobile_width:360,infinity_and_domain_checked:true}));await b.close();})().catch(e=>{console.error(e);process.exit(1)});
+if(errors.length)throw Error(errors.join('\n'));console.log(JSON.stringify({status:'PASS',methods:15,archive_previews:links.length,mobile_width:360,infinity_and_domain_checked:true}));await b.close();})().catch(e=>{console.error(e);process.exit(1)});

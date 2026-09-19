@@ -1,0 +1,357 @@
+{
+  "digits": 180,
+  "scalar_samples": 5400,
+  "scalar_failures": [],
+  "geometry_samples": 984,
+  "max_geometry_error": "8.62554165493e-180",
+  "orders": {
+    "3": "6.99999999998364",
+    "4": "6.99999999998343",
+    "5": "6.99999999998334",
+    "7": "6.99999999998325",
+    "10": "6.99999999998321",
+    "32": "6.99999999998317",
+    "100": "6.99999999998317",
+    "1000": "6.99999999998317",
+    "1000000": "6.99999999998317"
+  },
+  "orbits": [
+    {
+      "p": 3,
+      "initial_log10_t": -100,
+      "steps": 64
+    },
+    {
+      "p": 3,
+      "initial_log10_t": -10,
+      "steps": 9
+    },
+    {
+      "p": 3,
+      "initial_log10_t": -1,
+      "steps": 4
+    },
+    {
+      "p": 3,
+      "initial_log10_t": 1,
+      "steps": 4
+    },
+    {
+      "p": 3,
+      "initial_log10_t": 10,
+      "steps": 9
+    },
+    {
+      "p": 3,
+      "initial_log10_t": 100,
+      "steps": 64
+    },
+    {
+      "p": 4,
+      "initial_log10_t": -100,
+      "steps": 65
+    },
+    {
+      "p": 4,
+      "initial_log10_t": -10,
+      "steps": 9
+    },
+    {
+      "p": 4,
+      "initial_log10_t": -1,
+      "steps": 4
+    },
+    {
+      "p": 4,
+      "initial_log10_t": 1,
+      "steps": 4
+    },
+    {
+      "p": 4,
+      "initial_log10_t": 10,
+      "steps": 9
+    },
+    {
+      "p": 4,
+      "initial_log10_t": 100,
+      "steps": 65
+    },
+    {
+      "p": 5,
+      "initial_log10_t": -100,
+      "steps": 65
+    },
+    {
+      "p": 5,
+      "initial_log10_t": -10,
+      "steps": 9
+    },
+    {
+      "p": 5,
+      "initial_log10_t": -1,
+      "steps": 4
+    },
+    {
+      "p": 5,
+      "initial_log10_t": 1,
+      "steps": 4
+    },
+    {
+      "p": 5,
+      "initial_log10_t": 10,
+      "steps": 9
+    },
+    {
+      "p": 5,
+      "initial_log10_t": 100,
+      "steps": 65
+    },
+    {
+      "p": 7,
+      "initial_log10_t": -100,
+      "steps": 66
+    },
+    {
+      "p": 7,
+      "initial_log10_t": -10,
+      "steps": 9
+    },
+    {
+      "p": 7,
+      "initial_log10_t": -1,
+      "steps": 4
+    },
+    {
+      "p": 7,
+      "initial_log10_t": 1,
+      "steps": 4
+    },
+    {
+      "p": 7,
+      "initial_log10_t": 10,
+      "steps": 9
+    },
+    {
+      "p": 7,
+      "initial_log10_t": 100,
+      "steps": 66
+    },
+    {
+      "p": 10,
+      "initial_log10_t": -100,
+      "steps": 66
+    },
+    {
+      "p": 10,
+      "initial_log10_t": -10,
+      "steps": 9
+    },
+    {
+      "p": 10,
+      "initial_log10_t": -1,
+      "steps": 4
+    },
+    {
+      "p": 10,
+      "initial_log10_t": 1,
+      "steps": 4
+    },
+    {
+      "p": 10,
+      "initial_log10_t": 10,
+      "steps": 9
+    },
+    {
+      "p": 10,
+      "initial_log10_t": 100,
+      "steps": 66
+    },
+    {
+      "p": 32,
+      "initial_log10_t": -100,
+      "steps": 66
+    },
+    {
+      "p": 32,
+      "initial_log10_t": -10,
+      "steps": 9
+    },
+    {
+      "p": 32,
+      "initial_log10_t": -1,
+      "steps": 4
+    },
+    {
+      "p": 32,
+      "initial_log10_t": 1,
+      "steps": 4
+    },
+    {
+      "p": 32,
+      "initial_log10_t": 10,
+      "steps": 9
+    },
+    {
+      "p": 32,
+      "initial_log10_t": 100,
+      "steps": 66
+    },
+    {
+      "p": 100,
+      "initial_log10_t": -100,
+      "steps": 66
+    },
+    {
+      "p": 100,
+      "initial_log10_t": -10,
+      "steps": 9
+    },
+    {
+      "p": 100,
+      "initial_log10_t": -1,
+      "steps": 4
+    },
+    {
+      "p": 100,
+      "initial_log10_t": 1,
+      "steps": 4
+    },
+    {
+      "p": 100,
+      "initial_log10_t": 10,
+      "steps": 9
+    },
+    {
+      "p": 100,
+      "initial_log10_t": 100,
+      "steps": 66
+    },
+    {
+      "p": 1000,
+      "initial_log10_t": -100,
+      "steps": 66
+    },
+    {
+      "p": 1000,
+      "initial_log10_t": -10,
+      "steps": 9
+    },
+    {
+      "p": 1000,
+      "initial_log10_t": -1,
+      "steps": 4
+    },
+    {
+      "p": 1000,
+      "initial_log10_t": 1,
+      "steps": 4
+    },
+    {
+      "p": 1000,
+      "initial_log10_t": 10,
+      "steps": 9
+    },
+    {
+      "p": 1000,
+      "initial_log10_t": 100,
+      "steps": 66
+    },
+    {
+      "p": 1000000,
+      "initial_log10_t": -100,
+      "steps": 66
+    },
+    {
+      "p": 1000000,
+      "initial_log10_t": -10,
+      "steps": 9
+    },
+    {
+      "p": 1000000,
+      "initial_log10_t": -1,
+      "steps": 4
+    },
+    {
+      "p": 1000000,
+      "initial_log10_t": 1,
+      "steps": 4
+    },
+    {
+      "p": 1000000,
+      "initial_log10_t": 10,
+      "steps": 9
+    },
+    {
+      "p": 1000000,
+      "initial_log10_t": 100,
+      "steps": 66
+    }
+  ],
+  "reference_costs": [
+    {
+      "digits": 6,
+      "AD5": {
+        "iterations": 1,
+        "native_expanded_traces": 39,
+        "binary_expanded_traces": 30
+      },
+      "global7": {
+        "iterations": 1,
+        "native_expanded_traces": 38,
+        "binary_expanded_traces": 29
+      }
+    },
+    {
+      "digits": 12,
+      "AD5": {
+        "iterations": 2,
+        "native_expanded_traces": 73,
+        "binary_expanded_traces": 60
+      },
+      "global7": {
+        "iterations": 2,
+        "native_expanded_traces": 76,
+        "binary_expanded_traces": 58
+      }
+    },
+    {
+      "digits": 30,
+      "AD5": {
+        "iterations": 2,
+        "native_expanded_traces": 73,
+        "binary_expanded_traces": 60
+      },
+      "global7": {
+        "iterations": 2,
+        "native_expanded_traces": 76,
+        "binary_expanded_traces": 58
+      }
+    },
+    {
+      "digits": 60,
+      "AD5": {
+        "iterations": 3,
+        "native_expanded_traces": 107,
+        "binary_expanded_traces": 90
+      },
+      "global7": {
+        "iterations": 2,
+        "native_expanded_traces": 76,
+        "binary_expanded_traces": 58
+      }
+    },
+    {
+      "digits": 120,
+      "AD5": {
+        "iterations": 3,
+        "native_expanded_traces": 107,
+        "binary_expanded_traces": 90
+      },
+      "global7": {
+        "iterations": 3,
+        "native_expanded_traces": 114,
+        "binary_expanded_traces": 87
+      }
+    }
+  ]
+}

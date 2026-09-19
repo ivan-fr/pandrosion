@@ -1,0 +1,10 @@
+{
+  "correction_joins": 12,
+  "arcs": 0,
+  "parallels": 0,
+  "local_order": 7,
+  "log_error_coefficient": "(p - 1)*(p + 1)*(2*p - 1)*(2*p + 1)*(3*p - 1)*(3*p + 1)/100800",
+  "error_derivative": "2*(p^2-1)*(4p^2-1)*(9p^2-1)*z^6 / (p*(1-z^2)*N*Q)",
+  "domain": "p>=3, X>0, s>0, t=X*s^p>0; exact real geometry",
+  "certificates": "exact rational incidence and derivative identities; inequalities explained in README.md"
+}

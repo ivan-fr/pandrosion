@@ -126,6 +126,8 @@ jobs:
       - run: python3 scripts/audit_fast_power.py
       - run: python3 scripts/audit_native_nondegeneracy.py
       - run: python3 scripts/audit_initialization.py
+      - run: python3 scripts/audit_dual_transport.py
+      - run: python3 scripts/audit_global_seven.py
       - uses: actions/cache/save@v6.1.0
         if: needs.lean-base.outputs.cache-hit != 'true'
         with:
@@ -152,6 +154,10 @@ jobs:
           python src/decentered/verify.py
       - run: python scripts/test_native_nondegeneracy.py
       - run: python scripts/check_initialization.py
+      - run: python research/geometric_factorization/symbolic_search.py
+      - run: python research/geometric_factorization/benchmark.py
+      - run: python research/global_order7/verify.py
+      - run: python research/global_order7/benchmark.py
   paper:
     name: Build V20 and analog companion PDFs
     runs-on: ubuntu-24.04
@@ -205,6 +211,9 @@ jobs:
       - run: node scripts/test_initialization.mjs
       - run: node scripts/test_layout.mjs
       - run: node scripts/test_stereography.mjs
+      - run: node scripts/test_dual_transport.mjs
+      - run: node research/geometric_factorization/geometry_benchmark.mjs
+      - run: node research/global_order7/prototype.mjs
       - run: |
           python3 -m http.server 8765 --directory docs > /tmp/preview-server.log 2>&1 &
           node scripts/test_browser.mjs

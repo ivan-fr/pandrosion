@@ -1,0 +1,461 @@
+{
+  "scope": "Finite search; no unrestricted optimum claimed. Native gallery p<=32. Upper bounds exclude fixed preparation and power stage.",
+  "candidates": [
+    {
+      "id": "AK",
+      "order": 2,
+      "status": "implemented_incidence_protocol",
+      "scalar_global": "inherits_V20_written_proof",
+      "reciprocal": false,
+      "native_total": {
+        "J": 2,
+        "P": "2p+1",
+        "C": 0
+      },
+      "binary_correction": {
+        "J": 1,
+        "P": 2,
+        "C": 0
+      },
+      "fixed_support": true,
+      "geometry_results": "geometry_results.json",
+      "cost_optimality": "not_established"
+    },
+    {
+      "id": "AD",
+      "order": 3,
+      "status": "implemented_incidence_protocol",
+      "scalar_global": "inherits_V20_written_proof",
+      "reciprocal": true,
+      "native_total": {
+        "J": 3,
+        "P": "2p+1",
+        "C": 1
+      },
+      "binary_correction": {
+        "J": 2,
+        "P": 2,
+        "C": 1
+      },
+      "fixed_support": false,
+      "geometry_results": "geometry_results.json",
+      "cost_optimality": "not_established"
+    },
+    {
+      "id": "projective",
+      "order": 4,
+      "status": "implemented_incidence_protocol",
+      "scalar_global": "inherits_V20_written_proof",
+      "reciprocal": false,
+      "native_total": {
+        "J": 4,
+        "P": "2p+1",
+        "C": 0
+      },
+      "binary_correction": {
+        "J": 3,
+        "P": 2,
+        "C": 0
+      },
+      "fixed_support": false,
+      "geometry_results": "geometry_results.json",
+      "cost_optimality": "not_established"
+    },
+    {
+      "id": "arc",
+      "order": 5,
+      "status": "implemented_incidence_protocol",
+      "scalar_global": "inherits_V20_written_proof",
+      "reciprocal": true,
+      "native_total": {
+        "J": 3,
+        "P": "2p+1",
+        "C": 1
+      },
+      "binary_correction": {
+        "J": 2,
+        "P": 2,
+        "C": 1
+      },
+      "fixed_support": false,
+      "geometry_results": "geometry_results.json",
+      "cost_optimality": "not_established"
+    },
+    {
+      "id": "AKdual",
+      "order": 2,
+      "status": "implemented_incidence_protocol",
+      "scalar_global": "inherits_V20_written_proof",
+      "reciprocal": false,
+      "native_total": {
+        "J": 2,
+        "P": "2p+1",
+        "C": 0
+      },
+      "binary_correction": {
+        "J": 1,
+        "P": 2,
+        "C": 0
+      },
+      "fixed_support": true,
+      "geometry_results": "geometry_results.json",
+      "cost_optimality": "not_established"
+    },
+    {
+      "id": "ADdual",
+      "order": 3,
+      "status": "implemented_incidence_protocol",
+      "scalar_global": "inherits_V20_written_proof",
+      "reciprocal": true,
+      "native_total": {
+        "J": 2,
+        "P": "2p+1",
+        "C": 0
+      },
+      "binary_correction": {
+        "J": 1,
+        "P": 3,
+        "C": 0
+      },
+      "fixed_support": true,
+      "geometry_results": "geometry_results.json",
+      "cost_optimality": "not_established"
+    },
+    {
+      "id": "projectiveDual",
+      "order": 4,
+      "status": "implemented_incidence_protocol",
+      "scalar_global": "inherits_V20_written_proof",
+      "reciprocal": false,
+      "native_total": {
+        "J": 3,
+        "P": "2p+2",
+        "C": 0
+      },
+      "binary_correction": {
+        "J": 2,
+        "P": 4,
+        "C": 0
+      },
+      "fixed_support": true,
+      "geometry_results": "geometry_results.json",
+      "cost_optimality": "not_established"
+    },
+    {
+      "id": "arcDual",
+      "order": 5,
+      "status": "implemented_incidence_protocol",
+      "scalar_global": "inherits_V20_written_proof",
+      "reciprocal": true,
+      "native_total": {
+        "J": 3,
+        "P": "2p+2",
+        "C": 1
+      },
+      "binary_correction": {
+        "J": 2,
+        "P": 4,
+        "C": 1
+      },
+      "fixed_support": true,
+      "geometry_results": "geometry_results.json",
+      "cost_optimality": "not_established"
+    },
+    {
+      "id": "AD5_constant",
+      "gauge": "c>0",
+      "order": 5,
+      "scalar_global": "same_AD5_map",
+      "reciprocal": true,
+      "status": "arithmetic_constructibility_protocol",
+      "minimum_cost": null,
+      "correction_only_loose_upper_bound": {
+        "J": 42,
+        "P": 243,
+        "C": 1
+      },
+      "geometry_results": null,
+      "conditioning": "no_uniform_bound"
+    },
+    {
+      "id": "AD5_unit_support",
+      "gauge": "1/(1+g)",
+      "order": 5,
+      "scalar_global": "same_AD5_map",
+      "reciprocal": true,
+      "status": "implemented_support_level_parameter",
+      "minimum_cost": null,
+      "correction_only_loose_upper_bound": {
+        "J": 42,
+        "P": 243,
+        "C": 1
+      },
+      "geometry_results": "geometry_results.json",
+      "conditioning": "no_uniform_bound"
+    },
+    {
+      "id": "AD5_double_AK",
+      "gauge": "2p/(1+g)",
+      "order": 5,
+      "scalar_global": "same_AD5_map",
+      "reciprocal": true,
+      "status": "implemented_support_level_parameter",
+      "minimum_cost": null,
+      "correction_only_loose_upper_bound": {
+        "J": 42,
+        "P": 243,
+        "C": 1
+      },
+      "geometry_results": "geometry_results.json",
+      "conditioning": "no_uniform_bound"
+    },
+    {
+      "id": "AD5_cayley",
+      "gauge": "1/(1+t)",
+      "order": 5,
+      "scalar_global": "same_AD5_map",
+      "reciprocal": true,
+      "status": "arithmetic_constructibility_protocol",
+      "minimum_cost": null,
+      "correction_only_loose_upper_bound": {
+        "J": 42,
+        "P": 243,
+        "C": 1
+      },
+      "geometry_results": null,
+      "conditioning": "bounded_circle_core_only"
+    },
+    {
+      "id": "AD5_weighted_cayley",
+      "gauge": "t/(1+t)",
+      "order": 5,
+      "scalar_global": "same_AD5_map",
+      "reciprocal": true,
+      "status": "arithmetic_constructibility_protocol",
+      "minimum_cost": null,
+      "correction_only_loose_upper_bound": {
+        "J": 42,
+        "P": 243,
+        "C": 1
+      },
+      "geometry_results": null,
+      "conditioning": "no_uniform_bound"
+    },
+    {
+      "id": "AD5_radical_scaled",
+      "gauge": "1/g",
+      "order": 5,
+      "scalar_global": "same_AD5_map",
+      "reciprocal": true,
+      "status": "arithmetic_constructibility_protocol",
+      "minimum_cost": null,
+      "correction_only_loose_upper_bound": {
+        "J": 42,
+        "P": 243,
+        "C": 1
+      },
+      "geometry_results": null,
+      "conditioning": "no_uniform_bound"
+    },
+    {
+      "id": "radical7",
+      "order": 7,
+      "status": "exact_symbolic_candidate_with_Lean_jets",
+      "parameters": {
+        "a": "3*p*(p**2 + 1)/(2*(2*p - 1)*(2*p + 1))",
+        "b": "0",
+        "c": "5*p*(p - 1)*(p + 1)/(2*(2*p - 1)*(2*p + 1))",
+        "d": "-4*(2*p - 1)*(2*p + 1)/(15*p**2)",
+        "D_defect": "-(p - 2)*(p - 1)*(p + 1)*(p + 2)*(2*p - 1)*(2*p + 1)/(4725*p**5)",
+        "log_error_coefficient": "-(p - 2)*(p - 1)*(p + 1)*(p + 2)*(2*p - 1)*(2*p + 1)/302400",
+        "max_order_in_this_ansatz": 7
+      },
+      "correction": "(D-z)/(D+z)",
+      "kappa": "D-z",
+      "transport": "-2z",
+      "z": "(t-1)/(t+1)",
+      "D": "a+b*z^2+c*sqrt(1+d*z^2)",
+      "reciprocal": true,
+      "globally_real": false,
+      "counterexample": {
+        "p": 3,
+        "t": 1000,
+        "reason": "negative_radicand"
+      },
+      "domain": "abs(z)<1/sqrt(-d)",
+      "correction_only_loose_upper_bound": {
+        "J": 42,
+        "P": 243,
+        "C": 1
+      },
+      "actual_economical_trace_count": null,
+      "gallery": false
+    },
+    {
+      "id": "radical9",
+      "order": 9,
+      "status": "exact_symbolic_candidate_with_Lean_jets",
+      "parameters": {
+        "a": "3*p*(71*p**4 + 90*p**2 - 26)/(5*(11*p**2 - 2)**2)",
+        "b": "(p - 2)*(p - 1)*(p + 1)*(p + 2)/(15*p*(11*p**2 - 2))",
+        "c": "98*p*(p - 1)*(p + 1)*(2*p - 1)*(2*p + 1)/(5*(11*p**2 - 2)**2)",
+        "d": "-2*(11*p**2 - 2)/(21*p**2)",
+        "D_defect": "-(p - 2)*(p - 1)*(p + 1)*(p + 2)*(2*p - 1)*(2*p + 1)*(29*p**2 - 4)/(396900*p**7)",
+        "log_error_coefficient": "-(p - 2)*(p - 1)*(p + 1)*(p + 2)*(2*p - 1)*(2*p + 1)*(29*p**2 - 4)/101606400",
+        "max_order_in_this_ansatz": 9
+      },
+      "correction": "(D-z)/(D+z)",
+      "kappa": "D-z",
+      "transport": "-2z",
+      "z": "(t-1)/(t+1)",
+      "D": "a+b*z^2+c*sqrt(1+d*z^2)",
+      "reciprocal": true,
+      "globally_real": false,
+      "counterexample": {
+        "p": 3,
+        "t": 1000,
+        "reason": "negative_radicand"
+      },
+      "domain": "abs(z)<1/sqrt(-d)",
+      "correction_only_loose_upper_bound": {
+        "J": 42,
+        "P": 243,
+        "C": 1
+      },
+      "actual_economical_trace_count": null,
+      "gallery": false
+    },
+    {
+      "id": "two_radicals",
+      "order": 11,
+      "proven_p": [
+        3,
+        4,
+        5,
+        7
+      ],
+      "status": "finite_p_exact_symbolic_jets",
+      "parameters": {
+        "3": {
+          "a": "339/257",
+          "c": "216/257 + 3972*sqrt(239)/61423",
+          "e": "216/257 - 3972*sqrt(239)/61423",
+          "d": "-106/135 - 2*sqrt(239)/135",
+          "f": "-106/135 + 2*sqrt(239)/135",
+          "defect": "-3196/119574225"
+        },
+        "4": {
+          "a": "116/69",
+          "c": "80/69 + 550*sqrt(745)/10281",
+          "e": "80/69 - 550*sqrt(745)/10281",
+          "d": "-19/24 - sqrt(745)/120",
+          "f": "-19/24 + sqrt(745)/120",
+          "defect": "-5/98304"
+        },
+        "5": {
+          "a": "6995/3399",
+          "c": "5000/3399 + 274700*sqrt(1807)/6141993",
+          "e": "5000/3399 - 274700*sqrt(1807)/6141993",
+          "d": "-298/375 - 2*sqrt(1807)/375",
+          "f": "-298/375 + 2*sqrt(1807)/375",
+          "defect": "-267284/3662109375"
+        },
+        "7": {
+          "a": "52115/18421",
+          "c": "38416/18421 + 4217752*sqrt(338191)/889973773",
+          "e": "38416/18421 - 4217752*sqrt(338191)/889973773",
+          "d": "-586/735 - 2*sqrt(338191)/5145",
+          "f": "-586/735 + 2*sqrt(338191)/5145",
+          "defect": "-2416856/21185643675"
+        }
+      },
+      "globally_real": false,
+      "reciprocal": true,
+      "correction_only_loose_upper_bound": {
+        "J": 52,
+        "P": 305,
+        "C": 2
+      },
+      "actual_economical_trace_count": null,
+      "gallery": false
+    },
+    {
+      "id": "pade_3/2",
+      "order": 6,
+      "status": "classical_rational_control",
+      "globally_convergent": false,
+      "global_evidence": "negative_at_p3_t100",
+      "reciprocal": false,
+      "radicals": 0,
+      "actual_economical_trace_count": null,
+      "gallery": false
+    },
+    {
+      "id": "pade_3/3",
+      "order": 7,
+      "status": "classical_rational_control",
+      "globally_convergent": true,
+      "global_evidence": "written_Gaussian_quadrature_proof",
+      "reciprocal": true,
+      "radicals": 0,
+      "actual_economical_trace_count": null,
+      "gallery": false
+    },
+    {
+      "id": "pade_4/3",
+      "order": 8,
+      "status": "classical_rational_control",
+      "globally_convergent": false,
+      "global_evidence": "negative_at_p3_t100",
+      "reciprocal": false,
+      "radicals": 0,
+      "actual_economical_trace_count": null,
+      "gallery": false
+    },
+    {
+      "id": "pade_4/4",
+      "order": 9,
+      "status": "classical_rational_control",
+      "globally_convergent": true,
+      "global_evidence": "written_Gaussian_quadrature_proof",
+      "reciprocal": true,
+      "radicals": 0,
+      "actual_economical_trace_count": null,
+      "gallery": false
+    },
+    {
+      "id": "AD5_angle_optimal",
+      "gauge": "1/(L*sqrt(abs((1+g)*(1-t))))",
+      "order": 5,
+      "status": "optimizes_only_final_intersection_angle",
+      "radicals": 2,
+      "defined_at_root": false,
+      "actual_economical_trace_count": null,
+      "gallery": false
+    },
+    {
+      "id": "global_pade33_twelve_joins",
+      "order": 7,
+      "status": "explicit_incidence_protocol",
+      "globally_convergent": true,
+      "global_evidence": "written_positive_error_derivative_proof_with_Lean_polynomial_certificate",
+      "reciprocal": true,
+      "correction_actual": {
+        "J": 12,
+        "P": 0,
+        "C": 0
+      },
+      "native_total": {
+        "J": 13,
+        "P": "2p-1",
+        "C": 0
+      },
+      "native_expanded_first": "10p+8",
+      "native_expanded_subsequent": "10p+8",
+      "fixed_prepared_points": 9,
+      "fixed_circles": 0,
+      "report": "../global_order7/README.md",
+      "gallery": false
+    }
+  ]
+}
