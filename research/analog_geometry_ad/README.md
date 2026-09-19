@@ -4,6 +4,8 @@ This research note uses the V30 circuit experience to redesign the geometric **c
 
 The recorded study finds a **24% shorter isolated settling time** for the calibrated cubic full step, with overshoot, but **no complete-calculator speed advantage over the V30 model** at 1 ppm: the new feedback policy passes 60/64 held-out cases at 2.385 ms versus 64/64 for V30. It is an implementation candidate, not a validated replacement. Explicit port-load losses increase; total chip energy and area remain unmodeled.
 
+The subsequent [memory/acquisition study](memory_speed/RESULTS.md) changes storage capacitance and explicitly models current limits and charge on both edges. It observes a faster 33 nF candidate, but retains an additional nominal precision failure; its conclusions and validation sets are separate from the correction-only comparison above.
+
 ![Same bounded correction geometry at degree 3 and one million](centered_ad_geometry.png)
 
 ## What the circuit experiments suggest

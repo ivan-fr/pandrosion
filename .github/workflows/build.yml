@@ -224,6 +224,8 @@ jobs:
       - run: python research/analog_fast_ad/validate_comparison.py
       - run: python research/analog_geometry_ad/circuit.py
       - run: python research/analog_geometry_ad/check_results.py
+      - run: python research/analog_geometry_ad/memory_speed/memory_model.py
+      - run: python research/analog_geometry_ad/memory_speed/check_results.py
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: analog-p4-results

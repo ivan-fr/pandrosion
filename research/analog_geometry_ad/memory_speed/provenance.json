@@ -1,0 +1,28 @@
+{
+  "scope": "Behavioral simulation source provenance. Archive labels were normalized from actual configurations without changing numerical results.",
+  "base_git_commit": "fede236fdd8f99e76e34dc0d3996681f50a0f2f6",
+  "python": "3.14.3",
+  "ngspice": "** ngspice-46 : Circuit level simulation program",
+  "packages": {
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2",
+    "mpmath": "1.3.0",
+    "sympy": "1.14.0"
+  },
+  "source_sha256": {
+    "research/analog_geometry_ad/memory_speed/memory_campaign.py": "2329f69cad6fef8e9fb9edf3a0e0474073a6deb16f8d209350d6aff1868e26ac",
+    "research/analog_geometry_ad/memory_speed/refinement.py": "55106d20fc1fa4e8f9b74f212fcc2b586f43281517e3adf1188e78d2356c2fc0",
+    "research/analog_geometry_ad/memory_speed/check_results.py": "ded2336319fbbb54ffb71f4505c0802a4d5e18ad73991ba92b5657032e420767",
+    "research/analog_geometry_ad/memory_speed/feedback_stress.py": "712a42434b826c5b17dd408ff8eedc2a50e923b243e4e43e2b68e89c80076f12",
+    "research/analog_geometry_ad/memory_speed/supplement.py": "f5f366e1a10d228316559e979e0b30572281d88ac8de64b7ba2e8af2727e70ff",
+    "research/analog_geometry_ad/memory_speed/draw_memory.py": "17ca8f82e93fb09a2aeffab1072408467cda3c72ea1b7cdb39bdb276eb0470fe",
+    "research/analog_geometry_ad/memory_speed/memory_model.py": "222845b6359c89e9640525ca219aff51ad6ec386edbe6ccc90d558580c1fa9dc",
+    "research/analog_geometry_ad/memory_speed/report.py": "2543efa88a898e5c1f8b08aa705f635aaa28915d7e977563155feadc2abf543a",
+    "research/analog_geometry_ad/circuit.py": "0f00c5cd1c8e210592a5444ace3a4f6164d540d43e3bf946cbe644c4913a7d8b",
+    "research/analog_fast_ad/spice.py": "548609ebed18386e0c865d72924ac55e8cbaba9bb8f6d0856e1d972997ccb14a",
+    "research/analog_fast_ad/model.py": "d1ab42dba3c78ba3d40e9517e14c2c8633c87ff1cd6446c727769863e215e341",
+    "research/analog_fast_ad/revised_circuit.py": "5cee90b5e33c81c1f975a85d315271bf8f988a15214593f03cbf1e0a79dba690",
+    "research/analog_fast_ad/calibrate_cells.py": "6595e61ff029ba9c34f0f469641e5564200b613451892809e86d5f5e0a785574",
+    "research/analog_fast_ad/speed_accuracy.py": "9bad4971f93eb2802364a5193ca7103747a65d006193c97642f5a8444316b1cb"
+  }
+}
