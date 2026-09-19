@@ -1,6 +1,6 @@
 # V22 validation — 19 September 2026
 
-The delivered paper has **20 pages and ten numbered figures**. All five original Pandrosion drawings remain: MA, AK, centered AD, projective order four and decentered order five. The new branch plot supplements the fixed-circle, control, binary-power and circuit figures.
+The delivered paper has **19 pages (16 main-text pages) and eleven numbered figures**. All five original Pandrosion drawings remain: MA, AK, centered AD, projective order four and decentered order five. The contraction plot and the restored inverse-fold figure supplement the fixed-circle, control, binary-power and circuit figures. MA and the residual gate are retained in the appendices.
 
 ## Executed locally
 
@@ -21,3 +21,13 @@ The branch audit proves strict one-step logarithmic-error reduction on the param
 The branch graph and finite trajectories do not prove a uniform factor of 0.36, floating-point robustness, bounded drawing size or hardware performance. No new SPICE campaign was needed because the existing electrical implementation was not changed; the proposed circle cell remains unimplemented.
 
 CI builds the new and archived PDFs, runs the two audits and new mathematical checks, and retains the broader repository campaigns. Its live status is reported by GitHub Actions rather than presumed here.
+
+## Checks repeated for the editorial revision
+
+- Re-ran `scripts/audit_circle_safeguard.py`: all 41 declarations passed, with only the same three permitted standard axioms.
+- Re-ran `src/branch/protocol.py`: all 144 geometric trajectories at 180 digits passed, with at most 18 steps to the specified threshold; generated records and the work table are unchanged.
+- Confirmed the tracked root `LICENSE` contains the MIT license and the 2026 Ivan Besevic copyright notice.
+- The new `src/branch/fold.py` independently computes both positive inverse roots at `p=3,t=0.05` and checks that exactly the smaller one lies on the descending branch. It is included in the verifier and CI.
+- Rebuilt and rendered the revised PDF. All eleven figures, the five Pandrosion drawings, the three appendices and theorem references are present; no overfull boxes or unresolved references remain.
+
+This revision changes exposition, notation and figure layout. The Lean statements, endpoint certificates, controller implementations and electrical results are unchanged. The reported review explicitly identifies its author as a contributor to the branch proof; it is not treated as an independent first-reader validation of that work.

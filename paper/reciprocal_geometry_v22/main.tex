@@ -26,7 +26,7 @@
 \url{https://github.com/ivan-fr/pandrosion}
 \vspace{8pt}\hrule\vspace{8pt}
 \textbf{Abstract.}
-An iteration formula does not specify how to construct its next value. We study explicit line-and-circle realizations for positive roots. A rationally prepared fixed circle acts as a quadratic solver for an inverse Pad\'e correction: the cubic example uses eight mobile joins, and the general linear-power protocol uses $2p+2$. We prove strict logarithmic-error contraction on its entire real inverse branch for every integer $p\ge3$; invariant-band convergence follows, with local order five. Centered AD supplies entry from arbitrary positive starts and handles excluded finite charts. A binary-power realization counts this combined protocol without claiming a global eight-line bound. Five Pandrosion constructions, including linear MA and the globally monotone decentered fifth-order arc, locate the result among explicit geometric alternatives. Finally, we explain how the geometry specifies arithmetic cells, branch selection and state storage for analog design, distinguishing a proposed centered quadratic cell from the existing order-three AD behavioral prototype. Incidence certificates, Lean audits, numerical work tables and executable geometry accompany the paper.
+We construct positive-root iterations using lines and circles, with an explicit count of mobile traces. A prepared fixed circle solves an inverse Pad\'e model and gives a fifth-order update: eight joins for the cubic example, or $2p+2$ with a linear power stage. For every integer $p\ge3$, we prove that the selected real branch strictly reduces logarithmic error. Iteration therefore converges from every point in its real band. A centered AD step handles starts outside that band and exceptional readouts, giving a global algorithm whose control cost is counted separately. Four accelerated Pandrosion constructions and the linear MA reference provide geometric comparisons. We then derive a centered quadratic equation for a prospective analog cell and relate it to an existing order-three AD prototype. Lean certificates, executable constructions and accuracy-versus-work tables document the results.
 
 \section{Why construct an iteration?}
 A numerical algorithm names operations. A physical calculator must realize them: a ratio may be an alignment, a product a similar-triangle construction, and a square root a circle crossing. Two formulas with the same local order can therefore have different realization costs. This paper asks which geometric arrangements make a root iteration economical and how that arrangement can guide an analog implementation.
@@ -34,8 +34,8 @@ A numerical algorithm names operations. A physical calculator must realize them:
 The intended setting is constructive computation: exact incidence geometry supplies a design and a correctness argument; a count of mobile operations describes the protocol. It also exposes which quantities must be stored, copied or solved for in a circuit. Drawing cost and electrical delay are different quantities, but the decomposition into reusable operations connects them.
 
 Our principal example is a fixed circle that solves for a correction rather than merely transferring a length. Three joins after the power stage complete a fifth-order update. The circle converges throughout its real branch; a globally defined AD fallback handles entry and geometric exceptions. The decentered arc gives another choice: global monotone convergence with a moving radius. The contribution is these explicit realizations and their analysis, rather than the classical Newton, Halley or Pad\'e families. Section~\ref{sec:scope} collects the proof and implementation boundaries; the main text develops the constructions themselves.
-\clearpage
 
+\clearpage
 \section{Coordinates as reusable computing elements}\label{sec:rails}
 Let $X>0$, let $p\ge3$ be an integer, and write
 \[
@@ -74,7 +74,6 @@ Binary products & Repeated squaring and multiplication & $R(s^p)$; large degrees
 We count a join as $J$, a parallel-construction macro as $P_{\parallel}$, and a mobile compass arc as $C_{\mathrm{arc}}$. Intersections of already drawn objects, fixed preparation and final inversion are excluded. When expanded into ruler-and-compass traces, our parallel macro costs $2J+3C_{\mathrm{arc}}$. These conventions are specified before any cost comparison.
 
 This question belongs to the constructive tradition of Lemoine's geom\'etrographie and d'Ocagne's nomography \cite{lemoine1902,docagne1925}. The Poncelet--Steiner theorem supplies a broad existence result for straightedge constructions with a given circle and its center \cite{steiner1833}. Our question is more specific: an explicit repeated protocol, its branch selection, and its mobile cost. The name Pandrosion refers to the addressee of the opening of Book III of Pappus' \emph{Collection} \cite{pappusLittle2023}. Our rectangle follows a modern reconstruction \cite{launayPandrosion}; the accelerated supports are modern constructions, not attributed to the ancient text.
-\clearpage
 
 \section{A prepared circle as a quadratic solver}\label{sec:circle}
 Suppose the desired correction factor is $v\approx1$. Instead of evaluating a rational approximation to $t^{-1/p}$, approximate the inverse relation $t=v^{-p}$ by a quadratic rational model and solve it exactly. Put
@@ -99,10 +98,10 @@ The first five joins form the rail power stage with left factors $\rho$ and $\si
 \end{enumerate}
 \fig{fixed_circle}{1}{The fixed-circle device at $s=3/4$. Left: the sixth join supplies $G$, and the seventh supplies the readout center $U$. Right: an independently enlarged view shows the eighth join and distinguishes $P$ from $P^+$. The circle is drawn once, before iteration. Equal horizontal and vertical scales are used within each view.}
 The computed next state is $0.793700551706633\ldots$, with relative error about $3.24\times10^{-8}$. The circle is doing arithmetic: it replaces a longer rational readout by the solution of a quadratic model.
-\clearpage
 
+\clearpage
 \subsection{Why the inverse correction has order five}
-The local order follows from one polynomial identity, which is also a useful certificate for the approximation. At $v=1$, $N=D=12$, and
+At $v=1$, $N=D=12$. The polynomial certificate for local order is
 \begin{equation}\label{eq:cert}
  pND+v(N'D-ND')=p\alpha_p\gamma_p(v-1)^4.
 \end{equation}
@@ -122,24 +121,20 @@ Set $v=1+u$, $E(u)=\log\mathcal R(1+u)/p$ and $K(u)=E(u)+\log(1+u)$. Equation~\e
 \]
 Thus $K(u)/u^5\to\alpha_p\gamma_p/720$, while $E(0)=0$ and $E'(0)=-1$. The inverse function theorem identifies $E(u)$ with the input logarithmic error. Dividing the limits gives the coefficient in~\eqref{eq:circleorder}. Analyticity and $\mathcal R(1/v)=1/\mathcal R(v)$ make the logarithmic update odd, giving the stated remainder. The coefficient is nonzero for $p>2$.
 \end{proof}
-The same identity, integrated as the derivative of $\log(v^p\mathcal R(v))$, proves the fifth-order Pad\'e contact. Model-based iteration and quadratic approximants have classical precedents \cite{traub1961,traub1964,shafer1974}; the construction problem is to realize this inverse with a short, prepared geometric device.
+The same identity proves the Pad\'e contact by integrating $\frac{d}{dv}\log(v^p\mathcal R(v))$. Model-based iteration and quadratic approximants have classical precedents \cite{traub1961,traub1964,shafer1974}.
 
 \subsection{Which circle intersection?}
-The discriminant after removing a factor four is
-\[
- \Delta_p(t)=(42p^2-24)t-3(p^2-4)(1+t^2).
-\]
-The transverse real interval is $\tau_-<t<\tau_+$, where
-\[
- \tau_\pm=\frac{7p^2-4\pm4p\sqrt{3(p^2-1)}}{p^2-4},\qquad \tau_-\tau_+=1.
-\]
-Select the descending branch $\mathcal R'(v)<0$, equivalently
-\[
- v_-<v<v_+,\qquad v_\pm=\frac{p^2+2\pm\sqrt{12(p^2-1)}}{p^2-4}.
-\]
-Its reference point is $v=1$. At $p=3,t=0.05$, both inverse roots are positive, approximately 3.1183 and 6.3817; only the first is on this branch. Positivity alone cannot choose $G$. At a transverse endpoint the two roots merge. Theorem~\ref{thm:branch} below proves strict error contraction on this entire interval. Tangencies remain excluded from the finite protocol, and the real interval is not the whole positive axis.
-\clearpage
+The discriminant and the descending branch $\mathcal R'(v)<0$ are
+\begin{align*}
+ \Delta_p(t)&=(42p^2-24)t-3(p^2-4)(1+t^2),\\
+ \tau_\pm&=\frac{7p^2-4\pm4p\sqrt{3(p^2-1)}}{p^2-4},\qquad \tau_-\tau_+=1,\\
+ v_\pm&=\frac{p^2+2\pm\sqrt{12(p^2-1)}}{p^2-4}.
+\end{align*}
+The transverse real interval is $\tau_-<t<\tau_+$; select its inverse with $v_-<v<v_+$.
+Positivity alone does not select this branch: the figure exhibits two positive roots at the same residual. At $\Delta_p(t)=0$ they merge tangentially. Theorem~\ref{thm:branch} proves contraction in the open band; AD handles tangencies and starts outside it.
+\fig{branch_fold}{.82}{The fold of $\mathcal R$ for $p=3$. Blue marks the descending branch through $(1,1)$; gray marks the other branches. The level $t=0.05$ has two positive preimages. Only $v\approx3.1183$ belongs to the selected branch; $v\approx6.3817$ must be rejected. Open circles mark the tangencies.}
 
+\clearpage
 \subsection{The general-degree construction}\label{sec:generalcircle}
 For each integer $p\ge3$, prepare $O_\Gamma=(h,j)$, $Z=(z_x,z_y)$, $k>0$ and $\rho>0$, using the rational formulas in Appendix~\ref{app:prep}. The circle passes through $B=(2,0)$ and is independent of $X$ and $s$. Put $\sigma=kX2^{p-3}/\rho$. The rail sequence uses
 \[
@@ -173,10 +168,10 @@ The prepared parameters satisfy $I=\lambda_p[N(v)-tD(v)]$, with $\lambda_p\ne0$.
 The exclusions concern this finite chart. In particular, $s=1$ sends the initial center $V$ to infinity even though the scalar correction can remain regular. A positive rescaling $\widetilde X=c^pX$, $\widetilde s=s/c$ preserves $t$ and conjugates every correction. A dyadic choice can keep the limiting state away from one, controlling the distant initial center near convergence. The circle-specific exclusions still require their own branch and chart checks.
 
 The result is a concrete upper bound on mobile work, not merely an existence theorem for straightedge construction. Its advantage over the rational fifth-order baseline will be quantified after the other devices have been introduced.
-\clearpage
 
+\clearpage
 \subsection{Strict error contraction on the whole real branch}\label{sec:branch}
-The finite real interval is a convergence region, not merely a domain on which a square root exists. The result below closes the whole-branch conjecture stated in V20. ``Contraction'' here means strict reduction of the error relative to the root; it does not assert a common Lipschitz constant between arbitrary states.
+The real band is a convergence region, resolving the V20 conjecture. Here ``contraction'' means strict error reduction relative to the root, not a pairwise Lipschitz bound.
 
 \begin{theorem}[Whole-branch contraction]\label{thm:branch}
 Let $p\ge3$ be an integer and $\tau_-<t<\tau_+$, $t\ne1$. For the descending inverse branch $v=v(t)$,
@@ -189,25 +184,25 @@ Consequently the scalar circle iteration stays inside this residual band and con
 \textbf{Reduce the error comparison to a sign.} Parameterize the branch by $v$, so $t=N(v)/D(v)$. Put
 \[
  h(v)=p\log v+2\log\frac{N(v)}{D(v)},\qquad
- S(v)=2\alpha_p\gamma_p(v-1)^4-N(v)D(v).
+ \mathcal H_p(v)=2\alpha_p\gamma_p(v-1)^4-N(v)D(v).
 \]
 The difference of squared errors is $\log v\,h(v)/p$. It suffices to prove $h(v)<0$ for $1<v<v_+$; reciprocity gives $h(1/v)=-h(v)$ and handles the other half. Equivalently, for integer $p$ the desired sign is $(v-1)[D(v)^2-v^pN(v)^2]>0$.
 
 \textbf{Control the shape of $h$.} The certificate~\eqref{eq:cert} gives
 \[
- h'(v)=\frac{pS(v)}{vN(v)D(v)}.
+ h'(v)=\frac{p\mathcal H_p(v)}{vN(v)D(v)}.
 \]
 Write $v=1+u$. The useful simplification is
 \[
- \frac{S(1+u)}{u^2}=\alpha_p\gamma_pu^2+12(p^2-4)u+12(p^2-16)-\frac{288}{u}-\frac{144}{u^2}.
+ \frac{\mathcal H_p(1+u)}{u^2}=\alpha_p\gamma_pu^2+12(p^2-4)u+12(p^2-16)-\frac{288}{u}-\frac{144}{u^2}.
 \]
-For $u>0$, its derivative is strictly positive. Since $S(1)=-144$, $h$ first decreases and can then increase only once. Thus $h(1)=0$ and the single endpoint inequality $h(v_+)<0$ imply $h(v)<0$ throughout $(1,v_+)$. The next page proves that endpoint inequality for every integer degree.
+For $u>0$, its derivative is strictly positive. Since $\mathcal H_p(1)=-144$, $h$ first decreases and can then increase only once. Thus $h(1)=0$ and the single endpoint inequality $h(v_+)<0$ imply $h(v)<0$ throughout $(1,v_+)$. Section~\ref{sec:endpoint} proves the endpoint inequality for every integer degree.
 
 \textbf{Pass from one step to convergence.} Let $z=\log t$ and $F(z)=\log[tv(t)^p]$. The inverse branch is continuous in the open band, $F(0)=0$, and $|F(z)|<|z|$ for $z\ne0$. Since $\tau_-\tau_+=1$, an orbit starting at $z_0$ remains in the compact interval $[-|z_0|,|z_0|]$ strictly inside the band. Its absolute errors decrease to a limit $\ell$. If $\ell>0$, a convergent subsequence has limit $z_*$ with $|z_*|=\ell$; continuity would give both $|F(z_*)|=\ell$ and $|F(z_*)|<\ell$. Hence $\ell=0$. The local order follows from~\eqref{eq:circleorder}.
 \end{proof}
 The first, strict-error assertion is \texttt{whole\_branch\_contraction} in \texttt{RectangleFixedCircleBranch}; its 33-declaration audit checks the sign and endpoint argument. The invariant-band convergence and inverse-branch assembly above are written corollaries. This distinction avoids calling the entire analytic/geometric program a single formal theorem.
-\clearpage
 
+\clearpage
 \subsection{An endpoint certificate valid at every degree}\label{sec:endpoint}
 Let $r=\sqrt{12(p^2-1)}$, $u_+=(6+r)/(p^2-4)$ and $v_+=1+u_+$. At this branch endpoint,
 \[
@@ -237,23 +232,15 @@ Hence $v_+^p\le e^{pu_+}\le e^5<148.42<12.3^2\le[D(v_+)/N(v_+)]^2$. The finitely
 
 \fig{branch_contraction}{1}{Sampled contraction ratios and endpoint margins illustrate the proved inequalities. The left curves use $p=3,5,17$; the horizontal line is the strict-error threshold one. The right curve samples degrees 3--400. Its limiting margin is $2\log(7+4\sqrt3)-2\sqrt3\approx1.80373$. No uniform numerical bound such as $0.36$ is asserted as a theorem.}
 The whole-band result still requires real branch membership. The next constructions provide globally defined alternatives; Section~\ref{sec:safeguard} uses AD to enter the band and to handle excluded finite charts.
-\clearpage
 
-\section{The five Pandrosion constructions}\label{sec:supports}
+\clearpage
+\section{Four accelerated Pandrosion constructions}\label{sec:supports}
 The fixed circle solves for a correction externally. A second architecture keeps the power endpoint $E=R(s^p)$ and changes the interception support inside the rectangle. Prepare $M=(0,H(1-X^{-1}))$. The slope of $ME$ is $m=H(1-t)/(WX)$. A line through $A$ of slope $k_s=H\kappa/(WX)$ meets the parallel to $ME$ through $P=R(s)$ at $T_A$. The horizontal through $T_A$ gives $P^+$, with
 \begin{equation}\label{eq:common}
  s^+=s\frac{k_s}{k_s-m}=s\frac{\kappa}{\kappa-1+t}.
 \end{equation}
-This one identity explains the four accelerated supports; each is a different device for supplying $\kappa$. Here we deliberately use the triangle protocol from Section~\ref{sec:rails}, rather than the rail telescope: horizontals meet the diagonal $OB$ at $B_j=(Ws^j,H(1-s^j))$ and the left rail at $L_j=L(s^j)$. Parallels to $L_1B$ carry $B_j$ to $L_{j+1}$, by similar triangles. The $p$th horizontal gives $E=R(s^p)$.
+Each support supplies a different $\kappa$. The common triangle stage uses horizontals through $B_j=(Ws^j,H(1-s^j))$ on $OB$ and $L_j=L(s^j)$. Parallels to $L_1B$ carry $B_j$ to $L_{j+1}$; the $p$th horizontal gives $E$. This is the triangle protocol of Section~\ref{sec:rails}, not the scaled rail telescope. MA and its figure remain in Appendix~\ref{app:ma}.
 
-\textbf{Reference construction: linear MA.}
-MA provides a baseline, not an additional accelerated method. Write its lower-right endpoint as $A_{\rm lin}=B$. The parallel to $ME$ through $P$ meets $MB$; a horizontal returns the next state. For $s\ne1$,
-\[
- \map{MA}(s)=1-\frac{X-1}{X S_p(s)},\qquad S_p(s)=\sum_{j=0}^{p-1}s^j.
-\]
-For $X>1$ this scalar map is increasing and $\map{MA}(s)-s=(1-Xs^p)/(XS_p(s))$. It therefore converges monotonically to $a$ from every positive start, with the removable scalar extension at $s=1$. Its derivative at $a$ is $1-pa^{p-1}/S_p(a)\in(0,1)$: convergence is linear.
-\fig{pandrosion_ma}{.40}{Pandrosion MA, the linear reference construction, at $p=3,X=2,s=3/4$. Thin lines construct the power by similar triangles. The green parallel meets the blue support $MA_{\rm lin}$; the horizontal gives $P^+$. The historical endpoint $A_{\rm lin}$ is the lower-right vertex $B$ in this paper. At $s=1$ the geometric intersection is coincident despite the removable scalar extension.}
-\clearpage
 \subsection{AK and centered AD: orders two and three}
 
 \textbf{AK: a fixed line.} Prepare $K=(W(1-X/p),0)$. The support $AK$ has $\kappa=p$, so $\map{AK}(s)=ps/(p-1+t)$, Newton under inversion. It has order two and converges from every positive start.
@@ -266,19 +253,19 @@ Transfer $AE=Hs^p$ downward from this center to $D_{\mathrm{AD}}$ and join $AD_{
 \begin{equation}\label{eq:halley}
  \map{AD}(s)=s\frac{p+1+(p-1)t}{p-1+(p+1)t}.
 \end{equation}
-This is Halley, with cubic local order and global monotone positive convergence. Geometric interpretations of Halley precede this construction \cite{gander1985,scavo1995}; the support here is specified to preserve the common rail encoding and readout.
+This Halley map has cubic order and global monotone convergence. Earlier geometric interpretations appear in \cite{gander1985,scavo1995}; here the rail encoding and readout are shared with AK.
 
 \begin{figure}[H]\centering
 \begin{minipage}[t]{.48\linewidth}\centering
-\includegraphics[width=\linewidth]{figures/pandrosion_ak.pdf}
+\includegraphics[width=.88\linewidth]{figures/pandrosion_ak.pdf}
 \caption{Pandrosion AK, order two. The fixed support $AK$ replaces MA while the triangle chain and green correction direction are retained. Here $p=3,X=2,s=3/4$.}
 \end{minipage}\hfill
 \begin{minipage}[t]{.48\linewidth}\centering
-\includegraphics[width=\linewidth]{figures/pandrosion_ad.pdf}
+\includegraphics[width=.88\linewidth]{figures/pandrosion_ad.pdf}
 \caption{Pandrosion AD, order three. Transfer the orange length $AE$ onto the prepared vertical through $O_{\rm AD}$; the lower arc point determines $AD_{\rm AD}$. Here $O_{\rm AD}=C$.}
 \end{minipage}
 \end{figure}
-Both drawings preserve the full triangular power stage. The support encodes the correction law: a fixed slope for AK, or a radius-dependent slope for AD. The green transport and horizontal readout are otherwise identical.
+Both drawings retain the triangle stage, green transport and horizontal readout; only the support changes.
 \clearpage
 \subsection{Projective AD: order four}
 \textbf{Two joins supply the support.} Prepare
@@ -298,8 +285,8 @@ The map has its global maximum $a$ at $s=a$. Also $\map{proj}(s)/s-1=(1-t)((p+1)
 
 \fig{pandrosion_projective}{.49}{Projective AD [2/1], order four, at the same cubic state. The orange line $Z_{\rm proj}E$ meets the prepared horizontal $\ell$ at $D_{\rm proj}$. The blue support $AD_{\rm proj}$ receives the green correction. The inset separates $P$, $T$ and $P^+$.}
 \textbf{The fifth construction.} Displacing the arc center from the prepared vertical makes the height a genuine square root. The decentered AD support is developed next, because its global fifth-order behavior changes the choice of device rather than only its coefficients.
-\clearpage
 
+\clearpage
 \subsection{A decentered arc with a global fifth-order map}
 For $p>2$, define
 \begin{equation}\label{eq:arc}
@@ -320,8 +307,8 @@ The support $AD_{\mathrm{arc}}$ consequently gives $\kappa=1+g(t)$ in~\eqref{eq:
 Unlike the inverse-circle correction, this map is defined for every positive residual and requires no choice between two inverse-model branches. It uses a mobile radius at every step. Unlike rational diagonal Pad\'e, it realizes the correction with a single radical rather than two rational factors. These are practical differences in geometric realization, even though all three maps have fifth local order.
 
 Centered AD and decentered AD use the same mobile support operations: one arc and one join. Their fixed preparations and coordinate scales differ. This is the precise sense in which order five is obtained at the mobile support cost of order three.
-\clearpage
 
+\clearpage
 \subsection{Global monotone convergence of the decentered map}
 \begin{theorem}\label{thm:arc}
 For real $p>2$, $X>0$ and every $s_0>0$, \eqref{eq:arc} converges to $a$ monotonically without crossing it. Its logarithmic error satisfies
@@ -360,8 +347,8 @@ Near one, rationalize $qA_*-B_*$ using~\eqref{eq:arcfactor}. Since $q=1$, $g=p-1
 Substituting $t=e^{pe}$ and integrating yields~\eqref{eq:arcorder}; reciprocity makes the analytic logarithmic map odd.
 \end{proof}
 At $p=3$, the leading coefficient is $+1/18$, whereas the fixed-circle inverse has $-1/18$. The former stays on the starting side; the latter alternates near the root. At $p=2$, both scalar radical formulas reduce to the exact square-root correction, but the displayed decentered preparation must be replaced by a mean-proportional construction.
-\clearpage
 
+\clearpage
 \section{What the shorter construction saves}\label{sec:cost}
 A useful comparison holds the state, requested accuracy and counting convention fixed. The rational competitors can be built on the same rail telescope. A prepared projector
 \[
@@ -398,67 +385,48 @@ The fixed circle saves five joins per regular update relative to this rational f
 \begin{table}[H]\centering\small
 \caption{Steps / mobile joins to obtain $|s/a-1|\le10^{-d}$ from $p=3,X=2,s_0=3/4$, computed at 250 digits. The last two rows use binary residual caching and add 12 initial joins; every circle trial in this example is regular and accepted.}
 \input{accuracy_table.tex}\end{table}
-These are geometric work counts under the stated convention, not circuit time or energy measurements. Branch entry and the optional residual gate are developed next.
+These are geometric work counts under the stated convention, not circuit time or energy measurements. The next section develops branch entry; the optional residual gate is documented in Appendix~\ref{app:gate}.
+
 
 \clearpage
-
 \section{From a convergence band to all positive starts}\label{sec:safeguard}
-The whole-branch theorem removes the need to test the improvement of a correctly selected, regular circle step. It does not create real intersections outside the band or remove affine chart singularities. We therefore distinguish two global protocols: a branch-driven one using the new theorem, and the residual-controlled V21 protocol whose formal switching proof is independent of it.
+Use a regular descending circle readout whenever it exists; otherwise use centered AD. The branch theorem removes any need to test its improvement. The older, independently formalized residual gate is retained in Appendix~\ref{app:gate}.
 
 \subsection{AD entry and geometric exceptions}
-Cache $E=R(s^p)$ and $R(t)$, and stop if $t=1$. Attempt the descending circle readout. Use it whenever the crossing is transverse and its readout finite; otherwise use centered AD. Refresh the power and residual of the output. Thus AD supplies entry to the band and any exceptional readouts, rather than checking every circle step's improvement.
+Cache $E=R(s^p)$ and $R(t)$. Stop at $t=1$; otherwise apply the chosen step and refresh its power and residual.
 
 \begin{proposition}[Global branch-driven protocol]\label{thm:entry}
 For every integer $p\ge3$, $X>0$ and $s_0>0$, this exact geometric protocol converges to $a=X^{-1/p}$. With the preparation specified below, it eventually uses the circle step unless already at the root, and has local order five.
 \end{proposition}
 \begin{proof}
-Outside the real band all steps are AD. Its global convergence brings the residual into the open band after finitely many steps. Inside, the circle strictly reduces $|\log t|$ by Theorem~\ref{thm:branch}; AD also strictly reduces it away from the root. Both preserve the band.
-
-Chart exceptions can switch between these maps. They cannot prevent convergence: on the compact symmetric log-residual interval determined by the first entry, both scalar post-error functions are continuous. If the decreasing errors had limit $\ell>0$, their maximum would be uniformly smaller than the current error on the compact set $\ell\le|\log t|\le|\log t_{\rm entry}|$. Every late step would decrease the error by a fixed positive amount, a contradiction. Hence the error tends to zero.
+Outside the band, AD converges globally and therefore reaches the open band in finitely many steps. Inside, both maps strictly reduce $|\log t|$ and preserve the band. On the compact log-residual interval determined by entry, both scalar post-error functions are continuous. If the errors tended to $\ell>0$, the larger post-error would be uniformly below the current error on $\ell\le|\log t|\le|\log t_{\rm entry}|$. Every late step would decrease it by a fixed positive amount, a contradiction. Thus chart-driven switching also converges.
 
 The finite chart is regular near the root. For the compact preparation ($p\ne4$), $\rho=1/2$ and
 \[
  b(1)=\frac{48p(p+4)(p+1)}{(p-1)\Lambda_p}>0;
 \]
-for $p=4$, use the separate chart in Appendix~\ref{app:prep}, where direct substitution also gives $\rho\ne1$ and $b(1)\ne0$. Geometrically, $v\ne\rho$ keeps $BG$ from being parallel to the top rail, while $b\ne0$ keeps $G$ distinct from $B$. At the root $\Delta_p(1)=36p^2>0$, so continuity preserves all three conditions nearby. The eventual update is therefore the order-five circle map.
+for $p=4$, use the separate chart in Appendix~\ref{app:prep}, where direct substitution also gives $\rho\ne1$ and $b(1)\ne0$. At the root $\Delta_p(1)=36p^2>0$. Continuity therefore preserves the transverse crossing, distinct $B,G$ and finite top intersection nearby; the eventual update is the order-five circle map.
 \end{proof}
-This proposition's switching/compactness assembly is a written proof. Lean checks the strict branch inequality and the chart-at-root certificates separately. The fully formal global controller remains the next, more conservative protocol.
-
-\subsection{The residual gate remains an independent option}
-For a positive circle candidate $c$, construct $u=Xc^p$ and accept precisely when
-\begin{equation}\label{eq:gate}
- (t\le1\ \wedge\ t\le u^2\ \wedge\ tu^2\le1)
- \quad\hbox{or}\quad
- (1\le t\ \wedge\ u^2\le t\ \wedge\ 1\le tu^2).
-\end{equation}
-Otherwise use AD. Three rail comparisons implement this condition, equivalent to $|\log u|\le|\log t|/2$. The errors decrease; if their limit were positive, eventually no halving step would be possible, leaving only AD and forcing the limit to zero. This is the V21 global switching theorem, including the incidence-based gate, formalized in \texttt{RectangleCircleSafeguard}. The strict branch theorem alone does not assert this stronger half-error inequality. The gate is retained as an independently justified controller, not as a necessary test inside the proved branch.
-\clearpage
+Lean checks the branch inequality and chart certificates separately; the switching assembly above is a written proof.
 
 \subsection{Geometric arithmetic and complete trace counts}
-The controller uses a finite, five-join product. Given $R(a),R(b)$ with $b>0$, test $R(b)=B$; if equal, reuse $R(a)$. Otherwise $CR(b)$ gives $V=\hub{1/b}$. Project $R(a)$ through $\hub{1/2}$ to $L(a/2)$; its join to $V$ gives $R(ab/2)$. Project through $\hub{1/2}$ and then $\hub{1/4}$ to obtain $L(ab/4)$ and $R(ab)$. The exact unit shortcut handles the otherwise infinite center.
+For positive $a,b$, reuse $R(a)$ when $b=1$. Otherwise one join gives $V=CR(b)\cap OA=\hub{1/b}$, then four joins through $\hub{1/2},V,\hub{1/2},\hub{1/4}$ successively give $L(a/2),R(ab/2),L(ab/4),R(ab)$. This five-join product is finite, including its exact unit shortcut. The two centers $\hub{d/[2(1+d)]}$ and $\hub{1/[2(1+d)]}$ multiply a rail value by a fixed $d>0$ in two joins.
 
-A fixed positive scale $d$ uses two joins, through $\hub{d/[2(1+d)]}$ and $\hub{1/[2(1+d)]}$. Binary powering with $m=\lfloor\log_2p\rfloor+\operatorname{popcount}(p)-1$ products therefore constructs $R(s^p)$ and $R(Xs^p)$ in at most $5m+2$ joins, including when $s=1$. Both residual protocols use this power stage.
+With $m=\lfloor\log_2p\rfloor+\operatorname{popcount}(p)-1$, binary powering and the fixed scale $X$ cost $5m+2$ joins. Each power makes $m$ unit tests; branch and root-stop decisions are additional, uncharged decisions.
 
 \begin{table}[H]\centering\small
-\caption{Upper bounds from a cached current power and residual, including the next cache. Prepared objects, existing intersections and decisions are excluded from trace columns and specified below.}
+\caption{Mobile upper bounds, including the next cache. Fixed preparation, existing intersections and decisions are excluded.}
 \begin{tabularx}{\linewidth}{@{}Xccc@{}}\toprule
 Operation & $J$ & $P_{\parallel}$ & $C_{\mathrm{arc}}$\\\midrule
 Initial power and residual cache & $5m+2$ & 0 & 0\\
 Branch-driven regular circle step & $5m+8$ & 0 & 0\\
 Branch-driven fallback after a full attempted readout & $5m+10$ & 2 & 1\\
-Residual-gate accepted step & $5m+18$ & 0 & 0\\
-Residual-gate full rejection, AD and refreshed cache & $10m+22$ & 2 & 1\\\bottomrule
+\bottomrule
 \end{tabularx}
 \end{table}
-A cached circle trial costs six joins: two for $R(kt)$, one for $L(\rho s)$ and three for $ZT$, $BG$ and the final readout. AD adds two joins, two parallels and one arc. The optional gate adds two products, at most ten joins, plus three ordered comparisons; a rejected trial also requires a second power/residual evaluation.
+A trial costs six joins: two for $R(kt)$, one for $L(\rho s)$ and three for the circle readout. AD adds $2J+2P_{\parallel}+C_{\rm arc}$. The cubic costs $12J$ initially, $18J$ per regular step and $31$ expanded traces for full fallback. At $p=10^6$, $m=25$ gives $133J$ per regular step. These are instrumented protocol bounds, not a global eight-line claim.
 
-\fig{circle_safeguard}{.90}{The five-join product and the optional V21 residual gate. The branch-driven V22 protocol reuses the product for powers and scales, but omits the two gate products and its three ordered comparisons. The geometric points and labels are unchanged from the independently checked V21 figure.}
-
-For $p=3$, the cache costs 12 joins; branch-driven regular steps cost at most \textbf{18 joins}, and full fallback at most $20J+2P_{\parallel}+C_{\rm arc}=31$ expanded traces. The optional gate costs 28 joins on acceptance and 53 expanded traces after full rejection. At $p=10^6$, $m=25$ gives 133 versus 143 joins on acceptance. None of these is a global eight-line bound.
-
-Branch, incidence and root-stop decisions remain explicit. Each power evaluation makes $m$ product identity tests; a completed gate adds two. The trace inventory is checked by instrumented intersections, not a Lean execution-cost semantics. The two 144-trajectory campaigns pass through degree one million. Distant rail points and ill-conditioned near-unit products remain possible: exact global convergence does not imply uniform drawing size or floating-point accuracy.
 \clearpage
-
 \section{Binary geometry and the path to an analog calculator}\label{sec:binary}
 The linear telescope is attractive for a few degrees. At large $p$, binary powering gives a smaller arithmetic architecture. Define a top encoding $Z_\times(q)=(W+Hq,H)$ and the fixed unit $U_\times=(W+H,H)$. A parallel to $U_\times B$ copies $R(a)$ to $Z_\times(a)$. The parallel through $Z_\times(a)$ to $U_\times R(b)$ then meets the right rail at $R(ab)$: its slope is $b$ and its horizontal displacement is $-Ha$.
 
@@ -473,9 +441,9 @@ Product incidence & Multiplier and weighted sums & Gain error and settling\\
 Circle crossing & Quadratic solve plus branch choice & Stability and branch margin\\
 Retained point & Sample-and-hold memory & Leakage and sampling error\\\bottomrule
 \end{tabularx}\end{center}
-The next page separates the existing AD circuit from the quadratic cell suggested by the fixed-circle construction.
-\clearpage
+We now separate the existing AD circuit from the quadratic cell suggested by the fixed-circle construction.
 
+\clearpage
 \subsection{From an incidence equation to an analog cell}
 \textbf{What has been implemented.} The V30 prototype realizes centered AD, of order three. A digitally prepared scale $c$ makes $Y\approx Xc^p\in[1,2]$, with $s=cu$. Storing $u\approx1$ directly would give sensitivity $\partial\log(Yu^p)/\partial u=p/u$. Instead store $q=p(u-1)$: the sensitivity becomes $1/u$. Centered binary products evaluate the residual, followed by
 \[
@@ -493,46 +461,39 @@ As with AD, the useful electrical variable at large $p$ is centered: put $z=p(v-
  &+\frac{(1-3/p+2/p^2)-t(1+3/p+2/p^2)}{12}\,z^2 .
 \end{align*}
 At $(t,z)=(1,0)$ the derivative of the left side with respect to $z$ is $-1$, independently of $p$. This removes the trivial large-degree scaling from the local quadratic cell. At a branch endpoint that derivative vanishes: an electrical design must restrict its operating margin or fall back before the tangency. Algebraic centering alone does not control noise or feedback settling.
+
 \clearpage
-
 \subsection{What the prototype teaches about the construction}
-The existing evidence answers three distinct design questions. The 8,243-pair arithmetic campaign checks that one programmable binary schedule covers many degrees and input scales. The calibrated behavioral SPICE study meets one ppm decoded-root error in 64 cases, with worst error 0.279 ppm at 23.985 ms: memory, calibration and readout determine a practical error floor even when the iteration is exact. A 4.785 ms policy meets one ppm on 18 new cases, demonstrating a precision--time tradeoff within that same behavioral model, not a measured silicon speed.
+The existing campaigns distinguish programmability from electrical accuracy. Arithmetic checks cover 8,243 $(p,X)$ pairs. The calibrated behavioral SPICE study meets one ppm decoded-root error in 64 cases, with worst error 0.279 ppm at 23.985 ms. A 4.785 ms policy meets one ppm on 18 new cases. These results expose a precision--time tradeoff in a behavioral model; they are not silicon measurements.
 
-Preparation can dominate an apparently impressive large-degree example. At $p=10^6,X=500000$, the digitally prepared $1/c$ is already within about $2.477\times10^{-7}$ relative error of the root. The analog loop refines it. A fair comparison must therefore include preparation, programming and conversion; the recorded circuit readout times exclude those operations.
+Preparation matters: at $p=10^6,X=500000$, the digitally prepared $1/c$ is already within about $2.477\times10^{-7}$ relative error of the root. The analog loop refines it, and its recorded readout time excludes preparation, programming and conversion.
 
-For the proposed circle cell, the next experiment is consequently specific: retain the same power module and memories, replace the AD correction by the centered quadratic relation, and measure wrong-branch events, settling time and decoded-root error under the same loading and noise assumptions. Fifth-order mathematical convergence can reduce the number of updates; the extra nonlinear solve may cost time and energy per update. The geometry supplies an exact operation graph and testable cell equations. A performance advantage requires that electrical comparison, which has not yet been performed.
+The next experiment should retain the same power module and memories, replace AD by the centered quadratic cell, and measure wrong-branch events, settling and root error under identical loading and noise. Order five may save updates, but each nonlinear solve has a cost. No electrical advantage has yet been established.
 
-\section{Evidence, scope and reproducibility}\label{sec:scope}
-\textbf{Mathematical scope.} The strict-error inequality over the whole inverse branch is formally proved for integer $p\ge3$. Invariant-band convergence and the branch-driven global extension are written consequences. The residual-gated circle--AD controller has a separate formal global convergence proof. The concrete inverse-circle local-order assembly and the decentered map's global monotone convergence are written proofs. The linear MA argument follows directly from its increasing scalar map; the finite diagram excludes its coincident state. The rational baselines belong to classical iteration families \cite{dlmf38,laszkiewicz2009,baker1996}. The explicit arrangements and counted protocols are the objects proposed here; their historical priority and optimality remain open. Iterative approximation of a cube root is distinct from its exact finite straightedge-and-compass construction.
-
-\textbf{Formal scope.} Lean and mathlib \cite{lean4,mathlib} serve as algebraic and incidence checks, with additional analytic theorems where the modules actually export them. The relevant modules are:
+\section{Evidence and reproducibility}\label{sec:scope}
+The main proof boundary is explicit: Lean establishes the whole-branch strict-error inequality; the invariant-band, inverse-branch/local-order and branch-driven convergence assemblies are written arguments. Appendix~\ref{app:gate} has a separate formal global switching theorem. The decentered map's global radical proof is written. The source map below identifies the checked components \cite{lean4,mathlib}.
 \begin{center}\small
 \begin{tabularx}{\linewidth}{@{}p{.34\linewidth}X@{}}\toprule
-Module family & What the checked development supplies\\\midrule
-\texttt{RectangleProjective} & Projection/readout identities and order-four dynamics.\\
-\texttt{RectanglePencils*} & Rail operations, rational projectors, dynamics and order results.\\
-\texttt{RectangleFixedCircleBranch} & Whole-branch strict error contraction and endpoint bounds (33 audited declarations).\\
-\texttt{RectangleFixedCircle} & Quadratic identities, radical charts, preparation certificates, readout and a parameterized local limit.\\
-\texttt{RectangleDecenteredArc} & Polynomial certificates used in the written radical proof.\\
-\texttt{RectangleCircleSafeguard} & Geometric residual gate, ruler-only products and powers, global hybrid convergence and local transfer.\\
-\texttt{RectangleFastPower} & Product incidence and geometric binary recursion.\\
-\texttt{AnalogFastAD} & Six exact centered-arithmetic identities.\\\bottomrule
+Lean module & Checked component\\\midrule
+\texttt{RectangleProjective} & Incidences and order-four dynamics.\\
+\texttt{RectanglePencils*} & Rail/projector identities, dynamics and orders.\\
+\texttt{RectangleFixedCircleBranch} & Strict branch contraction and endpoint bounds; 33 declarations audited.\\
+\texttt{RectangleFixedCircle} & Quadratic identities, charts, preparation, readout and a parameterized local limit.\\
+\texttt{RectangleDecenteredArc} & Certificates for the written radical proof.\\
+\texttt{RectangleCircleSafeguard} & Products, powers, residual gate, global switching and local transfer; 41 declarations audited.\\
+\texttt{RectangleFastPower} & Product incidence and binary recursion.\\
+\texttt{AnalogFastAD} & Six centered-arithmetic identities.\\\bottomrule
 \end{tabularx}\end{center}
-The full radical convergence argument, inverse-branch and band/entry convergence assemblies, and physical trace count are written arguments. The sampled ratios below 0.36 do not provide a formal half-error bound. Neither Lean nor the numerical checks certify the browser renderer, device noise, ADC implementation or fabricated silicon. The named audits restrict transitive axioms to the standard \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+Both audits allow only \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. Physical trace counts are instrumented inventories, not a Lean cost semantics. Neither the proofs nor sampled contraction ratios certify uniform drawing size, browser accuracy or hardware performance.
 
-\clearpage
-\subsection{Reproduction}
-The \href{https://github.com/ivan-fr/pandrosion/blob/main/paper/reciprocal_geometry_v22/README.md}{V22 repository guide} links sources, proofs and verification commands. The \href{https://ivan-fr.github.io/pandrosion/}{interactive gallery} shows planar constructions and their optional spherical display.
+Independent intersections check 162 circle configurations at 250 digits, 108 arc configurations at 160 digits, and two 144-trajectory controller campaigns at 180 digits. These finite tests supplement the proofs. The \href{https://github.com/ivan-fr/pandrosion/blob/main/paper/reciprocal_geometry_v22/README.md}{repository guide} links all sources, audits, data and reproduction commands. CI rebuilds the PDF; the \href{https://ivan-fr.github.io/pandrosion/}{gallery} provides interactive views. The repository includes the MIT license and citation metadata; V20, V21 and analog V30 remain archived.
 
-Independent intersections, symbolic identities and scalar comparisons check 162 circle configurations at 250 digits, 108 arc configurations at 160 digits, and 144 residual-gated and 144 branch-driven trajectories at 180 digits. The branch and safeguard modules have separate axiom audits. Frozen V20 and analog V30 packages retain detailed antecedents and circuit evidence.
-
-Citation metadata accompany this version. The paper source, editable figures and datasets are versioned, and the PDF is rebuilt by CI. The repository includes an MIT \texttt{LICENSE}; V21 and its safeguard source are retained as a reproducible archive.
+The numerical families are classical \cite{dlmf38,laszkiewicz2009,baker1996}; priority and trace optimality of these realizations remain open. Iterative approximation is distinct from exact finite construction.
 
 \section{Conclusion}
-A rationally prepared circle realizes a fifth-order correction in $2p+2$ joins, and its selected inverse branch strictly contracts logarithmic error throughout the real band. AD entry and chart fallback extend the algorithm to arbitrary positive starts, with a separately counted cost. The five Pandrosion supports and rational pencil baselines show how geometry redistributes the arithmetic work.
+The prepared circle gives fifth-order convergence on its real band in $2p+2$ joins; AD entry and chart fallback extend it globally at an explicit extra cost. The centered quadratic relation now supplies a testable analog-cell design. Its error and settling budget must be measured against the existing AD baseline.
 
-The same construction language specifies analog cells and their dependencies. Centering the circle's quadratic relation gives a degree-independent derivative at the root; implementing and characterizing that cell remains the next electrical task. The existing centered AD prototype supplies a reproducible baseline. Better-conditioned charts, lower control costs and a measured quadratic-cell error/settling budget are the remaining priorities.
-
+\clearpage
 \appendix
 \section{Rational preparation for every integer degree}\label{app:prep}
 This appendix makes the general-circle protocol reproducible without searching through an earlier manuscript. Write $\nu=p-3$ and use $\alpha_p,\gamma_p$ from~\eqref{eq:model}. Define
@@ -569,6 +530,41 @@ Here $\lambda_p=-384p(p-2)(p+4)(p^2-4p+13)/[(p-4)(p-1)\Lambda_p^2]$. Substitutio
  \dfrac{\sqrt{\Delta_p(t)}-\beta_p(1-t)}{t\alpha_p-\gamma_p},&t>1.
  \end{cases}
 \]
+
+\section{The linear MA reference}\label{app:ma}
+MA provides a baseline, not an additional accelerated method. Write its lower-right endpoint as $A_{\rm lin}=B$. The parallel to $ME$ through $P$ meets $MB$; a horizontal returns the next state. For $s\ne1$,
+\[
+ \map{MA}(s)=1-\frac{X-1}{X S_p(s)},\qquad S_p(s)=\sum_{j=0}^{p-1}s^j.
+\]
+For $X>1$ this scalar map is increasing and $\map{MA}(s)-s=(1-Xs^p)/(XS_p(s))$. It therefore converges monotonically to $a$ from every positive start, with the removable scalar extension at $s=1$. Its derivative at $a$ is $1-pa^{p-1}/S_p(a)\in(0,1)$: convergence is linear.
+\fig{pandrosion_ma}{.34}{Pandrosion MA, the linear reference construction, at $p=3,X=2,s=3/4$. Thin lines construct the power by similar triangles. The green parallel meets the blue support $MA_{\rm lin}$; the horizontal gives $P^+$. The historical endpoint $A_{\rm lin}$ is the lower-right vertex $B$ in this paper. At $s=1$ the geometric intersection is coincident despite the removable scalar extension.}
+
+The notation $S_p(s)$ is reserved for this geometric sum; the sign polynomial in the branch proof is $\mathcal H_p(v)$.
+
+\section{The independent residual-gate controller}\label{app:gate}
+This independently formalized V21 controller is retained for comparison. It is not required by the branch-driven protocol.
+
+For a positive circle candidate $c$, construct $u=Xc^p$ and accept precisely when
+\begin{equation}\label{eq:gate}
+ (t\le1\ \wedge\ t\le u^2\ \wedge\ tu^2\le1)
+ \quad\hbox{or}\quad
+ (1\le t\ \wedge\ u^2\le t\ \wedge\ 1\le tu^2).
+\end{equation}
+Otherwise use AD. Three rail comparisons implement this condition, equivalent to $|\log u|\le|\log t|/2$. The errors decrease; if their limit were positive, eventually no halving step would be possible, leaving only AD and forcing the limit to zero. This is the V21 global switching theorem, including the incidence-based gate, formalized in \texttt{RectangleCircleSafeguard}. Strict branch contraction alone does not assert the stronger half-error inequality.
+
+From the cached current state, a circle trial uses six joins and the candidate power/residual uses $5m+2$. The gate's two products add at most ten joins and three ordered comparisons. Acceptance thus costs $5m+18$ joins including the next cache. Full rejection adds AD ($2J+2P_{\parallel}+C_{\rm arc}$) and a fresh $5m+2$ cache, for a total of $(10m+22)J+2P_{\parallel}+C_{\rm arc}$. The common initialization costs $5m+2$ joins.
+
+\begin{center}\small
+\begin{tabular}{@{}lrr@{}}\toprule
+Cubic protocol ($m=2$) & Regular / accepted & Full fallback\\\midrule
+Branch-driven & $18J$ & $20J+2P_{\parallel}+C_{\rm arc}$\\
+Residual gate & $28J$ & $42J+2P_{\parallel}+C_{\rm arc}$\\\bottomrule
+\end{tabular}
+\end{center}
+The expanded fallback bounds are respectively 31 and 53 traces. At $p=10^6$, regular steps cost 133 versus 143 joins. A completed gate adds two product-identity tests to the $m$ tests in each power evaluation. All these are protocol upper bounds; fixed preparation and decisions are not charged as traces.
+
+\fig{circle_safeguard}{.82}{The five-join product and the optional V21 residual gate. The branch-driven V22 protocol reuses the product for powers and scales, but omits the two gate products and its three ordered comparisons. The geometric points and labels are unchanged from the independently checked V21 figure.}
+Its separate 144-trajectory campaign and 41-declaration axiom audit are reproduced in the repository.
 \begingroup\footnotesize\setlength{\bibsep}{1pt}
 \bibliographystyle{unsrtnat}\bibliography{references}\endgroup
 \end{document}

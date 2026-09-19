@@ -160,6 +160,7 @@ jobs:
       - run: python paper/reciprocal_geometry_v22/src/branch/verify.py
       - run: python paper/reciprocal_geometry_v22/src/branch/protocol.py
       - run: python paper/reciprocal_geometry_v22/src/branch/figure.py
+      - run: python paper/reciprocal_geometry_v22/src/branch/fold.py
       - run: python paper/reciprocal_geometry_v22/draw_figures.py
       - run: python paper/reciprocal_geometry_v22/draw_pandrosion.py
       - run: python paper/reciprocal_geometry_v22/draw_safeguard.py

@@ -12,6 +12,7 @@ scripts=[
  'paper/reciprocal_geometry_v22/src/branch/verify.py',
  'paper/reciprocal_geometry_v22/src/branch/protocol.py',
  'paper/reciprocal_geometry_v22/src/branch/figure.py',
+ 'paper/reciprocal_geometry_v22/src/branch/fold.py',
  'paper/reciprocal_geometry_v22/draw_figures.py',
  'paper/reciprocal_geometry_v22/draw_pandrosion.py',
  'paper/reciprocal_geometry_v22/draw_safeguard.py',

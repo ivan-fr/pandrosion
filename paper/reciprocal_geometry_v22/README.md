@@ -2,7 +2,7 @@
 
 **[Read the paper](Reciprocal_Root_Geometry_v22.pdf)** · [Source](main.tex) · [Response to the review](REVISION_NOTES.md) · [Validation](VALIDATION.md) · [Gallery](https://ivan-fr.github.io/pandrosion/)
 
-*Geometric Root Calculators: Fixed Circles, Global Convergence, and Analog Realization* retains the construction-first organization of V21, with its five Pandrosion drawings, and integrates the new whole-branch theorem.
+*Geometric Root Calculators: Fixed Circles, Global Convergence, and Analog Realization* retains the construction-first organization of V21, with its five Pandrosion drawings, and integrates the new whole-branch theorem. The revised edition has **19 pages, with 16 pages of main text and eleven numbered figures**. MA and the independent V21 residual gate are in Appendices B and C; the main argument uses one global protocol.
 
 The fixed-circle inverse strictly reduces logarithmic error throughout its transverse real branch for every integer `p≥3`. This yields invariant-band convergence. Centered AD supplies entry from arbitrary positive starts and handles excluded finite charts. The branch-driven protocol omits the old residual gate: for the cubic it uses at most **18 joins per regular step**, including the next power/residual cache, after **12 initial joins**. A full attempted readout followed by fallback costs at most **31 expanded traces**. These are upper bounds for that binary-power protocol, not a global eight-line claim.
 
@@ -16,7 +16,7 @@ The fixed-circle inverse strictly reduces logarithmic error throughout its trans
 | Geometric residual gate and its global switching theorem | [RectangleCircleSafeguard](../../LeanMath/Papers/RectangleCircleSafeguard.lean), including `ruler_circle_AD_global`; separate 41-declaration [audit](../../scripts/audit_circle_safeguard.py). This V21 alternative remains available. |
 | Branch-driven trace counts and actual intersections | [branch_entry.py](../../research/fixed_circle_safeguard/branch_entry.py), [protocol.py](src/branch/protocol.py) and [results](src/branch/protocol_checks.json). Physical operation counting is a written, instrumented protocol inventory. |
 | Endpoint certificates and centered quadratic cell equation | [Symbolic/high-precision checker](src/branch/verify.py) and [records](src/branch/checks.json). The cell equation is a design specification, not an implemented fifth-order electrical circuit. |
-| Five Pandrosion constructions | MA is a reference remark; AK, AD, projective order four and decentered order five retain their drawings and derivations. Their earlier formal boundary is documented in [V21](../reciprocal_geometry_v21/README.md#claim-to-source-map). |
+| Five Pandrosion constructions | MA is a reference construction in Appendix B; AK, AD, projective order four and decentered order five retain their drawings and derivations. Their earlier formal boundary is documented in [V21](../reciprocal_geometry_v21/README.md#claim-to-source-map). |
 | Existing analog evidence | [V30](../pandrosion_analog_v30/README.md) documents the order-three AD behavioral prototype. No new SPICE campaign or fabricated-chip evidence is introduced by V22. |
 
 Strict whole-branch contraction is not a proved uniform factor of `0.36`, nor a pairwise Lipschitz bound. Sampled ratios illustrate the theorem; they do not prove the optional gate's stronger one-half bound. The raw circle remains undefined outside its real band. Global exact convergence does not establish uniformly bounded drawings or browser floating-point reliability.
@@ -36,7 +36,7 @@ python3 scripts/audit_circle_safeguard.py
 
 The Lean toolchain and mathlib are pinned. Tectonic or `latexmk` is needed to build the PDF; supplied figures and the generated work table allow the PDF build alone. `verify.py` regenerates symbolic checks, both 144-trajectory controllers, the 250-digit work table and the figures. It checks retained V30 records and figure provenance, without rerunning electrical simulations or compiling Lean.
 
-The original mathematical campaigns remain in their archived V20 locations. The five Pandrosion figures are reproduced by [draw_figures.py](draw_figures.py) and [draw_pandrosion.py](draw_pandrosion.py); the branch plot by [figure.py](src/branch/figure.py); the controller drawing by [draw_safeguard.py](draw_safeguard.py). The fast-power and circuit diagrams are explicitly reused from V30.
+The original mathematical campaigns remain in their archived V20 locations. The five Pandrosion figures are reproduced by [draw_figures.py](draw_figures.py) and [draw_pandrosion.py](draw_pandrosion.py); the contraction plot by [figure.py](src/branch/figure.py), and the two-positive-root fold by [fold.py](src/branch/fold.py); the controller drawing by [draw_safeguard.py](draw_safeguard.py). The fast-power and circuit diagrams are explicitly reused from V30.
 
 The two controller campaigns each cover 144 trajectories at 180 decimal digits, across eight degrees through one million, three inputs and six initial log residuals. The branch-driven campaign checks real-domain failures, affine singularities, unit states and full fallback costs. These finite checks supplement the proofs.
 
@@ -47,3 +47,5 @@ The two controller campaigns each cover 144 trajectories at 180 decimal digits, 
 The historical name is sourced to the opening of Pappus' *Collection*, Book III, via [John B. Little's translation](https://crossworks.holycross.edu/hc_books/63/). The rectangle is a modern reconstruction, and the accelerated variants are not attributed to the ancient text.
 
 The repository includes the [MIT License](../../LICENSE). Use [CITATION.cff](CITATION.cff) to cite V22. CI builds V22 and the archived papers, tests the mathematics, and runs the two separate axiom audits. See the [repository](https://github.com/ivan-fr/pandrosion) and its PR checks for current CI status.
+
+The manuscript writes the branch sign polynomial as `ℋ_p(v)` to distinguish it from MA’s geometric sum `S_p(s)`. Its stable Lean identifier remains `RectangleFixedCircleBranch.S`. This editorial rename does not change the formal development.
