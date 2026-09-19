@@ -67,6 +67,7 @@ import LeanMath.Papers.RectangleDecenteredArc
 import LeanMath.Papers.RectangleDynamics
 import LeanMath.Papers.RectangleFixedCircle
 import LeanMath.Papers.RectangleCircleSafeguard
+import LeanMath.Papers.RectangleFixedCircleBranch
 import LeanMath.Papers.RectangleFixedCircleStereo
 import LeanMath.Papers.RectangleGeometry
 import LeanMath.Papers.RectangleNewton

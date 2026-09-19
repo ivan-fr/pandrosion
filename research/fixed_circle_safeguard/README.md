@@ -81,3 +81,7 @@ python3 research/fixed_circle_safeguard/draw.py
 The geometric implementation places moving points by line/circle intersections; an independent scalar calculation is used only by the verifier. The 180-digit campaign covers **144 trajectories**, eight degrees from 3 to one million, three inputs (`0.01,2,500000`), and six initial log residuals from −30 to 30. It also checks forced full rejections, both-positive-root branch selection, exact unit products, exact fixed points, missing crossings and the singular readout cases `(p,t)=(3,7.75),(5,16)`. See [results.json](results.json).
 
 Finite tests are not a proof of all inputs or a browser-precision guarantee. The numerical implementation conservatively rejects a small precision-dependent neighborhood of singular circle readouts. Its order comparisons are high-precision arithmetic, not outward-rounded interval certificates. Unbounded rail points and large powers remain possible for unrestricted positive data. The browser gallery and analog model are unchanged by this research addition.
+
+## V22 follow-up
+
+The [whole-branch theorem and V22 guide](../../paper/reciprocal_geometry_v22/README.md) justify a second protocol in [branch_entry.py](branch_entry.py): use a regular circle readout directly, with AD for entry and chart exceptions. It removes the two gate products and the three ordered comparisons. Its cubic regular-step bound is 18 joins, plus the same 12 initial cache joins. The original residual-gated algorithm, its formal global theorem and its 28-join bound remain unchanged.

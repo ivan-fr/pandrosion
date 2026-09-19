@@ -1,0 +1,1404 @@
+{
+  "scope": "Finite high-precision checks; whole-branch contraction is separately proved in Lean.",
+  "trajectory_digits": 180,
+  "trajectories": [
+    {
+      "p": 3,
+      "X": ".01",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 4,
+      "AD": 13
+    },
+    {
+      "p": 3,
+      "X": ".01",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 4,
+      "AD": 1
+    },
+    {
+      "p": 3,
+      "X": ".01",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 3,
+      "X": ".01",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 3,
+      "X": ".01",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 4,
+      "AD": 1
+    },
+    {
+      "p": 3,
+      "X": ".01",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 4,
+      "AD": 13
+    },
+    {
+      "p": 3,
+      "X": "2",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 4,
+      "AD": 13
+    },
+    {
+      "p": 3,
+      "X": "2",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 4,
+      "AD": 1
+    },
+    {
+      "p": 3,
+      "X": "2",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 3,
+      "X": "2",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 3,
+      "X": "2",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 4,
+      "AD": 1
+    },
+    {
+      "p": 3,
+      "X": "2",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 4,
+      "AD": 13
+    },
+    {
+      "p": 3,
+      "X": "500000",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 4,
+      "AD": 13
+    },
+    {
+      "p": 3,
+      "X": "500000",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 4,
+      "AD": 1
+    },
+    {
+      "p": 3,
+      "X": "500000",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 3,
+      "X": "500000",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 3,
+      "X": "500000",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 4,
+      "AD": 1
+    },
+    {
+      "p": 3,
+      "X": "500000",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 4,
+      "AD": 13
+    },
+    {
+      "p": 4,
+      "X": ".01",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 4,
+      "X": ".01",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 4,
+      "X": ".01",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 4,
+      "X": ".01",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 4,
+      "X": ".01",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 4,
+      "X": ".01",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 4,
+      "X": "2",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 4,
+      "X": "2",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 4,
+      "X": "2",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 4,
+      "X": "2",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 4,
+      "X": "2",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 4,
+      "X": "2",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 4,
+      "X": "500000",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 4,
+      "X": "500000",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 4,
+      "X": "500000",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 4,
+      "X": "500000",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 4,
+      "X": "500000",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 4,
+      "X": "500000",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 5,
+      "X": ".01",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 5,
+      "X": ".01",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 5,
+      "X": ".01",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 5,
+      "X": ".01",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 5,
+      "X": ".01",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 5,
+      "X": ".01",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 5,
+      "X": "2",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 5,
+      "X": "2",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 5,
+      "X": "2",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 5,
+      "X": "2",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 5,
+      "X": "2",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 5,
+      "X": "2",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 5,
+      "X": "500000",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 5,
+      "X": "500000",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 5,
+      "X": "500000",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 5,
+      "X": "500000",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 5,
+      "X": "500000",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 5,
+      "X": "500000",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 7,
+      "X": ".01",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 7,
+      "X": ".01",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 7,
+      "X": ".01",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 7,
+      "X": ".01",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 7,
+      "X": ".01",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 7,
+      "X": ".01",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 7,
+      "X": "2",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 7,
+      "X": "2",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 7,
+      "X": "2",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 7,
+      "X": "2",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 7,
+      "X": "2",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 7,
+      "X": "2",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 7,
+      "X": "500000",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 7,
+      "X": "500000",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 7,
+      "X": "500000",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 7,
+      "X": "500000",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 7,
+      "X": "500000",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 7,
+      "X": "500000",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 16,
+      "X": ".01",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 16,
+      "X": ".01",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 16,
+      "X": ".01",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 16,
+      "X": ".01",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 16,
+      "X": ".01",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 16,
+      "X": ".01",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 16,
+      "X": "2",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 16,
+      "X": "2",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 16,
+      "X": "2",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 16,
+      "X": "2",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 16,
+      "X": "2",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 16,
+      "X": "2",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 16,
+      "X": "500000",
+      "logt0": -30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 16,
+      "X": "500000",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 16,
+      "X": "500000",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 16,
+      "X": "500000",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 16,
+      "X": "500000",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 16,
+      "X": "500000",
+      "logt0": 30,
+      "steps": 17,
+      "circle": 3,
+      "AD": 14
+    },
+    {
+      "p": 32,
+      "X": ".01",
+      "logt0": -30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 32,
+      "X": ".01",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 32,
+      "X": ".01",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 32,
+      "X": ".01",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 32,
+      "X": ".01",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 32,
+      "X": ".01",
+      "logt0": 30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 32,
+      "X": "2",
+      "logt0": -30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 32,
+      "X": "2",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 32,
+      "X": "2",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 32,
+      "X": "2",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 32,
+      "X": "2",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 32,
+      "X": "2",
+      "logt0": 30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 32,
+      "X": "500000",
+      "logt0": -30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 32,
+      "X": "500000",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 32,
+      "X": "500000",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 32,
+      "X": "500000",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 32,
+      "X": "500000",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 32,
+      "X": "500000",
+      "logt0": 30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000,
+      "X": ".01",
+      "logt0": -30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000,
+      "X": ".01",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000,
+      "X": ".01",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000,
+      "X": ".01",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000,
+      "X": ".01",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000,
+      "X": ".01",
+      "logt0": 30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000,
+      "X": "2",
+      "logt0": -30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000,
+      "X": "2",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000,
+      "X": "2",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000,
+      "X": "2",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000,
+      "X": "2",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000,
+      "X": "2",
+      "logt0": 30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000,
+      "X": "500000",
+      "logt0": -30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000,
+      "X": "500000",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000,
+      "X": "500000",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000,
+      "X": "500000",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000,
+      "X": "500000",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000,
+      "X": "500000",
+      "logt0": 30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000000,
+      "X": ".01",
+      "logt0": -30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000000,
+      "X": ".01",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000000,
+      "X": ".01",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000000,
+      "X": ".01",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000000,
+      "X": ".01",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000000,
+      "X": ".01",
+      "logt0": 30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000000,
+      "X": "2",
+      "logt0": -30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000000,
+      "X": "2",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000000,
+      "X": "2",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000000,
+      "X": "2",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000000,
+      "X": "2",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000000,
+      "X": "2",
+      "logt0": 30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000000,
+      "X": "500000",
+      "logt0": -30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    },
+    {
+      "p": 1000000,
+      "X": "500000",
+      "logt0": -5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000000,
+      "X": "500000",
+      "logt0": -1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000000,
+      "X": "500000",
+      "logt0": 1,
+      "steps": 3,
+      "circle": 3,
+      "AD": 0
+    },
+    {
+      "p": 1000000,
+      "X": "500000",
+      "logt0": 5,
+      "steps": 5,
+      "circle": 3,
+      "AD": 2
+    },
+    {
+      "p": 1000000,
+      "X": "500000",
+      "logt0": 30,
+      "steps": 18,
+      "circle": 4,
+      "AD": 14
+    }
+  ],
+  "count": 144,
+  "max_steps": 18,
+  "max_relative_readout_disagreement": "4.3328584e-167",
+  "exceptional_cases": [
+    {
+      "p": 3,
+      "t": "7.75",
+      "reason": "readout chart singular"
+    },
+    {
+      "p": 5,
+      "t": "16",
+      "reason": "readout chart singular"
+    },
+    {
+      "p": 3,
+      "t": "1e-30",
+      "reason": "no transverse crossing"
+    },
+    {
+      "p": 3,
+      "t": "1e30",
+      "reason": "no transverse crossing"
+    }
+  ],
+  "accuracy_work": {
+    "Pencil Halley": {
+      "initial_cache_joins": 0,
+      "targets": [
+        {
+          "digits": 6,
+          "steps": 2,
+          "mobile_joins": 18,
+          "with_cache": 18
+        },
+        {
+          "digits": 12,
+          "steps": 3,
+          "mobile_joins": 27,
+          "with_cache": 27
+        },
+        {
+          "digits": 30,
+          "steps": 3,
+          "mobile_joins": 27,
+          "with_cache": 27
+        },
+        {
+          "digits": 60,
+          "steps": 4,
+          "mobile_joins": 36,
+          "with_cache": 36
+        }
+      ]
+    },
+    "Pencil rational Pade": {
+      "initial_cache_joins": 0,
+      "targets": [
+        {
+          "digits": 6,
+          "steps": 1,
+          "mobile_joins": 13,
+          "with_cache": 13
+        },
+        {
+          "digits": 12,
+          "steps": 2,
+          "mobile_joins": 26,
+          "with_cache": 26
+        },
+        {
+          "digits": 30,
+          "steps": 2,
+          "mobile_joins": 26,
+          "with_cache": 26
+        },
+        {
+          "digits": 60,
+          "steps": 3,
+          "mobile_joins": 39,
+          "with_cache": 39
+        }
+      ]
+    },
+    "Circle, linear power": {
+      "initial_cache_joins": 0,
+      "targets": [
+        {
+          "digits": 6,
+          "steps": 1,
+          "mobile_joins": 8,
+          "with_cache": 8
+        },
+        {
+          "digits": 12,
+          "steps": 2,
+          "mobile_joins": 16,
+          "with_cache": 16
+        },
+        {
+          "digits": 30,
+          "steps": 2,
+          "mobile_joins": 16,
+          "with_cache": 16
+        },
+        {
+          "digits": 60,
+          "steps": 3,
+          "mobile_joins": 24,
+          "with_cache": 24
+        }
+      ]
+    },
+    "Circle, branch entry": {
+      "initial_cache_joins": 12,
+      "targets": [
+        {
+          "digits": 6,
+          "steps": 1,
+          "mobile_joins": 18,
+          "with_cache": 30
+        },
+        {
+          "digits": 12,
+          "steps": 2,
+          "mobile_joins": 36,
+          "with_cache": 48
+        },
+        {
+          "digits": 30,
+          "steps": 2,
+          "mobile_joins": 36,
+          "with_cache": 48
+        },
+        {
+          "digits": 60,
+          "steps": 3,
+          "mobile_joins": 54,
+          "with_cache": 66
+        }
+      ]
+    },
+    "Circle, residual gate": {
+      "initial_cache_joins": 12,
+      "targets": [
+        {
+          "digits": 6,
+          "steps": 1,
+          "mobile_joins": 28,
+          "with_cache": 40
+        },
+        {
+          "digits": 12,
+          "steps": 2,
+          "mobile_joins": 56,
+          "with_cache": 68
+        },
+        {
+          "digits": 30,
+          "steps": 2,
+          "mobile_joins": 56,
+          "with_cache": 68
+        },
+        {
+          "digits": 60,
+          "steps": 3,
+          "mobile_joins": 84,
+          "with_cache": 96
+        }
+      ]
+    }
+  },
+  "costs": {
+    "3": {
+      "m": 2,
+      "initial": {
+        "J": 12,
+        "P": 0,
+        "C": 0
+      },
+      "circle": {
+        "J": 18,
+        "P": 0,
+        "C": 0
+      },
+      "fallback_after_trial": {
+        "J": 20,
+        "P": 2,
+        "C": 1
+      }
+    },
+    "4": {
+      "m": 2,
+      "initial": {
+        "J": 12,
+        "P": 0,
+        "C": 0
+      },
+      "circle": {
+        "J": 18,
+        "P": 0,
+        "C": 0
+      },
+      "fallback_after_trial": {
+        "J": 20,
+        "P": 2,
+        "C": 1
+      }
+    },
+    "32": {
+      "m": 5,
+      "initial": {
+        "J": 27,
+        "P": 0,
+        "C": 0
+      },
+      "circle": {
+        "J": 33,
+        "P": 0,
+        "C": 0
+      },
+      "fallback_after_trial": {
+        "J": 35,
+        "P": 2,
+        "C": 1
+      }
+    },
+    "1000000": {
+      "m": 25,
+      "initial": {
+        "J": 127,
+        "P": 0,
+        "C": 0
+      },
+      "circle": {
+        "J": 133,
+        "P": 0,
+        "C": 0
+      },
+      "fallback_after_trial": {
+        "J": 135,
+        "P": 2,
+        "C": 1
+      }
+    }
+  }
+}

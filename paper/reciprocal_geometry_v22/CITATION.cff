@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "Please cite Geometry V22 for the geometric constructions; the analog V30 companion documents the circuit study."
 type: software
-title: "Pandrosion: geometric root calculators and analog prototypes"
+title: "Geometry V22 reproducibility package"
 authors:
   - family-names: Besevic
     given-names: Ivan
