@@ -151,6 +151,8 @@ jobs:
           python src/fixed_circle/verify.py
           python src/stereo/model.py
           python src/decentered/verify.py
+      - run: python paper/reciprocal_geometry_v21/draw_figures.py
+      - run: python paper/reciprocal_geometry_v21/draw_pandrosion.py
       - run: python scripts/test_native_nondegeneracy.py
       - run: python scripts/check_initialization.py
       - run: python paper/pandrosion_analog_v30/draw_fast_geometry.py
@@ -167,6 +169,8 @@ jobs:
           echo '8533d07f9ccbd7a65824b9e0459041bca34af1eb33daba48f59215593753a3b7  /tmp/tectonic.tar.gz' | sha256sum -c -
           tar xzf /tmp/tectonic.tar.gz -C /tmp
           sudo install /tmp/tectonic /usr/local/bin/tectonic
+      # Keep this job name stable: main protection requires its status context.
+      - run: bash paper/reciprocal_geometry_v21/build.sh
       - run: bash paper/reciprocal_geometry_v20/build.sh
       - run: bash paper/pandrosion_analog_v17/build.sh
       - run: python3 paper/pandrosion_analog_v30/check_results.py
@@ -175,6 +179,7 @@ jobs:
         with:
           name: papers
           path: |
+            paper/reciprocal_geometry_v21/Reciprocal_Root_Geometry_v21.pdf
             paper/reciprocal_geometry_v20/Reciprocal_Root_Geometry_v20.pdf
             paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf
             paper/pandrosion_analog_v30/Pandrosion_Geometry_Analog_V30.pdf

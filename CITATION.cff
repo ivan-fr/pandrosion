@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite Geometry V21 for the geometric constructions; the analog V30 companion documents the circuit study."
+type: software
+title: "Pandrosion: geometric root calculators and analog prototypes"
+authors:
+  - family-names: Besevic
+    given-names: Ivan
+repository-code: "https://github.com/ivan-fr/pandrosion"
+url: "https://ivan-fr.github.io/pandrosion/"
+preferred-citation:
+  type: article
+  title: "Geometric Root Calculators: Fixed Circles, Moving Supports, and Analog Realization"
+  authors:
+    - family-names: Besevic
+      given-names: Ivan
+  year: 2026
+  version: "21"
+  url: "https://github.com/ivan-fr/pandrosion/tree/main/paper/reciprocal_geometry_v21"
