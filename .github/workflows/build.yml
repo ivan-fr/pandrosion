@@ -154,6 +154,7 @@ jobs:
       - run: python scripts/test_native_nondegeneracy.py
       - run: python scripts/check_initialization.py
       - run: python paper/pandrosion_analog_v30/draw_fast_geometry.py
+      - run: python paper/pandrosion_analog_v30/draw_circuit.py
   paper:
     name: Build V20, V17 and V30 papers
     runs-on: ubuntu-24.04
