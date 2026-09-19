@@ -432,6 +432,30 @@
       "defined_at_root": false,
       "actual_economical_trace_count": null,
       "gallery": false
+    },
+    {
+      "id": "global_pade33_twelve_joins",
+      "order": 7,
+      "status": "explicit_incidence_protocol",
+      "globally_convergent": true,
+      "global_evidence": "written_positive_error_derivative_proof_with_Lean_polynomial_certificate",
+      "reciprocal": true,
+      "correction_actual": {
+        "J": 12,
+        "P": 0,
+        "C": 0
+      },
+      "native_total": {
+        "J": 13,
+        "P": "2p-1",
+        "C": 0
+      },
+      "native_expanded_first": "10p+8",
+      "native_expanded_subsequent": "10p+8",
+      "fixed_prepared_points": 9,
+      "fixed_circles": 0,
+      "report": "../global_order7/README.md",
+      "gallery": false
     }
   ]
 }

@@ -1,5 +1,12 @@
 # Geometric factorization of reciprocal-root corrections
 
+> **Follow-up:** the [global order-seven protocol](../global_order7/README.md) now
+> supplies an explicit twelve-join correction with rational preparation. It
+> resolves the comparable-expanded-cost question left open in Q5 below.
+> This document records the earlier search; its statement that no economical
+> order-seven protocol had been established is superseded by that follow-up.
+
+
 Research extension to V20, 19 September 2026. The V20 manuscript and its frozen
 axiom audit are unchanged. The results here concern exact real geometry;
 numerical surveys are explicitly distinguished from proofs.

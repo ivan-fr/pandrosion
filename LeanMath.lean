@@ -240,3 +240,5 @@ import LeanMath.Papers.RectangleInitialization
 
 import LeanMath.Papers.RectangleDualTransport
 import LeanMath.Papers.RectangleFactorizationJets
+
+import LeanMath.Papers.RectangleGlobalSeven

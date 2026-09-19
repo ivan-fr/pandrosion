@@ -65,9 +65,15 @@ one join and one arc; the implemented AD5 dual adds one parallel. Exact order-7
 and order-9 radical candidates remain research-only because their real domains
 are restricted. The report includes cost tables, falsification data and limitations.
 
+The [global order-seven follow-up](research/global_order7/README.md) realizes
+the classical Padé [3/3] correction with **12 joins after the power stage**,
+without mobile parallels or circles. It has a written global convergence proof,
+19 separately audited Lean certificates, an explicit diagram and a comparison
+including AD5's horizontal reuse. It remains a research prototype.
+
 ## Lean
 
-The repository includes all 240 source modules in `LeanMath/`, 31 supplementary research modules and two standalone algebra files in `lean/`. `LeanMath.lean` imports the complete main library. Historical coefficient certificates are retained, accounting for most of the source size.
+The repository includes all 241 source modules in `LeanMath/`, 31 supplementary research modules and two standalone algebra files in `lean/`. `LeanMath.lean` imports the complete main library. Historical coefficient certificates are retained, accounting for most of the source size.
 
 Lean and mathlib are pinned to **4.33.1**. After installing [elan](https://github.com/leanprover/elan):
 
@@ -79,9 +85,10 @@ python3 scripts/audit_fast_power.py
 python3 scripts/audit_native_nondegeneracy.py
 python3 scripts/audit_initialization.py
 python3 scripts/audit_dual_transport.py
+python3 scripts/audit_global_seven.py
 ```
 
-The build script checks every one of the 273 modules in dependency order and then all default library targets. The V20 axiom audit checks **149 geometric declarations plus 11 analytical background declarations** and permits only `propext`, `Classical.choice` and `Quot.sound`. This audit has a narrower scope than the full library build. See the claim-coverage document for the boundary between formal algebraic certificates and written analytic proofs; in particular, the complete analytic convergence theorem for decentered AD is not yet formalized.
+The build script checks every one of the 274 modules in dependency order and then all default library targets. The V20 axiom audit checks **149 geometric declarations plus 11 analytical background declarations** and permits only `propext`, `Classical.choice` and `Quot.sound`. This audit has a narrower scope than the full library build. See the claim-coverage document for the boundary between formal algebraic certificates and written analytic proofs; in particular, the complete analytic convergence theorem for decentered AD is not yet formalized.
 
 The paper also retains its self-contained 57-module source snapshot in `paper/reciprocal_geometry_v20/formal/`.
 
@@ -123,7 +130,7 @@ The paper build requires Tectonic or a TeX installation with `latexmk`. Supplied
 
 The badge links to the actual GitHub Actions workflow. It passes only when all validation areas succeed:
 
-1. Build all 273 Lean sources and the complete library; check the frozen 149+11 audit and the separate 22, 51, 34 and 44 declaration post-V20 audits.
+1. Build all 274 Lean sources and the complete library; check the frozen 149+11 audit and the separate 22, 51, 34, 44 and 19 declaration post-V20 audits.
 2. Repeat symbolic and high precision geometry checks.
 3. Rebuild the V20 PDF and the analog companion PDF.
 4. Rerun the P4 SPICE study and its validation checks.

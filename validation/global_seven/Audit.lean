@@ -1,0 +1,21 @@
+import LeanMath.Papers.RectangleGlobalSeven
+
+#print axioms LeanMath.Papers.RectangleGlobalSeven.denominator_decomposition
+#print axioms LeanMath.Papers.RectangleGlobalSeven.lower_bound_certificate
+#print axioms LeanMath.Papers.RectangleGlobalSeven.B_positive
+#print axioms LeanMath.Papers.RectangleGlobalSeven.A_lower
+#print axioms LeanMath.Papers.RectangleGlobalSeven.positive_numerator_denominator
+#print axioms LeanMath.Papers.RectangleGlobalSeven.correction_positive
+#print axioms LeanMath.Papers.RectangleGlobalSeven.correction_factorization_identity
+#print axioms LeanMath.Papers.RectangleGlobalSeven.fixed_point
+#print axioms LeanMath.Papers.RectangleGlobalSeven.reciprocity
+#print axioms LeanMath.Papers.RectangleGlobalSeven.global_derivative_certificate
+#print axioms LeanMath.Papers.RectangleGlobalSeven.order_seven_coefficient_positive
+#print axioms LeanMath.Papers.RectangleGlobalSeven.affine_transfer
+#print axioms LeanMath.Papers.RectangleGlobalSeven.top_projection
+#print axioms LeanMath.Papers.RectangleGlobalSeven.first_cayley_join
+#print axioms LeanMath.Papers.RectangleGlobalSeven.second_cayley_join
+#print axioms LeanMath.Papers.RectangleGlobalSeven.square_center
+#print axioms LeanMath.Papers.RectangleGlobalSeven.square_readout
+#print axioms LeanMath.Papers.RectangleGlobalSeven.ratio_readout
+#print axioms LeanMath.Papers.RectangleGlobalSeven.final_readout
