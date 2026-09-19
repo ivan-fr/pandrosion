@@ -1,6 +1,7 @@
 """Behavioral, clocked sample/hold SPICE prototype. No root/power oracle in deck.
 Unrolled programmable stages, NOT a validated time-multiplexed transistor core.
 """
+from simulation_runtime import spice_timeout
 from pathlib import Path
 import json,subprocess,tempfile,re
 import numpy as np
@@ -89,7 +90,7 @@ def run(r,stress=False,step='0.2u',keep=None,config=None):
  text=deck(r['p'],r['Y'],stress,step,config)
  with tempfile.TemporaryDirectory(prefix='pandrosion-fast-ad-') as tmp:
   path=Path(tmp);(path/'test.cir').write_text(text)
-  proc=subprocess.run(['ngspice','-b','test.cir'],cwd=path,text=True,capture_output=True,timeout=90)
+  proc=subprocess.run(['ngspice','-b','test.cir'],cwd=path,text=True,capture_output=True,timeout=spice_timeout())
   if proc.returncode:raise RuntimeError(proc.stdout+proc.stderr)
   a=np.loadtxt(path/'wave.txt',skiprows=1)
   if keep:

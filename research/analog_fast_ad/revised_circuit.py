@@ -1,6 +1,7 @@
 """Precision revision: measured trims, larger memory, matched acquisition and averaging.
 Same imposed analog errors; actual extra components/noise of compensation are unmodeled.
 """
+from simulation_runtime import spice_timeout
 from pathlib import Path
 import json,tempfile,subprocess,math
 import numpy as np
@@ -37,7 +38,7 @@ def calibrate_memory(cfg,seed):
   'wrdata mem.txt '+' '.join(f'v(state{i})' for i in range(len(refs))),'quit','.endc','.end']
  with tempfile.TemporaryDirectory() as tmp:
   path=Path(tmp);(path/'mem.cir').write_text('\n'.join(lines)+'\n')
-  p=subprocess.run(['ngspice','-b','mem.cir'],cwd=path,capture_output=True,text=True,timeout=90)
+  p=subprocess.run(['ngspice','-b','mem.cir'],cwd=path,capture_output=True,text=True,timeout=spice_timeout())
   if p.returncode:raise RuntimeError(p.stdout+p.stderr)
   a=np.loadtxt(path/'mem.txt',skiprows=1)
  measured=np.array([np.interp(read*1e-6,a[:,0],a[:,i+1]) for i in range(len(refs))])

@@ -1,0 +1,6 @@
+{
+  "source": "research/analog_fast_ad/spice.py",
+  "memory_cap_F": 1e-07,
+  "switch_ron_ohm": 230.0,
+  "checked": "Sample/update/reset node pairs, candidate RC, q port loading, memory values"
+}

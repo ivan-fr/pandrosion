@@ -190,6 +190,17 @@ Four electrical-reference procedures calibrate the cells, memory drift, memory t
 No target root is used in calibration. Calibration is repeated at each tested temperature and schedule; drift after calibration is not covered. Reference accuracy, trim-source noise, capacitor tolerance, converter timing and trim-circuit area remain requirements, not demonstrated hardware. A 24-bit code does not imply 24 effective physical bits.
 \clearpage
 
+\section*{Electrical schematic of the simulated core}
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{figures/analog_circuit.pdf}
+\caption{Electrical topology of the precision-mode SPICE model. Repeated node labels denote the same net. (a) Candidate filtering, sample storage, calibrated voltage buffer and transfer to state. (b) Explicit state capacitance, leakage resistance, net leakage/compensation current, injected disturbances and reset switch. (c) The loaded cell used for the read buffer and every centered power stage. Diamonds are behavioral voltage sources, not transistor-level amplifiers. The orange dashed arrow indicates voltage sensing, not a conductive path.}
+\end{figure}
+The three switch models use $R_{\mathrm{on}}=230~\Omega$ and $R_{\mathrm{off}}=10^{12}~\Omega$. The sample window is 350--750~$\mu$s and the transfer window 770--1170~$\mu$s of each 1200~$\mu$s period. Reset grounds the state during the initial 10~$\mu$s. The readout occurs 15~$\mu$s after transfer ends. These control sources are prescribed waveforms, not an implemented timing circuit.
+
+For the read cell, $f_j$ senses \texttt{state} and includes read offset, noise and fitted compensation. Each power cell uses \eqref{eq:square} or \eqref{eq:multiply} with the modeled gain/offset and fitted trim terms. The residual and denominator are behavioral sources feeding \eqref{eq:centered}; \texttt{Bcandidate} clips that corrected target before its 10~$\Omega$/100 nF output filter. They are specified by equations rather than a transistor schematic.
+
+The ADC and final digital decode are outside this electrical drawing because they are postprocessed transfer models. Power rails, transistor internals and the physical implementation of trims are not supplied by the existing model. The drawing therefore documents exactly the level simulated; it is not a fabrication-ready circuit.
+\clearpage
 \section{Validation: broad coverage and precision revision}
 The datasets answer different questions and must not be pooled as if every case exercised the final circuit. The broad arithmetic campaign evaluates 8,243 pairs, 4,278 distinct degrees and 24,729 arithmetic executions, with high-precision reference scoring. The largest recorded ideal relative error is approximately $1.14\times10^{-16}$. Inputs include extreme finite and subnormal binary64 values, random degrees and binary-boundary cases.
 

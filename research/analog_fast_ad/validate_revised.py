@@ -1,4 +1,5 @@
 """Frozen revision, independent inputs/noise seeds, paired original/revised runs."""
+from simulation_runtime import campaign_workers
 from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor,as_completed
 import json,random,math,time
@@ -25,7 +26,7 @@ def main():
  pairs += [[max(3,round(10**rng.uniform(math.log10(3),6))),10**rng.uniform(-280,280)] for _ in range(16)]
  cases=prepare(pairs);jobs=[(r,[-20,25,85][i%3],1 if i%2 else -1,20262000+i) for i,r in enumerate(cases)]
  rows=[];start=time.monotonic()
- with ProcessPoolExecutor(max_workers=3) as pool:
+ with ProcessPoolExecutor(max_workers=campaign_workers()) as pool:
   futures={pool.submit(worker,j):i for i,j in enumerate(jobs)}
   for f in as_completed(futures):
    rows.append(dict(case_id=futures[f],**f.result()))
