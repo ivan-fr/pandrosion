@@ -1,6 +1,7 @@
 """Electrical-input cell calibration in ngspice; never evaluates a root to fit trims.
 Finite measurement noise and 24-bit programmable compensation. No PDK model.
 """
+from simulation_runtime import spice_timeout
 from pathlib import Path
 import json, subprocess, tempfile
 import numpy as np
@@ -33,7 +34,7 @@ def calibrate(p,cfg,seed=42):
  lines += ['.control','set numdgt=16','set wr_singlescale','set wr_vecnames','dc Vd -0.7 0.1 0.1 Vq -0.7 0.1 0.1',f'wrdata measured.txt v(d) v(q) {names}','quit','.endc','.end']
  with tempfile.TemporaryDirectory() as tmp:
   path=Path(tmp);(path/'cal.cir').write_text('\n'.join(lines)+'\n')
-  proc=subprocess.run(['ngspice','-b','cal.cir'],cwd=path,capture_output=True,text=True,timeout=90)
+  proc=subprocess.run(['ngspice','-b','cal.cir'],cwd=path,capture_output=True,text=True,timeout=spice_timeout())
   if proc.returncode:raise RuntimeError(proc.stdout+proc.stderr)
   raw=np.loadtxt(path/'measured.txt',skiprows=1)
  rng=np.random.default_rng(seed)

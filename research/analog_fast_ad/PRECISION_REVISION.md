@@ -146,3 +146,13 @@ controller tests. The next physical or transistor-level checks must include the
 new current compensation, calibration references, capacitor tolerances, converter
 transfer/noise, correlated drift and actual controller/memory integration.
 There is still no manufacturer/PDK sign-off or fabricated-chip measurement.
+
+### Hosted CI execution budget
+
+GitHub's precision job permits 600 seconds per ngspice process, two concurrent
+trajectories and one BLAS/OpenMP thread per process, with a 45-minute job limit.
+These are host wall-clock budgets, not simulated circuit latencies. The defaults
+for local use remain 90 seconds and three workers. Override them with
+`PANDROSION_SPICE_TIMEOUT_SECONDS` and `PANDROSION_SPICE_WORKERS`; positive
+integers are required. Accuracy thresholds, integration steps, seeds and all
+electrical parameters remain unchanged.

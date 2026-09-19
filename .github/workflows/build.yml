@@ -270,7 +270,14 @@ jobs:
   analog-precision:
     name: Precision circuit and noisy completion controller
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
+    env:
+      # Hosted CPUs need more wall time for long precision-mode transients.
+      # These budgets do not change SPICE time steps or electrical parameters.
+      PANDROSION_SPICE_TIMEOUT_SECONDS: '600'
+      PANDROSION_SPICE_WORKERS: '2'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-python@v7.0.0

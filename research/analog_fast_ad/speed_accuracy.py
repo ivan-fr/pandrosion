@@ -2,6 +2,7 @@
 No oracle stopping: each policy fixes schedule, iteration count and averaging.
 Times exclude preparation, calibration, converter latency and output decoding.
 """
+from simulation_runtime import campaign_workers
 from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import json, math
@@ -50,7 +51,7 @@ def worker(job):
 
 def batch(jobs,label):
  rows=[]
- with ProcessPoolExecutor(max_workers=3) as pool:
+ with ProcessPoolExecutor(max_workers=campaign_workers()) as pool:
   futs={pool.submit(worker,j):i for i,j in enumerate(jobs)}
   for f in as_completed(futs):
    rows.append(dict(id=futs[f],**f.result()))
