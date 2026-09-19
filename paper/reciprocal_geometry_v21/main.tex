@@ -26,7 +26,7 @@
 \url{https://github.com/ivan-fr/pandrosion}
 \vspace{8pt}\hrule\vspace{8pt}
 \textbf{Abstract.}
-An iteration formula does not specify how to construct its next value. We study this realization problem for positive roots: encode the current estimate as a point, produce the residual by line intersections, and implement the correction with a geometric device. The central construction uses one prepared circle as a quadratic solver. It realizes an inverse Pad\'e correction of order five in $2p+2$ mobile joins, with an explicit rational preparation for every integer $p\ge3$. A second construction moves the radius of a decentered arc; it raises AD from order three to order five with the same mobile support operations and converges monotonically from every positive start. Fixed, moving and projective supports place these designs beside Newton, Halley and rational Pad\'e baselines. A binary geometric power module then connects the construction language to a centered, sampled analog implementation of the order-three AD map. We give the incidence arguments, convergence proofs, protocol counts and a concise map of the algebraic formalization. The analog application is supported by reproducible behavioral simulations; its device-level design remains a separate engineering task.
+An iteration formula does not specify how to construct its next value. We study this realization problem for positive roots: encode the current estimate as a point, produce the residual by line intersections, and implement the correction with a geometric device. The central construction uses one prepared circle as a quadratic solver. It realizes an inverse Pad\'e correction of order five in $2p+2$ mobile joins, with an explicit rational preparation for every integer $p\ge3$. A residual gate made from straightedge products globalizes the circle algorithm through AD fallback, with an explicit additional cost. A second construction moves the radius of a decentered arc; it raises AD from order three to order five with the same mobile support operations and converges monotonically from every positive start. Fixed, moving and projective supports place these designs beside Newton, Halley and rational Pad\'e baselines. A binary geometric power module then connects the construction language to a centered, sampled analog implementation of the order-three AD map. We give the incidence arguments, convergence proofs, protocol counts and a concise map of the algebraic formalization. The analog application is supported by reproducible behavioral simulations; its device-level design remains a separate engineering task.
 
 \section{Why construct an iteration?}
 A numerical algorithm names operations. A physical calculator must realize them: a ratio may be an alignment, a product a similar-triangle construction, and a square root a circle crossing. Two formulas with the same local order can therefore have different realization costs. This paper asks which geometric arrangements make a root iteration economical and how that arrangement can guide an analog implementation.
@@ -127,7 +127,7 @@ Select the descending branch $\mathcal R'(v)<0$, equivalently
 \[
  v_-<v<v_+,\qquad v_\pm=\frac{p^2+2\pm\sqrt{12(p^2-1)}}{p^2-4}.
 \]
-Its reference point is $v=1$. At $p=3,t=0.05$, both inverse roots are positive, approximately 3.1183 and 6.3817; only the first is on this branch. Positivity alone cannot choose $G$. At a transverse endpoint the two roots merge. Whole-interval contraction remains an explicitly separate conjecture in the archived study; the theorem above is local.
+Its reference point is $v=1$. At $p=3,t=0.05$, both inverse roots are positive, approximately 3.1183 and 6.3817; only the first is on this branch. Positivity alone cannot choose $G$. At a transverse endpoint the two roots merge. Whole-interval contraction remains an explicitly separate conjecture in the archived study; the theorem above is local. Section~\ref{sec:safeguard} gives a global algorithm by geometrically testing a candidate and falling back to AD.
 \clearpage
 
 \subsection{The general-degree construction}\label{sec:generalcircle}
@@ -314,12 +314,66 @@ Projective AD & 4 & 4 & $2p+1$ & 0 & Global\\
 Decentered AD & 5 & 3 & $2p+1$ & 1 & Global\\
 Pencil Halley & 3 & $2p+3$ & 0 & 0 & Global\\
 Pencil rational Pad\'e & 5 & $2p+7$ & 0 & 0 & Global\\
-Fixed-circle inverse & 5 & $2p+2$ & 0 & 0 & Local\\\bottomrule
+Fixed-circle inverse & 5 & $2p+2$ & 0 & 0 & Local\\
+Guarded circle--AD & 5 & \multicolumn{3}{c}{Section~\ref{sec:safeguard}} & Global\\\bottomrule
 \end{tabularx}
 \end{table}
 The fixed circle saves five joins per update relative to the rational fifth-order realization. For $p=3,X=2,s_0=3/4$, reaching 60 reciprocal-state decimal digits takes four Halley steps (36 joins), three rational fifth-order steps (39 joins), or three fixed-circle steps (24 joins). The decentered map also takes three steps, using its different arc-and-parallel budget. These are construction-work comparisons; they do not predict circuit time or energy.
 
 Rectangle counts use the original linear triangle power chain. After the first update, its final horizontal can be reused, saving one parallel. The binary power replacement below has its own count and must not be combined with $2p+2$ as though the protocols were identical.
+\clearpage
+
+\section{A geometric safeguard makes the circle algorithm global}\label{sec:safeguard}
+The unguarded circle has a bounded real domain. A geometric acceptance test can nevertheless place it inside a globally convergent algorithm. Cache $E=R(s^p)$ and $T=R(t)$, $t=Xs^p$. If $T=B$, stop. Attempt the prescribed descending circle branch; a missing transverse intersection or singular readout triggers centered AD. For a positive candidate $c$, construct $u=Xc^p$ and accept exactly when
+\begin{equation}\label{eq:gate}
+ \begin{cases}
+ t\le u^2\quad\hbox{and}\quad tu^2\le1,&t\le1,\\
+ u^2\le t\quad\hbox{and}\quad1\le tu^2,&t\ge1.
+ \end{cases}
+\end{equation}
+This uses three ordered comparisons on the same rail after forming $R(u^2)$ and $R(tu^2)$. Otherwise use AD, then refresh the cache. On acceptance, the trial's power and residual become the next cache.
+
+\begin{theorem}[Globally convergent circle--AD controller]\label{thm:guard}
+For every integer $p\ge3$, $X>0$ and $s_0>0$, this exact geometric protocol converges to $X^{-1/p}$. On the prepared chart regular at the root it eventually uses the circle update, unless it has already reached the root, and inherits local order five.
+\end{theorem}
+\begin{proof}
+For $t,u>0$, taking logarithms shows that~\eqref{eq:gate} is equivalent to $|\log u|\le|\log t|/2$. Thus every accepted step halves the nonnegative error $\epsilon(s)=|\log(Xs^p)|$. AD lies between the state and the root, so fallback never increases this error. The errors decrease to a limit $\ell\ge0$.
+
+If $\ell>0$, eventually $\epsilon<3\ell/2$. A halving step would give $\epsilon^+<3\ell/4$, contradicting the lower bound $\ell$. Hence every sufficiently late step would be AD. Its global convergence implies $\ell=0$, a contradiction. Therefore $\epsilon\to0$, and $s=a\exp(\log t/p)\to a$.
+
+Near $a$, the fifth-order circle result gives $\epsilon(c)/\epsilon(s)\to0$, so the gate accepts throughout a punctured neighborhood. Use the compact preparation for $p\ne4$ and the separate degree-four preparation from Appendix~\ref{app:prep}. At $v=1$, $v\ne\rho$ and $b(v)\ne0$: for the compact chart,
+\[
+ b(1)=\frac{48p(p+4)(p+1)}{(p-1)\Lambda_p}>0,
+\]
+and the degree-four value is nonzero by substitution. The discriminant is $36p^2>0$. Continuity therefore supplies the required regular neighborhood.
+\end{proof}
+The global argument does not assume contraction on the entire circle branch. The Lean development proves the gate equivalence, the switching theorem, its circle specialization and the incidence-based controller. Eventual selection and local-order transfer are formalized with analytic premises; the concrete inverse-function assembly remains the written local proof above.
+
+\subsection{A control made only of joins}
+Given $R(a),R(b)$ with $b>0$, first test $R(b)=B$. If equal, reuse $R(a)$. Otherwise draw $CR(b)$ to $V=\hub{1/b}$. Project $R(a)$ through $\hub{1/2}$ to $L(a/2)$; joining this point to $V$ gives $R(ab/2)$. Two further joins, through $\hub{1/2}$ and then $\hub{1/4}$, give $L(ab/4)$ and $R(ab)$. This is a five-join product with finite intersections for $b\ne1$.
+
+A fixed positive scale $d$ costs two joins: project left through $\hub{d/[2(1+d)]}$ and right through $\hub{1/[2(1+d)]}$. Both centers are finite. Binary products and this scaling construct the residual without a root oracle, including at $s=1$.
+\clearpage
+
+\subsection{The price of a checked step}
+Let $m=\lfloor\log_2p\rfloor+\operatorname{popcount}(p)-1$, the binary multiplication count. With the current power and residual cached, a circle trial costs six joins: two to form $R(kt)$, one to save $L(\rho s)$, and the final three circle/readout joins. Computing the trial residual costs $5m+2$; the two control products cost ten more.
+
+\begin{table}[H]\centering\small
+\caption{Safeguarded protocol upper bounds, including the next cache. Unit products may use fewer joins. Prepared objects, incidence tests and order comparisons are separate from these trace columns.}
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}\toprule
+Operation & $J$ & $P_{\parallel}$ & $C_{\mathrm{arc}}$\\\midrule
+Initial power and residual cache & $5m+2$ & 0 & 0\\
+Accepted circle step with control & $5m+18$ & 0 & 0\\
+Full trial rejected, AD and cache refresh & $10m+22$ & 2 & 1\\\bottomrule
+\end{tabularx}
+\end{table}
+A completed gate makes three ordered comparisons and $m+2$ product identity tests; initial and fallback cache construction each add $m$ identity tests. Root stopping and circle branch/incidence tests are also explicit decisions. A missing crossing permits an earlier, cheaper fallback. The trace inventory is a written protocol count checked by an instrumented intersection implementation.
+
+\fig{circle_safeguard}{1}{Left: the five joins compute a product from rail points, with $a=1.4$ and $b=0.6$. Right: an illustrative trial with $t=2,u=1.1$ passes the three order comparisons. The ticks and labels annotate one oriented rail; they are not additional construction joins. The controller uses products and order, not the unknown root.}
+
+For $p=3$, the initial cache uses at most 12 joins; an accepted step uses at most \textbf{28 joins} and no new arc. A full rejection costs $42J+2P_{\parallel}+C_{\mathrm{arc}}$, or 53 expanded traces. At $p=10^6$, $m=25$ and acceptance costs at most 143 joins. These are upper bounds, not optimality claims. In particular, the eight-line local construction is not a global eight-line algorithm.
+
+The implementation checks 144 geometric trajectories at 180 digits, including degrees through $10^6$, plus rejected trials, exact unit inputs and singular charts. All tested trajectories reach $|\log t|<10^{-45}$ within 18 steps. This supplements the exact convergence theorem. Rail points can be arbitrarily distant, and the product center diverges as $b\to1$ despite the exact-unit shortcut. Global exact existence therefore does not imply uniform drawing size or floating-point conditioning.
 \clearpage
 
 \section{Binary geometry and the path to an analog calculator}\label{sec:binary}
@@ -356,7 +410,7 @@ The high-degree example also clarifies where the work is done. At $p=10^6,X=5000
 The geometric contribution remains useful at this stage: it supplies exact computational primitives, alternative correction devices and a transparent route to a circuit architecture. It does not turn line counts into speed claims. The fixed-circle and decentered fifth-order designs are candidates for further electrical realization; the implemented companion studies order three.
 
 \section{Evidence, scope and reproducibility}\label{sec:scope}
-\textbf{Mathematical scope.} The written proofs establish the fixed-circle local fifth-order result and the decentered map's global monotone convergence. The linear MA argument follows directly from its increasing scalar map; the finite diagram excludes its coincident state. The rational baselines belong to classical iteration families \cite{dlmf38,laszkiewicz2009,baker1996}. The explicit arrangements and counted protocols are the objects proposed here; their historical priority and optimality remain open. Iterative approximation of a cube root is distinct from its exact finite straightedge-and-compass construction.
+\textbf{Mathematical scope.} The guarded circle--AD algorithm has a formal global convergence proof and a counted geometric controller. The written proofs establish the fixed-circle local fifth-order result and the decentered map's global monotone convergence. The linear MA argument follows directly from its increasing scalar map; the finite diagram excludes its coincident state. The rational baselines belong to classical iteration families \cite{dlmf38,laszkiewicz2009,baker1996}. The explicit arrangements and counted protocols are the objects proposed here; their historical priority and optimality remain open. Iterative approximation of a cube root is distinct from its exact finite straightedge-and-compass construction.
 
 \textbf{Formal scope.} Lean and mathlib \cite{lean4,mathlib} serve as algebraic and incidence checks, with additional analytic theorems where the modules actually export them. It is not used as a blanket label for the entire paper. The relevant map is concise:
 \begin{center}\small
@@ -366,20 +420,22 @@ Module family & What the checked development supplies\\\midrule
 \texttt{RectanglePencils*} & Rail operations, rational projectors, dynamics and order results.\\
 \texttt{RectangleFixedCircle} & Quadratic identities, radical charts, preparation certificates, readout and a parameterized local limit.\\
 \texttt{RectangleDecenteredArc} & Polynomial certificates used in the written radical proof.\\
+\texttt{RectangleCircleSafeguard} & Geometric residual gate, ruler-only products and powers, global hybrid convergence and local transfer.\\
 \texttt{RectangleFastPower} & Product incidence and geometric binary recursion.\\
 \texttt{AnalogFastAD} & Six exact centered-arithmetic identities.\\\bottomrule
 \end{tabularx}\end{center}
 The full radical convergence argument, inverse-branch assembly and physical trace count are written arguments. Neither Lean nor the numerical checks certify the browser renderer, device noise, ADC implementation or fabricated silicon. The named audits restrict transitive axioms to the standard \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}; a repository-wide module count is not a count of this paper's proved claims.
 
-\subsection{A direct route through the repository}
-Start with \texttt{paper/reciprocal\_geometry\_v21/README.md}. It links the article, its editable figures, a verification entry point and the precise proof modules. The geometry gallery at \url{https://ivan-fr.github.io/pandrosion/} lets the reader inspect each join and iterate the constructions. The spherical view is retained there as an interface feature; the mathematical constructions are planar.
+\clearpage
+\subsection{Reproduction}
+The \href{https://github.com/ivan-fr/pandrosion/blob/main/paper/reciprocal_geometry_v21/README.md}{V21 repository guide} links sources, proofs and verification commands. The \href{https://ivan-fr.github.io/pandrosion/}{interactive gallery} shows planar constructions and their optional spherical display.
 
-The verification entry point reruns the archived revision, radical-arc and fixed-circle checks. These include symbolic identities, high-precision independent line/circle intersections and scalar comparisons. The original fixed-circle study tests 162 configurations at 250 digits; the arc study tests 108 at 160 digits. They supplement the written proofs and expose implementation mistakes. The frozen V20 and analog V30 packages remain accessible as detailed companions rather than prerequisites to finding the main result.
+Independent intersections, symbolic identities and scalar comparisons check 162 circle configurations at 250 digits, 108 arc configurations at 160 digits, and 144 safeguarded trajectories at 180 digits. The safeguard has a separate axiom audit. Frozen V20 and analog V30 packages retain detailed antecedents and circuit evidence.
 
 Citation metadata accompany this version. The paper source, editable figures and datasets are versioned, and the PDF is rebuilt by CI.
 
 \section{Conclusion}
-The main result is a geometric calculator: a rationally prepared circle converts a quadratic model into a fifth-order correction using three joins beyond a rail power stage. A second device, the decentered arc, offers global monotone convergence while preserving AD's mobile arc-and-join budget. These constructions make the difference between a numerical formula and its realization explicit.
+The main result is a geometric calculator: a rationally prepared circle converts a quadratic model into a fifth-order correction using three joins beyond a rail power stage. A second device, the decentered arc, offers global monotone convergence while preserving AD's mobile arc-and-join budget. A residual gate adds global convergence to the circle algorithm with a separately counted fallback protocol. These constructions make the difference between a numerical formula and its realization explicit.
 
 The binary product gadget extends the same design language to large degrees. Its centered electrical translation has a reproducible behavioral implementation for AD, with measured simulation tradeoffs between precision and time. This gives the geometric program a concrete application while leaving the fifth-order electrical designs as a clearly identified next step.
 

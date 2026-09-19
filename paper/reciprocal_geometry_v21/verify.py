@@ -15,6 +15,8 @@ SCRIPTS = [
     'paper/reciprocal_geometry_v20/src/review/check_math.py',
     'paper/reciprocal_geometry_v20/src/fixed_circle/verify.py',
     'paper/reciprocal_geometry_v20/src/decentered/verify.py',
+    'research/fixed_circle_safeguard/verify.py',
+    'research/fixed_circle_safeguard/draw.py',
     'research/analog_fast_ad/verify.py',
     'paper/pandrosion_analog_v30/check_results.py',
     'paper/reciprocal_geometry_v21/draw_figures.py',

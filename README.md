@@ -26,6 +26,7 @@ The contribution studied here is the **geometric realization** of an iteration. 
 | Pencil Halley | 3 | Global monotone |
 | Pencil rational Padé [2/2] | 5 | Global monotone |
 | Fixed-circle inverse [2/2] | 5 | Local; real branch and finite-chart conditions apply |
+| Guarded fixed circle + AD | 5 | Global exact hybrid; explicit geometric gate and fallback |
 
 Orders refer to general degrees `p≥3`. Scalar convergence, finite geometric existence and floating-point conditioning are distinct questions. The paper specifies preparation, branch selection and counting conventions.
 
@@ -39,6 +40,7 @@ The PDF build requires Tectonic or `latexmk`. The [V21 guide](paper/reciprocal_g
 
 The gallery additionally offers geometric binary powering for the four rectangle supports. Automatic initialization and rectangle calibration prepare the display; iteration remains manual. Serve it locally with `python3 -m http.server 8765 --directory docs`.
 
+- [Global fixed-circle safeguard: geometry, proof and trace counts](research/fixed_circle_safeguard/README.md)
 - [Fast geometric power: incidences and costs](docs/FAST_POWER_EXPERIMENT.md)
 - [Initialization, wide band, dimensions and numerical limits](docs/INITIALIZATION.md)
 - [Finite nondegeneracy of the native constructions](docs/NATIVE_NONDEGENERACY.md)
@@ -52,6 +54,7 @@ lake exe cache get
 python3 scripts/build_lean.py
 python3 scripts/audit_lean.py
 python3 scripts/audit_fast_power.py
+python3 scripts/audit_circle_safeguard.py
 python3 scripts/audit_native_nondegeneracy.py
 python3 scripts/audit_initialization.py
 python3 scripts/audit_analog_fast_ad.py

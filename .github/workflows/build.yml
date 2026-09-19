@@ -124,6 +124,7 @@ jobs:
       - run: python3 scripts/build_lean.py --phase final
       - run: python3 scripts/audit_lean.py
       - run: python3 scripts/audit_fast_power.py
+      - run: python3 scripts/audit_circle_safeguard.py
       - run: python3 scripts/audit_native_nondegeneracy.py
       - run: python3 scripts/audit_initialization.py
       - run: python3 scripts/audit_analog_fast_ad.py
@@ -153,6 +154,8 @@ jobs:
           python src/decentered/verify.py
       - run: python paper/reciprocal_geometry_v21/draw_figures.py
       - run: python paper/reciprocal_geometry_v21/draw_pandrosion.py
+      - run: python research/fixed_circle_safeguard/verify.py
+      - run: python research/fixed_circle_safeguard/draw.py
       - run: python scripts/test_native_nondegeneracy.py
       - run: python scripts/check_initialization.py
       - run: python paper/pandrosion_analog_v30/draw_fast_geometry.py
