@@ -164,6 +164,7 @@ jobs:
       - run: python paper/reciprocal_geometry_v22/draw_figures.py
       - run: python paper/reciprocal_geometry_v22/draw_pandrosion.py
       - run: python paper/reciprocal_geometry_v22/draw_safeguard.py
+      - run: python research/analog_geometry_ad/verify.py
       - run: python scripts/test_native_nondegeneracy.py
       - run: python scripts/check_initialization.py
       - run: python paper/pandrosion_analog_v30/draw_fast_geometry.py
@@ -221,6 +222,8 @@ jobs:
       - run: python research/analog_fast_ad/calibrate_cells.py
       - run: node research/analog_fast_ad/benchmark.mjs
       - run: python research/analog_fast_ad/validate_comparison.py
+      - run: python research/analog_geometry_ad/circuit.py
+      - run: python research/analog_geometry_ad/check_results.py
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: analog-p4-results

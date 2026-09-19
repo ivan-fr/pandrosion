@@ -1,0 +1,30 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: fast ad centered state behavioral p5
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Operating point simulation skipped by 'uic',
+  now using transient initial conditions.
+ Reference value :  2.35020e-03
+ Reference value :  3.89819e-03
+ Reference value :  5.24000e-03
+ Reference value :  6.51034e-03
+ Reference value :  7.78038e-03
+ Reference value :  9.04135e-03
+ Reference value :  1.03408e-02
+ Reference value :  1.15700e-02
+ Reference value :  1.29320e-02
+ Reference value :  1.41816e-02
+ Reference value :  1.54910e-02
+ Reference value :  1.66906e-02
+ Reference value :  1.79417e-02
+ Reference value :  1.92432e-02
+ Reference value :  2.05106e-02
+ Reference value :  2.17381e-02
+ Reference value :  2.30735e-02
+No. of Data Rows : 125073
+ngspice-46 done

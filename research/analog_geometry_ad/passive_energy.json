@@ -1,0 +1,113 @@
+{
+  "scope": "Only two modeled 50-kilohm correction-cell port resistors. Not circuit supply energy, chip power, area or system efficiency.",
+  "runs": [
+    {
+      "p": 3,
+      "X": 0.071,
+      "variant": "direct",
+      "final_port_power_uW": 3.4048408373907725e-09,
+      "points": [
+        {
+          "iterations": 4,
+          "time_ms": 4.785,
+          "port_resistor_energy_nJ": 18.229007457599824
+        },
+        {
+          "iterations": 20,
+          "time_ms": 23.985,
+          "port_resistor_energy_nJ": 18.22900750265029
+        }
+      ]
+    },
+    {
+      "p": 3,
+      "X": 0.071,
+      "variant": "feedback",
+      "final_port_power_uW": 12.96041499378839,
+      "points": [
+        {
+          "iterations": 4,
+          "time_ms": 4.785,
+          "port_resistor_energy_nJ": 62.677118268921156
+        },
+        {
+          "iterations": 20,
+          "time_ms": 23.985,
+          "port_resistor_energy_nJ": 311.5154356134993
+        }
+      ]
+    },
+    {
+      "p": 7,
+      "X": 1e-200,
+      "variant": "direct",
+      "final_port_power_uW": 8.117528669483012e-09,
+      "points": [
+        {
+          "iterations": 4,
+          "time_ms": 4.785,
+          "port_resistor_energy_nJ": 7.024992838965855
+        },
+        {
+          "iterations": 20,
+          "time_ms": 23.985,
+          "port_resistor_energy_nJ": 7.024992886985213
+        }
+      ]
+    },
+    {
+      "p": 7,
+      "X": 1e-200,
+      "variant": "feedback",
+      "final_port_power_uW": 17.70855438575687,
+      "points": [
+        {
+          "iterations": 4,
+          "time_ms": 4.785,
+          "port_resistor_energy_nJ": 82.46084172309007
+        },
+        {
+          "iterations": 20,
+          "time_ms": 23.985,
+          "port_resistor_energy_nJ": 422.4683363268174
+        }
+      ]
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "variant": "direct",
+      "final_port_power_uW": 3.377357761538698e-09,
+      "points": [
+        {
+          "iterations": 4,
+          "time_ms": 4.785,
+          "port_resistor_energy_nJ": 2.2489315566189916
+        },
+        {
+          "iterations": 20,
+          "time_ms": 23.985,
+          "port_resistor_energy_nJ": 2.2489316064252476
+        }
+      ]
+    },
+    {
+      "p": 1000000,
+      "X": 500000,
+      "variant": "feedback",
+      "final_port_power_uW": 20.000080955568773,
+      "points": [
+        {
+          "iterations": 4,
+          "time_ms": 4.785,
+          "port_resistor_energy_nJ": 92.8348914742158
+        },
+        {
+          "iterations": 20,
+          "time_ms": 23.985,
+          "port_resistor_energy_nJ": 476.8357118853675
+        }
+      ]
+    }
+  ]
+}

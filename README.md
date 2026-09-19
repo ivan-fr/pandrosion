@@ -72,6 +72,7 @@ The [centered binary-power AD prototype](research/analog_fast_ad/README.md) uses
 - [Generalist input campaign](research/analog_fast_ad/GENERALIST.md)
 - [Precision circuit results](research/analog_fast_ad/PRECISION_REVISION_RESULTS.md)
 - [Precision–time study](research/analog_fast_ad/SPEED_ACCURACY.md)
+- [Geometry-driven AD correction: paired SPICE comparison](research/analog_geometry_ad/SIMULATION_RESULTS.md)
 - [Hardware assumptions](research/analog_fast_ad/HARDWARE_ACCURACY.md) and [engineering review](research/analog_fast_ad/ENGINEERING_REVIEW.md)
 
 ## Validation and development
