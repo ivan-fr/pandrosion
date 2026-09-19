@@ -90,3 +90,7 @@ The gallery uses local HTML, CSS and JavaScript; Playwright is a development dep
 ## Archives
 
 [V20 geometry](paper/reciprocal_geometry_v20/README.md), its [review](paper/reciprocal_geometry_v20/REVIEW_V20.md), the [V19 erratum](ERRATA.md), and [analog V17](paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf) remain available. The historical [P0](research/pandrosion_analog/README.md), [P1](research/pandrosion_analog_p1/README.md), [P2](research/pandrosion_analog_p2/README.md), [P3](research/pandrosion_analog_p3/README.md) and [P4](research/pandrosion_analog_p4/README.md) circuit studies retain their original netlists and evidence.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Copyright © 2026 Ivan Besevic.
