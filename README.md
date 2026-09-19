@@ -156,3 +156,10 @@ npm run test:browser
 ```
 
 The gallery itself uses only local HTML, CSS and JavaScript. Playwright is a development dependency for browser checks, not a public-site dependency.
+
+The new [analog precision mode](research/analog_fast_ad/PRECISION_REVISION.md)
+passes a 1 ppm target in 64 held-out behavioral circuit tests (worst: 0.279 ppm),
+with added calibration and about 24 ms readout latency. A separate noisy
+completion controller passes 18 normal and four fail-closed fault tests.
+[Detailed results and assumptions](research/analog_fast_ad/PRECISION_REVISION_RESULTS.md)
+are reproduced by a dedicated CI job; physical circuit performance remains unvalidated.

@@ -257,3 +257,18 @@ python research/analog_fast_ad/characterize.py
 python research/analog_fast_ad/characterize_spice.py
 python research/analog_fast_ad/plot_accuracy.py
 ```
+
+## Calibrated precision mode
+
+The [precision revision](PRECISION_REVISION.md) adds 100 nF storage, longer
+acquisition, electrically calibrated leakage compensation, a calibrated 24-bit
+ADC and averaging of 16 readouts. In [64 held-out paired behavioral tests](PRECISION_REVISION_RESULTS.md),
+all revised results are below 1 ppm; the worst is 0.279 ppm, versus 404 ppm
+for the original circuit on those inputs. The readout takes about 24 ms,
+excluding preparation and calibration. These results depend on the documented
+reference, trim and converter assumptions; they do not establish physical chip
+performance or a universal accuracy guarantee.
+
+A separate noisy completion-controller model completes 18 normal jobs and
+blocks transfers in four injected-fault tests. It is not yet integrated with the
+revised SPICE circuit. The dedicated precision CI job repeats both studies.

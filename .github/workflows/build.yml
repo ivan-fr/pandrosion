@@ -262,3 +262,29 @@ jobs:
             research/analog_fast_ad/streaming_results.json
             research/analog_fast_ad/GENERALIST_RESULTS.md
             research/analog_fast_ad/generalist_results.png
+  analog-precision:
+    name: Precision circuit and noisy completion controller
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y ngspice
+      - run: pip install -r research/analog_fast_ad/requirements.txt
+      - run: python research/analog_fast_ad/validate_revised.py
+      - run: python research/analog_fast_ad/revised_ablation.py
+      - run: python research/analog_fast_ad/noisy_controller.py
+      - run: python research/analog_fast_ad/precision_revision_report.py
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: precision-revision-results
+          path: |
+            research/analog_fast_ad/revised_validation.json
+            research/analog_fast_ad/revised_ablation.json
+            research/analog_fast_ad/noisy_controller_results.json
+            research/analog_fast_ad/PRECISION_REVISION_RESULTS.md
+            research/analog_fast_ad/precision_revision.png
+            research/analog_fast_ad/precision_revision.svg
