@@ -1,0 +1,75 @@
+'LeanMath.Papers.RectangleCircleSafeguard.gate_log_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.gate_of_log_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.gate_iff_log' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.switching_error_converges' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.residual_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.residual_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ad_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ad_at_root' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ad_between' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.log_abs_between' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.root_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.residual_root' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ad_error_nonincrease' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.error_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ad_error_converges' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.hybrid_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.accepted_halves_error' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.hybrid_error_converges' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.state_from_residual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.hybrid_global_convergence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.guarded_circle_global' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.rail_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.geometric_gate_correct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.geometric_residual' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.eventual_selection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.local_order_inherited' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.toLeft_right' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.toRight_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.rulerMul_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.rulerScale_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.rulerPower_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ruler_residual_correct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ruler_gate_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.fixed_circle_AD_global' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.circleFactor_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.prepared_readout_regular' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.finiteChart_at_root' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ruler_accept_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.rulerControlledStep_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ruler_controlled_global' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleCircleSafeguard.ruler_circle_AD_global' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+Circle safeguard: 41 declarations passed the axiom audit.

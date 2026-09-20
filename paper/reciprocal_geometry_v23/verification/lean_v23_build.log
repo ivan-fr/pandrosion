@@ -1,0 +1,4 @@
+Command: lake build LeanMath.Papers.RectangleFixedCircleTheorem43
+Toolchain: Lean v4.33.1; mathlib v4.33.1
+✔ [3196/3196] Built LeanMath.Papers.RectangleFixedCircleTheorem43 (52s)
+Build completed successfully (3196 jobs).
