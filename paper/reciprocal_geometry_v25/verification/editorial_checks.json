@@ -1,0 +1,31 @@
+{
+  "pages": 24,
+  "main_text_pages": 15,
+  "figures": 11,
+  "references": 25,
+  "first_circle_page": 2,
+  "theorem_4_3_page": 6,
+  "accuracy_table_number": 2,
+  "accuracy_table_page": 10,
+  "conclusion_page": 15,
+  "equivalence_appendix": "F",
+  "equivalence_page": 23,
+  "unchanged": [
+    "abstract",
+    "all theorem/proposition statements",
+    "all proof environments",
+    "all figure files",
+    "accuracy table numbers"
+  ],
+  "regenerated_figures": "Only PDF CreationDate metadata changed; verified and original identical assets retained. PNGs byte-identical.",
+  "initial_cache_joins": [
+    0,
+    0,
+    0,
+    12,
+    12
+  ],
+  "bibliography_case": "passed on rendered PDF text",
+  "latex_overfull_or_undefined": false,
+  "visual_review": "all 24 pages; detailed inspection of pages 2, 4, 10, 15 and 24"
+}

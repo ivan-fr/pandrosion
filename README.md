@@ -6,7 +6,7 @@ Geometric root calculators: explicit line-and-circle constructions, Lean develop
 
 | Start here | What you will find |
 |---|---|
-| **[Geometry paper V24](paper/reciprocal_geometry_v24/Reciprocal_Root_Geometry_v24.pdf)** | Two fifth-order constructions, a precise equivalence comparison, and Theorem 4.3 formalized for every real `p>2`. |
+| **[Geometry paper V25](paper/reciprocal_geometry_v25/Reciprocal_Root_Geometry_v25.pdf)** | Two fifth-order solvers, geometric constructions presented first, and Theorem 4.3 formalized for every real `p>2`. |
 | **[Interactive gallery](https://ivan-fr.github.io/pandrosion/)** | Enter a degree and a positive input, then perform one geometric iteration per click. Planar and stereographic views. |
 | **[Analog paper V30](paper/pandrosion_analog_v30/Pandrosion_Geometry_Analog_V30.pdf)** | Binary-power AD, the centered state, circuit topology, calibration and precision–time simulations. |
 
@@ -33,11 +33,11 @@ Orders refer to general degrees `p≥3`. Scalar convergence, finite geometric ex
 
 ```sh
 python3 -m pip install -r paper/reciprocal_geometry_v20/requirements.txt
-python3 paper/reciprocal_geometry_v24/verify.py
-bash paper/reciprocal_geometry_v24/build.sh
+python3 paper/reciprocal_geometry_v25/verify.py
+bash paper/reciprocal_geometry_v25/build.sh
 ```
 
-The PDF build requires Tectonic or `latexmk`. The [V24 guide](paper/reciprocal_geometry_v24/README.md) maps claims to sources and explains the verifier. [Revision notes](paper/reciprocal_geometry_v24/REVISION_NOTES.md) document the review response and proof boundaries. [CITATION.cff](CITATION.cff) provides citation metadata.
+The PDF build requires Tectonic or `latexmk`. The [V25 guide](paper/reciprocal_geometry_v25/README.md) maps claims to sources and explains the verifier. [Revision notes](paper/reciprocal_geometry_v25/REVISION_NOTES.md) document the review response and proof boundaries. [CITATION.cff](CITATION.cff) provides citation metadata.
 
 The gallery additionally offers geometric binary powering for the four rectangle supports. Automatic initialization and rectangle calibration prepare the display; iteration remains manual. Serve it locally with `python3 -m http.server 8765 --directory docs`.
 
@@ -63,7 +63,7 @@ python3 scripts/audit_initialization.py
 python3 scripts/audit_analog_fast_ad.py
 ```
 
-The build checks the complete source library. The named audits have narrower, documented scopes and allow only the standard `propext`, `Classical.choice` and `Quot.sound` axioms. The full radical convergence argument for decentered AD is a written proof supported by formal polynomial identities. The [V24 formal claim map](paper/reciprocal_geometry_v24/LEAN_THEOREM_4_3.md) covers the real-degree circle theorem, including inverse selection, convergence and exact order five. See also the [V24 evidence map](paper/reciprocal_geometry_v24/README.md#proof-and-evidence-map) and the detailed [V20 coverage table](paper/reciprocal_geometry_v20/CLAIM_COVERAGE.md).
+The build checks the complete source library. The named audits have narrower, documented scopes and allow only the standard `propext`, `Classical.choice` and `Quot.sound` axioms. The full radical convergence argument for decentered AD is a written proof supported by formal polynomial identities. The [V25 formal claim map](paper/reciprocal_geometry_v25/LEAN_THEOREM_4_3.md) covers the real-degree circle theorem, including inverse selection, convergence and exact order five. See also the [V25 evidence map](paper/reciprocal_geometry_v25/README.md#proof-and-evidence-map) and the detailed [V20 coverage table](paper/reciprocal_geometry_v20/CLAIM_COVERAGE.md).
 
 ## Analog application
 
@@ -77,7 +77,7 @@ The [centered binary-power AD prototype](research/analog_fast_ad/README.md) uses
 
 ## Validation and development
 
-GitHub Actions separately checks Lean and axiom audits, symbolic/high-precision geometry, browser interactions, all seven paper builds, and the behavioral circuit campaigns. PDFs, screenshots and result records are uploaded as workflow artifacts. The existing protected-branch paper status name is retained even though it now includes V21, V22, V23 and V24.
+GitHub Actions separately checks Lean and axiom audits, symbolic/high-precision geometry, browser interactions, all eight paper builds, and the behavioral circuit campaigns. PDFs, screenshots and result records are uploaded as workflow artifacts. The existing protected-branch paper status name is retained even though it now includes V21, V22, V23, V24 and V25.
 
 ```sh
 npm ci

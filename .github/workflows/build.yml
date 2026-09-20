@@ -164,9 +164,9 @@ jobs:
       - run: python paper/reciprocal_geometry_v21/draw_pandrosion.py
       - run: python research/fixed_circle_safeguard/verify.py
       - run: python research/fixed_circle_safeguard/draw.py
-      - run: python paper/reciprocal_geometry_v24/src/positioning/verify.py
-      - run: python paper/reciprocal_geometry_v24/src/uniform/verify.py
-      - run: python paper/reciprocal_geometry_v24/src/branch/protocol.py
+      - run: python paper/reciprocal_geometry_v25/src/positioning/verify.py
+      - run: python paper/reciprocal_geometry_v25/src/uniform/verify.py
+      - run: python paper/reciprocal_geometry_v25/src/branch/protocol.py
       - run: python paper/reciprocal_geometry_v22/src/branch/verify.py
       - run: python paper/reciprocal_geometry_v22/src/branch/protocol.py
       - run: python paper/reciprocal_geometry_v22/src/branch/figure.py
@@ -191,6 +191,7 @@ jobs:
           tar xzf /tmp/tectonic.tar.gz -C /tmp
           sudo install /tmp/tectonic /usr/local/bin/tectonic
       # Keep this job name stable: main protection requires its status context.
+      - run: bash paper/reciprocal_geometry_v25/build.sh
       - run: bash paper/reciprocal_geometry_v24/build.sh
       - run: bash paper/reciprocal_geometry_v23/build.sh
       - run: bash paper/reciprocal_geometry_v22/build.sh
@@ -203,6 +204,7 @@ jobs:
         with:
           name: papers
           path: |
+            paper/reciprocal_geometry_v25/Reciprocal_Root_Geometry_v25.pdf
             paper/reciprocal_geometry_v24/Reciprocal_Root_Geometry_v24.pdf
             paper/reciprocal_geometry_v23/Reciprocal_Root_Geometry_v23.pdf
             paper/reciprocal_geometry_v22/Reciprocal_Root_Geometry_v22.pdf
