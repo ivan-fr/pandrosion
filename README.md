@@ -6,7 +6,7 @@ Geometric root calculators: explicit line-and-circle constructions, Lean develop
 
 | Start here | What you will find |
 |---|---|
-| **[Geometry paper V22](paper/reciprocal_geometry_v22/Reciprocal_Root_Geometry_v22.pdf)** | The fixed-circle device, whole-branch convergence, five Pandrosion supports, global entry and counted costs. |
+| **[Geometry paper V25](paper/reciprocal_geometry_v25/Reciprocal_Root_Geometry_v25.pdf)** | Two fifth-order solvers, geometric constructions presented first, and Theorem 4.3 formalized for every real `p>2`. |
 | **[Interactive gallery](https://ivan-fr.github.io/pandrosion/)** | Enter a degree and a positive input, then perform one geometric iteration per click. Planar and stereographic views. |
 | **[Analog paper V30](paper/pandrosion_analog_v30/Pandrosion_Geometry_Analog_V30.pdf)** | Binary-power AD, the centered state, circuit topology, calibration and precision–time simulations. |
 
@@ -33,11 +33,11 @@ Orders refer to general degrees `p≥3`. Scalar convergence, finite geometric ex
 
 ```sh
 python3 -m pip install -r paper/reciprocal_geometry_v20/requirements.txt
-python3 paper/reciprocal_geometry_v22/verify.py
-bash paper/reciprocal_geometry_v22/build.sh
+python3 paper/reciprocal_geometry_v25/verify.py
+bash paper/reciprocal_geometry_v25/build.sh
 ```
 
-The PDF build requires Tectonic or `latexmk`. The [V22 guide](paper/reciprocal_geometry_v22/README.md) maps claims to sources and explains the verifier. [Revision notes](paper/reciprocal_geometry_v22/REVISION_NOTES.md) document the review response and proof boundaries. [CITATION.cff](CITATION.cff) provides citation metadata.
+The PDF build requires Tectonic or `latexmk`. The [V25 guide](paper/reciprocal_geometry_v25/README.md) maps claims to sources and explains the verifier. [Revision notes](paper/reciprocal_geometry_v25/REVISION_NOTES.md) document the review response and proof boundaries. [CITATION.cff](CITATION.cff) provides citation metadata.
 
 The gallery additionally offers geometric binary powering for the four rectangle supports. Automatic initialization and rectangle calibration prepare the display; iteration remains manual. Serve it locally with `python3 -m http.server 8765 --directory docs`.
 
@@ -57,12 +57,13 @@ python3 scripts/audit_lean.py
 python3 scripts/audit_fast_power.py
 python3 scripts/audit_circle_safeguard.py
 python3 scripts/audit_branch.py
+python3 scripts/audit_circle_v23.py
 python3 scripts/audit_native_nondegeneracy.py
 python3 scripts/audit_initialization.py
 python3 scripts/audit_analog_fast_ad.py
 ```
 
-The build checks the complete source library. The named audits have narrower, documented scopes and allow only the standard `propext`, `Classical.choice` and `Quot.sound` axioms. The full radical convergence argument for decentered AD is a written proof supported by formal polynomial identities. See the [V22 claim map](paper/reciprocal_geometry_v22/README.md#read-the-claims-at-their-actual-scope) and the detailed [V20 coverage table](paper/reciprocal_geometry_v20/CLAIM_COVERAGE.md).
+The build checks the complete source library. The named audits have narrower, documented scopes and allow only the standard `propext`, `Classical.choice` and `Quot.sound` axioms. The full radical convergence argument for decentered AD is a written proof supported by formal polynomial identities. The [V25 formal claim map](paper/reciprocal_geometry_v25/LEAN_THEOREM_4_3.md) covers the real-degree circle theorem, including inverse selection, convergence and exact order five. See also the [V25 evidence map](paper/reciprocal_geometry_v25/README.md#proof-and-evidence-map) and the detailed [V20 coverage table](paper/reciprocal_geometry_v20/CLAIM_COVERAGE.md).
 
 ## Analog application
 
@@ -76,7 +77,7 @@ The [centered binary-power AD prototype](research/analog_fast_ad/README.md) uses
 
 ## Validation and development
 
-GitHub Actions separately checks Lean and axiom audits, symbolic/high-precision geometry, browser interactions, all five paper builds, and the behavioral circuit campaigns. PDFs, screenshots and result records are uploaded as workflow artifacts. The existing protected-branch paper status name is retained even though it now includes V21 and V22.
+GitHub Actions separately checks Lean and axiom audits, symbolic/high-precision geometry, browser interactions, all eight paper builds, and the behavioral circuit campaigns. PDFs, screenshots and result records are uploaded as workflow artifacts. The existing protected-branch paper status name is retained even though it now includes V21, V22, V23, V24 and V25.
 
 ```sh
 npm ci
@@ -91,7 +92,7 @@ The gallery uses local HTML, CSS and JavaScript; Playwright is a development dep
 
 ## Archives
 
-[V21 geometry and safeguard](paper/reciprocal_geometry_v21/README.md), [V20 geometry](paper/reciprocal_geometry_v20/README.md), its [review](paper/reciprocal_geometry_v20/REVIEW_V20.md), the [V19 erratum](ERRATA.md), and [analog V17](paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf) remain available. The historical [P0](research/pandrosion_analog/README.md), [P1](research/pandrosion_analog_p1/README.md), [P2](research/pandrosion_analog_p2/README.md), [P3](research/pandrosion_analog_p3/README.md) and [P4](research/pandrosion_analog_p4/README.md) circuit studies retain their original netlists and evidence.
+[V22 geometry](paper/reciprocal_geometry_v22/README.md), [V21 geometry and safeguard](paper/reciprocal_geometry_v21/README.md), [V20 geometry](paper/reciprocal_geometry_v20/README.md), its [review](paper/reciprocal_geometry_v20/REVIEW_V20.md), the [V19 erratum](ERRATA.md), and [analog V17](paper/pandrosion_analog_v17/Pandrosion_Geometry_Analog_V17.pdf) remain available. The historical [P0](research/pandrosion_analog/README.md), [P1](research/pandrosion_analog_p1/README.md), [P2](research/pandrosion_analog_p2/README.md), [P3](research/pandrosion_analog_p3/README.md) and [P4](research/pandrosion_analog_p4/README.md) circuit studies retain their original netlists and evidence.
 
 ## License
 

@@ -1,7 +1,7 @@
 cff-version: 1.2.0
-message: "Please cite Geometry V25 for the geometric constructions; the analog V30 companion documents the circuit study."
+message: "Please cite Geometry V24 for the geometric constructions; the analog V30 companion documents the circuit study."
 type: software
-title: "Pandrosion: geometric root calculators and analog prototypes"
+title: "Geometry V24 reproducibility package"
 authors:
   - family-names: Besevic
     given-names: Ivan
@@ -14,5 +14,5 @@ preferred-citation:
     - family-names: Besevic
       given-names: Ivan
   year: 2026
-  version: "25"
-  url: "https://github.com/ivan-fr/pandrosion/tree/main/paper/reciprocal_geometry_v25"
+  version: "24"
+  url: "https://github.com/ivan-fr/pandrosion/tree/main/paper/reciprocal_geometry_v24"

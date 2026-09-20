@@ -1,0 +1,251 @@
+paper/reciprocal_geometry_v23/src/uniform/verify.py
+PASS: 25 symbolic checks, 240 branch/endpoint cases and 72 scalar trajectories at 400 digits
+paper/reciprocal_geometry_v20/src/revision/verify.py
+{
+  "projective_difference_identity": "PASS",
+  "uniform_circle_identity": "PASS",
+  "uniform_denominator_positive": "all coefficients positive in p-3",
+  "renormalization": "Xnew=c^p X; snew=s/c; residual invariant",
+  "contraction_sampling": [
+    {
+      "p": 3,
+      "samples": 4008,
+      "max_abs_error_ratio": "0.353481051160016219"
+    },
+    {
+      "p": 5,
+      "samples": 4008,
+      "max_abs_error_ratio": "0.326034267854893883"
+    },
+    {
+      "p": 17,
+      "samples": 4008,
+      "max_abs_error_ratio": "0.316039275545863414"
+    }
+  ],
+  "precision": 90,
+  "scope": "Exact symbolic identities plus finite contraction evidence; contraction remains conjectural."
+}
+paper/reciprocal_geometry_v20/src/review/check_math.py
+{
+  "status": "PASS",
+  "rational_maps": {
+    "AK": {
+      "order": 2,
+      "relative_coefficient": "-(p - 1)/2",
+      "derivative": "-p*(p - 1)*(t - 1)/(p + t - 1)**2",
+      "pade_contact": "verified through degree 1"
+    },
+    "AD": {
+      "order": 3,
+      "relative_coefficient": "(p - 1)*(p + 1)/12",
+      "derivative": "(p - 1)*(p + 1)*(t - 1)**2/(p*t + p + t - 1)**2",
+      "pade_contact": "verified through degree 2"
+    },
+    "projective": {
+      "order": 4,
+      "relative_coefficient": "-(p - 1)*(p + 1)*(2*p - 1)/72",
+      "derivative": "-2*p*(p - 1)*(p + 1)*(2*p - 1)*(t - 1)**3/(4*p**2*t + 2*p**2 + p*t**2 + 2*p*t - 3*p + t**2 - 2*t + 1)**2",
+      "pade_contact": "verified through degree 3"
+    },
+    "rational5": {
+      "order": 5,
+      "relative_coefficient": "(p - 1)*(p + 1)*(2*p - 1)*(2*p + 1)/720",
+      "derivative": "(p - 1)*(p + 1)*(2*p - 1)*(2*p + 1)*(t - 1)**4/(2*p**2*t**2 + 8*p**2*t + 2*p**2 + 3*p*t**2 - 3*p + t**2 - 2*t + 1)**2",
+      "pade_contact": "verified through degree 4"
+    }
+  },
+  "fixed_circle": "positive quadratics, branch derivative and fourth-power certificate verified symbolically",
+  "bilateral_logarithmic_coefficient": "(p - 2)*(p - 1)**2/6",
+  "scope": "Algebraic cross-checks; full analytical arguments reviewed in manuscript, not an independent formal verification of every claim."
+}
+paper/reciprocal_geometry_v20/src/fixed_circle/verify.py
+{
+  "symbolic": "general discriminant, derivative and circle identities: exact",
+  "independent_geometries": 162,
+  "max_error": "4.170096e-243",
+  "benchmark_p3": [
+    {
+      "iteration": 0,
+      "s": "0.75",
+      "relative_error": "0.0550592125788"
+    },
+    {
+      "iteration": 1,
+      "s": "0.793700551706633487706391072484278618969277059900170218932446613095916693357624813731935361",
+      "relative_error": "3.24083617287e-8"
+    },
+    {
+      "iteration": 2,
+      "s": "0.793700525984099737375852819636154130194170252734856887471051058631244273263856296830832041",
+      "relative_error": "1.98615367316e-39"
+    },
+    {
+      "iteration": 3,
+      "s": "0.793700525984099737375852819636154130195746663949926504904142880912608252812109586636772107",
+      "relative_error": "1.71708476088e-195"
+    }
+  ],
+  "thresholds": {
+    "6": 1,
+    "12": 2,
+    "30": 2,
+    "60": 3
+  },
+  "two_positive_roots_at_t_005": [
+    "3.118283112791927988131219837685948332265424810351093617603212907242422936305805225510469853343511724437669130141800081516279312290423927910581112311129058357814122350932671815848911476865087841502003976407005293409196689393626655903679006128706503057",
+    "6.381716887208072011868780162314051667734575189648906382396787092757577063694194774489530146656488275562330869858199918483720687709576072089418887688870941642185877649067328184151088523134912158497996023592994706590803310606373344096320993871293496943"
+  ]
+}
+paper/reciprocal_geometry_v20/src/decentered/verify.py
+{
+  "symbolic": "Derivative numerator, squared identity, reciprocity and sign decomposition exact",
+  "local_coefficients": {
+    "3": "1/18",
+    "4": "13/48",
+    "5": "4/5",
+    "7": "11/3"
+  },
+  "independent_arc_geometries": 108,
+  "working_digits": 160,
+  "max_error": "2.56061807941e-159",
+  "additional_geometries": {
+    "AK": {
+      "cases": 108,
+      "max_error": "2.31166909946e-160"
+    },
+    "AD": {
+      "cases": 108,
+      "max_error": "2.34723323946e-159"
+    },
+    "projective": {
+      "cases": 108,
+      "max_error": "4.80115889889e-160"
+    }
+  },
+  "proof_scope": "Global monotone convergence proved in paper; finite checks do not replace proof."
+}
+research/fixed_circle_safeguard/verify.py
+PASS: 144 geometric trajectories, degrees 3..1000000, max 18 steps; costs and fallback checks
+paper/reciprocal_geometry_v23/src/branch/verify.py
+{
+ "centered_quadratic_identity": true,
+ "centered_quadratic_slope_at_root": true,
+ "derivative_certificate": true,
+ "reciprocity": true,
+ "h_prime_identity": true,
+ "branch_quadratic": true,
+ "S_coefficients": [
+  "(p - 2)*(p - 1)*(p + 1)*(p + 2)",
+  "12*(p - 2)*(p + 2)",
+  "12*(p - 4)*(p + 4)",
+  "-288",
+  "-144"
+ ],
+ "S_coefficients_expected": true,
+ "slope_certificate": true,
+ "Q_shift": true,
+ "N_reduced": true,
+ "D_reduced": true,
+ "large_p_polynomial_in_q": [
+  409,
+  11314,
+  140038,
+  1027656,
+  3519360
+ ],
+ "large_p_all_coefficients_positive": true,
+ "r_upper_347": true,
+ "r_lower_346": "(71*p**2 + 17300*p - 32500)/2500",
+ "exp_bound": true,
+ "small_p": {
+  "3": {
+   "rlo": "979/100",
+   "rhi": "49/5",
+   "ratio": 0.12986712942379014,
+   "ok": true
+  },
+  "4": {
+   "rlo": "1341/100",
+   "rhi": "671/50",
+   "ratio": 0.1461468216016592,
+   "ok": true
+  },
+  "5": {
+   "rlo": "1697/100",
+   "rhi": "849/50",
+   "ratio": 0.15307797822963318,
+   "ok": true
+  },
+  "6": {
+   "rlo": "2049/100",
+   "rhi": "41/2",
+   "ratio": 0.15681599203106922,
+   "ok": true
+  },
+  "7": {
+   "rlo": "24",
+   "rhi": "2401/100",
+   "ratio": 0.15891468950833854,
+   "ok": true
+  },
+  "8": {
+   "rlo": "2749/100",
+   "rhi": "55/2",
+   "ratio": 0.16042516423082082,
+   "ok": true
+  },
+  "9": {
+   "rlo": "1549/50",
+   "rhi": "3099/100",
+   "ratio": 0.16133840621200202,
+   "ok": true
+  }
+ },
+ "endpoint_margin_min": {
+  "p": 5000,
+  "margin": 1.8037300418435491
+ },
+ "endpoint_margin_limit": 1.8037299725615124,
+ "branch_samples": {
+  "3": {
+   "violations": 0,
+   "max_ratio": 0.35303376435903877
+  },
+  "4": {
+   "violations": 0,
+   "max_ratio": 0.33274187573929564
+  },
+  "5": {
+   "violations": 0,
+   "max_ratio": 0.3253420315799878
+  },
+  "17": {
+   "violations": 0,
+   "max_ratio": 0.3149605463391447
+  },
+  "100": {
+   "violations": 0,
+   "max_ratio": 0.3139459451465516
+  }
+ }
+}
+ALL CHECKS PASSED
+paper/reciprocal_geometry_v23/src/branch/protocol.py
+PASS: 144 branch-entry geometric trajectories; max 18 steps; costs, exceptions and accuracy table
+paper/reciprocal_geometry_v23/src/branch/figure.py
+wrote /Users/ivanbesevic/Documents/ChatGPT/lean-math/output/github/pandrosion-v23/paper/reciprocal_geometry_v23/figures/branch_contraction.pdf
+paper/reciprocal_geometry_v23/src/branch/fold.py
+PASS: fold figure selects the descending root and rejects the other positive root
+paper/reciprocal_geometry_v23/draw_figures.py
+PASS: fixed-circle and decentered-arc readouts; independent equal-axis views
+paper/reciprocal_geometry_v23/draw_pandrosion.py
+PASS: four Pandrosion figures from intersections; scalar readouts agree at 70 digits
+paper/reciprocal_geometry_v23/draw_safeguard.py
+PASS: five-join product and controller figure incidences
+research/analog_fast_ad/verify.py
+PASS: exact binary-deficit and AD conjugacy identities; 49 power checks; max error 2.517020667608179e-16
+paper/pandrosion_analog_v30/check_results.py
+PASS: V30 counts, errors, timings, controller outcomes and figure provenance
+PASS: geometric fast-power figure records
+PASS: V23 mathematics, two controllers, five Pandrosion figures and companion provenance

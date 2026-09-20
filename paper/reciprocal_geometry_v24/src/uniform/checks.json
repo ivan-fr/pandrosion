@@ -1,0 +1,523 @@
+{
+  "scope": "Symbolic identities and finite checks of written V24 results; not a new Lean theorem",
+  "symbolic_checks": {
+    "cayley_model": true,
+    "branch_derivative": true,
+    "convexity_second_derivative": true,
+    "defect_derivative_numerator": true,
+    "circle_discriminant": true,
+    "arc_elimination": true,
+    "circle_contact_0": true,
+    "circle_contact_1": true,
+    "circle_contact_2": true,
+    "circle_contact_3": true,
+    "circle_contact_4": true,
+    "circle_log_error_coefficient": true,
+    "arc_contact_0": true,
+    "arc_contact_1": true,
+    "arc_contact_2": true,
+    "arc_contact_3": true,
+    "arc_contact_4": true,
+    "arc_log_error_coefficient": true,
+    "rational_contact_0": true,
+    "rational_contact_1": true,
+    "rational_contact_2": true,
+    "rational_contact_3": true,
+    "rational_contact_4": true,
+    "rational_log_error_coefficient": true,
+    "arc_vs_rational_nonidentity": true
+  },
+  "precision_decimal_digits": 400,
+  "contraction_cases": 240,
+  "largest_sampled_ratio": "0.907936134533825178140398876241",
+  "endpoint_margins": [
+    {
+      "p": "2.000000000001",
+      "margin": "2.77258872221205160426433095293"
+    },
+    {
+      "p": "2.001",
+      "margin": "2.76558148005038089995651903147"
+    },
+    {
+      "p": "2.1",
+      "margin": "2.52407661037361803281322500525"
+    },
+    {
+      "p": "2.5",
+      "margin": "2.19481488385078842100950849447"
+    },
+    {
+      "p": "2.999",
+      "margin": "2.04284277283865965606425860539"
+    },
+    {
+      "p": "3",
+      "margin": "2.04264196289164783195181403616"
+    },
+    {
+      "p": "3.141592653589793",
+      "margin": "2.01675350918783245445626107548"
+    },
+    {
+      "p": "4",
+      "margin": "1.9248473002384137899910356537"
+    },
+    {
+      "p": "17",
+      "margin": "1.80975769228320437607990985415"
+    },
+    {
+      "p": "100",
+      "margin": "1.80390320622701640086328244959"
+    },
+    {
+      "p": "1000000",
+      "margin": "1.8037299725632442982528644414"
+    },
+    {
+      "p": "1e20",
+      "margin": "1.80372997256151224744529270622"
+    }
+  ],
+  "trajectories": [
+    {
+      "map": "circle",
+      "p": "2.001",
+      "start_fraction": "-.999999",
+      "steps": 4
+    },
+    {
+      "map": "circle",
+      "p": "2.001",
+      "start_fraction": ".001",
+      "steps": 2
+    },
+    {
+      "map": "circle",
+      "p": "2.001",
+      "start_fraction": ".5",
+      "steps": 3
+    },
+    {
+      "map": "circle",
+      "p": "2.001",
+      "start_fraction": ".999999",
+      "steps": 4
+    },
+    {
+      "map": "arc",
+      "p": "2.001",
+      "initial_log_residual": "-100",
+      "steps": 13
+    },
+    {
+      "map": "arc",
+      "p": "2.001",
+      "initial_log_residual": "-1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "2.001",
+      "initial_log_residual": ".00001",
+      "steps": 2
+    },
+    {
+      "map": "arc",
+      "p": "2.001",
+      "initial_log_residual": "1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "2.001",
+      "initial_log_residual": "100",
+      "steps": 13
+    },
+    {
+      "map": "circle",
+      "p": "2.5",
+      "start_fraction": "-.999999",
+      "steps": 4
+    },
+    {
+      "map": "circle",
+      "p": "2.5",
+      "start_fraction": ".001",
+      "steps": 2
+    },
+    {
+      "map": "circle",
+      "p": "2.5",
+      "start_fraction": ".5",
+      "steps": 3
+    },
+    {
+      "map": "circle",
+      "p": "2.5",
+      "start_fraction": ".999999",
+      "steps": 4
+    },
+    {
+      "map": "arc",
+      "p": "2.5",
+      "initial_log_residual": "-100",
+      "steps": 25
+    },
+    {
+      "map": "arc",
+      "p": "2.5",
+      "initial_log_residual": "-1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "2.5",
+      "initial_log_residual": ".00001",
+      "steps": 2
+    },
+    {
+      "map": "arc",
+      "p": "2.5",
+      "initial_log_residual": "1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "2.5",
+      "initial_log_residual": "100",
+      "steps": 25
+    },
+    {
+      "map": "circle",
+      "p": "3",
+      "start_fraction": "-.999999",
+      "steps": 4
+    },
+    {
+      "map": "circle",
+      "p": "3",
+      "start_fraction": ".001",
+      "steps": 2
+    },
+    {
+      "map": "circle",
+      "p": "3",
+      "start_fraction": ".5",
+      "steps": 3
+    },
+    {
+      "map": "circle",
+      "p": "3",
+      "start_fraction": ".999999",
+      "steps": 4
+    },
+    {
+      "map": "arc",
+      "p": "3",
+      "initial_log_residual": "-100",
+      "steps": 27
+    },
+    {
+      "map": "arc",
+      "p": "3",
+      "initial_log_residual": "-1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "3",
+      "initial_log_residual": ".00001",
+      "steps": 2
+    },
+    {
+      "map": "arc",
+      "p": "3",
+      "initial_log_residual": "1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "3",
+      "initial_log_residual": "100",
+      "steps": 27
+    },
+    {
+      "map": "circle",
+      "p": "3.141592653589793",
+      "start_fraction": "-.999999",
+      "steps": 4
+    },
+    {
+      "map": "circle",
+      "p": "3.141592653589793",
+      "start_fraction": ".001",
+      "steps": 2
+    },
+    {
+      "map": "circle",
+      "p": "3.141592653589793",
+      "start_fraction": ".5",
+      "steps": 3
+    },
+    {
+      "map": "circle",
+      "p": "3.141592653589793",
+      "start_fraction": ".999999",
+      "steps": 4
+    },
+    {
+      "map": "arc",
+      "p": "3.141592653589793",
+      "initial_log_residual": "-100",
+      "steps": 27
+    },
+    {
+      "map": "arc",
+      "p": "3.141592653589793",
+      "initial_log_residual": "-1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "3.141592653589793",
+      "initial_log_residual": ".00001",
+      "steps": 2
+    },
+    {
+      "map": "arc",
+      "p": "3.141592653589793",
+      "initial_log_residual": "1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "3.141592653589793",
+      "initial_log_residual": "100",
+      "steps": 27
+    },
+    {
+      "map": "circle",
+      "p": "4",
+      "start_fraction": "-.999999",
+      "steps": 4
+    },
+    {
+      "map": "circle",
+      "p": "4",
+      "start_fraction": ".001",
+      "steps": 2
+    },
+    {
+      "map": "circle",
+      "p": "4",
+      "start_fraction": ".5",
+      "steps": 3
+    },
+    {
+      "map": "circle",
+      "p": "4",
+      "start_fraction": ".999999",
+      "steps": 4
+    },
+    {
+      "map": "arc",
+      "p": "4",
+      "initial_log_residual": "-100",
+      "steps": 29
+    },
+    {
+      "map": "arc",
+      "p": "4",
+      "initial_log_residual": "-1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "4",
+      "initial_log_residual": ".00001",
+      "steps": 2
+    },
+    {
+      "map": "arc",
+      "p": "4",
+      "initial_log_residual": "1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "4",
+      "initial_log_residual": "100",
+      "steps": 29
+    },
+    {
+      "map": "circle",
+      "p": "17",
+      "start_fraction": "-.999999",
+      "steps": 4
+    },
+    {
+      "map": "circle",
+      "p": "17",
+      "start_fraction": ".001",
+      "steps": 2
+    },
+    {
+      "map": "circle",
+      "p": "17",
+      "start_fraction": ".5",
+      "steps": 3
+    },
+    {
+      "map": "circle",
+      "p": "17",
+      "start_fraction": ".999999",
+      "steps": 4
+    },
+    {
+      "map": "arc",
+      "p": "17",
+      "initial_log_residual": "-100",
+      "steps": 31
+    },
+    {
+      "map": "arc",
+      "p": "17",
+      "initial_log_residual": "-1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "17",
+      "initial_log_residual": ".00001",
+      "steps": 2
+    },
+    {
+      "map": "arc",
+      "p": "17",
+      "initial_log_residual": "1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "17",
+      "initial_log_residual": "100",
+      "steps": 31
+    },
+    {
+      "map": "circle",
+      "p": "100",
+      "start_fraction": "-.999999",
+      "steps": 4
+    },
+    {
+      "map": "circle",
+      "p": "100",
+      "start_fraction": ".001",
+      "steps": 2
+    },
+    {
+      "map": "circle",
+      "p": "100",
+      "start_fraction": ".5",
+      "steps": 3
+    },
+    {
+      "map": "circle",
+      "p": "100",
+      "start_fraction": ".999999",
+      "steps": 4
+    },
+    {
+      "map": "arc",
+      "p": "100",
+      "initial_log_residual": "-100",
+      "steps": 32
+    },
+    {
+      "map": "arc",
+      "p": "100",
+      "initial_log_residual": "-1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "100",
+      "initial_log_residual": ".00001",
+      "steps": 2
+    },
+    {
+      "map": "arc",
+      "p": "100",
+      "initial_log_residual": "1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "100",
+      "initial_log_residual": "100",
+      "steps": 32
+    },
+    {
+      "map": "circle",
+      "p": "1000000",
+      "start_fraction": "-.999999",
+      "steps": 4
+    },
+    {
+      "map": "circle",
+      "p": "1000000",
+      "start_fraction": ".001",
+      "steps": 2
+    },
+    {
+      "map": "circle",
+      "p": "1000000",
+      "start_fraction": ".5",
+      "steps": 3
+    },
+    {
+      "map": "circle",
+      "p": "1000000",
+      "start_fraction": ".999999",
+      "steps": 4
+    },
+    {
+      "map": "arc",
+      "p": "1000000",
+      "initial_log_residual": "-100",
+      "steps": 32
+    },
+    {
+      "map": "arc",
+      "p": "1000000",
+      "initial_log_residual": "-1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "1000000",
+      "initial_log_residual": ".00001",
+      "steps": 2
+    },
+    {
+      "map": "arc",
+      "p": "1000000",
+      "initial_log_residual": "1",
+      "steps": 3
+    },
+    {
+      "map": "arc",
+      "p": "1000000",
+      "initial_log_residual": "100",
+      "steps": 32
+    }
+  ],
+  "max_trajectory_steps": 32,
+  "coefficients": {
+    "circle": "-(p - 2)*(p - 1)*(p + 1)*(p + 2)/720",
+    "arc": "(p - 2)*(p - 1)*(p + 1)*(3*p + 1)/1440",
+    "rational": "(p - 1)*(p + 1)*(2*p - 1)*(2*p + 1)/720"
+  }
+}

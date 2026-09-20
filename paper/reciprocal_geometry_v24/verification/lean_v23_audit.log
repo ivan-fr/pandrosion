@@ -1,0 +1,139 @@
+'LeanMath.Papers.RectangleFixedCircleUniform.cayleyLog' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.cayleyLog_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.cayleyLog_derivative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.cayleyLog_strictMono' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.cayleyLog_scaled' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.uniform_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.input' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.output' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.input_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.output_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.input_eq_log_residual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.input_deriv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.output_deriv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.input_reciprocal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.output_reciprocal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.output_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.positive_half_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleUniform.real_branch_alternation_contraction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.parameters' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.radius' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.errors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.vplus_gt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.parameter_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.Q_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.Q_neg_interior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.Q_nonpos_parameters' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.parameters_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.input_continuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.input_strictAnti' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.one_mem_parameters' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.radius_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.input_mapsTo' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.input_surjOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.inputHomeomorph' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.correction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.correction_input' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.correction_continuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.zeroError' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.correction_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.output_mapsTo' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.step_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.step_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.step_continuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.step_alternation_contraction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.step_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.orbit_invariant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.orbit_converges' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.estimate_converges' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.estimate_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.inverse_order_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleDynamics.order_five_coefficient_neg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.tauMinus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.tauPlus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.r_eq_two_sqrt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.endpoint_residual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.tau_reciprocal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.tau_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.radius_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.error_band_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.open_error_band_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.correction_residual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.unique_correction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.theorem_4_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.rootEstimate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.root_estimate_initial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.root_estimate_update' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.root_estimate_residual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleTheorem43.root_estimate_converges' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+V23 circle audit: 69 declarations passed; only standard logical axioms.

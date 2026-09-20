@@ -1,0 +1,43 @@
+'LeanMath.Papers.RectangleFixedCircleBranch.branch_derivative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.S_expand' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.S_slope' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.Q_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.ND_branch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.Q_reciprocal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.AC_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.slopeCert_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.S_neg_before' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.S_pos_after' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.N_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.D_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.h_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.h_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.h_anti' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.h_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.r_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.r_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.uplus_rel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.uplus_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.Q_vplus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.lt_uplus_of_branch' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.N_reduced' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.D_reduced' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.endpoint_of_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.endpoint_small' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.endpoint_large' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.h_vplus_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.h_neg_of_branch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.h_reciprocal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.h_pos_of_branch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.RectangleFixedCircleBranch.whole_branch_contraction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+Branch audit: 33 declarations passed the axiom audit.

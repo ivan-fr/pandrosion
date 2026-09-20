@@ -1,0 +1,40 @@
+{
+  "revision": "V24",
+  "symbolic_checks": 18,
+  "checks": {
+    "radicand_discriminant": true,
+    "radicand_nonzero_constant": true,
+    "quadratic_discriminant": true,
+    "primitive_coefficients_sum": true,
+    "no_common_factor_at_one": true,
+    "recover_radical": true,
+    "elimination_before_square_root": true,
+    "target_contact_coefficient_0": true,
+    "target_contact_coefficient_1": true,
+    "target_contact_coefficient_2": true,
+    "target_contact_coefficient_3": true,
+    "target_contact_coefficient_4": true,
+    "target_contact_coefficient_5": true,
+    "target_contact_coefficient_6": true,
+    "branch_derivative_coefficient_1": true,
+    "contact_implies_arc_coefficient": true,
+    "positive_scaling_fourth_power": true,
+    "conjugacy_leading_coefficient": true
+  },
+  "residual_order": 6,
+  "residual_leading_coefficient": "(p - 2)*(p - 1)**2*(p + 1)*(3*p + 1)/(60*p**4)",
+  "diagonal_222_required_residual_order": 8,
+  "integer_squarefree_regression_cases": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "scope": "Exact identities and finite regression cases only. The universal nonrationality proof and application of B\u00f6ttcher's classical analytic theorem are written in POSITIONING.md, not Lean-checked."
+}

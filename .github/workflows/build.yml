@@ -27,8 +27,10 @@ jobs:
           build: false
           test: false
           lint: false
-          use-mathlib-cache: true
+          use-mathlib-cache: false
           use-github-cache: false
+      - name: Download mathlib cache with bounded retries
+        run: bash scripts/fetch_mathlib_cache.sh
       - uses: actions/cache/restore@v6.1.0
         id: lean-cache
         with:
@@ -81,8 +83,10 @@ jobs:
           build: false
           test: false
           lint: false
-          use-mathlib-cache: true
+          use-mathlib-cache: false
           use-github-cache: false
+      - name: Download mathlib cache with bounded retries
+        run: bash scripts/fetch_mathlib_cache.sh
       - uses: actions/download-artifact@v8.0.1
         with:
           name: lean-base
@@ -110,8 +114,10 @@ jobs:
           build: false
           test: false
           lint: false
-          use-mathlib-cache: true
+          use-mathlib-cache: false
           use-github-cache: false
+      - name: Download mathlib cache with bounded retries
+        run: bash scripts/fetch_mathlib_cache.sh
       - uses: actions/download-artifact@v8.0.1
         with:
           pattern: lean-segments-*
@@ -126,6 +132,7 @@ jobs:
       - run: python3 scripts/audit_fast_power.py
       - run: python3 scripts/audit_circle_safeguard.py
       - run: python3 scripts/audit_branch.py
+      - run: python3 scripts/audit_circle_v23.py
       - run: python3 scripts/audit_native_nondegeneracy.py
       - run: python3 scripts/audit_initialization.py
       - run: python3 scripts/audit_analog_fast_ad.py
@@ -157,6 +164,9 @@ jobs:
       - run: python paper/reciprocal_geometry_v21/draw_pandrosion.py
       - run: python research/fixed_circle_safeguard/verify.py
       - run: python research/fixed_circle_safeguard/draw.py
+      - run: python paper/reciprocal_geometry_v25/src/positioning/verify.py
+      - run: python paper/reciprocal_geometry_v25/src/uniform/verify.py
+      - run: python paper/reciprocal_geometry_v25/src/branch/protocol.py
       - run: python paper/reciprocal_geometry_v22/src/branch/verify.py
       - run: python paper/reciprocal_geometry_v22/src/branch/protocol.py
       - run: python paper/reciprocal_geometry_v22/src/branch/figure.py
@@ -181,6 +191,9 @@ jobs:
           tar xzf /tmp/tectonic.tar.gz -C /tmp
           sudo install /tmp/tectonic /usr/local/bin/tectonic
       # Keep this job name stable: main protection requires its status context.
+      - run: bash paper/reciprocal_geometry_v25/build.sh
+      - run: bash paper/reciprocal_geometry_v24/build.sh
+      - run: bash paper/reciprocal_geometry_v23/build.sh
       - run: bash paper/reciprocal_geometry_v22/build.sh
       - run: bash paper/reciprocal_geometry_v21/build.sh
       - run: bash paper/reciprocal_geometry_v20/build.sh
@@ -191,6 +204,9 @@ jobs:
         with:
           name: papers
           path: |
+            paper/reciprocal_geometry_v25/Reciprocal_Root_Geometry_v25.pdf
+            paper/reciprocal_geometry_v24/Reciprocal_Root_Geometry_v24.pdf
+            paper/reciprocal_geometry_v23/Reciprocal_Root_Geometry_v23.pdf
             paper/reciprocal_geometry_v22/Reciprocal_Root_Geometry_v22.pdf
             paper/reciprocal_geometry_v21/Reciprocal_Root_Geometry_v21.pdf
             paper/reciprocal_geometry_v20/Reciprocal_Root_Geometry_v20.pdf

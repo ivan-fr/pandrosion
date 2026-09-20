@@ -68,6 +68,7 @@ import LeanMath.Papers.RectangleDynamics
 import LeanMath.Papers.RectangleFixedCircle
 import LeanMath.Papers.RectangleCircleSafeguard
 import LeanMath.Papers.RectangleFixedCircleBranch
+import LeanMath.Papers.RectangleFixedCircleTheorem43
 import LeanMath.Papers.RectangleFixedCircleStereo
 import LeanMath.Papers.RectangleGeometry
 import LeanMath.Papers.RectangleNewton
