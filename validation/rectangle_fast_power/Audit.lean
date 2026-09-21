@@ -23,3 +23,12 @@ import LeanMath.Papers.RectangleFastPower
 #print axioms LeanMath.Papers.RectangleFastPower.fastAK_converges
 #print axioms LeanMath.Papers.RectangleFastPower.fastAD_converges
 #print axioms LeanMath.Papers.RectangleFastPower.fastProjective_converges
+#print axioms LeanMath.Papers.RectangleFastPower.copyLambda_incidence
+#print axioms LeanMath.Papers.RectangleFastPower.copyLambda_unique
+#print axioms LeanMath.Papers.RectangleFastPower.multiplierLambda_transverse
+#print axioms LeanMath.Papers.RectangleFastPower.joinLambda_distinct
+#print axioms LeanMath.Papers.RectangleFastPower.mulLambda_incidence
+#print axioms LeanMath.Papers.RectangleFastPower.geometricMulLambda_R
+#print axioms LeanMath.Papers.RectangleFastPower.geometricMulLambda_invariant
+#print axioms LeanMath.Papers.RectangleFastPower.geometricPowerLambda_eq
+#print axioms LeanMath.Papers.RectangleFastPower.geometricPowerLambda_readout

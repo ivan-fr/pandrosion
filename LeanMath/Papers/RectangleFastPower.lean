@@ -87,6 +87,99 @@ theorem geometricMul_R (W H a b : ℝ) (hH : H ≠ 0) :
   rw [copy_unique W H a hH]
   exact rectangle_mul_readout W H a b hH
 
+/-! A prepared fan may have any nonzero horizontal offset. Both outputs below
+are actual line intersections. Choosing a fan changes no encoded product. -/
+def unitLambda (W H lambda : ℝ) : Point := (W + lambda, H)
+def XtopLambda (W H lambda q : ℝ) : Point := (W + lambda*q, H)
+def transferLambda (W H lambda : ℝ) := join (unitLambda W H lambda) (W, 0)
+def multiplierLambda (W H lambda a b : ℝ) :=
+  parallel (join (unitLambda W H lambda) (R W H b)) (XtopLambda W H lambda a)
+def geometricMulLambda (W H lambda : ℝ) (P Q : Point) : Point :=
+  let T := meet (parallel (transferLambda W H lambda) P) (horizontal H)
+  meet (parallel (join (unitLambda W H lambda) Q) T) (vertical W)
+
+theorem copyLambda_incidence (W H lambda q : ℝ) :
+    On (parallel (transferLambda W H lambda) (R W H q)) (XtopLambda W H lambda q) ∧
+    On (horizontal H) (XtopLambda W H lambda q) := by
+  constructor <;> dsimp [On, parallel, transferLambda, join, unitLambda, R,
+    XtopLambda, horizontal] <;> ring
+
+theorem copyLambda_unique (W H lambda q : ℝ) (hH : H ≠ 0) :
+    meet (parallel (transferLambda W H lambda) (R W H q)) (horizontal H) =
+      XtopLambda W H lambda q := by
+  apply intersection_unique _ _ _ _ _ (meet_on _ _ _) (copyLambda_incidence W H lambda q)
+  all_goals simpa [parallel, transferLambda, join, unitLambda, horizontal] using hH
+
+theorem multiplierLambda_transverse (W H lambda a b : ℝ) (hlambda : lambda ≠ 0) :
+    (multiplierLambda W H lambda a b).a*(vertical W).b -
+      (vertical W).a*(multiplierLambda W H lambda a b).b ≠ 0 := by
+  simpa [multiplierLambda, parallel, join, unitLambda, R, vertical] using hlambda
+
+theorem joinLambda_distinct (W H lambda b : ℝ) (hlambda : lambda ≠ 0) :
+    unitLambda W H lambda ≠ R W H b := by
+  intro h
+  have he := congrArg Prod.fst h
+  dsimp [unitLambda, R] at he
+  exact hlambda (by linarith)
+
+theorem mulLambda_incidence (W H lambda a b : ℝ) :
+    On (multiplierLambda W H lambda a b) (R W H (a*b)) ∧
+    On (vertical W) (R W H (a*b)) := by
+  constructor <;> dsimp [On, multiplierLambda, parallel, join, unitLambda, R,
+    XtopLambda, vertical] <;> ring
+
+theorem geometricMulLambda_R (W H lambda a b : ℝ) (hH : H ≠ 0)
+    (hlambda : lambda ≠ 0) :
+    geometricMulLambda W H lambda (R W H a) (R W H b) = R W H (a*b) := by
+  dsimp [geometricMulLambda]
+  rw [copyLambda_unique W H lambda a hH]
+  exact intersection_unique _ _ (multiplierLambda_transverse W H lambda a b hlambda) _ _
+    (meet_on _ _ (multiplierLambda_transverse W H lambda a b hlambda))
+    (mulLambda_incidence W H lambda a b)
+
+theorem geometricMulLambda_invariant (W H lambda mu a b : ℝ) (hH : H ≠ 0)
+    (hlambda : lambda ≠ 0) (hmu : mu ≠ 0) :
+    geometricMulLambda W H lambda (R W H a) (R W H b) =
+      geometricMulLambda W H mu (R W H a) (R W H b) := by
+  rw [geometricMulLambda_R W H lambda a b hH hlambda,
+    geometricMulLambda_R W H mu a b hH hmu]
+
+-- The fan selector may vary with the recursion node; no optimality assumption is needed.
+def geometricPowerLambda (W H s : ℝ) (fan : ℕ → ℝ) (n : ℕ) : Point :=
+  if n = 0 then R W H 1 else if n = 1 then R W H s else
+    let Q := geometricPowerLambda W H s fan (n/2)
+    let Q₂ := geometricMulLambda W H (fan (2*n)) Q Q
+    if n%2 = 0 then Q₂ else geometricMulLambda W H (fan (2*n+1)) Q₂ (R W H s)
+termination_by n
+
+theorem geometricPowerLambda_eq (W H s : ℝ) (fan : ℕ → ℝ) (n : ℕ)
+    (hH : H ≠ 0) (hfan : ∀ k, fan k ≠ 0) :
+    geometricPowerLambda W H s fan n = R W H (s^n) := by
+  induction n using Nat.strong_induction_on with
+  | h n ih =>
+    rw [geometricPowerLambda]
+    by_cases h0 : n = 0
+    · simp [h0]
+    rw [if_neg h0]
+    by_cases h1 : n = 1
+    · simp [h1]
+    rw [if_neg h1, ih (n/2) (Nat.div_lt_self (by omega) (by omega))]
+    dsimp only
+    rw [geometricMulLambda_R W H _ _ _ hH (hfan _)]
+    split_ifs with he
+    · congr 1
+      rw [← pow_add]
+      congr 1
+      omega
+    · rw [geometricMulLambda_R W H _ _ _ hH (hfan _), ← pow_add, ← pow_succ]
+      have hn : n/2+n/2+1=n := by omega
+      rw [hn]
+
+theorem geometricPowerLambda_readout (W H s : ℝ) (fan : ℕ → ℝ) (n : ℕ)
+    (hH : H ≠ 0) (hfan : ∀ k, fan k ≠ 0) :
+    readout H (geometricPowerLambda W H s fan n) = s^n := by
+  rw [geometricPowerLambda_eq W H s fan n hH hfan, readout_R W H _ hH]
+
 def geometricPower (W H s : ℝ) (n : ℕ) : Point :=
   if n = 0 then R W H 1 else if n = 1 then R W H s else
     let Q := geometricPower W H s (n/2)

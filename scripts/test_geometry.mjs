@@ -49,3 +49,39 @@ for(const mode of ['AK','AD','projective','arc','AKfast','ADfast','projectiveFas
  assert(Math.abs(affine(g.points.E)[1])<1e-10);
 }
 console.log('PASS: 72 native/fast s=1 and harmless fixed-vertex coincidence cases');
+
+// Parameterized products are computed by incidences, checked independently here.
+const {fastMultiply,fastTopPoint,fanRatios,lineAngle}=await import('../docs/geometry.js');
+const {findInitialState,residualInterval,inResidualBand}=await import('../docs/initialization.js');
+let lambdaCases=0,spreadCases=0;
+for(const ratio of [.4,.7,1.2,2,3.5])for(const a of [.2,.5,.8,1,1.2,2,5])for(const b of [.2,.5,.8,1,1.2,2,5])for(const [W,H] of [[2,4],[7,11]]){
+ const R=q=>[W,H*(1-q),1],m=fastMultiply(W,H,ratio*H,R(a),R(b));
+ assert(Math.abs((1-affine(m.result)[1]/H)-a*b)<2e-12*Math.max(1,a*b));
+ assert(Math.hypot(...affine(m.top).map((v,i)=>v-affine(fastTopPoint(W,H,ratio*H,a))[i]))<1e-11);
+ lambdaCases++;
+}
+for(const p of [3,10,13,32,1024,65536,1000000])for(const mode of ['AKfast','ADfast','projectiveFast','arcFast'])for(const t of [.3,.8,1,1.2,3]){
+ const s=Math.exp(Math.log(t/2)/p),spread=construct(mode,p,2,s,'compact',2,4,'spread'),classic=construct(mode,p,2,s);
+ assert(Math.abs(spread.value-classic.value)<2e-7);assert.equal(spread.t,classic.t);
+ assert.equal(spread.multiplications,binaryCount(p));assert.equal(spread.modules.length,binaryCount(p)+1);
+ assert.equal(spread.modules.at(-1).kind,'correction');
+ assert.equal(spread.counts.P,2*binaryCount(p)+2); // Each independently routed module copies its input.
+ for(const m of spread.modules.slice(0,-1)){
+  assert.equal(m.end-m.start,3);assert.equal(m.candidates.length,fanRatios(p).length);
+  assert(m.candidates.every(c=>m.score<=c.score));
+  assert(fanRatios(p).includes(m.bank.ratio));assert(m.bank.lambda>0);
+ }
+ spreadCases++;
+}
+assert.equal(binaryCount(1000000),25);
+assert.throws(()=>fastMultiply(2,4,0,[2,1,1],[2,2,1]));
+assert.throws(()=>construct('AKfast',10,2,1,'compact',2,4,'unknown'));
+const demoStart=findInitialState(10,2000,'wide');assert(inResidualBand(residualInterval(10,2000,demoStart.c),'wide'));
+const demo=construct('AKfast',10,2000,demoStart.c,'compact',.02,4,'spread');
+assert.deepEqual(demo.modules.slice(0,-1).map(m=>m.to),[2,4,5,10]);
+assert.equal(demo.binary,'1010');assert.equal(demo.multiplications,4);
+assert(Math.abs(1-affine(demo.points.E)[1]/4-demoStart.c**10)<1e-13);
+const fanJoins=demo.modules.slice(0,-1).map(m=>demo.ops[m.start+1].line);
+assert(lineAngle(fanJoins[0],fanJoins[1])>10,'First two demo squares need distinct directions');
+assert(new Set(demo.modules.slice(0,-1).map(m=>m.bank.name)).size>=2);
+console.log(JSON.stringify({status:'PASS',lambda_products:lambdaCases,spread_classic_comparisons:spreadCases,paper_demo_start:demoStart.c,million_multiplications:25}));

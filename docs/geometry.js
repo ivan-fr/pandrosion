@@ -30,8 +30,68 @@ export function correction(mode,p,t){
  if(disc<=0)throw Error('The residual is outside the transverse real domain of the circle. Choose a closer starting point.');
  return t<=1?(A-t*C)/(B*(1-t)+Math.sqrt(disc)):(Math.sqrt(disc)-B*(1-t))/(t*A-C);
 }
-export function construct(mode,p,X,s,chart='compact',W=2,H=4){
+// A fan offset changes only the route between the same right-rail encodings.
+export const parallelThrough=(line,q)=>[line[0]*q[2],line[1]*q[2],-line[0]*q[0]-line[1]*q[1]];
+export const fastUnit=(W,H,lambda)=>point(W+lambda,H);
+export const fastTopPoint=(W,H,lambda,q)=>point(W+lambda*q,H); // specification, never the constructed output
+export function fastCopy(W,H,lambda,input){
+ if(!(H>0&&lambda>0&&Number.isFinite(H+lambda)))throw Error('A positive finite height and fan offset are required.');
+ const unit=fastUnit(W,H,lambda),transfer=cross(unit,point(W,0));
+ const copyLine=parallelThrough(transfer,input),top=cross(copyLine,[0,1,-H]);
+ return {unit,transfer,copyLine,top};
+}
+export function fastMultiply(W,H,lambda,a,b){
+ const copy=fastCopy(W,H,lambda,a),join=cross(copy.unit,b),productLine=parallelThrough(join,copy.top);
+ return {...copy,join,productLine,result:cross(productLine,[1,0,-W])};
+}
+export const fanRatios=p=>p<=32?[.4,1.2,3.5]:[.4,.7,1.2,2,3.5];
+export function lineAngle(a,b){
+ const sine=Math.abs(a[0]*b[1]-a[1]*b[0])/(Math.hypot(a[0],a[1])*Math.hypot(b[0],b[1]));
+ return Math.asin(Math.min(1,sine))*180/Math.PI;
+}
+// All lengths are normalized by H. Uniform scaling cannot improve this score.
+// Exact aliases and intentional parallel lines are excluded from the minima.
+export function paperMetrics(points,lines,H,centers=[],circles=[]){
+ const xy=points.map(affine).filter(Boolean),xs=xy.map(q=>q[0]/H),ys=xy.map(q=>q[1]/H);
+ for(const c of circles){xs.push((c.center[0]-c.radius)/H,(c.center[0]+c.radius)/H);ys.push((c.center[1]-c.radius)/H,(c.center[1]+c.radius)/H);}
+ let minSeparation=Infinity,minAngle=Infinity,quasiCoincidences=0,aliases=0;
+ for(let i=0;i<xy.length;i++)for(let j=0;j<i;j++){
+  const d=Math.hypot(xy[i][0]-xy[j][0],xy[i][1]-xy[j][1])/H;
+  if(d<=1e-12){aliases++;continue;}minSeparation=Math.min(minSeparation,d);if(d<.02)quasiCoincidences++;
+ }
+ const ls=lines.filter(Boolean);
+ for(let i=0;i<ls.length;i++)for(let j=0;j<i;j++){
+  const angle=lineAngle(ls[i],ls[j]);if(angle<=1e-9)continue;
+  minAngle=Math.min(minAngle,angle);if(angle<10)quasiCoincidences++;
+ }
+ const width=Math.max(...xs)-Math.min(...xs),height=Math.max(...ys)-Math.min(...ys);
+ const maxCenterDistance=Math.max(0,...centers.map(affine).filter(Boolean).map(q=>Math.hypot(q[0],q[1])/H));
+ const score=2*Math.log1p(width+height)+Math.log1p(maxCenterDistance)+
+  Math.log1p(1/Math.max(minSeparation,1e-12))+2*Math.max(0,Math.log(10/Math.max(minAngle,1e-9)))+.05*quasiCoincidences;
+ return {width,height,minAngle,minSeparation,maxCenterDistance,quasiCoincidences,aliases,score};
+}
+function chooseFan(W,H,banks,a,b,history,previous){
+ const rails=[[1,0,-W],[0,1,-H]],corners=[point(0,0),point(W,H),point(W,0)];
+ const candidates=banks.map(bank=>{
+  const geometry=fastMultiply(W,H,bank.lambda,a,b);
+  const metrics=paperMetrics([...corners,a,b,geometry.unit,geometry.top,geometry.result],
+   [...rails,geometry.transfer,geometry.copyLine,geometry.join,geometry.productLine],H,[geometry.unit]);
+  // Compare with prior multiplication directions, excluding intentional intra-module parallels.
+  const angles=history.map(l=>lineAngle(l,geometry.join));
+  const angle=angles.length?Math.min(...angles):90;
+  const recent=history.length?lineAngle(history.at(-1),geometry.join):90;
+  const score=metrics.score+2*Math.max(0,Math.log(10/Math.max(angle,.01)))+
+   4*Math.max(0,Math.log(15/Math.max(recent,.01)))+(previous===bank.name?3:0);
+  return {bank,geometry,metrics,score};
+ });
+ candidates.sort((a,b)=>a.score-b.score||a.bank.ratio-b.bank.ratio);
+ return {...candidates[0],candidates:candidates.map(({bank,score})=>({bank:bank.name,score}))};
+}
+
+export function construct(mode,p,X,s,chart='compact',W=2,H=4,powerLayout='classic'){
  const requestedMode=mode,fast=!!fastModes[mode];mode=baseMode(mode);
+ if(!['classic','spread'].includes(powerLayout))throw Error('Unknown power layout.');
+ const modules=[],banks=[];let powerEnd=0;
  if(!methods[requestedMode]||!Number.isSafeInteger(p)||p<3||p>(fast?1_000_000:32)||!(X>0&&s>0)||!Number.isFinite(X+s))throw Error('Choose an integer p from 3 to 32 (1,000,000 in binary mode), with positive X and s.');
  if(!(W>0&&H>0&&Number.isFinite(W+H)))throw Error('Positive finite dimensions are required.');
  if(!['AK','AD','projective','arc'].includes(mode)&&(W!==2||H!==4))throw Error('These dimensions are available only for the four rectangle methods.');
@@ -44,23 +104,44 @@ export function construct(mode,p,X,s,chart='compact',W=2,H=4){
  fixed.push({line:diagonal,label:'OB'});
  const op=(label,kind,line,names=[])=>{counts[kind]++;ops.push({label,kind,line,names});for(const n of names)birth[n]=ops.length;};
  const meet=(a,b,rail,name,label)=>{const l=cross(points[a],points[b]);add(name,cross(l,rail),ops.length+1);op(label||`${a}${b} → ${name}`,'J',l,[name]);return name;};
- const parallel=(l,q)=>[l[0]*q[2],l[1]*q[2],-l[0]*q[0]-l[1]*q[1]];
+ const parallel=parallelThrough;
  if(['AK','AD','projective','arc'].includes(mode)){
   add('M',point(0,H*(1-1/X)),0);
-  if(fast){
+  if(fast&&powerLayout==='spread'){
+   const ratios=fanRatios(p);
+   for(const [i,ratio] of ratios.entries()){
+    const name=String.fromCharCode(65+i),unit='U'+name,lambda=ratio*H;
+    add(unit,fastUnit(W,H,lambda),0);banks.push({name,unit,lambda,ratio,index:i});
+   }
+   let accumulator='P',exponent=1;const history=[];
+   const multiply=(square)=>{
+    const input=accumulator,other=square?input:'P',from=exponent,to=square?2*from:from+1;
+    const selected=chooseFan(W,H,banks,points[input],points[other],history,modules.at(-1)?.bank.name);
+    const {bank,geometry:q}=selected,serial=modules.length+1,start=ops.length,copy='Xmul'+serial,result='Rmul'+serial;
+    add(copy,q.top,start+1);op(`Copy accumulator using Fan ${bank.name} → ${copy}`,'P',q.copyLine,[copy]);
+    op(`Join Fan ${bank.name} to ${square?'accumulator':'stored s'}`,'J',q.join);
+    add(result,q.result,ops.length+1);op(`Parallel through the copy → R(s^${to})`,'P',q.productLine,[result]);
+    for(let i=start;i<ops.length;i++)ops[i].bank=bank.index;
+    modules.push({kind:square?'square':'multiply',from,to,input,other,copy,result,bank,start,end:ops.length,
+     fixed:[{line:q.transfer,label:'Fan '+bank.name}],candidates:selected.candidates,score:selected.score});
+    history.push(q.join);accumulator=result;exponent=to;
+   };
+   for(const bit of p.toString(2).slice(1)){multiply(true);if(bit==='1')multiply(false);}
+   add('E',points[accumulator]);
+  }else if(fast){
    add('Ux',point(3*W,H),0);const transfer=cross(points.Ux,points.B);fixed.push({line:transfer,label:'U×B'});
    const copy=(r,name)=>{const l=parallel(transfer,points[r]);add(name,cross(l,top),ops.length+1);op(`Copy ${r} onto the upper rail → ${name}`,'P',l,[name]);return name;};
-   let topAccumulator=copy('P','Xs'),accumulator='P',serial=0;
+   banks.push({name:'×',unit:'Ux',lambda:2*W,ratio:2*W/H,index:0});
+   let moduleStart=0,topAccumulator=copy('P','Xs'),accumulator='P',serial=0,exponent=1;
    const multiply=(a,b)=>{serial++;const l=cross(points.Ux,points[b]);op(`Multiplication ${serial}: join U× to ${b}`,'J',l);const m=parallel(l,points[a]),name='Rmul'+serial;add(name,cross(m,right),ops.length+1);op(`Parallel through ${a} → ${name}`,'P',m,[name]);return name;};
    const bits=p.toString(2).slice(1);
    for(let i=0;i<bits.length;i++){
-    accumulator=multiply(topAccumulator,accumulator);
-    if(bits[i]==='1')accumulator=multiply('Xs',accumulator);
+    const input=accumulator,from=exponent;accumulator=multiply(topAccumulator,accumulator);exponent*=2;
+    modules.push({kind:'square',from,to:exponent,input,other:input,copy:topAccumulator,result:accumulator,bank:banks[0],start:moduleStart,end:ops.length,fixed:[{line:transfer,label:'U×B'}]});moduleStart=ops.length;
+    if(bits[i]==='1'){const other=accumulator;accumulator=multiply('Xs',accumulator);modules.push({kind:'multiply',from:exponent,to:exponent+1,input:other,other:'P',copy:'Xs',result:accumulator,bank:banks[0],start:moduleStart,end:ops.length,fixed:[{line:transfer,label:'U×B'}]});exponent++;moduleStart=ops.length;}
     if(i<bits.length-1)topAccumulator=copy(accumulator,'Xmul'+serial);
    }
    add('E',points[accumulator]);
-   const power=Math.exp(p*Math.log(s)),read=1-affine(points.E)[1]/H;
-   if(!(power>0)||!Number.isFinite(power)||Math.abs(read/power-1)>2e-7)throw Error('Ill-conditioned geometric power: renormalize.');
   }else{
   let horizontal=[0,1,-H*(1-s)];add('L1',cross(horizontal,left),1);add('B1',cross(horizontal,diagonal),1);op('Horizontal through P: L₁ and B₁','P',horizontal,['L1','B1']);
   const red=cross(points.L1,points.B);op('Join L₁ to B','J',red);let prev='B1';
@@ -71,6 +152,11 @@ export function construct(mode,p,X,s,chart='compact',W=2,H=4){
    if(i===p){add('E',cross(horizontal,right),ops.length+1);names.push('E');}
    op(`Horizontal through ${li}`,'P',horizontal,names);prev=bi;
   }
+  }
+  if(fast){
+   const power=Math.exp(p*Math.log(s)),read=1-affine(points.E)[1]/H;
+   if(!(power>0)||!Number.isFinite(power)||Math.abs(read/power-1)>2e-7)throw Error('Ill-conditioned geometric power: renormalize.');
+   powerEnd=ops.length;
   }
   let support;
   if(mode==='AK'){add('K',point(W*(1-X/p),0),0);support=cross(points.A,points.K);fixed.push({line:support,label:'AK'});}
@@ -118,11 +204,12 @@ export function construct(mode,p,X,s,chart='compact',W=2,H=4){
    });
   }
  }
+ if(fast)modules.push({kind:'correction',start:powerEnd,end:ops.length,result:'Pnext',input:'E',fixed:fixed.filter(f=>f.label!=='U×B')});
  const end=affine(points.Pnext);if(!end)throw Error('Final readout at infinity.');const value=1-end[1]/H,discrepancy=Math.abs(value-expected)/Math.max(1,Math.abs(expected));
  if(!(value>0)||!Number.isFinite(value+discrepancy)||discrepancy>2e-7)throw Error('The configuration is too ill-conditioned for browser precision. Renormalize or change the chart.');
  const infinite=Object.entries(points).filter(([,v])=>!affine(v)).map(([n])=>n);
  if(infinite.length)warnings.push('Projective continuation: '+infinite.join(', ')+' at infinity. The cost of the finite protocol does not apply literally.');
- return {W,H,mode:requestedMode,baseMode:mode,fast,multiplications:fast?binaryCount(p):null,binary:p.toString(2),p,X,s,t,logt,chart,points,birth,ops,circles,fixed,counts,value,expected,discrepancy,warnings,transversality,root:Math.exp(-Math.log(X)/p)};
+ return {W,H,powerLayout,modules,banks,mode:requestedMode,baseMode:mode,fast,multiplications:fast?binaryCount(p):null,binary:p.toString(2),p,X,s,t,logt,chart,points,birth,ops,circles,fixed,counts,value,expected,discrepancy,warnings,transversality,root:Math.exp(-Math.log(X)/p)};
 }
 function validInput(p,X,s){return Number.isSafeInteger(p)&&p>=3&&p<=1_000_000&&X>0&&s>0&&Number.isFinite(X)&&Number.isFinite(s);}
 function scaledCandidate(p,X,s,k){const c=2**k,lx=Math.log(X)+p*k*Math.LN2,ls=Math.log(s)-k*Math.LN2;const nextX=k===0?X:Math.exp(lx),nextS=k===0?s:Math.exp(ls);if(!(c>0&&Number.isFinite(c)&&validInput(p,nextX,nextS)))return null;return {X:nextX,s:nextS,c,k};}
@@ -152,10 +239,10 @@ export function geometryScore(g){
  for(const t of g.transversality)score+=Math.max(0,-Math.log10(t)-3);
  return score;
 }
-export function renormalizeOptimal(mode,p,X,s,chart='compact',W=2,H=4){
+export function renormalizeOptimal(mode,p,X,s,chart='compact',W=2,H=4,powerLayout='classic'){
  if(!validInput(p,X,s))throw Error('Invalid parameters.');const ks=new Set([0]);
  for(const center of [Math.ceil(1-Math.log2(X)/p),Math.round(Math.log2(s))])for(let d=-10;d<=10;d++)ks.add(center+d);
- const candidates=[];for(const k of ks){const r=scaledCandidate(p,X,s,k);if(!r)continue;try{const g=construct(mode,p,r.X,r.s,chart,W,H);candidates.push({...r,score:geometryScore(g),discrepancy:g.discrepancy});}catch{/* Invalid real branch or unrepresentable geometry: exclude candidate. */}}
+ const candidates=[];for(const k of ks){const r=scaledCandidate(p,X,s,k);if(!r)continue;try{const g=construct(mode,p,r.X,r.s,chart,W,H,powerLayout);candidates.push({...r,score:geometryScore(g),discrepancy:g.discrepancy});}catch{/* Invalid real branch or unrepresentable geometry: exclude candidate. */}}
  if(!candidates.length)throw Error('None of the tested dyadic scales allows a reliable construction in double precision.');
  candidates.sort((a,b)=>a.score-b.score||Math.abs(a.k)-Math.abs(b.k));return {...candidates[0],candidateCount:candidates.length,testedCount:ks.size,rawScore:candidates.find(r=>r.k===0)?.score,reason:'Minimum score among the tested dyadic scales.'};
 }
@@ -168,10 +255,12 @@ export function rectangleLayoutScore(g){
  const dx=Math.max(...xs)-Math.min(...xs),dy=Math.max(...ys)-Math.min(...ys);
  return Math.abs(Math.log(dx/dy/1.25));
 }
-export function adaptRectangle(mode,p,X,s,chart='compact',W=2,H=4){
+export function adaptRectangle(mode,p,X,s,chart='compact',W=2,H=4,powerLayout='classic'){
  const candidates=[];
- for(const w of new Set([W,...[.25,.5,1,2,4,8,16].map(r=>r*H)])){
-  try{const g=construct(mode,p,X,s,chart,w,H);candidates.push({W:w,H,score:rectangleLayoutScore(g)});}catch{}
+ // Include a narrow genuine rectangle when a large original X places K far away.
+ const supportWidth=baseMode(mode)==='AK'?H*p/Math.max(p,X):W;
+ for(const w of new Set([W,supportWidth,...[.25,.5,1,2,4,8,16].map(r=>r*H)])){
+  try{const g=construct(mode,p,X,s,chart,w,H,powerLayout);candidates.push({W:w,H,score:rectangleLayoutScore(g)});}catch{}
  }
  if(!candidates.length)throw Error('None of the tested rectangles allows a reliable construction.');
  candidates.sort((a,b)=>a.score-b.score||Math.abs(Math.log(a.W/W))-Math.abs(Math.log(b.W/W)));
