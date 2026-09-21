@@ -158,11 +158,11 @@ function updatePaper(){
   $('module-instructions').replaceChildren(...moduleInstructions(g,m).map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
   $('module-coordinates').textContent=`Keep the same coordinates: W/H = ${fmt(g.W/g.H)}. `+(m.bank?`Fan ${m.bank.name}: λ/H = ${fmt(m.bank.ratio)}. `:'')+
    [m.input,m.copy,m.result].filter(Boolean).map(n=>{const xy=affine(g.points[n]);return `${scene.labels[n]||n}: (${xy.map(v=>fmt(v/g.H)).join(', ')}) H`;}).join(' · ');
-  $('module-aliases').textContent=scene.metrics.aliases?'Some named points coincide (for example when s = 1); one mark can carry several roles. Tiny distinct gaps are reported below.':'Carry the result on the right rail into the next module. Each page keeps equal x/y scale.';
+  $('module-aliases').textContent=scene.metrics.aliases?'Some named points coincide or are below display resolution. At s = 1, the power points coincide exactly. Verify other tiny gaps before choosing a paper scale.':'Carry the result on the right rail into the next module. Each page keeps equal x/y scale.';
  }
  const metrics=modular?scene.metrics:paperMetrics(Object.values(g.points),[...g.fixed,...g.ops].map(o=>o.line).concat([[1,0,-g.W],[0,1,-g.H]]),g.H,g.banks.map(b=>g.points[b.unit]).concat(['K','F','G','Z'].filter(n=>g.points[n]).map(n=>g.points[n])),g.circles);
  const metric=(n,u='')=>Number.isFinite(n)?`${n<.01?n.toExponential(2):n.toFixed(2)}${u}`:'No distinct pair';
- const entries=[['Minimum line angle',metric(metrics.minAngle,'°')],['Minimum point separation',metric(metrics.minSeparation,' H')],['Required normalized width',metric(metrics.width,' H')],['Required normalized height',metric(metrics.height,' H')],['Maximum center distance',metric(metrics.maxCenterDistance,' H')],['Near-coincidence / small-angle pairs',String(metrics.quasiCoincidences)]];
+ const entries=[['Minimum line angle',metric(metrics.minAngle,'°')],['Minimum point separation',(metrics.unresolvedPairs?'Unresolved gaps ≤ 10⁻¹² H; resolved minimum: ':'')+metric(metrics.minSeparation,' H')],['Required normalized width',metric(metrics.width,' H')],['Required normalized height',metric(metrics.height,' H')],['Maximum center distance',metric(metrics.maxCenterDistance,' H')],['Near-coincidence / small-angle pairs',String(metrics.quasiCoincidences)]];
  $('paper-measurements').replaceChildren(...entries.flatMap(([name,value])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=name;dd.textContent=value;return [dt,dd];}));
  $('paper-size').textContent='Suggested paper size: '+paperRecommendation(metrics);
 }

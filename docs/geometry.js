@@ -54,10 +54,10 @@ export function lineAngle(a,b){
 export function paperMetrics(points,lines,H,centers=[],circles=[]){
  const xy=points.map(affine).filter(Boolean),xs=xy.map(q=>q[0]/H),ys=xy.map(q=>q[1]/H);
  for(const c of circles){xs.push((c.center[0]-c.radius)/H,(c.center[0]+c.radius)/H);ys.push((c.center[1]-c.radius)/H,(c.center[1]+c.radius)/H);}
- let minSeparation=Infinity,minAngle=Infinity,quasiCoincidences=0,aliases=0;
+ let minSeparation=Infinity,minAngle=Infinity,quasiCoincidences=0,aliases=0,unresolvedPairs=0;
  for(let i=0;i<xy.length;i++)for(let j=0;j<i;j++){
   const d=Math.hypot(xy[i][0]-xy[j][0],xy[i][1]-xy[j][1])/H;
-  if(d<=1e-12){aliases++;continue;}minSeparation=Math.min(minSeparation,d);if(d<.02)quasiCoincidences++;
+  if(d<=1e-12){aliases++;if(d>0)unresolvedPairs++;continue;}minSeparation=Math.min(minSeparation,d);if(d<.02)quasiCoincidences++;
  }
  const ls=lines.filter(Boolean);
  for(let i=0;i<ls.length;i++)for(let j=0;j<i;j++){
@@ -68,7 +68,7 @@ export function paperMetrics(points,lines,H,centers=[],circles=[]){
  const maxCenterDistance=Math.max(0,...centers.map(affine).filter(Boolean).map(q=>Math.hypot(q[0],q[1])/H));
  const score=2*Math.log1p(width+height)+Math.log1p(maxCenterDistance)+
   Math.log1p(1/Math.max(minSeparation,1e-12))+2*Math.max(0,Math.log(10/Math.max(minAngle,1e-9)))+.05*quasiCoincidences;
- return {width,height,minAngle,minSeparation,maxCenterDistance,quasiCoincidences,aliases,score};
+ return {width,height,minAngle,minSeparation,maxCenterDistance,quasiCoincidences,aliases,unresolvedPairs,score};
 }
 function chooseFan(W,H,banks,a,b,history,previous){
  const rails=[[1,0,-W],[0,1,-H]],corners=[point(0,0),point(W,H),point(W,0)];

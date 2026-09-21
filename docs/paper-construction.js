@@ -42,6 +42,8 @@ export function moduleInstructions(g,m){
 // Heuristic targets: 10 mm between distinct points, 10 degrees between nonparallel lines.
 // No sheet size can fix an angular shortfall by uniformly magnifying the drawing.
 export function paperRecommendation(metrics){
+ // An almost coincident pair may be a real tiny gap or roundoff at an exact alias.
+ if(metrics.unresolvedPairs>0)return 'Undetermined: some marks differ by less than 10⁻¹² H. Verify exact coincidences before choosing a sheet.';
  const {width,height,minSeparation,minAngle}=metrics;
  const mmPerUnit=Number.isFinite(minSeparation)?10/minSeparation:40;
  const sizes=[['A4',190,277],['A3',277,400],['A2',400,574]]; // 10 mm margins

@@ -143,6 +143,7 @@ minimum separation, maximum center distance from the origin, and a count of
 small-angle/near-point pairs. Lengths are divided by H. In the floating-point
 readability measurement, separations ≤10⁻¹² H and angles ≤10⁻⁹ degrees are treated
 as aliases/intentional parallels, not physical resolution certificates. The
+A nonzero sub-resolution gap suppresses the paper-size recommendation: the display cannot decide whether it is a true separation or roundoff at an exact alias. The
 near-point threshold is 0.02 H and the small-angle threshold is 10 degrees.
 The instructions explicitly explain coincident roles such as s=1.
 

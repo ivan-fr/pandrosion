@@ -47,3 +47,8 @@ assert.match(paperRecommendation({width:1,height:1,minSeparation:.1,minAngle:1})
 const aliases=paperMetrics([[0,0,1],[0,0,1],[1,0,1]],[[1,1,0],[1,1,1],[1,0,0]],1);
 assert.equal(aliases.aliases,1);assert.equal(aliases.minSeparation,1);assert(Math.abs(aliases.minAngle-45)<1e-10);
 console.log('PASS: modular frames, scale-invariant routing and honest paper-size recommendations');
+
+const unresolved=paperMetrics([[0,0,1],[1e-14,0,1],[1,1,1]],[[1,0,0],[0,1,0]],1);
+assert.equal(unresolved.unresolvedPairs,1);
+assert.match(paperRecommendation(unresolved),/^Undetermined/);
+console.log('PASS: sub-resolution gaps never receive a false paper-size recommendation');
