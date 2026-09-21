@@ -7,7 +7,7 @@ fs.mkdirSync(output,{recursive:true});
  proto.clearRect=function(...args){if(this.canvas.id==='overview')this.canvas.dataset.drawnLabels='[]';return clear.apply(this,args);};
  proto.fillText=function(text,...args){if(this.canvas.id==='overview'){const labels=JSON.parse(this.canvas.dataset.drawnLabels||'[]');labels.push(text);this.canvas.dataset.drawnLabels=JSON.stringify(labels);}return fill.call(this,text,...args);};
 });await page.goto(process.env.PREVIEW_URL || 'http://127.0.0.1:8765/');await page.waitForFunction(()=>document.getElementById('next-value').textContent!=='—');
-// Regression: the decentered arc must render smoothly with automatically selected proportions.
+// Regression: the decentered arc must render smoothly with the reference rectangle.
 await page.selectOption('#method','arc');await page.selectOption('#view','sphere');
 let drawn=JSON.parse(await page.locator('#overview').getAttribute('data-drawn-labels'));if(!drawn.includes('P')||!drawn.includes('P⁺'))throw Error('Missing priority readout labels');
 await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');drawn=JSON.parse(await page.locator('#overview').getAttribute('data-drawn-labels'));if(!drawn.includes('P')||drawn.includes('P⁺'))throw Error('Readout labels ignore construction stage');
@@ -28,10 +28,31 @@ for(const mode of ['AKfast','ADfast','projectiveFast','arcFast']){
  if(await page.locator('#target').inputValue()!=='500000')throw Error('Original target mutated');
  for(let i=0;i<15&&!await page.locator('#iterate').isDisabled();i++)await page.click('#iterate');
  if(await page.locator('#error').isVisible())throw Error('Automatic orbit failed');
- const answer=Number(await page.locator('#answer').textContent());if(Math.abs(answer/Math.exp(Math.log(500000)/1000000)-1)>2e-11)throw Error('Wrong original-unit root');
+ const root=Math.exp(Math.log(500000)/1000000),lower=Number(await page.locator('#ruler-value').getAttribute('data-lower')),upper=Number(await page.locator('#ruler-value').getAttribute('data-upper'));
+ if(!(lower<=root&&root<=upper))throw Error('Converged root outside the millimetre reading');
+ if(!/^\d+\.\d cm$/.test(await page.locator('#answer').textContent()))throw Error('Ruler must read to one millimetre');
 }
 await page.selectOption('#method','AKfast');await page.click('#iterate');await page.screenshot({path:`${output}/simple-wide.png`,fullPage:true});
 await page.setViewportSize({width:360,height:900});await page.screenshot({path:`${output}/simple-mobile.png`,fullPage:true});if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1))throw Error('Simple mobile overflow');await page.setViewportSize({width:1280,height:1000});
+// Physical length comes from AR; the root estimate uses the rounded length and AU.
+await page.locator('#degree').fill('3');await page.locator('#target').fill('2');await page.click('#calculate');
+for(let i=0;i<12&&!await page.locator('#iterate').isDisabled();i++)await page.click('#iterate');
+if(await page.locator('#answer').textContent()!=='1.3 cm'||!(await page.locator('#ruler-value').textContent()).endsWith('≈ 1.3'))throw Error('Wrong small-paper millimetre reading');
+if(await page.locator('#paper-scale option:checked').textContent()!=='4 × 2 cm')throw Error('Wrong reference rectangle');
+const beforeScale=[await page.locator('#state').inputValue(),await page.locator('#next-value').textContent(),await page.locator('#answer-label').textContent()];
+await page.locator('#readout-construction > summary').click();await page.screenshot({path:`${output}/ruler-small.png`,fullPage:true});
+await page.selectOption('#paper-scale','10');
+if(await page.locator('#answer').textContent()!=='12.6 cm'||!(await page.locator('#ruler-value').textContent()).endsWith('≈ 1.26'))throw Error('Wrong large-paper millimetre reading');
+if(await page.locator('#paper-scale option:checked').textContent()!=='40 × 20 cm'||!(await page.locator('#ruler-unit').textContent()).startsWith('AU = 10 cm'))throw Error('Physical unit did not scale');
+const afterScale=[await page.locator('#state').inputValue(),await page.locator('#next-value').textContent(),await page.locator('#answer-label').textContent()];
+if(JSON.stringify(beforeScale)!==JSON.stringify(afterScale))throw Error('Changing paper size advanced or changed the iteration');
+await page.screenshot({path:`${output}/ruler-large.png`,fullPage:true});
+await page.setViewportSize({width:360,height:900});await page.screenshot({path:`${output}/ruler-mobile.png`,fullPage:true});
+if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1))throw Error('Ruler mobile overflow');
+await page.emulateMedia({colorScheme:'dark'});await page.screenshot({path:`${output}/ruler-dark.png`,fullPage:true});
+await page.emulateMedia({colorScheme:'light'});await page.setViewportSize({width:1280,height:1000});
+await page.locator('#readout-construction > summary').click();await page.selectOption('#paper-scale','1');
+await page.locator('#target').fill('500000');await page.click('#calculate');
 // Original constructions are available with automatic preparation and their native degree limit.
 for(const mode of ['AK','AD','projective','arc']){
  await page.locator('#degree').fill('32');await page.selectOption('#method',mode);
@@ -59,7 +80,14 @@ for(const mode of ['halley','pade'])for(const p of [3,7,16]){
 }
 await page.locator('#degree').fill('3');await page.selectOption('#method','AKfast');
 await page.locator('#advanced > summary').click();await page.locator('#exploration').check();await page.click('#reset');
-for(const mode of ['AK','AD','projective','arc','halley','pade','circle','AKfast','ADfast','projectiveFast','arcFast']){await page.selectOption('#method',mode);if(await page.locator('#error').isVisible())throw Error(mode+': '+await page.locator('#error').innerText());await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');await page.click('#forward');await page.click('#iterate');await page.click('#reset');}
+for(const mode of ['AK','AD','projective','arc','halley','pade','circle','AKfast','ADfast','projectiveFast','arcFast']){
+ await page.selectOption('#method',mode);if(await page.locator('#error').isVisible())throw Error(mode+': '+await page.locator('#error').innerText());
+ await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');
+ if(await page.locator('#answer').textContent()!=='—'||await page.locator('#ruler-value').getAttribute('data-lower')!==null)throw Error('Ruler exposes an unconstructed point or stale reading');
+ await page.locator('#stage').fill(await page.locator('#stage').getAttribute('max'));await page.locator('#stage').dispatchEvent('input');
+ if(!/^\d+\.\d cm$/.test(await page.locator('#answer').textContent()))throw Error('Missing completed manual readout: '+mode);
+ await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');await page.click('#forward');await page.click('#iterate');await page.click('#reset');
+}
 await page.selectOption('#method','circle');await page.selectOption('#chart','uniform');await page.screenshot({path:`${output}/gallery-uniform.png`,fullPage:true});await page.selectOption('#chart','compact');await page.selectOption('#view','sphere');await page.locator('#yaw').fill('50');await page.locator('#yaw').dispatchEvent('input');await page.screenshot({path:`${output}/gallery-sphere.png`,fullPage:true});
 await page.selectOption('#example','initial');if(!await page.locator('#warning').isVisible())throw Error('Missing infinity warning');if(await page.locator('#view').inputValue()!=='sphere')throw Error('No automatic sphere');await page.selectOption('#view','plane');await page.click('#iterate');if(await page.locator('#view').inputValue()!=='plane')throw Error('Manual view overridden');await page.selectOption('#example','outside');if(!await page.locator('#error').isVisible())throw Error('Missing domain error');await page.click('#reset');await page.click('#normalize');if(await page.locator('#error').isVisible())throw Error('Normalization failed');
 await page.selectOption('#method','AKfast');await page.locator('#degree').fill('1024');await page.locator('#state').fill(String(Math.exp(Math.log(.4)/1024)));await page.locator('#state').dispatchEvent('change');if(await page.locator('#error').isVisible())throw Error('Large degree failed');if(!(await page.locator('#fast-status').innerText()).includes('10 multiplications versus 1023'))throw Error('Wrong binary count');await page.click('#normalize-optimal');if(await page.locator('#error').isVisible())throw Error('Adaptive failed');if(!(await page.locator('#adaptive-status').innerText()).includes('score'))throw Error('Missing metadata');

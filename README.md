@@ -82,6 +82,7 @@ GitHub Actions separately checks Lean and axiom audits, symbolic/high-precision 
 ```sh
 npm ci
 npm run test:geometry
+npm run test:ruler
 npx playwright install chromium
 python3 -m http.server 8765 --directory docs
 # In a separate terminal:
@@ -89,6 +90,10 @@ npm run test:browser
 ```
 
 The gallery uses local HTML, CSS and JavaScript; Playwright is a development dependency. The CI badge reports the current main-branch workflow, not historical priority, optimality or hardware certification.
+
+The gallery's main result now measures a constructed segment with a simulated
+1 mm ruler. See [ruler readout](docs/RULER_READOUT.md) for the parallel construction,
+physical paper sizes, and the scope of the rounding model.
 
 ## Archives
 

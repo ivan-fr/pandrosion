@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test:geometry": "node scripts/test_geometry.mjs",
+    "test:ruler": "node scripts/test_ruler_readout.mjs",
     "test:browser": "node scripts/test_browser.mjs",
     "test:initialization": "node scripts/test_initialization.mjs",
     "test:layout": "node scripts/test_layout.mjs",

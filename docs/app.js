@@ -2,7 +2,9 @@ import {bindSphereDrag} from './sphere-drag.js';
 import {stereoLineSamples,stereoCircleSamples} from './stereography.js';
 import {construct,methods,orders,affine,point,stereo,renormalize,renormalizeOptimal,needsStereographicView,adaptRectangle,baseMode} from './geometry.js';
 import {initializeCalibrated,iterationDecision,initializationBands} from './initialization.js';
+import {constructRulerSegment,measureWithRuler,drawRuler,drawReadoutConstruction} from './ruler-readout.js';
 const $=id=>document.getElementById(id);let g=null,timer=null,scale=1,adaptive=null,manualView=false,automaticSphere=false,initialization=null,layout=null;
+let rulerGeometry=null,rulerReading=null;
 const fmt=x=>Number.isFinite(x)?(Math.abs(x)>1e6||Math.abs(x)<1e-5&&x!==0?x.toExponential(8):x.toPrecision(12)):'—';
 const colors=()=>Object.fromEntries(['bg','fg','muted','line','blue','orange','green'].map(k=>[k,getComputedStyle(document.documentElement).getPropertyValue('--'+k).trim()]));
 // Resolve light-dark() via a real element so canvas gets a concrete color.
@@ -60,8 +62,27 @@ function sphere(canvas){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<
  }
  c.fillStyle=co.muted;c.fillText('Dashed lines: rear hemisphere',14,h-6);
 }
-function draw(){$('overview').classList.toggle('sphere-interactive',$('view').value==='sphere'&&!!g);if($('view').value==='sphere')sphere($('overview'));else plane($('overview'));plane($('detail'),true);}
-function stage(){if(!g)return;const n=+$('stage').value;$('stage-number').textContent=`${n} / ${g.ops.length}`;$('step-text').textContent=n?`${g.ops[n-1].kind} · ${g.ops[n-1].label}`:'Fixed setup: rectangle, centers and supports.';$('back').disabled=n===0;$('forward').disabled=n===g.ops.length;draw();}
+function draw(){$('overview').classList.toggle('sphere-interactive',$('view').value==='sphere'&&!!g);if($('view').value==='sphere')sphere($('overview'));else plane($('overview'));plane($('detail'),true);drawRuler(...setup($('ruler-canvas')),rulerReading,palette());if($('readout-construction').open)drawReadoutConstruction(...setup($('readout-canvas')),rulerGeometry,palette());}
+function updateRuler(){
+ rulerGeometry=null;rulerReading=null;$('ruler-value').textContent='';$('ruler-unit').textContent='';$('ruler-source').textContent='';
+ delete $('ruler-value').dataset.lower;delete $('ruler-value').dataset.upper;
+ if(!g){$('answer').textContent='—';return;}
+ const source=$('exploration').checked?'Pnext':'P',paperScale=+$('paper-scale').value;
+ for(const option of $('paper-scale').options){const factor=+option.value;option.textContent=`${Number((g.H*factor).toPrecision(6))} × ${Number((g.W*factor).toPrecision(6))} cm`;}
+ $('answer-label').textContent=`Segment AR · ${$('exploration').checked?'next iteration':`step ${initialization?.iterations||0}`} · ruler reading`;
+ if(g.birth[source]>+$('stage').value){$('answer').textContent='—';$('answer-note').textContent='Finish the construction to measure the next result.';return;}
+ try{
+  rulerGeometry=constructRulerSegment(g,scale,source);
+  rulerReading=measureWithRuler(rulerGeometry.segment,rulerGeometry.unit,paperScale);
+  $('answer').textContent=rulerReading.text;
+  $('ruler-value').textContent=`Root read from the ruler: ≈ ${rulerReading.valueText}`;
+  $('ruler-value').dataset.lower=String(rulerReading.lower);$('ruler-value').dataset.upper=String(rulerReading.upper);
+  $('ruler-unit').textContent=`AU = ${Number(rulerReading.unitCM.toPrecision(6))} cm represents one unit. Smallest graduation: 1 mm.`;
+  $('answer-note').textContent=`Length of the constructed segment AR, rounded to 1 mm.${initialization?.stopped?' The numerical iteration has stopped.':''}`;
+  $('ruler-source').textContent=`This readout uses ${source==='P'?'the current point P':'the next point P⁺ (called P in this detail)'}. The calibration factor is c ≈ ${Number(scale.toPrecision(6))}. Shared marks are labelled together.`;
+ }catch(error){rulerGeometry=null;$('answer').textContent='Not measurable';$('answer-note').textContent=error.message;}
+}
+function stage(){if(!g)return;const n=+$('stage').value;$('stage-number').textContent=`${n} / ${g.ops.length}`;$('step-text').textContent=n?`${g.ops[n-1].kind} · ${g.ops[n-1].label}`:'Fixed setup: rectangle, centers and supports.';$('back').disabled=n===0;$('forward').disabled=n===g.ops.length;updateRuler();draw();}
 function stop(){clearInterval(timer);timer=null;$('play').textContent='Play steps';}
 function dimensions(){return ['AK','AD','projective','arc'].includes(baseMode($('method').value))?[+$('rect-width').value,+$('rect-height').value]:[2,4];}
 function chooseLayout(X=+$('working-target').value,s=+$('state').value){const [W,H]=dimensions();layout=adaptRectangle($('method').value,+$('degree').value,X,s,$('chart').value,W,H);$('rect-width').value=layout.W;$('rect-height').value=layout.H;}
@@ -75,13 +96,12 @@ $('initialize').disabled=!['AK','AD','projective','arc','AKfast','ADfast','proje
  $('fast-status').textContent=g.fast?`Post-V20 · p = ${g.p}, binary ${g.binary} · ${g.multiplications} multiplications versus ${g.p-1} in the native chain. Automatic sphere: ${automaticSphere?'yes':'no'}.`:'';
  $('stage').max=g.ops.length;$('stage').value=g.ops.length;
  $('root-value').textContent=fmt(g.root);$('next-value').textContent=fmt(g.value);$('error-value').textContent=(g.value/g.root-1).toExponential(5);
- $('answer').textContent=fmt(1/(scale*($('exploration').checked?g.value:g.s)));$('answer-label').textContent=$('exploration').checked?'Root · next readout in the original units':`Approximation to the degree-${g.p} root of ${document.getElementById('target').value} · step ${initialization?.iterations||0}`;$('answer-note').textContent='Numerical approximation. '+($('exploration').checked?'Manual exploration.':(initialization?.stopped?'The available precision can no longer certify an improvement.':'Automatic setup; each click performs one geometric iteration.'));
  $('protocol').textContent=`${methods[g.mode]} · order ${orders[g.mode]} · ${g.counts.J} joins, ${g.counts.P} parallels, ${g.counts.C} moving arcs. Setup excluded; one parallel here costs 2 joins + 3 arcs.`;
  $('scope').textContent=g.mode==='circle'?'Transverse real branch, selected by R′(v)<0. Proven convergence is local; error decrease over the entire domain remains conjectural. Exclusions and renormalization are described in the paper.':'The scalar map converges globally for positive states. The geometric representation may nevertheless encounter centers at infinity or ill-conditioned configurations.';
  $('check').textContent=`Normalized discrepancy between geometric readout and independent formula: ${g.discrepancy.toExponential(3)}. Residual t = ${fmt(g.t)}.`;
  if(g.warnings.length){$('warning').hidden=false;$('warning').textContent=g.warnings.join(' ');}
  $('iterate').disabled=!!initialization?.stopped;$('play').disabled=false;stage();
- }catch(e){g=null;$('answer').textContent='—';$('answer-note').textContent='';$('fast-status').textContent='';$('error').hidden=false;$('error').textContent=e.message+(!initialization&&!$('initialize').disabled?' Use “Initialize and calibrate” to choose a fresh start.':'');$('iterate').disabled=true;$('play').disabled=true;for(const id of ['root-value','next-value','error-value'])$(id).textContent='—';$('step-text').textContent='Construction unavailable for these parameters.';$('protocol').textContent='';draw();}
+ }catch(e){g=null;updateRuler();$('answer-note').textContent='';$('fast-status').textContent='';$('error').hidden=false;$('error').textContent=e.message+(!initialization&&!$('initialize').disabled?' Use “Initialize and calibrate” to choose a fresh start.':'');$('iterate').disabled=true;$('play').disabled=true;for(const id of ['root-value','next-value','error-value'])$(id).textContent='—';$('step-text').textContent='Construction unavailable for these parameters.';$('protocol').textContent='';draw();}
  $('scaling').textContent=scale===1?'':`original s = ${fmt(scale)} × normalized s (reciprocal root). Original direct root = normalized direct root / ${fmt(scale)}.`;
  $('initialization-status').hidden=!initialization;
  if(initialization)$('initialization-status').textContent=`Certified initialization for the requested X ${fmt(initialization.originalX)} : c = ${fmt(initialization.c)} ; ${initializationBands[initialization.band].lower} ≤ Xcᵖ ≤ ${initializationBands[initialization.band].upper} verified by intervals; working X = ${fmt(initialization.X)}, start at 1. ${initialization.comparisons} comparisons, ${initialization.halvings} bisections. Absolute calibration error ≤ 2⁻⁴⁸. Setup excluded from the per-iteration cost. ${initialization.stopped?'Iteration stopped: no certifiable numerical progress; this is not a proof of zero error.':''}`;
@@ -104,7 +124,7 @@ $('view').addEventListener('change',()=>cancelSphereDrag());
 new ResizeObserver(draw).observe($('overview'));matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
 // Keep preparation controls and internal values inside a closed advanced panel.
 for(const el of document.querySelectorAll('.internal-input'))$('internal-controls').append(el);
-for(const selector of ['#layout-controls','#layout-status','.toolbar','#research-notice','#initialization-status','#adaptive-status','#fast-status','.readouts','#protocol','details:not(#advanced)']){
+for(const selector of ['#layout-controls','#layout-status','.toolbar','#research-notice','#initialization-status','#adaptive-status','#fast-status','.readouts','#protocol','details:not(#advanced):not(#readout-construction)']){
  const el=document.querySelector(selector);if(el)$('advanced').append(el);
 }
 $('iteration-controls').append($('iterate'));
@@ -124,12 +144,13 @@ function autoSolve(){
   const r=initializeCalibrated(p,X,'wide');
   // A new original problem always starts with the reference height, avoiding scale drift.
   $('rect-width').value=2;$('rect-height').value=4;layout=null;
-  if(['AK','AD','projective','arc'].includes(baseMode($('method').value)))chooseLayout(r.X,1);
   const u=1;
   scale=r.c;initialization={...r,stopped:false,iterations:0};adaptive=null;
   $('working-target').value=r.X;$('state').value=u;rebuild();
- }catch(e){g=null;stop();$('answer').textContent='—';$('answer-note').textContent='';$('error').hidden=false;$('error').textContent=e.message;$('iterate').disabled=true;$('play').disabled=true;for(const canvas of [$('overview'),$('detail')])setup(canvas);}
+ }catch(e){g=null;stop();updateRuler();$('answer-note').textContent='';$('error').hidden=false;$('error').textContent=e.message;$('iterate').disabled=true;$('play').disabled=true;for(const canvas of [$('overview'),$('detail'),$('ruler-canvas'),$('readout-canvas')])setup(canvas);}
 }
+$('paper-scale').onchange=()=>{updateRuler();draw();};
+$('readout-construction').ontoggle=draw;
 $('calculate').onclick=autoSolve;
 document.getElementById('target').onchange=autoSolve;
 $('exploration').onchange=()=>{automaticUI();if($('exploration').checked)rebuild();else autoSolve();};

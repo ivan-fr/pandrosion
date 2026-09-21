@@ -260,6 +260,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: node scripts/test_geometry.mjs
+      - run: node scripts/test_ruler_readout.mjs
       - run: node scripts/test_initialization.mjs
       - run: node scripts/test_layout.mjs
       - run: node scripts/test_stereography.mjs
