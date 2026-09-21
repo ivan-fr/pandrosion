@@ -30,6 +30,7 @@
 <p id="routing-status"></p><p id="power-count"></p>
 <div id="module-nav" class="module-nav" hidden><button id="module-prev" aria-label="Previous module">← Previous</button><label>Module<select id="module-select"></select></label><button id="module-next" aria-label="Next module">Next →</button></div>
 <p id="module-heading" aria-live="polite"></p>
+<p id="module-status" class="notice" role="status" hidden></p><button id="skip-power" hidden>Reuse E = B → correction</button>
 </section>
 <section class="workspace" aria-label="Interactive construction">
 <div class="drawing"><div class="panel-head"><h2 id="drawing-title">Overview</h2><label class="view-label">View<select id="view"><option value="plane">Plane</option><option value="sphere">Stereographic sphere</option></select></label></div><canvas id="overview" aria-label="Geometric view of the construction" role="img"></canvas><div id="rotation" hidden><p class="drag-hint">Drag the sphere with a mouse or one finger to rotate it.</p><label>Rotation<input id="yaw" type="range" min="-180" max="180" value="-25"></label><label>Tilt<input id="pitch" type="range" min="-80" max="80" value="20"></label></div></div>

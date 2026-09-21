@@ -121,6 +121,16 @@ for(const mode of ['AKfast','ADfast','projectiveFast','arcFast']){
 }
 await page.selectOption('#method','AKfast');await page.selectOption('#module-select','12');
 await shot('paper-million-current-module');
+if(await page.locator('#module-status').getAttribute('data-kind')!=='identity')throw Error('Exact s=1 must be identified algebraically');
+if(await page.locator('#overview').getAttribute('data-visible-operations')!=='0')throw Error('Identity must not ask for redundant operations');
+drawn=JSON.parse(await page.locator('#overview').getAttribute('data-drawn-labels'));
+if(!drawn.some(label=>label.includes('= upper copy')))throw Error('Exact fan alias is not merged');
+await page.click('#skip-power');
+if(!(await page.locator('#module-heading').textContent()).includes('correction'))throw Error('Identity shortcut did not reach correction');
+await page.click('#iterate');await page.selectOption('#module-select','0');
+if(await page.locator('#module-status').getAttribute('data-kind')==='identity'||!await page.locator('#skip-power').isHidden())throw Error('Near 1 must never be classified as exactly 1');
+if(!['too-close','unresolved'].includes(await page.locator('#module-status').getAttribute('data-kind')))throw Error('Tiny distinct paper gap not explained');
+await shot('paper-million-small-gap');
 for(const display of ['full','current','paper']){
  await page.selectOption('#power-display',display);await page.setViewportSize({width:360,height:900});
  if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1))throw Error('Paper mobile overflow: '+display);

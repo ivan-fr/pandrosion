@@ -52,3 +52,15 @@ const unresolved=paperMetrics([[0,0,1],[1e-14,0,1],[1,1,1]],[[1,0,0],[0,1,0]],1)
 assert.equal(unresolved.unresolvedPairs,1);
 assert.match(paperRecommendation(unresolved),/^Undetermined/);
 console.log('PASS: sub-resolution gaps never receive a false paper-size recommendation');
+
+const {modulePaperStatus,moduleInstructions}=await import('../docs/paper-construction.js');
+for(const mode of ['AKfast','ADfast','projectiveFast','arcFast'])for(const layout of ['classic','spread']){
+ const identity=construct(mode,1000000,1.5,1,'compact',2,4,layout);
+ for(let i=0;i<25;i++){const scene=moduleScene(identity,i);assert(scene.identity);assert.equal(scene.ops.length,0);assert.equal(modulePaperStatus(identity,scene).kind,'identity');assert(!scene.names.has(scene.m.copy));assert.match(moduleInstructions(identity,scene.m).join(' '),/No new mark or parallel/);}
+ assert(!moduleScene(identity,25).identity);
+ const close=construct(mode,1000000,1.5,1-1e-8,'compact',2,4,layout),scene=moduleScene(close,0);
+ assert(!scene.identity);assert.equal(modulePaperStatus(close,scene).kind,'too-close');
+ const tiny=construct(mode,3,1.5,1-1e-14,'compact',2,4,layout);
+ assert.equal(modulePaperStatus(tiny,moduleScene(tiny,0)).kind,'unresolved');
+}
+console.log('PASS: exact identity reuse is distinguished from small nonzero physical gaps');

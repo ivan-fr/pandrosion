@@ -146,6 +146,21 @@ as aliases/intentional parallels, not physical resolution certificates. The
 A nonzero sub-resolution gap suppresses the paper-size recommendation: the display cannot decide whether it is a true separation or roundoff at an exact alias. The
 near-point threshold is 0.02 H and the small-angle threshold is 10 degrees.
 The instructions explicitly explain coincident roles such as s=1.
+At **exactly s=1**, all power modules are identities: the upper copy is its
+fan center and every rail result is B. The module view merges these exact
+aliases, omits redundant strokes, and offers “Reuse E = B → correction”.
+The general binary schedule and incidence engine are preserved; the shortcut
+is justified by 1^n=1 and does not advance the scalar iteration. It is never
+selected by a numerical proximity tolerance.
+
+For s≠1, a visible notice above the module diagnoses the fan/copy gap
+λ|a−1| from the constructed coordinates. It distinguishes unresolved gaps
+from gaps below the 10 mm target even at the largest A2 scale fitting the
+module. Close points are not merged. This highlights a substantive limit:
+spread routing makes the diagram easier to follow but does not turn every
+million-degree calculation into a physically resolvable ruler-and-compass
+calculation. Robust hand calculation near 1 would need another geometric
+encoding or amplification construction; neither is claimed here.
 
 The paper-size heuristic targets 10 mm between distinct points and 10 degrees
 between nonparallel lines. It tries A4, A3, then A2 in either orientation with

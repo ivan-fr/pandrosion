@@ -2,7 +2,7 @@ import {bindSphereDrag} from './sphere-drag.js';
 import {stereoLineSamples,stereoCircleSamples} from './stereography.js';
 import {construct,methods,orders,affine,point,stereo,renormalize,renormalizeOptimal,needsStereographicView,adaptRectangle,baseMode,paperMetrics} from './geometry.js';
 import {initializeCalibrated,findInitialState,iterationDecision,initializationBands} from './initialization.js';
-import {moduleScene,moduleTitle,moduleInstructions,paperRecommendation,fanDashes} from './paper-construction.js';
+import {moduleScene,moduleTitle,moduleInstructions,modulePaperStatus,paperRecommendation,fanDashes} from './paper-construction.js';
 const $=id=>document.getElementById(id);let g=null,timer=null,scale=1,adaptive=null,manualView=false,automaticSphere=false,initialization=null,layout=null,moduleIndex=0;
 const fmt=x=>Number.isFinite(x)?(Math.abs(x)>1e6||Math.abs(x)<1e-5&&x!==0?x.toExponential(8):x.toPrecision(12)):'—';
 const colors=()=>Object.fromEntries(['bg','fg','muted','line','blue','orange','green'].map(k=>[k,getComputedStyle(document.documentElement).getPropertyValue('--'+k).trim()]));
@@ -26,7 +26,7 @@ function plane(canvas,detail=false){const [c,w,h]=setup(canvas),co=palette();if(
  for(const l of [[1,0,0],[1,0,-g.W],[0,1,0],[0,1,-g.H]])line(l,co.line,1.2);
  for(const o of visibleFixed)line(o.line,co.line,1,[4,4]);
  c.save();c.beginPath();c.rect(12,12,w-24,h-24);c.clip();for(const a of visibleCircles)if(a.stage<=stage){c.strokeStyle=co.orange;c.lineWidth=1.5;c.beginPath();c.arc(...to(...a.center),a.radius*k,0,2*Math.PI);c.stroke();}
- for(let i=scene?scene.m.start:0;i<Math.min(stage,scene?.m.end??stage);i++){const op=g.ops[i];line(op.line,i===stage-1?co.blue:co.muted,i===stage-1?2.2:1.3,op.bank===undefined?(i===stage-1?[]:[2,3]):fanDashes[op.bank]);}c.restore();
+ for(let i=scene?.identity?stage:scene?scene.m.start:0;i<Math.min(stage,scene?.m.end??stage);i++){const op=g.ops[i];line(op.line,i===stage-1?co.blue:co.muted,i===stage-1?2.2:1.3,op.bank===undefined?(i===stage-1?[]:[2,3]):fanDashes[op.bank]);}c.restore();
  const occupied=[];for(const [n,q]of Object.entries(visiblePoints)){if(g.birth[n]>stage)continue;const a=affine(q);if(!a)continue;const [x,y]=to(...a);if(x<12||x>w-12||y<12||y>h-12)continue;c.fillStyle=n==='Pnext'?co.green:n==='G'||n==='Gother'?co.orange:co.fg;c.beginPath();c.arc(x,y,n==='Pnext'?4.5:2.5,0,Math.PI*2);c.fill();if(!key.has(n)&&!scene?.labels[n]&&!g.banks?.some(b=>b.unit===n)&&!g.ops[stage-1]?.names.includes(n))continue;
  const text=scene?.labels[n]||(g.banks?.find(b=>b.unit===n)?'Fan '+g.banks.find(b=>b.unit===n).name:label(n)),tw=c.measureText(text).width;let place=null;for(const [dx,dy]of [[7,-8],[7,16],[-tw-7,-8],[-tw-7,16],[7,-24]]){const xx=Math.max(4,Math.min(w-tw-4,x+dx)),yy=Math.max(14,Math.min(h-5,y+dy));const box=[xx,yy-12,tw+4,15];if(!occupied.some(b=>box[0]<b[0]+b[2]&&box[0]+box[2]>b[0]&&box[1]<b[1]+b[3]&&box[1]+box[3]>b[1])){place=[xx,yy];occupied.push(box);break;}}
  if(place){c.fillStyle=co.fg;c.fillText(text,...place);}}
@@ -50,7 +50,7 @@ function sphere(canvas){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<
  function line(l,color,width=1){if(l)curve(stereoLineSamples(l,g.W,g.H),color,width);}
  for(const l of [[1,0,0],[1,0,-g.W],[0,1,0],[0,1,-g.H]])line(l,co.line);for(const f of scene?.fixed||g.fixed)line(f.line,co.line);
  for(const a of scene?.circles||g.circles)if(a.stage<=stage)curve(stereoCircleSamples(a.center,a.radius,g.W,g.H),co.orange,1.7);
- for(let i=scene?scene.m.start:0;i<Math.min(stage,scene?.m.end??stage);i++)line(g.ops[i].line,i===stage-1?co.blue:co.muted,i===stage-1?2:1);
+ for(let i=scene?.identity?stage:scene?scene.m.start:0;i<Math.min(stage,scene?.m.end??stage);i++)line(g.ops[i].line,i===stage-1?co.blue:co.muted,i===stage-1?2:1);
  // Reserve the readout points before placing secondary labels. Labels move; points never do.
  const readouts=['P','Pnext'].filter(n=>visiblePoints[n]&&g.birth[n]<=stage).map(n=>{const z=rotate(stereo(g.points[n],g.W,g.H));return {n,z,xy:screen(z)};});
  const occupied=[];for(const [n,q]of Object.entries(visiblePoints)){if(g.birth[n]>stage||(!key.has(n)&&!scene?.labels[n])||['P','Pnext'].includes(n))continue;const z=rotate(stereo(q,g.W,g.H)),[x,y]=screen(z);c.globalAlpha=z[2]<0?.45:1;c.fillStyle=n.startsWith('G')?co.orange:co.fg;c.beginPath();c.arc(x,y,3,0,2*Math.PI);c.fill();if(affine(q)&&!occupied.some(a=>Math.hypot(x-a[0],y-a[1])<24)&&!readouts.some(a=>Math.hypot(x-a.xy[0],y-a.xy[1])<40)){c.fillText(scene?.labels[n]||label(n),Math.min(w-35,x+7),Math.max(14,y-7));occupied.push([x,y]);}}
@@ -67,7 +67,7 @@ function sphere(canvas){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<
 }
 function draw(){$('overview').classList.toggle('sphere-interactive',$('view').value==='sphere'&&!!g);if($('view').value==='sphere')sphere($('overview'));else plane($('overview'));plane($('detail'),true);}
 function stage(){if(!g)return;const n=+$('stage').value;
- if(g.fast&&$('power-display').value!=='full'){moduleIndex=Math.max(0,g.modules.findIndex(m=>n<=m.end));updatePaper();}$('stage-number').textContent=`${n} / ${g.ops.length}`;$('step-text').textContent=n?`${g.ops[n-1].kind} · ${g.ops[n-1].label}`:'Fixed setup: rectangle, centers and supports.';$('back').disabled=n===0;$('forward').disabled=n===g.ops.length;draw();}
+ if(g.fast&&$('power-display').value!=='full'){moduleIndex=Math.max(0,g.modules.findIndex(m=>n<=m.end));updatePaper();}$('stage-number').textContent=`${n} / ${g.ops.length}`;$('step-text').textContent=g.fast&&$('power-display').value!=='full'&&moduleScene(g,moduleIndex)?.identity?'Exact identity: reuse the existing marks; no new parallel is needed.':n?`${g.ops[n-1].kind} · ${g.ops[n-1].label}`:'Fixed setup: rectangle, centers and supports.';$('back').disabled=n===0;$('forward').disabled=n===g.ops.length;draw();}
 function stop(){clearInterval(timer);timer=null;$('play').textContent='Play steps';}
 function dimensions(){return ['AK','AD','projective','arc'].includes(baseMode($('method').value))?[+$('rect-width').value,+$('rect-height').value]:[2,4];}
 function chooseLayout(X=+$('working-target').value,s=+$('state').value){const [W,H]=dimensions();layout=adaptRectangle($('method').value,+$('degree').value,X,s,$('chart').value,W,H,$('power-layout').value);$('rect-width').value=layout.W;$('rect-height').value=layout.H;}
@@ -142,7 +142,7 @@ document.getElementById('target').onchange=autoSolve;
 $('exploration').onchange=()=>{automaticUI();if($('exploration').checked)rebuild();else autoSolve();};
 function updatePaper(){
  const fast=!!g?.fast,display=$('power-display').value,modular=fast&&display!=='full';
- $('paper-controls').hidden=!fast;$('paper-metrics').hidden=!fast;$('paper-guide').hidden=!modular;$('module-nav').hidden=!modular;
+ $('paper-controls').hidden=!fast;$('paper-metrics').hidden=!fast;$('paper-guide').hidden=!modular;$('module-nav').hidden=!modular;$('module-status').hidden=true;$('skip-power').hidden=true;
  document.body.dataset.powerDisplay=fast?display:'full';
  if(!fast)return;
  $('routing-status').textContent=g.powerLayout==='spread'?`Spread routing: best among ${g.banks.length} prepared fan banks.`:'Classic routing: historical single fan.';
@@ -151,14 +151,18 @@ function updatePaper(){
  $('module-select').replaceChildren(...options);$('module-select').value=String(moduleIndex);
  $('module-prev').disabled=moduleIndex<=0;$('module-next').disabled=moduleIndex>=g.modules.length-1;
  const scene=moduleScene(g,moduleIndex),m=scene?.m;
+ const paperStatus=modular?modulePaperStatus(g,scene):null;
+ $('module-status').hidden=!paperStatus;$('module-status').textContent=paperStatus?.text||'';$('module-status').dataset.kind=paperStatus?.kind||'';
+ $('skip-power').hidden=!modular||!scene.identity;
+ if(g.s===1)$('power-count').textContent+=' At this exact starting state, the power modules are identities and can reuse B.';
  $('module-heading').textContent=modular?`Module ${moduleIndex+1} of ${g.modules.length} — ${moduleTitle(g,m)}`:'';
  $('overview').dataset.module=modular?String(moduleIndex):'all';
  $('overview').dataset.visibleOperations=String(modular?scene.ops.length:g.ops.length);
  if(modular){
   $('module-instructions').replaceChildren(...moduleInstructions(g,m).map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
-  $('module-coordinates').textContent=`Keep the same coordinates: W/H = ${fmt(g.W/g.H)}. `+(m.bank?`Fan ${m.bank.name}: λ/H = ${fmt(m.bank.ratio)}. `:'')+
+  $('module-coordinates').textContent=scene.identity?`Exact shared marks: B = R(1) = (W, 0); upper copy = U_${m.bank.name} = (W + λ, H). W/H = ${fmt(g.W/g.H)}; λ/H = ${fmt(m.bank.ratio)}. Floating-point differences between these aliases are roundoff.`:`Keep the same coordinates: W/H = ${fmt(g.W/g.H)}. `+(m.bank?`Fan ${m.bank.name}: λ/H = ${fmt(m.bank.ratio)}. `:'')+
    [m.input,m.copy,m.result].filter(Boolean).map(n=>{const xy=affine(g.points[n]);return `${scene.labels[n]||n}: (${xy.map(v=>fmt(v/g.H)).join(', ')}) H`;}).join(' · ');
-  $('module-aliases').textContent=scene.metrics.aliases?'Some named points coincide or are below display resolution. At s = 1, the power points coincide exactly. Verify other tiny gaps before choosing a paper scale.':'Carry the result on the right rail into the next module. Each page keeps equal x/y scale.';
+  $('module-aliases').textContent=scene.identity?'No numerical tolerance is used to identify this case: the input state is exactly 1.':scene.metrics.aliases?'Some named points coincide or are below display resolution. At s = 1, the power points coincide exactly. Verify other tiny gaps before choosing a paper scale.':'Carry the result on the right rail into the next module. Each page keeps equal x/y scale.';
  }
  const metrics=modular?scene.metrics:paperMetrics(Object.values(g.points),[...g.fixed,...g.ops].map(o=>o.line).concat([[1,0,-g.W],[0,1,-g.H]]),g.H,g.banks.map(b=>g.points[b.unit]).concat(['K','F','G','Z'].filter(n=>g.points[n]).map(n=>g.points[n])),g.circles);
  const metric=(n,u='')=>Number.isFinite(n)?`${n<.01?n.toExponential(2):n.toFixed(2)}${u}`:'No distinct pair';
@@ -169,6 +173,7 @@ function updatePaper(){
 function selectModule(index){
  if(!g?.fast)return;stop();moduleIndex=Math.max(0,Math.min(g.modules.length-1,index));$('stage').value=g.modules[moduleIndex].end;stage();
 }
+$('skip-power').onclick=()=>selectModule(g.modules.length-1);
 $('module-prev').onclick=()=>selectModule(moduleIndex-1);
 $('module-next').onclick=()=>selectModule(moduleIndex+1);
 $('module-select').onchange=()=>selectModule(+$('module-select').value);

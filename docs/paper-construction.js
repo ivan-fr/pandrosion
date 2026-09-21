@@ -1,5 +1,5 @@
 // Presentation of existing incidences; never changes mathematical coordinates.
-import {paperMetrics} from './geometry.js';
+import {affine,paperMetrics} from './geometry.js';
 export const fanDashes=[[],[8,4],[9,3,2,3],[2,4],[12,3,2,3,2,3]];
 export const powerLabel=n=>n===1?'s':`s^${n}`;
 export function moduleTitle(g,m){
@@ -9,23 +9,30 @@ export function moduleTitle(g,m){
 export function moduleScene(g,index){
  const m=g.modules[index];
  if(!m)return null;
- const correction=m.kind==='correction';
- const names=new Set(correction?['O','A','B','C','P','E','M','K','F','G','D','Z','T','Pnext']:
+ const correction=m.kind==='correction',identity=!correction&&g.s===1;
+ // Algebraic equality, not a proximity test: every positive power of exactly 1 is 1.
+ const names=new Set(identity?['O','A','B','C',m.bank.unit]:correction?['O','A','B','C','P','E','M','K','F','G','D','Z','T','Pnext']:
   ['O','A','B','C',m.input,m.other,m.copy,m.result,m.bank.unit]);
  const points=Object.fromEntries(Object.entries(g.points).filter(([n])=>names.has(n)));
- const ops=g.ops.slice(m.start,m.end),circles=correction?g.circles:[];
+ const ops=identity?[]:g.ops.slice(m.start,m.end),circles=correction?g.circles:[];
  const fixed=m.fixed;
- const labels=correction?{E:'Power result E',Pnext:'Next state P+',P:'Stored s'}:{
+ const labels=identity?{B:m.to===g.p?'B = accumulator = E':'B = input = result',
+  [m.bank.unit]:`Fan ${m.bank.name} = upper copy`}:correction?{E:'Power result E',Pnext:'Next state P+',P:'Stored s'}:{
   [m.bank.unit]:`Fan ${m.bank.name}`, [m.copy]:'Upper copy',
   [m.input]:`Accumulator ${powerLabel(m.from)}`, [m.result]:m.to===g.p?'Power result E':`R(${powerLabel(m.to)})`
  };
- if(!correction&&m.kind==='multiply')labels[m.other]='Stored s';
+ if(!correction&&!identity&&m.kind==='multiply')labels[m.other]='Stored s';
  const metrics=paperMetrics(Object.values(points),[...fixed,...ops].map(o=>o.line).concat([[1,0,-g.W],[0,1,-g.H]]),g.H,
   correction?['K','F','G','Z'].filter(n=>points[n]).map(n=>points[n]):[points[m.bank.unit]],circles);
- return {m,names,points,ops,circles,fixed,labels,metrics};
+ return {m,names,points,ops,circles,fixed,labels,metrics,identity};
 }
 export function moduleInstructions(g,m){
  if(m.kind==='correction')return g.ops.slice(m.start,m.end).map(o=>o.label.replace('P⁺','next state P+'));
+ if(g.s===1)return [
+  'The prepared state is exactly s = 1, so every power in this chain equals 1.',
+  `Reuse the existing points: R(1) = B and the upper copy = Fan ${m.bank.name}. No new mark or parallel is needed.`,
+  'Reuse B as the power result E and go directly to the correction module. The correction can still change the state.'
+ ];
  const fan=`Fan ${m.bank.name}`,other=m.kind==='square'?`the accumulator R(${powerLabel(m.from)})`:'R(s), the stored starting state';
  if(g.powerLayout==='classic'&&m.kind==='multiply')return [
   'Use the stored upper copy X(s) from the first module.',
@@ -38,6 +45,18 @@ export function moduleInstructions(g,m){
   'Draw the parallel through the copied accumulator.',
   `Mark its intersection with the right rail as R(${powerLabel(m.to)})${m.to===g.p?', the power result E':''}.`
  ];
+}
+export function modulePaperStatus(g,scene){
+ if(scene.m.kind==='correction')return null;
+ if(scene.identity)return {kind:'identity',text:'Exact coincidence, not a tiny gap: s = 1. Fan and upper copy are one point; accumulator and result are B. Reuse the marks, then continue to the correction.'};
+ const unit=affine(g.points[scene.m.bank.unit]),copy=affine(g.points[scene.m.copy]);
+ const gap=Math.hypot(unit[0]-copy[0],unit[1]-copy[1])/g.H;
+ if(gap<=1e-12)return {kind:'unresolved',gap,text:'The fan and upper copy are distinct in exact arithmetic (s ≠ 1), but this display cannot resolve their gap. Do not merge these marks or treat this module as a reliable hand construction.'};
+ const {width,height}=scene.metrics;
+ const largestScale=Math.max(Math.min(400/width,574/height),Math.min(574/width,400/height));
+ const gapMM=gap*largestScale;
+ if(gapMM<10)return {kind:'too-close',gap,gapMM,text:`Hand-construction limit: fan/copy gap = ${gap.toExponential(3)} H, at most ${gapMM<.01?gapMM.toExponential(2):gapMM.toFixed(2)} mm when this module fits A2. Below the 10 mm readability target. Separating labels or changing the fan cannot guarantee a usable gap near 1; a different geometric encoding would be needed.`};
+ return null;
 }
 // Heuristic targets: 10 mm between distinct points, 10 degrees between nonparallel lines.
 // No sheet size can fix an angular shortfall by uniformly magnifying the drawing.
