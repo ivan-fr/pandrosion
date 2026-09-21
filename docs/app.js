@@ -35,6 +35,15 @@ function plane(canvas,detail=false){const [c,w,h]=setup(canvas),co=palette();if(
    color:n==='Pnext'?co.green:n==='P'?co.blue:n==='G'||n==='Gother'?co.orange:null,radius:n==='Pnext'?4.5:2.5,
    priority:({K:8,B:7,E:6,P:5,Pnext:4,T:3}[n]||0),prefer:({O:[-1,-1],C:[-1,-1],K:[-1,-1],E:[-1,1],P:[1,1],Pnext:[1,1],T:[-1,1]}[n]||[1,-1])});
  }
+ // At exactly s=1 these are algebraic aliases, not merely nearby screen positions.
+ // Group only points that have actually appeared at this construction stage.
+ if(g.fast&&g.s===1){
+  const aliases=['B','P','E'].map(id=>marks.find(p=>p.id===id)).filter(Boolean);
+  if(aliases.length>1){
+   aliases[0].text=aliases.map(p=>p.id).join(' = ')+' · s = 1';aliases[0].color=co.blue;
+   for(const p of aliases.slice(1))p.text=null;
+  }
+ }
  drawPointLabels(c,marks,w,h,co);
  c.fillStyle=co.muted;c.fillText(detail?'Equal x/y scale · independent local frame':'Equal scale on both axes',14,h-6);
 }

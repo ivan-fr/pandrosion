@@ -17,11 +17,11 @@ export function moduleScene(g,index){
  const ops=identity?[]:g.ops.slice(m.start,m.end),circles=correction?g.circles:[];
  const fixed=m.fixed;
  const labels=identity?{B:m.to===g.p?'B = P = accumulator = E':'B = P = input = result',
-  [m.bank.unit]:`Fan ${m.bank.name} = upper copy`}:correction?{E:'Power result E',Pnext:'Next state P+',P:'P · stored s'}:{
+  [m.bank.unit]:`Fan ${m.bank.name} = upper copy`}:correction?{E:`E · s^${g.p}`,Pnext:'Next state P+',P:'P · s'}:{
   [m.bank.unit]:`Fan ${m.bank.name}`, [m.copy]:'Upper copy',
-  [m.input]:m.input==='P'?'P · accumulator s':`Accumulator ${powerLabel(m.from)}`, [m.result]:m.to===g.p?'Power result E':`R(${powerLabel(m.to)})`
+  [m.input]:m.input==='P'?'P · s':`Accumulator ${powerLabel(m.from)}`, [m.result]:m.to===g.p?`E · s^${g.p}`:`R(${powerLabel(m.to)})`
  };
- if(!correction&&!identity&&m.kind==='multiply')labels[m.other]='P · stored s';
+ if(!correction&&!identity&&m.kind==='multiply')labels[m.other]='P · s';
  const metrics=paperMetrics(Object.values(points),[...fixed,...ops].map(o=>o.line).concat([[1,0,-g.W],[0,1,-g.H]]),g.H,
   correction?['K','F','G','Z'].filter(n=>points[n]).map(n=>points[n]):[points[m.bank.unit]],circles);
  return {m,names,points,ops,circles,fixed,labels,metrics,identity};
@@ -47,7 +47,7 @@ export function moduleInstructions(g,m){
  ];
 }
 export function modulePaperStatus(g,scene){
- if(scene.m.kind==='correction')return null;
+ if(scene.m.kind==='correction')return g.s===1?{kind:'shared-state',text:'B = P = E: one geometric point, because s = 1 and s^p = 1. P names the input state; E names its power. The correction constructs the next state P+.'}:null;
  if(scene.identity)return {kind:'identity',text:'Exact coincidence, not a tiny gap: s = 1. Fan and upper copy are one point; accumulator and result are B. Reuse the marks, then continue to the correction.'};
  const unit=affine(g.points[scene.m.bank.unit]),copy=affine(g.points[scene.m.copy]);
  const gap=Math.hypot(unit[0]-copy[0],unit[1]-copy[1])/g.H;
