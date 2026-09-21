@@ -3,6 +3,7 @@ import {stereoLineSamples,stereoCircleSamples} from './stereography.js';
 import {construct,methods,orders,affine,point,stereo,renormalize,renormalizeOptimal,needsStereographicView,adaptRectangle,baseMode,paperMetrics} from './geometry.js';
 import {initializeCalibrated,findInitialState,iterationDecision,initializationBands} from './initialization.js';
 import {moduleScene,moduleTitle,moduleInstructions,modulePaperStatus,paperRecommendation,fanDashes} from './paper-construction.js';
+import {drawPointLabels} from './point-labels.js';
 const $=id=>document.getElementById(id);let g=null,timer=null,scale=1,adaptive=null,manualView=false,automaticSphere=false,initialization=null,layout=null,moduleIndex=0;
 const fmt=x=>Number.isFinite(x)?(Math.abs(x)>1e6||Math.abs(x)<1e-5&&x!==0?x.toExponential(8):x.toPrecision(12)):'—';
 const colors=()=>Object.fromEntries(['bg','fg','muted','line','blue','orange','green'].map(k=>[k,getComputedStyle(document.documentElement).getPropertyValue('--'+k).trim()]));
@@ -27,9 +28,14 @@ function plane(canvas,detail=false){const [c,w,h]=setup(canvas),co=palette();if(
  for(const o of visibleFixed)line(o.line,co.line,1,[4,4]);
  c.save();c.beginPath();c.rect(12,12,w-24,h-24);c.clip();for(const a of visibleCircles)if(a.stage<=stage){c.strokeStyle=co.orange;c.lineWidth=1.5;c.beginPath();c.arc(...to(...a.center),a.radius*k,0,2*Math.PI);c.stroke();}
  for(let i=scene?.identity?stage:scene?scene.m.start:0;i<Math.min(stage,scene?.m.end??stage);i++){const op=g.ops[i];line(op.line,i===stage-1?co.blue:co.muted,i===stage-1?2.2:1.3,op.bank===undefined?(i===stage-1?[]:[2,3]):fanDashes[op.bank]);}c.restore();
- const occupied=[];for(const [n,q]of Object.entries(visiblePoints)){if(g.birth[n]>stage)continue;const a=affine(q);if(!a)continue;const [x,y]=to(...a);if(x<12||x>w-12||y<12||y>h-12)continue;c.fillStyle=n==='Pnext'?co.green:n==='G'||n==='Gother'?co.orange:co.fg;c.beginPath();c.arc(x,y,n==='Pnext'?4.5:2.5,0,Math.PI*2);c.fill();if(!key.has(n)&&!scene?.labels[n]&&!g.banks?.some(b=>b.unit===n)&&!g.ops[stage-1]?.names.includes(n))continue;
- const text=scene?.labels[n]||(g.banks?.find(b=>b.unit===n)?'Fan '+g.banks.find(b=>b.unit===n).name:label(n)),tw=c.measureText(text).width;let place=null;for(const [dx,dy]of [[7,-8],[7,16],[-tw-7,-8],[-tw-7,16],[7,-24]]){const xx=Math.max(4,Math.min(w-tw-4,x+dx)),yy=Math.max(14,Math.min(h-5,y+dy));const box=[xx,yy-12,tw+4,15];if(!occupied.some(b=>box[0]<b[0]+b[2]&&box[0]+box[2]>b[0]&&box[1]<b[1]+b[3]&&box[1]+box[3]>b[1])){place=[xx,yy];occupied.push(box);break;}}
- if(place){c.fillStyle=co.fg;c.fillText(text,...place);}}
+ const marks=[];for(const [n,q]of Object.entries(visiblePoints)){
+  if(g.birth[n]>stage)continue;const a=affine(q);if(!a)continue;const [x,y]=to(...a);if(x<12||x>w-12||y<12||y>h-12)continue;
+  const bank=g.banks?.find(b=>b.unit===n),named=key.has(n)||scene?.labels[n]||bank||g.ops[stage-1]?.names.includes(n);
+  marks.push({id:n,x,y,text:named?(scene?.labels[n]||(bank?'Fan '+bank.name:label(n))):null,
+   color:n==='Pnext'?co.green:n==='P'?co.blue:n==='G'||n==='Gother'?co.orange:null,radius:n==='Pnext'?4.5:2.5,
+   priority:({K:8,B:7,E:6,P:5,Pnext:4,T:3}[n]||0),prefer:({O:[-1,-1],C:[-1,-1],K:[-1,-1],E:[-1,1],P:[1,1],Pnext:[1,1],T:[-1,1]}[n]||[1,-1])});
+ }
+ drawPointLabels(c,marks,w,h,co);
  c.fillStyle=co.muted;c.fillText(detail?'Equal x/y scale · independent local frame':'Equal scale on both axes',14,h-6);
 }
 function sphere(canvas){const [c,w,h]=setup(canvas),co=palette();if(!g||w<80||h<80)return;const stage=+$('stage').value,R=Math.min(w-65,h-65)/2,cx=w/2,cy=h/2,ya=+$('yaw').value*Math.PI/180,pi=+$('pitch').value*Math.PI/180;

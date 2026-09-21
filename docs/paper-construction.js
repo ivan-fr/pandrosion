@@ -16,12 +16,12 @@ export function moduleScene(g,index){
  const points=Object.fromEntries(Object.entries(g.points).filter(([n])=>names.has(n)));
  const ops=identity?[]:g.ops.slice(m.start,m.end),circles=correction?g.circles:[];
  const fixed=m.fixed;
- const labels=identity?{B:m.to===g.p?'B = accumulator = E':'B = input = result',
-  [m.bank.unit]:`Fan ${m.bank.name} = upper copy`}:correction?{E:'Power result E',Pnext:'Next state P+',P:'Stored s'}:{
+ const labels=identity?{B:m.to===g.p?'B = P = accumulator = E':'B = P = input = result',
+  [m.bank.unit]:`Fan ${m.bank.name} = upper copy`}:correction?{E:'Power result E',Pnext:'Next state P+',P:'P · stored s'}:{
   [m.bank.unit]:`Fan ${m.bank.name}`, [m.copy]:'Upper copy',
-  [m.input]:`Accumulator ${powerLabel(m.from)}`, [m.result]:m.to===g.p?'Power result E':`R(${powerLabel(m.to)})`
+  [m.input]:m.input==='P'?'P · accumulator s':`Accumulator ${powerLabel(m.from)}`, [m.result]:m.to===g.p?'Power result E':`R(${powerLabel(m.to)})`
  };
- if(!correction&&!identity&&m.kind==='multiply')labels[m.other]='Stored s';
+ if(!correction&&!identity&&m.kind==='multiply')labels[m.other]='P · stored s';
  const metrics=paperMetrics(Object.values(points),[...fixed,...ops].map(o=>o.line).concat([[1,0,-g.W],[0,1,-g.H]]),g.H,
   correction?['K','F','G','Z'].filter(n=>points[n]).map(n=>points[n]):[points[m.bank.unit]],circles);
  return {m,names,points,ops,circles,fixed,labels,metrics,identity};
@@ -30,10 +30,10 @@ export function moduleInstructions(g,m){
  if(m.kind==='correction')return g.ops.slice(m.start,m.end).map(o=>o.label.replace('P⁺','next state P+'));
  if(g.s===1)return [
   'The prepared state is exactly s = 1, so every power in this chain equals 1.',
-  `Reuse the existing points: R(1) = B and the upper copy = Fan ${m.bank.name}. No new mark or parallel is needed.`,
+  `Reuse the existing points: R(1) = P = B and the upper copy = Fan ${m.bank.name}. No new mark or parallel is needed.`,
   'Reuse B as the power result E and go directly to the correction module. The correction can still change the state.'
  ];
- const fan=`Fan ${m.bank.name}`,other=m.kind==='square'?`the accumulator R(${powerLabel(m.from)})`:'R(s), the stored starting state';
+ const fan=`Fan ${m.bank.name}`,other=m.kind==='square'?`the accumulator R(${powerLabel(m.from)})`:'P = R(s), the stored starting state';
  if(g.powerLayout==='classic'&&m.kind==='multiply')return [
   'Use the stored upper copy X(s) from the first module.',
   `Join U× to the accumulator R(${powerLabel(m.from)}).`,

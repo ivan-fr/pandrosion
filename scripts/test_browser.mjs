@@ -3,11 +3,42 @@ import fs from 'node:fs';
 const output=process.env.PREVIEW_OUTPUT || '.ci/browser';
 fs.mkdirSync(output,{recursive:true});
 (async()=>{const b=await chromium.launch({...(process.env.PLAYWRIGHT_CHANNEL ? {channel:process.env.PLAYWRIGHT_CHANNEL}:{}),headless:true});const page=await b.newPage({viewport:{width:1280,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(page.url()+': '+e.message));await page.addInitScript(()=>{
- const proto=CanvasRenderingContext2D.prototype,fill=proto.fillText,clear=proto.clearRect,stroke=proto.stroke;
- proto.clearRect=function(...args){if(this.canvas.id==='overview'){this.canvas.dataset.drawnLabels='[]';this.canvas.dataset.strokeCount='0';}return clear.apply(this,args);};
- proto.stroke=function(...args){if(this.canvas.id==='overview')this.canvas.dataset.strokeCount=String(Number(this.canvas.dataset.strokeCount||0)+1);return stroke.apply(this,args);};
- proto.fillText=function(text,...args){if(this.canvas.id==='overview'){const labels=JSON.parse(this.canvas.dataset.drawnLabels||'[]');labels.push(text);this.canvas.dataset.drawnLabels=JSON.stringify(labels);}return fill.call(this,text,...args);};
+ const proto=CanvasRenderingContext2D.prototype,fill=proto.fillText,clear=proto.clearRect,stroke=proto.stroke,paths=new WeakMap();
+ proto.clearRect=function(...args){if(this.canvas.id==='overview'){this.canvas.dataset.drawnLabels='[]';this.canvas.dataset.strokeCount='0';this.canvas.drawing={strokes:[],boxes:[],marks:[],texts:[]};}return clear.apply(this,args);};
+ for(const name of ['beginPath','moveTo','lineTo','arc']){const original=proto[name];proto[name]=function(...args){if(name==='beginPath')paths.set(this,[]);else paths.get(this)?.push([name,...args]);return original.apply(this,args);};}
+ proto.stroke=function(...args){if(this.canvas.id==='overview'){this.canvas.dataset.strokeCount=String(Number(this.canvas.dataset.strokeCount||0)+1);this.canvas.drawing?.strokes.push([...(paths.get(this)||[])]);}return stroke.apply(this,args);};
+ const fillPath=proto.fill,fillRect=proto.fillRect;
+ proto.fill=function(...args){if(this.canvas.id==='overview')for(const p of paths.get(this)||[])if(p[0]==='arc')this.canvas.drawing?.marks.push(p.slice(1,3));return fillPath.apply(this,args);};
+ proto.fillRect=function(...args){if(this.canvas.id==='overview')this.canvas.drawing?.boxes.push(args);return fillRect.apply(this,args);};
+ proto.fillText=function(text,...args){if(this.canvas.id==='overview'){const labels=JSON.parse(this.canvas.dataset.drawnLabels||'[]');labels.push(text);this.canvas.dataset.drawnLabels=JSON.stringify(labels);this.canvas.drawing?.texts.push({text,x:args[0],y:args[1],width:this.measureText(text).width});}return fill.call(this,text,...args);};
 });await page.goto(process.env.PREVIEW_URL || 'http://127.0.0.1:8765/');await page.waitForFunction(()=>document.getElementById('next-value').textContent!=='—');
+// Check the actual canvas strokes, not a count reported by the application.
+async function checkPointLeaders(required){
+ await page.waitForFunction(()=>{const c=document.getElementById('overview'),r=c.getBoundingClientRect();return c.width===Math.round(r.width*devicePixelRatio)&&c.height===Math.round(r.height*devicePixelRatio);});
+ const result=await page.locator('#overview').evaluate(canvas=>{
+  const {texts,boxes,strokes,marks}=canvas.drawing,near=(a,b)=>Math.abs(a-b)<1e-6;
+  const labels=texts.filter(t=>!t.text.startsWith('Equal ')).map(t=>{
+   const box=boxes.find(([x,y,w,h])=>t.x>=x&&t.x+t.width<=x+w&&t.y>=y&&t.y<=y+h);
+   if(!box)throw Error('Label has no readable background: '+t.text);
+   const [x,y,w,h]=box;
+   const leaders=strokes.filter(p=>p.length===2&&p[0][0]==='moveTo'&&p[1][0]==='lineTo'&&
+    marks.some(m=>near(m[0],p[0][1])&&near(m[1],p[0][2]))&&
+    p[1][1]>=x-1e-6&&p[1][1]<=x+w+1e-6&&p[1][2]>=y-1e-6&&p[1][2]<=y+h+1e-6&&
+    (near(p[1][1],x)||near(p[1][1],x+w)||near(p[1][2],y)||near(p[1][2],y+h)));
+   if(leaders.length!==1)throw Error('Ambiguous or missing leader: '+t.text);
+   return {...t,box,anchor:leaders[0][0].slice(1)};
+  });
+  const {width,height}=canvas.getBoundingClientRect();
+  for(let i=0;i<labels.length;i++){
+   const [x,y,w,h]=labels[i].box;
+   if(x<0||x+w>width||y<0||y+h>height-20)throw Error('Clipped annotation: '+labels[i].text);
+   for(const p of labels.slice(i+1)){const [xx,yy,ww,hh]=p.box;if(x<xx+ww&&x+w>xx&&y<yy+hh&&y+h>yy)throw Error('Overlapping annotations');}
+  }
+  return {labels,constructionStrokes:strokes.length-labels.length};
+ });
+ for(const text of required)if(!result.labels.some(p=>p.text===text))throw Error('Missing point callout: '+text);
+ return result;
+}
 // Regression: the decentered arc must render smoothly with automatically selected proportions.
 await page.selectOption('#method','arc');await page.selectOption('#view','sphere');
 let drawn=JSON.parse(await page.locator('#overview').getAttribute('data-drawn-labels'));if(!drawn.includes('P')||!drawn.includes('P⁺'))throw Error('Missing priority readout labels');
@@ -91,9 +122,9 @@ await shot('paper-p10-x2000-full');
 const originalNext=await page.locator('#next-value').textContent();
 await page.selectOption('#power-display','current');await page.selectOption('#module-select','2');
 if(await page.locator('#overview').getAttribute('data-visible-operations')!=='3')throw Error('Current module contains prior strokes');
-if(Number(await page.locator('#overview').getAttribute('data-stroke-count'))>8)throw Error('Prior lines actually rendered in module');
+if((await checkPointLeaders(['P · stored s','Fan B'])).constructionStrokes>8)throw Error('Prior lines actually rendered in module');
 drawn=JSON.parse(await page.locator('#overview').getAttribute('data-drawn-labels'));
-if(!drawn.includes('Stored s')||!drawn.includes('Fan B')||drawn.includes('K'))throw Error('Wrong module inputs/center');
+if(!drawn.includes('P · stored s')||!drawn.includes('Fan B')||drawn.includes('K'))throw Error('Wrong module inputs/center');
 await shot('paper-p10-x2000-module');
 await page.click('#module-next');if(!(await page.locator('#module-heading').textContent()).includes('s^5 → s^10'))throw Error('Next module failed');
 await page.click('#module-next');if(!(await page.locator('#module-heading').textContent()).includes('AK correction')||!await page.locator('#module-next').isDisabled())throw Error('Missing final correction');
@@ -116,6 +147,7 @@ for(const mode of ['AKfast','ADfast','projectiveFast','arcFast']){
  if(await page.locator('#module-select option').count()!==26)throw Error('Missing million modules');
  await page.selectOption('#module-select','24');await page.click('#module-next');
  if(!(await page.locator('#module-heading').textContent()).includes('correction'))throw Error('Million correction inaccessible');
+ await checkPointLeaders(['P · stored s','Power result E','Next state P+']);
  await page.click('#module-prev');await page.click('#iterate');
  if(await page.locator('#error').isVisible())throw Error('Million interaction failed');
 }
@@ -137,6 +169,25 @@ for(const display of ['full','current','paper']){
  if(display!=='full'){await page.click('#module-next');await page.click('#module-prev');}
 }
 await page.screenshot({path:`${output}/paper-mobile.png`,fullPage:true});
+// Regression from the reported screenshot: K, B, E and s share a very small area.
+await page.setViewportSize({width:1280,height:1100});
+await page.locator('#degree').fill('10');await page.locator('#target').fill('2000');await page.click('#calculate');
+await page.selectOption('#power-display','current');await page.selectOption('#module-select','4');
+const correctionReadout=await page.locator('#next-value').textContent();
+const expected=['K','B','Power result E','P · stored s','Next state P+'];
+const callouts=await checkPointLeaders(expected),byName=name=>callouts.labels.find(p=>p.text===name).anchor;
+if(!(byName('K')[0]<byName('B')[0]&&byName('Next state P+')[1]>byName('B')[1]))throw Error('Correction callouts point to the wrong location');
+for(const name of ['Power result E','P · stored s'])if(Math.hypot(...byName(name).map((v,i)=>v-byName('B')[i]))>1e-6)throw Error('Exact aliases were moved apart');
+await page.locator('#overview').screenshot({path:`${output}/correction-label-leaders.png`});
+await page.emulateMedia({colorScheme:'dark'});await checkPointLeaders(expected);
+await page.locator('#overview').screenshot({path:`${output}/correction-label-leaders-dark.png`});await page.emulateMedia({colorScheme:'light'});
+await page.setViewportSize({width:360,height:900});await checkPointLeaders(expected);
+await page.locator('#overview').screenshot({path:`${output}/correction-label-leaders-mobile.png`});
+await page.locator('#stage').fill('0');await page.locator('#stage').dispatchEvent('input');
+drawn=JSON.parse(await page.locator('#overview').getAttribute('data-drawn-labels'));
+if(drawn.includes('Power result E')||drawn.includes('Next state P+'))throw Error('Planar callout revealed a future point');
+await page.selectOption('#module-select','4');
+if(await page.locator('#next-value').textContent()!==correctionReadout)throw Error('Annotations changed the construction');
 // Returning via a native method must not leave a stale module index.
 await page.locator('#degree').fill('10');await page.selectOption('#method','AK');await page.selectOption('#method','AKfast');
 if(await page.locator('#error').isVisible())throw Error('Stale module after native mode');
