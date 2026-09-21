@@ -9,7 +9,7 @@ or modify the frozen V20 paper or its formal snapshot. Their local orders remain
 
 For W,H>0, use A=(W,H), B=(W,0), the right encoding R(q)=(W,H(1−q)),
 the top encoding X(q)=(W+Hq,H), and the fixed unit U×=(W+H,H).
-The gallery uses W=2,H=4, hence U×=(6,4).
+This is the original Lean specialization λ=H. The historical browser uses U×=(3W,H), so at W=2,H=4 both give U×=(6,4); see the parameterized construction below.
 
 1. Copy R(q) onto the top rail using the parallel to U×B through R(q).
    Its intersection with y=H is X(q).
@@ -52,6 +52,116 @@ O(log p). The original linear protocols retain the degree limit 32;
 binary modes accept safe integers from 3 to 1,000,000. These are browser
 limits, not mathematical restrictions. The adaptive scoring includes pairwise
 comparisons of objects and is consequently O((log p)^2) per binary candidate.
+
+## Spread-fan binary powering
+
+The simple gallery now defaults to **Spread** for the four fast modes. The
+explicit **Classic** option keeps the historical single fan and cached upper
+copies. The API default remains classic for existing callers and archived
+previews: pass `'spread'` as the eighth argument of `construct` to opt in.
+The historical browser center is `(3W,H)`, i.e. λ=2W; the original Lean
+specialization uses λ=H. Both are instances of the same incidence theorem.
+
+For a prepared offset λ>0, use
+
+```
+U_lambda = (W + lambda, H)
+X_lambda(a) = (W + lambda*a, H)
+R(a) = (W, H*(1-a))
+```
+
+Copy R(a) along the parallel to B U_lambda onto the upper rail. Join U_lambda
+to R(b), and draw its parallel through the copy. The final right-rail meet is
+R(ab): the join's slope is Hb/λ, and the horizontal displacement −λa gives the
+vertical displacement −Hab. This works for every λ≠0 when H≠0. `fastCopy` and
+`fastMultiply` compute cross products and rail meets; `fastTopPoint` describes
+the specification only and is never used to construct a product.
+
+For p≤32, the prepared ratios λ/H are 0.4, 1.2 and 3.5. Higher degrees use
+0.4, 0.7, 1.2, 2 and 3.5. Each multiplication constructs all candidate routes
+from its already available rail inputs. A deterministic score considers:
+
+- bounding-box width and height, normalized by H;
+- the minimum nonzero angle and distinct-point separation inside the module;
+- center distance and the number of near-coincidences or small-angle pairs;
+- angular separation from earlier multiplication lines, with extra weight on
+  the preceding line and a penalty for immediately reusing its bank.
+
+No root oracle participates in this decision. The UI says **“Spread routing:
+best among N prepared fan banks.”** The score is a finite engineering heuristic,
+not a theorem of optimality or conditioning. Banks can open successive angles,
+but cannot guarantee separated marks or avoid every small angle, particularly
+near a fixed point or when powers approach the upper rail.
+
+Spread uses one fresh copy per multiplication, so m multiplications cost
+**m J + 2m P**, plus the unchanged correction in the table above. This differs
+from classic's cached-copy cost m J + (m+L) P. Prepared centers, transfer lines
+and certified initialization are setup costs and excluded from both mobile
+counts. The gallery's counters count the actual incidences for each layout.
+There are still exactly **25 geometric multiplications at p=1,000,000**, versus
+999999 linear stages. Routing and its history comparisons take O((log p)^2)
+time with a fixed number of banks; the constructed output has O(log p) objects.
+
+`RectangleFastPower.lean` additionally proves `copyLambda_unique`,
+`multiplierLambda_transverse`, `joinLambda_distinct`, `geometricMulLambda_R`
+and `geometricMulLambda_invariant`. `geometricPowerLambda_eq` allows an arbitrary
+nonzero fan at each node of the binary recursion and proves that its final
+point is R(s^p). This exact statement covers any finite routing choice. The
+existing support-substitution theorems then identify the same four scalar
+maps, with the same residual t=Xs^p and the existing convergence results.
+The separate audit now checks 31 declarations; the frozen paper audits and
+archives are untouched. Neither the JS implementation nor its score is itself
+verified by Lean.
+
+## Paper-oriented modular construction
+
+Choose **Full construction**, **Current module**, or **Paper modules** above
+the drawing. Full shows the complete route. Current hides other multiplication
+strokes in both drawing panes. Paper gives the selected module a full-width
+plane and numbered instructions. Previous/next controls and a module selector
+navigate each multiplication and then the AK/AD/projective/arc correction
+E → P+. Large-degree automatic preparation starts in Current module; Full
+remains available explicitly. The two rails and all mathematical coordinates
+are retained, and each frame uses one common scale for its x and y axes.
+Instructions include the fan ratio and input/copy/output coordinates in units
+of H so that differently framed pages can be transferred at a consistent
+physical scale. Parallels retain the documented ruler-and-compass macro P=2J+3C.
+
+**Paper demo · 10th root of 2000** uses Fast AK with the original X=2000 and
+s=7/16 from `findInitialState`'s certified interval comparisons. It does not
+use a numerical root to choose s. The four modules implement
+`s → s² → s⁴ → s⁵ → s¹⁰`, followed by the existing AK correction. Its genuinely
+narrow rectangle keeps the prepared K finite and within the overview;
+`adaptRectangle` considers W=Hp/max(p,X) as an additional AK candidate.
+The preset does not calibrate the state to 1, which would make every power
+point coincide. Normal gallery initialization continues to use its existing
+calibration and manual-iteration workflow.
+
+The expandable paper measurements refer to the displayed full construction
+or selected module. They report the bounding box, minimum nonzero line angle,
+minimum separation, maximum center distance from the origin, and a count of
+small-angle/near-point pairs. Lengths are divided by H. In the floating-point
+readability measurement, separations ≤10⁻¹² H and angles ≤10⁻⁹ degrees are treated
+as aliases/intentional parallels, not physical resolution certificates. The
+near-point threshold is 0.02 H and the small-angle threshold is 10 degrees.
+The instructions explicitly explain coincident roles such as s=1.
+
+The paper-size heuristic targets 10 mm between distinct points and 10 degrees
+between nonparallel lines. It tries A4, A3, then A2 in either orientation with
+10 mm margins. If separation would require a larger sheet it says **Beyond
+A2**. If the angle target fails it says that magnification cannot fix it.
+Uniform scaling changes neither angles nor normalized ratios. W/H changes
+the rectangle's aspect, while λ/H controls the fan geometry; they are separate
+choices. **Physical precision depends on ruler, compass, line width and
+transfer error.** There is no theorem of physical accuracy or guaranteed
+number of decimal places.
+
+Tests cover 490 parameterized incidence products, 140 spread/classic comparisons,
+the certified p=10 preset, scale-invariant routing, 36 additional initialized
+spread orbits, all four million-degree supports, module navigation, mobile
+layout and the nine historical previews. Browser artifacts include
+`paper-p10-x2000-full.png`, `paper-p10-x2000-module.png`,
+`paper-p10-x2000-paper.png`, and `paper-million-current-module.png`.
 
 ## Finite construction versus conditioning
 

@@ -22,3 +22,28 @@ assert.throws(()=>initializeCalibrated(3,2,'invalid'));
 // AK is a concrete witness that [1/4,4] is not invariant.
 const g=construct('AKfast',1000000,4,1);assert(g.value**1000000*4<.25);
 console.log(JSON.stringify({status:'PASS',rectangle_cases:cases,wide_calibrated_orbits:orbits,euclidean_circles_checked:true}));
+
+// Paper metrics and frames keep the Euclidean geometry; page size is only a heuristic.
+const {paperMetrics}=await import('../docs/geometry.js');
+const {moduleScene,paperRecommendation}=await import('../docs/paper-construction.js');
+for(const p of [10,1000000])for(const mode of ['AKfast','ADfast','projectiveFast','arcFast']){
+ const s=Math.exp(Math.log(.8/2)/p),g=construct(mode,p,2,s,'compact',2,4,'spread'),scaled=construct(mode,p,2,s,'compact',6,12,'spread');
+ assert.deepEqual(g.modules.slice(0,-1).map(m=>m.bank.name),scaled.modules.slice(0,-1).map(m=>m.bank.name));
+ for(let i=0;i<g.modules.length;i++){
+  const a=moduleScene(g,i),b=moduleScene(scaled,i);
+  assert(Math.abs(a.metrics.width-b.metrics.width)<1e-8);
+  assert(Math.abs(a.metrics.height-b.metrics.height)<1e-8);
+  assert(Math.abs(a.metrics.minAngle-b.metrics.minAngle)<1e-6);
+  assert(Number.isFinite(a.metrics.score));assert(a.names.has('A')&&a.names.has('B'));
+  if(i<g.modules.length-1){assert.equal(a.ops.length,3);assert(!a.names.has('K'));assert.equal(a.circles.length,0);}
+  else{assert(a.names.has('E'));assert(a.names.has('Pnext'));}
+ }
+}
+assert.match(paperRecommendation({width:1,height:1,minSeparation:.1,minAngle:20}),/^A4/);
+assert.match(paperRecommendation({width:2.5,height:2.5,minSeparation:.1,minAngle:20}),/^A3/);
+assert.match(paperRecommendation({width:3.5,height:4.5,minSeparation:.1,minAngle:20}),/^A2/);
+assert.match(paperRecommendation({width:100,height:100,minSeparation:.001,minAngle:20}),/Beyond A2/);
+assert.match(paperRecommendation({width:1,height:1,minSeparation:.1,minAngle:1}),/angle target is unmet at every scale/);
+const aliases=paperMetrics([[0,0,1],[0,0,1],[1,0,1]],[[1,1,0],[1,1,1],[1,0,0]],1);
+assert.equal(aliases.aliases,1);assert.equal(aliases.minSeparation,1);assert(Math.abs(aliases.minAngle-45)<1e-10);
+console.log('PASS: modular frames, scale-invariant routing and honest paper-size recommendations');

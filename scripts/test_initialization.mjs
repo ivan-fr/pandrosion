@@ -22,3 +22,9 @@ assert.throws(()=>initializeCalibrated(2,5));assert.throws(()=>initializeCalibra
 for(const s of [.1,10]){const r=residualInterval(1000000,500000,s);assert(r.lo>0n&&r.hi>=r.lo);}
 assert.throws(()=>iterationDecision(1000000,1.5,1,.75));
 console.log(JSON.stringify({status:'PASS',calibrated_orbits:cases,acceptedSteps,exact_integer_reference_cases:28,max_degree:1000000}));
+for(const p of [10,1024,1000000])for(const X of [2,2000,500000])for(const mode of ['AKfast','ADfast','projectiveFast','arcFast']){
+ const r=initializeCalibrated(p,X,'wide');let s=1,stopped=false;
+ for(let n=0;n<20;n++){const g=construct(mode,p,r.X,s,'compact',2,4,'spread'),d=iterationDecision(p,r.X,s,g.value,'wide');if(d.stop){stopped=true;break;}s=g.value;}
+ assert(stopped,`Spread orbit failed to stop: ${mode}, ${p}, ${X}`);
+}
+console.log('PASS: 36 initialized spread orbits through degree one million');

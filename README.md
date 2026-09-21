@@ -39,7 +39,7 @@ bash paper/reciprocal_geometry_v25/build.sh
 
 The PDF build requires Tectonic or `latexmk`. The [V25 guide](paper/reciprocal_geometry_v25/README.md) maps claims to sources and explains the verifier. [Revision notes](paper/reciprocal_geometry_v25/REVISION_NOTES.md) document the review response and proof boundaries. [CITATION.cff](CITATION.cff) provides citation metadata.
 
-The gallery additionally offers geometric binary powering for the four rectangle supports. Automatic initialization and rectangle calibration prepare the display; iteration remains manual. Serve it locally with `python3 -m http.server 8765 --directory docs`.
+The gallery additionally offers geometric binary powering for the four rectangle supports, with prepared spread fans, a historical layout option, and paginated paper instructions. The “Paper demo · 10th root of 2000” follows four multiplication modules; degree 1,000,000 needs 25. Lean certifies invariance under nonzero fan offsets; routing and paper-size advice are readability heuristics, not physical accuracy guarantees. Automatic initialization and rectangle calibration prepare the display; iteration remains manual. Serve it locally with `python3 -m http.server 8765 --directory docs`.
 
 - [Global fixed-circle safeguard: geometry, proof and trace counts](research/fixed_circle_safeguard/README.md)
 - [Fast geometric power: incidences and costs](docs/FAST_POWER_EXPERIMENT.md)

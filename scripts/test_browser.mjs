@@ -3,8 +3,9 @@ import fs from 'node:fs';
 const output=process.env.PREVIEW_OUTPUT || '.ci/browser';
 fs.mkdirSync(output,{recursive:true});
 (async()=>{const b=await chromium.launch({...(process.env.PLAYWRIGHT_CHANNEL ? {channel:process.env.PLAYWRIGHT_CHANNEL}:{}),headless:true});const page=await b.newPage({viewport:{width:1280,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(page.url()+': '+e.message));await page.addInitScript(()=>{
- const proto=CanvasRenderingContext2D.prototype,fill=proto.fillText,clear=proto.clearRect;
- proto.clearRect=function(...args){if(this.canvas.id==='overview')this.canvas.dataset.drawnLabels='[]';return clear.apply(this,args);};
+ const proto=CanvasRenderingContext2D.prototype,fill=proto.fillText,clear=proto.clearRect,stroke=proto.stroke;
+ proto.clearRect=function(...args){if(this.canvas.id==='overview'){this.canvas.dataset.drawnLabels='[]';this.canvas.dataset.strokeCount='0';}return clear.apply(this,args);};
+ proto.stroke=function(...args){if(this.canvas.id==='overview')this.canvas.dataset.strokeCount=String(Number(this.canvas.dataset.strokeCount||0)+1);return stroke.apply(this,args);};
  proto.fillText=function(text,...args){if(this.canvas.id==='overview'){const labels=JSON.parse(this.canvas.dataset.drawnLabels||'[]');labels.push(text);this.canvas.dataset.drawnLabels=JSON.stringify(labels);}return fill.call(this,text,...args);};
 });await page.goto(process.env.PREVIEW_URL || 'http://127.0.0.1:8765/');await page.waitForFunction(()=>document.getElementById('next-value').textContent!=='—');
 // Regression: the decentered arc must render smoothly with automatically selected proportions.
@@ -19,6 +20,7 @@ await page.selectOption('#method','AKfast');await page.selectOption('#view','pla
 // Automatic preparation only: no hidden iteration, unchanged original input, one click = one step.
 await page.locator('#degree').fill('1000000');await page.locator('#target').fill('500000');await page.locator('#target').dispatchEvent('change');
 if(await page.locator('#error').isVisible())throw Error('Automatic preparation failed');
+if(await page.locator('#power-display').inputValue()!=='current')throw Error('Large degree should default to one module');
 if(await page.locator('#advanced').getAttribute('open')!==null)throw Error('Advanced controls exposed');
 if(await page.locator('#state').inputValue()!=='1')throw Error('Unexpected automatic iteration');
 await page.waitForTimeout(300);if(await page.locator('#state').inputValue()!=='1')throw Error('Background solver must not run');
@@ -73,5 +75,63 @@ if(await page.locator('#error').isVisible())throw Error('Initialized iteration f
 await page.screenshot({path:`${output}/initialized-million.png`,fullPage:true});
 await page.locator('#rect-width').fill('8');await page.locator('#rect-width').dispatchEvent('change');if(await page.locator('#error').isVisible())throw Error('Manual rectangle failed');await page.click('#adapt-rectangle');if(await page.locator('#error').isVisible())throw Error('Rectangle adaptation failed');
 await page.setViewportSize({width:360,height:900});await page.screenshot({path:`${output}/gallery-mobile.png`,fullPage:true});const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);if(overflow)throw Error('Mobile overflow');
+// Prepared fans and paginated paper construction are available without advanced controls.
+await page.setViewportSize({width:1280,height:1100});
+await page.click('#paper-demo');
+if(await page.locator('#error').isVisible())throw Error('Paper demo failed');
+if(await page.locator('#exploration').isChecked()||await page.locator('#advanced').getAttribute('open')!==null)throw Error('Paper demo is not in the simple gallery');
+if(await page.locator('#target').inputValue()!=='2000'||await page.locator('#working-target').inputValue()!=='2000'||await page.locator('#degree').inputValue()!=='10')throw Error('Paper demo parameters changed');
+if(await page.locator('#state').inputValue()!=='0.4375')throw Error('Paper demo must use certified initialization');
+if(await page.locator('#view').inputValue()!=='plane')throw Error('Spread demo incorrectly switched to sphere');
+if(!(await page.locator('#routing-status').textContent()).includes('best among 3 prepared fan banks'))throw Error('Missing routing scope');
+const headings=await page.locator('#module-select option').allTextContents();
+if(headings.length!==5||!headings[2].includes('s^4 → s^5')||!headings[4].includes('AK correction'))throw Error('Wrong paper schedule');
+const shot=async name=>{await page.locator('#paper-controls').evaluate(el=>el.scrollIntoView({block:'start'}));await page.screenshot({path:`${output}/${name}.png`});};
+await shot('paper-p10-x2000-full');
+const originalNext=await page.locator('#next-value').textContent();
+await page.selectOption('#power-display','current');await page.selectOption('#module-select','2');
+if(await page.locator('#overview').getAttribute('data-visible-operations')!=='3')throw Error('Current module contains prior strokes');
+if(Number(await page.locator('#overview').getAttribute('data-stroke-count'))>8)throw Error('Prior lines actually rendered in module');
+drawn=JSON.parse(await page.locator('#overview').getAttribute('data-drawn-labels'));
+if(!drawn.includes('Stored s')||!drawn.includes('Fan B')||drawn.includes('K'))throw Error('Wrong module inputs/center');
+await shot('paper-p10-x2000-module');
+await page.click('#module-next');if(!(await page.locator('#module-heading').textContent()).includes('s^5 → s^10'))throw Error('Next module failed');
+await page.click('#module-next');if(!(await page.locator('#module-heading').textContent()).includes('AK correction')||!await page.locator('#module-next').isDisabled())throw Error('Missing final correction');
+await page.click('#module-prev');await page.click('#module-prev');
+await page.selectOption('#power-display','paper');
+if(await page.locator('.detail').isVisible())throw Error('Paper module not isolated');
+if((await page.locator('#module-instructions li').count())!==4)throw Error('Missing paper instructions');
+await shot('paper-p10-x2000-paper');
+if(await page.locator('#next-value').textContent()!==originalNext)throw Error('Display change mutated readout');
+await page.selectOption('#power-layout','classic');
+if(await page.locator('#error').isVisible()||Math.abs(Number(await page.locator('#next-value').textContent())-Number(originalNext))>2e-7)throw Error('Classic layout regression');
+await page.selectOption('#power-layout','spread');
+// Exact module pages stay interactive for every support at the largest supported degree.
+await page.locator('#degree').fill('1000000');await page.locator('#target').fill('500000');await page.locator('#target').dispatchEvent('change');
+await page.locator('#target').blur();await page.selectOption('#power-display','current');
+for(const mode of ['AKfast','ADfast','projectiveFast','arcFast']){
+ await page.selectOption('#method',mode);
+ if(await page.locator('#error').isVisible()||await page.locator('#view').inputValue()!=='plane')throw Error('Million-degree spread construction failed: '+mode);
+ if(!(await page.locator('#power-count').textContent()).includes('25 geometric multiplications instead of 999999 linear stages.'))throw Error('Wrong million count');
+ if(await page.locator('#module-select option').count()!==26)throw Error('Missing million modules');
+ await page.selectOption('#module-select','24');await page.click('#module-next');
+ if(!(await page.locator('#module-heading').textContent()).includes('correction'))throw Error('Million correction inaccessible');
+ await page.click('#module-prev');await page.click('#iterate');
+ if(await page.locator('#error').isVisible())throw Error('Million interaction failed');
+}
+await page.selectOption('#method','AKfast');await page.selectOption('#module-select','12');
+await shot('paper-million-current-module');
+for(const display of ['full','current','paper']){
+ await page.selectOption('#power-display',display);await page.setViewportSize({width:360,height:900});
+ if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1))throw Error('Paper mobile overflow: '+display);
+ if(display!=='full'){await page.click('#module-next');await page.click('#module-prev');}
+}
+await page.screenshot({path:`${output}/paper-mobile.png`,fullPage:true});
+// Returning via a native method must not leave a stale module index.
+await page.locator('#degree').fill('10');await page.selectOption('#method','AK');await page.selectOption('#method','AKfast');
+if(await page.locator('#error').isVisible())throw Error('Stale module after native mode');
+await page.selectOption('#power-display','full');
+await page.locator('#advanced > summary').click();await page.locator('#exploration').check();
+
 const links=await page.locator('.gallery-links a').evaluateAll(a=>a.map(x=>x.href));for(const url of links){await page.goto(url);await page.waitForTimeout(150);if((await page.locator('body').innerText()).includes('Error response'))throw Error('Missing '+url);}
-if(errors.length)throw Error(errors.join('\n'));console.log(JSON.stringify({status:'PASS',methods:11,archive_previews:links.length,mobile_width:360,infinity_and_domain_checked:true}));await b.close();})().catch(e=>{console.error(e);process.exit(1)});
+if(errors.length)throw Error(errors.join('\n'));console.log(JSON.stringify({status:'PASS',methods:11,archive_previews:links.length,mobile_width:360,paper_views:3,million_modules:26,infinity_and_domain_checked:true}));await b.close();})().catch(e=>{console.error(e);process.exit(1)});
