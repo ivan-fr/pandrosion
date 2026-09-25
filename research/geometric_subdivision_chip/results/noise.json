@@ -1,0 +1,50 @@
+[
+  {
+    "device": "generic",
+    "kind": "mean",
+    "band_Hz": [
+      1,
+      1000000000.0
+    ],
+    "output_voltage_noise_V": 0.00033711272540482316,
+    "equivalent_current_noise_A": 3.3711272540482316e-07,
+    "scope": "small-signal BJT/resistor noise around computed DC point; not transient noise or input-reference/converter noise",
+    "error": null
+  },
+  {
+    "device": "generic",
+    "kind": "root",
+    "band_Hz": [
+      1,
+      1000000000.0
+    ],
+    "output_voltage_noise_V": 0.07137887851129113,
+    "equivalent_current_noise_A": 7.137887851129113e-05,
+    "scope": "small-signal BJT/resistor noise around computed DC point; not transient noise or input-reference/converter noise",
+    "error": null
+  },
+  {
+    "device": "sky130",
+    "kind": "mean",
+    "band_Hz": [
+      1,
+      1000000000.0
+    ],
+    "output_voltage_noise_V": 0.000347166104738193,
+    "equivalent_current_noise_A": 3.47166104738193e-07,
+    "scope": "small-signal BJT/resistor noise around computed DC point; not transient noise or input-reference/converter noise",
+    "error": null
+  },
+  {
+    "device": "sky130",
+    "kind": "root",
+    "band_Hz": [
+      1,
+      1000000000.0
+    ],
+    "output_voltage_noise_V": 0.6318530116116711,
+    "equivalent_current_noise_A": 0.0006318530116116711,
+    "scope": "small-signal BJT/resistor noise around computed DC point; not transient noise or input-reference/converter noise",
+    "error": null
+  }
+]

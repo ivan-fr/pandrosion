@@ -1,0 +1,6 @@
+'LeanMath.Papers.GeometricSubdivision.homogeneous_P' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.GeometricSubdivision.homogeneous_Q' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.GeometricSubdivision.homogeneous_weights' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.GeometricSubdivision.constructed_root_bracket' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,20 @@
+[
+  {
+    "error": "Command '['/opt/homebrew/bin/ngspice', '-b', 'circuit.cir']' timed out after 45 seconds",
+    "kind": "root",
+    "p": 3.7,
+    "X": 2,
+    "n": 6,
+    "ramp": true,
+    "id": "ramp_3.7"
+  },
+  {
+    "error": "Command '['/opt/homebrew/bin/ngspice', '-b', 'circuit.cir']' timed out after 45 seconds",
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000,
+    "n": 6,
+    "ramp": true,
+    "id": "ramp_1000000.0"
+  }
+]

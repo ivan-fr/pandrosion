@@ -1,0 +1,133 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * mean level=t2 device=generic
+
+Doing analysis at TEMP = 25.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vcc                                          4
+vee                                       -2.5
+vb                                        1.65
+vcn                                       -0.1
+vcp                                        1.6
+clampn                                    -0.8
+clampp                                     2.3
+n_unit                                -1.13527
+n_a                                   -1.13491
+n_b                                   -1.11552
+gm_ac1                                 1.36577
+gm_a1                                 0.703469
+gm_ac1_in                              1.36577
+gm_dc1                                    1.65
+gm_b1                              -0.00907651
+gm_b1_sk                           -0.00907651
+gm_ac2                                   1.375
+gm_a2                                 0.712339
+gm_ac2_in                                1.375
+gm_cc                                  2.62219
+gm_c                                   2.62219
+n_gmtrim_s                            -1.12555
+n_gmtrim                              -1.12555
+n_gmtrim_k                            -1.12555
+n_meas                               0.0140897
+n_load                               0.0140897
+mp_unit_hc                                -2.5
+unit_pin                               2.77056
+mp_unit_x                              3.43007
+unit_pin_d                             2.77056
+mp_unit_e0                             2.16897
+mn_unit_hc                                   4
+mn_unit_x                             -1.79634
+n_unit_d                              -1.13527
+mn_unit_e0                           -0.803031
+mp_a_hc                                   -2.5
+a_pin                                  2.63412
+mp_a_x                                  3.2965
+a_pin_d                                2.63412
+mp_a_e0                                2.30358
+mn_a_hc                                      4
+mn_a_x                                -1.79634
+n_a_d                                 -1.13491
+mn_a_e0                               -0.80307
+mp_b_hc                                   -2.5
+b_pin                                  2.61356
+mp_b_x                                 3.27853
+b_pin_d                                2.61356
+mp_b_e0                                2.32153
+mn_b_hc                                      4
+mn_b_x                                 -1.7784
+n_b_d                                 -1.11552
+mn_b_e0                              -0.821784
+mn_b_e1                              -0.821006
+mn_gm_hc                                     4
+gm_nin                                -1.12574
+mn_gm_x                               -1.78748
+gm_nin_d                              -1.12574
+mn_gm_e0                             -0.812707
+mp_gm_hc                                  -2.5
+mp_gm_x                                3.28746
+gm_c_d                                 2.62219
+mp_gm_e0                               2.31141
+mp_gm_e1                               2.31141
+mp_gmtrim_hc                              -2.5
+gmtrim_pin                             2.62394
+mp_gmtrim_x                            3.28744
+gmtrim_pin_d                           2.62394
+mp_gmtrim_e0                           2.31197
+mn_gmtrim_hc                                 4
+mn_gmtrim_x                            -1.7873
+n_gmtrim_d                            -1.12555
+mn_gmtrim_e0                         -0.812115
+vmn_gmtrim_in#branch               1.41792e-05
+vmn_gmtrim_hc#branch               2.07714e-06
+vmp_gmtrim_in#branch               1.41659e-05
+vmp_gmtrim_hc#branch               2.30495e-06
+vmp_gm_in#branch                    1.4156e-05
+vmp_gm_hc#branch                   2.46806e-06
+vmn_gm_in#branch                   1.40774e-05
+vmn_gm_hc#branch                   2.07655e-06
+vmn_b_in#branch                    1.99942e-05
+vmn_b_hc#branch                    2.16966e-06
+vmp_b_in#branch                    1.99795e-05
+vmp_b_hc#branch                    2.43968e-06
+vmn_a_in#branch                     9.9947e-06
+vmn_a_hc#branch                    2.05263e-06
+vmp_a_in#branch                    9.98144e-06
+vmp_a_hc#branch                    2.20819e-06
+vmn_unit_in#branch                 9.99479e-06
+vmn_unit_hc#branch                 2.02361e-06
+vmp_unit_in#branch                 5.68896e-08
+vmp_unit_hc#branch                 1.98037e-06
+vmeas#branch                       1.40897e-05
+vgmtrim_snks#branch                          0
+vgmtrim_srcs#branch                1.41847e-05
+vgm_out#branch                      1.4182e-05
+vgm_inj2#branch                    1.98582e-05
+vgm_snk1#branch                    3.40902e-05
+vgm_flw1#branch                    1.41387e-05
+vgm_inj1#branch                    9.92844e-06
+vclampp#branch                     6.70295e-08
+vclampn#branch                    -1.30652e-09
+vcp#branch                         8.26408e-07
+vcn#branch                        -2.26584e-07
+vb#branch                         -1.41387e-05
+vee#branch                         0.000172598
+vcc#branch                        -0.000197389
+
+ Reference value :  3.07863e-07
+ Reference value :  5.42868e-07
+ Reference value :  7.86964e-07
+ Reference value :  1.03255e-06
+ Reference value :  1.27845e-06
+ Reference value :  1.52453e-06
+ Reference value :  1.76510e-06
+No. of Data Rows : 49001
+ngspice-46 done

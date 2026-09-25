@@ -1,0 +1,245 @@
+* mean level=T2 device=sky130
+.options reltol=1e-6 abstol=1e-13 vntol=1e-8 chgtol=1e-16 gmin=1e-15 method=gear
+.temp 25
+Vcc vcc 0 4.0
+Vee vee 0 -2.5
+Vb vb 0 1.65
+Vcn vcn 0 -0.1
+Vcp vcp 0 1.6
+.model DCL D(Is=1e-15 n=1 Cjo=5f)
+Vclampn clampn 0 -0.8
+Vclampp clampp 0 2.3
+* PNP nominal; selected NPN corner only. Continuous BJT area is an adapter assumption.
+.param mult=1 area=1
+.param dkispp5x=1.0046
+.param dkbfpp5x=1.1288
+.param dkisepp5x=0.745
+.param dknfpp5x=1.0009
+.param sky130_fd_pr__model__parasitic__diode_pw2dn__ajunction_mult=0.982
+.param sky130_fd_pr__pfet_01v8__pjunction_mult=1.0009
+.param sky130_fd_pr__model__parasitic__diode_ps2nw__ajunction_mult=0.98286
+.param sky130_fd_pr__pfet_01v8__ajunction_mult=0.99626
+.param sky130_fd_pr__nfet_01v8__ajunction_mult=0.99543
+.param sky130_fd_pr__model__parasitic__diode_ps2nw__pjunction_mult=0.98954
+.param sky130_fd_pr__model__parasitic__diode_ps2dn__pjunction_mult=1.0116
+* Copyright 2020 The SkyWater PDK Authors
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     https://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+
+* SKY130 Spice File.
+*  Typical Parameters
+.param
++ dkisnpn1x1=8.7913e-01 dkbfnpn1x1=9.8501e-01
++ dkisnpn1x2=9.0950e-01 dkbfnpn1x2=9.6759e-01
++ dkisnpnpolyhv=1.0 dkbfnpnpolyhv=1.0
+* Copyright 2020 The SkyWater PDK Authors
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     https://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+
+* SKY130 Spice File.
+.param sky130_fd_pr__npn_05v5_W1p00L1p00__is_slope_spectre = 0.0
+.param sky130_fd_pr__npn_05v5_W1p00L1p00__bf_slope_spectre = 0.0
+* statistics {
+*   mismatch {
+*     vary  sky130_fd_pr__npn_05v5_W1p00L1p00__is_slope_spectre dist=gauss std=1.0
+*     vary  sky130_fd_pr__npn_05v5_W1p00L1p00__bf_slope_spectre dist=gauss std=1.0
+*   }
+* }
+.param  mult = 1 area = 1.0
+.model QN npn level = 1.0
+* General Parameters
++ tref = 30.0
+* Capacitance Parameters
++ dcap = 2 cjc = '1.73302e-014*sky130_fd_pr__model__parasitic__diode_pw2dn__ajunction_mult' cje = '5.4899e-015*sky130_fd_pr__nfet_01v8__ajunction_mult'
++ cjs = '3.03477e-014*sky130_fd_pr__model__parasitic__diode_ps2dn__pjunction_mult' fc = 0.5 mjc = 0.33982 mje = 0.44
++ mjs = 0.49 vjc = 0.58758 vje = 0.729 vjs = 0.5348
++ xcjc = 1 itf = '2.6e-03+4e-3' ptf = 20 tf = '7.24041e-011+2e-11'
++ tr = 0 vtf = '0.5+0.2' xtf = '2.0-0.9'
+* Noise Parameters
++ af = 1.523963 kf = 6.1811298e-11
+* DC Parameters
++ is = '4.5584e-018*dkisnpn1x1 + sky130_fd_pr__npn_05v5_W1p00L1p00__is_slope_spectre*(4.5584e-018*dkisnpn1x1*0.00473/sqrt(mult))' subs = 1 rb = 602.54 re = 30.0
++ irb = 7.4e+020 rc = 320.4 rbm = 0 bf = '39.28*dkbfnpn1x1 + sky130_fd_pr__npn_05v5_W1p00L1p00__bf_slope_spectre*(39.28*dkbfnpn1x1*0.05237/sqrt(mult))'
++ nf = 1.0394 vaf = 100 ikf = 0.00083757 ise = 3.2947e-16
++ ne = 1.792 ns = 1.0 br = 1 ibc = 0.0
++ iss = 0 nr = 0.8976 var = 0 ikr = 3.679e-7
++ nkf = 0.5 isc = 0 nc = 2.0
+* Temperature Parameters
++ xtb = 0 xti = 1.0713 eg = 1.188 gap1 = 0.0
++ gap2 = 0 ctc = 0.0
++ cte = 0 cts = 0 tlev = 0 tlevc = 0.0
++ tvjc = 0 tvje = 0 tvjs = 0.0
++ tis1 = 0 tise1 = 0 tisc1 = 0.0
++ tnf1 = 4.208e-005 tnr1 = -0.0011234 tne1 = 0 tnc1 = 0.0
++ tbf1 = 0.00776 tbr1 = 0 tiss1 = 0 tvaf1 = 0.0
++ tvar1 = 0 tikf1 = -0.0074 tikr1 = 0 tns1 = 0.0
++ trb1 = 0 trc1 = 0 tre1 = 0 tirb1 = 0.0
++ trm1 = 0 tmjc1 = 0 tmje1 = 0 tmjs1 = 0.0
++ ttf1 = 0 titf1 = 0 ttr1 = 0 tis2 = 4.0e-12
++ tise2 = 0 tisc2 = 0 tnf2 = -3.372e-007 tnr2 = -2.274e-6
++ tne2 = 0 tnc2 = 0 tbf2 = 6.48e-006 tbr2 = 0.0
++ tiss2 = 0 tvaf2 = 0 tvar2 = 0 tikf2 = 4.0e-5
++ tikr2 = 0 tns2 = 0 trb2 = 0 trc2 = 0.0
++ tre2 = 0 tirb2 = 0 trm2 = 0 tmjc2 = 0.0
++ tmje2 = 0 tmjs2 = 0 ttf2 = 0.0
+* Copyright 2020 The SkyWater PDK Authors
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     https://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+
+* SKY130 Spice File.
+* statistics {
+*   mismatch {
+*   }
+* }
+.param sky130_fd_pr__pnp_05v5_W3p40L3p40__bf_slope = 0.0
+.param sky130_fd_pr__pnp_05v5_W3p40L3p40__is_slope = 0.0
+.param sky130_fd_pr__pnp_05v5_W3p40L3p40__xti_slope = 0.0
+*  statistics {
+*   mismatch {
+*     vary  sky130_fd_pr__pnp_05v5_W3p40L3p40__bf_slope dist=gauss std=0.05537
+*     vary  sky130_fd_pr__pnp_05v5_W3p40L3p40__is_slope dist=gauss std=0.01662
+*     vary  sky130_fd_pr__pnp_05v5_W3p40L3p40__xti_slope dist=gauss std=0.06
+*   }
+* }
+.param  mult = 1.0
++ sky130_fd_pr__pnp_05v5_W3p40L3p40__bf_mm = {(16.603*dkbfpp5x*sky130_fd_pr__pnp_05v5_W3p40L3p40__bf_slope*0.45/sqrt(mult))}
++ sky130_fd_pr__pnp_05v5_W3p40L3p40__is_mm = {(7.1190e-018*1.00*dkispp5x*sky130_fd_pr__pnp_05v5_W3p40L3p40__is_slope*0.13/sqrt(mult))}
++ sky130_fd_pr__pnp_05v5_W3p40L3p40__xti_mm = {(5*sky130_fd_pr__pnp_05v5_W3p40L3p40__xti_slope/sqrt(mult))}
+.model QP pnp level = 1.0
+* General Parameters
++ tref = 30 subs = 1.0
+* Capacitance Parameters
++ cjc = '9.155e-17*5.17*5.17*sky130_fd_pr__model__parasitic__diode_ps2nw__ajunction_mult+5.822e-16*4*5.17*sky130_fd_pr__model__parasitic__diode_ps2nw__pjunction_mult' cje = '7.4079e-16*3.4*3.4*sky130_fd_pr__pfet_01v8__ajunction_mult+9.88e-17*4*3.4*sky130_fd_pr__pfet_01v8__pjunction_mult' cjs = 0.0
++ fc = 0.5 mjc = 0.24 mje = 0.3 mjs = 0.24
++ vjc = 0.54 vje = 0.74 vjs = 0.54 xcjc = 1.0
++ ptf = 0 tf = 6.15385e-010 tr = 5e-008 vtf = 1.0e-12
++ xtf = 0.0
+* Noise Parameters
++ af = 1.30180 kf = 4.9435066e-11
+* DC Parameters
++ is = '7.1190e-018*dkispp5x+sky130_fd_pr__pnp_05v5_W3p40L3p40__is_mm' rb = 73.32 re = 5.3848 irb = 0.0002
++ rc = 100.0 rbm = 25.19 bf = '16.603*dkbfpp5x+sky130_fd_pr__pnp_05v5_W3p40L3p40__bf_mm' nf = '1.000*dknfpp5x'
++ vaf = 111.6 ikf = 0.00038589 ise = '1.0310e-015*dkisepp5x' ne = 1.64
++ ns = 1 br = 0.2675 iss = 0 nr = 1.0
++ var = 4.3 ikr = 0.0043 nkf = 0.426 isc = 1.9855e-15
++ nc = 1.000
+* Temperature Parameters
++ xtb = 1.692 xti = '5.0+sky130_fd_pr__pnp_05v5_W3p40L3p40__xti_mm' eg = 1.125 tnf1 = 5.972e-6
++ tikf1 = -0.002456 tnf2 = -3.0e-8
+Iunit vcc n_unit 1.0000000000000001e-05
+Ia vcc n_a 1.0000000000000001e-05
+Ib vcc n_b 2.0000000000000002e-05
+Qgm_u1 gm_ac1 gm_a1 0 vee QN area=1
+Qgm_h1 vcc gm_ac1 gm_a1 vee QN area=1
+Ibleed_gm_h1 gm_a1 vee 2e-06
+Vgm_inj1 gm_ac1_in gm_ac1 0
+Qgm_d1 gm_dc1 gm_a1 gm_b1 vee QN area=1
+Vgm_flw1 vb gm_dc1 0
+Vgm_snk1 gm_b1 gm_b1_sk 0
+Qgm_u2 gm_ac2 gm_a2 gm_b1 vee QN area=1
+Qgm_h2 vcc gm_ac2 gm_a2 vee QN area=1
+Ibleed_gm_h2 gm_a2 vee 2e-06
+Vgm_inj2 gm_ac2_in gm_ac2 0
+Qgm_d2 gm_cc gm_a2 0 vee QN area=1
+Vgm_out gm_c gm_cc 0
+Vmeas n_meas n_load 0
+Rload n_load 0 1000
+Cload n_load 0 9.9999999999999998e-13
+Qmn_unit_h mn_unit_hc n_unit mn_unit_x vee QN area=1
+Vmn_unit_hc vcc mn_unit_hc 0
+Ibleed_mn_unit mn_unit_x vee 2e-06
+Dcl_mn_unit clampn n_unit DCL
+Vmn_unit_in n_unit n_unit_d 0
+Qmn_unit_d n_unit_d mn_unit_x vee vee QN area=1
+Qmp_a_h mp_a_hc a_pin mp_a_x vcc QP area=1
+Vmp_a_hc mp_a_hc vee 0
+Ibleed_mp_a vcc mp_a_x 2e-06
+Dcl_mp_a a_pin clampp DCL
+Vmp_a_in a_pin_d a_pin 0
+Qmp_a_d a_pin_d mp_a_x vcc vcc QP area=1
+Qmp_a_o0 mp_a_e0 mp_a_x vcc vcc QP area=1
+Qmp_a_c0 gm_ac1_in vcp mp_a_e0 vcc QP area=1
+Qmn_a_h mn_a_hc n_a mn_a_x vee QN area=1
+Vmn_a_hc vcc mn_a_hc 0
+Ibleed_mn_a mn_a_x vee 2e-06
+Dcl_mn_a clampn n_a DCL
+Vmn_a_in n_a n_a_d 0
+Qmn_a_d n_a_d mn_a_x vee vee QN area=1
+Qmn_a_o0 mn_a_e0 mn_a_x vee vee QN area=1
+Qmn_a_c0 a_pin vcn mn_a_e0 vee QN area=1
+Qmp_b_h mp_b_hc b_pin mp_b_x vcc QP area=1
+Vmp_b_hc mp_b_hc vee 0
+Ibleed_mp_b vcc mp_b_x 2e-06
+Dcl_mp_b b_pin clampp DCL
+Vmp_b_in b_pin_d b_pin 0
+Qmp_b_d b_pin_d mp_b_x vcc vcc QP area=1
+Qmp_b_o0 mp_b_e0 mp_b_x vcc vcc QP area=1
+Qmp_b_c0 gm_ac2_in vcp mp_b_e0 vcc QP area=1
+Qmn_b_h mn_b_hc n_b mn_b_x vee QN area=1
+Vmn_b_hc vcc mn_b_hc 0
+Ibleed_mn_b mn_b_x vee 2e-06
+Dcl_mn_b clampn n_b DCL
+Vmn_b_in n_b n_b_d 0
+Qmn_b_d n_b_d mn_b_x vee vee QN area=1
+Qmn_b_o0 mn_b_e0 mn_b_x vee vee QN area=1
+Qmn_b_c0 gm_b1_sk vcn mn_b_e0 vee QN area=1
+Qmn_b_o1 mn_b_e1 mn_b_x vee vee QN area=1
+Qmn_b_c1 b_pin vcn mn_b_e1 vee QN area=1
+Qmn_gm_h mn_gm_hc gm_nin mn_gm_x vee QN area=1
+Vmn_gm_hc vcc mn_gm_hc 0
+Ibleed_mn_gm mn_gm_x vee 2e-06
+Dcl_mn_gm clampn gm_nin DCL
+Vmn_gm_in gm_nin gm_nin_d 0
+Qmn_gm_d gm_nin_d mn_gm_x vee vee QN area=1
+Qmn_gm_o0 mn_gm_e0 mn_gm_x vee vee QN area=1
+Qmn_gm_c0 gm_b1_sk vcn mn_gm_e0 vee QN area=1
+Qmp_gm_h mp_gm_hc gm_c mp_gm_x vcc QP area=1
+Vmp_gm_hc mp_gm_hc vee 0
+Ibleed_mp_gm vcc mp_gm_x 2e-06
+Dcl_mp_gm gm_c clampp DCL
+Vmp_gm_in gm_c_d gm_c 0
+Qmp_gm_d gm_c_d mp_gm_x vcc vcc QP area=1
+Qmp_gm_o0 mp_gm_e0 mp_gm_x vcc vcc QP area=1
+Qmp_gm_c0 n_meas vcp mp_gm_e0 vcc QP area=1
+Qmp_gm_o1 mp_gm_e1 mp_gm_x vcc vcc QP area=1
+Qmp_gm_c1 gm_nin vcp mp_gm_e1 vcc QP area=1
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=17
+tran 1.0000000000000001e-09 1.9999999999999999e-06 0 1.0000000000000001e-09
+wrdata trace.txt i(Vmeas) i(vcc) i(vee) i(vb) i(vcn) i(vcp) i(vclampn) i(vclampp)
+quit
+.endc
+.end

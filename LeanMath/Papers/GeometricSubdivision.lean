@@ -259,4 +259,29 @@ theorem constructed_root_bracket {X p : ℝ} (hX : 1 ≤ X) (hp : 1 ≤ p) (n : 
   linarith [hs.2.2]
  exact real_root_bracket hX hp hab hs.1 hs.2.1
 
+/-- Positive-current implementation: no subtraction of adjacent rails in P. -/
+theorem homogeneous_P (t A B : ℝ) (hA : A ≠ 0) :
+ A^2 * P t (B/A-1) = (t+1)*(t+2)*B^2 + (8-2*t^2)*A*B + (t-1)*(t-2)*A^2 := by
+ unfold P
+ field_simp
+ ring
+
+/-- The same positive monomials, with the outside coefficients exchanged. -/
+theorem homogeneous_Q (t A B : ℝ) (hA : A ≠ 0) :
+ A^2 * Q t (B/A-1) = (t-1)*(t-2)*B^2 + (8-2*t^2)*A*B + (t+1)*(t+2)*A^2 := by
+ unfold Q
+ field_simp
+ ring
+
+/-- All three programmable mirror weights are nonnegative. -/
+theorem homogeneous_weights {t : ℝ} (h0 : 0 ≤ t) (h1 : t ≤ 1) :
+ 0 ≤ (t+1)*(t+2)/12 ∧ 0 ≤ (8-2*t^2)/12 ∧ 0 ≤ (t-1)*(t-2)/12 := by
+ have hs : t^2 ≤ 1 := by nlinarith [mul_nonneg h0 (sub_nonneg.mpr h1)]
+ have hn : 0 ≤ (t-1)*(t-2) := mul_nonneg_of_nonpos_of_nonpos (by linarith) (by linarith)
+ constructor
+ · positivity
+ constructor
+ · apply div_nonneg <;> linarith
+ · positivity
+
 end LeanMath.Papers.GeometricSubdivision
