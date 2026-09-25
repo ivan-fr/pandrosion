@@ -129,6 +129,7 @@ jobs:
           done
       - run: python3 scripts/build_lean.py --phase final
       - run: python3 scripts/audit_lean.py
+      - run: python3 scripts/audit_geometric_subdivision.py
       - run: python3 scripts/audit_fast_power.py
       - run: python3 scripts/audit_circle_safeguard.py
       - run: python3 scripts/audit_branch.py
@@ -341,3 +342,30 @@ jobs:
             research/analog_fast_ad/speed_accuracy.png
             research/analog_fast_ad/speed_accuracy.svg
             research/analog_fast_ad/SPEED_ACCURACY.md
+
+  geometric-subdivision-spice:
+    name: Geometric subdivision analog feasibility
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y ngspice
+      - run: pip install -r research/geometric_subdivision/requirements.txt
+      - run: python research/geometric_subdivision/spice.py
+      - run: python research/geometric_subdivision/validate.py
+      - run: python research/geometric_subdivision/stress.py
+      - run: python research/geometric_subdivision/accuracy_campaign.py
+      - run: python research/geometric_subdivision/report.py
+      - run: python research/geometric_subdivision/check_results.py
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: geometric-subdivision-results
+          path: |
+            research/geometric_subdivision/**/*.json
+            research/geometric_subdivision/figures/
+            research/geometric_subdivision/examples/
+            research/geometric_subdivision/README.md

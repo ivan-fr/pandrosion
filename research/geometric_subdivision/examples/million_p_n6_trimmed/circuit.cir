@@ -1,0 +1,81 @@
+Geometric subdivision: multiplier-feedback square-root cells
+.options reltol=1e-9 abstol=1e-13 vntol=1e-10 method=gear
+Vunit unit 0 1
+Vx x 0 1.9073486328125
+Vweight w 0 6.389617919921875e-05
+Bm0 0 m0 I=min(0.001,max(-0.001,0.00010409023889143037*((1*v(unit)*v(x)*(0.99998922485431796)+(-4.9451310142732693e-06))-v(m0)*v(m0))))+1.0409023889143036e-11*sin(6.28318530718*1e6*time+0)
+Cm0 m0 0 1.9555785948846697e-11 IC=1
+Rlm0 m0 0 10000000000
+Bm1 0 m1 I=min(0.001,max(-0.001,0.00010350014092319067*((2*v(unit)*v(m0)*(1.0000124868905289)+(-1.6389302326059454e-06))-v(m1)*v(m1))))+1.0350014092319068e-11*sin(6.28318530718*1e6*time+1)
+Cm1 m1 0 1.8026311909641322e-11 IC=1
+Rlm1 m1 0 10000000000
+Bm2 0 m2 I=min(0.001,max(-0.001,9.7908112397136572e-05*((1*v(unit)*v(m1)*(1.0000069303724755)+(1.1457475690155169e-07))-v(m2)*v(m2))))+9.7908112397136576e-12*sin(6.28318530718*1e6*time+2)
+Cm2 m2 0 2.0642860708002449e-11 IC=1
+Rlm2 m2 0 10000000000
+Bm3 0 m3 I=min(0.001,max(-0.001,0.00010108812160449528*((1*v(unit)*v(m2)*(0.99998482738205796)+(-1.4567691037692222e-06))-v(m3)*v(m3))))+1.0108812160449528e-11*sin(6.28318530718*1e6*time+3)
+Cm3 m3 0 1.947071085254192e-11 IC=1
+Rlm3 m3 0 10000000000
+Bm4 0 m4 I=min(0.001,max(-0.001,0.00010064072289534313*((2*v(unit)*v(m3)*(1.000009877637976)+(1.248841123387777e-06))-v(m4)*v(m4))))+1.0064072289534313e-11*sin(6.28318530718*1e6*time+4)
+Cm4 m4 0 1.9753434827094506e-11 IC=1
+Rlm4 m4 0 10000000000
+Bm5 0 m5 I=min(0.001,max(-0.001,9.7012668116527284e-05*((1*v(unit)*v(m4)*(0.99998772961028637)+(3.9045861555072013e-06))-v(m5)*v(m5))))+9.701266811652728e-12*sin(6.28318530718*1e6*time+5)
+Cm5 m5 0 2.0480774731327105e-11 IC=1
+Rlm5 m5 0 10000000000
+Bratio 0 ratio I=min(0.001,max(-0.001,1e-4*(1*v(m5)*0.99998382492103877+(2.8350372195380438e-06)-v(unit)*v(ratio))))
+Cratio ratio 0 20p IC=1
+Rlratio ratio 0 10000000000
+Bzsrc zsrc 0 V=(v(ratio)-1)*(0.99999214592563224)+(-6.1001913852866826e-07)
+Rz zsrc z 10000
+Cz z 0 20p IC=0
+Rlz z 0 10000000000
+Bz2src z2src 0 V=(v(z)*v(z))*(0.99999343290416887)+(-7.2943679549983988e-07)
+Rz2 z2src z2 10000
+Cz2 z2 0 20p IC=0
+Rlz2 z2 0 10000000000
+Bqlsrc qlsrc 0 V=(1+(1-v(w)/2)*v(z)+(v(w)-1)*(v(w)-2)*v(z2)/12)*(0.99997937888374189)+(-2.2169497297265215e-06)
+Rql qlsrc ql 10000
+Cql ql 0 20p IC=0
+Rlql ql 0 10000000000
+Bqusrc qusrc 0 V=(1+(1-(1-v(w))/2)*v(z)+(-v(w))*(-1-v(w))*v(z2)/12)*(0.99999746128825018)+(-4.1642543181478961e-07)
+Rqu qusrc qu 10000
+Cqu qu 0 20p IC=0
+Rlqu qu 0 10000000000
+Bnlsrc nlsrc 0 V=(v(w)*v(z)*(1+v(z)/2))*(1.0000192686870519)+(-1.933077381922738e-06)
+Rnl nlsrc nl 10000
+Cnl nl 0 20p IC=0
+Rlnl nl 0 10000000000
+Bnusrc nusrc 0 V=((1-v(w))*v(z)*(1+v(z)/2))*(0.99999150159345351)+(2.6808650244794433e-06)
+Rnu nusrc nu 10000
+Cnu nu 0 20p IC=0
+Rlnu nu 0 10000000000
+Bdl 0 dl I=min(0.001,max(-0.001,1e-4*(v(nl)*0.99998433587353674+(2.9017075138305456e-06)-v(ql)*v(dl))))
+Cdl dl 0 20p IC=0
+Rldl dl 0 10000000000
+Bdu 0 du I=min(0.001,max(-0.001,1e-4*(v(nu)*0.99999187812433143+(-8.306610560348207e-07)-v(qu)*v(du))))
+Cdu du 0 20p IC=0
+Rldu du 0 10000000000
+Blowersrc lowersrc 0 V=(v(unit)*(1+v(dl)))*(1.0000233179873461)+(-2.493768863660418e-06)
+Rlower lowersrc lower 10000
+Clower lower 0 20p IC=0
+Rllower lower 0 10000000000
+Buppersrc uppersrc 0 V=(1*v(m5)/(1+v(du)))*(0.9999990643677934)+(-1.7894943981728254e-06)
+Rupper uppersrc upper 10000
+Cupper upper 0 20p IC=0
+Rlupper upper 0 10000000000
+Bncoresrc ncoresrc 0 V=(v(z)*(1+v(z)/2))*(1.0000029784706872)+(-2.9987804792894947e-06)
+Rncore ncoresrc ncore 10000
+Cncore ncore 0 20p IC=0
+Rlncore ncore 0 10000000000
+Bcore 0 core I=min(0.001,max(-0.001,1e-4*(v(ncore)-v(ql)*v(core))))
+Ccore core 0 20p IC=0
+Rlcore core 0 10000000000
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=17
+tran 20n 30u uic
+wrdata trace.csv v(lower) v(upper) v(unit) v(dl) v(ratio) v(core)
+quit
+.endc
+.end

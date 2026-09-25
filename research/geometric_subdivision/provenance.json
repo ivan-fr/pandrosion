@@ -1,0 +1,17 @@
+{
+  "ngspice": "******\n** ngspice-46 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2025, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n******\n",
+  "python": "3.14.3 (main, Feb  3 2026, 15:32:20) [Clang 17.0.0 (clang-1700.6.3.2)]",
+  "files": {
+    "spice.py": "c341077ffd7838c9c0016fd444f6f321e4972f7a5f101b53154aceb11ab35184",
+    "validate.py": "541a452abb8eee9a2f76ed084af4f42c1d614eeb1e982d10ae43e668b6f5e310",
+    "stress.py": "bb9ea98f1c309d73f0c8b35d35da972dff83d96d94cdd8cd15fcad99be8c24ac",
+    "report.py": "7fa3da65540030752347b4f52a017a6a202fd6f30b85121734d82663e851b872",
+    "check_results.py": "1ec5c84ab0819df8ecaaad424b975b8b9986599f8bcf51adfb57d448df34c388",
+    "accuracy_campaign.py": "f53af4e13147e400e4b5c6a87c2e31d84c0396f4c18cdd1afc516816aafe3a2c",
+    "accuracy/summary.json": "fe6aed9de54a8fb823e33c36bc3088600d2112488eca4832a746a3f0278c3dd6",
+    "results/summary.json": "1b3a2d62bad0566cf5c53ae421cb76fe4900e266cc677c8532e3336a2f00583d",
+    "validation.json": "1dde4601db333526026b8b8168cf51f4cba2be4116097de25f9cafdb31e6f9cb",
+    "stress/summary.json": "37831d1044dc4e59c4537de6c1dc4b46e1bf700d02f69cb29fc37d9a0b57dfaf",
+    "../../LeanMath/Papers/GeometricSubdivision.lean": "4488736ec0e55efd6ceed54dea939c0854e6ee7998b6d8c62edabf21d4bb2f6d"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "audited_theorems": 7,
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "new_axioms": false,
+  "sorry": false
+}
