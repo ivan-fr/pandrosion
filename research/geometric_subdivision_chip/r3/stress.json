@@ -1,0 +1,4574 @@
+[
+ {
+  "p": 3.7,
+  "X": 2.0,
+  "variation": {
+   "temp": -20
+  },
+  "frozen": {
+   "output_gain": 0.9935092197258942,
+   "calibration_outputs": [
+    1.0065325814023744,
+    1.0000006003698334,
+    1.000000000052764
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": -20,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9935092197258942,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.2075729720927613,
+    "tail_min": 1.2075729717061627,
+    "tail_max": 1.2075729722866257,
+    "tail_pp": 5.804630109906839e-10,
+    "power_W": 0.006917824237129695,
+    "energy_J": 2.7976745118074963e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 0.0012762751739710378,
+    "relative_error": 0.0012762750132255516,
+    "excess_error": 0.0074707701710527855,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9942897327291086,
+   "calibration_outputs": [
+    1.0057425308608943,
+    1.0000005278751802,
+    0.9999999999211227
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": -20,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0055533434025088,
+    "output_gain": 0.9942897327291086,
+    "kappa": 0.00748415403641797,
+    "hcomp": {
+     "npn": 6.99756091942616e-09,
+     "pnp": 3.0066517009119665e-09,
+     "loop": 6.438512975947375e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000187275314425,
+      "high": 1.0001190777818032,
+      "low": 0.9999728265625031
+     },
+     "pnp": {
+      "mid": 1.0005023143936598,
+      "high": 0.9998681644453229,
+      "low": 1.0007660281448916
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.2059298149506117,
+    "tail_min": 1.2059298145653898,
+    "tail_max": 1.2059298155154106,
+    "tail_pp": 9.500207287516105e-10,
+    "power_W": 0.006915019391480826,
+    "energy_J": 2.790421826707451e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 8.61723802558799e-05,
+    "relative_error": 8.617206084370991e-05,
+    "excess_error": 0.0005044145306130522,
+    "settle_time_s": {
+     "0.0001": 4.982595715667113e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 3.7,
+  "X": 2.0,
+  "variation": {
+   "temp": 85
+  },
+  "frozen": {
+   "output_gain": 0.995993719139567,
+   "calibration_outputs": [
+    1.0040223857076251,
+    1.000000009892727,
+    1.0000000000669547
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 85,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.995993719139567,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.201821674766282,
+    "tail_min": 1.201821674347327,
+    "tail_max": 1.2018216753040003,
+    "tail_pp": 9.566734071597693e-10,
+    "power_W": 0.006833659497678341,
+    "energy_J": 7.373002837163896e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 0.0034924951697146893,
+    "relative_error": 0.0034924948223321256,
+    "excess_error": 0.020443576714154522,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9956879853789256,
+   "calibration_outputs": [
+    1.0043306776876353,
+    1.0000000107284712,
+    1.0000000001504763
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 85,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0043879475784616,
+    "output_gain": 0.9956879853789256,
+    "kappa": 0.004479979080417863,
+    "hcomp": {
+     "npn": 4.06891212146876e-09,
+     "pnp": 1.6934981287408668e-09,
+     "loop": 4.03457929816021e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000268746956023,
+      "high": 1.0000753560129603,
+      "low": 0.9999891560231271
+     },
+     "pnp": {
+      "mid": 1.0003970165813734,
+      "high": 1.0001083635362886,
+      "low": 1.0006033037296997
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.2059028675510524,
+    "tail_min": 1.2059028670644256,
+    "tail_max": 1.2059028680480615,
+    "tail_pp": 9.83635839446606e-10,
+    "power_W": 0.0068421761781062,
+    "energy_J": 7.389940116390965e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 0.00010851628328279428,
+    "relative_error": 0.00010851587978932456,
+    "excess_error": 0.0006352057271471192,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 3.7,
+  "X": 2.0,
+  "variation": {
+   "vscale": 0.95
+  },
+  "frozen": {
+   "output_gain": 0.9945356150939361,
+   "calibration_outputs": [
+    1.0054943851979887,
+    1.0000000232201305,
+    0.9999999999234892
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 0.95,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9945356150939361,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.2059060578509284,
+    "tail_min": 1.2059060571648308,
+    "tail_max": 1.2059060580331624,
+    "tail_pp": 8.683316288227161e-10,
+    "power_W": 0.006533177982901807,
+    "energy_J": 3.955167601497526e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 0.00010587116623858648,
+    "relative_error": 0.00010587059735100098,
+    "excess_error": 0.0006197213707745127,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9943320701413652,
+   "calibration_outputs": [
+    1.0057002141911402,
+    1.0000000239261801,
+    1.0000000001555296
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 0.95,
+    "load": 1e-12,
+    "mean_feedback": 1.0057574156296312,
+    "output_gain": 0.9943320701413652,
+    "kappa": 0.005863672223975499,
+    "hcomp": {
+     "npn": 5.4848722166434e-09,
+     "pnp": 2.2970295162516586e-09,
+     "loop": 5.874234812968525e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000204697946402,
+      "high": 1.0000930332136155,
+      "low": 0.9999835870382532
+     },
+     "pnp": {
+      "mid": 1.0004042368177557,
+      "high": 0.999954097266609,
+      "low": 1.000613876483204
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.2060341855799248,
+    "tail_min": 1.2060341852463967,
+    "tail_max": 1.20603418621143,
+    "tail_pp": 9.650333865351968e-10,
+    "power_W": 0.006533842067247225,
+    "energy_J": 3.955239438590917e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 3.6885193407968505e-07,
+    "relative_error": 3.6832831250025123e-07,
+    "excess_error": 2.1560370152720275e-06,
+    "settle_time_s": {
+     "0.0001": 6.640209933782203e-06,
+     "1e-05": 6.9452099337822e-06,
+     "1e-06": 7.290209933782196e-06
+    }
+   }
+  }
+ },
+ {
+  "p": 3.7,
+  "X": 2.0,
+  "variation": {
+   "vscale": 1.05
+  },
+  "frozen": {
+   "output_gain": 0.9940759879295141,
+   "calibration_outputs": [
+    1.0059592917411806,
+    1.0000000230283472,
+    1.000000000217165
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.05,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9940759879295141,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.206071110802908,
+    "tail_min": 1.2060711103400301,
+    "tail_max": 1.206071111183392,
+    "tail_pp": 8.433618248204766e-10,
+    "power_W": 0.007221902595026374,
+    "energy_J": 5.283013305047094e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 3.098571669948036e-05,
+    "relative_error": 3.0985401215880197e-05,
+    "excess_error": 0.00018137533740213637,
+    "settle_time_s": {
+     "0.0001": 6.7680561081544345e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9942791136645105,
+   "calibration_outputs": [
+    1.005753780948972,
+    1.0000000222698189,
+    0.9999999998435074
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.05,
+    "load": 1e-12,
+    "mean_feedback": 1.0058115094634843,
+    "output_gain": 0.9942791136645105,
+    "kappa": 0.0058795278934848025,
+    "hcomp": {
+     "npn": 5.447668789906324e-09,
+     "pnp": 2.28297114295728e-09,
+     "loop": 5.854537539886003e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000299852276266,
+      "high": 1.0001021505388437,
+      "low": 0.9999838810145548
+     },
+     "pnp": {
+      "mid": 1.0004918770106277,
+      "high": 1.000048331373349,
+      "low": 1.0007497911116239
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.2059560194805576,
+    "tail_min": 1.205956018706806,
+    "tail_max": 1.2059560195499168,
+    "tail_pp": 8.431109144169113e-10,
+    "power_W": 0.007221205257128819,
+    "energy_J": 5.282871722462358e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 6.444484435257378e-05,
+    "relative_error": 6.444420278534161e-05,
+    "excess_error": 0.0003772289066830789,
+    "settle_time_s": {
+     "0.0001": 6.853376018589932e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 3.7,
+  "X": 2.0,
+  "variation": {
+   "load": 1e-10
+  },
+  "frozen": {
+   "output_gain": 0.9943023427826707,
+   "calibration_outputs": [
+    1.0057302842192908,
+    1.0000000221021033,
+    1.000000000091175
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-10,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9943023427826707,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.2059952410782135,
+    "tail_min": 1.205995240872327,
+    "tail_max": 1.205995241625006,
+    "tail_pp": 7.526790302136988e-10,
+    "power_W": 0.006877538093355855,
+    "energy_J": 4.594366839504159e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 3.1923228931892173e-05,
+    "relative_error": 3.192305821806054e-05,
+    "excess_error": 0.00018686398200457496,
+    "settle_time_s": {
+     "0.0001": 6.72772501053128e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9943023427826707,
+   "calibration_outputs": [
+    1.0057302842192908,
+    1.0000000221021033,
+    1.000000000091175
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-10,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9943023427826707,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.2059952410782135,
+    "tail_min": 1.205995240872327,
+    "tail_max": 1.205995241625006,
+    "tail_pp": 7.526790302136988e-10,
+    "power_W": 0.006877538093355855,
+    "energy_J": 4.594366839504159e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 3.1923228931892173e-05,
+    "relative_error": 3.192305821806054e-05,
+    "excess_error": 0.00018686398200457496,
+    "settle_time_s": {
+     "0.0001": 6.72772501053128e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 3.7,
+  "X": 2.0,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 11
+  },
+  "frozen": {
+   "output_gain": 0.9937489236494369,
+   "calibration_outputs": [
+    1.0062903736034605,
+    1.0000000244913674,
+    0.9999999998614045
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9937489236494369,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 11,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.1896111226326336,
+    "tail_min": 1.189611122334296,
+    "tail_max": 1.1896111228704354,
+    "tail_pp": 5.361393551339688e-10,
+    "power_W": 0.00687605530245038,
+    "energy_J": 4.590886650059374e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 0.01361704773756038,
+    "relative_error": 0.013617047490189542,
+    "excess_error": 0.07970839447088576,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 3.7,
+  "X": 2.0,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 12
+  },
+  "frozen": {
+   "output_gain": 0.9945649198323261,
+   "calibration_outputs": [
+    1.0054647604823006,
+    1.000000021227726,
+    0.9999999998689663
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9945649198323261,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 12,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.209128308968081,
+    "tail_min": 1.2091283083058333,
+    "tail_max": 1.209128309110536,
+    "tail_pp": 8.04702748880004e-10,
+    "power_W": 0.006885082108677026,
+    "energy_J": 4.593475109078723e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 0.0025659047842933945,
+    "relative_error": 0.0025659046661748613,
+    "excess_error": 0.01501971271331047,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 3.7,
+  "X": 2.0,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 13
+  },
+  "frozen": {
+   "output_gain": 0.9832212379911874,
+   "calibration_outputs": [
+    1.0170650259080563,
+    1.0000000660341153,
+    1.0000000000750309
+   ],
+   "result": {
+    "weight": 0.29729729890823364,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 3.7,
+    "X": 2.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9832212379911874,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 13,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.1872288581818888,
+    "tail_min": 1.1872288578232706,
+    "tail_max": 1.1872288587654725,
+    "tail_pp": 9.422018720783853e-10,
+    "power_W": 0.00685852673612567,
+    "energy_J": 4.594170652967804e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.20603374136355203639196742936",
+    "window_error": 0.015592336180429319,
+    "relative_error": 0.015592335883075908,
+    "excess_error": 0.09127089115215106,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 1000000.0,
+  "X": 500000.0,
+  "variation": {
+   "temp": -20
+  },
+  "frozen": {
+   "output_gain": 0.9935545194324681,
+   "calibration_outputs": [
+    1.0064866994392287,
+    1.0000005910647236,
+    0.9999999999591118
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": -20,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9935545194324681,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000132153719774,
+    "tail_min": 1.0000132149601988,
+    "tail_max": 1.0000132156724377,
+    "tail_pp": 7.122389344971225e-10,
+    "power_W": 0.007645566014634242,
+    "energy_J": 2.7213479336315713e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 9.322173843868594e-08,
+    "relative_error": 9.292128205812149e-08,
+    "excess_error": 0.007081185687394799,
+    "settle_time_s": {
+     "0.0001": 4.6056534812596435e-06,
+     "1e-05": 4.850653481259641e-06,
+     "1e-06": 5.100653481259639e-06
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9943991462482168,
+   "calibration_outputs": [
+    1.0056318838596183,
+    1.000000513360908,
+    0.9999999998893653
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": -20,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0055533434025088,
+    "output_gain": 0.9943991462482168,
+    "kappa": 0.00748415403641797,
+    "hcomp": {
+     "npn": 6.99756091942616e-09,
+     "pnp": 3.0066517009119665e-09,
+     "loop": 6.438512975947375e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000187275314425,
+      "high": 1.0001190777818032,
+      "low": 0.9999728265625031
+     },
+     "pnp": {
+      "mid": 1.0005023143936598,
+      "high": 0.9998681644453229,
+      "low": 1.0007660281448916
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000131279657933,
+    "tail_min": 1.0000131276334328,
+    "tail_max": 1.0000131281485336,
+    "tail_pp": 5.15100850861927e-10,
+    "power_W": 0.007644780563527673,
+    "energy_J": 2.7225168224780815e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 5.698982827370745e-09,
+    "relative_error": 5.516244957976557e-09,
+    "excess_error": 0.00042037253446583576,
+    "settle_time_s": {
+     "0.0001": 4.6068348712378965e-06,
+     "1e-05": 4.851834871237894e-06,
+     "1e-06": 5.091834871237892e-06
+    }
+   }
+  }
+ },
+ {
+  "p": 1000000.0,
+  "X": 500000.0,
+  "variation": {
+   "temp": 85
+  },
+  "frozen": {
+   "output_gain": 0.9961389401043412,
+   "calibration_outputs": [
+    1.0038760157739843,
+    1.000000009495322,
+    1.0000000001554123
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 85,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9961389401043412,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000129609059552,
+    "tail_min": 1.0000129605458965,
+    "tail_max": 1.0000129611368083,
+    "tail_pp": 5.909117639646411e-10,
+    "power_W": 0.007559804245977749,
+    "energy_J": 5.5863522693822846e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 1.619014549466012e-07,
+    "relative_error": 1.6154140102182839e-07,
+    "excess_error": 0.012310470018288942,
+    "settle_time_s": {
+     "0.0001": 1.1925174576002968e-05,
+     "1e-05": 1.2245174576003019e-05,
+     "1e-06": 1.2600174576003076e-05
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9957297005703711,
+   "calibration_outputs": [
+    1.0042886024541198,
+    1.0000000105161406,
+    1.0000000000759823
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 85,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0043879475784616,
+    "output_gain": 0.9957297005703711,
+    "kappa": 0.004479979080417863,
+    "hcomp": {
+     "npn": 4.06891212146876e-09,
+     "pnp": 1.6934981287408668e-09,
+     "loop": 4.03457929816021e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000268746956023,
+      "high": 1.0000753560129603,
+      "low": 0.9999891560231271
+     },
+     "pnp": {
+      "mid": 1.0003970165813734,
+      "high": 1.0001083635362886,
+      "low": 1.0006033037296997
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.000013118761392,
+    "tail_min": 1.000013118677621,
+    "tail_max": 1.0000131192033697,
+    "tail_pp": 5.257485558018971e-10,
+    "power_W": 0.007562448170650236,
+    "energy_J": 5.586265810066392e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 3.771805391388492e-09,
+    "relative_error": 3.6880355005099815e-09,
+    "excess_error": 0.00028105148381917574,
+    "settle_time_s": {
+     "0.0001": 1.19235353806057e-05,
+     "1e-05": 1.2243535380605752e-05,
+     "1e-06": 1.2573535380605805e-05
+    }
+   }
+  }
+ },
+ {
+  "p": 1000000.0,
+  "X": 500000.0,
+  "variation": {
+   "vscale": 0.95
+  },
+  "frozen": {
+   "output_gain": 0.9946323140744605,
+   "calibration_outputs": [
+    1.0053966304417161,
+    1.000000022840516,
+    1.0000000000605753
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 0.95,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9946323140744605,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000131143141422,
+    "tail_min": 1.0000131140828654,
+    "tail_max": 1.0000131146385487,
+    "tail_pp": 5.556832771702602e-10,
+    "power_W": 0.00722137485267773,
+    "energy_J": 3.291857837554733e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 8.366500784767712e-09,
+    "relative_error": 8.135227044137085e-09,
+    "excess_error": 0.000619955429291407,
+    "settle_time_s": {
+     "0.0001": 5.955273634535358e-06,
+     "1e-05": 6.260273634535355e-06,
+     "1e-06": 6.560273634535352e-06
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9944294735036923,
+   "calibration_outputs": [
+    1.0056017075401895,
+    1.000000023693292,
+    0.9999999997231039
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 0.95,
+    "load": 1e-12,
+    "mean_feedback": 1.0057574156296312,
+    "output_gain": 0.9944294735036923,
+    "kappa": 0.005863672223975499,
+    "hcomp": {
+     "npn": 5.4848722166434e-09,
+     "pnp": 2.2970295162516586e-09,
+     "loop": 5.874234812968525e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000204697946402,
+      "high": 1.0000930332136155,
+      "low": 0.9999835870382532
+     },
+     "pnp": {
+      "mid": 1.0004042368177557,
+      "high": 0.999954097266609,
+      "low": 1.000613876483204
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.000013122618691,
+    "tail_min": 1.0000131224251028,
+    "tail_max": 1.0000131229146116,
+    "tail_pp": 4.895088778766876e-10,
+    "power_W": 0.007221873318311789,
+    "energy_J": 3.291922735677008e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 4.6512954584627516e-10,
+    "relative_error": 1.692128076582925e-10,
+    "excess_error": 1.2895079417482733e-05,
+    "settle_time_s": {
+     "0.0001": 5.9577150540957405e-06,
+     "1e-05": 6.2627150540957376e-06,
+     "1e-06": 6.557715054095735e-06
+    }
+   }
+  }
+ },
+ {
+  "p": 1000000.0,
+  "X": 500000.0,
+  "variation": {
+   "vscale": 1.05
+  },
+  "frozen": {
+   "output_gain": 0.9941692220775892,
+   "calibration_outputs": [
+    1.005864952375265,
+    1.0000000226838754,
+    1.0000000000980966
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.05,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9941692220775892,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000131279216593,
+    "tail_min": 1.000013127597003,
+    "tail_max": 1.0000131283117086,
+    "tail_pp": 7.147056280132347e-10,
+    "power_W": 0.007982359918195783,
+    "energy_J": 4.374840784069635e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 5.862155715187051e-09,
+    "relative_error": 5.472111507351424e-09,
+    "excess_error": 0.00041700928815691633,
+    "settle_time_s": {
+     "0.0001": 6.054794917758398e-06,
+     "1e-05": 6.354794917758395e-06,
+     "1e-06": 6.654794917758392e-06
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.994371509586905,
+   "calibration_outputs": [
+    1.0056603276593687,
+    1.0000000220258034,
+    0.9999999998278891
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.05,
+    "load": 1e-12,
+    "mean_feedback": 1.0058115094634843,
+    "output_gain": 0.994371509586905,
+    "kappa": 0.0058795278934848025,
+    "hcomp": {
+     "npn": 5.447668789906324e-09,
+     "pnp": 2.28297114295728e-09,
+     "loop": 5.854537539886003e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000299852276266,
+      "high": 1.0001021505388437,
+      "low": 0.9999838810145548
+     },
+     "pnp": {
+      "mid": 1.0004918770106277,
+      "high": 1.000048331373349,
+      "low": 1.0007497911116239
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000131205971585,
+    "tail_min": 1.0000131202078035,
+    "tail_max": 1.0000131208694845,
+    "tail_pp": 6.616809322679273e-10,
+    "power_W": 0.007981823892607494,
+    "energy_J": 4.374751708657984e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 2.241643045653153e-09,
+    "relative_error": 1.85229316218589e-09,
+    "excess_error": 0.00014115638030828888,
+    "settle_time_s": {
+     "0.0001": 6.052899804657689e-06,
+     "1e-05": 6.357899804657686e-06,
+     "1e-06": 6.652899804657683e-06
+    }
+   }
+  }
+ },
+ {
+  "p": 1000000.0,
+  "X": 500000.0,
+  "variation": {
+   "load": 1e-10
+  },
+  "frozen": {
+   "output_gain": 0.9943973178174446,
+   "calibration_outputs": [
+    1.0056342272229744,
+    1.0000000217977547,
+    0.9999999999463015
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-10,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9943973178174446,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000131215277699,
+    "tail_min": 1.0000131212137067,
+    "tail_max": 1.0000131217510169,
+    "tail_pp": 5.373101963357385e-10,
+    "power_W": 0.007601857999848384,
+    "energy_J": 3.818006649560775e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 1.2357531068307507e-09,
+    "relative_error": 9.216940081803671e-10,
+    "excess_error": 7.023887611453716e-05,
+    "settle_time_s": {
+     "0.0001": 6.006353088716198e-06,
+     "1e-05": 6.3063530887161955e-06,
+     "1e-06": 6.606353088716193e-06
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9943973178174446,
+   "calibration_outputs": [
+    1.0056342272229744,
+    1.0000000217977547,
+    0.9999999999463015
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-10,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9943973178174446,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000131215277699,
+    "tail_min": 1.0000131212137067,
+    "tail_max": 1.0000131217510169,
+    "tail_pp": 5.373101963357385e-10,
+    "power_W": 0.007601857999848384,
+    "energy_J": 3.818006649560775e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 1.2357531068307507e-09,
+    "relative_error": 9.216940081803671e-10,
+    "excess_error": 7.023887611453716e-05,
+    "settle_time_s": {
+     "0.0001": 6.006353088716198e-06,
+     "1e-05": 6.3063530887161955e-06,
+     "1e-06": 6.606353088716193e-06
+    }
+   }
+  }
+ },
+ {
+  "p": 1000000.0,
+  "X": 500000.0,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 11
+  },
+  "frozen": {
+   "output_gain": 1.0092204364833453,
+   "calibration_outputs": [
+    0.9908638385505123,
+    0.9999999642241167,
+    1.0000000001383735
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 1.0092204364833453,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 11,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000130627454036,
+    "tail_min": 1.0000130621668357,
+    "tail_max": 1.0000130627454036,
+    "tail_pp": 5.785678602876487e-10,
+    "power_W": 0.007586267660216405,
+    "energy_J": 3.817166517091073e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 6.028184922568267e-08,
+    "relative_error": 5.970328895752292e-08,
+    "excess_error": 0.004549765843652136,
+    "settle_time_s": {
+     "0.0001": 5.999765072736649e-06,
+     "1e-05": 6.3047650727366465e-06,
+     "1e-06": 6.594765072736644e-06
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 1000000.0,
+  "X": 500000.0,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 12
+  },
+  "frozen": {
+   "output_gain": 0.9943301026753719,
+   "calibration_outputs": [
+    1.0057022060408705,
+    1.000000022190571,
+    1.0000000000159628
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9943301026753719,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 12,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000130812019998,
+    "tail_min": 1.0000130808987164,
+    "tail_max": 1.0000130815079264,
+    "tail_pp": 6.09210015767303e-10,
+    "power_W": 0.0075983151338885665,
+    "energy_J": 3.818421903458113e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 4.155021431739673e-08,
+    "relative_error": 4.124693489877044e-08,
+    "excess_error": 0.003143275669306698,
+    "settle_time_s": {
+     "0.0001": 6.007419144882429e-06,
+     "1e-05": 6.307419144882426e-06,
+     "1e-06": 6.602419144882423e-06
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 1000000.0,
+  "X": 500000.0,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 13
+  },
+  "frozen": {
+   "output_gain": 0.99831805938886,
+   "calibration_outputs": [
+    1.0016847678414933,
+    1.0000000063598828,
+    1.0000000000892169
+   ],
+   "result": {
+    "weight": 6.401538848876953e-05,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1000000.0,
+    "X": 500000.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.99831805938886,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 13,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0000131226618465,
+    "tail_min": 1.000013122347653,
+    "tail_max": 1.0000131228640057,
+    "tail_pp": 5.163527383444944e-10,
+    "power_W": 0.007588786123103175,
+    "energy_J": 3.818479558207231e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.00001312244947599123835193485",
+    "window_error": 4.14524246047906e-10,
+    "relative_error": 2.123677205503329e-10,
+    "excess_error": 1.6183755001196084e-05,
+    "settle_time_s": {
+     "0.0001": 6.005380577865656e-06,
+     "1e-05": 6.310380577865653e-06,
+     "1e-06": 6.61038057786565e-06
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 1.9,
+  "X": 3.3,
+  "variation": {
+   "temp": -20
+  },
+  "frozen": {
+   "output_gain": 0.9934707603026227,
+   "calibration_outputs": [
+    1.0065715626982041,
+    1.000000584313519,
+    0.9999999999940385
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": -20,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9934707603026227,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8766954472995139,
+    "tail_min": 1.8766954468879975,
+    "tail_max": 1.8766954477168019,
+    "tail_pp": 8.288043584769866e-10,
+    "power_W": 0.009936740698748526,
+    "energy_J": 3.601623449900413e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 0.001132884291786799,
+    "relative_error": 0.0011328840691823686,
+    "excess_error": 0.0024282426684721077,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9942478098284199,
+   "calibration_outputs": [
+    1.005784951798783,
+    1.0000005143728854,
+    1.0000000001430565
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": -20,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0055533434025088,
+    "output_gain": 0.9942478098284199,
+    "kappa": 0.00748415403641797,
+    "hcomp": {
+     "npn": 6.99756091942616e-09,
+     "pnp": 3.0066517009119665e-09,
+     "loop": 6.438512975947375e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000187275314425,
+      "high": 1.0001190777818032,
+      "low": 0.9999728265625031
+     },
+     "pnp": {
+      "mid": 1.0005023143936598,
+      "high": 0.9998681644453229,
+      "low": 1.0007660281448916
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8739438016176844,
+    "tail_min": 1.8739438011543725,
+    "tail_max": 1.8739438019326369,
+    "tail_pp": 7.782643418607904e-10,
+    "power_W": 0.009928509944206673,
+    "energy_J": 3.596942159111513e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 0.00033499578590396765,
+    "relative_error": 0.000334995538747876,
+    "excess_error": 0.0007180350426522298,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 1.9,
+  "X": 3.3,
+  "variation": {
+   "temp": 85
+  },
+  "frozen": {
+   "output_gain": 0.9959910550924089,
+   "calibration_outputs": [
+    1.0040250717160977,
+    1.0000000095425792,
+    0.9999999999396735
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 85,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9959910550924089,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8679854979658865,
+    "tail_min": 1.8679854975527486,
+    "tail_max": 1.867985498423164,
+    "tail_pp": 8.704155174399375e-10,
+    "power_W": 0.009790639605158852,
+    "energy_J": 7.895504143532318e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 0.0035134836313543655,
+    "relative_error": 0.0035134834109637816,
+    "excess_error": 0.007530859128091229,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9956881943108271,
+   "calibration_outputs": [
+    1.00433046723184,
+    1.00000001096042,
+    0.9999999996301602
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 85,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0043879475784616,
+    "output_gain": 0.9956881943108271,
+    "kappa": 0.004479979080417863,
+    "hcomp": {
+     "npn": 4.06891212146876e-09,
+     "pnp": 1.6934981287408668e-09,
+     "loop": 4.03457929816021e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000268746956023,
+      "high": 1.0000753560129603,
+      "low": 0.9999891560231271
+     },
+     "pnp": {
+      "mid": 1.0003970165813734,
+      "high": 1.0001083635362886,
+      "low": 1.0006033037296997
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.874544248070605,
+    "tail_min": 1.8745442475319354,
+    "tail_max": 1.8745442482039598,
+    "tail_pp": 6.720244360991501e-10,
+    "power_W": 0.009809081672340195,
+    "energy_J": 7.905501246345282e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 1.4684563023674607e-05,
+    "relative_error": 1.46842756676178e-05,
+    "excess_error": 3.147452215251897e-05,
+    "settle_time_s": {
+     "0.0001": 9.939102414209572e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 1.9,
+  "X": 3.3,
+  "variation": {
+   "vscale": 0.95
+  },
+  "frozen": {
+   "output_gain": 0.9945339180312988,
+   "calibration_outputs": [
+    1.0054961013368626,
+    1.0000000232820911,
+    0.9999999994901636
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 0.95,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9945339180312988,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8741952144407874,
+    "tail_min": 1.874195213937257,
+    "tail_max": 1.874195214645948,
+    "tail_pp": 7.086908837550254e-10,
+    "power_W": 0.00937374618405676,
+    "energy_J": 4.446326495849207e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 0.00020087833771425607,
+    "relative_error": 0.00020087806910340037,
+    "excess_error": 0.00043056541426097475,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9943303378524723,
+   "calibration_outputs": [
+    1.0057019665423148,
+    1.0000000241518674,
+    0.9999999996772176
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 0.95,
+    "load": 1e-12,
+    "mean_feedback": 1.0057574156296312,
+    "output_gain": 0.9943303378524723,
+    "kappa": 0.005863672223975499,
+    "hcomp": {
+     "npn": 5.4848722166434e-09,
+     "pnp": 2.2970295162516586e-09,
+     "loop": 5.874234812968525e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000204697946402,
+      "high": 1.0000930332136155,
+      "low": 0.9999835870382532
+     },
+     "pnp": {
+      "mid": 1.0004042368177557,
+      "high": 0.999954097266609,
+      "low": 1.000613876483204
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8745304031737862,
+    "tail_min": 1.8745304030805319,
+    "tail_max": 1.8745304037536215,
+    "tail_pp": 6.730895840689755e-10,
+    "power_W": 0.009375145727258201,
+    "energy_J": 4.445186777154472e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 2.2069957165220867e-05,
+    "relative_error": 2.2069907418236286e-05,
+    "excess_error": 4.7305008817776474e-05,
+    "settle_time_s": {
+     "0.0001": 7.051872917866864e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 1.9,
+  "X": 3.3,
+  "variation": {
+   "vscale": 1.05
+  },
+  "frozen": {
+   "output_gain": 0.994074729829308,
+   "calibration_outputs": [
+    1.0059605653204982,
+    1.0000000231075954,
+    0.9999999997024931
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.05,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.994074729829308,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8747905642385687,
+    "tail_min": 1.8747905637672826,
+    "tail_max": 1.8747905645814205,
+    "tail_pp": 8.141378682324785e-10,
+    "power_W": 0.010362869953741572,
+    "energy_J": 5.8558168796025714e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 0.00011671453985220742,
+    "relative_error": 0.00011671435695617132,
+    "excess_error": 0.00025016750547900667,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9942778900686124,
+   "calibration_outputs": [
+    1.0057550186656379,
+    1.00000002215163,
+    0.999999999963582
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.05,
+    "load": 1e-12,
+    "mean_feedback": 1.0058115094634843,
+    "output_gain": 0.9942778900686124,
+    "kappa": 0.0058795278934848025,
+    "hcomp": {
+     "npn": 5.447668789906324e-09,
+     "pnp": 2.28297114295728e-09,
+     "loop": 5.854537539886003e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000299852276266,
+      "high": 1.0001021505388437,
+      "low": 0.9999838810145548
+     },
+     "pnp": {
+      "mid": 1.0004918770106277,
+      "high": 1.000048331373349,
+      "low": 1.0007497911116239
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.874476251355619,
+    "tail_min": 1.8744762508996191,
+    "tail_max": 1.8744762514885307,
+    "tail_pp": 5.889115861634764e-10,
+    "power_W": 0.010361390696624161,
+    "energy_J": 5.855701128426914e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 5.095771790116622e-05,
+    "relative_error": 5.095747464566081e-05,
+    "excess_error": 0.00010922310373865828,
+    "settle_time_s": {
+     "0.0001": 7.182377996523983e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 1.9,
+  "X": 3.3,
+  "variation": {
+   "load": 1e-10
+  },
+  "frozen": {
+   "output_gain": 0.9943009295870054,
+   "calibration_outputs": [
+    1.0057317135130015,
+    1.0000000221255312,
+    1.00000000021336
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-10,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9943009295870054,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8745044577192156,
+    "tail_min": 1.8745044571895773,
+    "tail_max": 1.8745044578749976,
+    "tail_pp": 6.854203871142772e-10,
+    "power_W": 0.009868296072578405,
+    "energy_J": 5.130252867662683e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 3.59109267687416e-05,
+    "relative_error": 3.591064423043588e-05,
+    "excess_error": 7.697147567411767e-05,
+    "settle_time_s": {
+     "0.0001": 7.113510690577737e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9943009295870054,
+   "calibration_outputs": [
+    1.0057317135130015,
+    1.0000000221255312,
+    1.00000000021336
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-10,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9943009295870054,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8745044577192156,
+    "tail_min": 1.8745044571895773,
+    "tail_max": 1.8745044578749976,
+    "tail_pp": 6.854203871142772e-10,
+    "power_W": 0.009868296072578405,
+    "energy_J": 5.130252867662683e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 3.59109267687416e-05,
+    "relative_error": 3.591064423043588e-05,
+    "excess_error": 7.697147567411767e-05,
+    "settle_time_s": {
+     "0.0001": 7.113510690577737e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 1.9,
+  "X": 3.3,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 11
+  },
+  "frozen": {
+   "output_gain": 0.9908933253791443,
+   "calibration_outputs": [
+    1.0091903321855877,
+    1.0000000360151708,
+    0.9999999997849702
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9908933253791443,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 11,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8452261064905304,
+    "tail_min": 1.8452261060643467,
+    "tail_max": 1.8452261068260092,
+    "tail_pp": 7.616625108397557e-10,
+    "power_W": 0.00984483900727549,
+    "energy_J": 5.122517224967295e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 0.01565459862858543,
+    "relative_error": 0.015654598401235502,
+    "excess_error": 0.03355432813448455,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 1.9,
+  "X": 3.3,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 12
+  },
+  "frozen": {
+   "output_gain": 0.9971063643362987,
+   "calibration_outputs": [
+    1.002902022032438,
+    1.0000000112468845,
+    0.9999999997788288
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9971063643362987,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 12,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.878906069796605,
+    "tail_min": 1.8789060694813584,
+    "tail_max": 1.878906070205318,
+    "tail_pp": 7.239595589680903e-10,
+    "power_W": 0.00987145005871601,
+    "energy_J": 5.128093539746826e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 0.0023121522815402378,
+    "relative_error": 0.002312152063510142,
+    "excess_error": 0.004955905418162744,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 1.9,
+  "X": 3.3,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 13
+  },
+  "frozen": {
+   "output_gain": 0.9797137002800054,
+   "calibration_outputs": [
+    1.0207062732956829,
+    1.0000000801238342,
+    0.9999999999666443
+   ],
+   "result": {
+    "weight": 0.6842105388641357,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 1.9,
+    "X": 3.3,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9797137002800054,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 13,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.8488321227910436,
+    "tail_min": 1.848832122572209,
+    "tail_max": 1.8488321232459612,
+    "tail_pp": 6.737521651700717e-10,
+    "power_W": 0.009865670758519294,
+    "energy_J": 5.1281778679372154e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.87457177479930482339933948482",
+    "window_error": 0.013730950488599711,
+    "relative_error": 0.013730950371861313,
+    "excess_error": 0.029431148763253794,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 90.2,
+  "X": 777.0,
+  "variation": {
+   "temp": -20
+  },
+  "frozen": {
+   "output_gain": 0.9936043346143959,
+   "calibration_outputs": [
+    1.0064362409364151,
+    1.000000588526631,
+    0.9999999999662748
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": -20,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9936043346143959,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0774785348893443,
+    "tail_min": 1.0774785345203564,
+    "tail_max": 1.0774785353453473,
+    "tail_pp": 8.249909644320041e-10,
+    "power_W": 0.007438935544297156,
+    "energy_J": 3.0305744653030496e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 0.0008386036977826198,
+    "relative_error": 0.0008386032742146285,
+    "excess_error": 0.01178989866264191,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9944257047554691,
+   "calibration_outputs": [
+    1.005605027049013,
+    1.000000512541873,
+    0.9999999997295324
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": -20,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0055533434025088,
+    "output_gain": 0.9944257047554691,
+    "kappa": 0.00748415403641797,
+    "hcomp": {
+     "npn": 6.99756091942616e-09,
+     "pnp": 3.0066517009119665e-09,
+     "loop": 6.438512975947375e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000187275314425,
+      "high": 1.0001190777818032,
+      "low": 0.9999728265625031
+     },
+     "pnp": {
+      "mid": 1.0005023143936598,
+      "high": 0.9998681644453229,
+      "low": 1.0007660281448916
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.076627376011515,
+    "tail_min": 1.0766273756684521,
+    "tail_max": 1.0766273765420489,
+    "tail_pp": 8.735967504946984e-10,
+    "power_W": 0.007438436380000836,
+    "energy_J": 3.0288545328143537e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 4.7986938122293746e-05,
+    "relative_error": 4.7986445324776855e-05,
+    "excess_error": 0.0006746400174616167,
+    "settle_time_s": {
+     "0.0001": 4.944840712757344e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 90.2,
+  "X": 777.0,
+  "variation": {
+   "temp": 85
+  },
+  "frozen": {
+   "output_gain": 0.9961027962162546,
+   "calibration_outputs": [
+    1.003912441738802,
+    1.000000009672264,
+    0.9999999999554278
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 85,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9961027962162546,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0748069389230164,
+    "tail_min": 1.074806938400452,
+    "tail_max": 1.0748069390900483,
+    "tail_pp": 6.895963799991023e-10,
+    "power_W": 0.007356720060350937,
+    "energy_J": 5.739603150922415e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 0.0016429653249500264,
+    "relative_error": 0.001642964839555057,
+    "excess_error": 0.02309839415160723,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9957373471875083,
+   "calibration_outputs": [
+    1.0042808903994653,
+    1.0000000104962468,
+    0.999999999866281
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 85,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0043879475784616,
+    "output_gain": 0.9957373471875083,
+    "kappa": 0.004479979080417863,
+    "hcomp": {
+     "npn": 4.06891212146876e-09,
+     "pnp": 1.6934981287408668e-09,
+     "loop": 4.03457929816021e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000268746956023,
+      "high": 1.0000753560129603,
+      "low": 0.9999891560231271
+     },
+     "pnp": {
+      "mid": 1.0003970165813734,
+      "high": 1.0001083635362886,
+      "low": 1.0006033037296997
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0765009196941027,
+    "tail_min": 1.0765009194064377,
+    "tail_max": 1.0765009201788958,
+    "tail_pp": 7.724580974866058e-10,
+    "power_W": 0.007359013714668023,
+    "energy_J": 5.739279953170768e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 6.947543247814e-05,
+    "relative_error": 6.947516527445064e-05,
+    "excess_error": 0.0009767492965290202,
+    "settle_time_s": {
+     "0.0001": 1.231240144166582e-05,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 90.2,
+  "X": 777.0,
+  "variation": {
+   "vscale": 0.95
+  },
+  "frozen": {
+   "output_gain": 0.994636335889083,
+   "calibration_outputs": [
+    1.0053925654438667,
+    1.00000002273877,
+    0.999999999838018
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 0.95,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.994636335889083,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.076454765071097,
+    "tail_min": 1.076454764597525,
+    "tail_max": 1.0764547653850522,
+    "tail_pp": 7.87527154599843e-10,
+    "power_W": 0.007026814928801911,
+    "energy_J": 3.488279762477105e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 0.00011234729766215258,
+    "relative_error": 0.00011234685777497899,
+    "excess_error": 0.001579481155107253,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9944332267628231,
+   "calibration_outputs": [
+    1.0055979119199192,
+    1.0000000235453523,
+    1.0000000000781657
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 0.95,
+    "load": 1e-12,
+    "mean_feedback": 1.0057574156296312,
+    "output_gain": 0.9944332267628231,
+    "kappa": 0.005863672223975499,
+    "hcomp": {
+     "npn": 5.4848722166434e-09,
+     "pnp": 2.2970295162516586e-09,
+     "loop": 5.874234812968525e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000204697946402,
+      "high": 1.0000930332136155,
+      "low": 0.9999835870382532
+     },
+     "pnp": {
+      "mid": 1.0004042368177557,
+      "high": 0.999954097266609,
+      "low": 1.000613876483204
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0765439726358552,
+    "tail_min": 1.0765439722413679,
+    "tail_max": 1.07654397288175,
+    "tail_pp": 6.403821917189134e-10,
+    "power_W": 0.00702728038935305,
+    "energy_J": 3.4883345767251366e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 2.948490108162748e-05,
+    "relative_error": 2.9484534653770893e-05,
+    "excess_error": 0.0004145222018226276,
+    "settle_time_s": {
+     "0.0001": 6.298641146981425e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 90.2,
+  "X": 777.0,
+  "variation": {
+   "vscale": 1.05
+  },
+  "frozen": {
+   "output_gain": 0.9941726369193941,
+   "calibration_outputs": [
+    1.0058614978611873,
+    1.0000000225854078,
+    0.9999999997102448
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.05,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9941726369193941,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.076603104568639,
+    "tail_min": 1.076603103996094,
+    "tail_max": 1.0766031048091786,
+    "tail_pp": 8.13084710671319e-10,
+    "power_W": 0.007767252939000128,
+    "energy_J": 4.623258169874719e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 2.544162845876555e-05,
+    "relative_error": 2.5441405028508947e-05,
+    "excess_error": 0.0003576799618416235,
+    "settle_time_s": {
+     "0.0001": 6.6372794971859775e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9943752563970617,
+   "calibration_outputs": [
+    1.0056565383570188,
+    1.0000000218327187,
+    0.9999999999911396
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.05,
+    "load": 1e-12,
+    "mean_feedback": 1.0058115094634843,
+    "output_gain": 0.9943752563970617,
+    "kappa": 0.0058795278934848025,
+    "hcomp": {
+     "npn": 5.447668789906324e-09,
+     "pnp": 2.28297114295728e-09,
+     "loop": 5.854537539886003e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.0000299852276266,
+      "high": 1.0001021505388437,
+      "low": 0.9999838810145548
+     },
+     "pnp": {
+      "mid": 1.0004918770106277,
+      "high": 1.000048331373349,
+      "low": 1.0007497911116239
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0765190804052072,
+    "tail_min": 1.0765190800346176,
+    "tail_max": 1.0765190806946285,
+    "tail_pp": 6.600109347942862e-10,
+    "power_W": 0.007766752603487884,
+    "energy_J": 4.623183563825138e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 5.260655096110642e-05,
+    "relative_error": 5.2606206731198686e-05,
+    "excess_error": 0.0007395891066221695,
+    "settle_time_s": {
+     "0.0001": 6.747841414890903e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 90.2,
+  "X": 777.0,
+  "variation": {
+   "load": 1e-10
+  },
+  "frozen": {
+   "output_gain": 0.9944010286310361,
+   "calibration_outputs": [
+    1.0056304747199152,
+    1.0000000218034282,
+    0.9999999997123716
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-10,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9944010286310361,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0765313442792557,
+    "tail_min": 1.076531343636006,
+    "tail_max": 1.0765313443447684,
+    "tail_pp": 7.087623821178113e-10,
+    "power_W": 0.007397025606721409,
+    "energy_J": 4.040808633540236e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 4.121524683091847e-05,
+    "relative_error": 4.1214649334925566e-05,
+    "excess_error": 0.0005794355376565474,
+    "settle_time_s": {
+     "0.0001": 6.546742289206167e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "output_gain": 0.9944010286310361,
+   "calibration_outputs": [
+    1.0056304747199152,
+    1.0000000218034282,
+    0.9999999997123716
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-10,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9944010286310361,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.0,
+    "seed": 1,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0765313442792557,
+    "tail_min": 1.076531343636006,
+    "tail_max": 1.0765313443447684,
+    "tail_pp": 7.087623821178113e-10,
+    "power_W": 0.007397025606721409,
+    "energy_J": 4.040808633540236e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 4.121524683091847e-05,
+    "relative_error": 4.1214649334925566e-05,
+    "excess_error": 0.0005794355376565474,
+    "settle_time_s": {
+     "0.0001": 6.546742289206167e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  }
+ },
+ {
+  "p": 90.2,
+  "X": 777.0,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 11
+  },
+  "frozen": {
+   "output_gain": 1.0092823827859636,
+   "calibration_outputs": [
+    0.9908030227499851,
+    0.9999999644290077,
+    0.9999999998983532
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 1.0092823827859636,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 11,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0758775507677092,
+    "tail_min": 1.0758775504380869,
+    "tail_max": 1.0758775511060095,
+    "tail_pp": 6.6792260611237e-10,
+    "power_W": 0.0073823387998544435,
+    "energy_J": 4.039256544940173e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 0.0006485048120961545,
+    "relative_error": 0.0006485045059195198,
+    "excess_error": 0.009117305694064064,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 90.2,
+  "X": 777.0,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 12
+  },
+  "frozen": {
+   "output_gain": 0.9943178939674802,
+   "calibration_outputs": [
+    1.0057145546554402,
+    1.0000000220188359,
+    1.000000000063725
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9943178939674802,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 12,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.075984306536751,
+    "tail_min": 1.0759843062430425,
+    "tail_max": 1.0759843068248054,
+    "tail_pp": 5.81762860107915e-10,
+    "power_W": 0.00739474374626273,
+    "energy_J": 4.041844504790021e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 0.0005493424369178669,
+    "relative_error": 0.0005493421641006494,
+    "excess_error": 0.007723185259357149,
+    "settle_time_s": {
+     "0.0001": null,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ },
+ {
+  "p": 90.2,
+  "X": 777.0,
+  "variation": {
+   "mismatch": 0.001,
+   "seed": 13
+  },
+  "frozen": {
+   "output_gain": 0.9983156154613827,
+   "calibration_outputs": [
+    1.0016872198293933,
+    1.0000000066305845,
+    1.0000000000056333
+   ],
+   "result": {
+    "weight": 0.7095343470573425,
+    "scale": 1.0,
+    "I0": 1e-05,
+    "transistors": 349,
+    "kind": "root",
+    "p": 90.2,
+    "X": 777.0,
+    "X2": null,
+    "n": 6,
+    "A": 1.0,
+    "B": 2.0,
+    "A2": null,
+    "B2": null,
+    "temp": 25,
+    "vscale": 1.0,
+    "load": 1e-12,
+    "mean_feedback": 1.0057882160726233,
+    "output_gain": 0.9983156154613827,
+    "kappa": 0.005871611943483728,
+    "hcomp": {
+     "npn": 5.466202339019511e-09,
+     "pnp": 2.289953402008216e-09,
+     "loop": 5.866224928266446e-09
+    },
+    "gains": {
+     "npn": {
+      "mid": 1.000025234210569,
+      "high": 1.0000975981017126,
+      "low": 0.9999837343445753
+     },
+     "pnp": {
+      "mid": 1.0004482161701733,
+      "high": 1.0000013922067954,
+      "low": 1.0006822231521015
+     }
+    },
+    "bleed": 0.2,
+    "compensation": 1e-11,
+    "readout_reference": null,
+    "weight_override": null,
+    "mismatch": 0.001,
+    "seed": 13,
+    "startup": true,
+    "ramp": false,
+    "model": null,
+    "loop_area": 4.0,
+    "darlington": "pnp",
+    "bleed2": 0.02,
+    "soft_start": null,
+    "t_edge": 1e-07,
+    "loop_rc": 0.0,
+    "por": null,
+    "base_r": 20000.0,
+    "loop_clamp": true,
+    "final": 1.0766734659456145,
+    "tail_min": 1.0766734655995982,
+    "tail_max": 1.0766734664199604,
+    "tail_pp": 8.203622225977369e-10,
+    "power_W": 0.007384247269624011,
+    "energy_J": 4.041309184789693e-06,
+    "duration": 2e-05,
+    "dt": 5e-09,
+    "rail_accounting": "vcc/vee rails; includes every ideal bias, bleed, trim and DAC current source returned through the rails",
+    "reference": "1.07657571496983065363831189639",
+    "window_error": 9.079849078010172e-05,
+    "relative_error": 9.079805017393785e-05,
+    "excess_error": 0.0012765271055240643,
+    "settle_time_s": {
+     "0.0001": 6.4562545921834215e-06,
+     "1e-05": null,
+     "1e-06": null
+    }
+   }
+  },
+  "recalibrated": {
+   "result": {
+    "error": "not applicable: family calibration cannot correct per-device mismatch"
+   },
+   "applicable": false
+  }
+ }
+]

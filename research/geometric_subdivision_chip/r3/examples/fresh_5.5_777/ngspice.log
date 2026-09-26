@@ -1,0 +1,66 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * r3 root
+
+Doing analysis at TEMP = 25.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Operating point simulation skipped by 'uic',
+  now using transient initial conditions.
+ Reference value :  4.62313e-09
+ Reference value :  1.03446e-08
+ Reference value :  1.32520e-08
+ Reference value :  1.46429e-08
+ Reference value :  1.59227e-08
+ Reference value :  1.76057e-08
+ Reference value :  2.47617e-08
+ Reference value :  8.92627e-08
+ Reference value :  1.83913e-07
+ Reference value :  4.92417e-07
+ Reference value :  6.06975e-07
+ Reference value :  7.70833e-07
+ Reference value :  8.11011e-07
+ Reference value :  8.27037e-07
+ Reference value :  8.44672e-07
+ Reference value :  8.61366e-07
+ Reference value :  8.78301e-07
+ Reference value :  8.94546e-07
+ Reference value :  9.09696e-07
+ Reference value :  9.24971e-07
+ Reference value :  9.39299e-07
+ Reference value :  9.52962e-07
+ Reference value :  9.66374e-07
+ Reference value :  9.79098e-07
+ Reference value :  9.92101e-07
+ Reference value :  1.00590e-06
+ Reference value :  1.02033e-06
+ Reference value :  1.03322e-06
+ Reference value :  1.04665e-06
+ Reference value :  1.06000e-06
+ Reference value :  1.07732e-06
+ Reference value :  1.09838e-06
+ Reference value :  1.12309e-06
+ Reference value :  1.15096e-06
+ Reference value :  1.18321e-06
+ Reference value :  1.21546e-06
+ Reference value :  1.24751e-06
+ Reference value :  1.27712e-06
+ Reference value :  1.30562e-06
+ Reference value :  1.35496e-06
+ Reference value :  2.03556e-06
+ Reference value :  2.95225e-06
+ Reference value :  3.26846e-06
+ Reference value :  3.39660e-06
+ Reference value :  3.54397e-06
+ Reference value :  3.66221e-06
+ Reference value :  3.69872e-06
+ Reference value :  3.71814e-06
+ Reference value :  3.74016e-06
+ Reference value :  3.76905e-06
+ Reference value :  6.21374e-06
+ Reference value :  1.10142e-05
+ Reference value :  1.68342e-05
+No. of Data Rows : 39525
+ngspice-46 done

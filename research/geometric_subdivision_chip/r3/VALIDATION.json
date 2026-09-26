@@ -1,0 +1,88 @@
+{
+ "frozen_config_sha256": "2214d93eaa4a2f557b8dca9b3a93846078930ae262286411f53b39182c3d4a71",
+ "calibration_written_before_scoring": true,
+ "identities": [
+  [
+   1.0,
+   1.0,
+   1.0
+  ],
+  [
+   1.0,
+   2.25,
+   1.5
+  ],
+  [
+   2.25,
+   1.0,
+   1.5
+  ],
+  [
+   2.25,
+   2.25,
+   2.25
+  ],
+  [
+   0.5625,
+   0.5625,
+   0.5625
+  ]
+ ],
+ "forbidden_tokens_in_calibration": [],
+ "netlists": {
+  "3.7/2": {
+   "transistors": 349,
+   "resistors": 124,
+   "capacitors": 52,
+   "clamp_diodes": 45,
+   "ideal_current_sources": {
+    "input DAC": 2,
+    "bleed": 59,
+    "hc": 45,
+    "bias": 6,
+    "fol": 6
+   }
+  },
+  "1e+06/500000": {
+   "transistors": 349,
+   "resistors": 124,
+   "capacitors": 52,
+   "clamp_diodes": 45,
+   "ideal_current_sources": {
+    "input DAC": 2,
+    "bleed": 59,
+    "hc": 45,
+    "bias": 6,
+    "fol": 6
+   }
+  }
+ },
+ "standalone_replays": [
+  {
+   "case": "development p=3.7 X=2",
+   "netlist_sha256": "e8fe57aabf7d9db3453f8c4de811204a4dfeffc4b066653dff86ba325d876fa6",
+   "trace_sha256": "fa788c624a46cd977e5c2c370ee790495b914527cd05b58c16bfdad03d1bbab4",
+   "campaign_final": 1.2059952411292694,
+   "replay_final": 1.2059952411292694,
+   "absolute_difference": 0.0
+  },
+  {
+   "case": "development p=1e+06 X=500000",
+   "netlist_sha256": "cfad9dc719427c89cb79e5f51b3481ffd892cad04084afb019db00805a7e01f3",
+   "trace_sha256": "ff66b6addb04db2fa557d022b114f0755be1f23662126b40a38d322766b7b5a0",
+   "campaign_final": 1.0000131214540477,
+   "replay_final": 1.0000131214540477,
+   "absolute_difference": 0.0
+  },
+  {
+   "case": "fresh p=5.5 X=777",
+   "netlist_sha256": "9d8dc3311e6276342894e6439c676a9511cff9458a058a93943bb521c1b59520",
+   "trace_sha256": "47466f23193435d6ea345cf245ffd1f8dd357f72ec80004ef253266545e6711b",
+   "campaign_final": 3.3536265240972267,
+   "replay_final": 3.3536265240972267,
+   "absolute_difference": 0.0
+  }
+ ],
+ "behavioral_sources_in_core": false,
+ "note": "Ideal elements: two rails, 0 V senses, input DAC currents, bias/bleed/trim currents."
+}
