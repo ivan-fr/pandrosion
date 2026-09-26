@@ -1,6 +1,8 @@
 # Subdivision géométrique : prototype transistor et comparaison
 
-**Mise à jour : [révision R2](improvement/README.md)** — 21/24 cas distincts améliorés ; 0,18 ppm sur le cœur nominal du cas à un million et 2,14 ppm avec le SAR 20 bits calibré. Trois régressions, la sensibilité aux conditions électriques et les échecs de démarrage restent documentés. Les résultats ci-dessous sont ceux de la première version R1.
+**Mise à jour : [révision R3](r3/README.md)** — primitives transistor refaites : 56/56 couples plus précis que R2, dont 28 couples nouveaux en test aveugle ; 1,9–150 ppm pour p < 64 et ≤ 0,016 ppm pour p ≥ 250 000 ; démarrage depuis zéro établi de −20 à 85 °C. Le bruit (≈ 1 000 ppm RMS sur 1 MHz) et le mismatch restent limitants.
+
+[Révision R2](improvement/README.md) : 21/24 cas améliorés, 0,18 ppm sur le cœur nominal du cas à un million. Ses « échecs de démarrage » venaient de la fenêtre d'observation de 2 µs (voir R3). Les résultats ci-dessous sont ceux de la première version R1.
 
 **La réalisation testée ne remplace pas V30.** La lecture de Padé est exacte à l'ordre annoncé, mais sa traduction en cellules translinéaires et miroirs BJT accumule des erreurs, et certains transitoires oscillent. Ce dossier fournit une simulation électrique du noyau, une interface mixte simulée et les résultats négatifs nécessaires pour décider de la suite. Il ne fournit pas une puce prête à fabriquer.
 

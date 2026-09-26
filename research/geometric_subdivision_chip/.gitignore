@@ -7,3 +7,5 @@ results/transistor_backup.json
 
 improvement/raw/
 improvement/replay/
+r3/raw/
+r3/examples/*/trace.txt
