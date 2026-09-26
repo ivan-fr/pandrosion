@@ -1,0 +1,475 @@
+* root level=T2 device=generic
+.options reltol=1e-6 abstol=1e-13 vntol=1e-8 chgtol=1e-16 gmin=1e-15 method=gear
+.temp 25
+.model QN NPN(Is=2e-17 Bf=400 Br=2 Vaf=100 Var=5 Ikf=0.05 Rb=40 Re=1.5 Rc=15 Tf=2.5e-11 Cje=15f Cjc=8f Vje=0.9 Vjc=0.7 Mje=0.4 Mjc=0.3 Xtb=1.4 Xti=3 Eg=1.1)
+.model QP PNP(Is=2e-17 Bf=100 Br=2 Vaf=60 Var=5 Ikf=0.05 Rb=60 Re=2 Rc=25 Tf=6e-11 Cje=20f Cjc=12f Vje=0.9 Vjc=0.7 Mje=0.4 Mjc=0.3 Xtb=1.4 Xti=3 Eg=1.1)
+Vcc vcc 0 4.0
+Vee vee 0 -2.5
+Vb vb 0 1.65
+Vcn vcn 0 -0.1
+Vcp vcp 0 1.6
+.model DCL D(Is=1e-15 n=1 Cjo=5f)
+Vclampn clampn 0 -0.8
+Vclampp clampp 0 2.3
+Iunit vcc n_unit 1.0000000000000001e-05
+Ix vcc n_x 1.9073486328125e-05
+Qgm0_u1 gm0_ac1 gm0_a1 0 QN area=1
+Qgm0_h1 vcc gm0_ac1 gm0_a1 QN area=1
+Ibleed_gm0_h1 gm0_a1 vee 2e-06
+Vgm0_inj1 gm0_ac1_in gm0_ac1 0
+Qgm0_d1 gm0_dc1 gm0_a1 gm0_b1 QN area=1
+Vgm0_flw1 vb gm0_dc1 0
+Vgm0_snk1 gm0_b1 gm0_b1_sk 0
+Qgm0_u2 gm0_ac2 gm0_a2 gm0_b1 QN area=1
+Qgm0_h2 vcc gm0_ac2 gm0_a2 QN area=1
+Ibleed_gm0_h2 gm0_a2 vee 2e-06
+Vgm0_inj2 gm0_ac2_in gm0_ac2 0
+Qgm0_d2 gm0_cc gm0_a2 0 QN area=1
+Vgm0_out gm0_c gm0_cc 0
+Qgm1_u1 gm1_ac1 gm1_a1 0 QN area=1
+Qgm1_h1 vcc gm1_ac1 gm1_a1 QN area=1
+Ibleed_gm1_h1 gm1_a1 vee 2e-06
+Vgm1_inj1 gm1_ac1_in gm1_ac1 0
+Qgm1_d1 gm1_dc1 gm1_a1 gm1_b1 QN area=1
+Vgm1_flw1 vb gm1_dc1 0
+Vgm1_snk1 gm1_b1 gm1_b1_sk 0
+Qgm1_u2 gm1_ac2 gm1_a2 gm1_b1 QN area=1
+Qgm1_h2 vcc gm1_ac2 gm1_a2 QN area=1
+Ibleed_gm1_h2 gm1_a2 vee 2e-06
+Vgm1_inj2 gm1_ac2_in gm1_ac2 0
+Qgm1_d2 gm1_cc gm1_a2 0 QN area=1
+Vgm1_out gm1_c gm1_cc 0
+Qgm2_u1 gm2_ac1 gm2_a1 0 QN area=1
+Qgm2_h1 vcc gm2_ac1 gm2_a1 QN area=1
+Ibleed_gm2_h1 gm2_a1 vee 2e-06
+Vgm2_inj1 gm2_ac1_in gm2_ac1 0
+Qgm2_d1 gm2_dc1 gm2_a1 gm2_b1 QN area=1
+Vgm2_flw1 vb gm2_dc1 0
+Vgm2_snk1 gm2_b1 gm2_b1_sk 0
+Qgm2_u2 gm2_ac2 gm2_a2 gm2_b1 QN area=1
+Qgm2_h2 vcc gm2_ac2 gm2_a2 QN area=1
+Ibleed_gm2_h2 gm2_a2 vee 2e-06
+Vgm2_inj2 gm2_ac2_in gm2_ac2 0
+Qgm2_d2 gm2_cc gm2_a2 0 QN area=1
+Vgm2_out gm2_c gm2_cc 0
+Qgm3_u1 gm3_ac1 gm3_a1 0 QN area=1
+Qgm3_h1 vcc gm3_ac1 gm3_a1 QN area=1
+Ibleed_gm3_h1 gm3_a1 vee 2e-06
+Vgm3_inj1 gm3_ac1_in gm3_ac1 0
+Qgm3_d1 gm3_dc1 gm3_a1 gm3_b1 QN area=1
+Vgm3_flw1 vb gm3_dc1 0
+Vgm3_snk1 gm3_b1 gm3_b1_sk 0
+Qgm3_u2 gm3_ac2 gm3_a2 gm3_b1 QN area=1
+Qgm3_h2 vcc gm3_ac2 gm3_a2 QN area=1
+Ibleed_gm3_h2 gm3_a2 vee 2e-06
+Vgm3_inj2 gm3_ac2_in gm3_ac2 0
+Qgm3_d2 gm3_cc gm3_a2 0 QN area=1
+Vgm3_out gm3_c gm3_cc 0
+Qgm4_u1 gm4_ac1 gm4_a1 0 QN area=1
+Qgm4_h1 vcc gm4_ac1 gm4_a1 QN area=1
+Ibleed_gm4_h1 gm4_a1 vee 2e-06
+Vgm4_inj1 gm4_ac1_in gm4_ac1 0
+Qgm4_d1 gm4_dc1 gm4_a1 gm4_b1 QN area=1
+Vgm4_flw1 vb gm4_dc1 0
+Vgm4_snk1 gm4_b1 gm4_b1_sk 0
+Qgm4_u2 gm4_ac2 gm4_a2 gm4_b1 QN area=1
+Qgm4_h2 vcc gm4_ac2 gm4_a2 QN area=1
+Ibleed_gm4_h2 gm4_a2 vee 2e-06
+Vgm4_inj2 gm4_ac2_in gm4_ac2 0
+Qgm4_d2 gm4_cc gm4_a2 0 QN area=1
+Vgm4_out gm4_c gm4_cc 0
+Qgm5_u1 gm5_ac1 gm5_a1 0 QN area=1
+Qgm5_h1 vcc gm5_ac1 gm5_a1 QN area=1
+Ibleed_gm5_h1 gm5_a1 vee 2e-06
+Vgm5_inj1 gm5_ac1_in gm5_ac1 0
+Qgm5_d1 gm5_dc1 gm5_a1 gm5_b1 QN area=1
+Vgm5_flw1 vb gm5_dc1 0
+Vgm5_snk1 gm5_b1 gm5_b1_sk 0
+Qgm5_u2 gm5_ac2 gm5_a2 gm5_b1 QN area=1
+Qgm5_h2 vcc gm5_ac2 gm5_a2 QN area=1
+Ibleed_gm5_h2 gm5_a2 vee 2e-06
+Vgm5_inj2 gm5_ac2_in gm5_ac2 0
+Qgm5_d2 gm5_cc gm5_a2 0 QN area=1
+Vgm5_out gm5_c gm5_cc 0
+Vbscale_srcs n_bscale_s n_bscale 0
+Vbscale_snks n_bscale n_bscale_k 0
+Qaa_u1 aa_ac1 aa_a1 0 QN area=1
+Qaa_h1 vcc aa_ac1 aa_a1 QN area=1
+Ibleed_aa_h1 aa_a1 vee 2e-06
+Vaa_inj1 aa_ac1_in aa_ac1 0
+Qaa_d1 aa_dc1 aa_a1 aa_b1 QN area=1
+Vaa_flw1 vb aa_dc1 0
+Vaa_snk1 aa_b1 aa_b1_sk 0
+Qaa_u2 aa_ac2 aa_a2 aa_b1 QN area=1
+Qaa_h2 vcc aa_ac2 aa_a2 QN area=1
+Ibleed_aa_h2 aa_a2 vee 2e-06
+Vaa_inj2 aa_ac2_in aa_ac2 0
+Qaa_d2 aa_cc aa_a2 0 QN area=1
+Vaa_out aa_c aa_cc 0
+Qab_u1 ab_ac1 ab_a1 0 QN area=1
+Qab_h1 vcc ab_ac1 ab_a1 QN area=1
+Ibleed_ab_h1 ab_a1 vee 2e-06
+Vab_inj1 ab_ac1_in ab_ac1 0
+Qab_d1 ab_dc1 ab_a1 ab_b1 QN area=1
+Vab_flw1 vb ab_dc1 0
+Vab_snk1 ab_b1 ab_b1_sk 0
+Qab_u2 ab_ac2 ab_a2 ab_b1 QN area=1
+Qab_h2 vcc ab_ac2 ab_a2 QN area=1
+Ibleed_ab_h2 ab_a2 vee 2e-06
+Vab_inj2 ab_ac2_in ab_ac2 0
+Qab_d2 ab_cc ab_a2 0 QN area=1
+Vab_out ab_c ab_cc 0
+Qbb_u1 bb_ac1 bb_a1 0 QN area=1
+Qbb_h1 vcc bb_ac1 bb_a1 QN area=1
+Ibleed_bb_h1 bb_a1 vee 2e-06
+Vbb_inj1 bb_ac1_in bb_ac1 0
+Qbb_d1 bb_dc1 bb_a1 bb_b1 QN area=1
+Vbb_flw1 vb bb_dc1 0
+Vbb_snk1 bb_b1 bb_b1_sk 0
+Qbb_u2 bb_ac2 bb_a2 bb_b1 QN area=1
+Qbb_h2 vcc bb_ac2 bb_a2 QN area=1
+Ibleed_bb_h2 bb_a2 vee 2e-06
+Vbb_inj2 bb_ac2_in bb_ac2 0
+Qbb_d2 bb_cc bb_a2 0 QN area=1
+Vbb_out bb_c bb_cc 0
+Vnum_srcs n_num_s n_num 0
+Vnum_snks n_num n_num_k 0
+Vden_srcs n_den_s n_den 0
+Vden_snks n_den n_den_k 0
+Qpade_u1 pade_ac1 pade_a1 0 QN area=1
+Qpade_h1 vcc pade_ac1 pade_a1 QN area=1
+Ibleed_pade_h1 pade_a1 vee 2e-06
+Vpade_inj1 pade_ac1_in pade_ac1 0
+Qpade_d1 pade_dc1 pade_a1 pade_b1 QN area=1
+Vpade_flw1 vb pade_dc1 0
+Vpade_snk1 pade_b1 pade_b1_sk 0
+Qpade_u2 pade_ac2 pade_a2 pade_b1 QN area=1
+Qpade_h2 vcc pade_ac2 pade_a2 QN area=1
+Ibleed_pade_h2 pade_a2 vee 2e-06
+Vpade_inj2 pade_ac2_in pade_ac2 0
+Qpade_d2 pade_cc pade_a2 0 QN area=1
+Vpade_out pade_c pade_cc 0
+Vmeas n_meas n_load 0
+Rload n_load 0 1000
+Cload n_load 0 9.9999999999999998e-13
+Qmp_unit_h mp_unit_hc unit_pin mp_unit_x QP area=1
+Vmp_unit_hc mp_unit_hc vee 0
+Ibleed_mp_unit vcc mp_unit_x 2e-06
+Dcl_mp_unit unit_pin clampp DCL
+Vmp_unit_in unit_pin_d unit_pin 0
+Qmp_unit_d unit_pin_d mp_unit_x vcc QP area=1
+Qmp_unit_o0 mp_unit_e0 mp_unit_x vcc QP area=0.0839290976
+Qmp_unit_c0 gm0_ac1_in vcp mp_unit_e0 QP area=0.0833333333
+Qmp_unit_o1 mp_unit_e1 mp_unit_x vcc QP area=0.167858195
+Qmp_unit_c1 gm1_ac1_in vcp mp_unit_e1 QP area=0.166666667
+Qmp_unit_o2 mp_unit_e2 mp_unit_x vcc QP area=0.0839290976
+Qmp_unit_c2 gm2_ac1_in vcp mp_unit_e2 QP area=0.0833333333
+Qmp_unit_o3 mp_unit_e3 mp_unit_x vcc QP area=0.0839290976
+Qmp_unit_c3 gm3_ac1_in vcp mp_unit_e3 QP area=0.0833333333
+Qmp_unit_o4 mp_unit_e4 mp_unit_x vcc QP area=0.167858195
+Qmp_unit_c4 gm4_ac1_in vcp mp_unit_e4 QP area=0.166666667
+Qmp_unit_o5 mp_unit_e5 mp_unit_x vcc QP area=0.0839290976
+Qmp_unit_c5 gm5_ac1_in vcp mp_unit_e5 QP area=0.0833333333
+Qmp_unit_o6 mp_unit_e6 mp_unit_x vcc QP area=0.0839290976
+Qmp_unit_c6 aa_ac1_in vcp mp_unit_e6 QP area=0.0833333333
+Qmp_unit_o7 mp_unit_e7 mp_unit_x vcc QP area=0.0839290976
+Qmp_unit_c7 aa_ac2_in vcp mp_unit_e7 QP area=0.0833333333
+Qmp_unit_o8 mp_unit_e8 mp_unit_x vcc QP area=0.0839290976
+Qmp_unit_c8 ab_ac1_in vcp mp_unit_e8 QP area=0.0833333333
+Qmp_unit_o9 mp_unit_e9 mp_unit_x vcc QP area=0.0839290976
+Qmp_unit_c9 pade_ac1_in vcp mp_unit_e9 QP area=0.0833333333
+Qmn_unit_h mn_unit_hc n_unit mn_unit_x QN area=1
+Vmn_unit_hc vcc mn_unit_hc 0
+Ibleed_mn_unit mn_unit_x vee 2e-06
+Dcl_mn_unit clampn n_unit DCL
+Vmn_unit_in n_unit n_unit_d 0
+Qmn_unit_d n_unit_d mn_unit_x vee QN area=1
+Qmn_unit_o0 mn_unit_e0 mn_unit_x vee QN area=0.999646223
+Qmn_unit_c0 aa_b1_sk vcn mn_unit_e0 QN area=1
+Qmn_unit_o1 mn_unit_e1 mn_unit_x vee QN area=0.999646223
+Qmn_unit_c1 aa_b1_sk vcn mn_unit_e1 QN area=1
+Qmn_unit_o2 mn_unit_e2 mn_unit_x vee QN area=0.999646223
+Qmn_unit_c2 ab_b1_sk vcn mn_unit_e2 QN area=1
+Qmn_unit_o3 mn_unit_e3 mn_unit_x vee QN area=0.999646223
+Qmn_unit_c3 bb_b1_sk vcn mn_unit_e3 QN area=1
+Qmn_unit_o4 mn_unit_e4 mn_unit_x vee QN area=11.9957547
+Qmn_unit_c4 unit_pin vcn mn_unit_e4 QN area=12
+Qmp_x_h mp_x_hc x_pin mp_x_x QP area=1
+Vmp_x_hc mp_x_hc vee 0
+Ibleed_mp_x vcc mp_x_x 2e-06
+Dcl_mp_x x_pin clampp DCL
+Vmp_x_in x_pin_d x_pin 0
+Qmp_x_d x_pin_d mp_x_x vcc QP area=1
+Qmp_x_o0 mp_x_e0 mp_x_x vcc QP area=1.00714917
+Qmp_x_c0 gm0_ac2_in vcp mp_x_e0 QP area=1
+Qmn_x_h mn_x_hc n_x mn_x_x QN area=1
+Vmn_x_hc vcc mn_x_hc 0
+Ibleed_mn_x mn_x_x vee 2e-06
+Dcl_mn_x clampn n_x DCL
+Vmn_x_in n_x n_x_d 0
+Qmn_x_d n_x_d mn_x_x vee QN area=1
+Qmn_x_o0 mn_x_e0 mn_x_x vee QN area=0.999646223
+Qmn_x_c0 gm0_b1_sk vcn mn_x_e0 QN area=1
+Qmn_x_o1 mn_x_e1 mn_x_x vee QN area=0.999646223
+Qmn_x_c1 x_pin vcn mn_x_e1 QN area=1
+Qmn_gm0_h mn_gm0_hc gm0_nin mn_gm0_x QN area=1
+Vmn_gm0_hc vcc mn_gm0_hc 0
+Ibleed_mn_gm0 mn_gm0_x vee 2e-06
+Dcl_mn_gm0 clampn gm0_nin DCL
+Vmn_gm0_in gm0_nin gm0_nin_d 0
+Qmn_gm0_d gm0_nin_d mn_gm0_x vee QN area=1
+Qmn_gm0_o0 mn_gm0_e0 mn_gm0_x vee QN area=0.504812954
+Qmn_gm0_c0 gm0_b1_sk vcn mn_gm0_e0 QN area=0.504991608
+Qmn_gm0_o1 mn_gm0_e1 mn_gm0_x vee QN area=0.494833269
+Qmn_gm0_c1 gm1_b1_sk vcn mn_gm0_e1 QN area=0.495008392
+Qmp_gm0_h mp_gm0_hc gm0_c mp_gm0_x QP area=1
+Vmp_gm0_hc mp_gm0_hc vee 0
+Ibleed_mp_gm0 vcc mp_gm0_x 2e-06
+Dcl_mp_gm0 gm0_c clampp DCL
+Vmp_gm0_in gm0_c_d gm0_c 0
+Qmp_gm0_d gm0_c_d mp_gm0_x vcc QP area=1
+Qmp_gm0_o0 mp_gm0_e0 mp_gm0_x vcc QP area=1.00714917
+Qmp_gm0_c0 gm1_ac2_in vcp mp_gm0_e0 QP area=1
+Qmp_gm0_o1 mp_gm0_e1 mp_gm0_x vcc QP area=2.0346103
+Qmp_gm0_c1 gm0_nin vcp mp_gm0_e1 QP area=2.02016777
+Qmn_gm1_h mn_gm1_hc gm1_nin mn_gm1_x QN area=1
+Vmn_gm1_hc vcc mn_gm1_hc 0
+Ibleed_mn_gm1 mn_gm1_x vee 2e-06
+Dcl_mn_gm1 clampn gm1_nin DCL
+Vmn_gm1_in gm1_nin gm1_nin_d 0
+Qmn_gm1_d gm1_nin_d mn_gm1_x vee QN area=1
+Qmn_gm1_o0 mn_gm1_e0 mn_gm1_x vee QN area=0.504812954
+Qmn_gm1_c0 gm1_b1_sk vcn mn_gm1_e0 QN area=0.504991608
+Qmn_gm1_o1 mn_gm1_e1 mn_gm1_x vee QN area=0.494833269
+Qmn_gm1_c1 gm2_b1_sk vcn mn_gm1_e1 QN area=0.495008392
+Qmp_gm1_h mp_gm1_hc gm1_c mp_gm1_x QP area=1
+Vmp_gm1_hc mp_gm1_hc vee 0
+Ibleed_mp_gm1 vcc mp_gm1_x 2e-06
+Dcl_mp_gm1 gm1_c clampp DCL
+Vmp_gm1_in gm1_c_d gm1_c 0
+Qmp_gm1_d gm1_c_d mp_gm1_x vcc QP area=1
+Qmp_gm1_o0 mp_gm1_e0 mp_gm1_x vcc QP area=1.00714917
+Qmp_gm1_c0 gm2_ac2_in vcp mp_gm1_e0 QP area=1
+Qmp_gm1_o1 mp_gm1_e1 mp_gm1_x vcc QP area=2.0346103
+Qmp_gm1_c1 gm1_nin vcp mp_gm1_e1 QP area=2.02016777
+Qmn_gm2_h mn_gm2_hc gm2_nin mn_gm2_x QN area=1
+Vmn_gm2_hc vcc mn_gm2_hc 0
+Ibleed_mn_gm2 mn_gm2_x vee 2e-06
+Dcl_mn_gm2 clampn gm2_nin DCL
+Vmn_gm2_in gm2_nin gm2_nin_d 0
+Qmn_gm2_d gm2_nin_d mn_gm2_x vee QN area=1
+Qmn_gm2_o0 mn_gm2_e0 mn_gm2_x vee QN area=0.504812954
+Qmn_gm2_c0 gm2_b1_sk vcn mn_gm2_e0 QN area=0.504991608
+Qmn_gm2_o1 mn_gm2_e1 mn_gm2_x vee QN area=0.494833269
+Qmn_gm2_c1 gm3_b1_sk vcn mn_gm2_e1 QN area=0.495008392
+Qmp_gm2_h mp_gm2_hc gm2_c mp_gm2_x QP area=1
+Vmp_gm2_hc mp_gm2_hc vee 0
+Ibleed_mp_gm2 vcc mp_gm2_x 2e-06
+Dcl_mp_gm2 gm2_c clampp DCL
+Vmp_gm2_in gm2_c_d gm2_c 0
+Qmp_gm2_d gm2_c_d mp_gm2_x vcc QP area=1
+Qmp_gm2_o0 mp_gm2_e0 mp_gm2_x vcc QP area=1.00714917
+Qmp_gm2_c0 gm3_ac2_in vcp mp_gm2_e0 QP area=1
+Qmp_gm2_o1 mp_gm2_e1 mp_gm2_x vcc QP area=2.0346103
+Qmp_gm2_c1 gm2_nin vcp mp_gm2_e1 QP area=2.02016777
+Qmn_gm3_h mn_gm3_hc gm3_nin mn_gm3_x QN area=1
+Vmn_gm3_hc vcc mn_gm3_hc 0
+Ibleed_mn_gm3 mn_gm3_x vee 2e-06
+Dcl_mn_gm3 clampn gm3_nin DCL
+Vmn_gm3_in gm3_nin gm3_nin_d 0
+Qmn_gm3_d gm3_nin_d mn_gm3_x vee QN area=1
+Qmn_gm3_o0 mn_gm3_e0 mn_gm3_x vee QN area=0.504812954
+Qmn_gm3_c0 gm3_b1_sk vcn mn_gm3_e0 QN area=0.504991608
+Qmn_gm3_o1 mn_gm3_e1 mn_gm3_x vee QN area=0.494833269
+Qmn_gm3_c1 gm4_b1_sk vcn mn_gm3_e1 QN area=0.495008392
+Qmp_gm3_h mp_gm3_hc gm3_c mp_gm3_x QP area=1
+Vmp_gm3_hc mp_gm3_hc vee 0
+Ibleed_mp_gm3 vcc mp_gm3_x 2e-06
+Dcl_mp_gm3 gm3_c clampp DCL
+Vmp_gm3_in gm3_c_d gm3_c 0
+Qmp_gm3_d gm3_c_d mp_gm3_x vcc QP area=1
+Qmp_gm3_o0 mp_gm3_e0 mp_gm3_x vcc QP area=1.00714917
+Qmp_gm3_c0 gm4_ac2_in vcp mp_gm3_e0 QP area=1
+Qmp_gm3_o1 mp_gm3_e1 mp_gm3_x vcc QP area=2.0346103
+Qmp_gm3_c1 gm3_nin vcp mp_gm3_e1 QP area=2.02016777
+Qmn_gm4_h mn_gm4_hc gm4_nin mn_gm4_x QN area=1
+Vmn_gm4_hc vcc mn_gm4_hc 0
+Ibleed_mn_gm4 mn_gm4_x vee 2e-06
+Dcl_mn_gm4 clampn gm4_nin DCL
+Vmn_gm4_in gm4_nin gm4_nin_d 0
+Qmn_gm4_d gm4_nin_d mn_gm4_x vee QN area=1
+Qmn_gm4_o0 mn_gm4_e0 mn_gm4_x vee QN area=0.504812954
+Qmn_gm4_c0 gm4_b1_sk vcn mn_gm4_e0 QN area=0.504991608
+Qmn_gm4_o1 mn_gm4_e1 mn_gm4_x vee QN area=0.494833269
+Qmn_gm4_c1 gm5_b1_sk vcn mn_gm4_e1 QN area=0.495008392
+Qmp_gm4_h mp_gm4_hc gm4_c mp_gm4_x QP area=1
+Vmp_gm4_hc mp_gm4_hc vee 0
+Ibleed_mp_gm4 vcc mp_gm4_x 2e-06
+Dcl_mp_gm4 gm4_c clampp DCL
+Vmp_gm4_in gm4_c_d gm4_c 0
+Qmp_gm4_d gm4_c_d mp_gm4_x vcc QP area=1
+Qmp_gm4_o0 mp_gm4_e0 mp_gm4_x vcc QP area=1.00714917
+Qmp_gm4_c0 gm5_ac2_in vcp mp_gm4_e0 QP area=1
+Qmp_gm4_o1 mp_gm4_e1 mp_gm4_x vcc QP area=2.0346103
+Qmp_gm4_c1 gm4_nin vcp mp_gm4_e1 QP area=2.02016777
+Qmn_gm5_h mn_gm5_hc gm5_nin mn_gm5_x QN area=1
+Vmn_gm5_hc vcc mn_gm5_hc 0
+Ibleed_mn_gm5 mn_gm5_x vee 2e-06
+Dcl_mn_gm5 clampn gm5_nin DCL
+Vmn_gm5_in gm5_nin gm5_nin_d 0
+Qmn_gm5_d gm5_nin_d mn_gm5_x vee QN area=1
+Qmn_gm5_o0 mn_gm5_e0 mn_gm5_x vee QN area=0.999646223
+Qmn_gm5_c0 gm5_b1_sk vcn mn_gm5_e0 QN area=1
+Qmp_gm5_h mp_gm5_hc gm5_c mp_gm5_x QP area=1
+Vmp_gm5_hc mp_gm5_hc vee 0
+Ibleed_mp_gm5 vcc mp_gm5_x 2e-06
+Dcl_mp_gm5 gm5_c clampp DCL
+Vmp_gm5_in gm5_c_d gm5_c 0
+Qmp_gm5_d gm5_c_d mp_gm5_x vcc QP area=1
+Qmp_gm5_o0 mp_gm5_e0 mp_gm5_x vcc QP area=1.00714917
+Qmp_gm5_c0 n_bscale_s vcp mp_gm5_e0 QP area=1
+Qmp_gm5_o1 mp_gm5_e1 mp_gm5_x vcc QP area=1.02746113
+Qmp_gm5_c1 gm5_nin vcp mp_gm5_e1 QP area=1.02016777
+Qmp_bscale_h mp_bscale_hc bscale_pin mp_bscale_x QP area=1
+Vmp_bscale_hc mp_bscale_hc vee 0
+Ibleed_mp_bscale vcc mp_bscale_x 2e-06
+Dcl_mp_bscale bscale_pin clampp DCL
+Vmp_bscale_in bscale_pin_d bscale_pin 0
+Qmp_bscale_d bscale_pin_d mp_bscale_x vcc QP area=1
+Qmp_bscale_o0 mp_bscale_e0 mp_bscale_x vcc QP area=0.335716391
+Qmp_bscale_c0 ab_ac2_in vcp mp_bscale_e0 QP area=0.333333333
+Qmp_bscale_o1 mp_bscale_e1 mp_bscale_x vcc QP area=0.335716391
+Qmp_bscale_c1 bb_ac1_in vcp mp_bscale_e1 QP area=0.333333333
+Qmp_bscale_o2 mp_bscale_e2 mp_bscale_x vcc QP area=0.335716391
+Qmp_bscale_c2 bb_ac2_in vcp mp_bscale_e2 QP area=0.333333333
+Qmn_bscale_h mn_bscale_hc n_bscale mn_bscale_x QN area=1
+Vmn_bscale_hc vcc mn_bscale_hc 0
+Ibleed_mn_bscale mn_bscale_x vee 2e-06
+Dcl_mn_bscale clampn n_bscale DCL
+Vmn_bscale_in n_bscale n_bscale_d 0
+Qmn_bscale_d n_bscale_d mn_bscale_x vee QN area=1
+Qmn_bscale_o0 mn_bscale_e0 mn_bscale_x vee QN area=0.999646223
+Qmn_bscale_c0 ab_b1_sk vcn mn_bscale_e0 QN area=1
+Qmn_bscale_o1 mn_bscale_e1 mn_bscale_x vee QN area=0.999646223
+Qmn_bscale_c1 bb_b1_sk vcn mn_bscale_e1 QN area=1
+Qmn_bscale_o2 mn_bscale_e2 mn_bscale_x vee QN area=2.99893867
+Qmn_bscale_c2 bscale_pin vcn mn_bscale_e2 QN area=3
+Qmp_aa_h mp_aa_hc aa_c mp_aa_x QP area=1
+Vmp_aa_hc mp_aa_hc vee 0
+Ibleed_mp_aa vcc mp_aa_x 2e-06
+Dcl_mp_aa aa_c clampp DCL
+Vmp_aa_in aa_c_d aa_c 0
+Qmp_aa_d aa_c_d mp_aa_x vcc QP area=1
+Qmp_aa_o0 mp_aa_e0 mp_aa_x vcc QP area=0.167842077
+Qmp_aa_c0 n_num_s vcp mp_aa_e0 QP area=0.166650663
+Qmp_aa_o1 mp_aa_e1 mp_aa_x vcc QP area=0.167874314
+Qmp_aa_c1 n_den_s vcp mp_aa_e1 QP area=0.166682671
+Qmp_ab_h mp_ab_hc ab_c mp_ab_x QP area=1
+Vmp_ab_hc mp_ab_hc vee 0
+Ibleed_mp_ab vcc mp_ab_x 2e-06
+Dcl_mp_ab ab_c clampp DCL
+Vmp_ab_in ab_c_d ab_c 0
+Qmp_ab_d ab_c_d mp_ab_x vcc QP area=1
+Qmp_ab_o0 mp_ab_e0 mp_ab_x vcc QP area=0.67143278
+Qmp_ab_c0 n_num_s vcp mp_ab_e0 QP area=0.666666666
+Qmp_ab_o1 mp_ab_e1 mp_ab_x vcc QP area=0.67143278
+Qmp_ab_c1 n_den_s vcp mp_ab_e1 QP area=0.666666666
+Qmp_bb_h mp_bb_hc bb_c mp_bb_x QP area=1
+Vmp_bb_hc mp_bb_hc vee 0
+Ibleed_mp_bb vcc mp_bb_x 2e-06
+Dcl_mp_bb bb_c clampp DCL
+Vmp_bb_in bb_c_d bb_c 0
+Qmp_bb_d bb_c_d mp_bb_x vcc QP area=1
+Qmp_bb_o0 mp_bb_e0 mp_bb_x vcc QP area=0.167874314
+Qmp_bb_c0 n_num_s vcp mp_bb_e0 QP area=0.166682671
+Qmp_bb_o1 mp_bb_e1 mp_bb_x vcc QP area=0.167842077
+Qmp_bb_c1 n_den_s vcp mp_bb_e1 QP area=0.166650663
+Qmp_num_h mp_num_hc num_pin mp_num_x QP area=1
+Vmp_num_hc mp_num_hc vee 0
+Ibleed_mp_num vcc mp_num_x 2e-06
+Dcl_mp_num num_pin clampp DCL
+Vmp_num_in num_pin_d num_pin 0
+Qmp_num_d num_pin_d mp_num_x vcc QP area=1
+Qmp_num_o0 mp_num_e0 mp_num_x vcc QP area=1.00714917
+Qmp_num_c0 pade_ac2_in vcp mp_num_e0 QP area=1
+Qmn_num_h mn_num_hc n_num mn_num_x QN area=1
+Vmn_num_hc vcc mn_num_hc 0
+Ibleed_mn_num mn_num_x vee 2e-06
+Dcl_mn_num clampn n_num DCL
+Vmn_num_in n_num n_num_d 0
+Qmn_num_d n_num_d mn_num_x vee QN area=1
+Qmn_num_o0 mn_num_e0 mn_num_x vee QN area=0.999646223
+Qmn_num_c0 pade_b1_sk vcn mn_num_e0 QN area=1
+Qmn_num_o1 mn_num_e1 mn_num_x vee QN area=0.999646223
+Qmn_num_c1 num_pin vcn mn_num_e1 QN area=1
+Qmn_den_h mn_den_hc n_den mn_den_x QN area=1
+Vmn_den_hc vcc mn_den_hc 0
+Ibleed_mn_den mn_den_x vee 2e-06
+Dcl_mn_den clampn n_den DCL
+Vmn_den_in n_den n_den_d 0
+Qmn_den_d n_den_d mn_den_x vee QN area=1
+Qmn_den_o0 mn_den_e0 mn_den_x vee QN area=0.999646223
+Qmn_den_c0 pade_b1_sk vcn mn_den_e0 QN area=1
+Qmp_pade_h mp_pade_hc pade_c mp_pade_x QP area=1
+Vmp_pade_hc mp_pade_hc vee 0
+Ibleed_mp_pade vcc mp_pade_x 2e-06
+Dcl_mp_pade pade_c clampp DCL
+Vmp_pade_in pade_c_d pade_c 0
+Qmp_pade_d pade_c_d mp_pade_x vcc QP area=1
+Qmp_pade_o0 mp_pade_e0 mp_pade_x vcc QP area=0.987515511
+Qmp_pade_c0 n_meas vcp mp_pade_e0 QP area=0.980505707
+Ccomp_gm0_h1 gm0_ac1 gm0_a1 9.9999999999999994e-12
+Ccomp_gm0_h2 gm0_ac2 gm0_a2 9.9999999999999994e-12
+Ccomp_gm1_h1 gm1_ac1 gm1_a1 9.9999999999999994e-12
+Ccomp_gm1_h2 gm1_ac2 gm1_a2 9.9999999999999994e-12
+Ccomp_gm2_h1 gm2_ac1 gm2_a1 9.9999999999999994e-12
+Ccomp_gm2_h2 gm2_ac2 gm2_a2 9.9999999999999994e-12
+Ccomp_gm3_h1 gm3_ac1 gm3_a1 9.9999999999999994e-12
+Ccomp_gm3_h2 gm3_ac2 gm3_a2 9.9999999999999994e-12
+Ccomp_gm4_h1 gm4_ac1 gm4_a1 9.9999999999999994e-12
+Ccomp_gm4_h2 gm4_ac2 gm4_a2 9.9999999999999994e-12
+Ccomp_gm5_h1 gm5_ac1 gm5_a1 9.9999999999999994e-12
+Ccomp_gm5_h2 gm5_ac2 gm5_a2 9.9999999999999994e-12
+Ccomp_aa_h1 aa_ac1 aa_a1 9.9999999999999994e-12
+Ccomp_aa_h2 aa_ac2 aa_a2 9.9999999999999994e-12
+Ccomp_ab_h1 ab_ac1 ab_a1 9.9999999999999994e-12
+Ccomp_ab_h2 ab_ac2 ab_a2 9.9999999999999994e-12
+Ccomp_bb_h1 bb_ac1 bb_a1 9.9999999999999994e-12
+Ccomp_bb_h2 bb_ac2 bb_a2 9.9999999999999994e-12
+Ccomp_pade_h1 pade_ac1 pade_a1 9.9999999999999994e-12
+Ccomp_pade_h2 pade_ac2 pade_a2 9.9999999999999994e-12
+Ccomp_mp_unit_h unit_pin mp_unit_x 9.9999999999999994e-12
+Ccomp_mn_unit_h n_unit mn_unit_x 9.9999999999999994e-12
+Ccomp_mp_x_h x_pin mp_x_x 9.9999999999999994e-12
+Ccomp_mn_x_h n_x mn_x_x 9.9999999999999994e-12
+Ccomp_mn_gm0_h gm0_nin mn_gm0_x 9.9999999999999994e-12
+Ccomp_mp_gm0_h gm0_c mp_gm0_x 9.9999999999999994e-12
+Ccomp_mn_gm1_h gm1_nin mn_gm1_x 9.9999999999999994e-12
+Ccomp_mp_gm1_h gm1_c mp_gm1_x 9.9999999999999994e-12
+Ccomp_mn_gm2_h gm2_nin mn_gm2_x 9.9999999999999994e-12
+Ccomp_mp_gm2_h gm2_c mp_gm2_x 9.9999999999999994e-12
+Ccomp_mn_gm3_h gm3_nin mn_gm3_x 9.9999999999999994e-12
+Ccomp_mp_gm3_h gm3_c mp_gm3_x 9.9999999999999994e-12
+Ccomp_mn_gm4_h gm4_nin mn_gm4_x 9.9999999999999994e-12
+Ccomp_mp_gm4_h gm4_c mp_gm4_x 9.9999999999999994e-12
+Ccomp_mn_gm5_h gm5_nin mn_gm5_x 9.9999999999999994e-12
+Ccomp_mp_gm5_h gm5_c mp_gm5_x 9.9999999999999994e-12
+Ccomp_mp_bscale_h bscale_pin mp_bscale_x 9.9999999999999994e-12
+Ccomp_mn_bscale_h n_bscale mn_bscale_x 9.9999999999999994e-12
+Ccomp_mp_aa_h aa_c mp_aa_x 9.9999999999999994e-12
+Ccomp_mp_ab_h ab_c mp_ab_x 9.9999999999999994e-12
+Ccomp_mp_bb_h bb_c mp_bb_x 9.9999999999999994e-12
+Ccomp_mp_num_h num_pin mp_num_x 9.9999999999999994e-12
+Ccomp_mn_num_h n_num mn_num_x 9.9999999999999994e-12
+Ccomp_mn_den_h n_den mn_den_x 9.9999999999999994e-12
+Ccomp_mp_pade_h pade_c mp_pade_x 9.9999999999999994e-12
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=17
+tran 1.0000000000000001e-09 1.9999999999999999e-06 0 1.0000000000000001e-09
+wrdata trace.txt i(Vmeas) i(vcc) i(vee) i(vb) i(vcn) i(vcp) i(vclampn) i(vclampp) v(vcc) v(vee) v(vb) v(vcn) v(vcp) v(clampn) v(clampp)
+quit
+.endc
+.end

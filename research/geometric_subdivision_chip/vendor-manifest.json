@@ -1,0 +1,74 @@
+[
+  {
+    "path": "vendor/previous/README_p5.md",
+    "sha256": "a509f8b0e740122bae7e529552f91a4a4ff3f355af99dce0c58c7e020937ea29"
+  },
+  {
+    "path": "vendor/previous/README_p6.md",
+    "sha256": "ad704ddc7bc2aeb727b605f50380548f256a1c2846267e313b934a15dfe4e944"
+  },
+  {
+    "path": "vendor/previous/historical-feedback.md",
+    "sha256": "7415812d0dd717a9f0fa0662d14f8ff417974998b447cc6ebc2494565f8bf82b"
+  },
+  {
+    "path": "vendor/previous/historical-memory.md",
+    "sha256": "14de2cfc9e018920668fdaa5de5d942f29ba817cc71f5016c1a84cdde84ca1e2"
+  },
+  {
+    "path": "vendor/previous/policies.py",
+    "sha256": "e6537b36130c35077036e4b2ffcad96ba4404c5ac666d5108915a439b25aec43"
+  },
+  {
+    "path": "vendor/previous/single_pass.py",
+    "sha256": "385cf31201eb7cac54e6110fd0019eb4ae6c8f87a0f05a3e2bd6d71b9f63935e"
+  },
+  {
+    "path": "vendor/previous/translinear.py",
+    "sha256": "a123c602315aa16f99ab8c0c7f37f5a7c3172bdbf054c9e4d098cae3ac4bc6ea"
+  },
+  {
+    "path": "vendor/previous/translinear_chain3.py",
+    "sha256": "c692ba0a6ec5874daca21439f54cc82d2753b0f89e1a74fc1add76b8cffb8243"
+  },
+  {
+    "path": "vendor/previous/v30_bridge.py",
+    "sha256": "49567d0159ccfdf04839989cea7cce6e8d0901de50243d1f2279d28a0be45cbd"
+  },
+  {
+    "path": "vendor/sky130/LICENSE",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+    "path": "vendor/sky130/invariant.spice",
+    "sha256": "9f47fd02e7d4010fc3eccc59420bf8f2ec86aa8b5ee68d677d150a6ff405f12e"
+  },
+  {
+    "path": "vendor/sky130/montecarlo.spice",
+    "sha256": "22b7203f0a5adfa489269a63076dd85e9f6020598d7e9bbf46e59c64d7675d83"
+  },
+  {
+    "path": "vendor/sky130/provenance.json",
+    "sha256": "bfad20088b55eb0036fd0cb12d7ff6c9bfe6d957f864f8cb0a6f48fbfcb06722"
+  },
+  {
+    "path": "vendor/sky130/sky130_fd_pr__npn_05v5_W1p00L1p00.model.spice",
+    "sha256": "576c67d4b0966926a36531033e01ec1049f61cfce754e0f08a7e4b4ca0e5cad2"
+  },
+  {
+    "path": "vendor/sky130/sky130_fd_pr__npn_05v5__f.corner.spice",
+    "sha256": "8150c2134c0ff3e9b7b190280d32a48d5451ceaa1dea62def6966ce42e7f8f3a"
+  },
+  {
+    "path": "vendor/sky130/sky130_fd_pr__npn_05v5__s.corner.spice",
+    "sha256": "8aa8e893fde54044f70bb1c5fad7ffdee9c3738b3370e97a05c85eadaea081ba"
+  },
+  {
+    "path": "vendor/sky130/sky130_fd_pr__npn_05v5__t.corner.spice",
+    "sha256": "69583cf1827826ed0f91f9e775e17dc3d23d70caa6e4a4c766bb433f47d6d8e0"
+  },
+  {
+    "path": "vendor/sky130/sky130_fd_pr__pnp_05v5_W3p40L3p40.model.spice",
+    "sha256": "05cfa2aca6665fdf7b90f4aa11604ccf70b966e96bc3035c5f7c8fb52223cb9d"
+  }
+]

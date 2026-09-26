@@ -1,0 +1,9 @@
+# Source provenance
+
+- P5 `translinear.py` and P6 `translinear_chain3.py`, `single_pass.py`, `policies.py` were copied byte-for-byte from the workspace research folders `research/pandrosion_analog_p5` and `research/pandrosion_analog_p6` on 2026-09-25. Their historical README files are preserved; associated historical figures are not vendored. These are project research sources, not foundry models.
+- `vendor/previous/v30_bridge.py` is a new path adapter. It imports the current repository's unchanged `research/analog_fast_ad` modules. Their baseline is PR #13 commit 395b8caeb97189c12b40c9bc60c1749a6589d473. The runtime adapter for `translinear_chain3.py` removes only its unused schedule import; the historical control supplies the actual V30 schedule.
+- Historical feedback/memory documents were extracted from branch `research/analog-ad-feedback`, commit 4c562e963d10bae18705769c1efe064f004ec260. These archived results are not newly rerun here.
+- SKY130 source revision, original paths, direct source URLs and individual SHA-256 hashes are in [the PDK provenance](vendor/sky130/provenance.json). Original models and parameters are unchanged. Research transformations are confined to `sky_adapter.py` and `transistor.py`; continuous area, substrate ties, nominal parameter selection and ignored ngspice parameters are not foundry signoff.
+- [vendor-manifest.json](vendor-manifest.json) lists hashes of the retained source files. The SkyWater Apache-2.0 license is retained in its own directory; the main project license applies to new project code.
+
+Environment used: ngspice 46, Python 3 with NumPy/mpmath/Matplotlib; Lean 4.33.1 and Mathlib v4.33.1. All target roots are computed independently after the electrical simulation, except the prescribed reference-current values used for primitive calibration. No held-out root is used to fit a calibration.

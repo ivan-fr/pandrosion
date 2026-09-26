@@ -1,0 +1,18 @@
+{
+  "algebra_cases": 48,
+  "calibration_separation": true,
+  "transistor_core_has_no_behavioral_arithmetic": true,
+  "replay": [
+    {
+      "id": "root_p3.7_X2_calFalse",
+      "absolute_difference": 0.0,
+      "power_difference": 0.0
+    },
+    {
+      "id": "root_p1000000.0_X500000_calFalse",
+      "absolute_difference": 0.0,
+      "power_difference": 0.0
+    }
+  ],
+  "scope": "Verifies implementation and reported errors; does not assert that the chip meets an accuracy target"
+}

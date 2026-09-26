@@ -1,0 +1,7 @@
+__pycache__/
+quick/
+results/case_*/
+depth/
+stress/case_*/
+stress/bits_*/
+accuracy/case_*/

@@ -242,3 +242,5 @@ import LeanMath.Papers.RectangleNativeNondegeneracy
 import LeanMath.Papers.RectangleInitialization
 
 import LeanMath.Papers.AnalogFastAD
+
+import LeanMath.Papers.GeometricSubdivision

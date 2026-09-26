@@ -1,0 +1,9 @@
+__pycache__/
+pilot/
+results/raw/
+results/*_raw/
+results/campaign-progress.json
+results/transistor_backup.json
+
+improvement/raw/
+improvement/replay/

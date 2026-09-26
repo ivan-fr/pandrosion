@@ -1,0 +1,128 @@
+* mean level=T2 device=generic
+.options reltol=1e-6 abstol=1e-13 vntol=1e-8 chgtol=1e-16 gmin=1e-15 method=gear
+.temp 25
+.model QN NPN(Is=2e-17 Bf=400 Br=2 Vaf=100 Var=5 Ikf=0.05 Rb=40 Re=1.5 Rc=15 Tf=2.5e-11 Cje=15f Cjc=8f Vje=0.9 Vjc=0.7 Mje=0.4 Mjc=0.3 Xtb=1.4 Xti=3 Eg=1.1)
+.model QP PNP(Is=2e-17 Bf=100 Br=2 Vaf=60 Var=5 Ikf=0.05 Rb=60 Re=2 Rc=25 Tf=6e-11 Cje=20f Cjc=12f Vje=0.9 Vjc=0.7 Mje=0.4 Mjc=0.3 Xtb=1.4 Xti=3 Eg=1.1)
+Vcc vcc 0 4.0
+Vee vee 0 -2.5
+Vb vb 0 1.65
+Vcn vcn 0 -0.1
+Vcp vcp 0 1.6
+.model DCL D(Is=1e-15 n=1 Cjo=5f)
+Vclampn clampn 0 -0.8
+Vclampp clampp 0 2.3
+Iunit vcc n_unit 1.0000000000000001e-05
+Ia vcc n_a 1.0000000000000001e-05
+Ib vcc n_b PULSE(2.0000000000000002e-05 1.0000000000000001e-05 100n 1.0000000000000001e-09 1.0000000000000001e-09 10u 20u)
+Qgm_u1 gm_ac1 gm_a1 0 QN area=1
+Qgm_h1 vcc gm_ac1 gm_a1 QN area=1
+Ibleed_gm_h1 gm_a1 vee 2e-06
+Vgm_inj1 gm_ac1_in gm_ac1 0
+Qgm_d1 gm_dc1 gm_a1 gm_b1 QN area=1
+Vgm_flw1 vb gm_dc1 0
+Vgm_snk1 gm_b1 gm_b1_sk 0
+Qgm_u2 gm_ac2 gm_a2 gm_b1 QN area=1
+Qgm_h2 vcc gm_ac2 gm_a2 QN area=1
+Ibleed_gm_h2 gm_a2 vee 2e-06
+Vgm_inj2 gm_ac2_in gm_ac2 0
+Qgm_d2 gm_cc gm_a2 0 QN area=1
+Vgm_out gm_c gm_cc 0
+Vgmtrim_srcs n_gmtrim_s n_gmtrim 0
+Vgmtrim_snks n_gmtrim n_gmtrim_k 0
+Vmeas n_meas n_load 0
+Rload n_load 0 1000
+Cload n_load 0 9.9999999999999998e-13
+Qmp_unit_h mp_unit_hc unit_pin mp_unit_x QP area=1
+Vmp_unit_hc mp_unit_hc vee 0
+Ibleed_mp_unit vcc mp_unit_x 2e-06
+Dcl_mp_unit unit_pin clampp DCL
+Vmp_unit_in unit_pin_d unit_pin 0
+Qmp_unit_d unit_pin_d mp_unit_x vcc QP area=1
+Qmp_unit_o0 mp_unit_e0 mp_unit_x vcc QP area=1
+Qmp_unit_c0 n_gmtrim_s vcp mp_unit_e0 QP area=1
+Qmn_unit_h mn_unit_hc n_unit mn_unit_x QN area=1
+Vmn_unit_hc vcc mn_unit_hc 0
+Ibleed_mn_unit mn_unit_x vee 2e-06
+Dcl_mn_unit clampn n_unit DCL
+Vmn_unit_in n_unit n_unit_d 0
+Qmn_unit_d n_unit_d mn_unit_x vee QN area=1
+Qmn_unit_o0 mn_unit_e0 mn_unit_x vee QN area=0.00116651405
+Qmn_unit_c0 unit_pin vcn mn_unit_e0 QN area=0.00116651405
+Qmp_a_h mp_a_hc a_pin mp_a_x QP area=1
+Vmp_a_hc mp_a_hc vee 0
+Ibleed_mp_a vcc mp_a_x 2e-06
+Dcl_mp_a a_pin clampp DCL
+Vmp_a_in a_pin_d a_pin 0
+Qmp_a_d a_pin_d mp_a_x vcc QP area=1
+Qmp_a_o0 mp_a_e0 mp_a_x vcc QP area=1
+Qmp_a_c0 gm_ac1_in vcp mp_a_e0 QP area=1
+Qmn_a_h mn_a_hc n_a mn_a_x QN area=1
+Vmn_a_hc vcc mn_a_hc 0
+Ibleed_mn_a mn_a_x vee 2e-06
+Dcl_mn_a clampn n_a DCL
+Vmn_a_in n_a n_a_d 0
+Qmn_a_d n_a_d mn_a_x vee QN area=1
+Qmn_a_o0 mn_a_e0 mn_a_x vee QN area=1
+Qmn_a_c0 a_pin vcn mn_a_e0 QN area=1
+Qmp_b_h mp_b_hc b_pin mp_b_x QP area=1
+Vmp_b_hc mp_b_hc vee 0
+Ibleed_mp_b vcc mp_b_x 2e-06
+Dcl_mp_b b_pin clampp DCL
+Vmp_b_in b_pin_d b_pin 0
+Qmp_b_d b_pin_d mp_b_x vcc QP area=1
+Qmp_b_o0 mp_b_e0 mp_b_x vcc QP area=1
+Qmp_b_c0 gm_ac2_in vcp mp_b_e0 QP area=1
+Qmn_b_h mn_b_hc n_b mn_b_x QN area=1
+Vmn_b_hc vcc mn_b_hc 0
+Ibleed_mn_b mn_b_x vee 2e-06
+Dcl_mn_b clampn n_b DCL
+Vmn_b_in n_b n_b_d 0
+Qmn_b_d n_b_d mn_b_x vee QN area=1
+Qmn_b_o0 mn_b_e0 mn_b_x vee QN area=1
+Qmn_b_c0 gm_b1_sk vcn mn_b_e0 QN area=1
+Qmn_b_o1 mn_b_e1 mn_b_x vee QN area=1
+Qmn_b_c1 b_pin vcn mn_b_e1 QN area=1
+Qmn_gm_h mn_gm_hc gm_nin mn_gm_x QN area=1
+Vmn_gm_hc vcc mn_gm_hc 0
+Ibleed_mn_gm mn_gm_x vee 2e-06
+Dcl_mn_gm clampn gm_nin DCL
+Vmn_gm_in gm_nin gm_nin_d 0
+Qmn_gm_d gm_nin_d mn_gm_x vee QN area=1
+Qmn_gm_o0 mn_gm_e0 mn_gm_x vee QN area=1
+Qmn_gm_c0 gm_b1_sk vcn mn_gm_e0 QN area=1
+Qmp_gm_h mp_gm_hc gm_c mp_gm_x QP area=1
+Vmp_gm_hc mp_gm_hc vee 0
+Ibleed_mp_gm vcc mp_gm_x 2e-06
+Dcl_mp_gm gm_c clampp DCL
+Vmp_gm_in gm_c_d gm_c 0
+Qmp_gm_d gm_c_d mp_gm_x vcc QP area=1
+Qmp_gm_o0 mp_gm_e0 mp_gm_x vcc QP area=1.00318916
+Qmp_gm_c0 n_gmtrim_s vcp mp_gm_e0 QP area=1.00318916
+Qmp_gm_o1 mp_gm_e1 mp_gm_x vcc QP area=1
+Qmp_gm_c1 gm_nin vcp mp_gm_e1 QP area=1
+Qmp_gmtrim_h mp_gmtrim_hc gmtrim_pin mp_gmtrim_x QP area=1
+Vmp_gmtrim_hc mp_gmtrim_hc vee 0
+Ibleed_mp_gmtrim vcc mp_gmtrim_x 2e-06
+Dcl_mp_gmtrim gmtrim_pin clampp DCL
+Vmp_gmtrim_in gmtrim_pin_d gmtrim_pin 0
+Qmp_gmtrim_d gmtrim_pin_d mp_gmtrim_x vcc QP area=1
+Qmp_gmtrim_o0 mp_gmtrim_e0 mp_gmtrim_x vcc QP area=1
+Qmp_gmtrim_c0 n_meas vcp mp_gmtrim_e0 QP area=1
+Qmn_gmtrim_h mn_gmtrim_hc n_gmtrim mn_gmtrim_x QN area=1
+Vmn_gmtrim_hc vcc mn_gmtrim_hc 0
+Ibleed_mn_gmtrim mn_gmtrim_x vee 2e-06
+Dcl_mn_gmtrim clampn n_gmtrim DCL
+Vmn_gmtrim_in n_gmtrim n_gmtrim_d 0
+Qmn_gmtrim_d n_gmtrim_d mn_gmtrim_x vee QN area=1
+Qmn_gmtrim_o0 mn_gmtrim_e0 mn_gmtrim_x vee QN area=1
+Qmn_gmtrim_c0 gmtrim_pin vcn mn_gmtrim_e0 QN area=1
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=17
+tran 1.0000000000000001e-09 1.9999999999999999e-06 0 1.0000000000000001e-09
+wrdata trace.txt i(Vmeas) i(vcc) i(vee) i(vb) i(vcn) i(vcp) i(vclampn) i(vclampp)
+quit
+.endc
+.end

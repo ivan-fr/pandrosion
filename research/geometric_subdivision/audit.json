@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "spice_runs": 517,
+  "ideal_spice_vs_independent_reference_cases": 166,
+  "worst_relative_electrical_discrepancy": 4.185420284057615e-11,
+  "threshold": 1e-08,
+  "high_precision_checks": 424,
+  "note": "The tolerance allows SPICE solver and finite-leakage error; this is not a proof of interval certification."
+}

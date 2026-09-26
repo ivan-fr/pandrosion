@@ -1,0 +1,45 @@
+{
+  "commit": "f62031a1be9aefe902d6d54cddd6f59b57627436",
+  "files": [
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/google/skywater-pdk-libs-sky130_fd_pr/f62031a1be9aefe902d6d54cddd6f59b57627436/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "cells/npn_05v5/sky130_fd_pr__npn_05v5_W1p00L1p00.model.spice",
+      "url": "https://raw.githubusercontent.com/google/skywater-pdk-libs-sky130_fd_pr/f62031a1be9aefe902d6d54cddd6f59b57627436/cells/npn_05v5/sky130_fd_pr__npn_05v5_W1p00L1p00.model.spice",
+      "sha256": "576c67d4b0966926a36531033e01ec1049f61cfce754e0f08a7e4b4ca0e5cad2"
+    },
+    {
+      "path": "cells/pnp_05v5/sky130_fd_pr__pnp_05v5_W3p40L3p40.model.spice",
+      "url": "https://raw.githubusercontent.com/google/skywater-pdk-libs-sky130_fd_pr/f62031a1be9aefe902d6d54cddd6f59b57627436/cells/pnp_05v5/sky130_fd_pr__pnp_05v5_W3p40L3p40.model.spice",
+      "sha256": "05cfa2aca6665fdf7b90f4aa11604ccf70b966e96bc3035c5f7c8fb52223cb9d"
+    },
+    {
+      "path": "cells/npn_05v5/sky130_fd_pr__npn_05v5__t.corner.spice",
+      "url": "https://raw.githubusercontent.com/google/skywater-pdk-libs-sky130_fd_pr/f62031a1be9aefe902d6d54cddd6f59b57627436/cells/npn_05v5/sky130_fd_pr__npn_05v5__t.corner.spice",
+      "sha256": "69583cf1827826ed0f91f9e775e17dc3d23d70caa6e4a4c766bb433f47d6d8e0"
+    },
+    {
+      "path": "cells/npn_05v5/sky130_fd_pr__npn_05v5__f.corner.spice",
+      "url": "https://raw.githubusercontent.com/google/skywater-pdk-libs-sky130_fd_pr/f62031a1be9aefe902d6d54cddd6f59b57627436/cells/npn_05v5/sky130_fd_pr__npn_05v5__f.corner.spice",
+      "sha256": "8150c2134c0ff3e9b7b190280d32a48d5451ceaa1dea62def6966ce42e7f8f3a"
+    },
+    {
+      "path": "cells/npn_05v5/sky130_fd_pr__npn_05v5__s.corner.spice",
+      "url": "https://raw.githubusercontent.com/google/skywater-pdk-libs-sky130_fd_pr/f62031a1be9aefe902d6d54cddd6f59b57627436/cells/npn_05v5/sky130_fd_pr__npn_05v5__s.corner.spice",
+      "sha256": "8aa8e893fde54044f70bb1c5fad7ffdee9c3738b3370e97a05c85eadaea081ba"
+    },
+    {
+      "path": "models/parameters/invariant.spice",
+      "url": "https://raw.githubusercontent.com/google/skywater-pdk-libs-sky130_fd_pr/f62031a1be9aefe902d6d54cddd6f59b57627436/models/parameters/invariant.spice",
+      "sha256": "9f47fd02e7d4010fc3eccc59420bf8f2ec86aa8b5ee68d677d150a6ff405f12e"
+    },
+    {
+      "path": "models/parameters/montecarlo.spice",
+      "url": "https://raw.githubusercontent.com/google/skywater-pdk-libs-sky130_fd_pr/f62031a1be9aefe902d6d54cddd6f59b57627436/models/parameters/montecarlo.spice",
+      "sha256": "22b7203f0a5adfa489269a63076dd85e9f6020598d7e9bbf46e59c64d7675d83"
+    }
+  ]
+}

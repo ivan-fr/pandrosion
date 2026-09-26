@@ -1,0 +1,30 @@
+{
+  "total_spice_runs": 517,
+  "high_precision_checks": 424,
+  "profiles": {
+    "ideal": {
+      "runs": 100,
+      "direct_under_1ppm": 69,
+      "centered_under_1ppm": 59,
+      "centered_under_1ppb": 29,
+      "electrical_enclosures_all_samples": 93,
+      "worst_centered": 0.019049729189670794
+    },
+    "trimmed": {
+      "runs": 172,
+      "direct_under_1ppm": 9,
+      "centered_under_1ppm": 72,
+      "centered_under_1ppb": 28,
+      "electrical_enclosures_all_samples": 84,
+      "worst_centered": 0.019065962885893163
+    },
+    "untrimmed": {
+      "runs": 108,
+      "direct_under_1ppm": 0,
+      "centered_under_1ppm": 27,
+      "centered_under_1ppb": 9,
+      "electrical_enclosures_all_samples": 32,
+      "worst_centered": 0.020747356876641948
+    }
+  }
+}

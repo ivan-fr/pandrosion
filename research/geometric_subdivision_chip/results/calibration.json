@@ -1,0 +1,13 @@
+{
+  "training": "five rational-square/diagonal currents; 25C, 1pF, 1kohm, I0=10uA",
+  "trims": {
+    "generic": [
+      0.9968209824425357,
+      -0.001162805681570293
+    ],
+    "sky130": [
+      0.864278939059924,
+      -0.028731878058416028
+    ]
+  }
+}

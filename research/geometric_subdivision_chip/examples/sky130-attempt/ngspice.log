@@ -1,0 +1,106 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * mean level=t2 device=sky130
+
+Doing analysis at TEMP = 25.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vcc                                          4
+vee                                       -2.5
+vb                                        1.65
+vcn                                       -0.1
+vcp                                        1.6
+clampn                                    -0.8
+clampp                                     2.3
+n_unit                               -0.975013
+n_a                                  -0.971983
+n_b                                  -0.942929
+gm_ac1                                 1.52568
+gm_a1                                 0.780057
+gm_ac1_in                              1.52568
+gm_dc1                                    1.65
+gm_b1                              -0.00908859
+gm_b1_sk                           -0.00908859
+gm_ac2                                 1.53867
+gm_a2                                 0.790419
+gm_ac2_in                              1.53867
+gm_cc                                  2.52605
+gm_c                                   2.52605
+n_meas                               0.0118604
+n_load                               0.0118604
+mn_unit_hc                                   4
+mn_unit_x                             -1.71661
+n_unit_d                             -0.975013
+mp_a_hc                                   -2.5
+a_pin                                   2.5427
+mp_a_x                                 3.25612
+a_pin_d                                 2.5427
+mp_a_e0                                2.34232
+mn_a_hc                                      4
+mn_a_x                                -1.71663
+n_a_d                                -0.971983
+mn_a_e0                              -0.882157
+mp_b_hc                                   -2.5
+b_pin                                  2.51462
+mp_b_x                                 3.23724
+b_pin_d                                2.51462
+mp_b_e0                                2.36111
+mn_b_hc                                      4
+mn_b_x                                 -1.6973
+n_b_d                                -0.942929
+mn_b_e0                              -0.902118
+mn_b_e1                               -0.90145
+mn_gm_hc                                     4
+gm_nin                               -0.966173
+mn_gm_x                               -1.71189
+gm_nin_d                             -0.966173
+mn_gm_e0                             -0.887556
+mp_gm_hc                                  -2.5
+mp_gm_x                                3.24837
+gm_c_d                                 2.52605
+mp_gm_e0                               2.34963
+mp_gm_e1                               2.34937
+vmp_gm_in#branch                   1.26607e-05
+vmp_gm_hc#branch                   4.37889e-06
+vmn_gm_in#branch                      1.18e-05
+vmn_gm_hc#branch                   2.58113e-06
+vmn_b_in#branch                    1.99057e-05
+vmn_b_hc#branch                    3.55881e-06
+vmp_b_in#branch                    1.90934e-05
+vmp_b_hc#branch                    4.42866e-06
+vmn_a_in#branch                    9.93405e-06
+vmn_a_hc#branch                    2.48061e-06
+vmp_a_in#branch                    9.47454e-06
+vmp_a_hc#branch                     3.1164e-06
+vmn_unit_in#branch                 9.94104e-06
+vmn_unit_hc#branch                 2.21453e-06
+vmeas#branch                       1.18604e-05
+vgm_out#branch                     1.29511e-05
+vgm_inj2#branch                    1.78467e-05
+vgm_snk1#branch                    3.08646e-05
+vgm_flw1#branch                    1.22647e-05
+vgm_inj1#branch                    8.87169e-06
+vclampp#branch                     1.72902e-11
+vclampn#branch                    -1.92378e-12
+vcp#branch                         3.54182e-06
+vcn#branch                        -1.64604e-06
+vb#branch                         -1.22647e-05
+vee#branch                         0.000140207
+vcc#branch                        -0.000164048
+
+
+No. of Data Rows : 2008
+ngspice-46 done
+Warning: Model issue on line 69 :
+  .model qn npn level=1.0 tref=30.0 dcap=2 cjc=    1.701825640000000e-14   ...
+unrecognized parameter (dcap) - ignored
+unrecognized parameter (gap1) - ignored
+unrecognized parameter (gap2) - ignored
