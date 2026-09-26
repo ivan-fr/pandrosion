@@ -19,9 +19,11 @@ def header(level,temp=25,vscale=1.,device='generic',corner='t'):
  if device=='generic':return mod.headers(temp=temp,vcc=4*vscale,vee=-2.5*vscale,ikf=.05)
  return skyheader(temp,vscale,corner)
 
-def build(kind='mean',level='T2',A=1.,B=2.,A2=None,B2=None,p=3.7,X=2.,n=2,I0=1e-5,temp=25,vscale=1.,edge=10e-9,device='generic',corner='t',mismatch=0.,seed=1,trim=None,load=1e-12,coeff_bits=24,load_R=1000.,startup=False,ramp=False):
+def build(kind='mean',level='T2',A=1.,B=2.,A2=None,B2=None,p=3.7,X=2.,n=2,I0=1e-5,temp=25,vscale=1.,edge=10e-9,device='generic',corner='t',mismatch=0.,seed=1,trim=None,load=1e-12,coeff_bits=24,load_R=1000.,startup=False,ramp=False,mean_feedback=1.,output_gain=1.,readout_reference=None,compensation=0.,mirror_gains=None,weight_override=None):
  if not (math.isfinite(X) and X>=1 and math.isfinite(p) and p>=1 and isinstance(n,int) and n>=0):raise ValueError('Require finite X>=1, p>=1 and integer n>=0')
- net=mod.NetT2Chain(I0,clamps=True) if level=='T2' else T.Net(helper=True,bleed=.2*I0)
+ if not (mean_feedback>0 and output_gain>0 and compensation>=0):raise ValueError('Positive trim ratios and nonnegative compensation required')
+ if weight_override is not None and not 0<=weight_override<=1:raise ValueError('Reference weight must lie in [0,1]')
+ net=mod.NetT2Chain(I0,clamps=True,gains=mirror_gains) if level=='T2' else T.Net(helper=True,bleed=.2*I0)
  # iid synthetic area perturbations, NOT a foundry statistical mismatch model.
  if mismatch:
   rng=random.Random(seed);oldq=net.q
@@ -43,7 +45,7 @@ def build(kind='mean',level='T2',A=1.,B=2.,A2=None,B2=None,p=3.7,X=2.,n=2,I0=1e-
  def mean(name,a,b,factor=1.):
   if level=='T2':
    feedback=mod.Sig('feedback','pnp',None)
-   out=loop(name,[(a,factor)],[(b,1.)],[(feedback,1.)]);out.sinks.extend(feedback.sinks);out.sources.extend(feedback.sources)
+   out=loop(name,[(a,factor)],[(b,1.)],[(feedback,mean_feedback)]);out.sinks.extend(feedback.sinks);out.sources.extend(feedback.sources)
   else:out=loop(name,[(a,factor)],[(b,1.)],[(f'V{name}_out',1.)])
   if trim:
    k,o=trim
@@ -67,8 +69,11 @@ def build(kind='mean',level='T2',A=1.,B=2.,A2=None,B2=None,p=3.7,X=2.,n=2,I0=1e-
   if kind=='rails':out=b;scale=2.**eb
   else:
    weight=(1/p-lo)/(hi-lo);weight=round(weight*2**coeff_bits)/2**coeff_bits
+   if weight_override is not None:weight=weight_override
    # Physical rail currents are rescaled to the same binary unit before products.
    b=summ('bscale',[(b,2.**(eb-ea))])
+   if readout_reference is not None:
+    a=inp('cal_a',readout_reference);b=inp('cal_b',readout_reference)
    aa=loop('aa',[(a,1)],[(a,1)],[(unit,1)])
    ab=loop('ab',[(a,1)],[(b,1)],[(unit,1)])
    bb=loop('bb',[(b,1)],[(b,1)],[(unit,1)])
@@ -78,11 +83,15 @@ def build(kind='mean',level='T2',A=1.,B=2.,A2=None,B2=None,p=3.7,X=2.,n=2,I0=1e-
    out=loop('pade',[(a,1)],[(num,1)],[(den,1)]);scale=2.**ea
  else:raise ValueError(kind)
  if level=='T2':
-  out.sources.append(('n_meas',1.));net.add('Vmeas n_meas n_load 0',f'Rload n_load 0 {load_R:.17g}',f'Cload n_load 0 {load:.17g}');net.emit();sense='Vmeas'
+  out.sources.append(('n_meas',output_gain));net.add('Vmeas n_meas n_load 0',f'Rload n_load 0 {load_R:.17g}',f'Cload n_load 0 {load:.17g}');net.emit();sense='Vmeas'
  else:sense=out
  # All voltage-source power is included, including collector/cascode/clamp rails.
  # Ideal current references are external ports and are reported separately.
  lines=net.lines
+ if compensation:
+  for name in net.junctions:
+   if name.endswith('_h') or re.search(r'_h[12]$',name):
+    qline=next(l for l in lines if l.startswith('Q'+name+' '));w=qline.split();lines.append(f'Ccomp_{name} {w[2]} {w[3]} {compensation:.17g}')
  if device=='sky130':lines=convert_sky(lines)
  if ramp:
   ramped=['* Ramped supplies and reference currents', 'Venable enable 0 PWL(0 0 100n 0 1u 1)']
@@ -94,7 +103,7 @@ def build(kind='mean',level='T2',A=1.,B=2.,A2=None,B2=None,p=3.7,X=2.,n=2,I0=1e-
     l='B'+w[0]+' '+' '.join(w[1:3])+f' I=({w[3]})*v(enable)'
    ramped.append(l)
   lines=ramped
- return lines,sense,dict(scale=scale,I0=I0,transistors=len(net.junctions),kind=kind,level=level,device=device,p=p,X=X,n=n,A=A,B=B,temp=temp,vscale=vscale,edge=edge,load=load,load_R=load_R,trim=trim,startup=startup,mismatch=mismatch,seed=seed,ramp=ramp)
+ return lines,sense,dict(scale=scale,I0=I0,transistors=len(net.junctions),kind=kind,level=level,device=device,p=p,X=X,n=n,A=A,B=B,temp=temp,vscale=vscale,edge=edge,load=load,load_R=load_R,trim=trim,startup=startup,mismatch=mismatch,seed=seed,ramp=ramp,mean_feedback=mean_feedback,output_gain=output_gain,readout_reference=readout_reference,compensation=compensation,mirror_gains=mirror_gains,weight_override=weight_override)
 
 def execute(lines,sense,meta,out,duration=2e-6,dt=1e-9):
  out=Path(out);out.mkdir(parents=True,exist_ok=True)

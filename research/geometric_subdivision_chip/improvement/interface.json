@@ -1,0 +1,554 @@
+[
+  {
+    "mode": "old",
+    "p": 3.7,
+    "X": 2,
+    "bits": 20,
+    "acquisition_end_s": 2.101e-06,
+    "conversion_end_s": 2.501e-06,
+    "latency_from_input_edge_s": 2.401e-06,
+    "coefficient_programming": "preloaded, excluded",
+    "converter_scope": "behavioral DAC RC and current source, read amplifier, SPICE switch/hold, timed numerical SAR; no converter transistor design or converter power",
+    "code": 319303,
+    "decoded": 1.2180442810058594,
+    "relative_error": 0.009958709470871074,
+    "excess_error": 0.05829404233898973,
+    "core_current_A": 1.217920264199462e-05,
+    "decisions": [
+      {
+        "t": 2.1209999999999997e-06,
+        "bit": 19,
+        "observed_V": 1.218047693204766,
+        "code": 0
+      },
+      {
+        "t": 2.141e-06,
+        "bit": 18,
+        "observed_V": 1.2180476907684936,
+        "code": 262144
+      },
+      {
+        "t": 2.1609999999999997e-06,
+        "bit": 17,
+        "observed_V": 1.2180476883322224,
+        "code": 262144
+      },
+      {
+        "t": 2.181e-06,
+        "bit": 16,
+        "observed_V": 1.2180476858959526,
+        "code": 262144
+      },
+      {
+        "t": 2.2009999999999998e-06,
+        "bit": 15,
+        "observed_V": 1.218047683459683,
+        "code": 294912
+      },
+      {
+        "t": 2.221e-06,
+        "bit": 14,
+        "observed_V": 1.2180476810234118,
+        "code": 311296
+      },
+      {
+        "t": 2.241e-06,
+        "bit": 13,
+        "observed_V": 1.218047678587143,
+        "code": 311296
+      },
+      {
+        "t": 2.261e-06,
+        "bit": 12,
+        "observed_V": 1.2180476761508716,
+        "code": 315392
+      },
+      {
+        "t": 2.281e-06,
+        "bit": 11,
+        "observed_V": 1.2180476737146022,
+        "code": 317440
+      },
+      {
+        "t": 2.3009999999999997e-06,
+        "bit": 10,
+        "observed_V": 1.2180476712783326,
+        "code": 318464
+      },
+      {
+        "t": 2.321e-06,
+        "bit": 9,
+        "observed_V": 1.2180476688420607,
+        "code": 318976
+      },
+      {
+        "t": 2.341e-06,
+        "bit": 8,
+        "observed_V": 1.218047666405791,
+        "code": 319232
+      },
+      {
+        "t": 2.361e-06,
+        "bit": 7,
+        "observed_V": 1.218047663969519,
+        "code": 319232
+      },
+      {
+        "t": 2.3809999999999997e-06,
+        "bit": 6,
+        "observed_V": 1.2180476615332485,
+        "code": 319296
+      },
+      {
+        "t": 2.401e-06,
+        "bit": 5,
+        "observed_V": 1.2180476590969778,
+        "code": 319296
+      },
+      {
+        "t": 2.4209999999999998e-06,
+        "bit": 4,
+        "observed_V": 1.218047656660706,
+        "code": 319296
+      },
+      {
+        "t": 2.441e-06,
+        "bit": 3,
+        "observed_V": 1.2180476542244365,
+        "code": 319296
+      },
+      {
+        "t": 2.461e-06,
+        "bit": 2,
+        "observed_V": 1.2180476517881638,
+        "code": 319300
+      },
+      {
+        "t": 2.481e-06,
+        "bit": 1,
+        "observed_V": 1.2180476493518948,
+        "code": 319302
+      },
+      {
+        "t": 2.501e-06,
+        "bit": 0,
+        "observed_V": 1.2180476469156225,
+        "code": 319303
+      }
+    ]
+  },
+  {
+    "mode": "r2",
+    "p": 3.7,
+    "X": 2,
+    "bits": 20,
+    "acquisition_end_s": 2.101e-06,
+    "conversion_end_s": 2.501e-06,
+    "latency_from_input_edge_s": 2.401e-06,
+    "coefficient_programming": "preloaded, excluded",
+    "converter_scope": "behavioral DAC RC and current source, read amplifier, SPICE switch/hold, timed numerical SAR; no converter transistor design or converter power",
+    "code": 316794,
+    "decoded": 1.2084732055664062,
+    "relative_error": 0.0020227163794739322,
+    "excess_error": 0.011840119908077271,
+    "core_current_A": 1.2083481707371656e-05,
+    "decisions": [
+      {
+        "t": 2.1209999999999997e-06,
+        "bit": 19,
+        "observed_V": 1.2084755041024398,
+        "code": 0
+      },
+      {
+        "t": 2.141e-06,
+        "bit": 18,
+        "observed_V": 1.2084755016853153,
+        "code": 262144
+      },
+      {
+        "t": 2.1609999999999997e-06,
+        "bit": 17,
+        "observed_V": 1.2084754992681903,
+        "code": 262144
+      },
+      {
+        "t": 2.181e-06,
+        "bit": 16,
+        "observed_V": 1.2084754968510654,
+        "code": 262144
+      },
+      {
+        "t": 2.2009999999999998e-06,
+        "bit": 15,
+        "observed_V": 1.2084754944339404,
+        "code": 294912
+      },
+      {
+        "t": 2.221e-06,
+        "bit": 14,
+        "observed_V": 1.2084754920168153,
+        "code": 311296
+      },
+      {
+        "t": 2.241e-06,
+        "bit": 13,
+        "observed_V": 1.20847548959969,
+        "code": 311296
+      },
+      {
+        "t": 2.261e-06,
+        "bit": 12,
+        "observed_V": 1.208475487182565,
+        "code": 315392
+      },
+      {
+        "t": 2.281e-06,
+        "bit": 11,
+        "observed_V": 1.20847548476544,
+        "code": 315392
+      },
+      {
+        "t": 2.3009999999999997e-06,
+        "bit": 10,
+        "observed_V": 1.2084754823483148,
+        "code": 316416
+      },
+      {
+        "t": 2.321e-06,
+        "bit": 9,
+        "observed_V": 1.2084754799311899,
+        "code": 316416
+      },
+      {
+        "t": 2.341e-06,
+        "bit": 8,
+        "observed_V": 1.208475477514064,
+        "code": 316672
+      },
+      {
+        "t": 2.361e-06,
+        "bit": 7,
+        "observed_V": 1.2084754750969398,
+        "code": 316672
+      },
+      {
+        "t": 2.3809999999999997e-06,
+        "bit": 6,
+        "observed_V": 1.2084754726798148,
+        "code": 316736
+      },
+      {
+        "t": 2.401e-06,
+        "bit": 5,
+        "observed_V": 1.2084754702626899,
+        "code": 316768
+      },
+      {
+        "t": 2.4209999999999998e-06,
+        "bit": 4,
+        "observed_V": 1.208475467845565,
+        "code": 316784
+      },
+      {
+        "t": 2.441e-06,
+        "bit": 3,
+        "observed_V": 1.20847546542844,
+        "code": 316792
+      },
+      {
+        "t": 2.461e-06,
+        "bit": 2,
+        "observed_V": 1.208475463011315,
+        "code": 316792
+      },
+      {
+        "t": 2.481e-06,
+        "bit": 1,
+        "observed_V": 1.20847546059419,
+        "code": 316794
+      },
+      {
+        "t": 2.501e-06,
+        "bit": 0,
+        "observed_V": 1.2084754581770651,
+        "code": 316794
+      }
+    ]
+  },
+  {
+    "mode": "old",
+    "p": 1000000.0,
+    "X": 500000,
+    "bits": 20,
+    "acquisition_end_s": 2.101e-06,
+    "conversion_end_s": 2.501e-06,
+    "latency_from_input_edge_s": 2.401e-06,
+    "coefficient_programming": "preloaded, excluded",
+    "converter_scope": "behavioral DAC RC and current source, read amplifier, SPICE switch/hold, timed numerical SAR; no converter transistor design or converter power",
+    "code": 259965,
+    "decoded": 0.9916877746582031,
+    "relative_error": 0.008325238543750668,
+    "excess_error": 634.4354997549634,
+    "core_current_A": 9.915647973440293e-06,
+    "decisions": [
+      {
+        "t": 2.1209999999999997e-06,
+        "bit": 19,
+        "observed_V": 0.99168996319274,
+        "code": 0
+      },
+      {
+        "t": 2.141e-06,
+        "bit": 18,
+        "observed_V": 0.9916899612091838,
+        "code": 0
+      },
+      {
+        "t": 2.1609999999999997e-06,
+        "bit": 17,
+        "observed_V": 0.9916899592256265,
+        "code": 131072
+      },
+      {
+        "t": 2.181e-06,
+        "bit": 16,
+        "observed_V": 0.9916899572420705,
+        "code": 196608
+      },
+      {
+        "t": 2.2009999999999998e-06,
+        "bit": 15,
+        "observed_V": 0.9916899552585138,
+        "code": 229376
+      },
+      {
+        "t": 2.221e-06,
+        "bit": 14,
+        "observed_V": 0.9916899532749571,
+        "code": 245760
+      },
+      {
+        "t": 2.241e-06,
+        "bit": 13,
+        "observed_V": 0.9916899512914006,
+        "code": 253952
+      },
+      {
+        "t": 2.261e-06,
+        "bit": 12,
+        "observed_V": 0.9916899493078433,
+        "code": 258048
+      },
+      {
+        "t": 2.281e-06,
+        "bit": 11,
+        "observed_V": 0.9916899473242873,
+        "code": 258048
+      },
+      {
+        "t": 2.3009999999999997e-06,
+        "bit": 10,
+        "observed_V": 0.9916899453407296,
+        "code": 259072
+      },
+      {
+        "t": 2.321e-06,
+        "bit": 9,
+        "observed_V": 0.991689943357173,
+        "code": 259584
+      },
+      {
+        "t": 2.341e-06,
+        "bit": 8,
+        "observed_V": 0.9916899413736165,
+        "code": 259840
+      },
+      {
+        "t": 2.361e-06,
+        "bit": 7,
+        "observed_V": 0.9916899393900598,
+        "code": 259840
+      },
+      {
+        "t": 2.3809999999999997e-06,
+        "bit": 6,
+        "observed_V": 0.991689937406503,
+        "code": 259904
+      },
+      {
+        "t": 2.401e-06,
+        "bit": 5,
+        "observed_V": 0.9916899354229464,
+        "code": 259936
+      },
+      {
+        "t": 2.4209999999999998e-06,
+        "bit": 4,
+        "observed_V": 0.9916899334393899,
+        "code": 259952
+      },
+      {
+        "t": 2.441e-06,
+        "bit": 3,
+        "observed_V": 0.9916899314558333,
+        "code": 259960
+      },
+      {
+        "t": 2.461e-06,
+        "bit": 2,
+        "observed_V": 0.991689929472277,
+        "code": 259964
+      },
+      {
+        "t": 2.481e-06,
+        "bit": 1,
+        "observed_V": 0.9916899274887208,
+        "code": 259964
+      },
+      {
+        "t": 2.501e-06,
+        "bit": 0,
+        "observed_V": 0.991689925505164,
+        "code": 259965
+      }
+    ]
+  },
+  {
+    "mode": "r2",
+    "p": 1000000.0,
+    "X": 500000,
+    "bits": 20,
+    "acquisition_end_s": 2.101e-06,
+    "conversion_end_s": 2.501e-06,
+    "latency_from_input_edge_s": 2.401e-06,
+    "coefficient_programming": "preloaded, excluded",
+    "converter_scope": "behavioral DAC RC and current source, read amplifier, SPICE switch/hold, timed numerical SAR; no converter transistor design or converter power",
+    "code": 262180,
+    "decoded": 1.0001373291015625,
+    "relative_error": 0.00012420502221233143,
+    "excess_error": 9.465203300219681,
+    "core_current_A": 1.0000132998128741e-05,
+    "decisions": [
+      {
+        "t": 2.1209999999999997e-06,
+        "bit": 19,
+        "observed_V": 1.0001385495587025,
+        "code": 0
+      },
+      {
+        "t": 2.141e-06,
+        "bit": 18,
+        "observed_V": 1.0001385475582445,
+        "code": 262144
+      },
+      {
+        "t": 2.1609999999999997e-06,
+        "bit": 17,
+        "observed_V": 1.0001385455577863,
+        "code": 262144
+      },
+      {
+        "t": 2.181e-06,
+        "bit": 16,
+        "observed_V": 1.0001385435573287,
+        "code": 262144
+      },
+      {
+        "t": 2.2009999999999998e-06,
+        "bit": 15,
+        "observed_V": 1.0001385415568707,
+        "code": 262144
+      },
+      {
+        "t": 2.221e-06,
+        "bit": 14,
+        "observed_V": 1.0001385395564124,
+        "code": 262144
+      },
+      {
+        "t": 2.241e-06,
+        "bit": 13,
+        "observed_V": 1.0001385375559557,
+        "code": 262144
+      },
+      {
+        "t": 2.261e-06,
+        "bit": 12,
+        "observed_V": 1.0001385355554968,
+        "code": 262144
+      },
+      {
+        "t": 2.281e-06,
+        "bit": 11,
+        "observed_V": 1.000138533555039,
+        "code": 262144
+      },
+      {
+        "t": 2.3009999999999997e-06,
+        "bit": 10,
+        "observed_V": 1.0001385315545814,
+        "code": 262144
+      },
+      {
+        "t": 2.321e-06,
+        "bit": 9,
+        "observed_V": 1.0001385295541234,
+        "code": 262144
+      },
+      {
+        "t": 2.341e-06,
+        "bit": 8,
+        "observed_V": 1.0001385275536654,
+        "code": 262144
+      },
+      {
+        "t": 2.361e-06,
+        "bit": 7,
+        "observed_V": 1.0001385255532074,
+        "code": 262144
+      },
+      {
+        "t": 2.3809999999999997e-06,
+        "bit": 6,
+        "observed_V": 1.0001385235527498,
+        "code": 262144
+      },
+      {
+        "t": 2.401e-06,
+        "bit": 5,
+        "observed_V": 1.000138521552291,
+        "code": 262176
+      },
+      {
+        "t": 2.4209999999999998e-06,
+        "bit": 4,
+        "observed_V": 1.000138519551833,
+        "code": 262176
+      },
+      {
+        "t": 2.441e-06,
+        "bit": 3,
+        "observed_V": 1.0001385175513753,
+        "code": 262176
+      },
+      {
+        "t": 2.461e-06,
+        "bit": 2,
+        "observed_V": 1.0001385155509175,
+        "code": 262180
+      },
+      {
+        "t": 2.481e-06,
+        "bit": 1,
+        "observed_V": 1.0001385135504608,
+        "code": 262180
+      },
+      {
+        "t": 2.501e-06,
+        "bit": 0,
+        "observed_V": 1.0001385115500017,
+        "code": 262180
+      }
+    ]
+  }
+]

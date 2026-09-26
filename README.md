@@ -69,7 +69,7 @@ The build checks the complete source library. The named audits have narrower, do
 
 The [centered binary-power AD prototype](research/analog_fast_ad/README.md) uses digitally prepared inputs and the state `q=p(u−1)`. Its behavioral SPICE models expose input loading, memory, settling, noise and calibration assumptions. The arithmetic campaign covers 8,243 input pairs; the calibrated precision study meets one ppm in 64 validation cases, with worst simulated error 0.279 ppm at 23.985 ms. These are simulation results, not fabricated-chip measurements or evidence of superiority to digital calculation.
 
-- [Real-exponent subdivision: Lean proofs, transistor prototype and comparison](research/geometric_subdivision_chip/README.md) — the tested BJT chain does not meet the precision or startup requirements and does not replace V30.
+- [Real-exponent subdivision: Lean proofs, transistor prototype and comparison](research/geometric_subdivision_chip/README.md) — R2 improves nominal accuracy in 21/24 held-out cases; regressions and startup failures remain.
 - [V30 sources, diagrams and reproduction](paper/pandrosion_analog_v30/README.md)
 - [Generalist input campaign](research/analog_fast_ad/GENERALIST.md)
 - [Precision circuit results](research/analog_fast_ad/PRECISION_REVISION_RESULTS.md)

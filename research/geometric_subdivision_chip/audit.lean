@@ -3,3 +3,4 @@ import LeanMath.Papers.GeometricSubdivision
 #print axioms LeanMath.Papers.GeometricSubdivision.homogeneous_Q
 #print axioms LeanMath.Papers.GeometricSubdivision.homogeneous_weights
 #print axioms LeanMath.Papers.GeometricSubdivision.constructed_root_bracket
+#print axioms LeanMath.Papers.GeometricSubdivision.zero_weight_readout

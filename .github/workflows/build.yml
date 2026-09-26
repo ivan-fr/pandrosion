@@ -382,6 +382,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y ngspice
       - run: pip install -r research/geometric_subdivision/requirements.txt
       - run: python research/geometric_subdivision_chip/check.py
+      - run: python research/geometric_subdivision_chip/check_improvement.py
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:

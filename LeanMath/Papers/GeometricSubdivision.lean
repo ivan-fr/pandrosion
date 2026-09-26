@@ -284,4 +284,11 @@ theorem homogeneous_weights {t : ℝ} (h0 : 0 ≤ t) (h1 : t ≤ 1) :
  · apply div_nonneg <;> linarith
  · positivity
 
+/-- Auto-zero reference: at zero weight the readout is exactly the unit ratio. -/
+theorem zero_weight_readout {z : ℝ} (hz : 0 ≤ z) : R 0 z = 1 := by
+ have hQ : Q 0 z ≠ 0 := ne_of_gt (Q_pos (by norm_num) hz)
+ have hPQ : P 0 z = Q 0 z := by unfold P Q; ring
+ unfold R
+ rw [hPQ, div_self hQ]
+
 end LeanMath.Papers.GeometricSubdivision
