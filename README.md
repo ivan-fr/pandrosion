@@ -13,11 +13,11 @@ This repository accompanies the paper on positive-root constructions using the P
 | Path | Purpose |
 |---|---|
 | [paper/Geometric_Root_Calculators_v27.pdf](paper/Geometric_Root_Calculators_v27.pdf) | Author-supplied V27-NR manuscript. |
-| [LeanMath/Papers](LeanMath/Papers) | Available classical rectangle proofs, decentered algebraic certificates, subdivision results, and their required imports. |
+| [LeanMath/Papers](LeanMath/Papers) | Classical rectangle proofs, decentered-arc certificates with global convergence and local order five, nested-radical modules with local order nine, the contact lemma, degree and efficiency results, subdivision results, and their required imports. |
 | [verification/decentered](verification/decentered) | Independent symbolic and high-precision line/circle checks for AK, AD, projective AD and the decentered arc. |
-| [validation](validation) | Axiom manifests for the decentered certificates and seven subdivision theorems. |
+| [validation](validation) | Axiom manifests for the decentered certificates, the subdivision theorems, the nested-radical modules and the order, degree and efficiency modules. |
 
-**Source availability:** the V27 nested-radical Lean modules, manuscript sources and full V27 verification package were absent from the repository at cleanup. The PDF describes results whose complete reproduction requires that missing supplement. The retained proofs and checks cover only the scopes listed in [EVIDENCE.md](EVIDENCE.md).
+**Source availability:** the nested-radical Lean modules are now included, together with modules for the decentered arc's global convergence, the local orders five and nine, and the degree and efficiency statements. The manuscript sources and the full V27 numerical verification package are still absent. The proofs and checks cover only the scopes listed in [EVIDENCE.md](EVIDENCE.md).
 
 ## Reproduce the available checks
 
@@ -36,7 +36,7 @@ lake build
 python3 scripts/audit_lean.py
 ```
 
-Lean and mathlib are pinned by `lean-toolchain`, `lakefile.toml` and `lake-manifest.json`. The audit checks ten decentered algebraic certificates and seven subdivision theorems, allowing only `propext`, `Classical.choice` and `Quot.sound`. CI builds the retained Lean library and runs these audits separately from the numerical verifier.
+Lean and mathlib are pinned by `lean-toolchain`, `lakefile.toml` and `lake-manifest.json`. The audit checks 246 declarations (ten decentered algebraic certificates, seven subdivision theorems, 104 nested-radical theorems and 125 theorems on orders, degrees and efficiency), allowing only `propext`, `Classical.choice` and `Quot.sound`. CI builds the Lean library and runs these audits separately from the numerical verifier.
 
 ## Repository scope
 

@@ -1,3 +1,8 @@
 import LeanMath.Papers.RectangleProjectiveVerification
 import LeanMath.Papers.RectangleDecenteredArc
 import LeanMath.Papers.GeometricSubdivision
+import LeanMath.Papers.NestedRadicalCubic
+import LeanMath.Papers.NestedRadicalAllDegrees
+import LeanMath.Papers.NestedOrderNine
+import LeanMath.Papers.ArcOrderFive
+import LeanMath.Papers.DegreesNested
