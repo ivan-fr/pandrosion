@@ -1,0 +1,365 @@
+% =========================================================================
+\section{Geometric work: inventory, comparison and efficiency}\label{sec:work}
+
+Throughout this section $p\ge3$ is an integer (or the numerator $\mu$ of a rational degree,
+Proposition~\ref{prop:rational}), the state $R(s)$ is supplied, and counts follow
+Section~\ref{sec:convention}. For the five supports through $A$ other than the nested one, the power
+stage uses $2p-1$ parallels and the join $L_1B$; transport adds the join $ME$ and two parallels (the
+parallel through $P$ and the horizontal readout). Moving AD adds one arc and one join; projective AD
+adds two joins.
+
+\subsection{Complete inventory of the nested support}
+
+Fixed preparation includes $a_9,b_9,c_9$ and $\lambda_9=(p-1)/X$; every residual-dependent length is
+rebuilt at each step. Obtain $E=R(s^{p})$ by the triangle stage, then $R(t)$ by the two-join fixed scale
+$X$. Stop if $t=1$. Otherwise use
+\begin{equation}\label{eq:w}
+w=t+\frac1t-2,
+\end{equation}
+which needs one five-join division and two rail sums or differences instead of a separate squaring.
+Then construct successively
+\[ K=1+\frac{b_9w}{1+c_9w},\qquad k_9=\sqrt{1\cdot K},\qquad \rho_9=1+\frac{a_9w}{k_9},\qquad
+q_9=\sqrt{t\,\rho_9}. \]
+Each mean proportional uses the semicircle macro of Section~\ref{sec:macros}, at most
+$2\jn+\pl+3\ar$ including diameter preparation and transfer to the rail. Scale $q_9$ to $\lambda_9q_9$
+in two joins; its rail length is $H\lambda_9q_9$. One arc centred at $M$ transfers this length
+downward on the left rail and gives $D_9=(0,\;H-\tfrac HX(1+(p-1)q_9))$. Join $AD_9$ and $ME$, draw the
+parallel to $ME$ through $P$, and return horizontally.
+
+\begin{table}[h]
+\centering\small
+\caption{Per-step upper inventory of the nested support, from $R(s)$ to $R(s_+)$, integer $p\ge3$.
+A sum or nonnegative difference is one rail arc, a general division five joins, a fixed scale two
+joins.}\label{tab:inventory}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Stage & $\jn$ & $\pl$ & $\ar$\\
+\midrule
+Triangle power endpoint $E=R(s^{p})$ & 1 & $2p-1$ & 0\\
+Residual $t=Xs^{p}$ & 2 & 0 & 0\\
+Width $w=t+1/t-2$ & 5 & 0 & 2\\
+Inner argument $K$ (two scales, one division, two sums) & 9 & 0 & 2\\
+First mean $k_9=\sqrt{1\cdot K}$ & 2 & 1 & 3\\
+Outer argument $\rho_9$ (scale, division, sum) & 7 & 0 & 1\\
+Second mean $q_9=\sqrt{t\rho_9}$ & 2 & 1 & 3\\
+Scale $\lambda_9q_9$ and transfer from $M$ to $D_9$ & 2 & 0 & 1\\
+Support join $AD_9$ & 1 & 0 & 0\\
+Join $ME$, transport parallel, horizontal readout & 1 & 2 & 0\\
+\midrule
+Total & 32 & $2p+3$ & 12\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}[Nested-radical work bound]\label{prop:inventory}
+For integer $p\ge3$, $X>0$ and a supplied state $R(s)$, the protocol above realizes the nested-radical
+correction with at most
+\begin{equation}\label{eq:inventory}
+32\jn+(2p+3)\pl+12\ar=(4p+38)\jn+(6p+21)\ar,
+\end{equation}
+that is $10p+59$ traces per nonterminal step; $89$ traces for cube roots.
+\end{proposition}
+\begin{proof}
+The rail identities \eqref{eq:incid} establish every division and fixed scale. Both mean-proportional
+inputs are positive, and the prescribed circle intersection with the transferred length gives the
+positive root. The point $D_9$ gives $\kappa=1+(p-1)q_9$ in \eqref{eq:support}. Adding the ten rows
+gives the left side of \eqref{eq:inventory}, and $\pl=2\jn+3\ar$ gives the right side. Unit shortcuts,
+reused objects and an exact-root stop can only reduce the count.
+\end{proof}
+
+If charged, the final inversion adds $5\jn$ once, and supplying $u_0$ instead of $s_0$ another $5\jn$.
+
+\subsection{Six supports at a common state}
+
+\begin{table}[h]
+\centering\small
+\caption{Mobile work per step with the triangle power stage, integer $p\ge3$.}\label{tab:mobile}
+\begin{tabular}{@{}lccccll@{}}
+\toprule
+Construction & Order & $\jn$ & $\pl$ & $\ar$ & Traces & Scalar scope\\
+\midrule
+MA rectangle & 1 & 2 & $2p+1$ & 0 & $10p+7$ & $X>1$\\
+AK rectangle & 2 & 2 & $2p+1$ & 0 & $10p+7$ & global\\
+AD rectangle & 3 & 3 & $2p+1$ & 1 & $10p+9$ & global\\
+Projective AD & 4 & 4 & $2p+1$ & 0 & $10p+9$ & global\\
+Decentered AD & 5 & 3 & $2p+1$ & 1 & $10p+9$ & global, $p>2$\\
+Nested radicals & 9 & 32 & $2p+3$ & 12 & $10p+59$ & global, $p>2$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For cube roots the per-step bounds are $37,37,39,39,39,89$. Table~\ref{tab:cubic} runs all six from the
+same state $X=2$, $s_0=3/4$ (so $u_0=4/3$, not the $u_0=1$ of the illustration) with the same stopping
+test on the reciprocal relative error.
+
+\begin{table}[h]
+\centering\small
+\caption{Steps / summed trace bounds to reach $|s/\alpha-1|\le10^{-d}$ for $p=3$, $X=2$, $s_0=3/4$.
+Each total is the per-step bound times the number of steps. Counts agree at 250 and 500 working
+digits.}\label{tab:cubic}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Construction & Order & $d=6$ & $d=12$ & $d=30$ & $d=60$\\
+\midrule
+MA rectangle & 1 & 8 / 296 & 17 / 629 & 44 / 1628 & 90 / 3330\\
+AK rectangle & 2 & 3 / 111 & 4 / 148 & 5 / 185 & 6 / 222\\
+AD rectangle & 3 & 2 / 78 & 3 / 117 & 3 / 117 & 4 / 156\\
+Projective AD & 4 & 2 / 78 & 2 / 78 & 3 / 117 & 3 / 117\\
+Decentered AD & 5 & 1 / 39 & 2 / 78 & 2 / 78 & 3 / 117\\
+Nested radicals & 9 & 1 / 89 & 1 / 89 & 2 / 178 & 2 / 178\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For cube roots the nested support needs fewer steps but more traces than the decentered arc at every
+target in the table: $89,89,178,178$ against $39,78,78,117$. Higher order alone does not give a
+drawing-work advantage. The next subsection shows that this is a statement about small $p$.
+
+\subsection{Efficiency index and the crossover at \texorpdfstring{$p=13$}{p = 13}}
+
+For an iteration of order $\varrho$ costing $N$ units per step, the classical efficiency index is
+$\varrho^{1/N}$~\cite{ostrowski,traub64}: the number of correct digits is asymptotically multiplied by
+$\varrho^{1/N}$ per unit of work. We compare its logarithm $\iota=\log\varrho/N(p)$, with $N(p)$ the
+trace bound of Table~\ref{tab:mobile}.
+
+\begin{proposition}[Efficiency ordering]\label{prop:index}
+For every integer $p\ge3$, $\iota_{\mathrm{AK}}<\iota_{\mathrm{AD}}<\iota_{\mathrm{proj}}<\iota_{\mathrm{dec}}$.
+The nested support satisfies $\iota_{\mathrm{nest}}>\iota_{\mathrm{dec}}$ if and only if
+\[ p>\frac{59\log5-9\log9}{10\,\log(9/5)}=12.79\ldots, \]
+that is, for integer degrees, if and only if $p\ge13$. It exceeds $\iota_{\mathrm{AD}}$ from $p=5$ and
+$\iota_{\mathrm{proj}}$ from $p=8$.
+\end{proposition}
+\begin{proof}
+The last three of the first group share $N=10p+9$ and have increasing orders, and
+$\log2/(10p+7)<\log3/(10p+9)$ because $10p\log(3/2)>9\log2-7\log3$, whose right side is negative. The
+inequality $\log9/(10p+59)>\log5/(10p+9)$ is linear in $p$ and rearranges to the stated threshold; the
+comparisons with orders three and four give $p>4.1$ and $p>7.6$ in the same way.
+\end{proof}
+
+\begin{table}[h]
+\centering\small
+\caption{$10^{3}\iota=10^{3}\log\varrho/N(p)$. The largest value in each column is in bold.}\label{tab:index}
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+Construction & $p=3$ & $5$ & $8$ & $12$ & $13$ & $20$ & $50$\\
+\midrule
+AK & 18.73 & 12.16 & 7.97 & 5.46 & 5.06 & 3.35 & 1.37\\
+AD & 28.17 & 18.62 & 12.34 & 8.52 & 7.90 & 5.26 & 2.16\\
+Projective AD & 35.55 & 23.50 & 15.58 & 10.75 & 9.97 & 6.63 & 2.72\\
+Decentered AD & \textbf{41.27} & \textbf{27.28} & \textbf{18.08} & \textbf{12.48} & 11.58 & 7.70 & 3.16\\
+Nested radicals & 24.69 & 20.16 & 15.81 & 12.27 & \textbf{11.63} & \textbf{8.48} & \textbf{3.93}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The reason is visible in Table~\ref{tab:mobile}: the power stage costs about $10p$ traces for every
+support, so the $50$ additional traces of the nested support are a fixed overhead that large $p$
+amortizes, and the ratio of indices tends to $\log9/\log5\approx1.37$. The index is an asymptotic
+quantity built from upper inventories; at a finite accuracy the integer number of steps makes the
+comparison lumpy, as Table~\ref{tab:p20} shows.
+
+\begin{table}[h]
+\centering\small
+\caption{Steps / summed trace bounds for $p=20$, $X=2$, $s_0=3/4$ (per-step bounds $209$ and
+$259$).}\label{tab:p20}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Construction & $d=30$ & $d=60$ & $d=250$ & $d=1000$ & $d=2500$\\
+\midrule
+Decentered AD & 4 / 836 & 5 / 1045 & 5 / 1045 & 6 / 1254 & 7 / 1463\\
+Nested radicals & 3 / 777 & 3 / 777 & 4 / 1036 & 5 / 1295 & 5 / 1295\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At $p=20$ the nested support has the smaller total at four of the five targets and loses at
+$d=1000$, where saving a single step (five instead of six) does not pay for the higher step cost.
+
+% =========================================================================
+\section{Direct root enclosures for real degrees}\label{sec:enclosure}
+
+The power stage can be avoided altogether by constructing the root directly. The input is a positive
+length $X$ and a real degree $p$, also given as a length; the output is an approximation of
+$r=X^{1/p}$ with prescribed relative error. A real input length is assumed to be available: this does
+not assert that every real number is constructible from a unit segment. This calculator is the only one in the paper whose every
+step is a finite construction for irrational $p$. We first treat $X>1$ and $p\ge1$; the cases $X=1$ and
+$p=1$ are immediate, and Proposition~\ref{prop:allp} removes both restrictions.
+
+\subsection{One mean proportional per subdivision}
+
+Set $\theta=1/p$, $a=1$, $b=X$ and $\lambda=\theta$. Here $a,b$ are moving rail values. The invariant is
+\begin{equation}\label{eq:inv}
+0<a<b,\qquad 0\le\lambda\le1,\qquad r=a^{1-\lambda}b^{\lambda}.
+\end{equation}
+If $\lambda\in\{0,1\}$ return the corresponding endpoint, which is exact. Otherwise construct
+$m=\sqrt{ab}$ with the classical mean-proportional semicircle~\cite{euclid} and replace
+\begin{equation}\label{eq:subdiv}
+(a,b,\lambda)\longmapsto
+\begin{cases}(a,\,m,\,2\lambda),&\lambda\le\tfrac12,\\[2pt](m,\,b,\,2\lambda-1),&\lambda>\tfrac12.\end{cases}
+\end{equation}
+Both branches preserve \eqref{eq:inv}. Thus $p$ determines the choices and the weight, never the length
+of a power chain. After $n$ subdivisions
+\begin{equation}\label{eq:gap}
+\frac ba=X^{2^{-n}},\qquad z:=\frac ba-1\ge0.
+\end{equation}
+No logarithm, exponential or power $s^{p}$ is evaluated. The branch test compares two constructed
+lengths, $\lambda$ and $\tfrac12$; for irrational $p$ equality never occurs, and for dyadic $1/p$ the
+process stops with an exact endpoint.
+
+\begin{figure}[h]
+\centering\figSubdivision
+\caption{A subdivision constructs one mean proportional. The semicircle has diameter $OS=a+b$, centre
+$C$ and junction $OT=a$; the orange perpendicular $TG$ is the mean $m$. The same device is rotated onto the vertical rail in the counted protocol.
+The figure uses $a=1.2$, $b=2.8$ only to show the incidence.}\label{fig:subdiv}
+\end{figure}
+
+\subsection{A fifth-order final enclosure}
+
+The harmonic--arithmetic readout of the companion gallery~\cite{gallery},
+$L_2=ab/[(1-\lambda)b+\lambda a]$ and $U_2=(1-\lambda)a+\lambda b$, encloses $r$ by the weighted
+arithmetic--geometric mean inequality, with
+\[ \frac{U_2}{L_2}-1=\lambda(1-\lambda)\frac{z^{2}}{1+z}\le\sinh^{2}\!\Bigl(\frac{\log X}{2^{n+1}}\Bigr), \]
+a width quadratic in $z$. A single rational readout of degree two gives a fifth-order width. It is the
+diagonal $[2/2]$ Pad\'e approximant of $(1+z)^{\tau}$ at zero~\cite{dlmf,baker}. For $0\le\tau\le1$ put
+\begin{equation}\label{eq:pade}
+\Pi_\tau(z)=12+6(2+\tau)z+(\tau+1)(\tau+2)z^{2},\qquad
+\psi_\tau(z)=\frac{\Pi_\tau(z)}{\Pi_{-\tau}(z)},
+\end{equation}
+whose denominators are positive for $z\ge0$, and
+\begin{equation}\label{eq:L5}
+L_5=a\,\psi_\lambda(z),\qquad U_5=\frac{b}{\psi_{1-\lambda}(z)}.
+\end{equation}
+
+\begin{proposition}[Enclosure and finite termination]\label{prop:enclosure}
+For $X\ge1$, real $p\ge1$ and every subdivision depth,
+\begin{equation}\label{eq:width}
+L_5\le X^{1/p}\le U_5,\qquad
+\frac{U_5}{L_5}-1=\frac{\lambda(1-\lambda)(2-\lambda)(1+\lambda)\,z^{5}}{\Pi_\lambda(z)\,\Pi_{1-\lambda}(z)}
+\le\frac{z^{5}}{256}.
+\end{equation}
+Given $\eps>0$, choose a positive rational $\beta$ with $\beta^{5}/256\le\eps$, stop when
+$b\le(1+\beta)a$ and return $L_5$. The procedure terminates and its relative error is at most $\eps$.
+A sufficient depth depends on $X$ and $\eps$ only, not on $p$.
+\end{proposition}
+\begin{proof}
+For $0\le\tau\le1$, direct differentiation gives
+\[ (1+z)\bigl(\Pi_\tau'\Pi_{-\tau}-\Pi_\tau\Pi_{-\tau}'\bigr)-\tau\,\Pi_\tau\Pi_{-\tau}
+=-\tau(1-\tau^{2})(4-\tau^{2})\,z^{4}\le0. \]
+Hence $\log\psi_\tau(z)-\tau\log(1+z)$ is nonincreasing from zero, so
+$\psi_\tau(z)\le(1+z)^{\tau}$. With $\tau=\lambda$ this is $L_5\le r$; with $\tau=1-\lambda$ and
+$(1+z)^{\lambda}(1+z)^{1-\lambda}=1+z$ it is $r\le U_5$. Multiplying out gives the equality in
+\eqref{eq:width}. With $\chi=\lambda(1-\lambda)\le\tfrac14$ the numerator coefficient is
+$\chi(2+\chi)\le\tfrac9{16}$, and $\Pi_\lambda,\Pi_{1-\lambda}\ge12$, so the width is at most
+$z^{5}/256$. At the stopping test $0\le z\le\beta$, so $r/L_5-1\le\eps$ and $(r-L_5)/r\le\eps/(1+\eps)$. By \eqref{eq:gap}, $z\to0$,
+so the test is eventually met; any $n$ with $2^{n}\log(1+\beta)\ge\log X$ suffices. Equivalently
+$X\le(1+\beta)^{2^{n}}$, which can be checked in exact rational arithmetic for rational input.
+\end{proof}
+
+It suffices to draw $L_5$ alone; the analytic upper bound certifies its accuracy without constructing
+a second Pad\'e quotient. For $0<X<1$, constructing and inverting this lower bound for $1/X$ gives an
+upper approximation of the original root with relative error at most $\eps$. The width is of order
+five in the rail gap $z$; this is not a fifth-order iteration, since each subdivision only halves the
+logarithmic gap.
+
+\begin{proposition}[Every nonzero real degree and every positive input]\label{prop:allp}
+Let $p\neq0$ be real and $X>0$, $X\neq1$.
+\begin{enumerate}[label=(\roman*)]
+\item If $X>1$ and $0<p<1$, let $k=\lfloor1/p\rfloor\ge1$ and start from $a=X^{k}$, $b=X^{k+1}$,
+  $\lambda=1/p-k$. Then \eqref{eq:inv}, \eqref{eq:gap} and Proposition~\ref{prop:enclosure} hold
+  unchanged.
+\item If $0<X<1$, apply the construction to $1/X$ and invert: the enclosure $[1/U_5,1/L_5]$ has the same
+  relative width.
+\item If $p<0$, apply the construction to $|p|$ and invert the output.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+In (i), $a^{1-\lambda}b^{\lambda}=X^{k+\lambda}=X^{1/p}$, $0\le\lambda<1$ and $b/a=X$, so the invariant
+and the gap formula are those of the case $p\ge1$, and the proof of Proposition~\ref{prop:enclosure}
+uses nothing else. Inversion maps an enclosure $[L,U]$ to $[1/U,1/L]$ with the same ratio.
+\end{proof}
+
+\subsection{A complete, conservative drawing inventory}\label{sec:macros}
+
+Use the extended vertical rail $R(q)$, its origin $R(0)$ and the prepared centres of
+Section~\ref{sec:rect}; $X$ and $p$ are given on the rail. The macros are:
+\begin{itemize}
+\item \emph{Sum or nonnegative difference} of two rail values: one compass arc on the rail.
+\item \emph{Product or quotient}: five joins (Section~\ref{sec:rect}); by a prepared constant, two joins.
+\item \emph{Mean proportional}, $2\jn+\pl+3\ar$: form $R(a+b)$ with one arc and $R((a+b)/2)$ with the
+  two-join fixed scale; draw the semicircle through $R(0)$; draw the horizontal through $R(a)$ with one
+  parallel macro; transfer the resulting length to the rail with one arc.
+\end{itemize}
+The updated weight uses the fixed scale $2\lambda$ and, on a right branch, one subtraction. A
+subdivision with its weight update costs at most $4\jn+\pl+4\ar$, and a stopping test, which scales $a$
+by the prepared $1+\beta$, two joins. For the final readout use
+\begin{equation}\label{eq:L5eval}
+L_5=a\Bigl(1+\lambda\,\frac{6z(2+z)}{\Pi_{-\lambda}(z)}\Bigr),\qquad
+\Pi_{-\lambda}(z)=12+6(2-\lambda)z+(1-\lambda)(2-\lambda)z^{2}.
+\end{equation}
+One evaluation schedule uses seven general products, namely $(1-\lambda)(2-\lambda)$, $z^{2}$,
+$(2-\lambda)z$, $(1-\lambda)(2-\lambda)z^{2}$, $z(2+z)$, the weighted quotient and the final scaling by
+$a$; two divisions, including $b/a$; two fixed scalings by $6$; and seven sums or differences. Its cost
+is at most $49\jn+7\ar$.
+
+\begin{table}[h]
+\centering\small
+\caption{Trace inventory of the direct enclosure for $X>1$, $p\ge1$.}\label{tab:subdiv}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Operation & $\jn$ & $\pl$ & $\ar$\\
+\midrule
+Initial weight $\lambda=1/p$ & 5 & 0 & 0\\
+$n$ subdivisions and weight updates & $4n$ & $n$ & $4n$\\
+At most $n+1$ stopping tests & $2n+2$ & 0 & 0\\
+One final lower Pad\'e readout & 49 & 0 & 7\\
+\midrule
+Total, parallels expanded & $8n+56$ & 0 & $7n+7$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Thus $15n+63$ traces suffice for $X>1$, $p\ge1$. The other cases of Proposition~\ref{prop:allp} add:
+$5k+1$ traces in case (i), for the $k$ products $X^{2},\dots,X^{k+1}$ and the difference $1/p-k$;
+two five-join inversions in case (ii), giving $15n+73$ for $0<X<1$, $p\ge1$; one five-join
+inversion in case (iii). Finding $k$ is a decision and is not charged. Constructing both endpoints
+$L_5$ and $U_5$ would require additional work and is not included in this single-output count.
+
+\subsection{Depth, precision and comparison with the iterations}
+
+\begin{table}[h]
+\centering\small
+\caption{Sufficient depths at $X=2$, uniformly in real $p\ge1$. The Pad\'e depths use
+$\beta=19/100,\ 3/40,\ 3/250,\ 3/1000$; the inequalities $\beta^{5}/256\le\eps$ and
+$(1+\beta)^{2^{n}}\ge2$ verify them in rational arithmetic.}\label{tab:depth}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Relative width target & Harmonic--arithmetic depth & Pad\'e depth & Trace bound $15n+63$\\
+\midrule
+$10^{-6}$ & 9 & 2 & 93\\
+$10^{-8}$ & 12 & 4 & 123\\
+$10^{-12}$ & 19 & 6 & 153\\
+$10^{-15}$ & 24 & 8 & 183\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering\figDepth
+\caption{Sufficient worst-case depths of Table~\ref{tab:depth}, uniformly in $p\ge1$. Points are
+verified depth certificates; the connecting segments only guide the eye and do not represent fractional
+subdivisions.}\label{fig:depth}
+\end{figure}
+
+For $p=37.5$, four subdivisions yield $a=1$, $b=2^{1/16}$ and $\lambda=32/75$, and the root lies between
+$1.0186558096$ and $1.0186558103$; these rounded endpoints can be checked exactly by raising them to the
+power $75$ and comparing with $4$. At $X=2$ and $\eps=10^{-8}$ the construction has the bound
+$88\jn+35\ar=123$ traces.
+
+\paragraph{When to use which calculator.}
+The subdivision gains a fixed number of bits per step, the iterations multiply the number of correct
+digits. For cube roots of $2$, the depths needed for width $10^{-d}$ with $d=6,12,30,60$ are
+$n=2,6,18,38$, that is $93,153,333,633$ traces, against $39,78,78,117$ for the decentered arc in
+Table~\ref{tab:cubic}. (The two columns are not the same quantity: a guaranteed width on one side, an
+observed error on the other.) For small integer or rational degrees and high accuracy the iterations
+are cheaper; for irrational degrees, and for rational degrees with a large numerator, the subdivision
+is the calculator to use (Remark~\ref{rem:pi}).

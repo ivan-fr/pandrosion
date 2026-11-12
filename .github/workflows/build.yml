@@ -22,6 +22,7 @@ jobs:
           cache: pip
       - run: python -m pip install -r requirements.txt
       - run: python verification/decentered/verify.py
+      - run: python paper/v28/verify_v28.py
   lean:
     name: Complete Lean build and separate axiom audits
     runs-on: ubuntu-24.04

@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "Please cite the accompanying V27-NR research preprint."
+message: "Please cite the accompanying V28 research preprint."
 type: software
 title: "Pandrosion: geometric root calculators"
 authors:
@@ -9,11 +9,11 @@ repository-code: "https://github.com/ivan-fr/pandrosion"
 license: MIT
 preferred-citation:
   type: article
-  title: "Geometric Root Calculators: A ninth-order cubic construction and real-degree root solvers"
+  title: "Geometric Root Calculators: A ninth-order nested-radical support and real-degree enclosures in the Pandrosion rectangle"
   authors:
     - family-names: Besevic
       given-names: Ivan
   year: 2026
-  month: 10
-  version: "27-NR"
-  url: "https://github.com/ivan-fr/pandrosion/blob/main/paper/Geometric_Root_Calculators_v27.pdf"
+  month: 11
+  version: "28"
+  url: "https://github.com/ivan-fr/pandrosion/blob/main/paper/Geometric_Root_Calculators_v28.pdf"

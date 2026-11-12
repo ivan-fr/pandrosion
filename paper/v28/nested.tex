@@ -1,0 +1,337 @@
+% =========================================================================
+\section{A nested-radical support of order nine}\label{sec:nested}
+
+The next support uses two successive mean proportionals, the output of the first entering the diameter
+of the second. In this section it is convenient to follow the direct state $u=1/s$ with target
+$r=X^{1/p}$ and log error $\hat e=\log(u/r)=-e$. The residual is unchanged, $t=X/u^{p}=Xs^{p}$, so the
+rail encoding of Section~\ref{sec:coords} is unchanged.
+
+\subsection{Formula, domain and rectangle support}
+
+For $p>2$ write $h=1/p$ and define
+\begin{align}
+a_9&=\frac{1-2h}{12}, & b_9&=\frac{(h+1)(h+3)}{30}, & c_9&=\frac{121-185h-67h^{2}-h^{3}}{840(h+3)},\label{eq:abc}\\
+w&=\frac{(t-1)^{2}}{t}, & k_9&=\sqrt{1+\frac{b_9w}{1+c_9w}}, & q_9&=\sqrt{t\Bigl(1+\frac{a_9w}{k_9}\Bigr)}.\label{eq:q9}
+\end{align}
+All square roots are positive branches. The iteration is
+\begin{equation}\label{eq:F}
+\Gamma_p(t)=\frac{t+(p-1)q_9(t)}{1+(p-1)q_9(t)},\qquad F_{p,X}(u)=u\,\Gamma_p\bigl(X/u^{p}\bigr),
+\end{equation}
+which is the support $\kappa=1+(p-1)q_9$ in \eqref{eq:support}, read in the direct state.
+
+For $0<h<1/2$ the three coefficients are positive: the numerator of $c_9$ is decreasing on this interval
+and equals $93/8$ at $h=1/2$. Thus every division and radical in \eqref{eq:q9} is defined for every
+$t>0$. Moreover
+\begin{equation}\label{eq:recip}
+w(1/t)=w(t),\qquad q_9(1/t)=q_9(t)/t,\qquad \Gamma_p(1/t)=1/\Gamma_p(t),
+\end{equation}
+so the log-error map $\hat e\mapsto\hat e_+$ is odd.
+
+In the rectangle, one support point is $D_9=\bigl(0,\;H-\tfrac{H}{X}(1+(p-1)q_9)\bigr)$. The parallel
+to $ME$ through $P=R(s)$ meets $AD_9$, and the horizontal readout gives
+$s_+=s\,(1+(p-1)q_9)/(t+(p-1)q_9)$, i.e.\ $1/s_+=F_{p,X}(u)$. After $t$ is obtained, the arithmetic
+consists of rational operations and two mean proportionals,
+$k_9=\sqrt{1\cdot(1+b_9w/(1+c_9w))}$ and $q_9=\sqrt{t\cdot(1+a_9w/k_9)}$.
+
+\subsection{First complete step for the cube root of two}
+
+At $p=3$ the support simplifies to
+\begin{equation}\label{eq:cubic}
+q_9(t)=\sqrt{\,t+\frac{(t-1)^{2}}{108}\sqrt{\frac{t^{2}+52t+1}{t^{2}+4t+1}}\,},\qquad
+u_+=u\,\frac{t+2q_9(t)}{1+2q_9(t)} .
+\end{equation}
+Here is the first step for $X=2$, $u_0=1$. The auxiliary diagrams have their own local point names. The
+unknown cube root is never used to place a point.
+\begin{enumerate}[label=\arabic*.]
+\item \emph{Rational preparation.} The residual is $t=2$. Prepare $109/13$ and $1/108$ by subdivisions
+  and similar triangles.
+\item \emph{First semicircle.} Place adjacent segments of lengths $1$ and $109/13$, draw the semicircle
+  on their sum and the perpendicular at the junction. Its height is
+  $\ell=\sqrt{109/13}=2.895620034572\ldots$ (This cubic auxiliary is not the general $k_9$.)
+\item \emph{Second diameter.} A similar-triangle division gives $d=\ell/108=0.026811296616\ldots$; add it
+  to two units.
+\item \emph{Second semicircle.} With adjacent lengths $1$ and $2+d$ the perpendicular height is
+  $q_9=\sqrt{2+d}=1.423661229583\ldots$
+\item \emph{Move the support.} Choose $W=6$, $H=4$, so $M=(0,2)$. Here $s_0=1$, hence $P_0=E=B$. Place
+  $D_9=(0,\,2-4q_9)$ below $M$.
+\item \emph{Intersect and report.} Draw $AD_9$ and $MB$; they meet at $T_9$. The horizontal through $T_9$
+  meets $AB$ at $P_1$, and the rectangle reports $s_1=AP_1/AB$.
+\item \emph{Invert.} A similar-triangle construction produces $u_1=AB/AP_1$.
+\end{enumerate}
+
+\begin{figure}[h]
+\centering\figMeans
+\caption{The two successive mean proportionals for $X=2$, $u_0=1$. Each panel has equal axis scales and
+its own magnification. The orange perpendiculars are the constructed lengths; the first height supplies
+the rationally scaled addition $d$ used by the second diameter.}\label{fig:means}
+\end{figure}
+
+\begin{figure}[h]
+\centering\figSupport
+\caption{The modified Pandrosion support for the same first step, at equal axis scales. The support
+$AD_9$ (blue) meets the transport line (orange) at $T_9$, and the horizontal (green) reads $P_1$. Because
+$s_0=1$, $P_0=E=B$ and the transport line is $MB$ itself. The extension below $C$ is part of the
+construction. Lower right: the reciprocal reading $u_1=AB/AP_1$ by parallel lines.}\label{fig:support}
+\end{figure}
+
+The incidences give
+\begin{align*}
+T_9&=(3.524406494288\ldots,\;0.825197835237\ldots),\\
+s_1&=0.79370054119068191329\ldots,\\
+u_1&=1.259921025755929084356362206281\ldots,
+\end{align*}
+with relative error $u_1/r-1\approx-1.9159092613\times10^{-8}$. These digits describe exact geometric
+incidences evaluated numerically; they are not readable to that precision from a manual drawing. Later
+steps recompute $t=2/u^{3}$: the constants $109$ and $13$ belong to this first step only. The seven
+grouped instructions above, like the twelve screens of the companion interactive display, are
+pedagogical steps and not primitive trace counts; those are in Section~\ref{sec:work}.
+
+\subsection{Local order: exactly nine for every real \texorpdfstring{$p>2$}{p > 2}}
+
+The exact support corresponds to $q_*=(\kappa_*-1)/(p-1)=(t-t^{h})/[(p-1)(t^{h}-1)]$, used only in the
+analysis. With $x=\log t$ and quotients interpreted continuously at zero,
+\[ Y:=\frac{q_*^{2}}{t}=\left[\frac{\sinh((1-h)x/2)\,/\,((1-h)x/2)}{\sinh(hx/2)\,/\,(hx/2)}\right]^{2},
+\qquad w=2(\cosh x-1). \]
+Both sides are even in $x$, so $Y$ is a power series in $w$:
+\begin{equation}\label{eq:Yseries}
+\begin{aligned}
+Y&=1+a_9w+A_2w^{2}+A_3w^{3}+O(w^{4}),\\
+A_2&=-\frac{(1-2h)(h+1)(h+3)}{720},\qquad
+A_3=\frac{(1-2h)(h+1)(2h^{3}+8h^{2}+13h+31)}{60480},
+\end{aligned}
+\end{equation}
+while the proposed support has
+\begin{equation}\label{eq:q9series}
+\frac{q_9^{2}}{t}=1+a_9w-\frac{a_9b_9}{2}\,w^{2}+a_9\Bigl(\frac{b_9c_9}{2}+\frac{3b_9^{2}}{8}\Bigr)w^{3}+O(w^{4}).
+\end{equation}
+The coefficients \eqref{eq:abc} are exactly those that make \eqref{eq:q9series} agree with
+\eqref{eq:Yseries} through $w^{3}$. The first unmatched term is explicit.
+
+\begin{theorem}[Order nine with explicit constant; formalized in Lean]\label{thm:order9}
+For every real $p>2$ and $X>0$, the iteration $u_+=F_{p,X}(u)$ satisfies
+\begin{equation}\label{eq:c9}
+\hat e_+=c_9(p)\,\hat e^{\,9}+O(\hat e^{\,11}),\qquad
+c_9(p)=\frac{(p^{2}-1)(p-2)\,N_9(p)}{2^{11}\,3^{4}\,5^{3}\,7^{2}\,(3p+1)},
+\end{equation}
+\[ N_9(p)=21311p^{6}+1650p^{5}-21679p^{4}-15532p^{3}-4411p^{2}-526p-29 . \]
+Moreover $c_9(p)>0$ for every $p>2$, so the local order is exactly nine. In particular
+$c_9(3)=7/648$.
+\end{theorem}
+
+\begin{proof}
+Continuing the two expansions one term further gives
+\begin{equation}\label{eq:D4}
+\frac{q_9^{2}}{t}-Y=D_4\,w^{4}+O(w^{5}),\qquad
+D_4=\frac{(1-2h)(1+h)\,n_9(h)}{2^{10}\,3^{4}\,5^{3}\,7^{2}\,(h+3)},
+\end{equation}
+with $n_9(h)=21311+1650h-21679h^{2}-15532h^{3}-4411h^{4}-526h^{5}-29h^{6}=h^{6}N_9(1/h)$. This is an
+identity between rational functions of $h$, obtained by exact series expansion. (In the Lean proof it
+is obtained without Taylor series: $h^{2}t^{4}(t-t^{h})^{2}-(1-h)^{2}t(t^{h}-1)^{2}\,t^{4}P_4(w)$, with
+$P_4$ the quartic part of \eqref{eq:Yseries}, is a sum of 27 exponentials $c_je^{\lambda_jx}$ whose
+moments $\sum_jc_j\lambda_j^{n}$ vanish for $n<12$, hence it is $O(x^{12})$.) Since $w=\xi^{2}/t$ and
+$q_9+q_*\to2$ as $t\to1$, we get $q_9-q_*=\tfrac12D_4\xi^{8}+O(\xi^{9})$ and therefore
+$\kappa-\kappa_*=\tfrac12(p-1)D_4\,\xi^{8}+O(\xi^{9})$. Lemma~\ref{lem:contact} with $\omega=8$ gives
+$e_+=\tfrac12(p-1)p^{7}D_4\,e^{9}+O(e^{10})$. Substituting $h=1/p$,
+\[ \tfrac12(p-1)p^{7}D_4=\frac{(p-1)(p-2)(p+1)N_9(p)}{2^{11}3^{4}5^{3}7^{2}(3p+1)}=c_9(p). \]
+By \eqref{eq:recip} the map is odd, so the same expansion holds for $\hat e=-e$ and the next term is of
+order eleven. For positivity,
+\[ N_9(2+\rho)=21311\rho^{6}+257382\rho^{5}+1273481\rho^{4}+3286796\rho^{3}+4628741\rho^{2}+3325430\rho+926859, \]
+which has only positive coefficients; hence $N_9(p)>0$ and $c_9(p)>0$ for $p>2$. Finally
+$N_9(3)=13720000$ gives $c_9(3)=8\cdot13720000/(1016064000\cdot10)=7/648$.
+\end{proof}
+
+\begin{remark}[Scale of the constant]\label{rem:scale}
+$c_9(p)$ grows like $p^{8}$: for instance $c_9(4)\approx0.187$, $c_9(7)\approx26.6$ and
+$c_9(20)\approx1.58\times10^{5}$. This is the natural scale, not a deterioration. In the residual
+logarithm $x=\log t=-p\hat e$ the law reads $x_+=c_9(p)p^{-8}x^{9}+\dots$, and
+$c_9(p)p^{-8}\to21311/3048192000\approx7.0\times10^{-6}$ as $p\to\infty$. The same rescaling applied
+to \eqref{eq:arc-order} gives the limit $1/480$ for the decentered arc. The asymptotic regime is
+$|x|\lesssim1$, that is $|\hat e|\lesssim1/p$, for both.
+\end{remark}
+
+For the cubic specialization a short positive certificate proves the constant independently of series
+manipulations; it was the first version formalized in Lean. Let $v=t^{1/3}>0$ and set
+\begin{align*}
+D_v&=v^{6}+4v^{3}+1,\\
+H_v&=v^{8}+10v^{7}+55v^{6}+268v^{5}+466v^{4}+268v^{3}+55v^{2}+10v+1,\\
+\Theta_v&=(v^{2}+v+1)^{2}\sqrt{(v^{6}+52v^{3}+1)/D_v}.
+\end{align*}
+The exact identity
+\begin{equation}\label{eq:cubic-id}
+(v^{2}+v+1)^{4}(v^{6}+52v^{3}+1)-729v^{4}D_v=(v-1)^{6}H_v
+\end{equation}
+implies $\Theta_v\ge27v^{2}$ and gives
+\begin{equation}\label{eq:cubic-diff}
+q_9^{2}-\Bigl(\frac{v^{2}+v}{2}\Bigr)^{2}=\frac{(v-1)^{8}H_v}{108\,D_v\,(\Theta_v+27v^{2})},
+\end{equation}
+where every denominator is positive. Since $H_1=1134$,
+$q_9-\tfrac12(v^{2}+v)=\tfrac{7}{432}(v-1)^{8}+O((v-1)^{9})$.
+
+\begin{theorem}[Cubic certificate; formalized in Lean]\label{thm:cubic}
+For $X>0$ and $r=X^{1/3}$,
+\[ \lim_{u\to r,\ u\neq r}\frac{F_{3,X}(u)/r-1}{(u/r-1)^{9}}=\frac{7}{648}. \]
+\end{theorem}
+\begin{proof}
+With $y=u/r$ one has $v=1/y$. The exact difference $\Gamma_3(v^{3})-v$ equals
+$2(1-v)\bigl(q_9-\tfrac12(v^{2}+v)\bigr)/(1+2q_9)$. Substituting \eqref{eq:cubic-diff} and $v=1/y$
+factors $F_{3,1}(y)-1$ as $(y-1)^{9}$ times a continuous positive function with value $7/648$ at one.
+The scaling $F_{3,r^{3}}(ry)=rF_{3,1}(y)$ gives the limit.
+\end{proof}
+
+\subsection{Global convergence for every real degree greater than two}
+
+Local cancellation says nothing about distant starts. An independent sign argument covers the whole
+positive axis.
+
+\begin{theorem}[Global monotone convergence; formalized in Lean]\label{thm:global}
+For every real $p>2$, $X>0$ and $u_0>0$, the iteration $u_{n+1}=F_{p,X}(u_n)$ is defined, stays positive
+and converges to $r=X^{1/p}$. If $u_0\neq r$ it moves strictly toward $r$ without crossing it.
+\end{theorem}
+
+\begin{proof}
+We give the reduction to positive polynomial certificates; the complete integer coefficients are in the
+Lean source, and their structure was recomputed independently for this revision
+(Section~\ref{sec:evidence}). Define
+\begin{gather*}
+\cE=840p^{2}(3p+1),\qquad \cC=121p^{3}-185p^{2}-67p-1,\qquad \cD=373p^{3}+235p^{2}+129p+27,\\
+\cU=\cE+\cC w,\qquad \cV=\cE+\cD w,\qquad \mathcal{L}=\sqrt{\cU/\cV},\qquad \cR=1+\frac{(p-2)w\mathcal{L}}{12p}.
+\end{gather*}
+Then $\mathcal{L}=1/k_9$ and $q_9=\sqrt{t\cR}$. For $p>2$ and $w\ge0$ the quantities
+$\cU,\cV,\mathcal{L},\cR$ are positive. Put
+\[ \cJ=4\cU\cV-p\,\cE(\cD-\cC)w,\qquad \cA=1+\frac{(p-1)w\mathcal{L}}{12p},\qquad
+\cB=1-\frac{\cJ w\mathcal{L}}{24p\,\cU\cV}. \]
+A two-region certificate establishes
+\begin{align}
+0<w\le30p&\ \Longrightarrow\ \cR\cA^{2}>(1+w/4)\,\cB^{2},\label{eq:regionA}\\
+w\ge30p&\ \Longrightarrow\ \cB<0.\label{eq:regionB}
+\end{align}
+The elimination uses
+\begin{align*}
+\cK&=-1728p^{3}\cU\cV^{3}+48p(p-1)(3p-5)\,\cU^{2}\cV^{2}w-3p\,\cJ^{2}(4+w)w,\\
+\cM&=576p^{2}(3p-4)\,\cU\cV+144p^{2}\cJ(4+w)+4(p-2)(p-1)^{2}\,\cU^{2}w^{2}.
+\end{align*}
+There is a polynomial $\cP(p,w)$, of degree nine in $w$ and twenty-nine in $p$, with
+\[ (\cV^{2}\cM)^{2}\,\cU-\cK^{2}\,\cV=(p+1)\,w^{3}\,\cV\,\cP(p,w), \]
+and it has the exact Bernstein form
+\begin{equation}\label{eq:bernstein}
+(30p)^{9}\,\cP(p,w)=\sum_{j=0}^{9}w^{j}(30p-w)^{9-j}\,T_j(p-2),
+\end{equation}
+in which every $T_j$ is a polynomial with only positive coefficients, $345$ terms in all. Hence
+$\cP>0$ for $p>2$, $0\le w\le30p$. Positive-coefficient expansions of $\cM$ in $(p-2,w)$, and of $\cJ$
+and $w^{2}\cJ^{2}-576p^{2}\cU\cV^{3}$ in $(p-2,\,w-30p)$, with $49$, $24$ and $112$ terms respectively,
+provide the remaining signs. Rationalizing with $\mathcal{L}^{2}\cV=\cU$ proves \eqref{eq:regionA} and
+\eqref{eq:regionB}. These are exact identities and inequalities, not sampled signs.
+
+Since $(t+1)^{2}=4t(1+w/4)$ and $q_9^{2}=t\cR$, the two regions give
+\begin{equation}\label{eq:sign}
+2q_9\cA-(t+1)\cB>0\qquad(t>0,\ t\neq1).
+\end{equation}
+Define $\Delta_p(t)=\log\Gamma_p(t)-\log(t)/p$. Exact differentiation yields
+\begin{equation}\label{eq:Dprime}
+\Delta_p'(t)=-\frac{(p-1)(p-2)\,\bigl[2q_9\cA-(t+1)\cB\bigr]}{2p\,q_9\,[t+(p-1)q_9]\,[1+(p-1)q_9]}<0\qquad(t\neq1).
+\end{equation}
+With $\Delta_p(1)=0$ and $\Gamma_p(t)-1=(t-1)/(1+(p-1)q_9)$ this proves
+\[ t>1:\ 1<\Gamma_p(t)<t^{1/p},\qquad 0<t<1:\ t^{1/p}<\Gamma_p(t)<1 . \]
+Consequently $u<F_{p,X}(u)<r$ below the root and $r<F_{p,X}(u)<u$ above it. The orbit is monotone and
+bounded, its limit is positive, continuity makes it a fixed point, and $\Gamma_p(t)=1$ forces $t=1$.
+\end{proof}
+
+\subsection{Which degrees give a finite construction}\label{sec:degrees}
+
+Theorems~\ref{thm:arc}, \ref{thm:order9} and \ref{thm:global} are statements about real functions of a
+real parameter $p$. A drawing needs more: the residual $t=X/u^{p}$ must be \emph{constructed} at every
+step. The triangle stage constructs integer powers only. This subsection says exactly what follows.
+
+\begin{proposition}[Rational degrees are finite constructions]\label{prop:rational}
+Let $p=\mu/\nu$ with coprime positive integers $\mu,\nu$, and $X>0$. Then $X^{1/p}=(X^{\nu})^{1/\mu}$,
+and:
+\begin{enumerate}[label=(\roman*)]
+\item if $\mu\ge3$, every integer-degree protocol of this paper applies with degree $\mu$ and input
+  $X^{\nu}$. In particular the decentered and nested iterations converge monotonically from every
+  positive start, with orders five and nine, at no more than $10\mu+9$ and $10\mu+59$ traces per step
+  (Section~\ref{sec:work}). The input $X^{\nu}$ is fixed preparation: $\nu-1$ five-join products, once;
+\item if $\mu\in\{1,2\}$, the root $X^{\nu}$ or $\sqrt{X^{\nu}}$ is constructed exactly, by $\nu-1$
+  products and at most one mean proportional.
+\end{enumerate}
+For $p<0$ apply the above to $|p|$ and invert the output (five joins, once).
+\end{proposition}
+\begin{proof}
+The residual of the degree-$\mu$ problem with input $X^{\nu}$ is $t=X^{\nu}s^{\mu}$, built by the
+triangle stage with $\mu$ in place of $p$ from the prepared point $M=(0,H(1-X^{-\nu}))$. Theorems
+\ref{thm:arc} and \ref{thm:global} apply with real degree $\mu>2$ and positive input $X^{\nu}$, and
+their fixed point is $(X^{\nu})^{1/\mu}$.
+\end{proof}
+
+Two consequences are worth stating. First, the degree seen by the iteration is $\mu$, not $p$: the
+degree $p=3/2$ is handled as a cube root of $X^{2}$, inside the domain $\mu>2$ of the unmodified
+formulas although $3/2<2$. Second, the cost is governed by $\mu$: $p=355/113$ costs as much per step
+as degree $355$.
+
+The restriction to degree greater than two is real for the \emph{raw} formula. For $p=3/2$, $t=100$ one
+has $c_9=-25/2376$, $1+c_9w=-1/32$ and $1+b_9w/(1+c_9w)=-15947/25<0$, so $k_9$ is not real; Lean checks
+this counterexample. As a scalar statement the restriction can be removed:
+
+\begin{proposition}[Scalar extension to every nonzero real degree; formalized in Lean]\label{prop:scalar}
+For every real $p\neq0$, every $X>0$ and every start $u_0>0$ there is an explicit modification of
+\eqref{eq:F} that converges monotonically to $X^{1/p}$ without crossing it.
+\end{proposition}
+\begin{proof}
+Choose an integer $k\ge0$ with $p'=2^{k}|p|>2$. For $p>0$ put $v_0=u_0^{1/2^{k}}$, iterate
+$v_{n+1}=F_{p',X}(v_n)$ and report $u_n=v_n^{2^{k}}$; for $p<0$ put $v_0=u_0^{-1/2^{k}}$ and report
+$u_n=v_n^{-2^{k}}$. The reported start is exactly $u_0$. Theorem~\ref{thm:global} gives
+$v_n\to X^{1/p'}$, so $u_n\to X^{\pm2^{k}/p'}=X^{1/p}$. Positive integer powers preserve inequalities
+and inversion reverses them together with the direction of approach. For $p>2$ take $k=0$.
+\end{proof}
+
+Proposition~\ref{prop:scalar} is a change of variable and adds no geometric content beyond
+Proposition~\ref{prop:rational}: for irrational $p$ the step still needs the real power
+$v^{p'}$, which is a problem of the same nature as the root being sought. Irrational degrees can
+nevertheless be reached by the fast iterations through a rational approximation of $p$, with a
+controlled error:
+
+\begin{proposition}[Irrational degrees by rational approximation]\label{prop:irrational}
+Let $p>0$ be real, $X>0$, $r=X^{1/p}$, and let $\mu,\nu$ be positive integers with
+$\bigl|\nu/\mu-1/p\bigr|\le\eta$. Then $r'=X^{\nu/\mu}$ satisfies
+\[ \Bigl|\frac{r'}{r}-1\Bigr|\le e^{\eta|\log X|}-1 . \]
+If moreover $\tilde u>0$ satisfies $|\tilde u/r'-1|\le\eps_1$, then
+$|\tilde u/r-1|\le(1+\eps_1)\,e^{\eta|\log X|}-1$.
+\end{proposition}
+\begin{proof}
+$r'/r=X^{\nu/\mu-1/p}$, so $|\log(r'/r)|\le\eta|\log X|$, which gives the first bound since
+$1-e^{-y}\le e^{y}-1$ for $y\ge0$. For the second, $\tilde u/r=(\tilde u/r')(r'/r)$ lies between
+$(1-\eps_1)e^{-y}$ and $(1+\eps_1)e^{y}$ with $y=\eta|\log X|$, and
+$1-(1-\eps_1)e^{-y}\le(1+\eps_1)e^{y}-1$.
+\end{proof}
+
+\begin{remark}[Cost of the rational route]\label{rem:pi}
+Take $p=\pi$, $X=2$, $r=2^{1/\pi}=1.2468689889\ldots$ With $\mu/\nu=22/7$, $\eta\approx1.28\times10^{-4}$
+and the approximation error is at most $8.9\times10^{-5}$; a step costs at most $229$ traces (decentered)
+or $279$ (nested), after $30$ joins of preparation. With $\mu/\nu=355/113$, $\eta\approx2.70\times10^{-8}$
+and the error is at most $1.9\times10^{-8}$, but a step costs at most $3559$ or $3609$ traces after $560$
+joins of preparation. The direct subdivision of Section~\ref{sec:enclosure} reaches relative width
+$10^{-8}$ for the true exponent in at most $123$ traces. Since a convergent $\nu/\mu$ of $1/p$ has
+$\eta$ of order $\mu^{-2}$, the rational route needs $\mu$ of order $\eps^{-1/2}$ for accuracy $\eps$,
+while its step cost is linear in $\mu$. For irrational degrees the subdivision is therefore the
+recommended calculator, and the rational route is of interest only when a small $\mu$ is acceptable.
+\end{remark}
+
+A third route would approximate the real power $u^{p}$ inside each step by an inner subdivision. That
+is a two-level recursion whose outer iteration receives an inexact residual; its convergence would need
+a perturbation analysis that we have not carried out (Section~\ref{sec:conclusion}).
+
+\subsection{Algebraic character of the correction}\label{sec:algebraic}
+
+At $p=3$, $t=2$,
+\[ q_9^{2}=2+\frac{\sqrt{109/13}}{108},\qquad
+N_{\mathbb{Q}(\sqrt{109/13})/\mathbb{Q}}\bigl(q_9^{2}\bigr)=\frac{606419}{151632}. \]
+Neither this norm nor $109/13$ is a rational square, so $q_9$ has degree four over $\mathbb{Q}$. The
+correction $(2+2q_9)/(1+2q_9)$ is an invertible homography of $q_9$ and also has degree four. Hence
+the cubic correction is not a rational function of $t$ with rational coefficients, and cannot be written
+in this normalization with a single square root over $\mathbb{Q}$. This is an exact rational computation,
+not one of the Lean theorems.
+
+The argument does not exclude generalized algebraic or Hermite--Pad\'e approximants, transformed targets
+or other changes of variable. Algebraic approximants of arbitrary degree are established generalizations
+of Pad\'e approximation~\cite{sergeev}, and the coefficient matching of \eqref{eq:Yseries}--\eqref{eq:q9series}
+belongs to that methodology. Appendix~\ref{app:equiv} discusses what ``the same formula up to
+conjugacy'' can and cannot mean for the decentered arc.
