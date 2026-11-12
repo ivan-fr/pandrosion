@@ -1,22 +1,26 @@
 # Evidence and source availability
 
-The reference manuscript is [V27-NR](paper/Geometric_Root_Calculators_v27.pdf), supplied by the author for this cleanup. Files retained from the repository predate that manuscript; keeping them does not establish every V27 claim.
+The reference manuscript is [V27-NR](paper/Geometric_Root_Calculators_v27.pdf), supplied by the author for this cleanup. Files retained from the repository predate that manuscript; keeping them does not establish every V27 claim. The nested-radical modules and six further modules were added afterwards (see the table); some of the added statements (rational and irrational degrees, the closed form of the order-nine constant for every real degree, the efficiency comparison, negative degrees) belong to a revision of the manuscript that is not yet in this repository.
 
 | V27 topic | Available evidence | Scope and limits |
 |---|---|---|
 | Rectangle coordinates, reports, AK and centered AD | `RectangleGeometry`, `RectangleReports`, `RectangleRaw`, `RectangleNewton`, `RectangleDynamics` and their imports | Existing geometry and scalar developments; build with `lake build`. |
 | Projective AD | `RectangleProjective`, `RectangleProjectiveVerification` and their imports | Existing projective construction and scalar results. |
-| Decentered arc (Section 3) | `RectangleDecenteredArc`; `verification/decentered/verify.py` | Ten algebraic Lean certificates; symbolic identities and finite line/circle checks. The full global convergence argument is a written proof in the paper. |
-| Nested radicals (Section 4) | Manuscript only | `NestedRadicalCubic`, `NestedRadicalRealCertificate`, `NestedRadicalReal`, `NestedRadicalAllDegrees` and the reported 104-theorem audits were not present. No retained Lean file is represented as proving these results. |
-| Nested-radical work inventory and six-method comparison | Manuscript only | V27 macro checks, line/circle checks, independent comparison and validation records were not present. The retained four-method benchmark has a different scope. |
+| Decentered arc (Section 3) | `RectangleDecenteredArc`, `DecenteredArcGlobal`, `ArcOrderFive`; `verification/decentered/verify.py` | Ten algebraic Lean certificates; symbolic identities and finite line/circle checks. `DecenteredArcGlobal.global_convergence` proves convergence of the scalar iteration to `X^(1/p)` for every real `p > 2`, `X > 0` and positive start. `ArcOrderFive.order_five` proves the local limit `ê₊/ê⁵ → (p−2)(p²−1)(3p+1)/1440` in the logarithmic error. Both concern the scalar update; the correspondence between the drawn construction and that update is not formalized. |
+| Nested radicals (Section 4) | `NestedRadicalCubic`, `NestedRadicalRealCertificate`, `NestedRadicalReal`, `NestedRadicalAllDegrees`, `NestedOrderNine`; `validation/nested_radicals/Audit.lean` | The four author modules (104 theorems) are now present, unchanged from the author's working copy: exact order nine in the cubic case, global convergence for real `p > 2`, and the extension to every nonzero real degree. `NestedOrderNine.order_nine` adds the local limit `ê₊/ê⁹ → c₉(p)` for every real `p > 2`, with `c₉` defined in `DegreesEfficiency`. Scalar statements only; higher-order remainder terms are not formalized. |
+| Contact lemma (Section 2) | `ContactLimit` | `contact_limit`: a support whose contact with the exact support has order `ω ≥ 1` and coefficient `C` gives the logarithmic-error limit `−C/p²` at order `ω + 1`, stated in the variable `x = log t`. Includes the lemma that a finite exponential sum with `N` vanishing moments is `O(x^N)`. |
+| Degrees, constants and efficiency (revised manuscript) | `DegreesEfficiency`, `DegreesNested`; `validation/orders_degrees_efficiency/Audit.lean` | Positivity and special values of `c₉(p)`; rational degrees by reduction to an integer degree; an error bound for irrational degrees through a rational approximation; arithmetic totals of the trace inventories; comparison of efficiency indices, including the nested/decentered crossover between degrees 12 and 13; start and inversion identities for subdivision with negative degrees. The trace counts themselves are inputs: only their totals and the resulting inequalities are checked, not the ruler-and-compass protocols. |
+| Nested-radical work inventory and six-method comparison | Manuscript; totals in `DegreesEfficiency` | V27 macro checks, line/circle checks, independent comparison and validation records were not present. The retained four-method benchmark has a different scope. Lean checks only the arithmetic of the totals. |
 | Subdivision (Section 6) | `GeometricSubdivision`; `validation/geometric_subdivision/Audit.lean` | Retained real-degree bracket, interval invariant, rational readout and width results. The seven-theorem audit can be rerun. V27's separate geometric/numerical verifier was not present. |
 | Manuscript and figures | Author-supplied PDF | V27 LaTeX, bibliography, figure generators and `build.sh` were not present; this repository cannot rebuild the PDF. |
 
 ## Retained dependency boundary
 
-`LeanMath.lean` imports the projective verification, decentered certificates and subdivision modules. Other retained Lean files are their transitive imports, including common scalar convergence results. The decentered certificate file now imports mathlib directly instead of the unrelated fixed-circle development; its declarations and proofs are unchanged.
+`LeanMath.lean` imports the projective verification, decentered certificates and subdivision modules, and the nested-radical, order and degree modules added afterwards. Other retained Lean files are their transitive imports, including common scalar convergence results. The decentered certificate file now imports mathlib directly instead of the unrelated fixed-circle development; its declarations and proofs are unchanged.
 
-The source supplement required to complete V27 reproduction must include the four nested-radical modules and their imports, pinned build environment, audit scripts and records, manuscript sources, and the V27 symbolic/geometric/comparison verifiers. None has been reconstructed or claimed as verified by this cleanup.
+The four nested-radical modules and their imports have since been added and build in the pinned environment. Completing V27 reproduction still requires the manuscript sources and the V27 symbolic/geometric/comparison verifiers, which have not been reconstructed here.
+
+Not formalized: the correspondence between ruler-and-compass constructions and the scalar updates for the decentered arc and nested radicals, the trace-counting protocols, higher-order remainder terms beyond the leading constants, the classical constants of the comparison table, and the degree-four computation.
 
 ## Numerical checks
 
@@ -24,7 +28,7 @@ Run `python3 verification/decentered/verify.py` after installing `requirements.t
 
 ## Formal checks
 
-`lake build` compiles every retained module through the root imports. `python3 scripts/audit_lean.py` additionally prints transitive axioms for the ten decentered certificates and seven subdivision theorems, rejecting admitted proofs or nonstandard axioms. A successful audit of this subset makes no assertion about the absent nested-radical sources.
+`lake build` compiles every retained module through the root imports. `python3 scripts/audit_lean.py` additionally prints transitive axioms for the ten decentered certificates, seven subdivision theorems, all 104 theorems of the four nested-radical modules and all 125 theorems of the six added modules, rejecting admitted proofs or nonstandard axioms. The audit establishes that these statements are proved from the standard axioms; whether each statement matches the manuscript's wording is a matter of reading the Lean statements.
 
 ## Merge configuration
 

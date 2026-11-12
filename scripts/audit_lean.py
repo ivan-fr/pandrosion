@@ -6,7 +6,12 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = {'propext', 'Classical.choice', 'Quot.sound'}
 subprocess.run(['lake', 'build'], cwd=ROOT, check=True)
-for name, expected in [('decentered', 10), ('geometric_subdivision', 7)]:
+for name, expected in [
+    ('decentered', 10),
+    ('geometric_subdivision', 7),
+    ('nested_radicals', 104),
+    ('orders_degrees_efficiency', 125),
+]:
     result = subprocess.run(
         ['lake', 'env', 'lean', f'validation/{name}/Audit.lean'],
         cwd=ROOT, check=True, text=True, stdout=subprocess.PIPE,
