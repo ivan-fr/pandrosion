@@ -1,0 +1,11 @@
+import LeanMath.Papers.RectangleDecenteredArc
+#print axioms LeanMath.Papers.RectangleDecenteredArc.rad_one
+#print axioms LeanMath.Papers.RectangleDecenteredArc.reciprocal_radicand
+#print axioms LeanMath.Papers.RectangleDecenteredArc.square_certificate
+#print axioms LeanMath.Papers.RectangleDecenteredArc.sign_decomposition
+#print axioms LeanMath.Papers.RectangleDecenteredArc.derivative_numerator
+#print axioms LeanMath.Papers.RectangleDecenteredArc.circle_height
+#print axioms LeanMath.Papers.RectangleDecenteredArc.report_identity
+#print axioms LeanMath.Papers.RectangleDecenteredArc.correction_direction
+#print axioms LeanMath.Papers.RectangleDecenteredArc.reciprocal_correction
+#print axioms LeanMath.Papers.RectangleDecenteredArc.cubic_error_coefficient

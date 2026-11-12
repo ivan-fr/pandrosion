@@ -1,49 +1,16 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Explore geometric root constructions: Pandrosion, pencils of lines, arcs and a fixed circle."><title>Pandrosion — Geometry workshop</title><link rel="stylesheet" href="style.css"></head>
-<body>
-<header><a class="brand" href="./">PANDROSION <span>Geometry workshop</span></a><nav aria-label="Resources"><a href="gallery/geometric-subdivision.html">Real exponents · Geometric subdivision ↗</a><a href="https://github.com/ivan-fr/pandrosion">Code & Lean proofs ↗</a><a href="https://github.com/ivan-fr/pandrosion/blob/main/paper/reciprocal_geometry_v20/Reciprocal_Root_Geometry_v20.pdf">Read the paper ↗</a></nav></header>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pandrosion — Geometric Root Calculators</title>
+<style>body{font:18px/1.6 system-ui,sans-serif;max-width:48rem;margin:4rem auto;padding:0 1.5rem;color:#18252b}a{color:#165cab}h1{line-height:1.2}small{color:#43535c}</style>
 <main>
-<div class="intro"><p class="eyebrow">FROM CONSTRUCTION TO ITERATION</p><h1>Construct a root, step by step.</h1><p>Follow the lines and arcs, change the degree, and compare the geometric readout. Enter p and X: setup is automatic, then you advance one iteration at a time. The result is the <strong>pth root of X</strong>.</p></div>
-<section class="controls" aria-label="Construction parameters">
-<label class="method">Construction<select id="method"><optgroup label="V20 protocols"><option value="AK">Pandrosion AK · order 2 · p ≤ 32</option><option value="AD">Pandrosion AD · order 3 · p ≤ 32</option><option value="projective">Projective AD [2/1] · order 4 · p ≤ 32</option><option value="arc">Decentered-arc AD · order 5 · p ≤ 32</option><option value="halley">Pencils + Halley · order 3 · p ≤ 32</option><option value="pade">Pencils + Padé [2/2] · order 5 · p ≤ 32</option><option value="circle">Inverse fixed circle [2/2] · order 5</option></optgroup><optgroup label="Explorations · binary exponentiation"><option value="AKfast" selected>Fast exponentiation + AK · order 2</option><option value="ADfast">Fast exponentiation + AD · order 3</option><option value="projectiveFast">Fast exponentiation + Projective AD [2/1] · order 4</option><option value="arcFast">Fast exponentiation + decentered arc · order 5</option></optgroup></select></label>
-<label>Degree p<input id="degree" type="number" min="3" max="1000000" step="1" value="3"></label>
-<label>Number X<input id="target" type="number" min="0" step="any" value="2"></label><button id="calculate">Start over</button>
-<label class="internal-input">Internal target<input id="working-target" type="number" min="0" step="any" value="2"></label>
-<label class="internal-input">State s<input id="state" type="number" min="0" step="any" value="0.75"></label>
-<label class="internal-input" id="chart-label">Circle setup<select id="chart"><option value="compact">Compact (chart adapted to p)</option><option value="uniform">Uniform ρ = 1/3 · V20</option></select></label>
-</section>
-<section id="layout-controls" class="controls" aria-label="Geometric layout">
-<label>Band for a fresh start<select id="init-band"><option value="wide" selected>Wide · 1/4 to 4</option><option value="compact">Conservative · 1 to 2</option></select></label>
-<label>Rectangle width<input id="rect-width" type="number" min="0.01" max="1000" step="any" value="2"></label>
-<label>Rectangle height<input id="rect-height" type="number" min="0.01" max="1000" step="any" value="4"></label>
-<button id="adapt-rectangle">Adapt rectangle</button>
-</section><p id="layout-status"></p>
-<div class="toolbar"><label>Example<select id="example"><option value="base">Cube root of 2 · start at 3/4</option><option value="near">X near 1</option><option value="initial">Initial center at infinity</option><option value="final">Final center at infinity</option><option value="outside">Outside the circle domain</option></select></label><button id="reset">Reset</button><button id="initialize" title="Choose a certified fresh start and calibrate the target; distinct from renormalizing an existing state.">Initialize and calibrate</button><button id="normalize">Renormalize</button><button id="normalize-optimal" title="Optimal among the tested dyadic scales according to the gallery conditioning score.">Optimal adaptive renormalization</button><button id="iterate" class="primary">One iteration →</button><span id="scaling"></span></div>
-<p id="research-notice" class="notice">Seven V20 protocols and four experimental post-V20 explorations. Adaptive normalization is optimal among the tested dyadic scales according to the gallery conditioning score.</p><p id="initialization-status" class="notice" hidden></p><p id="adaptive-status"></p><p id="fast-status"></p><p id="error" role="alert" hidden></p><p id="warning" class="notice" hidden></p>
-<section class="answer-card" aria-live="polite"><span id="answer-label">pth root of X</span><strong id="answer">—</strong><div id="iteration-controls"></div><p id="answer-note"></p></section>
-<details id="advanced"><summary>Settings, proofs and manual exploration</summary><label class="manual-toggle"><input id="exploration" type="checkbox"> Control the calculation steps manually</label><div id="internal-controls" class="controls"></div></details>
-<section class="workspace" aria-label="Interactive construction">
-<div class="drawing"><div class="panel-head"><h2 id="drawing-title">Overview</h2><label class="view-label">View<select id="view"><option value="plane">Plane</option><option value="sphere">Stereographic sphere</option></select></label></div><canvas id="overview" aria-label="Geometric view of the construction" role="img"></canvas><div id="rotation" hidden><p class="drag-hint">Drag the sphere with a mouse or one finger to rotate it.</p><label>Rotation<input id="yaw" type="range" min="-180" max="180" value="-25"></label><label>Tilt<input id="pitch" type="range" min="-80" max="80" value="20"></label></div></div>
-<div class="drawing detail"><div class="panel-head"><h2>Readout in the rectangle</h2><label>Frame<select id="detail-frame"><option value="auto">Magnified readout · auto</option><option value="rectangle">Full rectangle</option></select></label></div><canvas id="detail" aria-label="Detail of points P and P plus in the rectangle" role="img"></canvas></div>
-</section>
-<div class="legend"><span><i class="fixed"></i>Setup</span><span><i class="previous"></i>Previous strokes</span><span><i class="active"></i>Current operation</span><span><i class="circle"></i>Circle / arc</span><span><i class="result"></i>P⁺ readout</span></div>
-<section class="steps" aria-label="Steps"><div class="step-tools"><button id="back" aria-label="Previous step">←</button><button id="play">Play steps</button><button id="forward" aria-label="Next step">→</button><label>Step <output id="stage-number">0</output><input id="stage" type="range" min="0" max="8" value="8"></label></div><p id="step-text" aria-live="polite"></p></section>
-<section class="readouts" aria-label="Results"><div><span>Reciprocal root a</span><strong id="root-value">—</strong></div><div><span>Geometric readout s⁺</span><strong id="next-value">—</strong></div><div><span>Relative error after this step</span><strong id="error-value">—</strong></div></section>
-<p id="protocol" class="protocol"></p>
-<details><summary>Understanding the domain and checks</summary><p id="scope"></p><p id="check"></p><p>Points are computed from line and circle intersections. An independent formula then checks the readout. Browser calculations use about 16 significant digits: a displayed zero error does not prove exact equality. Distant centers and tangencies can reduce accuracy.</p><p>On the sphere, a line becomes a circle through the north pole N. Directions at infinity remain distinct in the calculation, even though they map to the same point N. This representation is not a physical protocol with the same construction cost.</p></details>
-<section class="gallery"><p class="eyebrow">FURTHER EXPLORATIONS</p><h2>From the first figures to stereographic views.</h2><p>The seven protocols from the paper are available above. These additional demonstrations preserve the earlier constructions and their original conventions.</p><div class="gallery-links">
-<a href="gallery/geometric-subdivision.html"><strong>Real exponents · Geometric subdivision</strong><span>Successive geometric means and weighted root bounds</span></a>
-<a href="gallery/original.html"><strong>Proportional rectangle</strong><span>The original construction and its triangles</span></a>
-<a href="gallery/moving.html"><strong>Moving support AK / AD</strong><span>The correction in the rectangle</span></a>
-<a href="gallery/general.html"><strong>General degree</strong><span>The power chain</span></a>
-<a href="gallery/projective.html"><strong>Projection AD [2/1]</strong><span>The support defined by a projection center</span></a>
-<a href="gallery/pencils.html"><strong>Two pencils of lines</strong><span>Halley and Padé using joins</span></a>
-<a href="gallery/bilateral.html"><strong>Bounds and geometric mean</strong><span>Two-sided enclosure and semicircle</span></a>
-<a href="gallery/stereographic.html"><strong>Stereographic projection</strong><span>The first constructions on the sphere</span></a>
-<a href="gallery/fixed-circle-plane.html"><strong>Fixed circle: plane</strong><span>Setup, branch and steps</span></a>
-<a href="gallery/fixed-circle-stereo.html"><strong>Fixed circle: plane and sphere</strong><span>Synchronized views and cases at infinity</span></a>
-</div></section>
-<footer><p>Proofs, simulations and visualizations have different scopes. The paper and repository specify the assumptions and limits of the formalization.</p><a href="https://github.com/ivan-fr/pandrosion">Ivan Besevic · Pandrosion · Code, paper and checks</a></footer>
-</main><script type="module" src="app.js"></script>
-</body></html>
+<h1>Geometric Root Calculators</h1>
+<p>A ninth-order cubic construction and real-degree root solvers</p>
+<p><small>Ivan Besevic · V27-NR · 18 October 2026 · Research preprint</small></p>
+<p><a href="https://github.com/ivan-fr/pandrosion/blob/main/paper/Geometric_Root_Calculators_v27.pdf">Read the paper</a></p>
+<p><a href="https://github.com/ivan-fr/pandrosion">Mathematical sources and reproduction instructions</a></p>
+<p>The repository contains retained rectangle and subdivision proofs and decentered construction checks. The full V27 nested-radical source supplement is currently missing.</p>
+<p><a href="https://github.com/ivan-fr/pandrosion/blob/main/EVIDENCE.md">Evidence and source availability</a></p>
+</main>
+</html>

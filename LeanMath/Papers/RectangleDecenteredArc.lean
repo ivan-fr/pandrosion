@@ -1,4 +1,5 @@
-import LeanMath.Papers.RectangleFixedCircle
+import Mathlib.Data.Real.Basic
+import Mathlib.Tactic
 
 /-! Algebraic certificates for the decentered AD arc. The analytic global
 convergence proof and full geometric protocol are stated in the paper. -/

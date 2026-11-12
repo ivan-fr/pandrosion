@@ -1,6 +1,6 @@
 name = "lean_math"
 version = "0.1.0"
-defaultTargets = ["LeanMath", "research", "lean"]
+defaultTargets = ["LeanMath"]
 
 [[require]]
 name = "mathlib"
@@ -9,11 +9,3 @@ rev = "v4.33.1"
 
 [[lean_lib]]
 name = "LeanMath"
-
-[[lean_lib]]
-name = "research"
-globs = ["research.+"]
-
-[[lean_lib]]
-name = "lean"
-globs = ["lean.+"]

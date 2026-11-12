@@ -1,21 +1,26 @@
-"""Recheck the V19 audit and reject any axiom outside Lean's standard three."""
+"""Build retained sources and audit the explicitly documented theorem subset."""
 from pathlib import Path
 import re
 import subprocess
 
-allowed = {'propext', 'Classical.choice', 'Quot.sound'}
-for name, expected in [('Audit', 149), ('BackgroundAudit', 11)]:
-    p = subprocess.run(['lake', 'env', 'lean', f'validation/rectangle_v19/{name}.lean'],
-                       text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    print(p.stdout)
-    p.check_returncode()
-    if 'sorryAx' in p.stdout:
-        raise SystemExit('Unproved declaration in audit')
-    matches = re.findall(r"depends on axioms:\s*\[([^\]]*)\]|does not depend on any axioms", p.stdout)
-    if len(matches) != expected:
-        raise SystemExit(f'{name}: expected {expected} audit records, found {len(matches)}')
-    for axioms in matches:
-        extra = {x.strip() for x in axioms.split(',') if x.strip()} - allowed
+ROOT = Path(__file__).resolve().parents[1]
+ALLOWED = {'propext', 'Classical.choice', 'Quot.sound'}
+subprocess.run(['lake', 'build'], cwd=ROOT, check=True)
+for name, expected in [('decentered', 10), ('geometric_subdivision', 7)]:
+    result = subprocess.run(
+        ['lake', 'env', 'lean', f'validation/{name}/Audit.lean'],
+        cwd=ROOT, check=True, text=True, stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+    print(result.stdout)
+    records = re.findall(
+        r"depends on axioms:\s*\[([^\]]*)\]|does not depend on any axioms",
+        result.stdout,
+    )
+    if len(records) != expected or 'sorryAx' in result.stdout:
+        raise SystemExit(f'{name}: incomplete audit or admitted proof')
+    for record in records:
+        extra = {a.strip() for a in record.split(',') if a.strip()} - ALLOWED
         if extra:
-            raise SystemExit(f'Unexpected axioms: {extra}')
+            raise SystemExit(f'{name}: unexpected axioms {extra}')
     print(f'{name}: {expected} declarations passed the axiom audit.')

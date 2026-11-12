@@ -1,18 +1,19 @@
 cff-version: 1.2.0
-message: "Please cite Geometry V25 for the geometric constructions; the analog V30 companion documents the circuit study."
+message: "Please cite the accompanying V27-NR research preprint."
 type: software
-title: "Pandrosion: geometric root calculators and analog prototypes"
+title: "Pandrosion: geometric root calculators"
 authors:
   - family-names: Besevic
     given-names: Ivan
 repository-code: "https://github.com/ivan-fr/pandrosion"
-url: "https://ivan-fr.github.io/pandrosion/"
+license: MIT
 preferred-citation:
   type: article
-  title: "Geometric Root Calculators: Two Fifth-Order Solvers and Their Construction Cost"
+  title: "Geometric Root Calculators: A ninth-order cubic construction and real-degree root solvers"
   authors:
     - family-names: Besevic
       given-names: Ivan
   year: 2026
-  version: "25"
-  url: "https://github.com/ivan-fr/pandrosion/tree/main/paper/reciprocal_geometry_v25"
+  month: 10
+  version: "27-NR"
+  url: "https://github.com/ivan-fr/pandrosion/blob/main/paper/Geometric_Root_Calculators_v27.pdf"

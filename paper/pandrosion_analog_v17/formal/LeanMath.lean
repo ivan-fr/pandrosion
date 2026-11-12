@@ -1,1 +1,0 @@
-import LeanMath.Papers.RectangleVerification
