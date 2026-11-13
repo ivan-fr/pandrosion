@@ -1,0 +1,397 @@
+% =========================================================================
+\section{Attribution and algebraic approximation}\label{sec:attribution}
+
+High local order and geometric iteration are not new principles. Traub organizes classical iteration
+formulas and their error terms~\cite{traub61,traub64}. Gander discusses Halley's method and radical
+corrections~\cite{gander}; Scavo and Thoo analyze its geometry~\cite{scavo}. Melman connects geometry
+with global convergence, and Amat, Busquier and Guti\'errez develop geometric constructions for
+nonlinear iteration~\cite{melman,amat}. Here AK is Newton under inversion and centered AD is Halley,
+realized in the shared rectangle; their scalar formulas are classical. Reading all supports as
+approximations of one function $\kappa_*$ (Lemma~\ref{lem:contact}) is the usual principle that the
+order of an iteration is the order of contact of its iteration function with the exact one, specialized
+to the rectangle.
+
+The decentered and nested supports are algebraic corrections defined by explicit positive radicals.
+Algebraic approximants generalize rational approximation and form an established
+methodology~\cite{sergeev,shafer}; the two-radical coefficient matching of Section~\ref{sec:nested}
+belongs to it. Section~\ref{sec:algebraic} proves a degree-four distinction at the cubic
+specialization, and Appendix~\ref{app:equiv} gives a specified quadratic comparison for the decentered
+support. The subdivision mean proportional is Euclid's~\cite{euclid}; its final readout is an ordinary
+Pad\'e approximant~\cite{dlmf,baker}, with the enclosure and width proved in
+Section~\ref{sec:enclosure}. Counting particular constructions follows the concerns of
+g\'eom\'etrographie and nomography~\cite{lemoine,ocagne}, and the efficiency index is
+Ostrowski's~\cite{ostrowski}.
+
+What this paper contributes is the stated rectangle realizations, their domains, the scalar convergence
+proofs with explicit constants, the protocol bounds, and the classification of degrees.
+
+% =========================================================================
+\section{Evidence and reproducibility}\label{sec:evidence}
+
+\begin{table}[h]
+\centering\small
+\caption{Status of each claim. ``Lean'': checked by the Lean kernel, in the environments described below. ``CAS'':
+exact identity between polynomials or rational functions, recomputed with a computer-algebra system.
+``Numerical'': high-precision evaluation, not a proof.}\label{tab:evidence}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Claim & Domain & Status\\
+\midrule
+Lemma~\ref{lem:contact}, Table~\ref{tab:supports} & analytic supports & Lean (limit form); constants of AK, AD and projective AD: CAS\\
+Theorem~\ref{thm:arc} & real $p>2$ & Lean (global convergence and the fifth-order limit); $O(e^{7})$ remainder written\\
+Theorem~\ref{thm:order9} & real $p>2$ & Lean (limit $\hat e_+/\hat e^{\,9}\to c_9(p)$, positivity, $c_9(3)$); $O(\hat e^{\,11})$ remainder written\\
+Theorem~\ref{thm:cubic} & $p=3$, $X>0$ & Lean\\
+Theorem~\ref{thm:global} & real $p>2$ & Lean; certificate structure also CAS\\
+Proposition~\ref{prop:rational} & rational $p$ & Lean, for both radical supports\\
+Proposition~\ref{prop:scalar} & real $p\neq0$ (scalar) & Lean\\
+Proposition~\ref{prop:irrational} & real $p>0$ & Lean\\
+Proposition~\ref{prop:inventory} & integer $p\ge3$ & written inventory; totals Lean; incidence checks\\
+Proposition~\ref{prop:index}, Table~\ref{tab:index} & real and integer $p\ge3$ & Lean; table values numerical\\
+Tables~\ref{tab:cubic}, \ref{tab:p20} & stated examples & numerical\\
+Proposition~\ref{prop:enclosure} & $X\ge1$, $p\ge1$ & written proof; scalar part in Lean (retained)\\
+Proposition~\ref{prop:allp} & real $p\neq0$, $X>0$ & Lean (invariant, gap, inversion)\\
+Degree four (Section~\ref{sec:algebraic}) & $p=3$, $t=2$ & exact rational computation\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Lean.}
+The nested-radical results have two project Docker/Lean audits totalling 104 theorems: 38 cubic, 14
+real-parameter certificates, 44 real-parameter analysis and 8 degree-extension theorems. They use only
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}, with no admitted proof. The
+sources, pinned toolchain, hashes and audit records accompany the paper~\cite{lean4,mathlib,supplNR}.
+The four nested-radical modules are those of V27-NR; for this revision they were recompiled from
+source in a separate environment (Lean~4.33.1, Mathlib~v4.33.1, Mathlib itself built from source), the
+count of 104 theorems was confirmed, and the main theorems (global convergence, the extension to every
+nonzero degree and the cubic limit) were checked to depend on these three axioms only. This revision adds six modules, 125 theorems in all, with the same axioms and no admitted
+proof.
+\begin{itemize}
+\item \texttt{DecenteredArcGlobal} (30): Theorem~\ref{thm:arc}, global monotone convergence of the
+  decentered arc for every real $p>2$, by the sign argument of Section~\ref{sec:arc}.
+\item \texttt{ContactLimit} (12): Lemma~\ref{lem:contact} in limit form, and the analytic tool used for
+  the local orders: a finite sum $\sum_jc_je^{\lambda_jx}$ whose first $N$ moments
+  $\sum_jc_j\lambda_j^{n}$ vanish is $O(x^{N})$.
+\item \texttt{NestedOrderNine} (21): Theorem~\ref{thm:order9}, the limit
+  $\hat e_+/\hat e^{\,9}\to c_9(p)$ for every real $p>2$. The expansion \eqref{eq:Yseries} of $Y$
+  through $w^{4}$ is an exponential sum of 27 terms with twelve vanishing moments; the nested radical
+  is expanded algebraically and the result is identified with \eqref{eq:D4}.
+\item \texttt{ArcOrderFive} (10): the fifth-order limit \eqref{eq:arc-order} with its constant.
+\item \texttt{DegreesEfficiency} (47), depending on Mathlib only: the exact contact identity; the
+  positivity of $N_9$ and $c_9$, $c_9(3)=7/648$ and $c_9(p)=\tfrac12(p-1)p^{7}D_4(1/p)$;
+  Propositions~\ref{prop:irrational} and~\ref{prop:index}, including $12<\text{crossover}<13$ from
+  $9^{129}<5^{179}$ and $5^{189}<9^{139}$; the trace totals of Section~\ref{sec:work}; the invariant of
+  Proposition~\ref{prop:allp}.
+\item \texttt{DegreesNested} (5): Proposition~\ref{prop:rational} for the nested support and for the
+  decentered arc, without hypothesis and with integer powers only.
+\end{itemize}
+The local orders are stated as limits of $e_+/e^{\,\omega+1}$; the refinements $O(e^{7})$ and
+$O(\hat e^{\,11})$ of the remainders, which follow from oddness, are written arguments.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+Lean module & Certified scope\\
+\midrule
+\texttt{NestedRadicalCubic} & Cubic global convergence and the relative-error limit $7/648$, for every
+positive target.\\
+\texttt{NestedRadicalRealCertificate} & Exact polynomial identities and positive-coefficient
+certificates.\\
+\texttt{NestedRadicalReal} & Original formula for every real $p>2$; support equivalence and the
+small-degree counterexample.\\
+\texttt{NestedRadicalAllDegrees} & Degree doubling, preservation of the reported start and convergence
+for every $p\neq0$.\\
+\texttt{DecenteredArcGlobal} & New: global convergence of the decentered arc, real $p>2$.\\
+\texttt{ContactLimit} & New: contact lemma in limit form; exponential sums with vanishing moments.\\
+\texttt{NestedOrderNine} & New: order nine with constant $c_9(p)$ for every real $p>2$.\\
+\texttt{ArcOrderFive} & New: order five of the decentered arc with its constant.\\
+\texttt{DegreesEfficiency} & New: contact identity, constants, irrational degrees, efficiency ordering
+and crossover, trace totals, subdivision start for every positive degree.\\
+\texttt{DegreesNested} & New: rational degrees for both radical iterations.\\
+\texttt{GeometricSubdivision} & Scalar interval invariant, real-degree rational bracket and width;
+stored seven-declaration audit, not recompiled for this revision~\cite{supplS}.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Computer algebra and numerics for this revision.}
+The accompanying script \texttt{verify\_v28.py} recomputes, with exact rational arithmetic: the
+identities \eqref{eq:arc-der} (at sample points), \eqref{eq:arc-id}, \eqref{eq:cubic-id}; the series
+\eqref{eq:Yseries}--\eqref{eq:D4} and the constants of Table~\ref{tab:supports}; the positivity of
+$N_9(2+\rho)$; the factorization defining $\cP$ in Theorem~\ref{thm:global}, its degrees, and the
+positivity and term counts $345$, $49$, $24$, $112$ of the four certificates; the Pad\'e identity and
+the width equality \eqref{eq:width}; and the appendix formulas. Numerically it checks
+\eqref{eq:Dprime} against a numerical derivative, the constant $c_9(p)$ against the iteration
+at $p=2.5,3,4,7,20$, the monotone enclosure $\min(u,r)<F_{p,X}(u)<\max(u,r)$ on a grid
+$p\in[2.001,10^{4}]$, $t\in[10^{-12},10^{12}]$, and regenerates Tables~\ref{tab:cubic}, \ref{tab:index},
+\ref{tab:p20} and \ref{tab:depth} (working precision 300 to 2600 digits).
+
+\paragraph{Checks retained from V27.}
+The nested verifier checks coefficient identities, the cubic positive certificate, the degree-four
+specialization, eight exact local series and 80 residual probes at 140 digits. The illustrative first
+step is checked at 110 digits without using the cube root to place points. The nested inventory has 64
+exact rational macro checks and 60 full line/circle evaluations at 160 digits, including support
+placement and report; four additional root-stop cases are checked. The subdivision verifier checks
+three exact polynomial identities, 188 rational rail incidences, four rational depth certificates, the
+outward-rounded $p=37.5$ example and 256 numerical enclosures at 100 digits~\cite{supplS}. The complete
+source package contains \texttt{build.sh}, \texttt{verify.py}, the independent comparison script and
+validation records. Finite numerical probes supplement proofs and do not certify rounded
+implementations. The gallery contains companion interactive views; it does not certify finite drawing
+error.
+
+\paragraph{Figures.}
+All figures are generated by \texttt{genfigs.py} from the formulas of the paper; the script asserts, for
+each drawing, that the constructed point $P_+$ agrees with the scalar update to $10^{-12}$.
+
+% =========================================================================
+\section{Scope and limits}\label{sec:limits}
+
+The following limits apply to the whole paper and are stated here once.
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{Approximation.} Every calculator produces a convergent sequence or a finite enclosure. No
+  root is claimed to be exactly constructible in finitely many operations.
+\item \textbf{Finite steps.} The fast iterations are finite constructions for integer and rational
+  degrees only, at a cost governed by the numerator $\mu$. For irrational $p$ the convergence theorems
+  are scalar statements; the geometric calculator is the subdivision.
+\item \textbf{Counts.} Trace counts are upper bounds for the specified protocols under the convention of
+  Section~\ref{sec:convention}, which does not charge fixed preparation or decisions and weighs a join
+  and an arc equally. They are not minimal, and they are not times, energies or drawing sizes. They are
+  written inventories, not a formal cost semantics.
+\item \textbf{Efficiency.} The index of Proposition~\ref{prop:index} is asymptotic and inherits the
+  previous limit; a shorter nested protocol would lower the crossover degree.
+\item \textbf{Real drawings.} Exact incidences, the scalar real iteration and a physically inaccurate
+  drawing are different objects. Conditioning, finite drawing error and floating-point behaviour are not
+  analysed.
+\item \textbf{Priority.} We have not identified the decentered or nested formulas with a prior formula,
+  but a bounded comparison cannot establish priority, and different explicit formulas may be equivalent under changes of variable
+  (Appendix~\ref{app:equiv}).
+\item \textbf{Formalization.} Lean covers exactly the entries so marked in Table~\ref{tab:evidence}.
+  The three convergence theorems and their local orders are formalized. Not formalized: the constants
+  of the classical supports in Table~\ref{tab:supports}, the higher-order remainders, the degree-four
+  computation of Section~\ref{sec:algebraic} and Appendix~\ref{app:equiv}. For the inventories Lean checks
+  the arithmetic of the totals, not the geometric protocols.
+\end{enumerate}
+
+% =========================================================================
+\section{Conclusion and open questions}\label{sec:conclusion}
+
+Changing one line in the Pandrosion rectangle moves the iteration from order two to order nine, and the
+order is read off the contact of that line's slope with a single function $\kappa_*$. Two radical
+supports extend the classical ones: a decentered arc of order five at the mobile cost of Halley's
+construction, and a nested-radical support of order exactly nine for every real $p>2$, with constant
+$c_9(p)$, globally monotone. In trace counts the decentered arc is the most efficient support for
+$p\le12$ and the nested support for $p\ge13$. These iterations are finite constructions for rational
+degrees; for a general real degree the power-free subdivision with a Pad\'e readout gives a certified
+enclosure of relative width at most $z^{5}/256$ in $15n+63$ traces.
+
+Open questions:
+\begin{enumerate}[label=\arabic*.]
+\item Formalize a cost semantics for the drawing protocols, so that the inventories, and not only
+  their totals, are machine-checked.
+\item Shorten the nested inventory. Its overhead over the decentered arc is $50$ traces, of which $19$
+  build the two arguments $K$ and $\rho_9$ and $20$ the two mean proportionals; any saving lowers the
+  crossover degree $13$.
+\item Find supports of contact five to seven. Is there a single-radical support, with one mean
+  proportional, of order greater than five?
+\item Analyse the two-level recursion in which the residual $u^{p}$ of an irrational degree is itself
+  enclosed by subdivision: which inner accuracy preserves the outer order?
+\item Analyse conditioning and finite drawing error.
+\item Compare the exact formulas with earlier algebraic approximants under specified transformations.
+\end{enumerate}
+
+% =========================================================================
+\FloatBarrier
+\appendix
+\section{Classical rectangle supports}\label{app:classical}
+
+\subsection{AK and centered AD: orders two and three}
+
+\emph{AK: a fixed line.} Prepare $K=(W(1-X/p),0)$. The support $AK$ has slope $Hp/(WX)$, so
+$\kappa=p$ and $\Tm_{\mathrm{AK}}(s)=ps/(p-1+t)$, Newton's method under inversion. It has order two and
+converges from every positive start.
+
+\emph{AD: a centered length transfer.} Prepare
+\[ O_{\mathrm{AD}}=\Bigl(W-\frac{2W}{p-1},\;H-\frac{H(p+1)}{X(p-1)}\Bigr). \]
+Transfer $AE=Hs^{p}$ downward from this centre to $D_{\mathrm{AD}}$ and join $AD_{\mathrm{AD}}$. Then
+$\kappa=\tfrac12[p+1+(p-1)t]$, giving
+\begin{equation}\label{eq:AD}
+\Tm_{\mathrm{AD}}(s)=s\,\frac{p+1+(p-1)t}{p-1+(p+1)t}.
+\end{equation}
+This Halley map has cubic order and global monotone convergence. Earlier geometric interpretations
+appear in~\cite{gander,scavo}; here the rail encoding and readout are shared with AK.
+
+\begin{figure}[h]
+\centering\figAK
+\caption{Pandrosion AK, order two, at $p=3$, $X=2$, $s=3/4$ ($W=2$, $H=4$). The fixed support $AK$
+(blue) replaces the MA support, while the triangle chain (grey) and the correction direction (green)
+are retained. The inset magnifies the dashed window around $P$, $T$ and $P_+$.}\label{fig:ak}
+\end{figure}
+
+\begin{figure}[h]
+\centering\figAD
+\caption{Pandrosion AD, order three, at the same state. The orange length $AE$ is transferred onto the
+prepared vertical through $O_{\mathrm{AD}}$; the lower arc point determines the support
+$AD_{\mathrm{AD}}$ (blue). Here $O_{\mathrm{AD}}=C$.}\label{fig:ad}
+\end{figure}
+
+Both drawings retain the triangle stage, the green transport and the horizontal readout; only the
+support changes.
+
+\subsection{Projective AD: order four}
+
+Two joins supply the support. Prepare the horizontal line and the point
+\[ \ell:\ y=H\Bigl(1+\frac{5p-1}{(p+1)X}\Bigr),\qquad
+Z_{\mathrm{proj}}=\Bigl(W\Bigl(1+\frac{5p-1}{2p(2p-1)}\Bigr),\;H\Bigl(1+\frac{p+1}{(2p-1)X}\Bigr)\Bigr). \]
+(The line $\ell$ of this appendix is unrelated to the length $\ell$ of Figure~\ref{fig:means}.) Set
+$D_{\mathrm{proj}}=Z_{\mathrm{proj}}E\cap\ell$ and join $AD_{\mathrm{proj}}$. Substitution in
+\eqref{eq:support} gives the $\kappa$ of Table~\ref{tab:supports} and
+\begin{equation}\label{eq:proj}
+\Tm_{\mathrm{proj}}(s)=s\,\frac{2p\bigl((2p-1)t+p+1\bigr)}{Q_{\mathrm{proj}}(t)},\qquad
+Q_{\mathrm{proj}}(t)=(p+1)t^{2}+2(2p-1)(p+1)t+(2p-1)(p-1).
+\end{equation}
+The direct-root correction is the $[2/1]$ Pad\'e approximant; the reciprocal-state factor displayed
+here is $[1/2]$. Direct differentiation gives
+\[ \Tm_{\mathrm{proj}}'(s)=-\frac{2p(p^{2}-1)(2p-1)(t-1)^{3}}{Q_{\mathrm{proj}}(t)^{2}}, \]
+so the map has its global maximum $\alpha$ at $s=\alpha$. Also
+$\Tm_{\mathrm{proj}}(s)/s-1=(1-t)\bigl((p+1)t+5p-1\bigr)/Q_{\mathrm{proj}}(t)$. Thus a first step lands
+at or below $\alpha$ and subsequent steps increase to $\alpha$; the order is exactly four. The
+earlier preprint gives further dynamics and the original triangle-chain realization~\cite{v20}.
+
+\begin{figure}[h]
+\centering\figProjective
+\caption{Projective AD, order four, at the same cubic state. The orange line $Z_{\mathrm{proj}}E$ meets
+the prepared horizontal $\ell$ at $D_{\mathrm{proj}}$; the blue support $AD_{\mathrm{proj}}$, extended
+below $A$, receives the green correction. The inset magnifies the dashed window and separates $P$, $T$
+and $P_+$.}\label{fig:proj}
+\end{figure}
+
+\section{The linear MA reference}\label{app:ma}
+
+MA is a baseline, not an accelerated method. Its support is $MB$; write its lower-right endpoint as
+$A_{\mathrm{lin}}=B$. The parallel to $ME$ through $P$ meets $MB$, and a horizontal returns the next
+state. For $s\neq1$,
+\[ \Tm_{\mathrm{MA}}(s)=1-\frac{X-1}{X\,\Sigma_p(s)},\qquad \Sigma_p(s)=\sum_{j=0}^{p-1}s^{j}. \]
+For $X>1$ this map is increasing and
+$\Tm_{\mathrm{MA}}(s)-s=(1-Xs^{p})/(X\Sigma_p(s))$, so it converges monotonically to $\alpha$ from every
+positive start, with the removable extension at $s=1$. Its derivative at $\alpha$ is
+$1-p\alpha^{p-1}/\Sigma_p(\alpha)\in(0,1)$: convergence is linear.
+
+\begin{figure}[h]
+\centering\figMA
+\caption{Pandrosion MA, the linear reference construction, at $p=3$, $X=2$, $s=3/4$. Thin lines
+construct the power by similar triangles. The green parallel meets the blue support
+$MA_{\mathrm{lin}}$; the horizontal gives $P_+$. The historical endpoint $A_{\mathrm{lin}}$ is the
+lower-right vertex $B$ in this paper. At $s=1$ the geometric intersection is coincident despite the
+removable scalar extension.}\label{fig:ma}
+\end{figure}
+
+\FloatBarrier
+\section{Equivalence questions for the decentered correction}\label{app:equiv}
+
+Whether the arc is a known formula ``up to conjugacy'' depends on the class of coordinate changes
+allowed. Let $\varphi$ denote the correction factor $\Phi_{\mathrm{arc}}(t)=(1+g)/(t+g)$ with
+$g=(p-1)q_5$. Eliminating the radical gives the quadratic relation
+\begin{equation}\label{eq:quad}
+P_p(t,\varphi):=(p-1)^{2}S(t)(\varphi-1)^{2}-12p\,(t\varphi-1)^{2}=0 .
+\end{equation}
+The explicit radical in \eqref{eq:arc} selects the branch; the polynomial alone loses sign information
+and has a double root at $t=1$.
+
+\paragraph{Homographic changes.}
+For each real $p>2$, $\Phi_{\mathrm{arc}}$ is not rational in $t$. Indeed $\disc_tS=96p(p+1)$ and
+$S(0)=p-2>0$, so $S$ has two simple nonzero roots and is not a square in $\mathbb{C}(t)$; if the
+correction were rational, so would be
+$\sqrt{S(t)/(12p)}=(1-t\Phi_{\mathrm{arc}})/[(p-1)(\Phi_{\mathrm{arc}}-1)]$. Invertible homographies of
+the input or output preserve rationality. For integer $p\ge3$, $S(y^{p})$ also has only simple roots,
+so the state map $y\,\Phi_{\mathrm{arc}}(y^{p})$ is not rational and cannot be M\"obius-conjugate to a
+rational state map, even as a germ at $y=1$. This state-map exclusion is asserted only for integer
+degrees.
+
+\paragraph{A specified quadratic normalization.}
+A diagonal type $(2,2,2)$ quadratic Hermite--Pad\'e (Shafer) form for $f(t)=t^{-1/p}$ requires
+polynomials of degree at most two with $A(t)f^{2}+B(t)f+C(t)=O((t-1)^{8})$~\cite[eqs.~(1.4)--(1.6)]{cabay}.
+Direct substitution into \eqref{eq:quad} gives instead, with $\xi=t-1$,
+\[ P_p\bigl(1+\xi,(1+\xi)^{-1/p}\bigr)=\frac{(p-2)(p-1)^{2}(p+1)(3p+1)}{60p^{4}}\,\xi^{6}+O(\xi^{7}), \]
+contact six, not eight. The coefficients of $P_p$ have no common factor and its discriminant in
+$\varphi$ is $48p(p-1)^{2}(t-1)^{2}S(t)$, so it is irreducible over $\mathbb{C}(t)$; any polynomial
+with the same degree bounds defining this branch is a constant multiple of $P_p$. This excludes that
+particular diagonal approximant in these coordinates, without excluding other algebraic families or
+transformed targets.
+
+\paragraph{Local analytic conjugacy.}
+Distinct formulas may share a local analytic normal form: B\"ottcher's theorem conjugates a
+superattracting germ $F(e)=ce^{\varrho}+O(e^{\varrho+1})$, $c\neq0$, to its monomial normal form~\cite{buff}. This
+supplies neither a finite incidence protocol nor a global domain or drawing inventory. The explicit
+construction and its proved dynamics are therefore distinct from a claim of a new local conjugacy class.
+
+% =========================================================================
+\begin{thebibliography}{99}\small
+\bibitem{pappus} Pappus of Alexandria. \emph{Book III of the Mathematical Collection}. English
+translation by John B. Little, following Hultsch; College of the Holy Cross, Bookshelf 63, 2023.
+\url{https://crossworks.holycross.edu/hc_books/63/}.
+\bibitem{launay} Micka\"el Launay. Pandrosion et la duplication du cube. Micmaths, video presentation,
+2024. \url{https://www.youtube.com/watch?v=7T4neM660SM}. Rectangle construction and correction,
+approximately 16:37--19:10.
+\bibitem{sergeev} Alexei V. Sergeev and David Z. Goodson. Summation of asymptotic expansions of
+multiple-valued functions using algebraic approximants: application to anharmonic oscillators.
+\emph{J. Phys. A: Math. Gen.} 31:4301--4317, 1998.
+\url{https://avsergeev1.narod.ru/papers_37_iop_paper.pdf}.
+\bibitem{euclid} Euclid. \emph{Elements}, Book VI, Proposition 13. Online edition by David E. Joyce,
+Clark University. \url{https://mathcs.clarku.edu/~djoyce/elements/bookVI/propVI13.html}. Accessed
+17 October 2026.
+\bibitem{gallery} Ivan Besevic. Real exponents: geometric subdivision. Pandrosion Geometry Workshop,
+companion interactive construction, 2026.
+\url{https://ivan-fr.github.io/pandrosion/gallery/geometric-subdivision.html}. Local source snapshot
+included with the V26-S supplement.
+\bibitem{dlmf} NIST Digital Library of Mathematical Functions. Section 3.11(iv): Pad\'e
+approximations. \url{https://dlmf.nist.gov/3.11#iv}. Accessed 17 October 2026.
+\bibitem{baker} George A. Baker, Jr. and Peter Graves-Morris. \emph{Pad\'e Approximants}, 2nd ed.
+Encyclopedia of Mathematics and its Applications 59, Cambridge University Press, 1996.
+doi:10.1017/CBO9780511530074. In particular Section~1.5, Theorems 1.5.2--1.5.3, on argument and
+value homographic invariance.
+\bibitem{traub61} J. F. Traub. On a class of iteration formulas and some historical notes.
+\emph{Comm. ACM} 4(6):276--278, 1961. doi:10.1145/366573.366606.
+\bibitem{traub64} J. F. Traub. \emph{Iterative Methods for the Solution of Equations}. Prentice-Hall,
+1964.
+\bibitem{ostrowski} A. M. Ostrowski. \emph{Solution of Equations and Systems of Equations}. Academic
+Press, New York, 1960.
+\bibitem{gander} Walter Gander. On Halley's iteration method. \emph{Amer. Math. Monthly}
+92(2):131--134, 1985. doi:10.2307/2322644.
+\bibitem{scavo} T. R. Scavo and J. B. Thoo. On the geometry of Halley's method. \emph{Amer. Math.
+Monthly} 102(5):417--426, 1995. doi:10.2307/2975033.
+\bibitem{melman} A. Melman. Geometry and convergence of Euler's and Halley's methods. \emph{SIAM
+Review} 39(4):728--735, 1997. doi:10.1137/S0036144595301140.
+\bibitem{amat} S. Amat, S. Busquier and J. M. Guti\'errez. Geometric constructions of iterative
+functions to solve nonlinear equations. \emph{J. Comput. Appl. Math.} 157(1):197--205, 2003.
+doi:10.1016/S0377-0427(03)00420-5.
+\bibitem{shafer} R. E. Shafer. On quadratic approximation. \emph{SIAM J. Numer. Anal.}
+11(2):447--460, 1974. doi:10.1137/0711037.
+\bibitem{lemoine} \'Emile Lemoine. \emph{G\'eom\'etrographie ou Art des constructions
+g\'eom\'etriques}. Scientia 18, C. Naud, Paris, 1902.
+\url{https://catalogue.bnf.fr/ark:/12148/cb36049032t}.
+\bibitem{ocagne} Maurice d'Ocagne. \emph{Esquisse d'ensemble de la nomographie}. M\'emorial des
+sciences math\'ematiques 4, Gauthier-Villars, 1925.
+\url{https://www.numdam.org/item/MSM_1925__4__1_0/}.
+\bibitem{lean4} Leonardo de Moura and Sebastian Ullrich. The Lean 4 theorem prover and programming
+language. In \emph{CADE 28}, LNCS 12699, pages 625--635. Springer, 2021.
+doi:10.1007/978-3-030-79876-5\_37.
+\bibitem{mathlib} The mathlib Community. The Lean mathematical library. In \emph{CPP 2020}, pages
+367--381. ACM, 2020. doi:10.1145/3372885.3373824.
+\url{https://leanprover-community.github.io/papers/mathlib-paper.pdf}.
+\bibitem{supplNR} Ivan Besevic. Nested-radical Pandrosion support: derivation, geometric example and
+Lean convergence certificates. Source bundle accompanying \emph{Geometric Root Calculators}, V27-NR,
+18 October 2026. Includes \texttt{NestedRadicalCubic}, \texttt{NestedRadicalRealCertificate},
+\texttt{NestedRadicalReal}, \texttt{NestedRadicalAllDegrees}, audit scripts, source hashes and
+numerical checks.
+\bibitem{supplS} Ivan Besevic. Geometric subdivision and Pad\'e readout: supplementary source and
+verification records. Source bundle accompanying \emph{Geometric Root Calculators}, V26-S, 2026.
+Includes \texttt{GeometricSubdivision.lean}, its retained axiom audit and the independent subdivision
+verifier.
+\bibitem{v20} Ivan Besevic. Reciprocal root geometry, version 20. Research preprint, 2026.
+\url{https://github.com/ivan-fr/pandrosion/tree/main/paper/reciprocal_geometry_v20}.
+\bibitem{cabay} Stan Cabay and George Labahn. A fast, reliable algorithm for calculating
+Pad\'e--Hermite forms. Technical Report CS-89-09, University of Waterloo, 1989.
+\url{https://cs.uwaterloo.ca/research/tr/1989/CS-89-09.pdf}. Equations (1.4)--(1.6), printed page 1,
+PDF page 5.
+\bibitem{buff} Xavier Buff, Adam L. Epstein and Sarah Koch. B\"ottcher coordinates, 2011.
+\url{https://arxiv.org/abs/1104.2981}. Introduction: the classical one-variable theorem.
+\end{thebibliography}

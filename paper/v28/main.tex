@@ -1,0 +1,356 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper,left=23mm,right=23mm,top=24mm,bottom=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx,booktabs,array,tabularx,enumitem,xcolor}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage{placeins}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black]{hyperref}
+
+\input{figs}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Geometric root calculators}
+\fancyhead[R]{\small V28 / Research preprint}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt plus 1pt}
+\setlist{itemsep=2pt,topsep=3pt}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+% ---- notation macros ---------------------------------------------------
+\newcommand{\jn}{\mathsf{j}}          % one join
+\newcommand{\pl}{\mathsf{p}}          % one constructed parallel (= 2j + 3c)
+\newcommand{\ar}{\mathsf{c}}          % one compass arc
+\newcommand{\Om}{\Omega}              % projection centres on the top line
+\newcommand{\cE}{\mathcal{E}}\newcommand{\cC}{\mathcal{C}}\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cU}{\mathcal{U}}\newcommand{\cV}{\mathcal{V}}\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cJ}{\mathcal{J}}\newcommand{\cA}{\mathcal{A}}\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cK}{\mathcal{K}}\newcommand{\cM}{\mathcal{M}}\newcommand{\cP}{\mathcal{P}}
+\newcommand{\Tm}{\mathrm{T}}
+\newcommand{\eps}{\varepsilon}
+\DeclareMathOperator{\disc}{disc}
+
+\begin{document}
+
+{\small\scshape Constructive geometry \,/\, root iterations \,/\, global convergence}
+
+\vspace{6pt}
+{\LARGE\bfseries Geometric Root Calculators\par}
+\vspace{3pt}
+{\large A ninth-order nested-radical support and real-degree enclosures in the Pandrosion rectangle\par}
+\vspace{8pt}
+Ivan Besevic\footnote{Computational assistance: AI was used for derivations, proof development,
+figures and manuscript preparation. The author is responsible for the claims and their attribution.
+Section~\ref{sec:evidence} states, claim by claim, which results are formal proofs, written proofs,
+computer-algebra identities or numerical checks.}
+\quad$\cdot$\quad Independent research\\
+Version 28 (revision of V27-NR) \quad$\cdot$\quad 12 November 2026\\
+\url{https://github.com/ivan-fr/pandrosion}
+
+\vspace{6pt}
+\begin{quote}\small
+\textbf{Abstract.}
+We study ruler-and-compass iterations for the positive root $X^{1/p}$ that share one rectangle, one
+power stage and one readout, and differ only in a \emph{support line}. Every support approximates the
+same target function $\kappa_*(t)=(t-1)/(t^{1/p}-1)$ of the residual $t$, and the contact order of the
+approximation fixes the order of the iteration. Besides the classical supports of orders one to four we
+treat two radical supports. A decentered arc gives a globally monotone fifth-order iteration. A support
+built from two successive mean proportionals has local order \emph{exactly nine for every real $p>2$},
+with an explicit positive error constant equal to $7/648$ for cube roots, and converges monotonically
+from every positive start. For integer $p\ge 3$ one nested-radical step costs at most $10p+59$
+elementary traces against $10p+9$ for the decentered arc; measured by the efficiency index the
+decentered arc is preferable for $p\le 12$ and the nested support for $p\ge 13$. We then separate what
+is a finite construction from what is only a scalar statement: the fast iterations are finite
+constructions for rational degrees, whereas for irrational $p$ a single step is not. For arbitrary real
+$p\neq 0$ a power-free subdivision with one final Pad\'e readout encloses the root with relative width at
+most $z^5/256$ in at most $15n+63$ traces after $n$ subdivisions (for $X>1$, $p\ge 1$). Global
+convergence and the local orders with their constants, for both radical supports and every real
+$p>2$, are checked in Lean, as are the degree, approximation and efficiency statements; the drawing
+inventories are written protocols.
+\end{quote}
+
+% =========================================================================
+\section{Introduction}
+
+A geometric iteration must realize its arithmetic by intersections, parallels and length transfers.
+The Pandrosion rectangle does this for $p$th roots: a chain of similar triangles produces the power
+$s^p$ of the current estimate, a line through a prepared point transports the residual, and a horizontal
+reads the next estimate on the same rail. The only part that changes from one method to another is the
+\emph{support}, a line through the corner $A$ whose slope encodes a correction factor.
+
+\paragraph{Results.}
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{One target function} (Section~\ref{sec:coords}). All supports approximate
+  $\kappa_*(t)=(t-1)/(t^{1/p}-1)$; contact of order $\omega$ at $t=1$ gives an iteration of order $\omega+1$ with
+  an explicit error constant (Lemma~\ref{lem:contact}). Newton, Halley and the $[1/1]$ Pad\'e support are
+  the cases $\omega=1,2,3$.
+\item \textbf{Decentered arc} (Section~\ref{sec:arc}). One moving arc and one join give $\omega=4$:
+  a fifth-order iteration, monotone and convergent from every positive start for real $p>2$
+  (Theorem~\ref{thm:arc}).
+\item \textbf{Nested radicals} (Section~\ref{sec:nested}). Two successive mean proportionals give
+  $\omega=8$. The iteration has order exactly nine for every real $p>2$, with the closed-form constant of
+  Theorem~\ref{thm:order9}; it is globally monotone (Theorem~\ref{thm:global}).
+\item \textbf{Work} (Section~\ref{sec:work}). A complete per-step inventory of the nested support
+  (Proposition~\ref{prop:inventory}), a comparison of six supports at a common state, and an
+  efficiency-index comparison with a crossover at $p=13$ (Proposition~\ref{prop:index}).
+\item \textbf{Degrees} (Sections~\ref{sec:degrees} and~\ref{sec:enclosure}). A classification of what
+  is constructible in finitely many traces per step, summarized in Table~\ref{tab:degrees}, and a direct
+  enclosure for every real $p\neq 0$ (Propositions~\ref{prop:enclosure} and~\ref{prop:allp}).
+\end{enumerate}
+
+\begin{table}[h]
+\centering\small
+\caption{Which calculator applies to which degree. ``Finite step'' means that one iteration step is a
+finite ruler-and-compass construction from the current state.}\label{tab:degrees}
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+Degree $p$ & Fast rectangle iterations (orders 2--9) & Direct subdivision (Section~\ref{sec:enclosure})\\
+\midrule
+Integer $p\ge 3$ & Finite step; $10p+9$ or $10p+59$ traces & Yes\\
+Rational $p=\mu/\nu$ & Finite step, as degree $\mu$ applied to $X^{\nu}$ (Proposition~\ref{prop:rational}) & Yes\\
+Irrational $p$ & Step not finite: $u^{p}$ is itself a real power. Available only through a rational
+approximation of $p$ (Proposition~\ref{prop:irrational}) & Yes; this is the recommended route\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{What ``construct'' means here.}
+As in Pandrosion's recursive geometry, nothing in this paper constructs $X^{1/p}$ exactly in finitely
+many operations; $\sqrt[3]{2}$ is not constructible. A calculator is a rule whose every step is a finite
+construction and whose successive outputs converge to the root, with a stated rate or a stated
+enclosure. The distinction that matters is therefore not exact versus approximate, but whether
+\emph{each step} is finite. Scalar convergence theorems are stated for real $p$; drawing inventories are
+stated only where a step is a finite construction.
+
+\paragraph{Relation to earlier versions.}
+The classical supports and the decentered arc were introduced in the earlier preprint~\cite{v20}; they
+are restated here with complete proofs so that the comparison is self-contained. New in the present line
+of versions are the nested-radical support and its inventory. New in this revision are the contact lemma,
+the general ninth-order constant (which closes a question left open in V27), the efficiency-index
+comparison, and the degree classification of Table~\ref{tab:degrees} with the rational and irrational
+cases treated separately. Limits of the results are collected once, in Section~\ref{sec:limits}.
+
+% =========================================================================
+\section{Coordinates, arithmetic and the common support equation}\label{sec:coords}
+
+\subsection{States and notation}
+
+For $X>0$ and $p\neq 0$ let $r=X^{1/p}$ be the root and $\alpha=1/r$ its reciprocal. The rectangle
+carries a \emph{reciprocal state} $s>0$ approaching $\alpha$; the \emph{direct state} is $u=1/s$. The
+\emph{residual} is
+\[ t=Xs^{p}=X/u^{p}, \qquad t=1 \iff s=\alpha . \]
+The logarithmic error is $e=\log(s/\alpha)$, so that $t=e^{pe}$. An iteration is written
+$s_+=s\,\Phi(t)$. Table~\ref{tab:notation} fixes the main symbols.
+
+\begin{table}[h]
+\centering\small
+\caption{Notation.}\label{tab:notation}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+$X,\ p,\ r,\ \alpha$ & input, degree, root $X^{1/p}$, reciprocal root $X^{-1/p}$\\
+$s,\ u,\ t,\ e$ & reciprocal state, direct state $1/s$, residual $Xs^p$, log error $\log(s/\alpha)$\\
+$h,\ \xi,\ x$ & $h=1/p$;\ \ $\xi=t-1$;\ \ $x=\log t$\\
+$W,H$; $A,B,C,O$ & rectangle width and height; its corners (Section~\ref{sec:rect})\\
+$R(q),L(q),\Om_f$ & right-rail point, left-rail point, projection centre on the top line\\
+$M,E,P,T$ & prepared point, power endpoint $R(s^{p})$, state point $R(s)$, intersection on the support\\
+$\kappa$, $\kappa_*$ & normalized support slope; exact slope $(t-1)/(t^{h}-1)$\\
+$\jn,\pl,\ar$ & one join, one constructed parallel ($=2\jn+3\ar$), one compass arc\\
+$q_5,\ q_9$ & radicals of the decentered and nested supports\\
+$a,b$ & generic positive rail values; in Section~\ref{sec:enclosure}, the moving endpoints\\
+$m,\lambda,z$ & (Section~\ref{sec:enclosure} only) mean proportional $\sqrt{ab}$, weight, gap $b/a-1$\\
+$\omega$ & order of contact of a support with $\kappa_*$ at $t=1$\\
+$\mu,\nu$ & numerator and denominator of a rational degree $p=\mu/\nu$\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Rectangle and line arithmetic}\label{sec:rect}
+
+In the rectangle $C=(0,0)$, $B=(W,0)$, $O=(0,H)$, $A=(W,H)$, with $W,H>0$, define
+\begin{equation}\label{eq:rails}
+R(q)=(W,H(1-q)),\qquad L(q)=(0,H(1-q)),\qquad \Om_f=\Bigl(\frac{Wf}{f-1},\,H\Bigr)\quad(f\neq 1).
+\end{equation}
+Line incidences perform multiplication and division:
+\begin{equation}\label{eq:incid}
+\Om_fR(q)\cap OC=L(fq),\qquad \Om_fL(b)\cap AB=R(b/f).
+\end{equation}
+Substituting the coordinates into the line equations proves both identities. Unit factors and zero
+values reuse existing points instead of a centre at infinity.
+
+\paragraph{Triangle power stage.}
+Let $B_j=(Ws^{j},H(1-s^{j}))\in OB$ and $L_j=L(s^{j})$. Horizontals transfer between these points and
+the rails. The parallel to $L_1B$ through $B_j$ meets the left rail at $L_{j+1}$, since its ordinate
+there is $H(1-s^{j})+H(1-s)s^{j}=H(1-s^{j+1})$. For integer $p$, repetition gives $E=R(s^{p})$ with
+$2p-1$ parallels and the join $L_1B$.
+
+\paragraph{Products.}
+For positive rail values $a,b$ with $b\neq 1$, draw $V=CR(b)\cap OA=\Om_{1/b}$ and project $R(a)$
+successively through $\Om_{1/2}$, $V$, $\Om_{1/2}$, $\Om_{1/4}$. By~\eqref{eq:incid} the successive
+values are $L(a/2)$, $R(ab/2)$, $L(ab/4)$, $R(ab)$: a general product costs five joins. Division is
+symmetric: project $R(a)$ through $V$ to $L(a/b)$ and return through $\Om_{1/2},\Om_{1/4},\Om_{1/2}$,
+with values $R(2a/b)$, $L(a/(2b))$, $R(a/b)$; again five joins. Multiplication by a \emph{prepared}
+constant $d>0$ uses the two centres $\Om_{d/[2(1+d)]}$ and $\Om_{1/[2(1+d)]}$ and costs two joins.
+
+\subsection{The common support equation and its target}
+
+Prepare $M=(0,H(1-X^{-1}))$. With $P=R(s)$ and $E=R(s^{p})$, the line $ME$ has slope
+$\sigma=H(1-t)/(WX)$. Let a \emph{support} be a line through $A$ of slope $H\kappa/(WX)$. The parallel
+to $ME$ through $P$ meets the support at $T$, and the horizontal through $T$ meets the right rail at
+$P_+=R(s_+)$ with
+\begin{equation}\label{eq:support}
+s_+=s\,\frac{\kappa}{\kappa-1+t}.
+\end{equation}
+Indeed the two lines are $y-H=\tfrac{H\kappa}{WX}(x-W)$ and $y-H(1-s)=\sigma(x-W)$; eliminating $x$
+gives $H-y=Hs\kappa/(\kappa-1+t)$. The update is exact, $s_+=\alpha$, precisely when
+$\kappa/(\kappa-1+t)=t^{-h}$, that is when
+\begin{equation}\label{eq:kstar}
+\kappa=\kappa_*(t):=\frac{t-1}{t^{h}-1}\qquad(\kappa_*(1)=p).
+\end{equation}
+The function $\kappa_*$ is not constructible from $t$; every support below is a constructible
+approximation of it.
+
+\begin{lemma}[Contact lemma; limit form formalized in Lean]\label{lem:contact}
+Let $\kappa(t)$ be analytic and positive near $t=1$ with
+$\kappa(t)-\kappa_*(t)=c\,\xi^{\omega}+O(\xi^{\omega+1})$, $\xi=t-1$, $\omega\ge1$. Then the iteration
+\eqref{eq:support} satisfies
+\[ e_+=c\,p^{\,\omega-1}e^{\,\omega+1}+O(e^{\,\omega+2}). \]
+\end{lemma}
+\begin{proof}
+From \eqref{eq:support}, $e_+=e+\log\kappa-\log(\kappa-1+t)$, and this vanishes for
+$\kappa=\kappa_*$. Since $\partial_\kappa[\log\kappa-\log(\kappa-1+t)]=(t-1)/[\kappa(\kappa-1+t)]$,
+which equals $\xi/p^{2}+O(\xi^{2})$ near $\kappa=p$, we get
+$e_+=c\,\xi^{\omega+1}/p^{2}+O(\xi^{\omega+2})$. Finally $\xi=e^{pe}-1=pe+O(e^{2})$.
+\end{proof}
+
+\begin{table}[h]
+\centering\small
+\caption{The supports as approximations of $\kappa_*$. Leading constants are for the reciprocal-state
+log error $e$; for odd orders they are unchanged in the direct state.}\label{tab:supports}
+\begin{tabular}{@{}llccl@{}}
+\toprule
+Support & $\kappa(t)$ & contact $\omega$ & order & leading constant of $e_+$\\
+\midrule
+AK (Newton) & $p$ & 1 & 2 & $-(p-1)/2$\\[2pt]
+AD (Halley) & $\tfrac12[p+1+(p-1)t]$ & 2 & 3 & $(p^{2}-1)/12$\\[2pt]
+Projective AD & $\dfrac{2p[(2p-1)t+p+1]}{(p+1)t+5p-1}$ & 3 & 4 & $-(p^{2}-1)(2p-1)/72$\\[6pt]
+Decentered AD & $1+(p-1)q_5(t)$ & 4 & 5 & $(p-2)(p^{2}-1)(3p+1)/1440$\\[2pt]
+Nested radicals & $1+(p-1)q_9(t)$ & 8 & 9 & $c_9(p)$, Theorem~\ref{thm:order9}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+AK is the value of $\kappa_*$ at $t=1$, AD its first-order Taylor polynomial and projective AD its
+$[1/1]$ Pad\'e approximant; these three are classical (Newton under inversion, Halley, and a Pad\'e
+correction) and are documented in Appendix~\ref{app:classical}. The linear MA construction uses the
+support $MB$, which does not pass through $A$, and is kept as a baseline in Appendix~\ref{app:ma}.
+
+\subsection{Work convention}\label{sec:convention}
+
+A \emph{trace} is one join or one compass arc. A constructed parallel expands to $\pl=2\jn+3\ar$, five
+traces. Intersections of drawn objects are free. \emph{Fixed preparation}, meaning every object that
+depends only on $p,X,W,H$ and not on the current state, is not charged, nor are decisions (comparisons
+of two constructed lengths) or the single final inversion that converts $s$ into $u=1/s$. Section
+\ref{sec:enclosure} charges its input and output inversions explicitly. All counts are upper bounds for
+the specified protocols; a trace count is neither a time nor an energy.
+
+The name Pandrosion refers to the addressee of Book~III of Pappus' \emph{Collection}~\cite{pappus}. Our
+rectangle follows a modern reconstruction~\cite{launay}; the accelerated supports are modern and are not
+attributed to the ancient text.
+
+% =========================================================================
+\section{A decentered arc with global fifth-order convergence}\label{sec:arc}
+
+\subsection{Formula and construction}
+
+For real $p>2$ put
+\begin{equation}\label{eq:arc}
+S(t)=(p-2)(t^{2}+1)+(10p+4)t,\qquad q_5(t)=\sqrt{\frac{S(t)}{12p}},\qquad
+\Tm_{\mathrm{arc}}(s)=s\,\frac{1+(p-1)q_5(t)}{t+(p-1)q_5(t)},
+\end{equation}
+that is, the support $\kappa=1+(p-1)q_5(t)$ in~\eqref{eq:support}. The radicand is positive for $t>0$.
+
+For integer $p\ge3$ the radical is produced by one arc. Put
+\[ \eta=(p-1)\sqrt{\frac{p-2}{12p}},\qquad \zeta=\frac{5p+2}{p-2}>1,\qquad d_0=\frac{W}{\eta},\qquad
+\delta=\frac{H}{X}\sqrt{\zeta^{2}-1}, \]
+and prepare
+\[ G_0=\Bigl(W,\;H+\frac{H\zeta}{X}\Bigr),\qquad
+O_{\mathrm{arc}}=\Bigl(W-d_0+\delta,\;H-\frac{H}{X\eta}\Bigr),\qquad\text{the vertical } x=W-d_0 . \]
+Draw the arc centred at $O_{\mathrm{arc}}$ with radius $EG_0=(H/X)(t+\zeta)$ and take its lower
+intersection $D_{\mathrm{arc}}$ with the prepared vertical. Its distance below the centre is
+\[ \sqrt{EG_0^{2}-\delta^{2}}=\frac{H}{X}\sqrt{t^{2}+2\zeta t+1}, \]
+so the slope of $AD_{\mathrm{arc}}$ is $\tfrac{H}{WX}\bigl[1+\eta\sqrt{t^{2}+2\zeta t+1}\bigr]
+=\tfrac{H}{WX}\bigl[1+(p-1)q_5(t)\bigr]$, because $(p-2)\cdot2\zeta=10p+4$. All preparation parameters
+use rational operations and square roots of positive quantities. Centered AD and decentered AD use the
+same mobile operations, one arc and one join; only the fixed preparation differs. This is the precise
+sense in which order five is obtained at the mobile cost of order three.
+
+\begin{figure}[h]
+\centering\figDecentered
+\caption{The decentered-arc device for $p=7$, $X=W=2$, $H=4$, $s=3/4$, drawn from the exact coordinates.
+(a) The whole circle. The compass opening $EG_0$ (thick orange segment) is carried to the prepared centre
+$O_{\mathrm{arc}}$; the circle meets the prepared vertical at $D_{\mathrm{arc}}$, and the right triangle with
+horizontal leg $\delta$ shows why its vertical leg is a square root. The small grey box is the rectangle
+at the same scale. (b) The rectangle enlarged: triangle chain (grey), transport lines (green), support
+$AD_{\mathrm{arc}}$ (blue) and the readout $P_+$. Each panel has equal axis scales.}\label{fig:arc}
+\end{figure}
+
+\subsection{Global monotone convergence}
+
+\begin{theorem}[Formalized in Lean]\label{thm:arc}
+For real $p>2$, $X>0$ and every $s_0>0$, the iteration $s_{n+1}=\Tm_{\mathrm{arc}}(s_n)$ converges to
+$\alpha$ monotonically without crossing it, and
+\begin{equation}\label{eq:arc-order}
+e_+=\frac{(p-2)(p^{2}-1)(3p+1)}{1440}\,e^{5}+O(e^{7}).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Write $g=(p-1)q_5$. Since $S(1/t)=S(t)/t^{2}$ we have $q_5(1/t)=q_5(t)/t$, hence
+$\Phi(1/t)=1/\Phi(t)$ for $\Phi=(1+g)/(t+g)$: the log-error map $e\mapsto e_+$ is odd. Put
+\[ \Lambda(t)=\frac{\log t}{p}+\log(1+g(t))-\log(t+g(t)), \]
+so that $e_+=\Lambda(t)$, and define the polynomials
+\begin{align*}
+N_1(t)&=(p-1)(t^{2}+1)+(10p+2)t,\\
+N_2(t)&=(t+1)\bigl(6pt-(t-1)^{2}\bigr),\\
+N_3(t)&=(p^{2}-5p-2)(t-1)^{2}+12p(3p+1)t .
+\end{align*}
+Differentiation and factorization give the two identities
+\begin{align}
+\frac{d\Lambda}{d\log t}&=\frac{(p-2)(p-1)^{2}\,\bigl(q_5N_1-N_2\bigr)}{12p^{2}\,g(1+g)(t+g)},\label{eq:arc-der}\\
+q_5^{2}N_1^{2}-N_2^{2}&=\frac{p+1}{12p}\,(t-1)^{4}\,N_3 .\label{eq:arc-id}
+\end{align}
+Here $N_1>0$. If $N_2\le0$ then $q_5N_1-N_2>0$. Otherwise $(t-1)^{2}<6pt$, and $N_3>0$: directly when
+$p^{2}-5p-2\ge0$, and otherwise from the rearrangement
+\[ N_3=6p^{2}(p+1)t+(p^{2}-5p-2)\bigl((t-1)^{2}-6pt\bigr), \]
+whose two terms are positive. Then \eqref{eq:arc-id} gives $q_5N_1>N_2$ for $t\neq1$. Hence $\Lambda$
+is strictly increasing with $\Lambda(1)=0$: the new log error has the sign of the old one. Meanwhile
+$\Phi(t)-1=(1-t)/(t+g)$ moves the state toward $\alpha$. The orbit is monotone and bounded between
+$s_0$ and $\alpha$; its positive limit is a fixed point by continuity, and $\Phi(t)=1$ forces $t=1$.
+
+Near $t=1$, rationalize $q_5N_1-N_2$ with \eqref{eq:arc-id}. At $t=1$ one has $q_5=1$, $g=p-1$,
+$N_1=N_2=12p$ and $N_3=12p(3p+1)$, so
+\[ \lim_{t\to1}\frac{d\Lambda/d\log t}{(t-1)^{4}}=\frac{(p-2)(p^{2}-1)(3p+1)}{288\,p^{5}} . \]
+Substituting $t=e^{pe}$ and integrating yields the coefficient in \eqref{eq:arc-order}; oddness removes
+the $e^{6}$ term.
+\end{proof}
+
+At $p=3$ the constant is $1/18$. At $p=2$ the scalar formula is an exact square-root correction, but
+the displayed preparation is singular and is replaced by a single mean proportional.
+
+\input{nested}
+\input{work}
+\input{back}
+\end{document}
