@@ -11,6 +11,7 @@ for name, expected in [
     ('geometric_subdivision', 7),
     ('nested_radicals', 104),
     ('orders_degrees_efficiency', 125),
+    ('complex_c5', 198),
 ]:
     result = subprocess.run(
         ['lake', 'env', 'lean', f'validation/{name}/Audit.lean'],

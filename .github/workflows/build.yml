@@ -23,6 +23,11 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - run: python verification/decentered/verify.py
       - run: python paper/v28/verify_v28.py
+      - run: python paper/v29/verify_v29.py
+      - run: python verify_complex.py
+        working-directory: paper/c5
+      - run: python verify_threemean.py
+        working-directory: paper/c5
   lean:
     name: Complete Lean build and separate axiom audits
     runs-on: ubuntu-24.04
