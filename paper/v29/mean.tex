@@ -1,0 +1,230 @@
+% =========================================================================
+\section{A three-mean support of order nine}\label{sec:mean}
+
+The nested support reaches order nine with two radicals placed one inside the other, and its arguments
+cost divisions. A second support of the same order uses two radicals placed side by side, each of them
+produced by one arc. It is a combination of three classical means of $1$ and $t$.
+
+\subsection{Formula}
+
+The exact support is $\kappa_*=1+(p-1)q_*$ with
+\[ q_*(t)=\frac{t-t^{h}}{(p-1)(t^{h}-1)},\qquad q_*(1)=1,\qquad q_*(1/t)=q_*(t)/t , \]
+a homogeneous symmetric mean of $1$ and $t$; for integer $p$ it is the arithmetic mean of the $p-1$
+mean proportionals $t^{k/p}$ between $1$ and $t$. For real $p>2$ define
+\begin{equation}\label{eq:mcoeff}
+\begin{gathered}
+m=\frac{(p-2)(47p^{2}+21p+4)}{60\,p\,(4p^{2}-1)},\qquad
+g=\frac{16\,(p+1)(4p^{2}-1)}{15\,p\,(5p^{2}+4)},\\[2pt]
+n=\frac{49\,p\,(p+1)(p^{2}-4)}{10\,(4p^{2}-1)(5p^{2}+4)},\qquad
+d=\frac{5p^{2}+4}{84\,p^{2}} ,
+\end{gathered}
+\end{equation}
+all positive, with $2m+g-n=1$, and
+\begin{equation}\label{eq:qM}
+q_M(t)=m\,(1+t)+g\sqrt t-n\sqrt{t+d\,(t-1)^{2}},\qquad
+\Tm_{M}(s)=s\,\frac{1+(p-1)q_M(t)}{t+(p-1)q_M(t)},
+\end{equation}
+that is, the support $\kappa=1+(p-1)q_M(t)$ in \eqref{eq:support}. With the arithmetic mean
+$\mathrm A=(1+t)/2$, the geometric mean $\mathrm G=\sqrt t$ and the \emph{conic mean}
+$\mathrm C_d=\sqrt{\mathrm G^{2}+4d(\mathrm A^{2}-\mathrm G^{2})}$,
+\[ q_M=2m\,\mathrm A+g\,\mathrm G-n\,\mathrm C_d , \]
+a combination with weights of sum one; one weight is negative. The radicand $t+d(t-1)^{2}$ is positive
+for every $t>0$, so $q_M$ is defined on the whole positive axis, and $q_M(1/t)=q_M(t)/t$: the log-error
+map is odd. In terms of $h=1/p$,
+$m=\frac{(1-2h)(4h^{2}+21h+47)}{60(4-h^{2})}$, $g=\frac{16(1+h)(4-h^{2})}{15(4h^{2}+5)}$,
+$n=\frac{49(1+h)(1-4h^{2})}{10(4-h^{2})(4h^{2}+5)}$ and $d=\frac{4h^{2}+5}{84}$. For cube roots
+\begin{equation}\label{eq:qMcubic}
+q_M(t)=\frac{7}{90}(1+t)+\frac{64}{63}\sqrt t-\frac{6}{35}\sqrt{t+\frac{7}{108}(t-1)^{2}} .
+\end{equation}
+
+The three terms belong to one family. The decentered arc is $q_5^{2}=t+a_9(t-1)^{2}$, with the $a_9$ of
+\eqref{eq:abc}; the members $a=\tfrac14$ and $a=0$ of the family $q^{2}=t+a(t-1)^{2}$ are $\mathrm A$
+and $\mathrm G$, and $\mathrm C_d$ is the member $a=d$. Each member divided by $\sqrt t$ is
+$\sqrt{1+aw}$, a function of $w=(t-1)^{2}/t$ alone, as is $q_*/\sqrt t$. A combination of members
+therefore matches $q_*/\sqrt t$ coefficient by coefficient in $w$: the arc, with one free parameter,
+matches one coefficient, and \eqref{eq:qM}, with three free parameters (four coefficients, one
+normalization), matches three. The two members $\mathrm A$ and $\mathrm G$ are imposed; only the third
+is chosen by the matching.
+
+\subsection{Construction by three arcs}\label{sec:mean-construction}
+
+Let $\lambda=H/X$, so that $M=(0,H-\lambda)$ and $E=(W,H-\lambda t)$. Put
+\[ \gamma=1+2(p-1)m,\qquad \zeta=\frac1{2d}-1>1,\qquad K_g=\frac{(p-1)g}{\gamma}\,\lambda,\qquad
+K_n=\frac{(p-1)n\sqrt d}{\gamma}\,\lambda , \]
+and prepare four verticals, the horizontal through $M$ and three points:
+\[ \begin{gathered}
+v:\ x=W\Bigl(1-\frac1\gamma\Bigr),\qquad v_1:\ x=x_1=\frac{(p-1)m}{\gamma}W,\qquad
+v_2:\ x=x_2=\frac{K_g}{2\lambda}W,\qquad v_3:\ x=x_3=\frac{K_n}{\lambda}W,\\[2pt]
+F=(x_2,\,H-\lambda),\qquad G_2=(x_2,\,H-\lambda+K_g),\qquad G_3=(x_3,\,H-\lambda+K_n(1+\zeta)).
+\end{gathered} \]
+The vertical $v$ is at abscissa $2x_1$. The construction below requires that the distance from $v_1$ to
+$v$ equal $K_n\sqrt{\zeta^{2}-1}$, which fixes the shape of the rectangle:
+\begin{equation}\label{eq:aspect}
+\frac{WX}{H}=\frac nm\sqrt{\frac{1-4d}{4d}} .
+\end{equation}
+The right side is a constructible number depending on $p$ only; it equals $3.7256\ldots$ for $p=3$ and
+decreases to $2.238\ldots$ as $p\to\infty$.
+
+The line $ME$ is drawn for the transport. Its intersections $J_i=ME\cap v_i$ are free, and their heights
+are affine in $t$: $y_{J_i}=H-\lambda+(x_i/W)\lambda(1-t)$. Three arcs follow.
+\begin{enumerate}[label=\arabic*.]
+\item \emph{Conic radical.} With centre $J_1$ and compass opening
+$J_3G_3=K_n(t+\zeta)$, draw an arc and take its upper intersection $D_1$ with $v$. Its height above
+$J_1$ is $K_n\sqrt{(t+\zeta)^{2}-(\zeta^{2}-1)}=K_n\sqrt{(t+d(t-1)^{2})/d}$. This is the device of the
+decentered arc, with a moving centre.
+\item \emph{Mean proportional.} With centre $J_2$, draw the arc through $G_2$; its radius is
+$\tfrac12K_g(1+t)$ and $J_2$ is at distance $\tfrac12K_g|1-t|$ from the horizontal through $M$, so the
+arc meets that horizontal at a point $Z$ with $FZ=K_g\sqrt t$.
+\item \emph{Transfer.} With centre $D_1$ and opening $FZ$, draw an arc and take its lower intersection
+$D_M$ with $v$.
+\end{enumerate}
+Then
+\[ H-y_{D_M}=\frac\lambda\gamma\bigl[1+(p-1)m(1+t)\bigr]-K_n\sqrt{\frac{t+d(t-1)^{2}}{d}}+K_g\sqrt t
+=\frac\lambda\gamma\bigl[1+(p-1)q_M(t)\bigr], \]
+and since $W-x_{D_M}=W/\gamma$ the slope of $AD_M$ is $\tfrac{H}{WX}[1+(p-1)q_M(t)]$: the join $AD_M$
+is the support. Both radicands are positive for $t>0$, so the three intersections exist at every
+state. The mobile work is three arcs and one join, against one arc and one join for the decentered arc.
+Without the condition \eqref{eq:aspect} the centre of the first arc is obtained by one additional
+join, projecting $E$ from a prepared point onto the vertical at distance $K_n\sqrt{\zeta^{2}-1}$ from
+$v$; we count the protocol with \eqref{eq:aspect}.
+
+\begin{figure}[h]
+\centering\figMean
+\caption{The three-mean support for $p=3$, $X=2$, $H=4$, $s=3/4$, with $W=7.451\ldots$ from
+\eqref{eq:aspect}, drawn from the exact coordinates at equal axis scales. Dashed: prepared verticals and
+the horizontal through $M$. The free points $J_1,J_2,J_3$ are on the transport line $ME$ (green). The
+compass openings $J_3G_3$ and $FZ$ are the thick orange segments; the three arcs are orange; the support
+$AD_M$ is blue. Grey: the triangle chain.}\label{fig:mean}
+\end{figure}
+
+\subsection{Global convergence and order nine}
+
+\begin{theorem}[Three-mean support; formalized in Lean]\label{thm:mean}
+For real $p>2$, $X>0$ and every $s_0>0$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $q_M(t)>0$ for every $t>0$;
+\item the iteration $s_{j+1}=\Tm_M(s_j)$ converges to $\alpha$ monotonically without crossing it;
+\item the local order is exactly nine,
+\begin{equation}\label{eq:cM}
+e_+=c_M(p)\,e^{9}+O(e^{11}),\qquad
+c_M(p)=\frac{(p^{2}-1)(p^{2}-4)(4p^{2}-1)(17p^{2}+8)}{2^{11}\,3^{4}\,5^{2}\,7^{2}}>0 ,
+\end{equation}
+and $c_M(3)=23/20736$.
+\end{enumerate}
+\end{theorem}
+
+For comparison $c_9(3)=7/648=224/20736$: at $p=3$ the constant is about ten times smaller than that of
+the nested support, and $c_M(p)/c_9(p)\to1020/21311\approx0.048$ as $p\to\infty$.
+
+\begin{proof}
+Work in the variable $\tau=\sqrt t>0$, in which only one radical remains. Put $c=p-1$ and
+\[ S_M(\tau)=\tau^{2}+d\,(\tau^{2}-1)^{2},\qquad \rho_M=\sqrt{S_M},\qquad
+\ell_M(\tau)=m(1+\tau^{2})+g\,\tau,\qquad q(\tau)=\ell_M(\tau)-n\,\rho_M(\tau), \]
+so that $q_M(t)=q(\sqrt t)$ and $S_M\ge\tau^{2}>0$.
+
+\emph{Positivity.} Clearing denominators gives the identity
+\begin{equation}\label{eq:mean-pos}
+\ell_M^{2}-n^{2}S_M=\frac{Q_0\,(\tau-1)^{4}+Q_1\,\tau\,(\tau-1)^{2}+Q_2\,\tau^{2}}{900\,p^{2}(4p^{2}-1)(5p^{2}+4)},
+\end{equation}
+with $Q_0=(p-2)^{2}(2p-1)(313p^{3}+272p^{2}+200p+16)$,
+$Q_1=60\,p\,(p-2)(2p-1)(71p^{3}+74p^{2}+40p-8)$ and
+$Q_2=180\,p^{2}(149p^{4}+49p^{3}-141p^{2}-196p-20)$. For $p>2$, $Q_0\ge0$, $Q_1>0$ and $Q_2>0$, the
+last because
+$149p^{4}+49p^{3}-141p^{2}-196p-20=149\varrho^{4}+1241\varrho^{3}+3729\varrho^{2}+4596\varrho+1800$ with
+$\varrho=p-2$. Hence $\ell_M^{2}>n^{2}S_M$, and as $\ell_M>0$ we get $\ell_M>n\rho_M$: this is (i).
+
+\emph{The slope.} Let
+\[ \Lambda_M(\tau)=\log\bigl(\tau^{2}+c\,q\bigr)-\log\bigl(1+c\,q\bigr)-\frac2p\log\tau ,
+\qquad\text{so that}\qquad -\Lambda_M(\sqrt t)=\frac{\log t}{p}+\log\frac{1+c\,q_M}{t+c\,q_M}=e_+ . \]
+Both logarithms are defined by (i). Differentiating, with $q'=\ell_M'-nS_M'/(2\rho_M)$,
+\[ \tau\rho_M(\tau^{2}+cq)(1+cq)\,\Lambda_M'
+=2\tau^{2}(1+cq)\rho_M+c\,\tau(1-\tau^{2})\bigl(\ell_M'\rho_M-\tfrac12nS_M'\bigr)
+-\tfrac2p(\tau^{2}+cq)(1+cq)\rho_M . \]
+The right side is a cubic polynomial in $\rho_M$. Reducing it with $\rho_M^{2}=S_M$ and substituting
+\eqref{eq:mcoeff} gives
+\begin{equation}\label{eq:mean-slope}
+\Lambda_M'(\tau)=-\,\frac{(p^{2}-4)(p^{2}-1)\,\bigl(2\Psi_2\,\rho_M-7\Psi_1\bigr)}
+{1800\,p^{3}(4p^{2}-1)^{2}(5p^{2}+4)^{2}\;\tau\,\rho_M\,(\tau^{2}+cq)(1+cq)} ,
+\end{equation}
+where $\Psi_1$ is a palindromic sextic and $\Psi_2$ a palindromic quartic in $\tau$ with coefficients in
+$\mathbb Z[p^{2}]$, listed in Table~\ref{tab:mean-cert}. Every factor of the denominator is positive.
+
+\emph{The sign.} The three coefficients of $\Psi_2$ in Table~\ref{tab:mean-cert} are positive for $p>2$,
+so $\Psi_2>0$ for $\tau>0$. Rationalizing,
+\begin{equation}\label{eq:mean-square}
+4\Psi_2^{2}\,S_M-49\Psi_1^{2}=\frac{4\,(4p^{2}-1)^{3}(5p^{2}+4)^{2}}{21\,p^{2}}\;(\tau-1)^{8}\;\Psi_3 ,
+\end{equation}
+a polynomial identity after clearing $84p^{2}$, where $\Psi_3$ is a third palindromic quartic whose
+three coefficients are again positive. Let $\tau>0$, $\tau\ne1$. If $\Psi_1\le0$ then
+$2\Psi_2\rho_M>0\ge7\Psi_1$. Otherwise both sides are positive and \eqref{eq:mean-square} gives
+$(2\Psi_2\rho_M)^{2}>(7\Psi_1)^{2}$. In both cases $2\Psi_2\rho_M>7\Psi_1$, and by
+\eqref{eq:mean-slope} $\Lambda_M'<0$ for $\tau\neq1$. The factor $(\tau-1)^{8}$ is the contact of order
+eight.
+
+\emph{Convergence.} $\Lambda_M$ is strictly decreasing and $\Lambda_M(1)=0$, because
+$q(1)=2m+g-n=1$. Hence $e_+=-\Lambda_M(\sqrt t)$ has the sign of $t-1$, that is the sign of $e$: the
+state does not cross $\alpha$. Meanwhile $\Tm_M(s)/s-1=(1-t)/(t+c\,q_M)$ moves the state toward
+$\alpha$. The orbit is monotone and bounded between $s_0$ and $\alpha$; its positive limit is a fixed
+point by continuity, and a fixed point has $t=1$. This is (ii).
+
+\emph{Local order.} Both $q_M/\sqrt t$ and $q_*/\sqrt t$ are even analytic functions of $\log t$, hence
+power series in $w$, and exact expansion gives
+\begin{equation}\label{eq:mean-D4}
+\frac{q_M-q_*}{\sqrt t}=D_4^{M}\,w^{4}+O(w^{5}),\qquad
+D_4^{M}=\frac{(2-h)(1+h)(2+h)(1-2h)(1+2h)(8h^{2}+17)}{203212800} .
+\end{equation}
+Since $w=\xi^{2}/t$, $\kappa-\kappa_*=(p-1)D_4^{M}\xi^{8}+O(\xi^{9})$, and Lemma~\ref{lem:contact} with
+$\omega=8$ gives $e_+=(p-1)p^{7}D_4^{M}e^{9}+O(e^{10})$, which is \eqref{eq:cM}; oddness removes the
+term in $e^{10}$. In Lean the expansion \eqref{eq:mean-D4} is obtained without Taylor series. Put
+$y=\tfrac12\log t$, so that $\sqrt t=e^{y}$ and the conic radical is $e^{y}\sqrt{1+dw}$. If $R_4$ is the
+quartic Taylor polynomial of $\sqrt{1+dw}$, then $1+dw-R_4^{2}$ is $w^{5}$ times a polynomial, so
+replacing the radical by $e^{y}R_4(w)$ costs $O(w^{5})$. After this replacement and after subtracting
+$D_4^{M}e^{y}w^{4}$, the difference with $q_*$, multiplied by
+$60(4-h^{2})(4h^{2}+5)(1-h)(e^{2hy}-1)e^{8y}$, is a sum of $22$ exponentials $c_j(h)e^{(k_j+2hl_j)y}$
+whose moments $\sum_jc_j(k_j+2hl_j)^{n}$ vanish for $n<11$; it is therefore $O(y^{11})$, and
+$w/y^{2}\to4$ gives $(q_M-q_*)/y^{8}\to256\,D_4^{M}$.
+\end{proof}
+
+\begin{table}[h]
+\centering\small
+\caption{The certificate polynomials of Theorem~\ref{thm:mean}. $\Psi_1$ is given by its coefficients on
+$\tau^{6}+1$, $\tau^{5}+\tau$, $\tau^{4}+\tau^{2}$, $\tau^{3}$; $\Psi_2$ and $\Psi_3$ by their
+coefficients on $(\tau-1)^{4}$, $\tau(\tau-1)^{2}$, $\tau^{2}$. Each coefficient of $\Psi_2$ and
+$\Psi_3$ is positive for $p>2$: written in powers of $p-2$ it has nine positive
+coefficients.}\label{tab:mean-cert}
+\begin{tabular}{@{}lll@{}}
+\toprule
+$\Psi_1$ & $\tau^{6}+1$ & $1175p^{8}+2755p^{6}+2352p^{4}+880p^{2}+128$\\
+ & $\tau^{5}+\tau$ & $5120p^{8}-3584p^{6}-3264p^{4}+1984p^{2}-256$\\
+ & $\tau^{4}+\tau^{2}$ & $-6635p^{8}+13877p^{6}+17808p^{4}+1808p^{2}-128$\\
+ & $\tau^{3}$ & $75776p^{8}-121856p^{6}+54912p^{4}-9344p^{2}+512$\\
+\midrule
+$\Psi_2$ & $(\tau-1)^{4}$ & $30185p^{8}+32563p^{6}+16572p^{4}+8032p^{2}+128$\\
+ & $\tau(\tau-1)^{2}$ & $54180p^{8}+100044p^{6}+85680p^{4}+32256p^{2}$\\
+ & $\tau^{2}$ & $262836p^{8}-335160p^{6}+310464p^{4}$\\
+\midrule
+$\Psi_3$ & $(\tau-1)^{4}$ & $489845p^{8}+647956p^{6}+361344p^{4}+123904p^{2}-1024$\\
+ & $\tau(\tau-1)^{2}$ & $804380p^{8}+1583824p^{6}+2050176p^{4}+1033216p^{2}-4096$\\
+ & $\tau^{2}$ & $3829896p^{8}-3081456p^{6}+2225664p^{4}+2128896p^{2}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The proof has the structure of the proof of Theorem~\ref{thm:arc}, one radical, one rationalization
+and one sign discussion, and not that of Theorem~\ref{thm:global}, whose two nested radicals required a
+two-region certificate with $345$ terms: in the variable $\sqrt t$ three quartics suffice.
+
+\begin{remark}[Other members of the family; computer algebra]\label{rem:family}
+The same matching with fewer members gives lower orders. With $\mathrm A$ and one free conic mean,
+\[ q_7(t)=m_7\,(1+t)+n_7\sqrt{t-\varepsilon_7\,(t-1)^{2}},\qquad
+m_7=\frac{(h+3)(1-2h)}{4(4-h^{2})},\quad n_7=\frac{5(1+h)}{2(4-h^{2})},\quad
+\varepsilon_7=\frac{1-4h^{2}}{60}, \]
+has contact six: a single radical gives order seven, with
+$e_+=-\tfrac{(p^{2}-1)(p^{2}-4)(4p^{2}-1)}{302400}e^{7}+O(e^{9})$; for cube roots
+$q_7=\tfrac1{14}(1+t)+\tfrac67\sqrt{t-(t-1)^{2}/108}$. But the conic parameter is negative: the radicand
+is positive only for $w<60/(1-4h^{2})$, and the negative constant means that the state crosses the root
+at each step. The same happens for the combination of two free conic means, which has contact eight
+with one negative parameter. Imposing both $\mathrm A$ and $\mathrm G$ is what makes the third
+parameter $d$ positive in \eqref{eq:qM}. These statements are exact series computations; no
+convergence theorem is claimed for $q_7$.
+\end{remark}

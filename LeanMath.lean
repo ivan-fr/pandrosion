@@ -6,3 +6,8 @@ import LeanMath.Papers.NestedRadicalAllDegrees
 import LeanMath.Papers.NestedOrderNine
 import LeanMath.Papers.ArcOrderFive
 import LeanMath.Papers.DegreesNested
+import LeanMath.Papers.ThreeMeanWork
+import LeanMath.Papers.ThreeMeanSlitPlane
+import LeanMath.Papers.ComplexSlitPlane
+import LeanMath.Papers.ArcHalfPlane
+import LeanMath.Papers.NestedHalfPlane
