@@ -1,0 +1,25 @@
+10000 polynomials, 513018 roots: 13.12 s in all, median 40 us; complete 10000, within tolerance 9189
+group             n compl within shared  total_s median_us   p90_us  max_s
+cluster        1242  1242    733    509     0.28       125      499   0.01
+dense          2758  2758   2758      0     0.13        12      122   0.00
+dense_large     138   138    138      0     2.09      4127    19737   0.15
+edges           300   300    300      0     0.00         9       14   0.00
+laws           1000  1000   1000      0     0.03        15       83   0.00
+mignotte        316   316     23    293     0.17       393     1166   0.00
+multiplicity    807   807    807      0     0.12        75      389   0.00
+orthogonal      260   260    260      0     2.54       715    35114   0.17
+powers          500   500    500      0     1.73        95    14776   0.03
+products        250   250    250      0     0.05       155      365   0.00
+roots          1002  1002   1002      0     0.06        24      151   0.00
+scales          252   252    252      0     0.02        12       24   0.00
+sparse          505   505    505      0     3.67       686    33111   0.06
+special         213   213    204      9     1.14       168    12667   0.41
+wilkinson       257   257    257      0     1.08      2472     9196   0.09
+zero_roots      200   200    200      0     0.02        64      190   0.00
+not complete: []
+slowest: [('x_mandelbrot_255', 255, 0.413), ('k_laguerre_150', 150, 0.166), ('k_dense_large_2000_118', 2000, 0.152), ('k_dense_large_2000_119', 2000, 0.145), ('x_random_complex_2000_0', 2000, 0.138), ('x_random_real_2000_0', 2000, 0.138), ('k_dense_large_2000_115', 2000, 0.133), ('k_dense_large_2000_116', 2000, 0.13), ('k_dense_large_2000_117', 2000, 0.119), ('k_laguerre_140', 140, 0.118), ('k_dense_large_2000_114', 2000, 0.114), ('x_wilkinson_100', 100, 0.091)]
+
+against out-0.10.1.txt: previous total 111.11 s; discs (multiplicities and counts) or completeness changed on 14 polynomials: ['k_scales_0007', 'k_scales_0032', 'k_scales_0061', 'k_scales_0076', 'k_scales_0094', 'k_scales_0099', 'k_scales_0100', 'k_scales_0152', 'k_scales_0171', 'k_scales_0178', 'k_scales_0211', 'k_scales_0231', 'k_scales_0246', 'k_scales_0248']
+within tolerance lost: [] | gained: 14
+slower by more than 1.5: 4 [('k_multiple_0000', 0.06, 0.23), ('k_palindromic_0057', 0.12, 0.29), ('k_palindromic_0062', 0.33, 0.59), ('k_mignotte3_0020', 2.3, 3.93)]
+faster by more than 1.5: 3015

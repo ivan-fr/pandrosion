@@ -1,0 +1,26 @@
+== container lean-math-435-lean-1, Lean 4.35.0 / Mathlib v4.35.0, 15 November 2026
+== request: check FixedWidth.lean (lake env lean)
+exit 0
+== request: axioms of the theorems of FixedWidth.lean
+'LeanMath.Papers.FixedWidth.floor_neg_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FixedWidth.floor_shift_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FixedWidth.wrapping_sub_of_le' depends on axioms: [propext, Quot.sound]
+'LeanMath.Papers.FixedWidth.neg_wrapping_sub_of_lt' depends on axioms: [propext, Quot.sound]
+exit 0
+== request: check ZeroDeflation.lean (lake env lean)
+LeanMath/Pandroots/ZeroDeflation.lean:55:30: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+LeanMath/Pandroots/ZeroDeflation.lean:70:31: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+exit 0
+== request: axioms of the theorems of ZeroDeflation.lean
+'LeanMath.Papers.ZeroDeflation.exists_X_pow_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ZeroDeflation.roots_X_pow_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ZeroDeflation.rootMultiplicity_zero_X_pow_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.ZeroDeflation.rootMultiplicity_X_pow_mul_of_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.ZeroDeflation.roots_C_mul'' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ZeroDeflation.zero_notMem_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ZeroDeflation.roots_filter_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0

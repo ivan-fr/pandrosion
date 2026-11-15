@@ -1,0 +1,32 @@
+[package]
+name = "pandroots"
+version = "0.5.0"
+edition = "2024"
+rust-version = "1.85"
+authors = ["Ivan Besevic"]
+license = "MIT"
+description = "Complex polynomial roots with exact multiplicities and a posteriori inclusion discs using the Pandrosion simultaneous rectangle"
+readme = "README.md"
+repository = "https://github.com/ivan-fr/pandrosion"
+homepage = "https://ivanbesevic.com"
+documentation = "https://docs.rs/pandroots"
+keywords = ["polynomial", "roots", "numerical", "complex", "root-finding"]
+categories = ["algorithms", "mathematics", "science"]
+autobins = false
+include = ["Cargo.toml", "Cargo.lock", "src/**/*.rs", "tests/**/*.rs", "README.md", "LICENSE", "CHANGELOG.md", "verification/**"]
+
+[[bin]]
+name = "bench"
+path = "src/bin/bench.rs"
+doc = false
+
+[dependencies]
+num-bigint = "0.4"
+num-rational = "0.4"
+num-traits = "0.2"
+num-integer = "0.1"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
