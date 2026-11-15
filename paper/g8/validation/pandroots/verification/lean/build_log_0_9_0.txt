@@ -1,0 +1,30 @@
+== container lean-math-435-lean-1, Lean 4.35.0 / Mathlib v4.35.0, 15 November 2026
+== request: check ScaledVariable.lean (lake env lean)
+exit 0
+== request: check ClusterStep.lean (lake env lean)
+exit 0
+== request: check FixedWidth.lean (lake env lean)
+exit 0
+== request: check ZeroDeflation.lean (lake env lean)
+LeanMath/Pandroots/ZeroDeflation.lean:55:30: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+LeanMath/Pandroots/ZeroDeflation.lean:70:31: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+exit 0
+== request: axioms of the theorems of ScaledVariable.lean
+'LeanMath.Papers.ScaledVariable.eval_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ScaledVariable.derivative_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ScaledVariable.eval_derivative_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ScaledVariable.eval_derivative2_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ScaledVariable.coeff_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ScaledVariable.leadingCoeff_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ScaledVariable.newton_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ScaledVariable.beta_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ScaledVariable.smith_disc_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
+== request: axioms of the theorems of ClusterStep.lean
+'LeanMath.Papers.ClusterStep.eval_shifted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ClusterStep.eval_derivative_shifted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ClusterStep.eval_derivative2_shifted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ClusterStep.cursor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ClusterStep.anchor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ClusterStep.model_root' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0

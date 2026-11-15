@@ -1,0 +1,10 @@
+== container lean-math-435-lean-1, Lean 4.35.0 / Mathlib v4.35.0, 15 November 2026
+== request: check ClusterCursor.lean (lake env lean)
+exit 0
+== request: axioms of the theorems of ClusterCursor.lean
+'LeanMath.Papers.ClusterCursor.logder_of_parts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ClusterCursor.cursor_forms' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ClusterCursor.cursor_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ClusterCursor.anchor_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ClusterCursor.value_shrinks' depends on axioms: [propext, Quot.sound]
+exit 0

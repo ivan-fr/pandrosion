@@ -1,0 +1,21 @@
+== request: build LeanMath.Papers.SimultaneousRectangle
+Build completed successfully (8706 jobs).
+exit 0
+== request: build LeanMath.Papers.SmithDiscs
+Build completed successfully (8706 jobs).
+exit 0
+== request: build LeanMath.Papers.FixedPointCertificate
+Build completed successfully (8707 jobs).
+exit 0
+== request: axioms LeanMath.Papers.FixedPointCertificate LeanMath.Papers.FixedPointCertificate.all_roots_of_computed
+'LeanMath.Papers.FixedPointCertificate.all_roots_of_computed' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
+== request: axioms LeanMath.Papers.FixedPointCertificate LeanMath.Papers.FixedPointCertificate.real_disc_of_computed
+'LeanMath.Papers.FixedPointCertificate.real_disc_of_computed' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
+== request: axioms LeanMath.Papers.SmithDiscs LeanMath.Papers.SmithDiscs.smith_union
+'LeanMath.Papers.SmithDiscs.smith_union' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
+== request: axioms LeanMath.Papers.SimultaneousRectangle LeanMath.Papers.SimultaneousRectangle.trap_cube
+'LeanMath.Papers.SimultaneousRectangle.trap_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0

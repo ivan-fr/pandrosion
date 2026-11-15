@@ -1,0 +1,25 @@
+{
+  "archive": "pandroots-0.5.0.zip",
+  "rust_source_sha256": {
+    "src/float.rs": "7a69a2cfb291ab68fcf2354c88d75b4e03a95793bd62e3d3e6f7396670145704",
+    "src/lib.rs": "eb78f1aa6a5e516628fd763dd9d6722c81673f64e7a30b19f95263854caa39fc",
+    "src/sqfree.rs": "02106bfb9d0d256c799510bc5ff590ad9f96fd9ea2e19654cdb222b7a4b19e95",
+    "src/exact.rs": "c0d4ce5bd0e325a586806dca5341edae9d26d5fd889ad517a0226d45835c66de",
+    "src/complex.rs": "58496bcd12b15872325ded486097e9bd29c06b363ddc924b89b0e50edb17a480",
+    "src/precise.rs": "ac41e8d6ad3309546322fe567af873b607b50d7bee4f47b420d8e2b107595e24",
+    "src/bin/bench.rs": "99788b25bd2725506b8fe4c5b4f0cb64e862fba5034477f81b6487cbf0927132",
+    "tests/basic.rs": "35a6f5c55bd8bdba2deee6cd8db587a8d7502b03cade500a17982e4487aa5bfe"
+  },
+  "lean_sha256": {
+    "verification/lean/FixedPointCertificate.lean": "30cb479fcf104dc676bba00c76dcdf3cf40c70a64dd2ded3297c61aa2919b9be",
+    "verification/lean/SimultaneousRectangle.lean": "d15432a52ee8cd63dcf38416fea2a382489131b770160b5f60ba5fc4c0f796d0",
+    "verification/lean/SmithDiscs.lean": "750c0458ca3bdc72939233b562d53a81a898f3a63e8495374c3a2ae373d0939c",
+    "verification/lean/build_log.txt": "fb272d4107c94ce63c1c358d1883ec10a350a50db1ec080229fabccf994514f8"
+  },
+  "packaging_changes": [
+    "Publication metadata, license and layout carried forward from the published 0.2.0 crate",
+    "src/lib.rs includes the README in rustdoc, as in 0.2.0",
+    "Numerical changes of 0.5.0 are listed in CHANGELOG.md"
+  ],
+  "lean_evidence_origin": "G8 revision 7 (38 theorems), built on 2026-11-14; not rebuilt for this release. The theorems cover the certificate, not the ball evaluation, the multiprecision step or the decimal output."
+}

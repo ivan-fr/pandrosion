@@ -1,0 +1,15 @@
+== request: check ZeroDeflation.lean (lake env lean, Lean 4.33.1 / Mathlib v4.33.1, container lean-math-lean-1, 15 November 2026)
+exit 0
+== request: axioms of the seven theorems
+'LeanMath.Papers.ZeroDeflation.exists_X_pow_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ZeroDeflation.roots_X_pow_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ZeroDeflation.rootMultiplicity_zero_X_pow_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.ZeroDeflation.rootMultiplicity_X_pow_mul_of_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanMath.Papers.ZeroDeflation.roots_C_mul'' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ZeroDeflation.zero_notMem_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.ZeroDeflation.roots_filter_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
