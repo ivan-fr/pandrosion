@@ -13,4 +13,6 @@ M5 and are unchanged; the times here are those of another machine and are not co
                                            1e-80, default and full order; the 13 named polynomials pass
   cargo_test.log                           cargo test --release in pandroots: 35 tests pass (also in a debug
                                            build)
-The lines that give a verdict are the same as in the logs of 0.12.0.
+The verdicts are those of the logs of 0.12.0, count for count.  In precise_check the largest radius against
+the tolerance is 0.24 at 1e-30 and 0.43 at 1e-80 with full order (0.26 and 0.27 with 0.12.0; below 1 is a pass):
+the points of the double precision stage are not the same to the last bit.
