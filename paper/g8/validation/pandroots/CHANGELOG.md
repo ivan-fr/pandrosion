@@ -47,6 +47,14 @@ polynomial; 0.12.0, 0.13.0, 0.14.0):
 
 Tests: the two's complement loop against `BigInt`.  36 tests, in release and debug builds.
 
+Lean (added after the measurements, for 0.13.0 and 0.14.0): `CertificateGap.lean` (the test of the
+certificate from the smallest gap implies the two inequalities of the theorem), `SparseHorner.lean` (the
+closed form of a run of zero coefficients, the value of S alone, and the rounding of a power computed with
+k products in any order) and `TwoComplement.lean` (the arithmetic shift as the floor, the power of two of
+the multipliers, the limb of the quotient).  Fifteen theorems, checked by the workflow `Pandroots Lean
+files` of the repository (Lean 4.33.1 / Mathlib v4.33.1), standard axioms only.  Not formalised: the
+floating-point model, the underflows and the Rust code.
+
 ## 0.13.0 - 2026-11-16
 
 Found by profiling 0.12.0 on the 10 000 polynomials, then measured on 20 000 (the same and 10 000 more

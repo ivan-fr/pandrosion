@@ -1,0 +1,30 @@
+== GitHub Actions, workflow "Pandroots Lean files", run 43903929191 (commit 3926ba5), ubuntu-24.04,
+== 16 November 2026; the Lean toolchain and the Mathlib of the repository (Lean 4.33.1 / Mathlib v4.33.1),
+== Mathlib from its cache (scripts/fetch_mathlib_cache.sh), then check_0_14_0.sh
+== request: check CertificateGap.lean (lake env lean)
+exit 0
+== request: axioms of the theorems of CertificateGap.lean
+'LeanMath.Papers.CertificateGap.div_le_div_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.CertificateGap.sum_div_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.CertificateGap.sum_div_sq_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.CertificateGap.quick_test' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
+== request: check SparseHorner.lean (lake env lean)
+exit 0
+== request: axioms of the theorems of SparseHorner.lean
+'LeanMath.Papers.SparseHorner.zero_steps' depends on axioms: [propext, Quot.sound]
+'LeanMath.Papers.SparseHorner.gap_step' depends on axioms: [propext, Quot.sound]
+'LeanMath.Papers.SparseHorner.q1_succ' depends on axioms: [propext]
+'LeanMath.Papers.SparseHorner.two_q2' depends on axioms: [propext]
+'LeanMath.Papers.SparseHorner.value_alone' does not depend on any axioms
+'LeanMath.Papers.SparseHorner.comp_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
+== request: check TwoComplement.lean (lake env lean)
+exit 0
+== request: axioms of the theorems of TwoComplement.lean
+'LeanMath.Papers.TwoComplement.shift_floor' depends on axioms: [propext, Quot.sound]
+'LeanMath.Papers.TwoComplement.scaled_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.TwoComplement.step_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.TwoComplement.limb_of_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.TwoComplement.limb_of_shift_pow' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0

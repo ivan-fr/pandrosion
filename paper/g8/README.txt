@@ -19,6 +19,8 @@ Horner's rule over runs of zero coefficients, the certificate computed once, no 
   validation/v0_13_0/, validation/v0_14_0/   rust_check.py, underflow_check.py and precise_check.py run
                          again with each version on that machine (their logs; the verdicts are those of
                          0.12.0), and cargo test (35 and 36 tests).
+Lean: three more files (fifteen theorems) for what 0.13.0 and 0.14.0 added, in
+validation/pandroots/verification/lean, checked by the workflow .github/workflows/pandroots-lean.yml.
 Not done for 0.13.0 and 0.14.0: the comparison with MPSolve, and a revision of the note.
 
 G8, revision 9 - The simultaneous rectangle (Rust crate pandroots 0.12.0)

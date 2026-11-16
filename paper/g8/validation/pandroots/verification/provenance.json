@@ -12,6 +12,7 @@
     "tests/basic.rs": "5a143d40f7f68d750bf0e27c86ee00f4f4fcc8c77aa39835fb26430761c823dd"
   },
   "lean_sha256": {
+    "verification/lean/CertificateGap.lean": "4532bf8df8da58a680613a65607c8f3809847eeced79c7ddcdf1c5169fa5c952",
     "verification/lean/ClusterCursor.lean": "da9420c06770a2f34063ba8e15e90753ed0ad52798bd03ab1b9701797e6d6a8e",
     "verification/lean/ClusterStep.lean": "8072712b52afd6602e189f6272dba736194933dcd3c3dda819ec4f716acbe814",
     "verification/lean/FixedPointCertificate.lean": "30cb479fcf104dc676bba00c76dcdf3cf40c70a64dd2ded3297c61aa2919b9be",
@@ -19,16 +20,20 @@
     "verification/lean/ScaledVariable.lean": "785a0bbe36e1837614a660ae927ca0f983d0735a903b30f8df2fd9854f7346d6",
     "verification/lean/SimultaneousRectangle.lean": "d15432a52ee8cd63dcf38416fea2a382489131b770160b5f60ba5fc4c0f796d0",
     "verification/lean/SmithDiscs.lean": "750c0458ca3bdc72939233b562d53a81a898f3a63e8495374c3a2ae373d0939c",
+    "verification/lean/SparseHorner.lean": "8c816dd7fca629e66b041e05fa2c06c3ed395ed6b916a9c22278b151713354ec",
+    "verification/lean/TwoComplement.lean": "63e5adb89492ed5e0174996647ab7929e4ee22d0805e5cc2a3431fb5502777af",
     "verification/lean/ZeroDeflation.lean": "cdd544934fa1a95edcace40068c3dba2013ea7d1944fcfec197c1c0a18da7453",
     "verification/lean/build_log.txt": "fb272d4107c94ce63c1c358d1883ec10a350a50db1ec080229fabccf994514f8",
     "verification/lean/build_log_0_10_0.txt": "7ec4c90d6be5ce40bdfed771cf91c81b1da3fb1de2589abf1b7a401d00af90ed",
+    "verification/lean/build_log_0_14_0.txt": "91007a6d11768f6dc4a55d5dcc195e365633eceb56ad085e1361ef965d02ac9b",
     "verification/lean/build_log_0_9_0.txt": "dfae8441dac08b85ad6feb58178c6b49f1d12ee07213b9c3e194a86482956f72",
     "verification/lean/build_log_fixed_width.txt": "a8d7fd328b494a870451051855352abb8f7f6d851ad34d0bfbf26a9d36e167ec",
-    "verification/lean/build_log_zero_deflation.txt": "6561f89100b77c465e94f8fea1c6765bd933d743888744a7e3729cf1e2bb88f2"
+    "verification/lean/build_log_zero_deflation.txt": "6561f89100b77c465e94f8fea1c6765bd933d743888744a7e3729cf1e2bb88f2",
+    "verification/lean/check_0_14_0.sh": "ac8be16e0fb56fc40c4efcefe99b1a18289d7dc28dff47873b2fc73d35aa0055"
   },
   "packaging_changes": [
     "Publication metadata, license and layout carried forward from the published 0.5.0 crate",
     "Numerical changes of 0.6.0 to 0.14.0 are listed in CHANGELOG.md"
   ],
-  "lean_evidence_origin": "G8 revision 7 (38 theorems), built on 2026-11-14 with Lean 4.33.1 and not rebuilt for this release; ZeroDeflation.lean (7 theorems, 0.6.0), FixedWidth.lean (4 lemmas, 0.7.0), ScaledVariable.lean (9 theorems, 0.8.0) ClusterStep.lean (6 theorems, 0.9.0) and ClusterCursor.lean (5 lemmas, 0.10.0), checked on 2026-11-15 with Lean 4.35.0 / Mathlib v4.35.0. The theorems cover the certificate, the deflation of the root zero, two arithmetic identities, the scaled variable and the step of a cluster on a shifted power; not the Rust code, the ball evaluation, the multiprecision step, Yun's algorithm, the decimal output, nor how close a cluster is to a shifted power."
+  "lean_evidence_origin": "G8 revision 7 (38 theorems), built on 2026-11-14 with Lean 4.33.1 and not rebuilt for this release; ZeroDeflation.lean (7 theorems, 0.6.0), FixedWidth.lean (4 lemmas, 0.7.0), ScaledVariable.lean (9 theorems, 0.8.0) ClusterStep.lean (6 theorems, 0.9.0) and ClusterCursor.lean (5 lemmas, 0.10.0), checked on 2026-11-15 with Lean 4.35.0 / Mathlib v4.35.0; CertificateGap.lean (4 theorems), SparseHorner.lean (6) and TwoComplement.lean (5), for 0.13.0 and 0.14.0, checked on 2026-11-16 by the GitHub Actions workflow of the repository with Lean 4.33.1 / Mathlib v4.33.1. The theorems cover the certificate, the deflation of the root zero, two arithmetic identities, the scaled variable and the step of a cluster on a shifted power; not the Rust code, the ball evaluation, the multiprecision step, Yun's algorithm, the decimal output, nor how close a cluster is to a shifted power."
 }

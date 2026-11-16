@@ -49,6 +49,33 @@ K-th power law behind the bits asked after a step.  The rounding of that computa
 the cursor is used only above an estimate of its rounding, and an error there would cost time, not
 correctness.
 
+`CertificateGap.lean`, `SparseHorner.lean` and `TwoComplement.lean` (0.13.0 and 0.14.0, fifteen theorems,
+checked on 16 November 2026 by the workflow `Pandroots Lean files` of the repository with its own toolchain,
+Lean 4.33.1 / Mathlib v4.33.1; log and axiom audit in `build_log_0_14_0.txt`, script `check_0_14_0.sh`):
+
+* `CertificateGap.lean` (four theorems): the test of the certificate from the smallest gap.  With `g` a
+  lower bound of the gaps of the point `k` and `W` the sum of all the bounds `w_l`, `W / g < 1/2` and
+  `w_k W / g² < 1/4` give the two inequalities `σ_k < 1/2`, `w_k τ_k < 1/4` that `FixedPointCertificate.lean`
+  starts from.
+* `SparseHorner.lean` (six theorems): a run of zero coefficients in Horner's rule for `(S, S', S''/2)` is
+  the closed form that the program uses (`zero_steps`, `gap_step`, with `q1_succ` and `two_q2` for the two
+  factors `g x^(g-1)` and `g (g-1)/2 x^(g-2)`); the value of `S` is that of the rule for `S` alone
+  (`value_alone`); and a power `x^(k+1)` computed with `k` products in any order, each within a relative
+  error `u`, is within `((1 + u)^k - 1) |x|^(k+1)` of the true one (`comp_bound`), the bound of `k`
+  successive products: repeated squaring does not cost the rounding bound anything.
+* `TwoComplement.lean` (five theorems): the shift that fills with the sign bit is the floor of the
+  quotient, the common power of two of the multipliers comes off the shift, and the limb of the quotient
+  is `floor(lo / 2^s) + (hi mod 2^s) 2^(64 - s)` from two consecutive limbs of the product.
+
+What these three files do not cover.  They are statements about real, complex and integer numbers.  That a
+product of two doubles is within a relative error `u` of the true product, the operations that underflow,
+the rounding of `W / g` in double precision, and the Rust code that implements the formulas (signed
+carries, the detection of a number that does not fit) are not formalised; they are covered by the margins
+of the code and by its tests against `BigInt`.  That the sweeps and the certificate evaluate the
+polynomial at the same points (0.13.0) is a property of the program, not a theorem: `value_alone` is its
+mathematical part.  The number of bits asked in advance (0.14.0) is a heuristic and needs no proof: a
+value with too few bits is computed again, as before.
+
 These files provide evidence for the mathematical statements, not a formal verification of
 version 0.14.0. They are not compiled by Cargo.
 
