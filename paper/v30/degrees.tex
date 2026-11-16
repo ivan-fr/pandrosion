@@ -1,0 +1,88 @@
+% =========================================================================
+\section{Which degrees give a finite construction}\label{sec:degrees}
+
+Theorems~\ref{thm:arc} and~\ref{thm:mean} are statements about real functions of a real parameter $p$.
+A drawing needs more: the residual $t=X/u^{p}$ must be \emph{constructed} at every step. The triangle
+stage constructs integer powers only. This section says exactly what follows.
+
+\begin{proposition}[Rational degrees are finite constructions]\label{prop:rational}
+Let $p=\mu/\nu$ with coprime positive integers $\mu,\nu$, and $X>0$. Then $X^{1/p}=(X^{\nu})^{1/\mu}$,
+and:
+\begin{enumerate}[label=(\roman*)]
+\item if $\mu\ge3$, every integer-degree protocol of this paper applies with degree $\mu$ and input
+  $X^{\nu}$. In particular the decentered and three-mean iterations converge monotonically from every
+  positive start, with orders five and nine, at no more than $10\mu+9$ and $10\mu+11$ traces per step
+  (Section~\ref{sec:work}). The input $X^{\nu}$ is fixed preparation: $\nu-1$ five-join products, once;
+\item if $\mu\in\{1,2\}$, the root $X^{\nu}$ or $\sqrt{X^{\nu}}$ is constructed exactly, by $\nu-1$
+  products and at most one mean proportional.
+\end{enumerate}
+For $p<0$ apply the above to $|p|$ and invert the output (five joins, once).
+\end{proposition}
+\begin{proof}
+The residual of the degree-$\mu$ problem with input $X^{\nu}$ is $t=X^{\nu}s^{\mu}$, built by the
+triangle stage with $\mu$ in place of $p$ from the prepared point $M=(0,H(1-X^{-\nu}))$. Theorems
+\ref{thm:arc} and \ref{thm:mean} apply with real degree $\mu>2$ and positive input $X^{\nu}$, and their
+fixed point is $(X^{\nu})^{1/\mu}$.
+\end{proof}
+
+Two consequences are worth stating. First, the degree seen by the iteration is $\mu$, not $p$: the
+degree $p=3/2$ is handled as a cube root of $X^{2}$, inside the domain $\mu>2$ of the unmodified
+formulas although $3/2<2$. Second, the cost is governed by $\mu$: $p=355/113$ costs as much per step
+as degree $355$.
+
+The restriction to degree greater than two is real for the \emph{raw} formulas. At $p=2$ the
+coefficients $m$ and $n$ of \eqref{eq:mcoeff} vanish, $g=1$, and $q_M=\sqrt t$ is the exact support,
+while the preparation of the decentered arc is singular. For $\tfrac12<p<2$ the weights $m$ and $n$ are
+negative and the positivity argument of Theorem~\ref{thm:mean} no longer applies. As a scalar statement
+the restriction can be removed:
+
+\begin{proposition}[Scalar extension to every nonzero real degree]\label{prop:scalar}
+For every real $p\neq0$, every $X>0$ and every start $u_0>0$ there is an explicit modification of the
+three-mean iteration \eqref{eq:qM} that converges monotonically to $X^{1/p}$ without crossing it.
+\end{proposition}
+\begin{proof}
+Choose an integer $k\ge0$ with $p'=2^{k}|p|>2$, and write $F_{p',X}(v)=1/\Tm_M(1/v)$ for the three-mean
+iteration of degree $p'$ in the direct state. For $p>0$ put $v_0=u_0^{1/2^{k}}$, iterate
+$v_{n+1}=F_{p',X}(v_n)$ and report $u_n=v_n^{2^{k}}$; for $p<0$ put $v_0=u_0^{-1/2^{k}}$ and report
+$u_n=v_n^{-2^{k}}$. The reported start is exactly $u_0$. Theorem~\ref{thm:mean} gives
+$v_n\to X^{1/p'}$ monotonically, so $u_n\to X^{\pm2^{k}/p'}=X^{1/p}$. Positive integer powers preserve
+inequalities and inversion reverses them together with the direction of approach. For $p>2$ take
+$k=0$. The same argument applies to the decentered arc with Theorem~\ref{thm:arc}.
+\end{proof}
+
+Proposition~\ref{prop:scalar} is a change of variable and adds no geometric content beyond
+Proposition~\ref{prop:rational}: for irrational $p$ the step still needs the real power
+$v^{p'}$, which is a problem of the same nature as the root being sought. Irrational degrees can
+nevertheless be reached by the fast iterations through a rational approximation of $p$, with a
+controlled error:
+
+\begin{proposition}[Irrational degrees by rational approximation]\label{prop:irrational}
+Let $p>0$ be real, $X>0$, $r=X^{1/p}$, and let $\mu,\nu$ be positive integers with
+$\bigl|\nu/\mu-1/p\bigr|\le\eta$. Then $r'=X^{\nu/\mu}$ satisfies
+\[ \Bigl|\frac{r'}{r}-1\Bigr|\le e^{\eta|\log X|}-1 . \]
+If moreover $\tilde u>0$ satisfies $|\tilde u/r'-1|\le\eps_1$, then
+$|\tilde u/r-1|\le(1+\eps_1)\,e^{\eta|\log X|}-1$.
+\end{proposition}
+\begin{proof}
+$r'/r=X^{\nu/\mu-1/p}$, so $|\log(r'/r)|\le\eta|\log X|$, which gives the first bound since
+$1-e^{-y}\le e^{y}-1$ for $y\ge0$. For the second, $\tilde u/r=(\tilde u/r')(r'/r)$ lies between
+$(1-\eps_1)e^{-y}$ and $(1+\eps_1)e^{y}$ with $y=\eta|\log X|$, and
+$1-(1-\eps_1)e^{-y}\le(1+\eps_1)e^{y}-1$.
+\end{proof}
+
+\begin{remark}[Cost of the rational route]\label{rem:pi}
+Take $p=\pi$, $X=2$, $r=2^{1/\pi}=1.2468689889\ldots$ With $\mu/\nu=22/7$, $\eta\approx1.28\times10^{-4}$
+and the approximation error is at most $8.9\times10^{-5}$; a step costs at most $229$ traces (decentered)
+or $231$ (three means), after $30$ joins of preparation. With $\mu/\nu=355/113$,
+$\eta\approx2.70\times10^{-8}$ and the error is at most $1.9\times10^{-8}$, but a step costs at most
+$3559$ or $3561$ traces after $560$ joins of preparation. The direct subdivision of
+Section~\ref{sec:enclosure} reaches relative width $10^{-8}$ for the true exponent in at most $123$
+traces. Since a convergent $\nu/\mu$ of $1/p$ has $\eta$ of order $\mu^{-2}$, the rational route needs
+$\mu$ of order $\eps^{-1/2}$ for accuracy $\eps$, while its step cost is linear in $\mu$. For irrational
+degrees the subdivision is therefore the recommended calculator, and the rational route is of interest
+only when a small $\mu$ is acceptable.
+\end{remark}
+
+A third route would approximate the real power $u^{p}$ inside each step by an inner subdivision. That
+is a two-level recursion whose outer iteration receives an inexact residual; its convergence would need
+a perturbation analysis that we have not carried out (Section~\ref{sec:conclusion}).
