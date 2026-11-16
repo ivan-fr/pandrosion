@@ -4,7 +4,7 @@ use crate::complex::C;
 use crate::exact::GPoly;
 use num_bigint::BigInt;
 use num_integer::Integer;
-use num_traits::{One, ToPrimitive, Zero};
+use num_traits::{One, Zero};
 
 const PRIMES: [(u64, u64); 3] = [(998244353, 3), (1004535809, 3), (469762049, 3)]; // p = 1 mod 4, primitive root
 
@@ -21,7 +21,12 @@ fn powmod(mut b: u64, mut e: u64, p: u64) -> u64 {
     r
 }
 fn red(x: &BigInt, p: u64) -> u64 {
-    x.mod_floor(&BigInt::from(p)).to_u64().unwrap()
+    // p < 2^31: the digits of 32 bits from the top, without a big integer for the remainder
+    let mut r = 0u64;
+    for d in x.iter_u32_digits().rev() {
+        r = ((r << 32) | d as u64) % p;
+    }
+    if x.sign() == num_bigint::Sign::Minus && r != 0 { p - r } else { r }
 }
 
 /// True if S is certainly square-free: gcd(S, S') = 1 modulo a prime that does not divide the leading
@@ -44,13 +49,23 @@ pub fn squarefree_mod_p_float(c: &[C]) -> bool {
     };
     let parts: Vec<[(u64, i64, bool); 2]> = c.iter().map(|x| [dec(x.re), dec(x.im)]).collect();
     let emin = parts.iter().flatten().filter(|t| t.0 != 0).map(|t| t.1).min().unwrap_or(0);
+    let emax = parts.iter().flatten().filter(|t| t.0 != 0).map(|t| t.1).max().unwrap_or(0);
+    let mut pow2: Vec<u64> = Vec::with_capacity((emax - emin + 1).max(1) as usize);
     PRIMES.iter().any(|&(p, g)| {
         let r = powmod(g, (p - 1) / 4, p);
+        // the powers of two that the coefficients need, by doublings (one power per coefficient by
+        // repeated squaring was most of this test for a polynomial of degree 20)
+        pow2.clear();
+        let mut v = 1u64;
+        for _ in emin..=emax {
+            pow2.push(v);
+            v = if 2 * v >= p { 2 * v - p } else { 2 * v };
+        }
         let one = |t: &(u64, i64, bool)| {
             if t.0 == 0 {
                 return 0;
             }
-            let v = (t.0 % p) * powmod(2, (t.1 - emin) as u64, p) % p;
+            let v = (t.0 % p) * pow2[(t.1 - emin) as usize] % p;
             if t.2 { (p - v) % p } else { v }
         };
         euclid(parts.iter().map(|t| (one(&t[0]) + r * one(&t[1])) % p).collect(), p)
@@ -84,13 +99,18 @@ fn euclid_p<const P: u64>(mut a: Vec<u64>) -> bool {
         if b0 == b.len() {
             break;
         }
-        let inv = powmod(b[b0], p - 2, p);
+        // a <- lead(b) a - lead(a) x^k b: the remainder up to a constant that is not zero modulo p, without
+        // the inverse of lead(b) (thirty squarings for each remainder: most of this test at degree 20)
+        let lead = b[b0];
         let lb = b.len() - b0;
         let pp = p * p;
         while a.len() - a0 >= lb {
-            let f = a[a0] * inv % p;
+            let f = a[a0];
             for i in 1..lb {
-                a[a0 + i] = (a[a0 + i] + pp - f * b[b0 + i]) % p;
+                a[a0 + i] = (a[a0 + i] * lead + pp - f * b[b0 + i]) % p;
+            }
+            for x in a[a0 + lb..].iter_mut() {
+                *x = *x * lead % p;
             }
             a0 += 1;
         }

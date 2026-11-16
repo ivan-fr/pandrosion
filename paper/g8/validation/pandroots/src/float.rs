@@ -285,6 +285,8 @@ pub struct EvalWs {
     b: [Vec<f64>; 2],
     ax: Vec<f64>,
     sa: Vec<f64>,
+    /// how many of the points of `idx` are in the unit disc (they come first)
+    nin: usize,
 }
 #[inline(always)]
 #[allow(clippy::too_many_arguments)]
@@ -327,12 +329,21 @@ impl Poly {
     /// S'/S, S''/S and the residual test at all the points.
     /// `second`: also S''/S (not needed by the line AK).
     pub fn ev_all(&self, z: &[C], marg: f64, second: bool, ws: &mut EvalWs, out: &mut [Ev]) {
+        self.ev_some(z, &[], marg, second, ws, out)
+    }
+    /// `ev_all` at the points k for which `skip[k]` is false (all of them if `skip` is empty); `out` keeps
+    /// what it had for the others.  A point whose residual is at rounding level does not move any more, and
+    /// its values need not be computed again (version 0.13.0).
+    pub fn ev_some(&self, z: &[C], skip: &[bool], marg: f64, second: bool, ws: &mut EvalWs, out: &mut [Ev]) {
         let m = z.len();
         let deg = self.degree() as f64;
+        let live = |k: usize| skip.is_empty() || !skip[k];
         ws.idx.clear();
-        ws.idx.extend((0..m).filter(|&k| z[k].norm_sqr() <= 1.0));
+        ws.idx.extend((0..m).filter(|&k| live(k) && z[k].norm_sqr() <= 1.0));
         let nin = ws.idx.len();
-        ws.idx.extend((0..m).filter(|&k| !(z[k].norm_sqr() <= 1.0)));
+        ws.idx.extend((0..m).filter(|&k| live(k) && !(z[k].norm_sqr() <= 1.0)));
+        let cnt = ws.idx.len();
+        ws.nin = nin;
         for v in ws.x.iter_mut().chain(ws.p.iter_mut()).chain(ws.a.iter_mut()).chain(ws.b.iter_mut()) {
             v.resize(m, 0.0);
         }
@@ -349,7 +360,7 @@ impl Poly {
         let [ar, ai] = &mut ws.a;
         let [br, bi] = &mut ws.b;
         if let Some(sp) = &self.sparse {
-            for i in 0..m {
+            for i in 0..cnt {
                 let (steps, c0, a0) = if i < nin { (&sp[0], self.c[0], self.abs[0]) } else { (&sp[1], self.rev[0], self.absrev[0]) };
                 let (p, d1, d2, sa) = sparse_eval(steps, c0, a0, C::new(xr[i], xi[i]), ws.ax[i], second);
                 pr[i] = p.re;
@@ -362,10 +373,10 @@ impl Poly {
             }
         } else if second {
             kernel::<true>(&self.c, &self.abs, &xr[..nin], &xi[..nin], &ws.ax[..nin], &mut pr[..nin], &mut pi[..nin], &mut ar[..nin], &mut ai[..nin], &mut br[..nin], &mut bi[..nin], &mut ws.sa[..nin]);
-            kernel::<true>(&self.rev, &self.absrev, &xr[nin..], &xi[nin..], &ws.ax[nin..], &mut pr[nin..], &mut pi[nin..], &mut ar[nin..], &mut ai[nin..], &mut br[nin..], &mut bi[nin..], &mut ws.sa[nin..]);
+            kernel::<true>(&self.rev, &self.absrev, &xr[nin..cnt], &xi[nin..cnt], &ws.ax[nin..cnt], &mut pr[nin..cnt], &mut pi[nin..cnt], &mut ar[nin..cnt], &mut ai[nin..cnt], &mut br[nin..cnt], &mut bi[nin..cnt], &mut ws.sa[nin..cnt]);
         } else {
             kernel::<false>(&self.c, &self.abs, &xr[..nin], &xi[..nin], &ws.ax[..nin], &mut pr[..nin], &mut pi[..nin], &mut ar[..nin], &mut ai[..nin], &mut br[..nin], &mut bi[..nin], &mut ws.sa[..nin]);
-            kernel::<false>(&self.rev, &self.absrev, &xr[nin..], &xi[nin..], &ws.ax[nin..], &mut pr[nin..], &mut pi[nin..], &mut ar[nin..], &mut ai[nin..], &mut br[nin..], &mut bi[nin..], &mut ws.sa[nin..]);
+            kernel::<false>(&self.rev, &self.absrev, &xr[nin..cnt], &xi[nin..cnt], &ws.ax[nin..cnt], &mut pr[nin..cnt], &mut pi[nin..cnt], &mut ar[nin..cnt], &mut ai[nin..cnt], &mut br[nin..cnt], &mut bi[nin..cnt], &mut ws.sa[nin..cnt]);
         }
         for (i, &k) in ws.idx.iter().enumerate() {
             let p = C::new(pr[i], pi[i]);
@@ -397,22 +408,37 @@ impl Poly {
         self.ev_all(z, marg, false, ws, &mut ev);
         out.clear();
         out.resize(z.len(), (0.0, 0));
-        let nin = z.iter().filter(|x| x.norm_sqr() <= 1.0).count();
         for (i, &k) in ws.idx.iter().enumerate() {
-            let pa = ws.p[0][i].hypot(ws.p[1][i]);
-            // outside the unit disc the point 1/z is itself rounded: twice the margin
-            let mg = if i < nin { marg } else { 2.0 * marg };
-            // the leading coefficient may have been rounded to a subnormal number: lower bound of its modulus
-            let lead = self.abs[0] - 4.0 * ETA;
-            let b = if lead > 0.0 { (pa + mg * (ws.sa[i] + self.tiny())) / lead * (1.0 + 4.0 * U) } else { f64::INFINITY };
-            out[k] = if i < nin {
-                (b, 0)
-            } else {
-                let (fz, e) = frexp(z[k].abs());
-                (b * fz.powi(m as i32) * (1.0 + 2.0 * m as f64 * U), e * m as i64)
-            };
+            out[k] = self.bound_one(ws.p[0][i], ws.p[1][i], ws.sa[i], i < ws.nin, z[k]);
         }
     }
+    /// The bound of one point from what Horner's rule computed there: the value (pr, pi) of S, or of the
+    /// reversed polynomial at 1/z for a point outside the unit disc, and the sum of the moduli `sa`.
+    fn bound_one(&self, pr: f64, pi: f64, sa: f64, inside: bool, z: C) -> (f64, i64) {
+        let m = self.degree();
+        let marg = 4.0 * (m as f64 + 1.0) * U;
+        let pa = pr.hypot(pi);
+        // outside the unit disc the point 1/z is itself rounded: twice the margin
+        let mg = if inside { marg } else { 2.0 * marg };
+        // the leading coefficient may have been rounded to a subnormal number: lower bound of its modulus
+        let lead = self.abs[0] - 4.0 * ETA;
+        let b = if lead > 0.0 { (pa + mg * (sa + self.tiny())) / lead * (1.0 + 4.0 * U) } else { f64::INFINITY };
+        if inside {
+            (b, 0)
+        } else {
+            let (fz, e) = frexp(z.abs());
+            (b * fz.powi(m as i32) * (1.0 + 2.0 * m as f64 * U), e * m as i64)
+        }
+    }
+}
+
+/// Fujiwara's bound of the moduli of the roots.
+pub fn fujiwara(s: &Poly) -> f64 {
+    let mut rf: f64 = 0.0;
+    for j in 1..=s.degree() {
+        rf = rf.max((s.abs[j] / s.abs[0]).powf(1.0 / j as f64));
+    }
+    2.0 * rf
 }
 
 /// m points on a circle around the centroid of the roots (start of G2/G7); also the Fujiwara bound.
@@ -420,11 +446,7 @@ pub fn landing_circle(s: &Poly) -> (Vec<C>, f64) {
     let m = s.degree();
     let c0 = s.c[0];
     let cen = -(s.c[1] / c0).scale(1.0 / m as f64);
-    let mut rf: f64 = 0.0;
-    for j in 1..=m {
-        rf = rf.max((s.abs[j] / s.abs[0]).powf(1.0 / j as f64));
-    }
-    rf *= 2.0;
+    let rf = fujiwara(s);
     let (p0, p1) = s.eval2(cen);
     let mut r = (p0.abs() / s.abs[0]).powf(1.0 / m as f64).max((p1.abs() / (m as f64 * s.abs[0])).powf(1.0 / (m as f64 - 1.0)));
     if !r.is_finite() || r < 1e-8 * rf {
@@ -656,43 +678,76 @@ pub fn rectangle_step(z: &[C], ev: &[Ev], cf: &[f64; 4], opt: &Options, ws: &mut
 
 /// The simultaneous rectangle in double precision.  Returns the points and the number of sweeps.
 pub fn simultaneous(s: &Poly, opt: &Options, max_sweeps: usize) -> (Vec<C>, usize) {
+    let (z, it, _) = simultaneous_bounds(s, opt, max_sweeps);
+    (z, it)
+}
+
+/// `simultaneous`, and the bounds of |S(z_k)| / |c| at the points returned (those of `Poly::bound_all`) when
+/// the sweeps ended with every residual at rounding level (version 0.13.0).
+///
+/// The points are rounded to 53 bits of their modulus as they move (`exact::quantize`), which is what the
+/// certificate asks of them; the last evaluation of each point by the sweeps is then the evaluation that
+/// the certificate would make, and it is not made twice.  A point whose residual is at rounding level does
+/// not move, and is not evaluated again.  (Up to 0.13.0 a polynomial of degree 20 was evaluated at its
+/// points six times: four sweeps, the evaluation that found them all at rounding level, and the same once
+/// more at the rounded points for the certificate.)
+pub fn simultaneous_bounds(s: &Poly, opt: &Options, max_sweeps: usize) -> (Vec<C>, usize, Option<Vec<(f64, i64)>>) {
     let m = s.degree();
     if m == 1 {
-        return (vec![-(s.c[1] / s.c[0])], 0);
+        return (vec![-(s.c[1] / s.c[0])], 0, None);
     }
-    let (mut z, rf) = landing_circle(s);
-    if opt.start != Start::Circle {
-        if let Some(zb) = binomial_start_with(s, opt.start == Start::Binomial) {
-            z = zb;
+    // the circle around the centroid only if the dominant binomials give no start
+    let start = if opt.start != Start::Circle { binomial_start_with(s, opt.start == Start::Binomial) } else { None };
+    let (z, mut rf) = match start {
+        Some(zb) => (zb, None),
+        None => {
+            let (z, rf) = landing_circle(s);
+            (z, Some(rf))
         }
-    }
+    };
+    let mut z: Vec<C> = z.into_iter().map(crate::exact::quantize).collect();
     let cf = coeffs3(m as f64);
     let marg = 4.0 * (m as f64 + 1.0) * U;
     let mut ev = vec![Ev { a: ZERO, b: ZERO, done: false }; m];
+    let mut done = vec![false; m];
+    // what Horner's rule computed at the last evaluation of each point: value, sum of the moduli, inside
+    let mut last = vec![(0.0f64, 0.0f64, 0.0f64, true); m];
     let mut ews = EvalWs::default();
     let mut sws = StepWs::default();
     let mut dz = vec![ZERO; m];
     let mut it = 0;
+    let mut settled = false;
     while it < max_sweeps {
-        s.ev_all(&z, marg, opt.outer == Support::Three || opt.announce == Announce::Three, &mut ews, &mut ev);
-        if ev.iter().all(|e| e.done) {
+        s.ev_some(&z, &done, marg, opt.outer == Support::Three || opt.announce == Announce::Three, &mut ews, &mut ev);
+        for (i, &k) in ews.idx.iter().enumerate() {
+            last[k] = (ews.p[0][i], ews.p[1][i], ews.sa[i], i < ews.nin);
+            done[k] = ev[k].done;
+        }
+        if done.iter().all(|&d| d) {
+            settled = true;
             break;
         }
         rectangle_step(&z, &ev, &cf, opt, &mut sws, &mut dz);
         let mut small = true;
         for k in 0..m {
-            if !dz[k].is_finite() {
-                dz[k] = C::from_polar(1e-3 * rf, k as f64); // 0/0: nudge, the same iteration goes on
+            if done[k] {
+                continue; // dz[k] = 0
             }
-            z[k] = z[k] - dz[k];
-            small &= dz[k].norm_sqr() <= 16.0 * U * U * z[k].norm_sqr();
+            if !dz[k].is_finite() {
+                let r = *rf.get_or_insert_with(|| fujiwara(s));
+                dz[k] = C::from_polar(1e-3 * r, k as f64); // 0/0: nudge, the same iteration goes on
+            }
+            let n = crate::exact::quantize(z[k] - dz[k]);
+            small &= (z[k] - n).norm_sqr() <= 16.0 * U * U * n.norm_sqr();
+            z[k] = n;
         }
         it += 1;
         if small {
             break;
         }
     }
-    (z, it)
+    let bounds = settled.then(|| (0..m).map(|k| s.bound_one(last[k].0, last[k].1, last[k].2, last[k].3, z[k])).collect());
+    (z, it, bounds)
 }
 
 /// frexp: x = f 2^e with 0.5 <= |f| < 1 (x finite, nonzero).

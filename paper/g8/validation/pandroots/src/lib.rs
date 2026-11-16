@@ -440,9 +440,9 @@ fn factor_roots<'a>(mult: usize, f: &dyn Fn() -> &'a GPoly, s: Poly, real_coeffs
     // magnitude than a double has).  The double precision sweeps would then run on another polynomial: the
     // points start from the dominant binomials of the exact coefficients and go straight to the sweeps with
     // values beyond double precision.
-    let (z0, sw) = match if lost { exact::scaled_start(f()) } else { None } {
-        Some(z) => (z, 0),
-        None => simultaneous(&s, opt, 100 + 10 * m),
+    let (z0, sw, pre) = match if lost { exact::scaled_start(f()) } else { None } {
+        Some(z) => (z, 0, None),
+        None => float::simultaneous_bounds(&s, opt, 100 + 10 * m),
     };
     stats.t_sweeps += t0.elapsed().as_secs_f64();
     let t0 = std::time::Instant::now();
@@ -450,7 +450,7 @@ fn factor_roots<'a>(mult: usize, f: &dyn Fn() -> &'a GPoly, s: Poly, real_coeffs
     // (computed only if the certificate asks for it; it finds by itself that the two starts are the same)
     let other = || simultaneous(&s, &Options { start: float::Start::Edges, ..*opt }, 60 + m).0;
     let alt: Option<&dyn Fn() -> Vec<C>> = if opt.start == float::Start::Binomial && !lost && m >= 16 { Some(&other) } else { None };
-    let cert = exact::certify_from(f, &s, &z0, opt, real_coeffs, alt);
+    let cert = exact::certify_pre(f, &s, &z0, pre, opt, real_coeffs, alt);
     stats.sweeps += sw;
     stats.certificates += cert.certificates;
     stats.exact_sweeps += cert.exact_sweeps;

@@ -31,36 +31,51 @@ prints enough digits and a radius rounded upwards within that slack.
 
 ## Version 0.13.0
 
-Version 0.13.0 comes from profiling 0.12.0 on the 10 000 polynomials below, and was then run on 20 000:
-the same 10 000 and as many again from another seed (sixteen families, 1 043 482 roots, degrees up to
-2 000; generator and scripts in `bench20k/` of the validation archive).  The method is that of 0.12.0, with
-the same sweeps and the same certificate; what changed is what each of them costs.  One call per
-polynomial, one thread, the solver's own flags; Intel Xeon at 2.1 GHz, the smaller of two runs for each
-polynomial (on this machine 0.12.0 takes 22 s for the first 10 000, against about 15 s on the machine of
-the table below).
+Version 0.13.0 comes from profiling 0.12.0, first on the 10 000 polynomials below, then on 50 000 small
+ones, and was measured on two corpora (generators and scripts in `bench20k/` and `bench50k/` of the
+validation archive):
+
+- 20 000 polynomials of sixteen families, the 10 000 below and as many again from another seed: 1 043 482
+  roots, degrees up to 2 000, with the hard cases (clusters, Mignotte, orthogonal polynomials, sparse and
+  dense polynomials of large degree);
+- 50 000 polynomials of degree 2 to 60 in eight families (dense real and complex, small integers,
+  coefficients +-1, coefficients over forty orders of magnitude, integer and Gaussian integer roots with
+  multiplicities, real clusters): the ordinary use.
+
+The method is that of 0.12.0, with the same step and the same certificate; what changed is what each of
+them costs.  One call per polynomial, one thread, the solver's own flags; Intel Xeon at 2.1 GHz, the smaller
+of two runs for each polynomial (on this machine 0.12.0 takes 22 s for the first 10 000, against about 15 s
+on the machine of the table of 0.12.0).
 
 | the 20 000 polynomials | 0.12.0 | 0.13.0 |
 |---|---:|---:|
-| time in all | 54.0 s | 31.6 s |
-| ... the 15 075 for which double precision is enough | 18.0 s | 8.5 s |
-| ... the 2 968 that need values beyond double precision | 34.4 s | 21.6 s |
-| ... the 1 957 that need points beyond double precision | 1.7 s | 1.5 s |
+| time in all | 54.0 s | 29.1 s |
+| ... those for which double precision is enough (15 078) | 18.0 s | 6.6 s |
+| ... those that need values beyond double precision (2 966) | 34.4 s | 21.0 s |
+| ... those that need points beyond double precision (1 956) | 1.7 s | 1.5 s |
 | complete | 20 000 | 20 000 |
 | every root in its own disc within 10^-10 | 18 395 | 18 395 |
-| discs (multiplicities and counts) that differ | | 0 |
+
+| the 50 000 polynomials of degree 2 to 60 | 0.12.0 | 0.13.0 |
+|---|---:|---:|
+| time in all | 2.84 s | 1.97 s |
+| median, dense real (degree 2 to 40) | 56 us | 36 us |
+| median, coefficients +-1 (degree 5 to 60) | 88 us | 57 us |
+| median, integer roots with multiplicities | 22 us | 17 us |
+| median, real clusters | 122 us | 108 us |
 
 | one call (ms) | degree | 0.12.0 | 0.13.0 |
 |---|---:|---:|---:|
-| Laguerre | 150 | 287 | 83 |
-| Chebyshev T | 150 | 182 | 109 |
+| Laguerre | 150 | 287 | 81 |
+| Chebyshev T | 150 | 182 | 108 |
 | Wilkinson | 100 | 128 | 60 |
-| Mandelbrot | 255 | 701 | 371 |
-| truncated exponential | 120 | 50 | 32 |
-| `(z - a)^60 - b` | 60 | 24 | 16 |
-| `z^2000 + z + 1` | 2000 | 72 | 19 |
-| sparse, 6 terms | 1500 | 48 | 14 |
-| dense, Gaussian coefficients | 2000 | 153 | 112 |
-| dense, Gaussian coefficients | 640 | 12.8 | 8.4 |
+| Mandelbrot | 255 | 701 | 367 |
+| truncated exponential | 120 | 50 | 38 |
+| `(z - a)^60 - b` | 60 | 24 | 15 |
+| `z^2000 + z + 1` | 2000 | 72 | 21 |
+| sparse, 6 terms | 1500 | 48 | 13 |
+| dense, Gaussian coefficients | 2000 | 153 | 59 |
+| dense, Gaussian coefficients | 640 | 12.8 | 5.8 |
 
 **Values beyond double precision.**  In that stage the points are doubles and the values of S are
 computed in fixed point with as many bits F as each value asks for.  A point is then, in units of 2^-F,
@@ -72,6 +87,13 @@ through `1/z`, which has F bits, or through `T(t) = S(2^e t)`, whose multiplier 
 cost was elsewhere: when F minus the bits lost could not tell a value from zero, the value was computed
 exactly, with integers of 53 m bits, as if the point might be an exact root.  That exact evaluation now
 waits until F has passed the bits lost, and the limit of the scaled variable is F itself.
+
+**Evaluations that were made twice.**  A polynomial of degree 20 takes four sweeps in double precision,
+and was evaluated at its points six times: after the last sweep once more to find every residual at
+rounding level, and then again, at the same points rounded to 53 bits of their modulus, for the bounds of
+the certificate.  The points are now rounded as they move, the last evaluation of the sweeps gives the
+bounds, and a point whose residual is at rounding level, which no longer moves, is not evaluated again.
+At large degree, where the points settle one after the other, this is the larger part of the gain.
 
 **Polynomials with few terms.**  In double precision Horner's rule went through every coefficient, zero
 or not: 2 000 steps per point for `z^2000 + z + 1`.  When at most one coefficient in twelve is not zero,
@@ -85,16 +107,34 @@ two sums over the other points when the bounds `W / g` and `W / g^2` (W the sum 
 smallest gap of the point) already pass the two tests: one pass without square root or division, enough
 for points that have converged.
 
-**An independent check.**  7 249 of the 20 000 are built from prescribed rational roots.  For these the
+**Fixed costs.**  For a polynomial of degree 20 the test "square-free modulo a prime" took a seventh of
+the time, most of it in modular powers: one per coefficient for its power of two, one per remainder for
+the inverse of a leading coefficient.  The powers of two now come by doublings and the remainders are
+taken up to a constant.
+
+**Are the discs the same?**  On the 50 000, yes: same multiplicities and counts on every polynomial.  On
+the 20 000, on 19 989.  The 11 others are clusters whose roots are 10^-14 to 10^-16 of their size apart,
+which is where double precision centres stop being able to tell them apart; the points now reach such a
+cluster by another path, since they are rounded as they move, and 5 of the 11 come out with more roots in
+their own disc, 6 with fewer.  Both answers are right (next paragraph); which roots of such a cluster get
+their own disc was not, and is not, something the doubles interface promises.  The `precise` functions
+separate them all.
+
+**Independent checks.**  7 249 of the 20 000 are built from prescribed rational roots.  For these the
 discs of 0.13.0 (and of 0.12.0) were compared with the roots in exact rational arithmetic, the printed
 doubles read as the binary numbers they are: each of the 70 364 distinct roots lies in one disc and only
 one, the disc has its multiplicity and holds as many roots as its count.  None is wrong.  For the other
-12 751 polynomials the figures are the solver's own.
+12 751 polynomials the figures are the solver's own.  On the 50 000, the discs were compared with the
+known roots (10 000 polynomials), with `numpy.roots`, and, where numpy disagrees and on a sample of each
+family, with `mpmath.polyroots` at 60 digits: see `bench50k/`.
 
-What still costs, of the 31.6 seconds: the orthogonal polynomials (12.5 s for 510 of them), the powers,
-the Wilkinson polynomials and the Mandelbrot polynomials and truncated exponentials (8.7 s with their
-groups), 15 to 40 sweeps of hundreds of bits each, a number that 0.13.0 does not change; then the dense polynomials of degree 320 to 2 000 (3.4 s) and the sparse
-ones (3.6 s), where what is left is the m^2 pairs of points of each sweep.
+What still costs, of the 29 seconds: the orthogonal polynomials (12.2 s for 510 of them), the powers,
+the Wilkinson polynomials and the Mandelbrot polynomials and truncated exponentials (8.4 s with their
+groups), 15 to 40 sweeps of hundreds of bits each, a number that 0.13.0 does not change; then the sparse
+polynomials (3.3 s) and the dense ones of degree 320 to 2 000 (2.0 s), where what is left is the m^2 pairs
+of points of each sweep.  For a polynomial of degree 20, 36 microseconds: two thirds in the four sweeps
+(the pairs of points, with a division and two complex square roots per point), the rest in the
+certificate and the square-free test.
 
 ## Version 0.12.0
 

@@ -1,11 +1,11 @@
 {
   "archive": "pandroots-0.13.0 (development sources: 0.5.0 with the changes of CHANGELOG.md)",
   "rust_source_sha256": {
-    "src/float.rs": "60466081f9d0cbf8da7e9548a5c726166416c7b7e2243e4acb68b9b2ea989185",
-    "src/lib.rs": "10a7e6858395cda5f8a5d66d6cb0072ec31354a174a471c4580fd47d8fca13dd",
+    "src/float.rs": "5236b3de74f8623e51fec47b3b2918dd5a9249969f735c8114d72164cead6248",
+    "src/lib.rs": "3283b89c03122fec9f6015750e664aaf5030c3b630c542fcaf0e48ae2185c4e4",
     "src/limbs.rs": "c96814bbb16f06d6c03b56df705d15b7c717637618f0877326ba0c09d236ee6c",
-    "src/sqfree.rs": "5e68fd2ac3fac1bd00ba2e0a9f3549d3db1a8ce6689591afcadd74c011a4fd18",
-    "src/exact.rs": "ebefd66334d3127b22ac5b03013b315f4b225074b26d499de947615e5fd43cdf",
+    "src/sqfree.rs": "158b3583a9dd1a62d024bcacba48aed41cd39278fefd8b93107a64ff09211812",
+    "src/exact.rs": "0629fbb7f57218d4a78b6ef7c2df033fb4d2f801680ca2fbdaa24da97fc58e59",
     "src/complex.rs": "58496bcd12b15872325ded486097e9bd29c06b363ddc924b89b0e50edb17a480",
     "src/precise.rs": "d439b80409989416f955e455ced8c96c6879c6678aa11de28e8a4898ff78248a",
     "src/bin/bench.rs": "e66b4a0798841da413704128634b592d872d5decb9b26687aebfa33b95274fdc",

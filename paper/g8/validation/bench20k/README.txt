@@ -26,7 +26,9 @@ the same sixteen families from another seed (20261117, names m_*): 1 043 482 roo
 
 Results (results_0.13.0.txt; Intel Xeon at 2.1 GHz, one thread)
   0.12.0   54.0 s   20 000 complete, 18 395 with every root in its own disc within 10^-10
-  0.13.0   31.6 s   the same; the discs (multiplicities and counts) are those of 0.12.0 on every polynomial
+  0.13.0   29.1 s   20 000 complete, 18 395 with every root in its own disc within 10^-10
+  the discs (multiplicities and counts) are the same on 19 989 polynomials; the 11 others are clusters with
+  roots 10^-14 to 10^-16 of their size apart, at the limit of what double precision centres separate
   exact check of the discs on 7 249 polynomials, 70 364 distinct roots: none wrong (either version)
 The 1 605 polynomials not "within 10^-10" are clusters and Mignotte pairs that double precision centres
 cannot separate (one disc with their number) and Kameny polynomials.

@@ -7,7 +7,7 @@ fixed-width arithmetic in the multiprecision evaluation, which computes the same
 cursor in multiprecision; 0.11.0 and 0.12.0: gcds by images modulo primes in Yun's algorithm, the start from
 the exact coefficients, the choice between two starts; 0.13.0: the product by a short multiplier in one
 pass, which computes the same integers, Horner's rule over runs of zero coefficients, the test of the
-certificate from the smallest gap; no Lean file was added for these, which are checked by exact division,
+certificate from the smallest gap, the bounds of the certificate taken from the last evaluation of the sweeps; no Lean file was added for these, which are checked by exact division,
 by the certificate and by the tests).
 Its source hashes are recorded in `provenance.json`.
 

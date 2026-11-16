@@ -152,6 +152,16 @@ pub(crate) fn exact_val(ci: &GPoly, h: &((BigInt, BigInt), (BigInt, BigInt), (Bi
 
 /// Round each point to 53 significant bits of its modulus.
 pub fn quantize(z: C) -> C {
+    // the usual case without a call: the modulus from the squares, the power of two from its bits
+    // (the exponent may differ by one from that of the exact modulus when the modulus is within a
+    // rounding of a power of two: the point then keeps 52 or 54 bits, which is as good)
+    let n = z.norm_sqr();
+    if n > 1e-200 && n < 1e200 {
+        let e = ((n.sqrt().to_bits() >> 52) & 0x7ff) as i64; // |z| = f 2^(e - 1022), 1/2 <= f < 1
+        let q = f64::from_bits(((e - 52) as u64) << 52); // 2^(e - 1022 - 53), as a biased exponent
+        let iq = f64::from_bits(((2046 - (e - 52)) as u64) << 52); // 1 / q
+        return C::new((z.re * iq).round_ties_even() * q, (z.im * iq).round_ties_even() * q);
+    }
     let (_, e) = frexp(z.abs());
     let q = ldexp(1.0, e - 53);
     if !(q > 0.0) || !q.is_finite() {
@@ -221,6 +231,12 @@ pub fn certify<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], opt: &Options
 /// radii, from one evaluation each with a few bits of relative precision, and the sweeps go on from the
 /// better one.  The comparison costs about two sweeps and is not made when double precision sufficed.
 pub fn certify_from<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], opt: &Options, real: bool, alt: Option<&dyn Fn() -> Vec<C>>) -> Certified {
+    certify_pre(ci, s, z0, None, opt, real, alt)
+}
+
+/// `certify_from`; `pre` gives the bounds of |S| / |c| at the points `z0` when the sweeps have already
+/// computed them (`float::simultaneous_bounds`, version 0.13.0): the points are then taken as they are.
+pub(crate) fn certify_pre<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], pre: Option<Vec<(f64, i64)>>, opt: &Options, real: bool, alt: Option<&dyn Fn() -> Vec<C>>) -> Certified {
     let m = s.degree();
     let mf = m as f64;
     let cf = coeffs3(mf);
@@ -228,9 +244,15 @@ pub fn certify_from<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], opt: &Op
     // the radius compared with the tolerance is the one that may be printed: enlarged by the slack
     const SL: f64 = 1.0 + crate::float::SLACK;
     let passes = 30 + m;
-    let mut z: Vec<C> = z0.iter().map(|&x| quantize(x)).collect();
-    let mut bounds = Vec::new();
-    s.bound_all(&z, &mut EvalWs::default(), &mut bounds);
+    let (mut z, mut bounds) = match pre {
+        Some(b) if b.len() == z0.len() => (z0.to_vec(), b),
+        _ => {
+            let z: Vec<C> = z0.iter().map(|&x| quantize(x)).collect();
+            let mut bounds = Vec::new();
+            s.bound_all(&z, &mut EvalWs::default(), &mut bounds);
+            (z, bounds)
+        }
+    };
     let mut vals: Vec<Val> = bounds.iter().map(|&(b, e)| Val { q: C::new(if b.is_nan() { f64::INFINITY } else { b }, 0.0), ex: e, a: ZERO, b: ZERO, exact: false }).collect();
     let state = |vals: &[Val], z: &[C]| {
         let r = smith(vals, z);
@@ -252,6 +274,18 @@ pub fn certify_from<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], opt: &Op
     // (the fixed-point radii and flags of a state are kept with it: up to 0.12.0 those of the best state
     // were computed a second time at the end, 16 of the 72 ms of z^2000 + z + 1)
     let (mut r, mut fine, mut score, mut fp) = state(&vals, &z);
+    let strict_of = |z: &[C], rho: &[f64], one: &[bool]| {
+        (0..m).all(|k| {
+            let zk = z[k];
+            one[k] && rho[k] * SL <= opt.tol * zk.abs() && (!real || zk.im.abs() > rho[k] || ((rho[k] + zk.im.abs()) * SL <= opt.tol * zk.abs() && mirror(z, rho, k, rho[k])))
+        })
+    };
+    if m <= 1 || fine.iter().all(|&f| f) {
+        // nothing more to do (three polynomials in four): this state is returned as it is, not copied
+        let (rho, one) = fp;
+        let strict = strict_of(&z, &rho, &one);
+        return Certified { z, r, rho, one, strict, vals, parts: vec![None; m], certificates: 1, exact_sweeps: 0 };
+    }
     let mut pv: Vec<Option<(crate::precise::ZP, crate::precise::ZP)>> = vec![None; m];
     let mut best = (z.clone(), r.clone(), score, vals.clone(), pv.clone(), fp.clone());
     // values beyond the floating-point bound: ball evaluation in fixed point, as many bits as needed
@@ -477,10 +511,7 @@ pub fn certify_from<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], opt: &Op
         }
     }
     let (rho, one) = best.5;
-    let strict = (0..m).all(|k| {
-        let zk = best.0[k];
-        one[k] && rho[k] * SL <= opt.tol * zk.abs() && (!real || zk.im.abs() > rho[k] || ((rho[k] + zk.im.abs()) * SL <= opt.tol * zk.abs() && mirror(&best.0, &rho, k, rho[k])))
-    });
+    let strict = strict_of(&best.0, &rho, &one);
     Certified { z: best.0, r: best.1, rho, one, strict, vals: best.3, parts: best.4, certificates: n, exact_sweeps }
 }
 
@@ -576,4 +607,41 @@ pub fn scale_variable(ci: &GPoly, s: i64) -> GPoly {
 
 pub fn is_real(ci: &GPoly) -> bool {
     ci.iter().all(|(_, b)| b.is_zero())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// The fast path of `quantize` gives a point within half a unit of the 53rd bit of the modulus, with
+    /// coordinates that are multiples of that unit, and agrees with the general path away from the powers of two.
+    #[test]
+    fn quantize_keeps_53_bits_of_the_modulus() {
+        let mut st = 0x9e3779b97f4a7c15u64;
+        let mut next = || {
+            st ^= st << 13;
+            st ^= st >> 7;
+            st ^= st << 17;
+            (st >> 11) as f64 / (1u64 << 53) as f64
+        };
+        let mut same = 0;
+        for t in 0..20000 {
+            let scale = 2f64.powi((next() * 600.0) as i32 - 300);
+            let z = C::new((next() - 0.5) * scale, if t % 5 == 0 { 0.0 } else { (next() - 0.5) * scale * 2f64.powi((next() * 80.0) as i32 - 40) });
+            let (_, e) = frexp(z.abs());
+            let q = ldexp(1.0, e - 53);
+            let w = quantize(z);
+            let slow = C::new((z.re / q).round() * q, (z.im / q).round() * q);
+            // multiples of q/2 at least (the exponent may be one lower), within q/2 of z
+            for (a, b) in [(z.re, w.re), (z.im, w.im)] {
+                assert!((a - b).abs() <= q / 2.0 && (b / (q / 2.0)).fract() == 0.0, "case {t}: {z:?} {w:?}");
+            }
+            let f = z.abs() / ldexp(1.0, e);
+            same += (w == slow) as usize;
+            if f > 0.5000001 && f < 0.9999999 && (z.re / q).fract().abs() != 0.5 && (z.im / q).fract().abs() != 0.5 {
+                assert!(w == slow, "case {t}: {z:?} {w:?} {slow:?}");
+            }
+        }
+        assert!(same > 19500, "{same}");
+    }
 }

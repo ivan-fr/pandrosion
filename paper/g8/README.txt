@@ -5,13 +5,16 @@ revision 9 on Zenodo (crate 0.12.0; its sources are in the history of this repos
 tables and every log and result file listed below are those of 0.12.0 and are unchanged.  What 0.13.0
 adds is in validation/pandroots/CHANGELOG.md and README.md: the same method, with the same sweeps and the
 same certificate, at a lower cost (the product by a double precision point in one pass, Horner's rule over
-runs of zero coefficients, the certificate computed once).
+runs of zero coefficients, the certificate computed once, no evaluation made twice).
   validation/bench20k/   the crate alone on 20 000 polynomials (the 10 000 of bench10k and 10 000 more):
-                         0.12.0 54.0 s, 0.13.0 31.6 s on an Intel Xeon at 2.1 GHz, the same discs on every
-                         polynomial; the discs of the 7 249 polynomials with prescribed rational roots
+                         0.12.0 54.0 s, 0.13.0 29.1 s on an Intel Xeon at 2.1 GHz; the same discs on
+                         19 989 polynomials (the 11 others are clusters at the limit of double precision
+                         centres); the discs of the 7 249 polynomials with prescribed rational roots
                          checked in exact arithmetic (none wrong).  See validation/bench20k/README.txt.
+  validation/bench50k/   50 000 polynomials of degree 2 to 60 in eight families, with their check against
+                         known roots, numpy and mpmath: 0.12.0 2.84 s, 0.13.0 1.97 s, the same discs.
   validation/v0_13_0/    rust_check.py, underflow_check.py and precise_check.py run again with 0.13.0 on
-                         that machine (their logs; the counts are those of 0.12.0), and cargo test (34 tests).
+                         that machine (their logs; the counts are those of 0.12.0), and cargo test (35 tests).
 Not done for 0.13.0: the comparison with MPSolve, and a revision of the note.
 
 G8, revision 9 - The simultaneous rectangle (Rust crate pandroots 0.12.0)
