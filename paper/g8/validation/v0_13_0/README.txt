@@ -10,7 +10,7 @@ M5 and are unchanged; the times here are those of another machine and are not co
                                            and right, 6 true but weak, 0 wrong; at 1e-20, 1e-30 and 1e-80
                                            190 + 31 + 31 certified within the tolerance, 0 wrong
   precise_check.log, results_precise.txt   python3 precise_check.py (with hp_bench): 31/31 at 1e-30 and at
-                                           1e-80, default and full order; the 17 named polynomials pass
+                                           1e-80, default and full order; the 13 named polynomials pass
   cargo_test.log                           cargo test --release in pandroots: 34 tests pass (also in a debug
                                            build)
 The lines that give a verdict are the same as in the logs of 0.12.0.
