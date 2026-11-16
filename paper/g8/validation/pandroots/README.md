@@ -29,6 +29,73 @@ let (re, im, radius) = roots[1].decimal(60); // "1.41421356237309504880168872420
 A returned disc may be enlarged by 1/1024 of its radius and still contain exactly `count` roots; `decimal`
 prints enough digits and a radius rounded upwards within that slack.
 
+## Version 0.13.0
+
+Version 0.13.0 comes from profiling 0.12.0 on the 10 000 polynomials below, and was then run on 20 000:
+the same 10 000 and as many again from another seed (sixteen families, 1 043 482 roots, degrees up to
+2 000; generator and scripts in `bench20k/` of the validation archive).  The method is that of 0.12.0, with
+the same sweeps and the same certificate; what changed is what each of them costs.  One call per
+polynomial, one thread, the solver's own flags; Intel Xeon at 2.1 GHz, the smaller of two runs for each
+polynomial (on this machine 0.12.0 takes 22 s for the first 10 000, against about 15 s on the machine of
+the table below).
+
+| the 20 000 polynomials | 0.12.0 | 0.13.0 |
+|---|---:|---:|
+| time in all | 54.0 s | 31.6 s |
+| ... the 15 075 for which double precision is enough | 18.0 s | 8.5 s |
+| ... the 2 968 that need values beyond double precision | 34.4 s | 21.6 s |
+| ... the 1 957 that need points beyond double precision | 1.7 s | 1.5 s |
+| complete | 20 000 | 20 000 |
+| every root in its own disc within 10^-10 | 18 395 | 18 395 |
+| discs (multiplicities and counts) that differ | | 0 |
+
+| one call (ms) | degree | 0.12.0 | 0.13.0 |
+|---|---:|---:|---:|
+| Laguerre | 150 | 287 | 83 |
+| Chebyshev T | 150 | 182 | 109 |
+| Wilkinson | 100 | 128 | 60 |
+| Mandelbrot | 255 | 701 | 371 |
+| truncated exponential | 120 | 50 | 32 |
+| `(z - a)^60 - b` | 60 | 24 | 16 |
+| `z^2000 + z + 1` | 2000 | 72 | 19 |
+| sparse, 6 terms | 1500 | 48 | 14 |
+| dense, Gaussian coefficients | 2000 | 153 | 112 |
+| dense, Gaussian coefficients | 640 | 12.8 | 8.4 |
+
+**Values beyond double precision.**  In that stage the points are doubles and the values of S are
+computed in fixed point with as many bits F as each value asks for.  A point is then, in units of 2^-F,
+two integers of 53 bits times one power of two, and the product of an accumulator by it is one pass over
+its limbs (`limbs::combine_short`) instead of two full products, a subtraction and a shift over twice the
+width: the same integers, tested against `BigInt`.  A point outside the unit disc is evaluated either
+through `1/z`, which has F bits, or through `T(t) = S(2^e t)`, whose multiplier is short but which loses
+`m log2(1/|t|)` bits; 0.10.1 had limited the second way to a loss of a quarter of F.  Most of what it
+cost was elsewhere: when F minus the bits lost could not tell a value from zero, the value was computed
+exactly, with integers of 53 m bits, as if the point might be an exact root.  That exact evaluation now
+waits until F has passed the bits lost, and the limit of the scaled variable is F itself.
+
+**Polynomials with few terms.**  In double precision Horner's rule went through every coefficient, zero
+or not: 2 000 steps per point for `z^2000 + z + 1`.  When at most one coefficient in twelve is not zero,
+a run of zeros is now one step, `p <- p x^g + c`, with `x^g` by repeated squaring and the two derivatives
+by the closed form of g steps with nothing to add.  The value of S goes through no more products than in
+the dense rule, so the rounding bound that the certificate uses is the same.
+
+**The certificate.**  Its fixed-point test was run twice on the same points when double precision was
+enough, which is the case of three polynomials in four.  It is run once.  And a disc passes without the
+two sums over the other points when the bounds `W / g` and `W / g^2` (W the sum of all the w_l, g the
+smallest gap of the point) already pass the two tests: one pass without square root or division, enough
+for points that have converged.
+
+**An independent check.**  7 249 of the 20 000 are built from prescribed rational roots.  For these the
+discs of 0.13.0 (and of 0.12.0) were compared with the roots in exact rational arithmetic, the printed
+doubles read as the binary numbers they are: each of the 70 364 distinct roots lies in one disc and only
+one, the disc has its multiplicity and holds as many roots as its count.  None is wrong.  For the other
+12 751 polynomials the figures are the solver's own.
+
+What still costs, of the 31.6 seconds: the orthogonal polynomials (12.5 s for 510 of them), the powers,
+the Wilkinson polynomials and the Mandelbrot polynomials and truncated exponentials (8.7 s with their
+groups), 15 to 40 sweeps of hundreds of bits each, a number that 0.13.0 does not change; then the dense polynomials of degree 320 to 2 000 (3.4 s) and the sparse
+ones (3.6 s), where what is left is the m^2 pairs of points of each sweep.
+
 ## Version 0.12.0
 
 Versions 0.10.1 to 0.12.0 come from running the solver alone on 10 000 polynomials of sixteen families

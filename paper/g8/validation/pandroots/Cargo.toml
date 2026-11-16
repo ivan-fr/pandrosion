@@ -13,7 +13,7 @@
 edition = "2024"
 rust-version = "1.85"
 name = "pandroots"
-version = "0.12.0"
+version = "0.13.0"
 authors = ["Ivan Besevic"]
 build = false
 include = [

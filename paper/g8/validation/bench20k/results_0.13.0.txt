@@ -1,0 +1,42 @@
+pandroots 0.13.0 against 0.12.0 on the 20 000 polynomials of bench20k (make_corpus.sh), 16 November 2026.
+Intel Xeon at 2.1 GHz (4 cores of a shared virtual machine, AVX-512), Linux, rustc 1.97.0, RUSTFLAGS="-C target-cpu=native",
+one call per polynomial, one thread, default options.  Each version was run twice over the whole corpus;
+the time of a polynomial is the smaller of its two times.  Sums of the times of each run:
+0.12.0: 57.12 s and 57.43 s; 0.13.0: 33.59 s and 33.83 s (the sums of the smaller times are 54.04 s and 31.57 s).
+
+== analyse.py CORPUS out-0.13.0-run1.txt,out-0.13.0-run2.txt out-0.12.0-run1.txt,out-0.12.0-run2.txt
+20000 polynomials, 1043482 roots: 31.57 s in all, median 82 us; complete 20000, within tolerance 18395
+deepest stage reached: double 15075 (8.48 s), exact 2968 (21.56 s), precise 1957 (1.52 s)
+group             n compl within shared  total_s median_us   p90_us  max_s before_s ratio
+cluster        2442  2442   1426   1016     1.17       282     1034   0.03     1.23  1.06
+dense          5638  5638   5638      0     0.48        29      225   0.00     0.64  1.32
+dense_large     258   258    258      0     3.35      3744    24622   0.12     4.76  1.42
+edges           600   600    600      0     0.01        12       17   0.00     0.01  1.09
+laws           2000  2000   2000      0     0.12        30      155   0.00     0.14  1.21
+mignotte        616   616     44    572     0.66       916     2263   0.00     0.76  1.15
+multiplicity   1607  1607   1607      0     0.45       149      724   0.00     0.46  1.02
+orthogonal      510   510    510      0    12.49      9212    70310   0.11    21.15  1.69
+powers         1000  1000   1000      0     4.17       119    18416   0.03     6.39  1.53
+products        500   500    500      0     0.20       336      798   0.00     0.21  1.06
+roots          2002  2002   2002      0     0.23        52      306   0.00     0.28  1.19
+scales          502   502    502      0     0.05        28       51   0.00     0.05  1.03
+sparse         1005  1005   1005      0     3.62       673    15592   0.02    11.45  3.16
+special         413   413    396     17     1.83       288    14056   0.37     2.80  1.53
+wilkinson       507   507    507      0     2.68      3338    12871   0.06     3.65  1.36
+zero_roots      400   400    400      0     0.06       114      330   0.00     0.06  0.98
+not complete: []
+slowest: [('x_mandelbrot_255', 255, 0.371), ('m_dense_large_2000_114', 2000, 0.124), ('k_dense_large_2000_115', 2000, 0.12), ('m_dense_large_2000_117', 2000, 0.116), ('x_random_complex_2000_0', 2000, 0.114), ('m_dense_large_2000_118', 2000, 0.114), ('k_dense_large_2000_118', 2000, 0.112), ('m_legendre_148', 148, 0.111), ('k_dense_large_2000_116', 2000, 0.11), ('x_random_real_2000_0', 2000, 0.11), ('m_legendre_149', 149, 0.11), ('k_chebyshevT_150', 150, 0.109)]
+
+against out-0.12.0-run1.txt,out-0.12.0-run2.txt: previous total 54.04 s, ratio 1.71; discs (multiplicities and counts) or completeness changed on 0 polynomials: []
+within tolerance lost: [] | gained: 0
+slower by more than 1.5: 6 [('k_cluster_line_0978', 0.18, 0.31), ('k_cluster_plane_0892', 0.23, 0.39), ('k_cluster_plane_1030', 2.02, 3.32), ('k_cluster_ring_1010', 0.73, 1.18), ('k_cluster_ring_0950', 0.26, 0.4), ('k_cluster_plane_0880', 0.43, 0.66)]
+faster by more than 1.5: 1242 of 7370 that take more than 0.2 ms
+degree    0 to   20: 13067 polynomials,    2.04 s ->    1.89 s
+degree   21 to  100:  5521 polynomials,   15.95 s ->   11.29 s
+degree  101 to  400:   995 polynomials,   21.16 s ->   12.15 s
+degree  401 to 2000:   417 polynomials,   14.89 s ->    6.23 s
+
+== check_oracle.py CORPUS out-0.13.0-run1.txt   (the same line for the second run, and for the runs of 0.12.0)
+7249 polynomials with exactly known roots: 70364 distinct roots, 68400 discs (659 polynomials with a disc shared by roots that doubles cannot separate)
+by group (checked, all right): cluster 1633 1633, edges 600 600, multiplicity 1607 1607, roots 2002 2002, scales 502 502, wilkinson 505 505, zero_roots 400 400
+wrong: 0 []

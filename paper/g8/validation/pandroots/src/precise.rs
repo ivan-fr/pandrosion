@@ -182,6 +182,8 @@ pub struct Ball {
     pub more: u64,
     /// bits that F had in excess of that precision
     pub spare: u64,
+    /// bits of F that the scaled variable used up, `m log2(1/|t|)` (0 for the other evaluations)
+    pub lost: u64,
 }
 
 fn mant(re: &BigInt, im: &BigInt) -> (C, i64) {
@@ -284,10 +286,16 @@ impl<'a> BallPoly<'a> {
         // multiplier pays for them only while they are few against F: up to version 0.10.0 this path was
         // taken for every such point, and a dense polynomial of degree 320 took six times longer at 30
         // digits than with version 0.7.0.
+        // Version 0.13.0: the limit is F itself (it was a quarter of F from 0.10.1 to 0.12.0).  Most of that
+        // slowdown was not the wider numbers but the exact evaluation that `ball_auto` fell back on when
+        // F - lost bits could not tell the value from zero; it now waits for F to pass the bits lost.  With
+        // that, and with the product by a short multiplier in one pass (`limbs::combine_short`), the limit F
+        // takes 15 % off the time of the polynomials of the corpus that reach this stage and leaves the
+        // dense polynomials of degree 320 and 640 at 30 digits where they were.
         // (A point far inside the unit disc is the other way round: Horner's rule at z itself loses m log2(1/|z|)
         // bits when the low coefficients dominate there, and the scaled variable at most m of them.)
         let lost = m as f64 * -t.to_c().abs().log2();
-        if e > 0 && lost > 0.25 * f as f64 + 32.0 {
+        if e > 0 && lost > f as f64 + 32.0 {
             return None;
         }
         let inner = {
@@ -301,6 +309,7 @@ impl<'a> BallPoly<'a> {
             return None;
         }
         let mut ball = inner.eval(&t, f, rel, cut);
+        ball.lost = lost.max(0.0).ceil() as u64;
         let up = |c: C, k: i64| C::new(ldexp(c.re, k), ldexp(c.im, k));
         ball.val.ex += e * m as i64;
         ball.val.a = up(ball.val.a, -e);
@@ -474,7 +483,7 @@ impl<'a> BallPoly<'a> {
             let w2 = w * w;
             (w * (C::new(mf, 0.0) - w * r1), w2.scale(mf * (mf - 1.0)) - (w2 * w * r1).scale(2.0 * (mf - 1.0)) + w2 * w2 * r2)
         };
-        Ball { val: Val { q: C::new(qf, 0.0), ex: qe, a, b, exact: true }, good, tiny, more, spare, parts, lack1 }
+        Ball { val: Val { q: C::new(qf, 0.0), ex: qe, a, b, exact: true }, good, tiny, more, spare, parts, lack1, lost: 0 }
     }
 }
 
@@ -498,7 +507,11 @@ pub fn ball_auto(bp: &BallPoly, z: &ZP, f0: u64, fcap: u64, pbits: u64, rel: u64
             }
             return (ball.val, f, ball.parts, cut, f - ball.spare.min(f));
         }
-        if ball.tiny && f >= 2 * pbits + 128 {
+        // (Version 0.13.0: the bits that the scaled variable used up do not count.  Before, a value that
+        // F - lost bits could not tell from zero was computed exactly, with integers of 53 m bits, when a
+        // few more bits of F would have shown it.  On the Mandelbrot polynomial of degree 255, evaluated
+        // through the scaled variable up to `lost` = F / 2, half of the time went to those exact values.)
+        if ball.tiny && f >= 2 * pbits + 128 + ball.lost {
             let (x, y, s) = if z.e <= 0 { (z.re.clone(), z.im.clone(), (-z.e) as u64) } else { (&z.re << z.e as u64, &z.im << z.e as u64, 0) };
             let h = exact_horner(&bp.ci, &x, &y, s);
             let mut v = exact_val(&bp.ci, &h, s);

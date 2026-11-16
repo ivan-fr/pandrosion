@@ -247,11 +247,13 @@ pub fn certify_from<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], opt: &Op
                 f
             })
             .collect();
-        (r, fine, (nfine, -rmax))
+        (r, fine, (nfine, -rmax), (rho, one))
     };
-    let (mut r, mut fine, mut score) = state(&vals, &z);
+    // (the fixed-point radii and flags of a state are kept with it: up to 0.12.0 those of the best state
+    // were computed a second time at the end, 16 of the 72 ms of z^2000 + z + 1)
+    let (mut r, mut fine, mut score, mut fp) = state(&vals, &z);
     let mut pv: Vec<Option<(crate::precise::ZP, crate::precise::ZP)>> = vec![None; m];
-    let mut best = (z.clone(), r.clone(), score, vals.clone(), pv.clone());
+    let mut best = (z.clone(), r.clone(), score, vals.clone(), pv.clone(), fp.clone());
     // values beyond the floating-point bound: ball evaluation in fixed point, as many bits as needed
     let cell: std::cell::OnceCell<crate::precise::BallPoly> = std::cell::OnceCell::new();
     // the same polynomial for the models of the clusters (their evaluations return S S''/S'^2 as well)
@@ -311,7 +313,8 @@ pub fn certify_from<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], opt: &Op
             r = st.0;
             fine = st.1;
             score = st.2;
-            best = (z.clone(), r.clone(), score, vals.clone(), pv.clone());
+            fp = st.3;
+            best = (z.clone(), r.clone(), score, vals.clone(), pv.clone(), fp.clone());
         }
     }
     let (mut n, mut exact_sweeps) = (1usize, 0usize);
@@ -332,8 +335,9 @@ pub fn certify_from<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], opt: &Op
             r = st.0;
             fine = st.1;
             score = st.2;
+            fp = st.3;
             if better(score, best.2) {
-                best = (z.clone(), r.clone(), score, vals.clone(), pv.clone());
+                best = (z.clone(), r.clone(), score, vals.clone(), pv.clone(), fp.clone());
             }
             if fine.iter().all(|&f| f) {
                 break;
@@ -463,15 +467,16 @@ pub fn certify_from<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], opt: &Op
         r = st.0;
         fine = st.1;
         score = st.2;
+        fp = st.3;
         n += 1;
         if better(score, best.2) {
-            best = (z.clone(), r.clone(), score, vals.clone(), pv.clone());
+            best = (z.clone(), r.clone(), score, vals.clone(), pv.clone(), fp.clone());
         }
         if !moved {
             break;
         }
     }
-    let (rho, one) = fixed_point(&best.0, &best.1);
+    let (rho, one) = best.5;
     let strict = (0..m).all(|k| {
         let zk = best.0[k];
         one[k] && rho[k] * SL <= opt.tol * zk.abs() && (!real || zk.im.abs() > rho[k] || ((rho[k] + zk.im.abs()) * SL <= opt.tol * zk.abs() && mirror(&best.0, &rho, k, rho[k])))

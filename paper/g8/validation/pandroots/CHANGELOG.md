@@ -1,5 +1,54 @@
 # Changelog
 
+## 0.13.0 - 2026-11-16
+
+Found by profiling 0.12.0 on the 10 000 polynomials, then measured on 20 000 (the same and 10 000 more
+from another seed).  The method is unchanged: same sweeps, same number of them, same certificate with the
+same bounds.  The discs (multiplicities and counts) are those of 0.12.0 on every one of the 20 000.
+
+- Stage of exact values: the product of an accumulator by a double precision point in one pass.  Such a
+  point, in units of 2^-F, is two integers of 53 bits at most times one power of two; `floor((a x_r - b x_i)
+  / 2^F)` was two full products, a subtraction and a shift over twice the width, and is now one pass over
+  the limbs of `a` and `b` with two multiplications each (`limbs::combine_short`).  Same integers, tested
+  against `BigInt` on 40 000 random pairs, sum and difference.  The points evaluated through 1/z, which has as many bits as F, keep
+  the full products.
+- The scaled variable `T(t) = S(2^e t)` is used while the bits it loses are at most F plus 32 (a quarter of
+  F plus 32 from 0.10.1 to 0.12.0), and a value that cannot be told from zero is computed exactly only once
+  F has passed 2 x 53 + 128 bits beyond the bits lost.  The slowdown that 0.10.1 corrected came mostly from
+  that exact evaluation, with integers of 53 m bits, started when F minus the bits lost was too few to see
+  the value; a few more bits of F show it.  Laguerre 150: 287 ms -> 83 ms; Mandelbrot 255: 701 ms -> 371 ms;
+  Wilkinson 100: 128 ms -> 60 ms; Chebyshev T 150: 182 ms -> 109 ms.  Dense polynomials of degree 320 and
+  640 at 30 digits (`precise` functions): unchanged within the noise.
+- Double precision, polynomials with few terms (at most one coefficient in twelve is not zero, degree 23 or
+  more): Horner's rule jumps over the runs of zero coefficients, `p <- p x^g + c` with `x^g` by repeated
+  squaring, and S', S'' by the closed form of g steps with nothing to add.  The value of S goes through as
+  many products and sums as in the dense rule or fewer, so the rounding bound of the certificate holds
+  unchanged; what is added for the operations that underflow is larger (`Poly::tiny`).  `z^2000 + z + 1`:
+  72 ms -> 19 ms; the 1 005 sparse polynomials of the corpus (3 to 9 terms, degree up to 1 500): 11.5 s ->
+  3.6 s, with the next item.
+- The fixed-point certificate was computed twice on the same points when double precision was enough (16
+  of the 72 ms of `z^2000 + z + 1`): its radii and flags are now kept with the state they belong to.
+  A disc passes at once when the bounds `sigma_k <= W / g` and `tau_k <= W / g^2` (W the sum of the w_l, g
+  the smallest gap of the point) pass the two tests, which costs one pass without square root or division;
+  the sums are formed only for the points where this is not enough.  The loop of the sums is written on
+  groups of four points so that the compiler turns it into vector instructions; its terms and their order
+  are those of 0.12.0.
+- The test "square-free modulo a prime" has one copy of its loop per prime of the table, so that the
+  modulus is a constant and its divisions become multiplications (it was a tenth of the time of a dense
+  polynomial of degree 2000).
+- The 20 000 polynomials (1 043 482 roots), one call each, one thread, Intel Xeon at 2.1 GHz, the smaller
+  of two runs for each polynomial: 54.0 s -> 31.6 s (the first 10 000: 22.3 s -> 13.2 s).  All complete;
+  18 395 with every root in its own disc within 10^-10.  By degree: up to 20, 2.0 s -> 1.9 s; 21 to 100,
+  16.0 s -> 11.3 s; 101 to 400, 21.2 s -> 12.2 s; 401 to 2000, 14.9 s -> 6.2 s.  Of the 7 370 polynomials
+  that take more than 0.2 ms, 1 242 are more than 1.5 times faster and 6 (clusters, 0.2 to 3 ms) more
+  than 1.5 times slower in these runs.
+- For the 7 249 polynomials of the corpus built from prescribed rational roots, the discs were checked in
+  exact rational arithmetic against those roots (`bench20k/check_oracle.py`): 70 364 distinct roots, each
+  in one disc and only one, with its multiplicity and the right count.  No disc wrong, for 0.12.0 either.
+- Tests: the product by a short multiplier against `BigInt`; the evaluation over runs of zeros against the
+  dense rule; the flags of the certificate against the two sums formed one term at a time; `z^600 - 2`
+  and a trinomial of degree 400 with its reversed polynomial.  34 tests.
+
 ## 0.12.0 - 2026-11-15
 
 - When double precision is not enough for a quarter of the points or more, the sweeps with values beyond

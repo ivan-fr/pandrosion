@@ -1,3 +1,19 @@
+Later than revision 9: pandroots 0.13.0 (16 November 2026)
+===========================================================
+validation/pandroots now holds the crate 0.13.0, which is later than the note and than the archive of
+revision 9 on Zenodo (crate 0.12.0; its sources are in the history of this repository).  The note, its
+tables and every log and result file listed below are those of 0.12.0 and are unchanged.  What 0.13.0
+adds is in validation/pandroots/CHANGELOG.md and README.md: the same method, with the same sweeps and the
+same certificate, at a lower cost (the product by a double precision point in one pass, Horner's rule over
+runs of zero coefficients, the certificate computed once).
+  validation/bench20k/   the crate alone on 20 000 polynomials (the 10 000 of bench10k and 10 000 more):
+                         0.12.0 54.0 s, 0.13.0 31.6 s on an Intel Xeon at 2.1 GHz, the same discs on every
+                         polynomial; the discs of the 7 249 polynomials with prescribed rational roots
+                         checked in exact arithmetic (none wrong).  See validation/bench20k/README.txt.
+  validation/v0_13_0/    rust_check.py, underflow_check.py and precise_check.py run again with 0.13.0 on
+                         that machine (their logs; the counts are those of 0.12.0), and cargo test (34 tests).
+Not done for 0.13.0: the comparison with MPSolve, and a revision of the note.
+
 G8, revision 9 - The simultaneous rectangle (Rust crate pandroots 0.12.0)
 =======================================================================
 Built on revision 8 (G8_source_r8.zip, 15 November 2026, crate 0.5.0); Sections 1 to 8 (the step, its order,

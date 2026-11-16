@@ -1,15 +1,15 @@
 {
-  "archive": "pandroots-0.12.0 (development sources: 0.5.0 with the changes of CHANGELOG.md)",
+  "archive": "pandroots-0.13.0 (development sources: 0.5.0 with the changes of CHANGELOG.md)",
   "rust_source_sha256": {
-    "src/float.rs": "ea87492581db0c1fb6f462ea0e6204736ba08875279d4dcba9af549cec829a91",
+    "src/float.rs": "60466081f9d0cbf8da7e9548a5c726166416c7b7e2243e4acb68b9b2ea989185",
     "src/lib.rs": "10a7e6858395cda5f8a5d66d6cb0072ec31354a174a471c4580fd47d8fca13dd",
-    "src/limbs.rs": "a44432ea2cdf7bb7a180c7ea2bbae1288fa08d5ffe763f48f8fac973e0299a11",
-    "src/sqfree.rs": "af19c94a4913ce3efa836ea9dca5c378c953750df21f60ea064e3165153ee770",
-    "src/exact.rs": "61f8ecb45934394b75c31f6902a7b571790e2b80e6dad99c26e3abe51431cafa",
+    "src/limbs.rs": "c96814bbb16f06d6c03b56df705d15b7c717637618f0877326ba0c09d236ee6c",
+    "src/sqfree.rs": "5e68fd2ac3fac1bd00ba2e0a9f3549d3db1a8ce6689591afcadd74c011a4fd18",
+    "src/exact.rs": "ebefd66334d3127b22ac5b03013b315f4b225074b26d499de947615e5fd43cdf",
     "src/complex.rs": "58496bcd12b15872325ded486097e9bd29c06b363ddc924b89b0e50edb17a480",
-    "src/precise.rs": "5612c7b346a1c657c72aeb47e364f258037d5cff37f736ee5a5d1a1e7741b45d",
+    "src/precise.rs": "d439b80409989416f955e455ced8c96c6879c6678aa11de28e8a4898ff78248a",
     "src/bin/bench.rs": "e66b4a0798841da413704128634b592d872d5decb9b26687aebfa33b95274fdc",
-    "tests/basic.rs": "cd9b4ced9d5ffaeab07a6cf58aef3d7a149df37ead30df9b77a06056d8ea007b"
+    "tests/basic.rs": "741bc3846aad36846ff8d07ee31b2afe545aad1125d75c72745913cac6398310"
   },
   "lean_sha256": {
     "verification/lean/ClusterCursor.lean": "da9420c06770a2f34063ba8e15e90753ed0ad52798bd03ab1b9701797e6d6a8e",
@@ -28,7 +28,7 @@
   },
   "packaging_changes": [
     "Publication metadata, license and layout carried forward from the published 0.5.0 crate",
-    "Numerical changes of 0.6.0 to 0.12.0 are listed in CHANGELOG.md"
+    "Numerical changes of 0.6.0 to 0.13.0 are listed in CHANGELOG.md"
   ],
   "lean_evidence_origin": "G8 revision 7 (38 theorems), built on 2026-11-14 with Lean 4.33.1 and not rebuilt for this release; ZeroDeflation.lean (7 theorems, 0.6.0), FixedWidth.lean (4 lemmas, 0.7.0), ScaledVariable.lean (9 theorems, 0.8.0) ClusterStep.lean (6 theorems, 0.9.0) and ClusterCursor.lean (5 lemmas, 0.10.0), checked on 2026-11-15 with Lean 4.35.0 / Mathlib v4.35.0. The theorems cover the certificate, the deflation of the root zero, two arithmetic identities, the scaled variable and the step of a cluster on a shifted power; not the Rust code, the ball evaluation, the multiprecision step, Yun's algorithm, the decimal output, nor how close a cluster is to a shifted power."
 }

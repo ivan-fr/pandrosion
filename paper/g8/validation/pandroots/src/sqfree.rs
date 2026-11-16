@@ -58,7 +58,19 @@ pub fn squarefree_mod_p_float(c: &[C]) -> bool {
 }
 
 /// gcd(a, a') = 1 modulo p, for a polynomial a (highest degree first) with a nonzero leading coefficient.
-fn euclid(mut a: Vec<u64>, p: u64) -> bool {
+fn euclid(a: Vec<u64>, p: u64) -> bool {
+    // one copy of the loop for each prime of the table: the compiler then knows the modulus and replaces
+    // the divisions by multiplications (version 0.13.0; a tenth of the time of a dense polynomial of
+    // degree 2000 was spent in these divisions)
+    match p {
+        998244353 => euclid_p::<998244353>(a),
+        1004535809 => euclid_p::<1004535809>(a),
+        469762049 => euclid_p::<469762049>(a),
+        _ => unreachable!(),
+    }
+}
+fn euclid_p<const P: u64>(mut a: Vec<u64>) -> bool {
+    let p = P;
     let n = a.len() - 1;
     if a[0] == 0 || (n as u64) % p == 0 {
         return false;

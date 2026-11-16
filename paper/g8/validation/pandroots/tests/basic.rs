@@ -381,3 +381,47 @@ fn roots_closer_than_the_tolerance_need_not_be_isolated() {
     assert!(ca && cb && sb.within_tolerance && a.len() == 20 && b.len() == 20);
     assert!(a.iter().zip(&b).all(|(x, y)| x.z.re == y.z.re && x.z.im == y.z.im && x.radius == y.radius && x.count == 1 && y.count == 1));
 }
+
+#[test]
+fn few_terms_at_large_degree() {
+    // z^600 - 2: the roots are known
+    let mut c = vec![C::new(0.0, 0.0); 601];
+    c[0] = C::new(1.0, 0.0);
+    c[600] = C::new(-2.0, 0.0);
+    let (out, complete, st) = all_roots(&c, &Options::default());
+    assert!(complete && st.within_tolerance && out.len() == 600);
+    let r = 2f64.powf(1.0 / 600.0);
+    for k in 0..600 {
+        let t = 2.0 * std::f64::consts::PI * k as f64 / 600.0;
+        assert_eq!(out.iter().filter(|d| ((d.z.re - r * t.cos()).powi(2) + (d.z.im - r * t.sin()).powi(2)).sqrt() <= d.radius + 1e-13).count(), 1, "root {k}");
+    }
+    assert_eq!(out.iter().filter(|d| d.real).count(), 2);
+    // z^400 + (3 - i) z^17 - 5 and its reversed polynomial: every centre is a point where the polynomial,
+    // evaluated term by term outside the crate, is at rounding level, and the discs are pairwise disjoint
+    for reversed in [false, true] {
+        let mut c = vec![C::new(0.0, 0.0); 401];
+        c[0] = C::new(1.0, 0.0);
+        c[400 - 17] = C::new(3.0, -1.0);
+        c[400] = C::new(-5.0, 0.0);
+        if reversed {
+            c.reverse();
+        }
+        let (out, complete, st) = all_roots(&c, &Options::default());
+        assert!(complete && st.within_tolerance && out.len() == 400);
+        let pow = |z: C, n: usize| C::from_polar(z.abs().powi(n as i32), z.arg() * n as f64);
+        for d in &out {
+            let (mut v, mut sum) = (C::new(0.0, 0.0), 0.0);
+            for (j, a) in c.iter().enumerate().filter(|(_, a)| a.abs() != 0.0) {
+                let t = *a * pow(d.z, 400 - j);
+                v = v + t;
+                sum += t.abs();
+            }
+            assert!(v.abs() <= 1e-9 * sum, "residual {} against {}", v.abs(), sum);
+        }
+        for (i, a) in out.iter().enumerate() {
+            for b in &out[..i] {
+                assert!((a.z - b.z).abs() > a.radius + b.radius);
+            }
+        }
+    }
+}

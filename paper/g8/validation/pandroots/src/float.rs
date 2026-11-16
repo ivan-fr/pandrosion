@@ -119,6 +119,96 @@ pub struct Poly {
     pub abs: Vec<f64>,
     rev: Vec<C>,
     absrev: Vec<f64>,
+    /// few non-zero coefficients: the steps of Horner's rule over the runs of zero coefficients, for the
+    /// polynomial and for the reversed one (version 0.13.0)
+    sparse: Option<[Vec<Gap>; 2]>,
+}
+/// One step of Horner's rule over a run of zero coefficients: multiply by x^gap, add the coefficient.
+#[derive(Clone, Copy)]
+struct Gap {
+    gap: usize,
+    c: C,
+    abs: f64,
+}
+fn gaps(c: &[C], abs: &[f64]) -> Vec<Gap> {
+    let (mut out, mut last) = (Vec::new(), 0);
+    for j in 1..c.len() {
+        if abs[j] != 0.0 || c[j].re != 0.0 || c[j].im != 0.0 || j + 1 == c.len() {
+            out.push(Gap { gap: j - last, c: c[j], abs: abs[j] });
+            last = j;
+        }
+    }
+    out
+}
+/// x^n by repeated squaring (n >= 1).  The computed power is the product of n factors x in some order: its
+/// relative error is that of n - 1 products, as for the n - 1 products of Horner's rule.
+#[inline(always)]
+fn cpow(x: C, mut n: usize) -> C {
+    let (mut r, mut b, mut first) = (x, x, true);
+    loop {
+        if n & 1 == 1 {
+            r = if first { b } else { r * b };
+            first = false;
+        }
+        n >>= 1;
+        if n == 0 {
+            return r;
+        }
+        b = b * b;
+    }
+}
+#[inline(always)]
+fn rpow(x: f64, mut n: usize) -> f64 {
+    let (mut r, mut b, mut first) = (x, x, true);
+    loop {
+        if n & 1 == 1 {
+            r = if first { b } else { r * b };
+            first = false;
+        }
+        n >>= 1;
+        if n == 0 {
+            return r;
+        }
+        b *= b;
+    }
+}
+/// S, S', S''/2 and sum |c_j| |x|^(m-j) at a point of the unit disc, for a polynomial with few terms.
+///
+/// A run of g - 1 zero coefficients is g steps of Horner's rule with nothing to add:
+///
+/// ```text
+/// p2 <- p2 x^g + g p1 x^(g-1) + g (g-1)/2 p0 x^(g-2),   p1 <- p1 x^g + g p0 x^(g-1),   p0 <- p0 x^g + c
+/// ```
+///
+/// with x^(g-2) by repeated squaring and two more products.  The value of S goes through g products for the
+/// run (g - 1 inside x^g, one by it) and one sum, as in the dense rule: the rounding bound of Horner's rule,
+/// `marg` times the sum of the moduli, holds for it unchanged.  (Operations that underflow: see `Poly::tiny`.)
+#[inline(always)]
+fn sparse_eval(steps: &[Gap], c0: C, a0: f64, x: C, ax: f64, second: bool) -> (C, C, C, f64) {
+    let (mut p, mut d1, mut d2, mut sa) = (c0, ZERO, ZERO, a0);
+    for st in steps {
+        let g = st.gap;
+        if g == 1 {
+            if second {
+                d2 = d2 * x + d1;
+            }
+            d1 = d1 * x + p;
+            p = p * x + st.c;
+            sa = sa * ax + st.abs;
+            continue;
+        }
+        // y = x^(g-2), x1 = x^(g-1), x2 = x^g
+        let (y, x1) = if g == 2 { (ONE, x) } else { let y = cpow(x, g - 2); (y, y * x) };
+        let x2 = x1 * x;
+        let gf = g as f64;
+        if second {
+            d2 = d2 * x2 + (d1 * x1).scale(gf) + (p * y).scale(gf * (gf - 1.0) / 2.0);
+        }
+        d1 = d1 * x2 + (p * x1).scale(gf);
+        p = p * x2 + st.c;
+        sa = sa * rpow(ax, g) + st.abs;
+    }
+    (p, d1, d2, sa)
 }
 #[inline(always)]
 fn horner3(c: &[C], z: C) -> (C, C, C) {
@@ -143,7 +233,19 @@ impl Poly {
         let abs: Vec<f64> = c.iter().map(|x| x.abs()).collect();
         let rev: Vec<C> = c.iter().rev().cloned().collect();
         let absrev: Vec<f64> = abs.iter().rev().cloned().collect();
-        Poly { c, abs, rev, absrev }
+        // twelve zero coefficients or more for each one that is not: the runs of zeros are jumped over
+        let nz = abs.iter().filter(|&&a| a != 0.0).count();
+        let sparse = if c.len() >= 24 && 12 * nz <= c.len() { Some([gaps(&c, &abs), gaps(&rev, &absrev)]) } else { None };
+        Poly { c, abs, rev, absrev, sparse }
+    }
+    /// What is added to the sum of the moduli in the rounding bound (`TINY` for the dense rule).  With few
+    /// terms, a power x^g that underflows is off by a few ETA for each of its products, and that error is
+    /// multiplied by the value so far, below sqrt 2 (m + 1): 64 TINY for each run of zeros covers it.
+    pub fn tiny(&self) -> f64 {
+        match &self.sparse {
+            Some(g) => TINY * 64.0 * (g[0].len() as f64 + 1.0),
+            None => TINY,
+        }
     }
     pub fn degree(&self) -> usize {
         self.c.len() - 1
@@ -246,7 +348,19 @@ impl Poly {
         let [pr, pi] = &mut ws.p;
         let [ar, ai] = &mut ws.a;
         let [br, bi] = &mut ws.b;
-        if second {
+        if let Some(sp) = &self.sparse {
+            for i in 0..m {
+                let (steps, c0, a0) = if i < nin { (&sp[0], self.c[0], self.abs[0]) } else { (&sp[1], self.rev[0], self.absrev[0]) };
+                let (p, d1, d2, sa) = sparse_eval(steps, c0, a0, C::new(xr[i], xi[i]), ws.ax[i], second);
+                pr[i] = p.re;
+                pi[i] = p.im;
+                ar[i] = d1.re;
+                ai[i] = d1.im;
+                br[i] = d2.re;
+                bi[i] = d2.im;
+                ws.sa[i] = sa;
+            }
+        } else if second {
             kernel::<true>(&self.c, &self.abs, &xr[..nin], &xi[..nin], &ws.ax[..nin], &mut pr[..nin], &mut pi[..nin], &mut ar[..nin], &mut ai[..nin], &mut br[..nin], &mut bi[..nin], &mut ws.sa[..nin]);
             kernel::<true>(&self.rev, &self.absrev, &xr[nin..], &xi[nin..], &ws.ax[nin..], &mut pr[nin..], &mut pi[nin..], &mut ar[nin..], &mut ai[nin..], &mut br[nin..], &mut bi[nin..], &mut ws.sa[nin..]);
         } else {
@@ -290,7 +404,7 @@ impl Poly {
             let mg = if i < nin { marg } else { 2.0 * marg };
             // the leading coefficient may have been rounded to a subnormal number: lower bound of its modulus
             let lead = self.abs[0] - 4.0 * ETA;
-            let b = if lead > 0.0 { (pa + mg * (ws.sa[i] + TINY)) / lead * (1.0 + 4.0 * U) } else { f64::INFINITY };
+            let b = if lead > 0.0 { (pa + mg * (ws.sa[i] + self.tiny())) / lead * (1.0 + 4.0 * U) } else { f64::INFINITY };
             out[k] = if i < nin {
                 (b, 0)
             } else {
@@ -721,6 +835,33 @@ pub fn dist_le(dr: f64, di: f64, bound: f64) -> bool {
     }
 }
 
+/// The smallest of |x + i y - z_l|^2 over the slices (infinite for empty slices).
+#[inline(always)]
+fn min_sq(x: f64, y: f64, zr: &[f64], zi: &[f64]) -> f64 {
+    let n = zr.len();
+    let zi = &zi[..n];
+    let mut lo = [f64::INFINITY; 4];
+    let mut cr = zr.chunks_exact(4);
+    let mut ci = zi.chunks_exact(4);
+    for (r4, i4) in (&mut cr).zip(&mut ci) {
+        for j in 0..4 {
+            let (dr, di) = (x - r4[j], y - i4[j]);
+            let n = dr * dr + di * di;
+            if n < lo[j] {
+                lo[j] = n;
+            }
+        }
+    }
+    for (a, b) in cr.remainder().iter().zip(ci.remainder()) {
+        let (dr, di) = (x - a, y - b);
+        let n = dr * dr + di * di;
+        if n < lo[0] {
+            lo[0] = n;
+        }
+    }
+    lo[0].min(lo[1]).min(lo[2].min(lo[3]))
+}
+
 /// The fixed-point certificate (formalised in Lean: FixedPointCertificate.all_roots_of_computed,
 /// with w = r / m and g = the lowered gaps below).
 /// With w_k = r_k / m >= |W_k| and rho_k = 2 w_k: if every gap g_kl = |z_k - z_l| - rho_k is positive,
@@ -741,6 +882,14 @@ pub fn fixed_point(z: &[C], r: &[f64]) -> (Vec<f64>, Vec<bool>) {
     let up = 1.0 + (2.0 * mf + 16.0) * U;
     let mut rho = vec![0.0; m];
     let mut one = vec![false; m];
+    // The test from the smallest gap (version 0.13.0).  With g = min_l g_kl > 0 and W = sum_l w_l,
+    // sigma_k <= W / g and tau_k <= W / g^2: when these bounds pass the two tests, with `up` three times
+    // (once for the rounding of W and of the quotients, twice so that the sums below would pass as well),
+    // the disc passes and the sums are not formed.  The smallest gap costs one pass without square root or
+    // division; for points that have converged W is tiny against the gaps and the bounds are enough.
+    let wsum: f64 = w.iter().sum();
+    let up3 = up * up * up;
+    let quick = wsum.is_finite() && z.iter().all(|x| x.is_finite());
     for k in 0..m {
         let (x, y, wk) = (zr[k], zi[k], w[k]);
         let rk = 2.0 * wk;
@@ -748,37 +897,80 @@ pub fn fixed_point(z: &[C], r: &[f64]) -> (Vec<f64>, Vec<bool>) {
         if !r[k].is_finite() {
             continue;
         }
-        // four independent lanes: the sums do not wait for one another
-        let (mut sg, mut ta, mut gm) = ([0.0f64; 4], [0.0f64; 4], [f64::INFINITY; 4]);
-        let mut bad = [false; 4];
+        if quick {
+            let lo = min_sq(x, y, &zr[..k], &zi[..k]).min(min_sq(x, y, &zr[k + 1..], &zi[k + 1..]));
+            let g = lo.sqrt() * down - rk;
+            if lo > 1e-290 && g > 0.0 {
+                let s = wsum / g;
+                if s * up3 + 1e-300 < 0.5 && wk * (s / g) * up3 + 1e-300 < 0.25 {
+                    one[k] = true;
+                    continue;
+                }
+            }
+        }
+        // Four independent lanes (point l in lane l mod 4, the last points in lane 0): the sums do not wait
+        // for one another.  The groups of four that do not hold k are straight-line code on arrays of four,
+        // which the compiler turns into vector instructions (version 0.13.0; the sums are those of the
+        // loop of 0.12.0, term for term).  The smallest gap is the gap of the smallest squared distance
+        // (square root, product and difference are monotone), and a squared distance out of range, or one
+        // that is not a number, shows in the smallest, in the largest or in the sum.
+        let (mut sg, mut ta) = ([0.0f64; 4], [0.0f64; 4]);
+        let (mut nmin, mut nmax) = ([f64::INFINITY; 4], [0.0f64; 4]);
         let m4 = m & !3;
-        let mut lane = |l: usize, j: usize| {
+        let own = k / 4; // the group of k
+        let group = |c: usize, sg: &mut [f64; 4], ta: &mut [f64; 4], nmin: &mut [f64; 4], nmax: &mut [f64; 4]| {
+            let (r4, i4, w4) = (&zr[4 * c..4 * c + 4], &zi[4 * c..4 * c + 4], &w[4 * c..4 * c + 4]);
+            for j in 0..4 {
+                let (dr, di) = (x - r4[j], y - i4[j]);
+                let n = dr * dr + di * di;
+                if n < nmin[j] {
+                    nmin[j] = n;
+                }
+                if n > nmax[j] {
+                    nmax[j] = n;
+                }
+                let inv = 1.0 / (n.sqrt() * down - rk);
+                let t = w4[j] * inv;
+                sg[j] += t;
+                ta[j] += t * inv;
+            }
+        };
+        let single = |l: usize, j: usize, sg: &mut [f64; 4], ta: &mut [f64; 4], nmin: &mut [f64; 4], nmax: &mut [f64; 4]| {
+            if l == k {
+                return; // the term of k itself is zero
+            }
             let (dr, di) = (x - zr[l], y - zi[l]);
             let n = dr * dr + di * di;
-            let other = l != k;
-            bad[j] |= other & !(n > 1e-290 && n < 1e290);
-            let g = if other { n.sqrt() * down - rk } else { 1.0 };
-            gm[j] = gm[j].min(g);
-            let inv = 1.0 / g;
-            let t = if other { w[l] * inv } else { 0.0 };
+            if n < nmin[j] {
+                nmin[j] = n;
+            }
+            if n > nmax[j] {
+                nmax[j] = n;
+            }
+            let inv = 1.0 / (n.sqrt() * down - rk);
+            let t = w[l] * inv;
             sg[j] += t;
             ta[j] += t * inv;
         };
-        let mut l = 0;
-        while l < m4 {
-            lane(l, 0);
-            lane(l + 1, 1);
-            lane(l + 2, 2);
-            lane(l + 3, 3);
-            l += 4;
+        for c in 0..(m4 / 4).min(own) {
+            group(c, &mut sg, &mut ta, &mut nmin, &mut nmax);
+        }
+        if own < m4 / 4 {
+            for j in 0..4 {
+                single(4 * own + j, j, &mut sg, &mut ta, &mut nmin, &mut nmax);
+            }
+            for c in own + 1..m4 / 4 {
+                group(c, &mut sg, &mut ta, &mut nmin, &mut nmax);
+            }
         }
         for l in m4..m {
-            lane(l, 0);
+            single(l, 0, &mut sg, &mut ta, &mut nmin, &mut nmax);
         }
-        let unsafe_ = bad[0] | bad[1] | bad[2] | bad[3];
-        let mut closed = !(gm[0].min(gm[1]).min(gm[2].min(gm[3])) > 0.0);
+        let (lo, hi) = (nmin[0].min(nmin[1]).min(nmin[2].min(nmin[3])), nmax[0].max(nmax[1]).max(nmax[2].max(nmax[3])));
+        let mut closed = !(lo.sqrt() * down - rk > 0.0);
         let mut sigma = (sg[0] + sg[1]) + (sg[2] + sg[3]);
         let mut tau = (ta[0] + ta[1]) + (ta[2] + ta[3]);
+        let unsafe_ = !(lo > 1e-290 && hi < 1e290) || sigma.is_nan() || tau.is_nan();
         if unsafe_ {
             sigma = 0.0;
             tau = 0.0;
@@ -805,4 +997,110 @@ pub fn fixed_point(z: &[C], r: &[f64]) -> (Vec<f64>, Vec<bool>) {
 pub fn mirror(z: &[C], cover: &[f64], k: usize, rad: f64) -> bool {
     let (x, big) = (z[k].re, (rad + z[k].im.abs()) * (1.0 + 4.0 * U));
     (0..z.len()).all(|j| j == k || !dist_le(x - z[j].re, -z[j].im, (big + cover[j]) * (1.0 + SLACK)))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn next(state: &mut u64) -> f64 {
+        *state ^= *state << 13;
+        *state ^= *state >> 7;
+        *state ^= *state << 17;
+        (*state >> 11) as f64 / (1u64 << 53) as f64
+    }
+
+    /// The evaluation over the runs of zero coefficients gives the values of the dense rule, within the
+    /// rounding bound of both, at points inside and outside the unit disc.
+    #[test]
+    fn sparse_evaluation_agrees_with_the_dense_rule() {
+        let mut st = 0x9e3779b97f4a7c15u64;
+        let mut seen = 0;
+        for t in 0..300 {
+            let m = 24 + (next(&mut st) * 400.0) as usize;
+            let mut c = vec![ZERO; m + 1];
+            let terms = 1 + (next(&mut st) * (m / 14) as f64) as usize;
+            for _ in 0..terms {
+                let j = (next(&mut st) * (m + 1) as f64) as usize;
+                c[j.min(m)] = C::new(next(&mut st) - 0.5, if t % 2 == 0 { 0.0 } else { next(&mut st) - 0.5 });
+            }
+            c[0] = C::new(1.0, 0.0);
+            if t % 3 != 0 {
+                c[m] = C::new(0.5, 0.25); // otherwise the last coefficient may be zero
+            }
+            if t % 5 == 0 && m > 30 {
+                c[m - 1] = C::new(-0.3, 0.0); // two coefficients in a row
+                c[m - 3] = C::new(0.2, 0.1); // and a run of one zero
+            }
+            let sp = Poly::new(c.clone());
+            if sp.sparse.is_none() {
+                continue; // too many terms for this degree
+            }
+            seen += 1;
+            let dense = Poly { sparse: None, ..Poly::new(c) };
+            let z: Vec<C> = (0..40).map(|k| C::from_polar(if k % 4 == 0 { 1.0 } else { 0.2 + 1.6 * next(&mut st) }, 7.0 * next(&mut st))).collect();
+            let marg = 4.0 * (m as f64 + 1.0) * U;
+            let blank = vec![Ev { a: ZERO, b: ZERO, done: false }; z.len()];
+            let (mut e1, mut e2, mut w1, mut w2) = (blank.clone(), blank, EvalWs::default(), EvalWs::default());
+            sp.ev_all(&z, marg, true, &mut w1, &mut e1);
+            dense.ev_all(&z, marg, true, &mut w2, &mut e2);
+            for i in 0..z.len() {
+                let (p1, p2) = (C::new(w1.p[0][i], w1.p[1][i]), C::new(w2.p[0][i], w2.p[1][i]));
+                // the two values of S are within the two rounding bounds; the sums of the moduli agree
+                assert!((p1 - p2).abs() <= marg * (w1.sa[i] + w2.sa[i]), "case {t}, point {i}: {p1:?} {p2:?}");
+                assert!((w1.sa[i] - w2.sa[i]).abs() <= 1e-12 * w2.sa[i]);
+                // S' and S'': where the value is well above its rounding bound, the ratios agree
+                if p2.abs() > 1e6 * marg * w2.sa[i] {
+                    let k = w1.idx[i];
+                    assert_eq!(k, w2.idx[i]);
+                    assert!((e1[k].a - e2[k].a).abs() <= 1e-6 * e2[k].a.abs() + 1e-9, "case {t}, point {i}: S'/S {:?} {:?}", e1[k].a, e2[k].a);
+                    assert!((e1[k].b - e2[k].b).abs() <= 1e-6 * e2[k].b.abs() + 1e-6, "case {t}, point {i}: S''/S {:?} {:?}", e1[k].b, e2[k].b);
+                }
+            }
+        }
+        assert!(seen > 200, "{seen}");
+    }
+
+    /// The flags of the certificate against the two sums formed one term at a time: a disc that passes
+    /// satisfies the two inequalities, and one that satisfies them with a margin passes (whether the test
+    /// from the smallest gap or the sums decided).
+    #[test]
+    fn fixed_point_flags_agree_with_the_plain_sums() {
+        let mut st = 0x2545f4914f6cdd1du64;
+        let (mut passed, mut failed) = (0, 0);
+        for t in 0..400 {
+            let m = 2 + (next(&mut st) * 40.0) as usize;
+            let z: Vec<C> = (0..m).map(|_| C::new(next(&mut st) - 0.5, next(&mut st) - 0.5)).collect();
+            // radii from far below the gaps to their size; sometimes one that is zero or infinite
+            let scale = 10f64.powf(-12.0 * next(&mut st));
+            let mut r: Vec<f64> = (0..m).map(|_| scale * next(&mut st) * m as f64).collect();
+            if t % 7 == 0 {
+                r[0] = 0.0;
+            }
+            if t % 11 == 0 {
+                r[m - 1] = f64::INFINITY;
+            }
+            let (rho, one) = fixed_point(&z, &r);
+            for k in 0..m {
+                assert_eq!(rho[k], 2.0 * r[k] / m as f64);
+                let w = |l: usize| r[l] / m as f64 * (1.0 + SLACK);
+                let (mut sigma, mut tau, mut open) = (0.0, 0.0, true);
+                for l in (0..m).filter(|&l| l != k) {
+                    let g = (z[k] - z[l]).abs() - 2.0 * w(k);
+                    open &= g > 0.0;
+                    sigma += w(l) / g;
+                    tau += w(l) / (g * g);
+                }
+                let holds = |margin: f64| r[k].is_finite() && open && sigma < 0.5 * margin && w(k) * tau < 0.25 * margin;
+                if one[k] {
+                    assert!(holds(1.0 + 1e-9), "case {t}, point {k}: passed, sigma = {sigma}, w tau = {}", w(k) * tau);
+                    passed += 1;
+                } else {
+                    assert!(!holds(1.0 - 1e-6), "case {t}, point {k}: refused, sigma = {sigma}, w tau = {}", w(k) * tau);
+                    failed += 1;
+                }
+            }
+        }
+        assert!(passed > 1000 && failed > 1000, "{passed} {failed}");
+    }
 }

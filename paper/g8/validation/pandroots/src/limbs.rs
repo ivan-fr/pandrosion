@@ -114,11 +114,18 @@ fn add_signed(neg: &mut bool, acc: &mut [u64], bn: bool, b: &[u64]) -> bool {
 /// of the result, or None if it does not fit `dst`.
 fn shr_floor(neg: bool, src: &[u64], k: u64, dst: &mut [u64]) -> Option<bool> {
     let (w, s) = ((k / 64) as usize, (k % 64) as u32);
-    for i in 0..dst.len() {
-        let lo = src.get(i + w).copied().unwrap_or(0);
-        let hi = src.get(i + w + 1).copied().unwrap_or(0);
-        dst[i] = if s == 0 { lo } else { (lo >> s) | (hi << (64 - s)) };
+    // the limbs of src from w on, as many as dst takes; the rest of dst is zero
+    let live = &src[w.min(src.len())..];
+    let cnt = live.len().min(dst.len());
+    if s == 0 {
+        dst[..cnt].copy_from_slice(&live[..cnt]);
+    } else {
+        for i in 0..cnt {
+            let hi = if i + 1 < live.len() { live[i + 1] } else { 0 };
+            dst[i] = (live[i] >> s) | (hi << (64 - s));
+        }
     }
+    dst[cnt..].fill(0);
     // what is left above the width of dst must be zero
     let top = dst.len() + w;
     if top < src.len() {
@@ -266,6 +273,94 @@ fn combine(a: &Num, b: &Num, c: &Num, d: &Num, minus: bool, k: u64, w: &mut Work
     }
 }
 
+/// A complex multiplier with few bits: (re + i im) 2^sh, |re| and |im| below 2^62 (version 0.13.0).
+///
+/// The points of the stage that follows the double precision one are doubles rounded to 53 bits of their
+/// modulus (`exact::quantize`): in units of 2^-F their two coordinates are integers of 53 bits at most
+/// times one power of two.  The product of an accumulator by such a point is then one pass over its limbs
+/// with two multiplications each, instead of two full products, a subtraction and a shift over twice the
+/// width (`combine`).
+#[derive(Clone, Copy)]
+struct Short {
+    re: u64,
+    im: u64,
+    re_neg: bool,
+    im_neg: bool,
+    sh: u64,
+}
+impl Short {
+    /// None if the two coordinates do not fit 62 bits once their common power of two is taken out.
+    fn new(xr: &BigInt, xi: &BigInt) -> Option<Short> {
+        let sh = match (xr.trailing_zeros(), xi.trailing_zeros()) {
+            (Some(a), Some(b)) => a.min(b),
+            (Some(a), None) | (None, Some(a)) => a,
+            (None, None) => 0,
+        };
+        let part = |x: &BigInt| -> Option<u64> {
+            let m = x.magnitude() >> sh;
+            if m.bits() > 62 { None } else { Some(m.iter_u64_digits().next().unwrap_or(0)) }
+        };
+        Some(Short { re: part(xr)?, im: part(xi)?, re_neg: xr.sign() == Sign::Minus, im_neg: xi.sign() == Sign::Minus, sh })
+    }
+}
+
+/// dst = floor((a xa + sgn b xb) 2^sh / 2^k) with sgn = -1 if `minus`, for multipliers xa, xb below 2^62 with
+/// the signs `xa_neg`, `xb_neg`: the same integer as `combine` on the full numbers xa 2^sh and xb 2^sh
+/// (the sum a xa + sgn b xb is exact on one limb more than a, and floor(T 2^sh / 2^k) = floor(T / 2^(k - sh))).
+/// False if the result does not fit dst, or if sh > k.
+#[inline]
+#[allow(clippy::too_many_arguments)]
+fn combine_short(a: &Num, xa: u64, xa_neg: bool, b: &Num, xb: u64, xb_neg: bool, minus: bool, sh: u64, k: u64, w: &mut Work, dst: &mut Num) -> bool {
+    if sh > k {
+        return false;
+    }
+    let n = a.mag.len();
+    let (am, bm) = (&a.mag[..n], &b.mag[..n]);
+    let p = &mut w.p[..n + 1];
+    let (sa, sb) = (a.neg != xa_neg, (b.neg != xb_neg) != minus);
+    let neg;
+    if sa == sb {
+        // each term is below 2^126 and the carry below 2^63: the sum fits 128 bits
+        let (xa, xb) = (xa as u128, xb as u128);
+        let mut carry = 0u128;
+        for i in 0..n {
+            let t = am[i] as u128 * xa + bm[i] as u128 * xb + carry;
+            p[i] = t as u64;
+            carry = t >> 64;
+        }
+        p[n] = carry as u64;
+        neg = sa;
+    } else {
+        // the difference in two's complement on n + 1 limbs; a negative one is negated
+        let (xa, xb) = (xa as i128, xb as i128);
+        let mut carry = 0i128;
+        for i in 0..n {
+            let t = am[i] as i128 * xa - bm[i] as i128 * xb + carry;
+            p[i] = t as u64;
+            carry = t >> 64;
+        }
+        p[n] = carry as u64;
+        if carry < 0 {
+            let mut c = true;
+            for x in p.iter_mut() {
+                let (v, c1) = (!*x).overflowing_add(c as u64);
+                *x = v;
+                c = c1;
+            }
+            neg = sb;
+        } else {
+            neg = sa;
+        }
+    }
+    match shr_floor(neg, p, k - sh, &mut dst.mag) {
+        Some(s) => {
+            dst.neg = s;
+            true
+        }
+        None => false,
+    }
+}
+
 /// The dense Horner scheme of the ball evaluation, on fixed-width numbers.
 ///
 /// With x = (xr, xi) in units of 2^-f and x12 = (xr12, xi12) in units of 2^-(f - c12), runs, for the
@@ -299,9 +394,11 @@ pub(crate) fn horner3(
     // disc are below (m + 1)^3 times the largest coefficient; a larger value is reported as an overflow)
     let n = (f as usize + 64).div_ceil(64);
     let n12 = (f12 as usize + 64).div_ceil(64);
+    // points with few bits (the doubles of the stage of exact values): one fused pass per product
+    let (short, short12) = (Short::new(xr, xi), Short::new(xr12, xi12));
     let (xr, xi) = (Num::load(xr, n)?, Num::load(xi, n)?);
     let (xr12, xi12) = (Num::load(xr12, n12)?, Num::load(xi12, n12)?);
-    let mut w = Work { p: vec![0; 2 * n], q: vec![0; 2 * n] };
+    let mut w = Work { p: vec![0; 2 * n + 1], q: vec![0; 2 * n] };
     let (mut p0r, mut p0i) = (Num::zero(n), Num::zero(n));
     let (mut p1r, mut p1i, mut p2r, mut p2i) = (Num::zero(n12), Num::zero(n12), Num::zero(n12), Num::zero(n12));
     let (mut tr, mut ti) = (Num::zero(n), Num::zero(n));
@@ -311,7 +408,11 @@ pub(crate) fn horner3(
     for j in 0..=m {
         let cj = if rev { &c[m - j] } else { &c[j] };
         // p2 <- p2 x12 + p1
-        if !combine(&p2r, &xr12, &p2i, &xi12, true, f12, &mut w, &mut ur) || !combine(&p2r, &xi12, &p2i, &xr12, false, f12, &mut w, &mut ui) {
+        let ok = match short12 {
+            Some(x) => combine_short(&p2r, x.re, x.re_neg, &p2i, x.im, x.im_neg, true, x.sh, f12, &mut w, &mut ur) && combine_short(&p2r, x.im, x.im_neg, &p2i, x.re, x.re_neg, false, x.sh, f12, &mut w, &mut ui),
+            None => combine(&p2r, &xr12, &p2i, &xi12, true, f12, &mut w, &mut ur) && combine(&p2r, &xi12, &p2i, &xr12, false, f12, &mut w, &mut ui),
+        };
+        if !ok {
             return None;
         }
         std::mem::swap(&mut p2r, &mut ur);
@@ -320,7 +421,11 @@ pub(crate) fn horner3(
             return None;
         }
         // p1 <- p1 x12 + (p0 >> c12)
-        if !combine(&p1r, &xr12, &p1i, &xi12, true, f12, &mut w, &mut ur) || !combine(&p1r, &xi12, &p1i, &xr12, false, f12, &mut w, &mut ui) {
+        let ok = match short12 {
+            Some(x) => combine_short(&p1r, x.re, x.re_neg, &p1i, x.im, x.im_neg, true, x.sh, f12, &mut w, &mut ur) && combine_short(&p1r, x.im, x.im_neg, &p1i, x.re, x.re_neg, false, x.sh, f12, &mut w, &mut ui),
+            None => combine(&p1r, &xr12, &p1i, &xi12, true, f12, &mut w, &mut ur) && combine(&p1r, &xi12, &p1i, &xr12, false, f12, &mut w, &mut ui),
+        };
+        if !ok {
             return None;
         }
         std::mem::swap(&mut p1r, &mut ur);
@@ -331,7 +436,11 @@ pub(crate) fn horner3(
             return None;
         }
         // p0 <- p0 x + c_j
-        if !combine(&p0r, &xr, &p0i, &xi, true, f, &mut w, &mut tr) || !combine(&p0r, &xi, &p0i, &xr, false, f, &mut w, &mut ti) {
+        let ok = match short {
+            Some(x) => combine_short(&p0r, x.re, x.re_neg, &p0i, x.im, x.im_neg, true, x.sh, f, &mut w, &mut tr) && combine_short(&p0r, x.im, x.im_neg, &p0i, x.re, x.re_neg, false, x.sh, f, &mut w, &mut ti),
+            None => combine(&p0r, &xr, &p0i, &xi, true, f, &mut w, &mut tr) && combine(&p0r, &xi, &p0i, &xr, false, f, &mut w, &mut ti),
+        };
+        if !ok {
             return None;
         }
         std::mem::swap(&mut p0r, &mut tr);
@@ -428,6 +537,43 @@ mod tests {
                 assert_eq!(r.to_bigint(), exact);
             }
         }
+    }
+
+    #[test]
+    fn short_multipliers_match_bigint() {
+        let mut st = 0x1234567887654321u64;
+        let mut used = 0;
+        for t in 0..40000u64 {
+            let n = 1 + (t % 6) as usize;
+            let (a, b) = (random(&mut st, 64 * n as u64), random(&mut st, 64 * n as u64));
+            // multipliers of 62 bits at most, sometimes zero, of either sign, times a common power of two
+            let (ba, bb) = (1 + next(&mut st) % 62, 1 + next(&mut st) % 62);
+            let (xa, xb) = (random(&mut st, ba), random(&mut st, bb));
+            let sh = next(&mut st) % 130;
+            let (x, y) = (Num::load(&a, n).unwrap(), Num::load(&b, n).unwrap());
+            let short = Short::new(&(&xa << sh), &(&xb << sh)).unwrap();
+            // the parts times the power of two taken out are the multipliers
+            assert_eq!(BigInt::from(short.re) << short.sh, BigInt::from(xa.magnitude().clone()) << sh);
+            assert_eq!(BigInt::from(short.im) << short.sh, BigInt::from(xb.magnitude().clone()) << sh);
+            let k = short.sh + next(&mut st) % 200;
+            let mut w = Work { p: vec![0; 2 * n + 1], q: vec![0; 2 * n] };
+            let mut d = Num::zero(n + 1);
+            for minus in [false, true] {
+                let exact: BigInt = if minus { (&a * &xa - &b * &xb) << sh } else { (&a * &xa + &b * &xb) << sh };
+                let exact: BigInt = exact >> k;
+                let fits = exact.magnitude().bits() <= 64 * (n as u64 + 1);
+                let ok = combine_short(&x, short.re, short.re_neg, &y, short.im, short.im_neg, minus, short.sh, k, &mut w, &mut d);
+                assert_eq!(ok, fits, "case {t}");
+                if ok {
+                    assert_eq!(d.to_bigint(), exact, "case {t}: a = {a}, b = {b}, xa = {xa}, xb = {xb}, sh = {sh}, k = {k}, minus = {minus}");
+                    used += 1;
+                }
+            }
+        }
+        assert!(used > 70000, "{used}");
+        // too many bits: no short form
+        assert!(Short::new(&((BigInt::from(1) << 70u32) + 1), &BigInt::from(1)).is_none());
+        assert!(Short::new(&BigInt::from(0), &BigInt::from(0)).is_some());
     }
 
     #[test]
