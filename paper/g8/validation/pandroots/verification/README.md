@@ -1,13 +1,14 @@
 # Mathematical evidence and source provenance
 
-The Rust solver in this release is version 0.13.0: the sources of 0.5.0 with the changes listed in
+The Rust solver in this release is version 0.14.0: the sources of 0.5.0 with the changes listed in
 `CHANGELOG.md` (0.6.0: deflation of the root zero, Yun's algorithm over the Gaussian integers; 0.7.0:
 fixed-width arithmetic in the multiprecision evaluation, which computes the same integers; 0.8.0 to
 0.10.0: the evaluation of double precision points, the goal `isolate`, the step of a cluster and its
 cursor in multiprecision; 0.11.0 and 0.12.0: gcds by images modulo primes in Yun's algorithm, the start from
 the exact coefficients, the choice between two starts; 0.13.0: the product by a short multiplier in one
 pass, which computes the same integers, Horner's rule over runs of zero coefficients, the test of the
-certificate from the smallest gap, the bounds of the certificate taken from the last evaluation of the sweeps; no Lean file was added for these, which are checked by exact division,
+certificate from the smallest gap, the bounds of the certificate taken from the last evaluation of the sweeps; 0.14.0: the same Horner's rule
+in two's complement, which computes the same integers again; no Lean file was added for these, which are checked by exact division,
 by the certificate and by the tests).
 Its source hashes are recorded in `provenance.json`.
 
@@ -49,10 +50,10 @@ the cursor is used only above an estimate of its rounding, and an error there wo
 correctness.
 
 These files provide evidence for the mathematical statements, not a formal verification of
-version 0.13.0. They are not compiled by Cargo.
+version 0.14.0. They are not compiled by Cargo.
 
 The formal certificate assumes valid numerical upper and lower bounds. The Rust
 floating-point bounds, underflow handling, guards, fixed-point ball evaluation, multiprecision implementation,
-fallback count of unresolved clusters, the fixed-width arithmetic of 0.7.0 and 0.13.0 (tested against `BigInt`), the rounding bound of Horner's rule over runs of zero coefficients, the test of the certificate from the smallest gap (it implies the two inequalities of the theorem; tested against the plain sums), the test that keeps the discs away from zero, and Yun's algorithm
+fallback count of unresolved clusters, the fixed-width arithmetic of 0.7.0, 0.13.0 and 0.14.0 (tested against `BigInt`), the rounding bound of Horner's rule over runs of zero coefficients, the test of the certificate from the smallest gap (it implies the two inequalities of the theorem; tested against the plain sums), the test that keeps the discs away from zero, and Yun's algorithm
 (tested against the rational version of 0.5.0 and by rebuilding the polynomial from its factors) are not
 formally verified by these files. There is no theorem of global convergence of the solver.

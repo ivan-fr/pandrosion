@@ -101,9 +101,23 @@ fn euclid_p<const P: u64>(mut a: Vec<u64>) -> bool {
         }
         // a <- lead(b) a - lead(a) x^k b: the remainder up to a constant that is not zero modulo p, without
         // the inverse of lead(b) (thirty squarings for each remainder: most of this test at degree 20)
+        // (Only for a quotient of low degree, the usual case: this way every step multiplies what is left
+        // of a.  When the degree drops by more than eight, as it does for a polynomial with few terms, the
+        // inverse is computed once and each step touches lead(b) coefficients only.  In 0.13.0 the first
+        // way was used alone, and the test took 3 ms for z^2000 + z + 1 instead of 0.1.)
         let lead = b[b0];
         let lb = b.len() - b0;
         let pp = p * p;
+        if a.len() - a0 >= lb + 8 {
+            let inv = powmod(lead, p - 2, p);
+            while a.len() - a0 >= lb {
+                let f = a[a0] * inv % p;
+                for i in 1..lb {
+                    a[a0 + i] = (a[a0 + i] + pp - f * b[b0 + i]) % p;
+                }
+                a0 += 1;
+            }
+        }
         while a.len() - a0 >= lb {
             let f = a[a0];
             for i in 1..lb {

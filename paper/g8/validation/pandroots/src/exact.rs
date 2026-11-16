@@ -479,8 +479,10 @@ pub(crate) fn certify_pre<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], pr
             break;
         }
         // the points of a cluster go to the roots of its model instead
+        let mut bumped = vec![false; m];
         for (k, v, more) in cluster_dz {
             if v.is_finite() {
+                bumped[k] = true;
                 dz[k] = v;
                 fk[k].set((fk[k].get() + more).min(4096));
             }
@@ -491,6 +493,15 @@ pub(crate) fn certify_pre<'a>(ci: &dyn Fn() -> &'a GPoly, s: &Poly, z0: &[C], pr
             let z2 = quantize(z[k] - dz[k]);
             if z2 != z[k] {
                 moved |= (z2 - z[k]).abs() > 4.0 * U * z[k].abs();
+                // The bits its next value will ask for (version 0.14.0).  A point that moves by 2^-b of its
+                // modulus has about b correct bits and, if the step keeps its order, at least 3 b after it,
+                // 53 at most: S is that many bits smaller there, and F is raised by as many at once.  Without
+                // this one evaluation in five of this stage was an attempt with too few bits, made again.
+                // (The points of a cluster have been given their bits with their move.)
+                let b = -((z2 - z[k]).abs() / z2.abs()).log2();
+                if b.is_finite() && b > 0.0 && !bumped[k] {
+                    fk[k].set((fk[k].get() + (53.0 - b).min(2.0 * b).max(0.0) as u64).min(4096));
+                }
                 z[k] = z2;
                 let (v, _, p, _, _) = value(k, z2);
                 vals[k] = v;

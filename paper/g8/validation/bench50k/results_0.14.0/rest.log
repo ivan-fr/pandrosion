@@ -1,0 +1,4 @@
+wide_scale numpy disagreements: 1137 strict ok: 1137 BAD: 0 no reference: 0 []
+real_cluster numpy disagreements: 1613 strict ok: 1613 BAD: 0 no reference: 0 []
+kac_pm1 numpy disagreements: 3 strict ok: 3 BAD: 0 no reference: 0 []
+EXIT 0

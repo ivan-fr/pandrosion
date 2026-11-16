@@ -538,11 +538,22 @@ pub fn binomial_start_with(s: &Poly, merge: bool) -> Option<Vec<C>> {
     if z.len() != m || z.iter().any(|x| !x.is_finite()) {
         return None;
     }
-    for i in 0..m {
-        for j in 0..i {
-            if z[i] == z[j] {
-                return None;
+    // no two points equal (compared as numbers: the two zeros are one point): by pairs at small degree,
+    // sorted above (the pairs took a millisecond at degree 2000)
+    if m < 64 {
+        for i in 0..m {
+            for j in 0..i {
+                if z[i] == z[j] {
+                    return None;
+                }
             }
+        }
+    } else {
+        let key = |x: f64| if x == 0.0 { 0u64 } else { x.to_bits() };
+        let mut keys: Vec<(u64, u64)> = z.iter().map(|p| (key(p.re), key(p.im))).collect();
+        keys.sort_unstable();
+        if keys.windows(2).any(|w| w[0] == w[1]) {
+            return None;
         }
     }
     Some(z)

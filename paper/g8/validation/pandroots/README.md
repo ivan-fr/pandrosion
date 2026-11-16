@@ -29,6 +29,63 @@ let (re, im, radius) = roots[1].decimal(60); // "1.41421356237309504880168872420
 A returned disc may be enlarged by 1/1024 of its radius and still contain exactly `count` roots; `decimal`
 prints enough digits and a radius rounded upwards within that slack.
 
+## Version 0.14.0
+
+After 0.13.0, two thirds of the time on the 20 000 polynomials of the section below went to the
+polynomials that need values of S beyond double precision (orthogonal polynomials, powers, Wilkinson,
+Mandelbrot, clusters), and three quarters of that to one loop: Horner's rule on integers of a few hundred
+bits, at a point that has the 53 bits of a double.  Version 0.14.0 rewrites that loop.  Same method, same
+integers, same discs.
+
+| the 20 000 polynomials | 0.12.0 | 0.13.0 | 0.14.0 |
+|---|---:|---:|---:|
+| time in all | 54.0 s | 29.1 s | 18.4 s |
+| ... those for which double precision is enough (15 078) | 18.0 s | 6.6 s | 6.5 s |
+| ... those that need values beyond double precision (2 966) | 34.4 s | 21.0 s | 10.4 s |
+| ... those that need points beyond double precision (1 956) | 1.7 s | 1.5 s | 1.5 s |
+| the 50 000 polynomials of degree 2 to 60 (the three versions in one run) | 3.03 s | 2.10 s | 1.90 s |
+
+| one call (ms) | degree | 0.12.0 | 0.13.0 | 0.14.0 |
+|---|---:|---:|---:|---:|
+| Laguerre | 150 | 287 | 81 | 41 |
+| Chebyshev T | 150 | 182 | 108 | 47 |
+| Legendre | 100 | 54 | 35 | 15 |
+| Wilkinson | 100 | 128 | 60 | 33 |
+| Mandelbrot | 255 | 701 | 367 | 182 |
+| truncated exponential | 120 | 50 | 38 | 15 |
+| `(z - a)^60 - b` | 60 | 24 | 15 | 7.5 |
+| `z^2000 + z + 1` | 2000 | 72 | 21 | 17 |
+| dense, Gaussian coefficients | 2000 | 153 | 59 | 57 |
+
+(Intel Xeon at 2.1 GHz, one thread, one call per polynomial, the smaller of two runs.)
+
+**The loop in two's complement.**  A step of Horner's rule at a point `x = (x_r + i x_i) 2^s`, with x_r and
+x_i integers of 53 bits, is `p <- floor((p_r x_r - p_i x_i) 2^s / 2^F) + c` and the like: multiply two long
+numbers by two small ones, add, shift, add a third.  Version 0.7.0 kept the long numbers in sign and
+magnitude, where every one of these operations looks at signs, compares magnitudes and may negate, and
+0.13.0 had made the products one pass.  In two's complement nothing of this is left: the products are
+accumulated limb by limb with a signed carry, and the shift that fills with the sign bit is exactly the
+quotient rounded towards minus infinity that the error bound of the evaluation assumes.  The bits of a
+double precision point of the unit disc are at the top of its F bits, so the shift is shorter than a limb,
+and each limb of the product completes a limb of the quotient, to which the limb of the addend is added
+at once: one pass instead of three.  The coefficients are kept as limbs for each F instead of being
+converted at every step.  The result is the same integers as the `BigInt` loop (tested), or a report that
+a number does not fit, in which case the loop of 0.13.0 runs.
+
+**Bits asked in advance.**  A point that the sweep moves by 2^-b of its modulus has about b correct bits,
+and three times as many after the move if the step keeps its order; S is that much smaller there.  F is
+raised accordingly before the evaluation, instead of after an evaluation that fails for lack of bits:
+one evaluation in five was such a failure, one in ten now.
+
+**A defect of 0.13.0.**  Its test "square-free modulo a prime" took remainders in a way that is quadratic
+when the degree drops by much at once, which is what a polynomial with few terms does: 3 ms of the 21 ms of
+`z^2000 + z + 1`.  Corrected.
+
+What still costs, of the 18 seconds: the same polynomials (orthogonal 5.7 s, powers 2.1 s, Wilkinson
+1.4 s), now through the number of their sweeps, 15 to 40, which no version since 0.12.0 has changed; and
+the sparse and dense polynomials of large degree (3.2 s and 2.0 s), the m^2 pairs of points of each sweep.
+For the small polynomials of the 50 000, nothing changes except for clusters.
+
 ## Version 0.13.0
 
 Version 0.13.0 comes from profiling 0.12.0, first on the 10 000 polynomials below, then on 50 000 small

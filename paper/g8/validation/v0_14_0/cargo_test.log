@@ -1,0 +1,45 @@
+running 14 tests
+test exact::tests::quantize_keeps_53_bits_of_the_modulus ... ok
+test float::tests::fixed_point_flags_agree_with_the_plain_sums ... ok
+test limbs::tests::overflow_is_reported ... ok
+test float::tests::sparse_evaluation_agrees_with_the_dense_rule ... ok
+test limbs::tests::floor_shift_and_signed_sum_match_bigint ... ok
+test precise::tests::cluster_step_finds_the_roots_of_a_shifted_power ... ok
+test precise::tests::multiprecision_cursor_gives_the_radius_of_a_distant_cluster ... ok
+test precise::tests::scaled_evaluation_agrees_with_exact_values ... ok
+test precise::tests::series_of_the_support_near_one ... ok
+test sqfree::tests::pseudo_division_identity ... ok
+test limbs::tests::short_multipliers_match_bigint ... ok
+test limbs::tests::horner_matches_the_bigint_loop ... ok
+test limbs::tests::two_complement_horner_matches_the_bigint_loop ... ok
+test sqfree::tests::yun_agrees_with_the_rational_version_and_rebuilds_the_polynomial ... ok
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.96s
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+running 20 tests
+test degenerate_inputs ... ok
+test degree_one_to_eighty_digits ... ok
+test eighty_digits_in_few_sweeps ... ok
+test exact_roots_print_with_radius_zero ... ok
+test mignotte_fixed_point_certificate ... ok
+test mignotte_with_a_pair_far_below_double_precision ... ok
+test large_dense_real_polynomial ... ok
+test multiplicities ... ok
+test roots_closer_than_double_precision ... ok
+test sixty_digits_of_sqrt_two ... ok
+test roots_closer_than_the_tolerance_need_not_be_isolated ... ok
+test square_free_factors_of_a_complex_polynomial ... ok
+test subnormal_coefficients ... ok
+test unit_roots_and_scales ... ok
+test values_that_underflow ... ok
+test few_terms_at_large_degree ... ok
+test small_exact_roots_in_decimal ... ok
+test wilkinson_20 ... ok
+test zero_roots_are_exact_and_cost_nothing ... ok
+test full_order_in_multiprecision ... ok
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+running 2 tests
+test src/lib.rs - (line 20) ... ok
+test src/lib.rs - (line 37) ... ok
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+all doctests ran in 3.03s; merged doctests compilation took 3.02s

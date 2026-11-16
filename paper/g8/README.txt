@@ -1,21 +1,25 @@
-Later than revision 9: pandroots 0.13.0 (16 November 2026)
-===========================================================
-validation/pandroots now holds the crate 0.13.0, which is later than the note and than the archive of
+Later than revision 9: pandroots 0.13.0 and 0.14.0 (16 November 2026)
+=====================================================================
+validation/pandroots now holds the crate 0.14.0, which is later than the note and than the archive of
 revision 9 on Zenodo (crate 0.12.0; its sources are in the history of this repository).  The note, its
-tables and every log and result file listed below are those of 0.12.0 and are unchanged.  What 0.13.0
-adds is in validation/pandroots/CHANGELOG.md and README.md: the same method, with the same sweeps and the
-same certificate, at a lower cost (the product by a double precision point in one pass, Horner's rule over
-runs of zero coefficients, the certificate computed once, no evaluation made twice).
+tables and every log and result file listed below are those of 0.12.0 and are unchanged.  What 0.13.0 and
+0.14.0 add is in validation/pandroots/CHANGELOG.md and README.md: the same method, with the same step and
+the same certificate, at a lower cost (0.13.0: the product by a double precision point in one pass,
+Horner's rule over runs of zero coefficients, the certificate computed once, no evaluation made twice;
+0.14.0: Horner's rule on long integers in two's complement, the bits of a value asked in advance).
   validation/bench20k/   the crate alone on 20 000 polynomials (the 10 000 of bench10k and 10 000 more):
-                         0.12.0 54.0 s, 0.13.0 29.1 s on an Intel Xeon at 2.1 GHz; the same discs on
-                         19 989 polynomials (the 11 others are clusters at the limit of double precision
-                         centres); the discs of the 7 249 polynomials with prescribed rational roots
-                         checked in exact arithmetic (none wrong).  See validation/bench20k/README.txt.
+                         0.12.0 54.0 s, 0.13.0 29.1 s, 0.14.0 18.4 s on an Intel Xeon at 2.1 GHz; the discs
+                         of 0.14.0 are those of 0.13.0, and those of 0.12.0 on 19 989 polynomials (the 11
+                         others are clusters at the limit of double precision centres); the discs of the
+                         7 249 polynomials with prescribed rational roots checked in exact arithmetic
+                         (none wrong).  See validation/bench20k/README.txt.
   validation/bench50k/   50 000 polynomials of degree 2 to 60 in eight families, with their check against
-                         known roots, numpy and mpmath: 0.12.0 2.84 s, 0.13.0 1.97 s, the same discs.
-  validation/v0_13_0/    rust_check.py, underflow_check.py and precise_check.py run again with 0.13.0 on
-                         that machine (their logs; the counts are those of 0.12.0), and cargo test (35 tests).
-Not done for 0.13.0: the comparison with MPSolve, and a revision of the note.
+                         known roots, numpy and mpmath: 0.12.0 3.03 s, 0.13.0 2.10 s, 0.14.0 1.90 s in one
+                         run, the same discs.
+  validation/v0_13_0/, validation/v0_14_0/   rust_check.py, underflow_check.py and precise_check.py run
+                         again with each version on that machine (their logs; the verdicts are those of
+                         0.12.0), and cargo test (35 and 36 tests).
+Not done for 0.13.0 and 0.14.0: the comparison with MPSolve, and a revision of the note.
 
 G8, revision 9 - The simultaneous rectangle (Rust crate pandroots 0.12.0)
 =======================================================================

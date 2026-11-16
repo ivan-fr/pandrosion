@@ -361,6 +361,266 @@ fn combine_short(a: &Num, xa: u64, xa_neg: bool, b: &Num, xb: u64, xb_neg: bool,
     }
 }
 
+// ---- The same scheme in two's complement, for short multipliers (version 0.14.0) -----------------------
+//
+// With a short multiplier every step is "multiply two numbers by two small signed integers, add, shift
+// right, add a third number".  In sign and magnitude each of these looks at the signs, compares
+// magnitudes and may negate; in two's complement none does: the products are accumulated with a signed
+// carry, and the shift that fills with the sign bit is the quotient towards minus infinity, which is the
+// rounding of `BigInt >> k`.  The integers are the same; a number that does not fit its width (one bit
+// less than in sign and magnitude) is reported, and the caller falls back on the loop above.
+
+/// x as n limbs in two's complement; false if it does not fit (|x| must be below 2^(64 n - 1)).
+fn tc_load(x: &BigInt, dst: &mut [u64]) -> bool {
+    let n = dst.len();
+    if x.bits() > 64 * n as u64 - 1 {
+        return false;
+    }
+    dst.fill(0);
+    for (i, d) in x.iter_u64_digits().enumerate() {
+        dst[i] = d;
+    }
+    if x.sign() == Sign::Minus {
+        let mut carry = true;
+        for v in dst.iter_mut() {
+            let (w, c) = (!*v).overflowing_add(carry as u64);
+            *v = w;
+            carry = c;
+        }
+    }
+    true
+}
+fn tc_to_bigint(a: &[u64]) -> BigInt {
+    let neg = (a[a.len() - 1] as i64) < 0;
+    let mut mag: Vec<u64> = a.to_vec();
+    if neg {
+        let mut carry = true;
+        for v in mag.iter_mut() {
+            let (w, c) = (!*v).overflowing_add(carry as u64);
+            *v = w;
+            carry = c;
+        }
+    }
+    let digits: Vec<u32> = mag[..len(&mag)].iter().flat_map(|&d| [d as u32, (d >> 32) as u32]).collect();
+    BigInt::from_biguint(if neg { Sign::Minus } else { Sign::Plus }, BigUint::new(digits))
+}
+/// dst = floor(src / 2^k), src and dst in two's complement (dst.len() <= src.len() + 1).  False if the
+/// quotient does not fit dst.
+#[inline(always)]
+fn tc_shr(src: &[u64], k: u64, dst: &mut [u64]) -> bool {
+    let (w, s) = ((k / 64) as usize, (k % 64) as u32);
+    let ext = if (src[src.len() - 1] as i64) < 0 { u64::MAX } else { 0 };
+    let n = dst.len();
+    let at = |i: usize| if i < src.len() { src[i] } else { ext };
+    if s == 0 {
+        for i in 0..n {
+            dst[i] = at(i + w);
+        }
+    } else {
+        for i in 0..n {
+            dst[i] = (at(i + w) >> s) | (at(i + w + 1) << (64 - s));
+        }
+    }
+    // what is above dst must be the sign of dst, limb after limb
+    if ((dst[n - 1] as i64) < 0) != (ext != 0) {
+        return false;
+    }
+    for i in n + w..src.len() {
+        let v = if s == 0 { at(i) } else { (at(i) >> s) | (at(i + 1) << (64 - s)) };
+        if v != ext {
+            return false;
+        }
+    }
+    true
+}
+/// acc += b in two's complement (same width); false on overflow.
+#[inline(always)]
+fn tc_add(acc: &mut [u64], b: &[u64]) -> bool {
+    let n = acc.len();
+    let (sa, sb) = ((acc[n - 1] as i64) < 0, (b[n - 1] as i64) < 0);
+    let mut carry = false;
+    for i in 0..n {
+        let (v, c1) = acc[i].overflowing_add(b[i]);
+        let (v, c2) = v.overflowing_add(carry as u64);
+        acc[i] = v;
+        carry = c1 | c2;
+    }
+    sa != sb || ((acc[n - 1] as i64) < 0) == sa
+}
+/// dst = floor((a xa + b xb) / 2^k) for a, b in two's complement of the same width and |xa|, |xb| < 2^62;
+/// `tmp` has one limb more than a.  False if the result does not fit dst.
+#[inline(always)]
+fn tc_mul2_shr(a: &[u64], xa: i64, b: &[u64], xb: i64, k: u64, tmp: &mut [u64], dst: &mut [u64]) -> bool {
+    let n = a.len();
+    let (b, tmp) = (&b[..n], &mut tmp[..n + 1]);
+    let (xa, xb) = (xa as i128, xb as i128);
+    let mut carry = 0i128;
+    // the low limbs are unsigned, the top one carries the sign; each term is below 2^126 in modulus and
+    // the carry below 2^63
+    for i in 0..n - 1 {
+        let t = a[i] as i128 * xa + b[i] as i128 * xb + carry;
+        tmp[i] = t as u64;
+        carry = t >> 64;
+    }
+    let t = (a[n - 1] as i64) as i128 * xa + (b[n - 1] as i64) as i128 * xb + carry;
+    tmp[n - 1] = t as u64;
+    tmp[n] = (t >> 64) as u64;
+    tc_shr(tmp, k, dst)
+}
+
+/// dst = floor((a xa + b xb) / 2^k) + add, the three operations of a step in one pass when the shift is
+/// below one limb (the usual case: the bits of a double precision point of the unit disc are at the top of
+/// its F bits).  The limbs of the product come out from the lowest; each one completes a limb of the
+/// quotient, to which the limb of `add` is added at once.  False if the result does not fit dst.
+#[inline(always)]
+#[allow(clippy::too_many_arguments)]
+fn tc_step(a: &[u64], xa: i64, b: &[u64], xb: i64, k: u64, add: &[u64], tmp: &mut [u64], dst: &mut [u64]) -> bool {
+    let n = a.len();
+    if k == 0 || k >= 64 || n < 2 {
+        return tc_mul2_shr(a, xa, b, xb, k, tmp, dst) && tc_add(dst, add);
+    }
+    let (b, add, dst) = (&b[..n], &add[..n], &mut dst[..n]);
+    let s = k as u32;
+    let (xa, xb) = (xa as i128, xb as i128);
+    let t = a[0] as i128 * xa + b[0] as i128 * xb;
+    let (mut prev, mut carry, mut cadd) = (t as u64, t >> 64, false);
+    for i in 1..n - 1 {
+        let t = a[i] as i128 * xa + b[i] as i128 * xb + carry;
+        carry = t >> 64;
+        let v = (prev >> s) | ((t as u64) << (64 - s));
+        prev = t as u64;
+        let (v, c1) = v.overflowing_add(add[i - 1]);
+        let (v, c2) = v.overflowing_add(cadd as u64);
+        dst[i - 1] = v;
+        cadd = c1 | c2;
+    }
+    // the top limbs carry the sign
+    let t = (a[n - 1] as i64) as i128 * xa + (b[n - 1] as i64) as i128 * xb + carry;
+    let top = (t >> 64) as i64; // limb n of the product
+    let v = (prev >> s) | ((t as u64) << (64 - s));
+    let (v, c1) = v.overflowing_add(add[n - 2]);
+    let (v, c2) = v.overflowing_add(cadd as u64);
+    dst[n - 2] = v;
+    cadd = c1 | c2;
+    let q = ((t as u64) >> s) | ((top as u64) << (64 - s)); // limb n - 1 of the quotient
+    // the quotient fits n limbs if what is above is its sign
+    if (top >> s) != ((q as i64) >> 63) {
+        return false;
+    }
+    let (v, c1) = q.overflowing_add(add[n - 1]);
+    let (v, _) = v.overflowing_add(cadd as u64);
+    let _ = c1;
+    dst[n - 1] = v;
+    let (sq, sa) = ((q as i64) < 0, (add[n - 1] as i64) < 0);
+    sq != sa || ((v as i64) < 0) == sq
+}
+
+/// The coefficients of a polynomial as limbs in two's complement: for each one its real part and its
+/// imaginary part, `n` limbs each, n the width of the evaluation with F fractional bits.  Built once for
+/// each F (the coefficients were loaded from `BigInt` at every step of every evaluation).
+pub(crate) struct Table {
+    n: usize,
+    limbs: Vec<u64>,
+}
+impl Table {
+    /// None if a coefficient does not fit the width.
+    pub(crate) fn new(c: &[(BigInt, BigInt)], f: u64) -> Option<Table> {
+        let n = (f as usize + 64).div_ceil(64);
+        let mut limbs = vec![0u64; 2 * n * c.len()];
+        for (j, co) in c.iter().enumerate() {
+            let (re, im) = limbs[2 * n * j..2 * n * (j + 1)].split_at_mut(n);
+            if !tc_load(&co.0, re) || !tc_load(&co.1, im) {
+                return None;
+            }
+        }
+        Some(Table { n, limbs })
+    }
+}
+
+/// `horner3` for multipliers with few bits, in two's complement.  None if a number does not fit.
+fn horner3_tc(c: &[(BigInt, BigInt)], table: Option<&Table>, rev: bool, x: Short, x12: Short, f: u64, c12: u64) -> Option<[(BigInt, BigInt); 3]> {
+    let f12 = f - c12;
+    if x.sh > f || x12.sh > f12 {
+        return None;
+    }
+    let n = (f as usize + 64).div_ceil(64);
+    let n12 = (f12 as usize + 64).div_ceil(64);
+    let sg = |v: u64, neg: bool| if neg { -(v as i64) } else { v as i64 };
+    let (xr, xi) = (sg(x.re, x.re_neg), sg(x.im, x.im_neg));
+    let (yr, yi) = (sg(x12.re, x12.re_neg), sg(x12.im, x12.im_neg));
+    let (k, k12) = (f - x.sh, f12 - x12.sh);
+    let table = table.filter(|t| t.n == n && t.limbs.len() == 2 * n * c.len());
+    // one buffer: p0 (2 n), the next p0 (2 n), the coefficient (2 n), p1, p2 and their next values (8 n12),
+    // p0 shifted (2 n12), the product (n + 1)
+    let mut buf = vec![0u64; 6 * n + 10 * n12 + n + 1];
+    let (p0, rest) = buf.split_at_mut(2 * n);
+    let (q0, rest) = rest.split_at_mut(2 * n);
+    let (cj, rest) = rest.split_at_mut(2 * n);
+    let (p1, rest) = rest.split_at_mut(2 * n12);
+    let (q1, rest) = rest.split_at_mut(2 * n12);
+    let (p2, rest) = rest.split_at_mut(2 * n12);
+    let (q2, rest) = rest.split_at_mut(2 * n12);
+    let (s0, tmp) = rest.split_at_mut(2 * n12);
+    let (mut p0, mut q0, mut p1, mut q1, mut p2, mut q2) = (p0, q0, p1, q1, p2, q2);
+    let m = c.len() - 1;
+    for j in 0..=m {
+        let co = if rev { &c[m - j] } else { &c[j] };
+        {
+            // p2 <- p2 x12 + p1
+            let (ar, ai) = p2.split_at(n12);
+            let (dr, di) = q2.split_at_mut(n12);
+            if !tc_step(ar, yr, ai, -yi, k12, &p1[..n12], tmp, dr) || !tc_step(ar, yi, ai, yr, k12, &p1[n12..], tmp, di) {
+                return None;
+            }
+        }
+        std::mem::swap(&mut p2, &mut q2);
+        {
+            // p1 <- p1 x12 + (p0 >> c12)
+            let (ar, ai) = p1.split_at(n12);
+            let (dr, di) = q1.split_at_mut(n12);
+            if c12 == 0 {
+                // p0 has the width of p1 and is added as it is
+                if !tc_step(ar, yr, ai, -yi, k12, &p0[..n], tmp, dr) || !tc_step(ar, yi, ai, yr, k12, &p0[n..], tmp, di) {
+                    return None;
+                }
+            } else {
+                let (sr, si) = s0.split_at_mut(n12);
+                if !tc_shr(&p0[..n], c12, sr) || !tc_shr(&p0[n..], c12, si) {
+                    return None;
+                }
+                if !tc_step(ar, yr, ai, -yi, k12, sr, tmp, dr) || !tc_step(ar, yi, ai, yr, k12, si, tmp, di) {
+                    return None;
+                }
+            }
+        }
+        std::mem::swap(&mut p1, &mut q1);
+        {
+            // p0 <- p0 x + c_j
+            let (ar, ai) = p0.split_at(n);
+            let (dr, di) = q0.split_at_mut(n);
+            let (cr, ci): (&[u64], &[u64]) = match table {
+                Some(t) => {
+                    let at = 2 * n * if rev { m - j } else { j };
+                    t.limbs[at..at + 2 * n].split_at(n)
+                }
+                None => {
+                    let (cr, ci) = cj.split_at_mut(n);
+                    if !tc_load(&co.0, cr) || !tc_load(&co.1, ci) {
+                        return None;
+                    }
+                    (cr, ci)
+                }
+            };
+            if !tc_step(ar, xr, ai, -xi, k, cr, tmp, dr) || !tc_step(ar, xi, ai, xr, k, ci, tmp, di) {
+                return None;
+            }
+        }
+        std::mem::swap(&mut p0, &mut q0);
+    }
+    let pair = |p: &[u64], w: usize| (tc_to_bigint(&p[..w]), tc_to_bigint(&p[w..]));
+    Some([pair(p0, n), pair(p1, n12), pair(p2, n12)])
+}
+
 /// The dense Horner scheme of the ball evaluation, on fixed-width numbers.
 ///
 /// With x = (xr, xi) in units of 2^-f and x12 = (xr12, xi12) in units of 2^-(f - c12), runs, for the
@@ -376,8 +636,9 @@ fn combine_short(a: &Num, xa: u64, xa_neg: bool, b: &Num, xb: u64, xb_neg: bool,
 /// of the `BigInt` loop.  None if a number does not fit the width chosen for it; the caller then runs the
 /// `BigInt` loop.
 #[allow(clippy::too_many_arguments)]
-pub(crate) fn horner3(
+pub(crate) fn horner3_table(
     c: &[(BigInt, BigInt)],
+    table: Option<&Table>,
     rev: bool,
     xr: &BigInt,
     xi: &BigInt,
@@ -396,6 +657,11 @@ pub(crate) fn horner3(
     let n12 = (f12 as usize + 64).div_ceil(64);
     // points with few bits (the doubles of the stage of exact values): one fused pass per product
     let (short, short12) = (Short::new(xr, xi), Short::new(xr12, xi12));
+    if let (Some(a), Some(b)) = (short, short12) {
+        if let Some(r) = horner3_tc(c, table, rev, a, b, f, c12) {
+            return Some(r);
+        }
+    }
     let (xr, xi) = (Num::load(xr, n)?, Num::load(xi, n)?);
     let (xr12, xi12) = (Num::load(xr12, n12)?, Num::load(xi12, n12)?);
     let mut w = Work { p: vec![0; 2 * n + 1], q: vec![0; 2 * n] };
@@ -453,6 +719,13 @@ pub(crate) fn horner3(
         }
     }
     Some([(p0r.to_bigint(), p0i.to_bigint()), (p1r.to_bigint(), p1i.to_bigint()), (p2r.to_bigint(), p2i.to_bigint())])
+}
+
+/// `horner3_table` without a table (the tests).
+#[cfg(test)]
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn horner3(c: &[(BigInt, BigInt)], rev: bool, xr: &BigInt, xi: &BigInt, f: u64, c12: u64, xr12: &BigInt, xi12: &BigInt) -> Option<[(BigInt, BigInt); 3]> {
+    horner3_table(c, None, rev, xr, xi, f, c12, xr12, xi12)
 }
 
 /// The same scheme with `BigInt` (the loop of versions up to 0.6.0): the reference, and the fallback.
@@ -574,6 +847,55 @@ mod tests {
         // too many bits: no short form
         assert!(Short::new(&((BigInt::from(1) << 70u32) + 1), &BigInt::from(1)).is_none());
         assert!(Short::new(&BigInt::from(0), &BigInt::from(0)).is_some());
+    }
+
+    #[test]
+    fn two_complement_horner_matches_the_bigint_loop() {
+        let mut st = 0x7f4a7c159e3779b9u64;
+        let mut done = 0;
+        for t in 0..3000u64 {
+            let f = 64 + next(&mut st) % 700;
+            let c12 = if t % 3 == 0 { 0 } else { next(&mut st) % (f - 63) };
+            let m = 1 + (next(&mut st) % 40) as usize;
+            let c: Vec<(BigInt, BigInt)> = (0..=m).map(|_| (random(&mut st, f), if t % 4 == 0 { BigInt::from(0) } else { random(&mut st, f) })).collect();
+            // a point of the unit disc with few bits: two integers of 53 bits at most times a power of two,
+            // of either sign, sometimes zero, sometimes 1 or i
+            let sh = f - 54 - next(&mut st) % (f - 53).min(40);
+            let one = BigInt::from(1) << f;
+            let (xr, xi): (BigInt, BigInt) = match t % 7 {
+                0 => (one.clone(), BigInt::from(0)),
+                1 => (BigInt::from(0), -one.clone()),
+                2 => (random(&mut st, 53) << sh, BigInt::from(0)),
+                _ => {
+                    let bits = 1 + next(&mut st) % 53;
+                    (random(&mut st, 53) << sh, random(&mut st, bits) << sh)
+                }
+            };
+            let (xr12, xi12): (BigInt, BigInt) = (&xr >> c12, &xi >> c12);
+            let slow = horner3_big(&c, t % 2 == 0, &xr, &xi, f, c12, &xr12, &xi12);
+            if let (Some(a), Some(b)) = (Short::new(&xr, &xi), Short::new(&xr12, &xi12)) {
+                let table = if t % 5 < 3 { Table::new(&c, f) } else { None };
+                if let Some(got) = horner3_tc(&c, table.as_ref(), t % 2 == 0, a, b, f, c12) {
+                    assert_eq!(got, slow, "case {t}: f = {f}, c12 = {c12}, m = {m}");
+                    done += 1;
+                }
+            }
+            // and through the entry point, whatever path it takes
+            if let Some(got) = horner3(&c, t % 2 == 0, &xr, &xi, f, c12, &xr12, &xi12) {
+                assert_eq!(got, slow, "case {t} (entry point)");
+            }
+        }
+        assert!(done > 2500, "the two's complement loop gave up too often: {done}");
+        // the shift, the sum and the load at their limits
+        let mut d = [0u64; 2];
+        assert!(tc_load(&-(BigInt::from(1) << 126u32), &mut d) && !tc_load(&(BigInt::from(1) << 127u32), &mut d));
+        let mut q = [0u64; 1];
+        assert!(tc_load(&BigInt::from(-5), &mut d) && tc_shr(&d, 1, &mut q) && tc_to_bigint(&q) == BigInt::from(-3));
+        assert!(tc_load(&(BigInt::from(1) << 70u32), &mut d) && !tc_shr(&d, 3, &mut q) && tc_shr(&d, 8, &mut q));
+        let big = (BigInt::from(1) << 126u32) + 5;
+        let (mut a, mut b) = ([0u64; 2], [0u64; 2]);
+        assert!(tc_load(&big, &mut a) && tc_load(&big, &mut b) && !tc_add(&mut a, &b));
+        assert!(tc_load(&big, &mut a) && tc_load(&-&big, &mut b) && tc_add(&mut a, &b) && tc_to_bigint(&a) == BigInt::from(0));
     }
 
     #[test]

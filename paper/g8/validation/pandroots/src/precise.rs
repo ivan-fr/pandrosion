@@ -162,6 +162,8 @@ pub struct BallPoly<'a> {
     /// beta = S S''/S'^2 is wanted in multiprecision (only `Options::full_order` uses it)
     beta: bool,
     cache: RefCell<HashMap<u64, Rc<Vec<(BigInt, BigInt)>>>>,
+    /// the same coefficients as limbs, for the evaluations at points with few bits (None: they do not fit)
+    tables: RefCell<HashMap<u64, Option<Rc<crate::limbs::Table>>>>,
     /// the polynomials T_e(t) = S(2^e t), for the points outside the unit disc that have few bits
     scaled: RefCell<HashMap<i64, Rc<BallPoly<'static>>>>,
 }
@@ -232,7 +234,7 @@ impl<'a> BallPoly<'a> {
         };
         let nz: Vec<usize> = (0..ci.len()).filter(|&j| !(ci[j].0.is_zero() && ci[j].1.is_zero())).collect();
         let sparse = nz.len() * 48 < ci.len();
-        BallPoly { ci, e, sa, lead: (f0 * (1.0 - 1e-9), e0), nz, sparse, beta, cache: RefCell::new(HashMap::new()), scaled: RefCell::new(HashMap::new()) }
+        BallPoly { ci, e, sa, lead: (f0 * (1.0 - 1e-9), e0), nz, sparse, beta, cache: RefCell::new(HashMap::new()), tables: RefCell::new(HashMap::new()), scaled: RefCell::new(HashMap::new()) }
     }
     fn coeffs(&self, f: u64) -> Rc<Vec<(BigInt, BigInt)>> {
         if let Some(c) = self.cache.borrow().get(&f) {
@@ -245,6 +247,7 @@ impl<'a> BallPoly<'a> {
         let mut cache = self.cache.borrow_mut();
         if cache.len() > 6 {
             cache.clear();
+            self.tables.borrow_mut().clear();
         }
         cache.insert(f, c.clone());
         c
@@ -359,7 +362,8 @@ impl<'a> BallPoly<'a> {
             // the same integers from numbers of a fixed width (module `limbs`), or from `BigInt` when they
             // do not fit or F is large
             let rev = !inside;
-            let [q0, q1, q2] = match crate::limbs::horner3(&c, rev, &xr, &xi, f, c12, &xr12, &xi12) {
+            let table = if f <= crate::limbs::MAX_BITS { self.tables.borrow_mut().entry(f).or_insert_with(|| crate::limbs::Table::new(&c, f).map(Rc::new)).clone() } else { None };
+            let [q0, q1, q2] = match crate::limbs::horner3_table(&c, table.as_deref(), rev, &xr, &xi, f, c12, &xr12, &xi12) {
                 Some(r) => r,
                 None => crate::limbs::horner3_big(&c, rev, &xr, &xi, f, c12, &xr12, &xi12),
             };

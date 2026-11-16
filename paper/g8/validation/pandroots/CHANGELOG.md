@@ -1,5 +1,52 @@
 # Changelog
 
+## 0.14.0 - 2026-11-16
+
+The stage of exact values (double precision points, values of S beyond double precision) cost two thirds
+of the time of 0.13.0 on the 20 000 polynomials, and three quarters of that was Horner's rule on fixed
+width integers.  This version is about that loop.  The method is unchanged, and the integers computed are
+those of 0.13.0: the discs are the same on every one of the 20 000 and of the 50 000 polynomials.
+
+- Horner's rule for a point with few bits in two's complement (`limbs::horner3_tc`).  Every step of it is
+  "multiply two numbers by two small signed integers, add, shift right, add a third number".  In sign and
+  magnitude (0.7.0, and the pass of 0.13.0) each of these looks at the signs, compares magnitudes and may
+  negate.  In two's complement none does: the products are accumulated with a signed carry, and the shift
+  that fills with the sign bit is the quotient towards minus infinity, the rounding of `BigInt >> k`.
+  When the shift is below one limb, which is the case of a double precision point of the unit disc, the
+  three operations are one pass over the limbs (`tc_step`): each limb of the product completes a limb of
+  the quotient, to which the limb of the addend is added at once.  A number that does not fit its width,
+  one bit less than before, sends the evaluation to the loop of 0.13.0.  Tested against the `BigInt` loop
+  on 3 000 polynomials and points, with the limits of the shift, of the sum and of the width.
+- The coefficients rounded to F bits are kept as limbs, one table for each F (`limbs::Table`): they were
+  converted from `BigInt` at every step of every evaluation.
+- The bits of the next value of a point.  A point that moves by 2^-b of its modulus has about b correct
+  bits and, if the step keeps its order, at least 3 b after it, 53 at most; S is that many bits smaller
+  there, and F is raised by min(2 b, 53 - b) before the evaluation.  One evaluation in five of this stage
+  was an attempt with too few bits, made again; one in ten now.
+- The test "square-free modulo a prime" of 0.13.0 took its remainders without the inverse of the leading
+  coefficient, which multiplies what is left of the dividend at every step: quadratic when the degree
+  drops by much, as for a polynomial with few terms (3 ms for `z^2000 + z + 1`, against 0.1 ms with
+  0.12.0).  The inverse is used again when the degree drops by more than eight.
+- The points of the start are checked to be distinct by sorting them above degree 64 (the pairs took a
+  millisecond at degree 2000).
+
+Measurements (one call per polynomial, one thread, Intel Xeon at 2.1 GHz, the smaller of two runs for each
+polynomial; 0.12.0, 0.13.0, 0.14.0):
+
+- The 20 000 polynomials: 54.0 s, 29.1 s, 18.4 s (the first 10 000: 22.3 s, 12.0 s, 8.0 s).  The 2 966
+  that reach the stage of exact values: 34.4 s, 21.0 s, 10.4 s.  By degree: up to 20, 2.0 s, 1.8 s, 1.7 s;
+  21 to 100, 16.0 s, 10.8 s, 6.3 s; 101 to 400, 21.2 s, 11.7 s, 5.8 s; 401 to 2000, 14.9 s, 4.7 s, 4.6 s.
+- One call, in ms: Laguerre 150, 287, 81, 41; Chebyshev T 150, 182, 108, 47; Wilkinson 100, 128, 60, 33;
+  Mandelbrot 255, 701, 367, 182; truncated exponential 120, 50, 38, 15; `(z - a)^60 - b`, 24, 15, 7.5.
+- The 50 000 polynomials of degree 2 to 60, the three versions run one after the other: 3.03 s, 2.10 s,
+  1.90 s.  Only the real clusters, three quarters of which reach the stage of exact values, change with
+  0.14.0 (median 137 us -> 76 us in that run); for the others double precision is enough.
+- The discs (multiplicities and counts) are those of 0.13.0 on the 20 000 and on the 50 000.  Against
+  0.12.0 the 11 clusters of the entry below differ, as they did.
+- The 7 249 polynomials with prescribed rational roots, checked in exact rational arithmetic: none wrong.
+
+Tests: the two's complement loop against `BigInt`.  36 tests, in release and debug builds.
+
 ## 0.13.0 - 2026-11-16
 
 Found by profiling 0.12.0 on the 10 000 polynomials, then measured on 20 000 (the same and 10 000 more

@@ -435,6 +435,10 @@ fn finish(mut out: Vec<PreciseRoot>, n: usize, stats: Stats, s: i64) -> (Vec<Pre
 /// `s` miss some of the coefficients.
 fn factor_roots<'a>(mult: usize, f: &dyn Fn() -> &'a GPoly, s: Poly, real_coeffs: bool, opt: &Options, out: &mut Out, stats: &mut Stats, doubles: bool, lost: bool) {
     let m = s.degree();
+    match out {
+        Out::P(v) => v.reserve(m),
+        Out::D(v) => v.reserve(m),
+    }
     let t0 = std::time::Instant::now();
     // `lost`: some coefficients do not fit in double precision next to the others (roots over more orders of
     // magnitude than a double has).  The double precision sweeps would then run on another polynomial: the

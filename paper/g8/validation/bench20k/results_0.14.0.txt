@@ -1,0 +1,50 @@
+pandroots 0.14.0 against 0.13.0 and 0.12.0 on the 20 000 polynomials of bench20k (make_corpus.sh), 16 November 2026.
+Same machine and conditions as results_0.13.0.txt (Intel Xeon at 2.1 GHz, one thread, the smaller of two runs for
+each polynomial).  Sums of the times of each run of 0.14.0: 20.46 s and 20.20 s (sum of the smaller times: 18.41 s).
+
+== analyse.py CORPUS out-0.14.0-run1.txt,out-0.14.0-run2.txt out-0.13.0-run1.txt,out-0.13.0-run2.txt
+20000 polynomials, 1043482 roots: 18.41 s in all, median 70 us; complete 20000, within tolerance 18395
+deepest stage reached: double 15078 (6.47 s), exact 2966 (10.43 s), precise 1956 (1.50 s)
+group             n compl within shared  total_s median_us   p90_us  max_s before_s ratio
+cluster        2442  2442   1426   1016     1.08       256      942   0.03     1.13  1.05
+dense          5638  5638   5638      0     0.38        24      179   0.00     0.38  1.01
+dense_large     258   258    258      0     1.98      2205    15174   0.07     2.03  1.02
+edges           600   600    600      0     0.01        10       16   0.00     0.01  1.02
+laws           2000  2000   2000      0     0.10        25      125   0.00     0.10  1.00
+mignotte        616   616     44    572     0.67       984     2103   0.00     0.64  0.96
+multiplicity   1607  1607   1607      0     0.43       141      700   0.00     0.42  0.97
+orthogonal      510   510    510      0     5.66      4263    31273   0.07    12.22  2.16
+powers         1000  1000   1000      0     2.14       101     8893   0.02     4.05  1.89
+products        500   500    500      0     0.16       272      636   0.00     0.17  1.06
+roots          2002  2002   2002      0     0.18        47      230   0.00     0.22  1.25
+scales          502   502    502      0     0.05        23       43   0.00     0.05  1.00
+sparse         1005  1005   1005      0     3.18       544    14051   0.02     3.31  1.04
+special         413   413    396     17     0.89       230     6865   0.18     1.75  1.97
+wilkinson       507   507    507      0     1.44      1976     6652   0.03     2.58  1.79
+zero_roots      400   400    400      0     0.05       110      303   0.00     0.05  0.98
+not complete: []
+slowest: [('x_mandelbrot_255', 255, 0.182), ('m_chebyshevU_148', 148, 0.068), ('k_dense_large_2000_117', 2000, 0.065), ('x_random_complex_2000_0', 2000, 0.062), ('k_dense_large_2000_119', 2000, 0.061), ('k_dense_large_2000_114', 2000, 0.061), ('x_random_real_2000_0', 2000, 0.06), ('k_dense_large_2000_115', 2000, 0.06), ('m_dense_large_2000_119', 2000, 0.059), ('k_dense_large_2000_116', 2000, 0.059), ('m_dense_large_2000_114', 2000, 0.058), ('k_dense_large_2000_118', 2000, 0.057)]
+
+against out-0.13.0-run1.txt,out-0.13.0-run2.txt: previous total 29.11 s, ratio 1.58; discs (multiplicities and counts) or completeness changed on 0 polynomials: []
+within tolerance lost: [] | gained: 0
+slower by more than 1.5: 28 [('k_roots_0610', 0.16, 0.4), ('k_sparse_0336', 0.27, 0.55), ('m_roots_0165', 0.19, 0.38), ('x_cluster_line_K2_1e-40', 0.13, 0.21), ('m_multiple_0799', 0.75, 1.23), ('m_cluster_line_0078', 0.17, 0.28), ('m_multiple_0746', 0.29, 0.47), ('m_cluster_plane_0079', 3.03, 4.81), ('m_multiple_0751', 0.29, 0.46), ('m_multiple_0767', 0.36, 0.58)]
+faster by more than 1.5: 1336 of 6617 that take more than 0.2 ms
+degree    0 to   20: 13067 polynomials,    1.80 s ->    1.69 s
+degree   21 to  100:  5521 polynomials,   10.83 s ->    6.34 s
+degree  101 to  400:   995 polynomials,   11.73 s ->    5.79 s
+degree  401 to 2000:   417 polynomials,    4.74 s ->    4.59 s
+
+== the same against 0.12.0 (the lines of the comparison)
+against out-0.12.0-run1.txt,out-0.12.0-run2.txt: previous total 54.04 s, ratio 2.94; discs (multiplicities and counts) or completeness changed on 11 polynomials: ['k_cluster_plane_0169', 'k_cluster_line_0336', 'k_cluster_plane_0466', 'k_cluster_plane_0496', 'k_cluster_plane_0625', 'k_cluster_plane_0649', 'k_cluster_line_0666', 'k_cluster_line_0918', 'm_cluster_plane_0079', 'm_cluster_plane_0328', 'm_cluster_line_0939']
+within tolerance lost: ['k_cluster_line_0336', 'k_cluster_plane_0625'] | gained: 2
+slower by more than 1.5: 10 [('k_roots_0610', 0.18, 0.4), ('m_cluster_ring_0014', 1.1, 2.34), ('m_mignotte_0123', 0.81, 1.5), ('x_cluster_line_K2_1e-40', 0.13, 0.21), ('m_cluster_line_0360', 0.22, 0.36), ('m_roots_0165', 0.23, 0.38), ('m_multiple_0799', 0.79, 1.23), ('m_cluster_line_0126', 3.21, 4.91), ('m_multiple_0763', 0.28, 0.43), ('m_cluster_line_0090', 0.21, 0.31)]
+faster by more than 1.5: 4006 of 7363 that take more than 0.2 ms
+degree    0 to   20: 13067 polynomials,    2.04 s ->    1.69 s
+degree   21 to  100:  5521 polynomials,   15.95 s ->    6.34 s
+degree  101 to  400:   995 polynomials,   21.16 s ->    5.79 s
+degree  401 to 2000:   417 polynomials,   14.89 s ->    4.59 s
+
+== check_oracle.py CORPUS out-0.14.0-run1.txt   ("wrong: 0" as well for the second run)
+7249 polynomials with exactly known roots: 70364 distinct roots, 68396 discs (659 polynomials with a disc shared by roots that doubles cannot separate)
+by group (checked, all right): cluster 1633 1633, edges 600 600, multiplicity 1607 1607, roots 2002 2002, scales 502 502, wilkinson 505 505, zero_roots 400 400
+wrong: 0 []

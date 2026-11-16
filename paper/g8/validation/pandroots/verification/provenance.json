@@ -1,13 +1,13 @@
 {
-  "archive": "pandroots-0.13.0 (development sources: 0.5.0 with the changes of CHANGELOG.md)",
+  "archive": "pandroots-0.14.0 (development sources: 0.5.0 with the changes of CHANGELOG.md)",
   "rust_source_sha256": {
-    "src/float.rs": "5236b3de74f8623e51fec47b3b2918dd5a9249969f735c8114d72164cead6248",
-    "src/lib.rs": "3283b89c03122fec9f6015750e664aaf5030c3b630c542fcaf0e48ae2185c4e4",
-    "src/limbs.rs": "c96814bbb16f06d6c03b56df705d15b7c717637618f0877326ba0c09d236ee6c",
-    "src/sqfree.rs": "158b3583a9dd1a62d024bcacba48aed41cd39278fefd8b93107a64ff09211812",
-    "src/exact.rs": "0629fbb7f57218d4a78b6ef7c2df033fb4d2f801680ca2fbdaa24da97fc58e59",
+    "src/float.rs": "1b127f51aa91c2ce031cd33d34b2246a7144c7c45e3581a728aef7f8638eba12",
+    "src/lib.rs": "279e00e150d79e8aff98689d20db1f2093cda7d13bb4bb4c9382c57062261e05",
+    "src/limbs.rs": "ad668d623fb1fa6a7e4a84dc1abfb2c0eabf87861ddfe45d21391d54d204ec05",
+    "src/sqfree.rs": "49d0d657a6f00232caa6c9f61bb0a3fc4c34b9999d615db9e6120d7eceefdf24",
+    "src/exact.rs": "763b4ac8ea23dafa8c0fe454f0b16878c33f7cdd6a21ff4f4092eee4b3ac586f",
     "src/complex.rs": "58496bcd12b15872325ded486097e9bd29c06b363ddc924b89b0e50edb17a480",
-    "src/precise.rs": "d439b80409989416f955e455ced8c96c6879c6678aa11de28e8a4898ff78248a",
+    "src/precise.rs": "eafda37b9a8bf60f760ea8159f1ccc896bcc3fe04cf4174496a64ddd0ce374e7",
     "src/bin/bench.rs": "e66b4a0798841da413704128634b592d872d5decb9b26687aebfa33b95274fdc",
     "tests/basic.rs": "5a143d40f7f68d750bf0e27c86ee00f4f4fcc8c77aa39835fb26430761c823dd"
   },
@@ -28,7 +28,7 @@
   },
   "packaging_changes": [
     "Publication metadata, license and layout carried forward from the published 0.5.0 crate",
-    "Numerical changes of 0.6.0 to 0.13.0 are listed in CHANGELOG.md"
+    "Numerical changes of 0.6.0 to 0.14.0 are listed in CHANGELOG.md"
   ],
   "lean_evidence_origin": "G8 revision 7 (38 theorems), built on 2026-11-14 with Lean 4.33.1 and not rebuilt for this release; ZeroDeflation.lean (7 theorems, 0.6.0), FixedWidth.lean (4 lemmas, 0.7.0), ScaledVariable.lean (9 theorems, 0.8.0) ClusterStep.lean (6 theorems, 0.9.0) and ClusterCursor.lean (5 lemmas, 0.10.0), checked on 2026-11-15 with Lean 4.35.0 / Mathlib v4.35.0. The theorems cover the certificate, the deflation of the root zero, two arithmetic identities, the scaled variable and the step of a cluster on a shifted power; not the Rust code, the ball evaluation, the multiprecision step, Yun's algorithm, the decimal output, nor how close a cluster is to a shifted power."
 }

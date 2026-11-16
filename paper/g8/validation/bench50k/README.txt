@@ -24,6 +24,7 @@ seed 20261116:
   results_0.12.0/   the author's run of 0.12.0 (another machine).
   results_0.13.0/   0.13.0 on an Intel Xeon at 2.1 GHz: verify.log, summary.json, rest.log, and compare.txt
                     (0.12.0 against 0.13.0 on that machine, two runs each).
+  results_0.14.0/   the same for 0.14.0.
 
 Results for 0.13.0
   verify.py   50 000 complete and within tolerance; no multiplicity sum off, no two discs that meet, no
@@ -33,5 +34,11 @@ Results for 0.13.0
   rest.py     the 2 753 polynomials where numpy disagrees, each against mpmath: 2 753 right.
   compare.py  0.12.0 2.84 s, 0.13.0 1.97 s for the 50 000; the discs (multiplicities and counts) are the
               same on every polynomial.  Median of a dense real polynomial 56 us -> 36 us.
-The times of results_0.12.0/ and results_0.13.0/summary.json come from two machines and are not to be
-compared with one another; compare.txt is the comparison on one machine.
+Results for 0.14.0 (results_0.14.0/)
+  verify.py and rest.py: the same counts as for 0.13.0, without a failure.
+  compare.py  0.12.0 3.03 s, 0.13.0 2.10 s, 0.14.0 1.90 s, the three versions in one run (the machine is
+              shared: the same 0.12.0 took 2.84 s in the run of results_0.13.0/); the same discs.  Only the
+              real clusters change with 0.14.0 (0.45 s -> 0.25 s): the other families do not go beyond
+              double precision.
+The times of results_0.12.0/ and of the summary.json of the two other directories come from two machines
+and are not to be compared with one another; the files compare.txt are comparisons on one machine.
