@@ -9,7 +9,7 @@
     "src/complex.rs": "58496bcd12b15872325ded486097e9bd29c06b363ddc924b89b0e50edb17a480",
     "src/precise.rs": "d439b80409989416f955e455ced8c96c6879c6678aa11de28e8a4898ff78248a",
     "src/bin/bench.rs": "e66b4a0798841da413704128634b592d872d5decb9b26687aebfa33b95274fdc",
-    "tests/basic.rs": "741bc3846aad36846ff8d07ee31b2afe545aad1125d75c72745913cac6398310"
+    "tests/basic.rs": "5a143d40f7f68d750bf0e27c86ee00f4f4fcc8c77aa39835fb26430761c823dd"
   },
   "lean_sha256": {
     "verification/lean/ClusterCursor.lean": "da9420c06770a2f34063ba8e15e90753ed0ad52798bd03ab1b9701797e6d6a8e",

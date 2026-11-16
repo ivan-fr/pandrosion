@@ -97,7 +97,10 @@ fn contains(d: &pandroots::Root, x: f64, y: f64) -> bool {
 #[test]
 fn subnormal_coefficients() {
     // 2^-1070 (z-1)(z-2)(z-3): version 0.1.0 returned a wrong root with radius zero and complete = true
-    let s = 2f64.powi(-1070);
+    // (the power from its bits: without optimisation `2f64.powi(-1070)` is 1 / 2^1070 = 0, and this test
+    // failed in debug builds up to 0.12.0)
+    let s = f64::from_bits(16);
+    assert!(s > 0.0 && s * 2f64.powi(1000) * 2f64.powi(70) == 1.0);
     let c = [1.0, -6.0, 11.0, -6.0].map(|x| C::new(x * s, 0.0));
     let (out, complete, _) = all_roots(&c, &Options::default());
     assert!(complete && out.len() == 3);

@@ -47,7 +47,9 @@ same bounds.  The discs (multiplicities and counts) are those of 0.12.0 on every
   in one disc and only one, with its multiplicity and the right count.  No disc wrong, for 0.12.0 either.
 - Tests: the product by a short multiplier against `BigInt`; the evaluation over runs of zeros against the
   dense rule; the flags of the certificate against the two sums formed one term at a time; `z^600 - 2`
-  and a trinomial of degree 400 with its reversed polynomial.  34 tests.
+  and a trinomial of degree 400 with its reversed polynomial.  34 tests.  The test of subnormal
+  coefficients builds 2^-1070 from its bits: `2f64.powi(-1070)` is zero without optimisation, and that
+  test failed in debug builds (the solver was given the zero polynomial); the 34 pass in both builds.
 
 ## 0.12.0 - 2026-11-15
 
