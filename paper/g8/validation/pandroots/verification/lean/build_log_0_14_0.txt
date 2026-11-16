@@ -28,3 +28,19 @@ exit 0
 'LeanMath.Papers.TwoComplement.limb_of_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
 'LeanMath.Papers.TwoComplement.limb_of_shift_pow' depends on axioms: [propext, Classical.choice, Quot.sound]
 exit 0
+
+== GitHub Actions, workflow "Pandroots Lean files", run 43930325188 (commit 541bd36), ubuntu-24.04,
+== 16 November 2026, same toolchain (Lean 4.33.1 / Mathlib v4.33.1); the three files above passed again
+== request: check FloatModel.lean (lake env lean)
+exit 0        (with linter remarks, no error)
+== request: axioms of the theorems of FloatModel.lean
+'LeanMath.Papers.FloatModel.exists_close' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FloatModel.nearest_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FloatModel.nearest_rel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FloatModel.exists_binade' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FloatModel.nearest_normal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FloatModel.nearest_small' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FloatModel.binary64' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FloatModel.coord_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanMath.Papers.FloatModel.cmul_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0

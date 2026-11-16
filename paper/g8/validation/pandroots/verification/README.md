@@ -49,7 +49,7 @@ K-th power law behind the bits asked after a step.  The rounding of that computa
 the cursor is used only above an estimate of its rounding, and an error there would cost time, not
 correctness.
 
-`CertificateGap.lean`, `SparseHorner.lean` and `TwoComplement.lean` (0.13.0 and 0.14.0, fifteen theorems,
+`CertificateGap.lean`, `SparseHorner.lean`, `TwoComplement.lean` and `FloatModel.lean` (0.13.0 and 0.14.0, twenty-four theorems,
 checked on 16 November 2026 by the workflow `Pandroots Lean files` of the repository with its own toolchain,
 Lean 4.33.1 / Mathlib v4.33.1; log and axiom audit in `build_log_0_14_0.txt`, script `check_0_14_0.sh`):
 
@@ -67,11 +67,22 @@ Lean 4.33.1 / Mathlib v4.33.1; log and axiom audit in `build_log_0_14_0.txt`, sc
   quotient, the common power of two of the multipliers comes off the shift, and the limb of the quotient
   is `floor(lo / 2^s) + (hi mod 2^s) 2^(64 - s)` from two consecutive limbs of the product.
 
-What these three files do not cover.  They are statements about real, complex and integer numbers.  That a
-product of two doubles is within a relative error `u` of the true product, the operations that underflow,
-the rounding of `W / g` in double precision, and the Rust code that implements the formulas (signed
-carries, the detection of a number that does not fit) are not formalised; they are covered by the margins
-of the code and by its tests against `BigInt`.  That the sweeps and the certificate evaluate the
+* `FloatModel.lean` (nine theorems): the floating-point model.  The format is defined as the numbers
+  `m 2^e` with `|m| ≤ 2^p` and `e ≥ emin` (binary64: `p = 53`, `emin = -1074`; no overflow), and `y` is a
+  rounding of `x` to nearest when no number of the format is closer.  Then `|x - y| ≤ 2^-p |x|` for every
+  `x` of the normal range, `|x| ≥ 2^(emin + p - 1)` (`nearest_normal`, `binary64`), and `|x - y| ≤ 2^emin / 2`
+  below it (`nearest_small`): the relative error `u = 2^-53` that the other bounds assume of each product
+  and each sum is a consequence of the definition of the rounding.  And the product of two complex numbers
+  as the program computes it, four real products, a difference and a sum, is within `√2 (2 u + u²) |z| |w|`
+  of the exact one (`cmul_error`, stated with squares).
+
+What these four files do not cover.  They are statements about real, complex and integer numbers.  That the
+arithmetic of the machine is the rounding to nearest of `FloatModel.lean` (IEEE 754, which Rust's `f64`
+follows), overflow, the chain from one rounded operation to the bound of Horner's rule that the program
+uses (`4 (m + 1) 2^-52` times the sum of the moduli, with its term for the operations that underflow), the
+rounding of `W / g` in double precision, and the Rust code that implements the formulas (signed carries,
+the detection of a number that does not fit) are not formalised; they are covered by the margins of the
+code and by its tests against `BigInt`.  That the sweeps and the certificate evaluate the
 polynomial at the same points (0.13.0) is a property of the program, not a theorem: `value_alone` is its
 mathematical part.  The number of bits asked in advance (0.14.0) is a heuristic and needs no proof: a
 value with too few bits is computed again, as before.

@@ -51,9 +51,12 @@ Lean (added after the measurements, for 0.13.0 and 0.14.0): `CertificateGap.lean
 certificate from the smallest gap implies the two inequalities of the theorem), `SparseHorner.lean` (the
 closed form of a run of zero coefficients, the value of S alone, and the rounding of a power computed with
 k products in any order) and `TwoComplement.lean` (the arithmetic shift as the floor, the power of two of
-the multipliers, the limb of the quotient).  Fifteen theorems, checked by the workflow `Pandroots Lean
-files` of the repository (Lean 4.33.1 / Mathlib v4.33.1), standard axioms only.  Not formalised: the
-floating-point model, the underflows and the Rust code.
+the multipliers, the limb of the quotient), and `FloatModel.lean` (from a definition of the format and of
+the rounding to nearest: a relative error of at most 2^-p in the normal range, 2^-53 for doubles, and the
+error of the complex product as the program computes it).  Twenty-four theorems, checked by the workflow
+`Pandroots Lean files` of the repository (Lean 4.33.1 / Mathlib v4.33.1), standard axioms only.  Not
+formalised: that the machine rounds this way (IEEE 754), the chain from one rounded operation to the
+bound of Horner's rule with its term for underflows, and the Rust code.
 
 ## 0.13.0 - 2026-11-16
 
