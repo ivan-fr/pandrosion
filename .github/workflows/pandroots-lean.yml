@@ -1,0 +1,36 @@
+name: Pandroots Lean files
+on:
+  push:
+    branches: ['claude/**']
+    paths:
+      - 'paper/g8/validation/pandroots/verification/lean/**'
+      - '.github/workflows/pandroots-lean.yml'
+  pull_request:
+    paths:
+      - 'paper/g8/validation/pandroots/verification/lean/**'
+      - '.github/workflows/pandroots-lean.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pandroots-lean-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    name: Lean files of pandroots 0.13.0 and 0.14.0
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      LEAN_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: false
+          use-github-cache: false
+      - run: bash scripts/fetch_mathlib_cache.sh
+      - run: bash paper/g8/validation/pandroots/verification/lean/check_0_14_0.sh
