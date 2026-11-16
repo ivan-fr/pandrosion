@@ -1,0 +1,15 @@
+WEAK  z^2 - 1e300 z + 1e-300 (roots 1e300 and 1e-600) | complete = false
+WEAK  random, coefficients from 1e-300 to 1e300, degree 4 (#2) | complete = false
+WEAK  random, coefficients from 1e-300 to 1e300, degree 5 (#10) | relative radius 0.975
+WEAK  random, coefficients from 1e-300 to 1e300, degree 6 (#21) | complete = false
+WEAK  random, coefficients from 1e-300 to 1e300, degree 4 (#31) | complete = false
+WEAK  random, coefficients from 1e-300 to 1e300, degree 6 (#36) | complete = false
+edges of double precision, 195 polynomials: 189 sharp and right, 6 true but weak, 0 WRONG
+WEAK  tol 1e-20 | z^2 - 1e300 z + 1e-300 (roots 1e300 and 1e-600) | complete = false
+WEAK  tol 1e-20 | random, coefficients from 1e-300 to 1e300, degree 5 (#10) | relative radius 0.975
+WEAK  tol 1e-20 | random, coefficients from 1e-300 to 1e300, degree 6 (#21) | complete = false
+WEAK  tol 1e-20 | random, coefficients from 1e-300 to 1e300, degree 4 (#31) | complete = false
+WEAK  tol 1e-20 | random, coefficients from 1e-300 to 1e300, degree 6 (#36) | complete = false
+the same polynomials with tolerance 1e-20 (decimal output): 190 certified within the tolerance, 5 true but weak, 0 WRONG
+tolerance 1e-30, 31 polynomials: 31 certified within the tolerance, 0 true but weak, 0 WRONG (pandroots: 0.6 s in all, process start included)
+tolerance 1e-80, 31 polynomials: 31 certified within the tolerance, 0 true but weak, 0 WRONG (pandroots: 0.6 s in all, process start included)

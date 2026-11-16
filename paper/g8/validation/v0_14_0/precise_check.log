@@ -1,0 +1,21 @@
+=== A. 31 polynomials with integer coefficients: all_roots_exact_precise against mpmath.polyroots (200 digits) ===
+tol 1e-30, default | 31/31 pass | largest radius / (tol |z|) 0.24 | total 42 ms | precise sweeps 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 0 0 1 1 1 1 1 1 9 2 5 8 1 1 1
+tol 1e-30, full    | 31/31 pass | largest radius / (tol |z|) 0.24 | total 37 ms | precise sweeps 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 0 0 1 1 1 1 1 1 5 2 44 8 1 1 1
+tol 1e-80, default | 31/31 pass | largest radius / (tol |z|) 0.58 | total 55 ms | precise sweeps 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 2 0 0 3 2 2 2 2 3 3 4 44 10 2 2 2
+tol 1e-80, full    | 31/31 pass | largest radius / (tol |z|) 0.43 | total 79 ms | precise sweeps 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 0 2 2 2 2 2 2 3 3 11 10 2 2 2
+
+=== B. One call, best of 3 (ms); precise sweeps and largest number of bits in brackets ===
+polynomial | digits | default | full_order | both checked against the reference
+dense integer, degree 60       |  30 |       5.0 (1, 140) |       5.1 (1, 140) | pass
+dense integer, degree 60       |  80 |       9.6 (2, 306) |      16.5 (2, 306) | pass
+dense integer, degree 60       | 280 |      32.8 (4, 971) |      44.7 (3, 971) | pass
+dense integer, degree 160      |  30 |      30.2 (1, 140) |      32.6 (1, 140) | pass
+dense integer, degree 160      |  80 |      76.9 (3, 306) |      96.8 (2, 306) | pass
+dense integer, degree 160      | 280 |     225.2 (4, 971) |     279.6 (3, 971) | pass
+dense integer, degree 320      |  30 |     127.3 (1, 140) |     115.0 (1, 140) | pass
+dense integer, degree 320      |  80 |     257.0 (2, 306) |     393.4 (2, 306) | pass
+dense integer, degree 320      | 280 |     888.0 (4, 971) |    1076.8 (3, 971) | pass
+z^1000 - 1                     |  80 |     209.3 (2, 306) |    1543.1 (2, 306) | pass
+z^1000 - 1                     | 280 |     418.8 (4, 971) |    2728.4 (3, 971) | pass
+Wilkinson 30                   |  80 |       2.8 (2, 306) |       3.2 (2, 306) | pass
+Mignotte z^12 - 2(10^8 z-1)^2  |  30 |       1.6 (9, 192) |       1.8 (5, 192) | pass

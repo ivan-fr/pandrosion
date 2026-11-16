@@ -1,0 +1,54 @@
+=== 1. Random polynomials: Rust G8 against numpy.roots (same polynomials; times in microseconds per polynomial, best of 5) ===
+kind deg | certified (isolated, equal to numpy) | sweeps | time: G8 Rust (square-free + sweeps + certificate) | numpy.roots | LAPACK alone (eigvals of the companion matrix) | numpy.roots / G8
+complex   5 | 400/400 | 2.44 | 7.8 (1.2 + 4.8 + 1.0) | 48.1 | 27.5 | x6.18
+complex  10 | 400/400 | 3.03 | 16.2 (2.3 + 12.0 + 2.5) | 104.8 | 79.6 | x6.46
+complex  20 | 300/300 | 3.88 | 35.3 (5.5 + 25.0 + 4.7) | 312.0 | 276.9 | x8.83
+complex  40 | 150/150 | 4.55 | 104.6 (10.1 + 74.9 + 14.2) | 803.7 | 764.6 | x7.68
+complex  80 | 40/40 | 5.35 | 195.0 (20.3 + 147.4 + 26.9) | 6172.9 | 5757.3 | x31.66
+complex 160 | 10/10 | 6.40 | 531.1 (54.2 + 407.0 + 81.2) | 30213.5 | 30175.4 | x56.88
+complex 320 | 4/4 | 7.25 | 2337.2 (305.7 + 1632.1 + 352.3) | 155452.1 | 153275.6 | x66.51
+real      5 | 400/400 | 2.49 | 7.4 (1.0 + 4.9 + 1.1) | 26.2 | 10.0 | x3.54
+real     10 | 400/400 | 3.23 | 15.1 (1.7 + 10.7 + 2.4) | 40.2 | 22.0 | x2.67
+real     20 | 300/300 | 3.93 | 32.5 (4.7 + 32.3 + 6.7) | 91.0 | 69.3 | x2.80
+real     40 | 150/150 | 4.91 | 74.5 (6.3 + 57.6 + 10.3) | 311.0 | 277.2 | x4.17
+real     80 | 40/40 | 6.38 | 206.3 (22.6 + 191.3 + 32.9) | 2518.5 | 2472.0 | x12.21
+real    160 | 10/10 | 6.90 | 545.4 (152.2 + 502.9 + 96.7) | 13240.3 | 12517.3 | x24.28
+real    320 | 4/4 | 8.75 | 2059.9 (197.0 + 1268.0 + 598.8) | 65218.6 | 65947.0 | x31.66
+all certified and equal to numpy, real roots counted right: True | final count = fixed-point certificate on every disc: 2608/2608 polynomials
+
+=== 2. Variants in Rust (microseconds per polynomial; mean sweeps) ===
+kind deg | G8 (Gauss-Seidel, binomial start) | G8 Jacobi | G8 circle start | Ehrlich-Aberth (same code, support AK)
+complex  10 | 15.5 us, 3.03 sw | 15.3 us, 3.35 sw | 22.1 us, 3.70 sw | 15.4 us, 4.47 sw
+complex  20 | 44.9 us, 3.88 sw | 33.0 us, 4.29 sw | 36.6 us, 4.46 sw | 28.4 us, 5.51 sw
+complex  40 | 74.1 us, 4.55 sw | 76.8 us, 5.35 sw | 100.9 us, 5.35 sw | 101.2 us, 6.66 sw
+complex  80 | 204.8 us, 5.35 sw | 204.4 us, 6.72 sw | 197.8 us, 6.75 sw | 208.9 us, 8.12 sw
+complex 160 | 547.0 us, 6.40 sw | 629.5 us, 7.10 sw | 538.1 us, 8.00 sw | 636.5 us, 8.80 sw
+real     10 | 15.0 us, 3.23 sw | 15.0 us, 3.51 sw | 16.1 us, 4.06 sw | 12.8 us, 4.75 sw
+real     20 | 31.6 us, 3.93 sw | 39.4 us, 4.51 sw | 33.5 us, 4.93 sw | 32.6 us, 5.83 sw
+real     40 | 76.3 us, 4.91 sw | 77.7 us, 5.72 sw | 76.0 us, 5.81 sw | 73.8 us, 7.25 sw
+real     80 | 220.4 us, 6.38 sw | 201.9 us, 6.90 sw | 197.6 us, 7.38 sw | 295.5 us, 8.45 sw
+real    160 | 544.1 us, 6.90 sw | 568.7 us, 8.00 sw | 638.8 us, 8.50 sw | 661.1 us, 9.50 sw
+
+=== 3. Hard families (exact integer coefficients) ===
+z^50 - 1                     deg 50 | 50 isolated discs,  2 proved real | float sweeps  2, certificates  1 | max rel. radius 7.9e-15 |    67.6 us 
+(z-3)^12 - 5                 deg 12 | 12 isolated discs,  2 proved real | float sweeps  6, certificates  2 | max rel. radius 6.9e-11 |   153.9 us 
+Wilkinson 10                 deg 10 | 10 isolated discs, 10 proved real | float sweeps  6, certificates  2 | max rel. radius 5.8e-11 |   120.9 us 
+Wilkinson 15                 deg 15 | 15 isolated discs, 15 proved real | float sweeps  7, certificates  2 | max rel. radius 3.3e-11 |   438.0 us 
+Wilkinson 20                 deg 20 | 20 isolated discs, 20 proved real | float sweeps  7, certificates  5 | max rel. radius 7.9e-13 |   775.0 us 
+Wilkinson 30                 deg 30 | 30 isolated discs, 30 proved real | float sweeps  8, certificates 12 | max rel. radius 2.8e-11 |  3067.8 us 
+Chebyshev 10                 deg 10 | 10 isolated discs, 10 proved real | float sweeps  4, certificates  1 | max rel. radius 3.0e-12 |    19.2 us 
+Chebyshev 20                 deg 20 | 20 isolated discs, 20 proved real | float sweeps  6, certificates  1 | max rel. radius 6.9e-11 |   176.9 us 
+Chebyshev 30                 deg 30 | 30 isolated discs, 30 proved real | float sweeps  7, certificates  2 | max rel. radius 9.4e-11 |   347.4 us 
+Mignotte z^12 - 2(100z-1)^2  deg 12 | 12 isolated discs,  4 proved real | float sweeps  8, certificates  2 | max rel. radius 9.6e-15 |   116.6 us 
+roots 10^k, k < 10           deg 10 | 10 isolated discs, 10 proved real | float sweeps  2, certificates  1 | max rel. radius 1.2e-13 |    16.5 us 
+roots 2^k, k < 20            deg 20 | 20 isolated discs, 20 proved real | float sweeps  3, certificates  1 | max rel. radius 1.0e-11 |    39.2 us 
+close pair 1, 1+1e-6         deg  5 |  5 isolated discs,  5 proved real | float sweeps  7, certificates  2 | max rel. radius 1.7e-13 |    39.8 us 
+cluster of 5 at 1e-4         deg  7 |  7 isolated discs,  7 proved real | float sweeps  7, certificates  6 | max rel. radius 1.8e-11 |   162.2 us 
+1 + z + ... + z^30           deg 30 | 30 isolated discs,  0 proved real | float sweeps  3, certificates  1 | max rel. radius 1.6e-13 |    34.5 us 
+exp truncated, degree 20     deg 20 | 20 isolated discs,  0 proved real | float sweeps  5, certificates  1 | max rel. radius 8.9e-11 |   176.5 us 
+wide coefficients            deg  6 |  6 isolated discs,  2 proved real | float sweeps  2, certificates  1 | max rel. radius 5.0e-14 |     6.3 us 
+hard families all isolated, certified, real roots proved real: True | Wilkinson 20 = 1..20: True | fixed-point certificate on every disc: 17/17 families
+
+=== 4. Multiplicities ===
+exact multiplicities on 60 random integer polynomials: 60
+(z^2-2)^2 (z-i)^3 -> (-1.414213562373+0j) x2 (radius 2e-14), (-0+1j) x3 (radius 4e-15), (1.414213562373-0j) x2 (radius 2e-14)
