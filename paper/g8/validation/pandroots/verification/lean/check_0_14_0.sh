@@ -27,4 +27,5 @@ lean --version
 check CertificateGap.lean LeanMath.Papers.CertificateGap div_le_div_gap sum_div_le sum_div_sq_le quick_test
 check SparseHorner.lean LeanMath.Papers.SparseHorner zero_steps gap_step q1_succ two_q2 value_alone comp_bound
 check TwoComplement.lean LeanMath.Papers.TwoComplement shift_floor scaled_shift step_value limb_of_shift limb_of_shift_pow
+check FloatModel.lean LeanMath.Papers.FloatModel exists_close nearest_error nearest_rel exists_binade nearest_normal nearest_small binary64 coord_error cmul_error
 exit $status
