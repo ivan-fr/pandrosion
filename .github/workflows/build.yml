@@ -25,6 +25,7 @@ jobs:
       - run: python paper/v28/verify_v28.py
       - run: python paper/v29/verify_v29.py
       - run: python paper/v30/verify_v30.py
+      - run: python paper/v31/verify_v31.py
       - run: python verify_complex.py
         working-directory: paper/c5
       - run: python verify_threemean.py
